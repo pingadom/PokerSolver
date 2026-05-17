@@ -1,0 +1,2 @@
+# PokerSolver
+Personal project :)
