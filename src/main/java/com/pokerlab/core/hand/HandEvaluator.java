@@ -2,110 +2,37 @@ package com.pokerlab.core.hand;
 
 import com.pokerlab.core.card.Card;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class HandEvaluator {
     private static final int FIVE_CARD_HAND_SIZE = 5;
+    private static final int MIN_BEST_HAND_SIZE = 5;
+    private static final int MAX_BEST_HAND_SIZE = 7;
+    private static final int MAX_RANK_VALUE = 14;
+    private static final int CATEGORY_SHIFT = 20;
+    private static final int FIRST_TIEBREAKER_SHIFT = 16;
+    private static final int TIEBREAKER_BITS = 4;
+    private static final int[] STRAIGHT_HIGH_BY_MASK = buildStraightLookup();
+    private static final HandCategory[] CATEGORY_BY_STRENGTH = buildCategoryLookup();
 
     private HandEvaluator() {
     }
 
     public static EvaluatedHand evaluateFive(List<Card> cards) {
-        validateCardCount(cards, 5, 5);
+        validateCardCount(cards, FIVE_CARD_HAND_SIZE, FIVE_CARD_HAND_SIZE);
         validateNoDuplicates(cards);
 
-        boolean flush = isFlush(cards);
-        Integer straightHigh = straightHighCard(cards);
-        boolean straight = straightHigh != null;
+        int score = scoreFive(
+                cards.get(0),
+                cards.get(1),
+                cards.get(2),
+                cards.get(3),
+                cards.get(4)
+        );
 
-        Map<Integer, Long> countsByRank = cards.stream()
-                .collect(Collectors.groupingBy(card -> card.rank().value(), Collectors.counting()));
-
-        List<Integer> ranksDescending = cards.stream()
-                .map(card -> card.rank().value())
-                .sorted(Comparator.reverseOrder())
-                .toList();
-
-        List<Map.Entry<Integer, Long>> groups = countsByRank.entrySet().stream()
-                .sorted(Comparator
-                        .<Map.Entry<Integer, Long>>comparingLong(Map.Entry::getValue).reversed()
-                        .thenComparing(Map.Entry.<Integer, Long>comparingByKey().reversed()))
-                .toList();
-
-        if (straight && flush) {
-            if (straightHigh == 14) {
-                return evaluated(HandCategory.ROYAL_FLUSH, List.of(14), cards);
-            }
-            return evaluated(HandCategory.STRAIGHT_FLUSH, List.of(straightHigh), cards);
-        }
-
-        if (groups.get(0).getValue() == 4) {
-            int quadRank = groups.get(0).getKey();
-            int kicker = groups.stream()
-                    .filter(entry -> entry.getValue() == 1)
-                    .map(Map.Entry::getKey)
-                    .findFirst()
-                    .orElseThrow();
-            return evaluated(HandCategory.FOUR_OF_A_KIND, List.of(quadRank, kicker), cards);
-        }
-
-        if (groups.get(0).getValue() == 3 && groups.get(1).getValue() == 2) {
-            int tripRank = groups.get(0).getKey();
-            int pairRank = groups.get(1).getKey();
-            return evaluated(HandCategory.FULL_HOUSE, List.of(tripRank, pairRank), cards);
-        }
-
-        if (flush) {
-            return evaluated(HandCategory.FLUSH, ranksDescending, cards);
-        }
-
-        if (straight) {
-            return evaluated(HandCategory.STRAIGHT, List.of(straightHigh), cards);
-        }
-
-        if (groups.get(0).getValue() == 3) {
-            int tripRank = groups.get(0).getKey();
-            List<Integer> kickers = groups.stream()
-                    .filter(entry -> entry.getValue() == 1)
-                    .map(Map.Entry::getKey)
-                    .sorted(Comparator.reverseOrder())
-                    .toList();
-            return evaluated(HandCategory.THREE_OF_A_KIND, join(tripRank, kickers), cards);
-        }
-
-        List<Integer> pairRanks = groups.stream()
-                .filter(entry -> entry.getValue() == 2)
-                .map(Map.Entry::getKey)
-                .sorted(Comparator.reverseOrder())
-                .toList();
-
-        if (pairRanks.size() == 2) {
-            int kicker = groups.stream()
-                    .filter(entry -> entry.getValue() == 1)
-                    .map(Map.Entry::getKey)
-                    .findFirst()
-                    .orElseThrow();
-            return evaluated(HandCategory.TWO_PAIR, List.of(pairRanks.get(0), pairRanks.get(1), kicker), cards);
-        }
-
-        if (pairRanks.size() == 1) {
-            int pairRank = pairRanks.get(0);
-            List<Integer> kickers = groups.stream()
-                    .filter(entry -> entry.getValue() == 1)
-                    .map(Map.Entry::getKey)
-                    .sorted(Comparator.reverseOrder())
-                    .toList();
-            return evaluated(HandCategory.ONE_PAIR, join(pairRank, kickers), cards);
-        }
-
-        return evaluated(HandCategory.HIGH_CARD, ranksDescending, cards);
+        return evaluated(score, cards);
     }
 
     /**
@@ -113,23 +40,44 @@ public final class HandEvaluator {
      * For Hold'em with 2 hole cards and 5 board cards, this checks all 21 possible 5-card combinations.
      */
     public static EvaluatedHand evaluateBest(List<Card> cards) {
-        validateCardCount(cards, 5, 7);
+        validateCardCount(cards, MIN_BEST_HAND_SIZE, MAX_BEST_HAND_SIZE);
+
+        Card[] cardArray = cards.toArray(Card[]::new);
+        validateNoDuplicates(cardArray);
+
+        return evaluateBestArray(cardArray);
+    }
+
+    public static EvaluatedHand evaluateBest(Card... cards) {
+        validateCardCount(cards, MIN_BEST_HAND_SIZE, MAX_BEST_HAND_SIZE);
         validateNoDuplicates(cards);
 
-        EvaluatedHand best = null;
-        int n = cards.size();
+        return evaluateBestArray(cards);
+    }
+
+    public static int evaluateBestScore(Card... cards) {
+        validateCardCount(cards, MIN_BEST_HAND_SIZE, MAX_BEST_HAND_SIZE);
+        validateNoDuplicates(cards);
+
+        return bestScore(cards);
+    }
+
+    private static int bestScore(Card[] cards) {
+        int bestScore = -1;
+        int n = cards.length;
 
         for (int a = 0; a < n - 4; a++) {
+            Card cardA = cards[a];
             for (int b = a + 1; b < n - 3; b++) {
+                Card cardB = cards[b];
                 for (int c = b + 1; c < n - 2; c++) {
+                    Card cardC = cards[c];
                     for (int d = c + 1; d < n - 1; d++) {
+                        Card cardD = cards[d];
                         for (int e = d + 1; e < n; e++) {
-                            List<Card> candidate = List.of(
-                                    cards.get(a), cards.get(b), cards.get(c), cards.get(d), cards.get(e)
-                            );
-                            EvaluatedHand evaluated = evaluateFive(candidate);
-                            if (best == null || evaluated.compareTo(best) > 0) {
-                                best = evaluated;
+                            int score = scoreFive(cardA, cardB, cardC, cardD, cards[e]);
+                            if (score > bestScore) {
+                                bestScore = score;
                             }
                         }
                     }
@@ -137,50 +85,248 @@ public final class HandEvaluator {
             }
         }
 
-        return best;
+        return bestScore;
     }
 
-    private static EvaluatedHand evaluated(HandCategory category, List<Integer> tiebreakers, List<Card> cards) {
-        return new EvaluatedHand(new HandRank(category, tiebreakers), cards);
-    }
+    private static EvaluatedHand evaluateBestArray(Card[] cards) {
+        int bestScore = -1;
+        int bestA = 0;
+        int bestB = 1;
+        int bestC = 2;
+        int bestD = 3;
+        int bestE = 4;
+        int n = cards.length;
 
-    private static boolean isFlush(List<Card> cards) {
-        return cards.stream().map(Card::suit).distinct().count() == 1;
-    }
-
-    private static Integer straightHighCard(List<Card> cards) {
-        Set<Integer> uniqueRanks = new HashSet<>();
-        for (Card card : cards) {
-            uniqueRanks.add(card.rank().value());
-        }
-
-        if (uniqueRanks.size() != 5) {
-            return null;
-        }
-
-        List<Integer> sorted = uniqueRanks.stream()
-                .sorted(Comparator.reverseOrder())
-                .toList();
-
-        // Wheel straight: A-2-3-4-5. Ace is counted as low, so the high card is 5.
-        if (uniqueRanks.containsAll(List.of(14, 5, 4, 3, 2))) {
-            return 5;
-        }
-
-        int high = sorted.get(0);
-        for (int i = 1; i < sorted.size(); i++) {
-            if (sorted.get(i) != high - i) {
-                return null;
+        for (int a = 0; a < n - 4; a++) {
+            Card cardA = cards[a];
+            for (int b = a + 1; b < n - 3; b++) {
+                Card cardB = cards[b];
+                for (int c = b + 1; c < n - 2; c++) {
+                    Card cardC = cards[c];
+                    for (int d = c + 1; d < n - 1; d++) {
+                        Card cardD = cards[d];
+                        for (int e = d + 1; e < n; e++) {
+                            int score = scoreFive(cardA, cardB, cardC, cardD, cards[e]);
+                            if (score > bestScore) {
+                                bestScore = score;
+                                bestA = a;
+                                bestB = b;
+                                bestC = c;
+                                bestD = d;
+                                bestE = e;
+                            }
+                        }
+                    }
+                }
             }
         }
-        return high;
+
+        return evaluated(bestScore, List.of(cards[bestA], cards[bestB], cards[bestC], cards[bestD], cards[bestE]));
     }
 
-    private static List<Integer> join(int first, List<Integer> rest) {
-        List<Integer> result = new ArrayList<>();
-        result.add(first);
-        result.addAll(rest);
-        return result;
+    private static int scoreFive(Card c0, Card c1, Card c2, Card c3, Card c4) {
+        int r0 = c0.rank().value();
+        int r1 = c1.rank().value();
+        int r2 = c2.rank().value();
+        int r3 = c3.rank().value();
+        int r4 = c4.rank().value();
+
+        boolean flush = c0.suit() == c1.suit()
+                && c0.suit() == c2.suit()
+                && c0.suit() == c3.suit()
+                && c0.suit() == c4.suit();
+
+        int straightHigh = STRAIGHT_HIGH_BY_MASK[
+                (1 << r0) | (1 << r1) | (1 << r2) | (1 << r3) | (1 << r4)
+        ];
+
+        int swap;
+        if (r0 < r1) {
+            swap = r0;
+            r0 = r1;
+            r1 = swap;
+        }
+        if (r1 < r2) {
+            swap = r1;
+            r1 = r2;
+            r2 = swap;
+        }
+        if (r2 < r3) {
+            swap = r2;
+            r2 = r3;
+            r3 = swap;
+        }
+        if (r3 < r4) {
+            swap = r3;
+            r3 = r4;
+            r4 = swap;
+        }
+        if (r0 < r1) {
+            swap = r0;
+            r0 = r1;
+            r1 = swap;
+        }
+        if (r1 < r2) {
+            swap = r1;
+            r1 = r2;
+            r2 = swap;
+        }
+        if (r2 < r3) {
+            swap = r2;
+            r2 = r3;
+            r3 = swap;
+        }
+        if (r0 < r1) {
+            swap = r0;
+            r0 = r1;
+            r1 = swap;
+        }
+        if (r1 < r2) {
+            swap = r1;
+            r1 = r2;
+            r2 = swap;
+        }
+        if (r0 < r1) {
+            swap = r0;
+            r0 = r1;
+            r1 = swap;
+        }
+
+        if (straightHigh != 0 && flush) {
+            if (straightHigh == MAX_RANK_VALUE) {
+                return pack(HandCategory.ROYAL_FLUSH, MAX_RANK_VALUE, 0, 0, 0, 0);
+            }
+            return pack(HandCategory.STRAIGHT_FLUSH, straightHigh, 0, 0, 0, 0);
+        }
+
+        if (r0 == r3) {
+            return pack(HandCategory.FOUR_OF_A_KIND, r0, r4, 0, 0, 0);
+        }
+        if (r1 == r4) {
+            return pack(HandCategory.FOUR_OF_A_KIND, r1, r0, 0, 0, 0);
+        }
+
+        if (r0 == r2 && r3 == r4) {
+            return pack(HandCategory.FULL_HOUSE, r0, r3, 0, 0, 0);
+        }
+        if (r0 == r1 && r2 == r4) {
+            return pack(HandCategory.FULL_HOUSE, r2, r0, 0, 0, 0);
+        }
+
+        if (flush) {
+            return pack(HandCategory.FLUSH, r0, r1, r2, r3, r4);
+        }
+
+        if (straightHigh != 0) {
+            return pack(HandCategory.STRAIGHT, straightHigh, 0, 0, 0, 0);
+        }
+
+        if (r0 == r2) {
+            return pack(HandCategory.THREE_OF_A_KIND, r0, r3, r4, 0, 0);
+        }
+        if (r1 == r3) {
+            return pack(HandCategory.THREE_OF_A_KIND, r1, r0, r4, 0, 0);
+        }
+        if (r2 == r4) {
+            return pack(HandCategory.THREE_OF_A_KIND, r2, r0, r1, 0, 0);
+        }
+
+        if (r0 == r1 && r2 == r3) {
+            return pack(HandCategory.TWO_PAIR, r0, r2, r4, 0, 0);
+        }
+        if (r0 == r1 && r3 == r4) {
+            return pack(HandCategory.TWO_PAIR, r0, r3, r2, 0, 0);
+        }
+        if (r1 == r2 && r3 == r4) {
+            return pack(HandCategory.TWO_PAIR, r1, r3, r0, 0, 0);
+        }
+
+        if (r0 == r1) {
+            return pack(HandCategory.ONE_PAIR, r0, r2, r3, r4, 0);
+        }
+        if (r1 == r2) {
+            return pack(HandCategory.ONE_PAIR, r1, r0, r3, r4, 0);
+        }
+        if (r2 == r3) {
+            return pack(HandCategory.ONE_PAIR, r2, r0, r1, r4, 0);
+        }
+        if (r3 == r4) {
+            return pack(HandCategory.ONE_PAIR, r3, r0, r1, r2, 0);
+        }
+
+        return pack(HandCategory.HIGH_CARD, r0, r1, r2, r3, r4);
+    }
+
+    private static EvaluatedHand evaluated(int score, List<Card> cards) {
+        return new EvaluatedHand(new HandRank(category(score), tiebreakers(score)), cards);
+    }
+
+    private static HandCategory category(int score) {
+        return CATEGORY_BY_STRENGTH[score >>> CATEGORY_SHIFT];
+    }
+
+    private static List<Integer> tiebreakers(int score) {
+        return switch (category(score)) {
+            case HIGH_CARD, FLUSH -> List.of(
+                    tiebreaker(score, 0),
+                    tiebreaker(score, 1),
+                    tiebreaker(score, 2),
+                    tiebreaker(score, 3),
+                    tiebreaker(score, 4)
+            );
+            case ONE_PAIR -> List.of(
+                    tiebreaker(score, 0),
+                    tiebreaker(score, 1),
+                    tiebreaker(score, 2),
+                    tiebreaker(score, 3)
+            );
+            case TWO_PAIR -> List.of(
+                    tiebreaker(score, 0),
+                    tiebreaker(score, 1),
+                    tiebreaker(score, 2)
+            );
+            case THREE_OF_A_KIND, FULL_HOUSE, FOUR_OF_A_KIND -> List.of(
+                    tiebreaker(score, 0),
+                    tiebreaker(score, 1)
+            );
+            case STRAIGHT, STRAIGHT_FLUSH, ROYAL_FLUSH -> List.of(tiebreaker(score, 0));
+        };
+    }
+
+    private static int tiebreaker(int score, int index) {
+        return (score >>> (FIRST_TIEBREAKER_SHIFT - (index * TIEBREAKER_BITS))) & 0xF;
+    }
+
+    private static int pack(HandCategory category, int first, int second, int third, int fourth, int fifth) {
+        return (category.strength() << CATEGORY_SHIFT)
+                | (first << 16)
+                | (second << 12)
+                | (third << 8)
+                | (fourth << 4)
+                | fifth;
+    }
+
+    private static int[] buildStraightLookup() {
+        int[] lookup = new int[1 << (MAX_RANK_VALUE + 1)];
+
+        for (int high = 6; high <= MAX_RANK_VALUE; high++) {
+            int mask = 0;
+            for (int rank = high - 4; rank <= high; rank++) {
+                mask |= 1 << rank;
+            }
+            lookup[mask] = high;
+        }
+
+        lookup[(1 << MAX_RANK_VALUE) | (1 << 5) | (1 << 4) | (1 << 3) | (1 << 2)] = 5;
+        return lookup;
+    }
+
+    private static HandCategory[] buildCategoryLookup() {
+        HandCategory[] categories = new HandCategory[HandCategory.values().length];
+        for (HandCategory category : HandCategory.values()) {
+            categories[category.strength()] = category;
+        }
+        return categories;
     }
 
     private static void validateCardCount(List<Card> cards, int min, int max) {
@@ -192,14 +338,56 @@ public final class HandEvaluator {
         }
     }
 
-    private static void validateNoDuplicates(List<Card> cards) {
-        Set<Card> unique = new HashSet<>(cards);
-        if (unique.size() != cards.size()) {
-            Map<Card, Integer> counts = new HashMap<>();
-            for (Card card : cards) {
-                counts.merge(card, 1, Integer::sum);
-            }
-            throw new IllegalArgumentException("Duplicate cards are not allowed: " + counts);
+    private static void validateCardCount(Card[] cards, int min, int max) {
+        if (cards == null) {
+            throw new IllegalArgumentException("cards must not be null");
         }
+        if (cards.length < min || cards.length > max) {
+            throw new IllegalArgumentException("Expected between " + min + " and " + max + " cards, got " + cards.length);
+        }
+    }
+
+    private static void validateNoDuplicates(List<Card> cards) {
+        long seen = 0L;
+
+        for (Card card : cards) {
+            long bit = 1L << cardIndex(card);
+            if ((seen & bit) != 0L) {
+                throwDuplicateCards(cards);
+            }
+            seen |= bit;
+        }
+    }
+
+    private static void validateNoDuplicates(Card[] cards) {
+        long seen = 0L;
+
+        for (Card card : cards) {
+            long bit = 1L << cardIndex(card);
+            if ((seen & bit) != 0L) {
+                throwDuplicateCards(cards);
+            }
+            seen |= bit;
+        }
+    }
+
+    private static int cardIndex(Card card) {
+        return (card.suit().ordinal() * 13) + card.rank().ordinal();
+    }
+
+    private static void throwDuplicateCards(List<Card> cards) {
+        Map<Card, Integer> counts = new HashMap<>();
+        for (Card card : cards) {
+            counts.merge(card, 1, Integer::sum);
+        }
+        throw new IllegalArgumentException("Duplicate cards are not allowed: " + counts);
+    }
+
+    private static void throwDuplicateCards(Card[] cards) {
+        Map<Card, Integer> counts = new HashMap<>();
+        for (Card card : cards) {
+            counts.merge(card, 1, Integer::sum);
+        }
+        throw new IllegalArgumentException("Duplicate cards are not allowed: " + counts);
     }
 }
