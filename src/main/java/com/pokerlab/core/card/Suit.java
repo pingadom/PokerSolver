@@ -3,10 +3,10 @@ package com.pokerlab.core.card;
 import java.util.Arrays;
 
 public enum Suit {
-    CLUBS('c', '♣'),
-    DIAMONDS('d', '♦'),
-    HEARTS('h', '♥'),
-    SPADES('s', '♠');
+    CLUBS('c', 'c'),
+    DIAMONDS('d', 'd'),
+    HEARTS('h', 'h'),
+    SPADES('s', 's');
 
     private final char symbol;
     private final char displaySymbol;
