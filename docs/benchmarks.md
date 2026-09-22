@@ -5,15 +5,17 @@ Measured on 22 September 2026, Windows 10 amd64, AMD Ryzen 7 5700X3D (8 physical
 The workload is **10,000,000 trials of AS AH vs KS KH vs QS QH**, with an empty board, seed `123456789` and 100 batches of 100,000 trials. A warmup of twenty batches precedes measurements. Every repetition checks trial conservation and compares every batch's player counts/equity shares to the first run, ensuring that worker count did not change the work or seeded output.
 
 | Engine threads | Median seconds | Trials/second | Speedup | Efficiency |
-| --- | ---: | ---: | ---: | ---: |
-| 1 | 14.751 | 677,904 | 1.000× | 100.0% |
-| 2 | 7.724 | 1,294,622 | 1.910× | 95.5% |
-| 4 | 3.857 | 2,592,441 | 3.824× | 95.6% |
-| 8 | 2.253 | 4,437,734 | 6.546× | 81.8% |
+| -------------- | -------------: | ------------: | ------: | ---------: |
+| 1              |         14.751 |       677,904 |  1.000× |     100.0% |
+| 2              |          7.724 |     1,294,622 |  1.910× |      95.5% |
+| 4              |          3.857 |     2,592,441 |  3.824× |      95.6% |
+| 8              |          2.253 |     4,437,734 |  6.546× |      81.8% |
 
 ![Measured engine scaling](images/scaling.svg)
 
 This is an **engine worker-thread benchmark**, including thread pool startup and result collection. It does not measure SQS, HTTP, PostgreSQL, Redis, container networking or cloud task scaling. Separate functional smoke tests exercise those boundaries; their timings are not presented as a distributed scaling benchmark. The build specification permits local thread scaling as the minimum demonstration.
+
+A separate [functional run](data/distributed-smoke.json) processed the same ten-million-trial scenario through the API, durable PostgreSQL development queue and two independent worker JVMs. It completed all 100 batches in 13.901 seconds; both worker logs contributed acknowledgments. This is one end-to-end observation, not a scaling comparison or SQS benchmark. CI separately verified the SQS/LocalStack path.
 
 ## Reproduce
 

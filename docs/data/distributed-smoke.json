@@ -1,0 +1,47 @@
+{
+  "verifiedAt": "2026-09-22T19:42:55.1823587Z",
+  "transport": "PostgreSQL development queue",
+  "workerProcesses": 2,
+  "requestedIterations": 10000000,
+  "batchSize": 100000,
+  "seed": "123456789",
+  "result": {
+    "simulationId": "e9a06671-c6f2-45e0-9bbf-bb0e069670d5",
+    "status": "COMPLETED",
+    "totalTrials": 10000000,
+    "players": [
+      {
+        "name": "AA",
+        "wins": 6748238,
+        "ties": 59425,
+        "losses": 3192337,
+        "equity": 0.6768046333333378
+      },
+      {
+        "name": "KK",
+        "wins": 1702719,
+        "ties": 59425,
+        "losses": 8237856,
+        "equity": 0.1722527333333343
+      },
+      {
+        "name": "QQ",
+        "wins": 1489618,
+        "ties": 59425,
+        "losses": 8450957,
+        "equity": 0.15094263333333457
+      }
+    ],
+    "elapsedMs": 13901
+  },
+  "perWorkerAcknowledgments": [
+    {
+      "worker": "worker-one",
+      "acknowledgedBatches": 49
+    },
+    {
+      "worker": "worker-two",
+      "acknowledgedBatches": 51
+    }
+  ]
+}

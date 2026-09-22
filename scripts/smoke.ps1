@@ -1,8 +1,8 @@
-param([string]$BaseUrl = 'http://localhost:18080', [int]$Iterations = 100000)
+param([string]$BaseUrl = 'http://localhost:18080', [int]$Iterations = 100000, [int]$BatchSize = 10000, [long]$Seed = 42)
 $ErrorActionPreference = 'Stop'
 $body = @{
   players = @(@{name='AA';cards=@('AS','AH')},@{name='KK';cards=@('KS','KH')},@{name='QQ';cards=@('QS','QH')})
-  board = @(); iterations = $Iterations; batchSize = 10000; seed = 42
+  board = @(); iterations = $Iterations; batchSize = $BatchSize; seed = $Seed
 } | ConvertTo-Json -Depth 5
 $created = Invoke-RestMethod -Method Post -Uri "$BaseUrl/api/v1/simulations" -ContentType 'application/json' -Body $body
 $deadline = (Get-Date).AddMinutes(5)
