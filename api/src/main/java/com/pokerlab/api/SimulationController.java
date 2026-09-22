@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/simulations")
 public class SimulationController {
     private final SimulationStore store;
+    private final SimulationCache cache;
 
-    public SimulationController(SimulationStore store) {
+    public SimulationController(SimulationStore store, SimulationCache cache) {
         this.store = store;
+        this.cache = cache;
     }
 
     public record Created(UUID simulationId, SimulationStatus status, String statusUrl) {}
@@ -44,7 +46,7 @@ public class SimulationController {
 
     @GetMapping("/{id}")
     public SimulationView get(@PathVariable("id") UUID id) {
-        return store.get(id);
+        return cache.status(id);
     }
 
     @GetMapping
@@ -58,12 +60,7 @@ public class SimulationController {
     public ResponseEntity<?> results(@PathVariable("id") UUID id) {
         var view = store.get(id);
         if (view.status() == SimulationStatus.COMPLETED) {
-            var result =
-                    store.result(id)
-                            .orElseThrow(
-                                    () ->
-                                            new IllegalStateException(
-                                                    "Completed simulation has no result"));
+            var result = cache.result(id);
             return ResponseEntity.ok(
                     new ResultResponse(
                             id,

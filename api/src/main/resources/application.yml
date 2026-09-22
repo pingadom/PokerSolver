@@ -10,7 +10,16 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 200ms
+      connect-timeout: 200ms
 management:
+  health:
+    redis:
+      enabled: false
   endpoints:
     web:
       exposure:
@@ -21,6 +30,8 @@ management:
 server:
   port: ${PORT:8080}
 pokerlab:
+  cache:
+    enabled: ${CACHE_ENABLED:true}
   queue:
     mode: ${QUEUE_MODE:sqs}
     region: ${AWS_REGION:eu-west-2}

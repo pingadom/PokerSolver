@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent><groupId>com.pokerlab</groupId><artifactId>pokerlab-cloud</artifactId><version>1.0.0-SNAPSHOT</version></parent>
   <artifactId>api</artifactId>
-  <dependencies>
+  <dependencies><dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-data-redis</artifactId></dependency>
     <dependency><groupId>com.pokerlab</groupId><artifactId>shared</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>

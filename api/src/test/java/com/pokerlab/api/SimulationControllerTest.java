@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 class SimulationControllerTest {
     @Autowired MockMvc mvc;
     @MockitoBean SimulationStore store;
+    @MockitoBean SimulationCache cache;
     private static final String VALID =
             """
         {"players":[{"name":"AA","cards":["AS","AH"]},{"name":"KK","cards":["KS","KH"]}],"board":[],"iterations":1000,"seed":42}
@@ -50,7 +51,7 @@ class SimulationControllerTest {
 
     @Test
     void missingSimulationIs404() throws Exception {
-        when(store.get(any())).thenThrow(new SimulationNotFoundException(UUID.randomUUID()));
+        when(cache.status(any())).thenThrow(new SimulationNotFoundException(UUID.randomUUID()));
         mvc.perform(get("/api/v1/simulations/" + UUID.randomUUID()))
                 .andExpect(status().isNotFound());
     }
