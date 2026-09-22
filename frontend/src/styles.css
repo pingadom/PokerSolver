@@ -167,7 +167,7 @@ h1 {
 }
 .subtitle {
   font-size: 12px;
-  color: #748077;
+  color: #5d6e58;
   margin: 0;
 }
 .heading-suit {
@@ -210,7 +210,7 @@ h2 {
 }
 .section-number {
   font-size: 9px;
-  color: #82927e;
+  color: #5d6e58;
   border: 1px solid #dde5d8;
   width: 24px;
   height: 24px;
@@ -221,7 +221,7 @@ h2 {
 .pill {
   font-size: 8px;
   white-space: nowrap;
-  color: #6e7c65;
+  color: #5d6e58;
   background: #f3f5ed;
   border: 1px solid #e5eadf;
   padding: 6px 8px;
@@ -247,11 +247,11 @@ h3 {
 }
 .section-title > span {
   font-size: 9px;
-  color: #879282;
+  color: #5d6e58;
 }
 .field-hint {
   font-size: 10px;
-  color: #75816f;
+  color: #5d6e58;
   line-height: 1.7;
   margin: 9px 0 14px;
 }
@@ -301,7 +301,7 @@ input:focus {
   border-color: transparent;
 }
 input::placeholder {
-  color: #93a08e;
+  color: #5d6e58;
 }
 .card-input {
   text-transform: uppercase;
@@ -340,7 +340,7 @@ input::placeholder {
 .field-label > span {
   font-size: 9px;
   font-weight: 400;
-  color: #8b9684;
+  color: #5d6e58;
 }
 .settings-grid {
   display: grid;
@@ -370,7 +370,7 @@ input::placeholder {
 .form-footnote {
   text-align: center;
   font-size: 9px;
-  color: #8a9483;
+  color: #5d6e58;
   margin: 12px 0 0;
 }
 .results-panel {
@@ -429,7 +429,7 @@ input::placeholder {
 }
 .empty-state p {
   font-size: 11px;
-  color: #7d8876;
+  color: #5d6e58;
   line-height: 1.9;
   max-width: 290px;
   margin: 0 auto;
@@ -443,7 +443,7 @@ input::placeholder {
   padding-top: 24px;
   font-size: 8px;
   letter-spacing: 1px;
-  color: #94a087;
+  color: #5d6e58;
 }
 .simulation-detail {
   padding: 24px;
@@ -455,7 +455,7 @@ input::placeholder {
   justify-content: space-between;
   gap: 10px;
   font-size: 10px;
-  color: #7b8873;
+  color: #5d6e58;
 }
 .run-meta {
   margin-bottom: 27px;
@@ -511,7 +511,7 @@ progress::-moz-progress-bar {
 .equity-row strong small {
   font-size: 13px;
   margin-left: 2px;
-  color: #75866a;
+  color: #5d6e58;
 }
 .dot {
   display: inline-block;
@@ -546,7 +546,7 @@ td {
 }
 thead {
   font-size: 9px;
-  color: #8b957f;
+  color: #5d6e58;
 }
 th:first-child {
   text-align: left;
@@ -586,7 +586,7 @@ th:first-child {
 .recent-heading > span {
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: #8a947f;
+  color: #5d6e58;
 }
 .history-grid {
   display: grid;
@@ -613,7 +613,7 @@ th:first-child {
 }
 .history-item > span:last-child {
   font-size: 9px;
-  color: #87927d;
+  color: #5d6e58;
   display: flex;
   justify-content: space-between;
 }
@@ -628,7 +628,7 @@ footer {
   display: flex;
   justify-content: space-between;
   font-size: 9px;
-  color: #8b9583;
+  color: #5d6e58;
 }
 footer span {
   font-size: 8px;
