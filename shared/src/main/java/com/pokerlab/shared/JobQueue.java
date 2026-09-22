@@ -13,4 +13,8 @@ public interface JobQueue {
     void acknowledge(Delivery delivery);
 
     void extend(Delivery delivery);
+
+    List<Delivery> receiveDeadLetters();
+
+    void acknowledgeDeadLetter(Delivery delivery);
 }

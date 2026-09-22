@@ -1,25 +1,23 @@
 spring:
   application:
-    name: pokerlab-api
+    name: pokerlab-worker
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/pokerlab}
     username: ${DATABASE_USER:pokerlab}
     password: ${DATABASE_PASSWORD:pokerlab}
     hikari:
-      maximum-pool-size: 10
-  jackson:
-    deserialization:
-      fail-on-unknown-properties: true
+      maximum-pool-size: 5
+  task:
+    scheduling:
+      pool:
+        size: 2
+server:
+  port: ${PORT:8081}
 management:
   endpoints:
     web:
       exposure:
         include: health,info,metrics
-  endpoint:
-    health:
-      show-details: never
-server:
-  port: ${PORT:8080}
 pokerlab:
   queue:
     mode: ${QUEUE_MODE:sqs}

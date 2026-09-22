@@ -1,13 +1,13 @@
-package com.pokerlab.api;
+package com.pokerlab.worker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(scanBasePackages = {"com.pokerlab.api", "com.pokerlab.shared"})
+@SpringBootApplication(scanBasePackages = {"com.pokerlab.worker", "com.pokerlab.shared"})
 @EnableScheduling
-public class ApiApplication {
+public class WorkerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+        SpringApplication.run(WorkerApplication.class, args);
     }
 }
