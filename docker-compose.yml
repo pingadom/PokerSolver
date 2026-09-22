@@ -1,0 +1,77 @@
+name: pokerlab
+x-service-env: &service-env
+  DATABASE_URL: jdbc:postgresql://postgres:5432/pokerlab
+  DATABASE_USER: pokerlab
+  DATABASE_PASSWORD: ${DATABASE_PASSWORD:-pokerlab-local}
+  AWS_REGION: eu-west-2
+  AWS_ACCESS_KEY_ID: test
+  AWS_SECRET_ACCESS_KEY: test
+  QUEUE_MODE: sqs
+  SQS_ENDPOINT: http://localstack:4566
+  SQS_QUEUE_URL: http://localstack:4566/000000000000/pokerlab
+  SQS_DLQ_URL: http://localstack:4566/000000000000/pokerlab-dlq
+  PORT: 8080
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: pokerlab
+      POSTGRES_USER: pokerlab
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-pokerlab-local}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pokerlab -d pokerlab"]
+      interval: 5s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    ports: ["127.0.0.1:6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+  localstack:
+    image: localstack/localstack:4.8.1
+    environment:
+      SERVICES: sqs
+      AWS_DEFAULT_REGION: eu-west-2
+      SQS_ENDPOINT_STRATEGY: off
+    ports: ["127.0.0.1:4566:4566"]
+    volumes:
+      ["./scripts/init-sqs.sh:/etc/localstack/init/ready.d/init-sqs.sh:ro"]
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "awslocal sqs get-queue-url --queue-name pokerlab --region eu-west-2 >/dev/null",
+        ]
+      interval: 5s
+      start_period: 15s
+      retries: 30
+  api:
+    build:
+      context: .
+      args: { MODULE: api }
+    environment:
+      <<: *service-env
+      REDIS_HOST: redis
+    ports: ["127.0.0.1:18080:8080"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      localstack: { condition: service_healthy }
+      redis: { condition: service_healthy }
+  worker:
+    build:
+      context: .
+      args: { MODULE: worker }
+    environment: *service-env
+    depends_on:
+      postgres: { condition: service_healthy }
+      localstack: { condition: service_healthy }
+  frontend:
+    build: ./frontend
+    ports: ["127.0.0.1:8080:8080"]
+    depends_on: [api]
+volumes:
+  postgres-data:
