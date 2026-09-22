@@ -16,6 +16,61 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(SimulationController.class)
 class SimulationControllerTest {
     @Test
+    void rejectsFractionalTrialsRatherThanSilentlyTruncating() throws Exception {
+        mvc.perform(
+                        post("/api/v1/simulations")
+                                .contentType("application/json")
+                                .content(VALID.replace("1000", "1000.5")))
+                .andExpect(status().isBadRequest());
+        verifyNoInteractions(store);
+    }
+
+    @Test
+    void resultEndpointDistinguishesProcessingAndTerminalFailure() throws Exception {
+        var id = UUID.randomUUID();
+        var view = mock(SimulationView.class);
+        when(store.get(id)).thenReturn(view);
+        for (var state :
+                new SimulationStatus[] {SimulationStatus.QUEUED, SimulationStatus.RUNNING}) {
+            when(view.status()).thenReturn(state);
+            mvc.perform(get("/api/v1/simulations/" + id + "/results"))
+                    .andExpect(status().isAccepted())
+                    .andExpect(header().string("Retry-After", "2"));
+        }
+        for (var state :
+                new SimulationStatus[] {SimulationStatus.FAILED, SimulationStatus.CANCELLED}) {
+            when(view.status()).thenReturn(state);
+            mvc.perform(get("/api/v1/simulations/" + id + "/results"))
+                    .andExpect(status().isConflict())
+                    .andExpect(jsonPath("$.code").value("SIMULATION_TERMINAL"));
+        }
+    }
+
+    @Test
+    void returnsCompletedEquityRatherThanRawShares() throws Exception {
+        var id = UUID.randomUUID();
+        var view = mock(SimulationView.class);
+        when(view.status()).thenReturn(SimulationStatus.COMPLETED);
+        when(store.get(id)).thenReturn(view);
+        when(cache.result(id))
+                .thenReturn(
+                        new AggregatedSimulationResult(
+                                id,
+                                SimulationStatus.COMPLETED,
+                                100,
+                                java.util.List.of(
+                                        new com.pokerlab.core.batch.PlayerResult(
+                                                "AA", 75, 0, 25, 75),
+                                        new com.pokerlab.core.batch.PlayerResult(
+                                                "KK", 25, 0, 75, 25)),
+                                25));
+        mvc.perform(get("/api/v1/simulations/" + id + "/results"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalTrials").value(100))
+                .andExpect(jsonPath("$.players[0].equity").value(0.75));
+    }
+
+    @Test
     void acceptsFullPrecisionSeedStringsFromBrowser() throws Exception {
         when(store.create(any())).thenReturn(UUID.randomUUID());
         mvc.perform(
