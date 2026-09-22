@@ -1,6 +1,6 @@
-# PokerLab Phase 1
+# PokerLab Cloud (in development)
 
-Phase 1 of PokerLab: a core poker engine for cards, decks, hand evaluation, and showdown comparison.
+PokerLab is being expanded into a distributed poker simulation platform. The existing engine and CLI are preserved in the `engine` Maven module. See [build progress](docs/build-progress.md) for verified milestones and remaining acceptance gates.
 
 ## Features
 
@@ -15,7 +15,7 @@ Phase 1 of PokerLab: a core poker engine for cards, decks, hand evaluation, and 
 
 ## Requirements
 
-- Java 17+
+- Java 21
 - Maven 3.8+
 
 ## Run tests
@@ -27,13 +27,13 @@ mvn test
 ## Run demo
 
 ```bash
-mvn exec:java
+mvn -pl engine exec:java
 ```
 
 Or provide hero, villain, and board using compact two-character card notation:
 
 ```bash
-mvn exec:java -Dexec.args="AsKs QdQc Ah7c2s9dJc"
+mvn -pl engine exec:java -Dexec.args="AsKs QdQc Ah7c2s9dJc"
 ```
 
 Use `T` for ten, e.g. `Ts` = Ten of spades.
