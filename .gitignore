@@ -13,6 +13,7 @@ coverage/
 *.tfstate
 *.tfstate.*
 *.tfplan
+*.tfvars
 *.auto.tfvars
 !*.example
 *.log
