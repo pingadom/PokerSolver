@@ -1,6 +1,8 @@
 spring:
   application:
     name: pokerlab-api
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/pokerlab}
     username: ${DATABASE_USER:pokerlab}
@@ -29,6 +31,7 @@ management:
       show-details: never
 server:
   port: ${PORT:8080}
+  shutdown: graceful
 pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
@@ -38,3 +41,7 @@ pokerlab:
     endpoint: ${SQS_ENDPOINT:}
     url: ${SQS_QUEUE_URL:http://localhost:4566/000000000000/pokerlab}
     dlq-url: ${SQS_DLQ_URL:http://localhost:4566/000000000000/pokerlab-dlq}
+logging:
+  structured:
+    format:
+      console: ecs
