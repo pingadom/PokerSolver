@@ -58,11 +58,11 @@ class MonteCarloSimulationTest {
 
         PlayerHand villain = new PlayerHand("Villain", Card.parse("As"), Card.parse("Qc"));
 
-        SimulationRequest request =
-                SimulationRequest.quickWithSeed(
-                        List.of(hero, villain), List.of(), 100, OptionalLong.of(42));
-
-        assertThrows(IllegalArgumentException.class, () -> MonteCarloSimulation.run(request));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SimulationRequest.quickWithSeed(
+                                List.of(hero, villain), List.of(), 100, OptionalLong.of(42)));
     }
 
     @Test

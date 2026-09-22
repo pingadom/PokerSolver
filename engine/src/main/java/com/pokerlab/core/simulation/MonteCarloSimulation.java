@@ -5,27 +5,22 @@ import com.pokerlab.core.card.Deck;
 import com.pokerlab.core.hand.EvaluatedHand;
 import com.pokerlab.core.hand.HandEvaluator;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
-import java.util.Set;
 
 /**
- * Monte Carlo card-by-card simulator for Texas Hold'em.
- *
- * <p>This file is deliberately self-contained for now. It includes the simulator plus the small
- * data types it needs: PlayerHand, SimulationRequest, SimulationResult, SimulationTrial, and Mode.
- *
- * <p>Put this file here: src/main/java/com/pokerlab/core/simulation/MonteCarloSimulation.java
+ * Seeded Monte Carlo simulator for Texas Hold'em. Samples missing community cards uniformly without
+ * replacement. Timing is observational and is excluded from reproducibility guarantees.
  */
 public final class MonteCarloSimulation {
 
     private MonteCarloSimulation() {}
 
     public static SimulationResult run(SimulationRequest request) {
-        validateRequest(request);
+        Objects.requireNonNull(request, "request");
 
         long start = System.nanoTime();
 
@@ -37,7 +32,7 @@ public final class MonteCarloSimulation {
 
         SimulationResult result = new SimulationResult(request.players(), request.simulations());
 
-        for (int trialNumber = 1; trialNumber <= request.simulations(); trialNumber++) {
+        for (int trialNumber = 0; trialNumber < request.simulations(); trialNumber++) {
             List<Card> completedBoard = completeBoard(request.knownBoard(), baseDeck, random);
             boolean captureVerbose =
                     request.mode() == SimulationMode.VERBOSE
@@ -62,7 +57,7 @@ public final class MonteCarloSimulation {
             if (captureVerbose) {
                 result.addVerboseTrial(
                         new SimulationTrial(
-                                trialNumber,
+                                trialNumber + 1,
                                 request.players(),
                                 completedBoard,
                                 evaluatedHands,
@@ -74,42 +69,6 @@ public final class MonteCarloSimulation {
         result.setRuntimeMillis((end - start) / 1_000_000);
 
         return result;
-    }
-
-    private static void validateRequest(SimulationRequest request) {
-        if (request.players().size() < 2) {
-            throw new IllegalArgumentException("At least two players are required");
-        }
-
-        if (request.players().size() > 10) {
-            throw new IllegalArgumentException("Maximum supported players is 10");
-        }
-
-        int boardSize = request.knownBoard().size();
-        if (!(boardSize == 0 || boardSize == 3 || boardSize == 4 || boardSize == 5)) {
-            throw new IllegalArgumentException("Board must contain 0, 3, 4, or 5 cards");
-        }
-
-        Set<Card> seenCards = new HashSet<>();
-        Set<String> seenPlayerNames = new HashSet<>();
-
-        for (PlayerHand player : request.players()) {
-            if (!seenPlayerNames.add(player.playerName())) {
-                throw new IllegalArgumentException("Duplicate player name: " + player.playerName());
-            }
-
-            for (Card card : player.cards()) {
-                if (!seenCards.add(card)) {
-                    throw new IllegalArgumentException("Duplicate card found: " + card);
-                }
-            }
-        }
-
-        for (Card card : request.knownBoard()) {
-            if (!seenCards.add(card)) {
-                throw new IllegalArgumentException("Duplicate card found: " + card);
-            }
-        }
     }
 
     private static List<Card> collectKnownCards(SimulationRequest request) {
@@ -130,45 +89,23 @@ public final class MonteCarloSimulation {
     }
 
     private static List<Card> completeBoard(List<Card> knownBoard, Card[] deck, Random random) {
-        return switch (knownBoard.size()) {
-            case 0 -> {
-                int first = random.nextInt(deck.length);
-                int second = randomIndexExcept(deck.length, random, first, -1, -1, -1);
-                int third = randomIndexExcept(deck.length, random, first, second, -1, -1);
-                int fourth = randomIndexExcept(deck.length, random, first, second, third, -1);
-                int fifth = randomIndexExcept(deck.length, random, first, second, third, fourth);
-                yield List.of(deck[first], deck[second], deck[third], deck[fourth], deck[fifth]);
-            }
-            case 3 -> {
-                int first = random.nextInt(deck.length);
-                int second = randomIndexExcept(deck.length, random, first, -1, -1, -1);
-                yield List.of(
-                        knownBoard.get(0),
-                        knownBoard.get(1),
-                        knownBoard.get(2),
-                        deck[first],
-                        deck[second]);
-            }
-            case 4 ->
-                    List.of(
-                            knownBoard.get(0),
-                            knownBoard.get(1),
-                            knownBoard.get(2),
-                            knownBoard.get(3),
-                            deck[random.nextInt(deck.length)]);
-            case 5 -> knownBoard;
-            default -> throw new IllegalArgumentException("Board must contain 0, 3, 4, or 5 cards");
-        };
-    }
-
-    private static int randomIndexExcept(
-            int bound, Random random, int first, int second, int third, int fourth) {
-        int index;
-        do {
-            index = random.nextInt(bound);
-        } while (index == first || index == second || index == third || index == fourth);
-
-        return index;
+        if (knownBoard.size() == 5) return knownBoard;
+        List<Card> board = new ArrayList<>(knownBoard);
+        int[] sampled = new int[5 - knownBoard.size()];
+        for (int i = 0; i < sampled.length; i++) {
+            int index;
+            boolean duplicate;
+            do {
+                index = random.nextInt(deck.length);
+                duplicate = false;
+                for (int j = 0; j < i; j++) {
+                    if (sampled[j] == index) duplicate = true;
+                }
+            } while (duplicate);
+            sampled[i] = index;
+            board.add(deck[index]);
+        }
+        return board;
     }
 
     private static Map<String, EvaluatedHand> evaluatePlayers(

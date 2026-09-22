@@ -8,6 +8,7 @@ import java.util.Map;
 public class SimulationResult {
     private final int simulations;
     private final Map<String, Integer> winsByPlayer;
+    private final Map<String, Integer> tiesByPlayer;
     private final Map<String, Double> equitySharesByPlayer;
     private final List<SimulationTrial> verboseTrials;
     private int tiedPots;
@@ -16,11 +17,13 @@ public class SimulationResult {
     public SimulationResult(List<PlayerHand> players, int simulations) {
         this.simulations = simulations;
         this.winsByPlayer = new LinkedHashMap<>();
+        this.tiesByPlayer = new LinkedHashMap<>();
         this.equitySharesByPlayer = new LinkedHashMap<>();
         this.verboseTrials = new ArrayList<>();
 
         for (PlayerHand player : players) {
             winsByPlayer.put(player.playerName(), 0);
+            tiesByPlayer.put(player.playerName(), 0);
             equitySharesByPlayer.put(player.playerName(), 0.0);
         }
     }
@@ -35,6 +38,7 @@ public class SimulationResult {
         double share = 1.0 / tiedPlayers.size();
 
         for (String playerName : tiedPlayers) {
+            tiesByPlayer.merge(playerName, 1, Integer::sum);
             equitySharesByPlayer.merge(playerName, share, Double::sum);
         }
     }
@@ -61,6 +65,14 @@ public class SimulationResult {
 
     public int wins(String playerName) {
         return winsByPlayer.getOrDefault(playerName, 0);
+    }
+
+    public int ties(String playerName) {
+        return tiesByPlayer.getOrDefault(playerName, 0);
+    }
+
+    public int losses(String playerName) {
+        return simulations - wins(playerName) - ties(playerName);
     }
 
     public double equityShare(String playerName) {
