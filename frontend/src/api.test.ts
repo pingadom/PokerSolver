@@ -11,7 +11,7 @@ describe("scenario validation", () => {
         { name: "AA", cards: ["AS", "AH"] },
         { name: "KK", cards: ["KS", "KH"] },
       ],
-      seed: 0,
+      seed: "0",
     }));
   it("rejects duplicates across board and hands", () =>
     expect(() => parseScenario(players, "AS", "1000", "")).toThrow(
@@ -19,8 +19,16 @@ describe("scenario validation", () => {
     ));
   it("rejects unsafe iterations and seeds", () => {
     expect(() => parseScenario(players, "", "100000001", "")).toThrow("trials");
-    expect(() => parseScenario(players, "", "100", "9007199254740992")).toThrow(
-      "Seed",
+    expect(() =>
+      parseScenario(players, "", "100", "9223372036854775808"),
+    ).toThrow("Seed");
+  });
+  it("preserves full 64-bit seeds without rounding", () => {
+    expect(parseScenario(players, "", "100", "9223372036854775807").seed).toBe(
+      "9223372036854775807",
+    );
+    expect(parseScenario(players, "", "100", "-9223372036854775808").seed).toBe(
+      "-9223372036854775808",
     );
   });
   it("rejects malformed cards and duplicate names", () => {

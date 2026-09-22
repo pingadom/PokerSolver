@@ -282,8 +282,8 @@ export default function App() {
                     </label>
                     <input
                       id="seed"
-                      type="number"
-                      step="1"
+                      type="text"
+                      inputMode="numeric"
                       value={seed}
                       onChange={(e) => setSeed(e.target.value)}
                       placeholder="Auto"
@@ -484,7 +484,7 @@ export default function App() {
                   >
                     <span className="history-title">
                       {run.configuration.players
-                        .map((p) => p.playerName)
+                        .map((p) => p.name)
                         .join(" vs ")}
                     </span>
                     <span>

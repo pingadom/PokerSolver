@@ -5,7 +5,7 @@ export type Scenario = {
   board: string[];
   iterations: number;
   batchSize: number;
-  seed?: number;
+  seed?: string;
 };
 export type Simulation = {
   simulationId: string;
@@ -16,7 +16,7 @@ export type Simulation = {
   totalBatches: number;
   createdAt: string;
   errorMessage?: string;
-  configuration: { seed: number; players: { playerName: string }[] };
+  configuration: { seed: string; players: { name: string }[] };
 };
 export type Results = {
   simulationId: string;
@@ -71,15 +71,19 @@ export function parseScenario(
   const count = Number(iterations);
   if (!Number.isSafeInteger(count) || count < 1 || count > 100_000_000)
     throw new Error("Choose 1 to 100,000,000 trials.");
-  if (seed.trim() && !Number.isSafeInteger(Number(seed)))
-    throw new Error(
-      "Seed must be an integer within JavaScript’s safe number range.",
-    );
+  const seedText = seed.trim();
+  if (
+    seedText &&
+    (!/^-?\d+$/.test(seedText) ||
+      BigInt(seedText) < -(2n ** 63n) ||
+      BigInt(seedText) >= 2n ** 63n)
+  )
+    throw new Error("Seed must be a signed 64-bit integer.");
   return {
     players: hands,
     board: community,
     iterations: count,
     batchSize: 100_000,
-    ...(seed.trim() ? { seed: Number(seed) } : {}),
+    ...(seedText ? { seed: BigInt(seedText).toString() } : {}),
   };
 }

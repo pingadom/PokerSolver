@@ -45,15 +45,15 @@ public class SimulationController {
     }
 
     @GetMapping("/{id}")
-    public SimulationView get(@PathVariable("id") UUID id) {
-        return cache.status(id);
+    public SimulationStatusResponse get(@PathVariable("id") UUID id) {
+        return SimulationStatusResponse.from(cache.status(id));
     }
 
     @GetMapping
-    public List<SimulationView> recent(
+    public List<SimulationStatusResponse> recent(
             @RequestParam(name = "limit", defaultValue = "20") int limit,
             @RequestParam(name = "offset", defaultValue = "0") int offset) {
-        return store.recent(limit, offset);
+        return store.recent(limit, offset).stream().map(SimulationStatusResponse::from).toList();
     }
 
     @GetMapping("/{id}/results")

@@ -15,6 +15,17 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(SimulationController.class)
 class SimulationControllerTest {
+    @Test
+    void acceptsFullPrecisionSeedStringsFromBrowser() throws Exception {
+        when(store.create(any())).thenReturn(UUID.randomUUID());
+        mvc.perform(
+                        post("/api/v1/simulations")
+                                .contentType("application/json")
+                                .content(VALID.replace("42", "\"9223372036854775807\"")))
+                .andExpect(status().isAccepted());
+        verify(store).create(argThat(config -> config.seed() == Long.MAX_VALUE));
+    }
+
     @Autowired MockMvc mvc;
     @MockitoBean SimulationStore store;
     @MockitoBean SimulationCache cache;
