@@ -7,15 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** Alternating, full-tree vanilla CFR. Suitable for correctness fixtures and small games. */
+/** Alternating, full-tree CFR. Suitable for correctness fixtures and small games. */
 public final class CfrSolver<S> {
+    public enum Variant {
+        VANILLA,
+        CFR_PLUS
+    }
+
     private static final double CHANCE_TOLERANCE = 1e-9;
     private final CfrGame<S> game;
+    private final Variant variant;
     private final Map<String, InformationSet> informationSets = new LinkedHashMap<>();
     private final Map<String, double[]> iterationStrategies = new LinkedHashMap<>();
 
     public CfrSolver(CfrGame<S> game) {
+        this(game, Variant.VANILLA);
+    }
+
+    public CfrSolver(CfrGame<S> game, Variant variant) {
         this.game = Objects.requireNonNull(game, "game");
+        this.variant = Objects.requireNonNull(variant, "variant");
     }
 
     public CfrSolution solve(int iterations) {
@@ -23,16 +34,27 @@ public final class CfrSolver<S> {
         informationSets.clear();
         for (int iteration = 0; iteration < iterations; iteration++) {
             iterationStrategies.clear();
-            traverse(game.initialState(), 1, 1, 1, 0);
+            traverse(game.initialState(), 1, 1, 1, 0, iteration + 1);
+            // Aggregate all histories at each information set before applying regret-matching+.
+            if (variant == Variant.CFR_PLUS)
+                informationSets.values().forEach(InformationSet::clipNegativeRegrets);
             iterationStrategies.clear();
-            traverse(game.initialState(), 1, 1, 1, 1);
+            traverse(game.initialState(), 1, 1, 1, 1, iteration + 1);
+            if (variant == Variant.CFR_PLUS)
+                informationSets.values().forEach(InformationSet::clipNegativeRegrets);
         }
         Map<String, Map<String, Double>> average = new LinkedHashMap<>();
         informationSets.forEach((key, node) -> average.put(key, node.averageStrategy()));
         return new CfrSolution(iterations, Map.copyOf(average));
     }
 
-    private double traverse(S state, double reach0, double reach1, double chanceReach, int target) {
+    private double traverse(
+            S state,
+            double reach0,
+            double reach1,
+            double chanceReach,
+            int target,
+            int iterationWeight) {
         if (game.isTerminal(state)) {
             double utility = game.terminalUtility(state);
             if (!Double.isFinite(utility)) throw new IllegalArgumentException("Non-finite payoff");
@@ -54,7 +76,8 @@ public final class CfrSolver<S> {
                                         reach0,
                                         reach1,
                                         chanceReach * outcome.probability(),
-                                        target);
+                                        target,
+                                        iterationWeight);
             }
             return utility;
         }
@@ -84,7 +107,8 @@ public final class CfrSolver<S> {
                             player == 0 ? reach0 * probability : reach0,
                             player == 1 ? reach1 * probability : reach1,
                             chanceReach,
-                            target);
+                            target,
+                            iterationWeight);
             nodeUtility += probability * actionUtilities[index];
         }
         if (player == target) {
@@ -95,7 +119,8 @@ public final class CfrSolver<S> {
                     actionUtilities,
                     nodeUtility,
                     opponentReach * chanceReach,
-                    ownReach * chanceReach);
+                    ownReach * chanceReach,
+                    variant == Variant.CFR_PLUS ? iterationWeight : 1);
         }
         return nodeUtility;
     }
@@ -138,11 +163,17 @@ public final class CfrSolver<S> {
                 double[] actionUtilities,
                 double nodeUtility,
                 double counterfactualReach,
-                double ownReach) {
+                double ownReach,
+                int averagingWeight) {
             for (int index = 0; index < strategy.length; index++) {
                 regret[index] += counterfactualReach * (actionUtilities[index] - nodeUtility);
-                strategySum[index] += ownReach * strategy[index];
+                strategySum[index] += averagingWeight * ownReach * strategy[index];
             }
+        }
+
+        private void clipNegativeRegrets() {
+            for (int index = 0; index < regret.length; index++)
+                regret[index] = Math.max(0, regret[index]);
         }
 
         private Map<String, Double> averageStrategy() {

@@ -50,6 +50,14 @@ class PreflopSolutionPackTest {
                         PreflopPackJson.read(
                                 PreflopPackJson.write(valid)
                                         .replace(valid.spotHash(), "0".repeat(64))));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        PreflopPackJson.read(
+                                PreflopPackJson.write(valid)
+                                        .replace(
+                                                PreflopSolutionPack.SOLVER_VERSION,
+                                                "unknown-solver/v1")));
 
         var incomplete = new ArrayList<>(valid.matchups());
         incomplete.remove(0);
@@ -82,6 +90,14 @@ class PreflopSolutionPackTest {
         assertThrows(
                 java.nio.file.FileAlreadyExistsException.class,
                 () -> GenerateValidationPack.main(arguments));
+
+        Path plusOutput = temporaryDirectory.resolve("validation-plus-pack.json");
+        GenerateValidationPack.main(
+                new String[] {"mc-plus", plusOutput.toString(), "100", "1000", "42", GENERATED_AT});
+        PreflopSolutionPack plus = PreflopPackJson.read(Files.readString(plusOutput));
+        assertEquals(PreflopSolutionPack.CFR_PLUS_SOLVER_VERSION, plus.solverVersion());
+        assertEquals(pack.matchups(), plus.matchups());
+        assertEquals(PreflopSolutionPack.VALIDATION_ONLY, plus.publicationStatus());
     }
 
     @Test

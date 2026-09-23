@@ -3,7 +3,10 @@ package com.pokerlab.solver;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.pokerlab.core.card.Card;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 class PreflopAllInGameTest {
@@ -114,6 +117,32 @@ class PreflopAllInGameTest {
 
         assertTrue(early > later, () -> "Expected gap reduction: " + early + " -> " + later);
         assertTrue(later < 0.05, () -> "Best-response gap: " + later);
+    }
+
+    @Test
+    void cfrPlusConvergesOnExactValidationPayoffs() throws Exception {
+        PreflopSolutionPack pack;
+        try (var resource = getClass().getResourceAsStream("/validation-pack.json")) {
+            assertNotNull(resource);
+            pack =
+                    PreflopPackJson.read(
+                            new String(resource.readAllBytes(), StandardCharsets.UTF_8));
+        }
+        Map<String, EquityEstimate> estimates =
+                pack.matchups().stream()
+                        .collect(
+                                Collectors.toMap(
+                                        matchup ->
+                                                matchup.firstCombo() + "/" + matchup.secondCombo(),
+                                        PreflopSolutionPack.MatchupEquity::estimate));
+        PreflopAllInGame game =
+                pack.spot()
+                        .game((first, second) -> estimates.get(first.key() + "/" + second.key()));
+        CfrSolution plus =
+                new CfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(pack.iterations());
+        double gap = PreflopAllInBestResponse.assess(game, plus).gap();
+        assertTrue(gap < 0.001, () -> "CFR+ best-response gap: " + gap);
+        assertTrue(gap < pack.estimatedGameGapBb());
     }
 
     @Test

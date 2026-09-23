@@ -47,6 +47,33 @@ class CfrSolverTest {
         assertThrows(IllegalArgumentException.class, () -> solver.solve(0));
     }
 
+    @Test
+    void cfrPlusConvergesOnKuhnPoker() {
+        KuhnPoker game = new KuhnPoker();
+        CfrSolution solution = new CfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(3_000);
+        double value = StrategyEvaluator.playerZeroUtility(game, solution);
+        double gap = bestResponseGap(game, solution);
+        assertEquals(-1.0 / 18, value, 0.01);
+        assertTrue(gap < 0.001, () -> "Kuhn CFR+ best-response gap: " + gap);
+        assertEquals(solution, new CfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(3_000));
+    }
+
+    private static double bestResponseGap(KuhnPoker game, CfrSolution solution) {
+        double firstBest = Double.NEGATIVE_INFINITY;
+        double secondBest = Double.POSITIVE_INFINITY;
+        for (int mask = 0; mask < 64; mask++) {
+            firstBest =
+                    Math.max(
+                            firstBest,
+                            pureResponseValue(game, solution, 0, mask, game.initialState()));
+            secondBest =
+                    Math.min(
+                            secondBest,
+                            pureResponseValue(game, solution, 1, mask, game.initialState()));
+        }
+        return firstBest - secondBest;
+    }
+
     private static double pureResponseValue(
             KuhnPoker game,
             CfrSolution solution,

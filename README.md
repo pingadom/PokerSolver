@@ -27,7 +27,7 @@ flowchart LR
 - Scenario form, progress polling, results and recent simulations.
 - OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
+The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR and a scalar CFR+ variant, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
 
 Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
@@ -96,6 +96,7 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateValidationPack' '
 ```
 
 The output is not served to users. It uses exhaustive preflop runouts for eight unblocked combo matchups; the source spot and limits are documented in [ADR-004](docs/decisions/ADR-004-preflop-validation-game.md).
+Use `exact-plus` in place of `exact` to generate a separate CFR+ validation pack. `mc-plus` likewise selects CFR+ with seeded Monte Carlo payoffs. Existing `exact` and `mc` commands retain the vanilla solver and reproduce the committed fixture.
 
 ## Measured performance
 

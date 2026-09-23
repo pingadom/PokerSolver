@@ -28,6 +28,7 @@ public record PreflopSolutionPack(
         List<HeroDecision> heroDecisions) {
     public static final String SCHEMA_VERSION = "preflop-all-in-pack/v1";
     public static final String SOLVER_VERSION = "alternating-vanilla-cfr/v1";
+    public static final String CFR_PLUS_SOLVER_VERSION = "alternating-cfr-plus/v1";
     public static final String VALIDATION_ONLY = "VALIDATION_ONLY";
     public static final String SEEDED_MONTE_CARLO = "SEEDED_MONTE_CARLO";
     public static final String EXACT_ENUMERATION = "EXACT_ENUMERATION";
@@ -57,7 +58,8 @@ public record PreflopSolutionPack(
      */
     public void validate() {
         if (!SCHEMA_VERSION.equals(schemaVersion)
-                || !SOLVER_VERSION.equals(solverVersion)
+                || (!SOLVER_VERSION.equals(solverVersion)
+                        && !CFR_PLUS_SOLVER_VERSION.equals(solverVersion))
                 || !VALIDATION_ONLY.equals(publicationStatus))
             throw new IllegalArgumentException("Unsupported pack or solver version");
         try {

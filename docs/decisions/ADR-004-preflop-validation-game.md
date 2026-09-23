@@ -32,9 +32,11 @@ The `PreflopAllInSpot` hash binds the six-seat context, action history, stack, b
 
 The committed [validation pack](../../solver/src/test/resources/validation-pack.json) uses exact enumeration and 3,000 vanilla CFR iterations. Its hash is `f7b669b57c3e212f16dc8e80ee5a270407b04f09c22757e906b637cb3d6630b5`, its best-response gap is **0.011635bb**, and its payoff sampling error is zero. These numbers describe only the small synthetic range fixture and its restricted action tree; `publicationStatus` is `VALIDATION_ONLY`.
 
+The offline builder also supports a CFR+ variant with nonnegative cumulative regrets and linearly weighted average strategies. On the same exact eight-matchup payoff table, 3,000 iterations produce a roughly **0.0000078bb** best-response gap. The committed vanilla fixture remains unchanged for reproducibility. This comparison is specific to the restricted synthetic game; larger ranges and runtime/memory measurements are needed before choosing a production solver configuration.
+
 ## Consequences and next checks
 
 - Keep solution generation offline; page requests must never run CFR.
 - Benchmark seeded equity-estimation error over broader payoff tables; the first eight-matchup fixture now uses exact enumeration.
-- Define publication thresholds and a reviewed content set before exposing a read-only trainer API. The validation-only pack already has structural, payoff and action-EV checks.
+- Define publication thresholds and a reviewed content set before exposing a read-only trainer API. The validation-only pack already has structural, payoff and action-EV checks. Its current strategy gives nearly every hero combo the same action, so it is unsuitable as a lesson.
 - Solve non-all-in preflop decisions only after their postflop continuation model and rake treatment are validated.

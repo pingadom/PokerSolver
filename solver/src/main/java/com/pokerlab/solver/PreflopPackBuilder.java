@@ -20,18 +20,41 @@ public final class PreflopPackBuilder {
                 payoffTrialsPerMatchup,
                 payoffSeed,
                 generatedAt,
+                CfrSolver.Variant.VANILLA);
+    }
+
+    public static PreflopSolutionPack generate(
+            PreflopAllInSpot spot,
+            int iterations,
+            int payoffTrialsPerMatchup,
+            long payoffSeed,
+            String generatedAt,
+            CfrSolver.Variant variant) {
+        return generate(
+                spot,
+                iterations,
+                payoffTrialsPerMatchup,
+                payoffSeed,
+                generatedAt,
+                variant,
                 PreflopSolutionPack.SEEDED_MONTE_CARLO,
                 new SeededMonteCarloEquityOracle(payoffTrialsPerMatchup, payoffSeed));
     }
 
     public static PreflopSolutionPack generateExact(
             PreflopAllInSpot spot, int iterations, String generatedAt) {
+        return generateExact(spot, iterations, generatedAt, CfrSolver.Variant.VANILLA);
+    }
+
+    public static PreflopSolutionPack generateExact(
+            PreflopAllInSpot spot, int iterations, String generatedAt, CfrSolver.Variant variant) {
         return generate(
                 spot,
                 iterations,
                 1_712_304,
                 0,
                 generatedAt,
+                variant,
                 PreflopSolutionPack.EXACT_ENUMERATION,
                 new ExactPreflopEquityOracle());
     }
@@ -42,11 +65,13 @@ public final class PreflopPackBuilder {
             int payoffTrialsPerMatchup,
             long payoffSeed,
             String generatedAt,
+            CfrSolver.Variant variant,
             String payoffMethod,
             PreflopEquityOracle oracle) {
         Objects.requireNonNull(spot, "spot");
+        Objects.requireNonNull(variant, "variant");
         PreflopAllInGame game = spot.game(oracle);
-        CfrSolution solution = new CfrSolver<>(game).solve(iterations);
+        CfrSolution solution = new CfrSolver<>(game, variant).solve(iterations);
         List<PreflopSolutionPack.MatchupEquity> matchups = new ArrayList<>();
         for (ChanceOutcome<PreflopAllInGame.State> outcome :
                 game.chanceOutcomes(game.initialState())) {
@@ -64,7 +89,9 @@ public final class PreflopPackBuilder {
         PreflopSolutionPack pack =
                 new PreflopSolutionPack(
                         PreflopSolutionPack.SCHEMA_VERSION,
-                        PreflopSolutionPack.SOLVER_VERSION,
+                        variant == CfrSolver.Variant.CFR_PLUS
+                                ? PreflopSolutionPack.CFR_PLUS_SOLVER_VERSION
+                                : PreflopSolutionPack.SOLVER_VERSION,
                         PreflopSolutionPack.VALIDATION_ONLY,
                         generatedAt,
                         spot,
