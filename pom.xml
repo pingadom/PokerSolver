@@ -8,6 +8,7 @@
   <name>PokerLab Cloud</name>
   <modules>
     <module>engine</module>
+    <module>solver</module>
     <module>shared</module>
     <module>api</module>
     <module>worker</module>
