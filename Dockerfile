@@ -18,7 +18,7 @@ COPY --from=frontend /web/dist/ api/src/main/resources/static/
 ARG MODULE=api
 RUN mvn -B -pl ${MODULE} -am -DskipTests package && cp ${MODULE}/target/${MODULE}-1.0.0.jar /service.jar
 
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 WORKDIR /app
 COPY --from=build /service.jar /app/service.jar
 USER 10001:10001
