@@ -11,35 +11,38 @@ public final class GenerateValidationPack {
     private GenerateValidationPack() {}
 
     public static void main(String[] arguments) throws IOException {
-        if (arguments.length != 6 && arguments.length != 4)
+        String mode = arguments.length == 0 ? "" : arguments[0];
+        boolean sampled = "mc".equals(mode) || "mc-plus".equals(mode);
+        boolean exact = "exact".equals(mode) || "exact-plus".equals(mode);
+        if (!((sampled && (arguments.length == 6 || arguments.length == 7))
+                || (exact && (arguments.length == 4 || arguments.length == 5))))
             throw new IllegalArgumentException(
-                    "Usage: <mc|mc-plus> <output.json> <iterations> <trials-per-matchup> <seed> <generated-at-UTC> | <exact|exact-plus> <output.json> <iterations> <generated-at-UTC>");
+                    "Usage: <mc|mc-plus> <output.json> <iterations> <trials-per-matchup> <seed> <generated-at-UTC> [baseline|diverse] | <exact|exact-plus> <output.json> <iterations> <generated-at-UTC> [baseline|diverse]");
         Path output = Path.of(arguments[1]).toAbsolutePath();
         PreflopSolutionPack pack;
+        boolean hasSpotChoice = arguments.length == 5 || arguments.length == 7;
+        String spotChoice = hasSpotChoice ? arguments[arguments.length - 1] : "baseline";
+        PreflopAllInSpot spot =
+                switch (spotChoice) {
+                    case "baseline" -> ValidationSpot.create();
+                    case "diverse" -> DiverseValidationSpot.create();
+                    default -> throw new IllegalArgumentException("Unknown validation spot");
+                };
         CfrSolver.Variant variant =
-                arguments[0].endsWith("-plus")
-                        ? CfrSolver.Variant.CFR_PLUS
-                        : CfrSolver.Variant.VANILLA;
-        if (("mc".equals(arguments[0]) || "mc-plus".equals(arguments[0]))
-                && arguments.length == 6) {
+                mode.endsWith("-plus") ? CfrSolver.Variant.CFR_PLUS : CfrSolver.Variant.VANILLA;
+        if (sampled) {
             pack =
                     PreflopPackBuilder.generate(
-                            ValidationSpot.create(),
+                            spot,
                             Integer.parseInt(arguments[2]),
                             Integer.parseInt(arguments[3]),
                             Long.parseLong(arguments[4]),
                             arguments[5],
                             variant);
-        } else if (("exact".equals(arguments[0]) || "exact-plus".equals(arguments[0]))
-                && arguments.length == 4) {
+        } else {
             pack =
                     PreflopPackBuilder.generateExact(
-                            ValidationSpot.create(),
-                            Integer.parseInt(arguments[2]),
-                            arguments[3],
-                            variant);
-        } else {
-            throw new IllegalArgumentException("Unknown or incomplete payoff method");
+                            spot, Integer.parseInt(arguments[2]), arguments[3], variant);
         }
         Files.writeString(
                 output,
@@ -52,5 +55,8 @@ public final class GenerateValidationPack {
                 pack.spotHash(),
                 pack.estimatedGameGapBb(),
                 pack.maximumCalledPayoffStandardErrorBb());
+        System.out.println(
+                "Provisional content screening (not publication): "
+                        + PreflopPackScreening.assess(pack).findings());
     }
 }

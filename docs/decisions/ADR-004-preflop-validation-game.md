@@ -34,9 +34,13 @@ The committed [validation pack](../../solver/src/test/resources/validation-pack.
 
 The offline builder also supports a CFR+ variant with nonnegative cumulative regrets and linearly weighted average strategies. On the same exact eight-matchup payoff table, 3,000 iterations produce a roughly **0.0000078bb** best-response gap. The committed vanilla fixture remains unchanged for reproducibility. This comparison is specific to the restricted synthetic game; larger ranges and runtime/memory measurements are needed before choosing a production solver configuration.
 
+A second `DiverseValidationSpot` research fixture retains the action history but uses eight hero and seven opponent weighted exact combos, leaving 47 unblocked matchups. With 10,000 seeded trials per matchup and 3,000 CFR+ iterations, the gap against that sampled payoff table is **0.000063bb**, but the largest called-payoff standard error is **1.004bb**. The [committed exact-payoff fixture](../../solver/src/test/resources/diverse-validation-pack.json) removes sampling error and has a **0.000149bb** gap after 3,000 CFR+ iterations. Clear fold and shove decisions survive, as does a mixed combo. Both versions remain `VALIDATION_ONLY` and are not poker recommendations.
+
+`PreflopPackScreening` applies provisional cutoffs of 0.05bb game gap, 0.1bb maximum called-payoff standard error, at least six exact combos per range, and at least one clear action in each direction. A clear action needs an EV edge above 1bb and three times the maximum called-payoff standard error. The narrow exact fixture fails breadth and decision diversity; the wider sampled fixture fails precision; the wider exact fixture passes the numeric screen. These automated checks do not establish that a range, action tree or rake model is appropriate for human training.
+
 ## Consequences and next checks
 
 - Keep solution generation offline; page requests must never run CFR.
-- Benchmark seeded equity-estimation error over broader payoff tables; the first eight-matchup fixture now uses exact enumeration.
-- Define publication thresholds and a reviewed content set before exposing a read-only trainer API. The validation-only pack already has structural, payoff and action-EV checks. Its current strategy gives nearly every hero combo the same action, so it is unsuitable as a lesson.
+- Benchmark runtime and memory before scaling beyond 47 exact matchups; study sampled-payoff sensitivity on substantially larger ranges where exhaustive enumeration is impractical.
+- Define a human review and publication decision for a realistic content set before exposing a read-only trainer API. The provisional numeric screen and structural checks alone cannot publish a pack.
 - Solve non-all-in preflop decisions only after their postflop continuation model and rake treatment are validated.
