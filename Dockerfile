@@ -10,6 +10,7 @@ FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /source
 COPY pom.xml ./
 COPY engine/ engine/
+COPY solver/ solver/
 COPY shared/ shared/
 COPY api/ api/
 COPY worker/ worker/
