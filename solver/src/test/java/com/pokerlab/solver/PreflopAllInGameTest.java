@@ -32,6 +32,7 @@ class PreflopAllInGameTest {
         assertTrue(
                 deals.stream().noneMatch(d -> d.state().first().conflictsWith(d.state().second())));
         assertEquals(0.004, game.maximumEquityStandardError(), 1e-12);
+        assertEquals(0.802, game.maximumCalledPayoffStandardError(), 1e-12);
     }
 
     @Test
@@ -69,6 +70,20 @@ class PreflopAllInGameTest {
         assertTrue(first.standardError() > 0);
         assertThrows(
                 IllegalArgumentException.class, () -> oracle.estimate(aces, combo("AS", "KD", 1)));
+    }
+
+    @Test
+    void exactEnumerationBenchmarksSeededMonteCarloPayoff() {
+        WeightedCombo aces = combo("AS", "AH", 1);
+        WeightedCombo kings = combo("KC", "KD", 1);
+        EquityEstimate exact = new ExactPreflopEquityOracle().estimate(aces, kings);
+        EquityEstimate sampled =
+                new SeededMonteCarloEquityOracle(100_000, 42).estimate(aces, kings);
+
+        assertEquals(1_712_304, exact.trials());
+        assertEquals(0, exact.standardError());
+        assertEquals(exact.equity(), sampled.equity(), 4 * sampled.standardError());
+        assertTrue(exact.equity() > 0.8 && exact.equity() < 0.85);
     }
 
     @Test

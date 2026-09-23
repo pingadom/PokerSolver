@@ -88,6 +88,17 @@ public final class PreflopAllInGame implements CfrGame<PreflopAllInGame.State> {
                 .orElseThrow();
     }
 
+    /** Largest one-standard-error change in a called payoff, in big blinds. */
+    public double maximumCalledPayoffStandardError() {
+        return maximumEquityStandardError() * (2 * totalStack + deadMoney);
+    }
+
+    public EquityEstimate matchupEquity(WeightedCombo first, WeightedCombo second) {
+        EquityEstimate estimate = equities.get(new Matchup(first, second));
+        if (estimate == null) throw new IllegalArgumentException("Unknown matchup");
+        return estimate;
+    }
+
     @Override
     public State initialState() {
         return new State(null, null, "");

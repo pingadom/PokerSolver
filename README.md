@@ -27,7 +27,7 @@ flowchart LR
 - Scenario form, progress polling, results and recent simulations.
 - OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. No playable GTO solution pack or trainer API is published yet; see the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
+The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
 
 Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
@@ -87,6 +87,16 @@ Docker enables disposable PostgreSQL/Redis Testcontainers suites. A dedicated na
 
 The inherited evaluator is covered by category/tiebreaker tests and an exhaustive check over all 2,598,960 five-card hands. Distributed tests exercise duplicate submission, races, out-of-order completion, failure and retry. [Build progress](docs/build-progress.md) records acceptance evidence and limitations.
 
+To regenerate the solver's validation-only pack, first install the engine and solver modules locally, then run the offline generator from `solver`:
+
+```sh
+mvn -pl solver -am -DskipTests install
+cd solver
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateValidationPack' '-Dexec.args=exact target/validation-pack.json 3000 2026-09-23T12:00:00Z'
+```
+
+The output is not served to users. It uses exhaustive preflop runouts for eight unblocked combo matchups; the source spot and limits are documented in [ADR-004](docs/decisions/ADR-004-preflop-validation-game.md).
+
 ## Measured performance
 
 Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
@@ -106,6 +116,7 @@ These are engine thread measurements, not AWS or end-to-end queue scaling claims
 - [Queue decision](docs/decisions/ADR-001-queue.md)
 - [PostgreSQL vs Redis](docs/decisions/ADR-002-postgres-vs-redis.md)
 - [Idempotent workers and transaction boundaries](docs/decisions/ADR-003-idempotent-workers.md)
+- [First preflop solver validation game](docs/decisions/ADR-004-preflop-validation-game.md)
 - [AWS deployment, costs and teardown](docs/aws-deployment.md)
 - [Observability and operations](docs/observability.md)
 - [AI-assisted development record](docs/ai-development.md)
