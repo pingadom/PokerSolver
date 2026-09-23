@@ -1,4 +1,4 @@
-FROM node:24-alpine AS frontend
+FROM node:25-alpine AS frontend
 WORKDIR /web
 RUN npm install --global pnpm@11.25.0
 COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml ./
