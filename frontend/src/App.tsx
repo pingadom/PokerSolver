@@ -141,6 +141,9 @@ export default function App() {
         <a className="nav-item" href="#matchups">
           <span>◇</span> Example matchups
         </a>
+        <a className="nav-item" href="#solver">
+          <span>♧</span> GTO trainer
+        </a>
         <a className="nav-item" href="#recent">
           <span>◷</span> Recent simulations
         </a>
@@ -498,6 +501,39 @@ export default function App() {
               )}
             </section>
           </div>
+          <section
+            className="solver-preview"
+            id="solver"
+            aria-labelledby="solver-title"
+          >
+            <div className="solver-preview-copy">
+              <div className="solver-preview-topline">
+                <p className="eyebrow">SOLVER PROJECT</p>
+                <span className="solver-status">IN DEVELOPMENT</span>
+              </div>
+              <h2 id="solver-title">GTO trainer</h2>
+              <p>
+                We’re building our own solver for 6-max cash preflop practice.
+                The backend currently tests its CFR algorithm on Kuhn poker and
+                models a limited preflop shove/call spot. Strategy charts and
+                drills are still in development.
+              </p>
+            </div>
+            <ol className="solver-milestones">
+              <li>
+                <span>BUILT</span>
+                <strong>CFR benchmark and all-in game model</strong>
+              </li>
+              <li>
+                <span>NEXT</span>
+                <strong>Validate and publish the first preflop spot</strong>
+              </li>
+              <li>
+                <span>LATER</span>
+                <strong>Turn, river, partial-hand and full-hand drills</strong>
+              </li>
+            </ol>
+          </section>
           <section
             className="matchups"
             id="matchups"
