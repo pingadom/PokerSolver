@@ -27,7 +27,7 @@ flowchart LR
 - Scenario form, progress polling, results and recent simulations.
 - OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
+The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
 
 Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
