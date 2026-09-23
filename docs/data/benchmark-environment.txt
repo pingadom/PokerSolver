@@ -1,0 +1,8 @@
+Measured at: 2026-09-22T14:53:31.390204500Z
+Java: 21.0.3
+VM: OpenJDK 64-Bit Server VM
+OS: Windows 10 amd64
+Available processors: 16
+Warmup: 20 batches of up to 100000 trials
+Scenario: AS AH vs KS KH vs QS QH; empty board; seed 123456789; batch size 100000
+Boundary: engine worker threads, pool startup included; no queue, HTTP or database

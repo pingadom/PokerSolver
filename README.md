@@ -1,55 +1,115 @@
-# PokerLab Phase 1
+# PokerLab Cloud
 
-Phase 1 of PokerLab: a core poker engine for cards, decks, hand evaluation, and showdown comparison.
+A distributed Texas Hold’em simulation platform: submit exact hands, split millions of Monte Carlo trials into reproducible batches, process them with independent workers, and inspect equity and progress in a React workspace.
+
+Built around an existing Java poker engine, with PostgreSQL as the durable source of truth and explicit protection against duplicate queue delivery.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  UI[React / TypeScript] --> API[Java 21 / Spring Boot API]
+  API --> PG[(PostgreSQL)]
+  PG --> Outbox[Transactional outbox]
+  Outbox --> SQS[SQS / LocalStack]
+  SQS --> Workers[Java workers]
+  Workers --> PG
+  API --> Redis[(Optional Redis cache)]
+  PG --> API
+```
 
 ## Features
 
-- Card, rank, and suit representation
-- Standard 52-card deck
-- Shuffling and dealing
-- 5-card poker hand evaluator
-- 7-card Texas Hold'em evaluator by checking all 21 five-card combinations
-- Showdown comparison between two players
-- Starter JUnit tests
-- Simple CLI demo
+- 2–9 players with exact hole cards, 0–5 known community cards and up to 100 million trials.
+- Seeded batches, correct multiway tie splitting, per-player wins/ties/losses/equity.
+- Durable submission/outbox, retry, visibility renewal, dead-letter handling and idempotent finalisation.
+- PostgreSQL migrations and real concurrency tests; optional Redis cache with outage fallback.
+- Scenario form, progress polling, results and recent simulations.
+- OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-## Requirements
+Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
-- Java 17+
-- Maven 3.8+
+## Quick start
 
-## Run tests
+Requires Docker with Linux containers and Compose v2. The stack includes application images and two workers; no separate Java/Node installation is needed.
 
-```bash
-mvn test
+```sh
+git clone https://github.com/pingadom/PokerSolver.git
+cd PokerSolver
+git checkout codex/pokerlab-cloud
+cp .env.example .env
+docker compose up --build -d --scale worker=2
 ```
 
-## Run demo
+On PowerShell, replace the copy command with `Copy-Item .env.example .env`.
 
-```bash
-mvn exec:java
+Open **[PokerLab at localhost:8080](http://localhost:8080)**. Submit the default AA vs KK vs QQ scenario. View [Swagger](http://localhost:18080/swagger-ui/index.html) or [health](http://localhost:18080/actuator/health).
+
+Run `./scripts/smoke.ps1` on Windows, or `./scripts/smoke.sh` with curl/jq on Linux. Stop with `docker compose down`; the database volume is preserved. [Local development](docs/local-development.md) covers IDE runs and a durable PostgreSQL queue alternative when Docker is unavailable.
+
+## API example
+
+```sh
+curl http://localhost:18080/api/v1/simulations \
+  -H 'Content-Type: application/json' \
+  -d '{"players":[{"name":"AA","cards":["AS","AH"]},{"name":"KK","cards":["KS","KH"]},{"name":"QQ","cards":["QS","QH"]}],"board":[],"iterations":10000000,"batchSize":100000,"seed":123456789}'
 ```
 
-Or provide hero, villain, and board using compact two-character card notation:
+The API returns **202 Accepted**, a `Location` header and:
 
-```bash
-mvn exec:java -Dexec.args="AsKs QdQc Ah7c2s9dJc"
+```json
+{
+  "simulationId": "<generated UUID>",
+  "status": "QUEUED",
+  "statusUrl": "/api/v1/simulations/<generated UUID>"
+}
 ```
 
-Use `T` for ten, e.g. `Ts` = Ten of spades.
+Poll the status URL for `completedIterations / requestedIterations`. Fetch `{statusUrl}/results` for per-player counts and equity: 200 when complete, 202 while processing, 409 after terminal failure. `GET /api/v1/simulations?limit=20&offset=0` returns recent runs. Errors consistently return `{"code":"...","message":"..."}`.
 
-## Package layout
+Seeds can be JSON integers or decimal strings on submission. Status responses use strings to preserve all 64 bits in browsers. Fractional trial/batch counts are rejected. The same scenario, seed, batch size and engine version reproduce counts; measured elapsed time naturally varies.
 
-```text
-com.pokerlab.core.card      Card, Suit, Rank, Deck
-com.pokerlab.core.hand      HandCategory, HandRank, EvaluatedHand, HandEvaluator
-com.pokerlab.core.showdown  Showdown, ShowdownResult, Winner
-com.pokerlab.app           CLI demo
+## Verification
+
+```sh
+mvn spotless:check verify
+cd frontend
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
 ```
 
-## Next steps
+Docker enables disposable PostgreSQL/Redis Testcontainers suites. A dedicated native PostgreSQL database can run the same lifecycle contract using `TEST_DATABASE_URL`; see the development guide. CI additionally builds all images and completes a two-worker LocalStack simulation with Redis both available and stopped.
 
-1. Add stricter input validation for CLI use.
-2. Add more evaluator tests for every hand category.
-3. Add benchmark tests before optimising.
-4. Add Monte Carlo equity simulation in Phase 2.
+The inherited evaluator is covered by category/tiebreaker tests and an exhaustive check over all 2,598,960 five-card hands. Distributed tests exercise duplicate submission, races, out-of-order completion, failure and retry. [Build progress](docs/build-progress.md) records acceptance evidence and limitations.
+
+## Measured performance
+
+Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
+
+| Engine worker threads | Wall time | Trials/second | Speedup |
+| --------------------- | --------: | ------------: | ------: |
+| 1                     |  14.751 s |       677,904 |   1.00× |
+| 2                     |   7.724 s |     1,294,622 |   1.91× |
+| 4                     |   3.857 s |     2,592,441 |   3.82× |
+| 8                     |   2.253 s |     4,437,734 |   6.55× |
+
+These are engine thread measurements, not AWS or end-to-end queue scaling claims. [Method, raw data and reproduction](docs/benchmarks.md).
+
+## Engineering notes
+
+- [Architecture and failure modes](docs/architecture.md)
+- [Queue decision](docs/decisions/ADR-001-queue.md)
+- [PostgreSQL vs Redis](docs/decisions/ADR-002-postgres-vs-redis.md)
+- [Idempotent workers and transaction boundaries](docs/decisions/ADR-003-idempotent-workers.md)
+- [AWS deployment, costs and teardown](docs/aws-deployment.md)
+- [Observability and operations](docs/observability.md)
+- [AI-assisted development record](docs/ai-development.md)
+
+Terraform provisions a restricted demonstration environment and uses Secrets Manager without putting passwords in variables/state. Applying it is billable and manual. No infrastructure has been deployed as part of the build.
+
+The release supports exact hands. Authentication, player ranges, cancellation, live push updates, automatic scaling and S3 exports are not implemented. Keep the unauthenticated API on loopback or behind the documented restricted ingress.
+
+The original CLI remains available with `mvn -pl engine exec:java`.

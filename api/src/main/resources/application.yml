@@ -1,0 +1,50 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: pokerlab-api
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/pokerlab}
+    username: ${DATABASE_USER:pokerlab}
+    password: ${DATABASE_PASSWORD:pokerlab}
+    hikari:
+      maximum-pool-size: 10
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+      accept-float-as-int: false
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 200ms
+      connect-timeout: 200ms
+management:
+  health:
+    redis:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+pokerlab:
+  cache:
+    enabled: ${CACHE_ENABLED:true}
+  queue:
+    mode: ${QUEUE_MODE:sqs}
+    region: ${AWS_REGION:eu-west-2}
+    endpoint: ${SQS_ENDPOINT:}
+    url: ${SQS_QUEUE_URL:http://localhost:4566/000000000000/pokerlab}
+    dlq-url: ${SQS_DLQ_URL:http://localhost:4566/000000000000/pokerlab-dlq}
+logging:
+  structured:
+    format:
+      console: ecs

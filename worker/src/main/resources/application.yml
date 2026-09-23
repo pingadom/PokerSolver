@@ -1,0 +1,39 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: pokerlab-worker
+  lifecycle:
+    timeout-per-shutdown-phase: 110s
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/pokerlab}
+    username: ${DATABASE_USER:pokerlab}
+    password: ${DATABASE_PASSWORD:pokerlab}
+    hikari:
+      maximum-pool-size: 5
+  task:
+    scheduling:
+      pool:
+        size: 2
+      shutdown:
+        await-termination: true
+        await-termination-period: 100s
+server:
+  port: ${PORT:8081}
+  shutdown: graceful
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+pokerlab:
+  queue:
+    mode: ${QUEUE_MODE:sqs}
+    region: ${AWS_REGION:eu-west-2}
+    endpoint: ${SQS_ENDPOINT:}
+    url: ${SQS_QUEUE_URL:http://localhost:4566/000000000000/pokerlab}
+    dlq-url: ${SQS_DLQ_URL:http://localhost:4566/000000000000/pokerlab-dlq}
+logging:
+  structured:
+    format:
+      console: ecs

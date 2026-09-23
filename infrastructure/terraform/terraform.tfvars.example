@@ -1,0 +1,8 @@
+region = "eu-west-2"
+name = "pokerlab-demo"
+allowed_web_cidr = "203.0.113.10/32" # Replace with your public IP before planning.
+image_tag = "bootstrap"
+api_count = 0
+worker_count = 0
+enable_redis = false
+# certificate_arn = "arn:aws:acm:eu-west-2:123456789012:certificate/your-certificate"

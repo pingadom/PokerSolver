@@ -1,0 +1,10 @@
+.git
+.local
+**/target
+**/node_modules
+**/dist
+**/coverage
+**/*.tsbuildinfo
+.env
+.terraform
+**/.terraform

@@ -1,0 +1,46 @@
+name: Deploy AWS demo
+on: workflow_dispatch
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: aws-demo
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: aws-demo
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      API_REPOSITORY: ${{ vars.ECR_API_REPOSITORY }}
+      WORKER_REPOSITORY: ${{ vars.ECR_WORKER_REPOSITORY }}
+      ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+      API_SERVICE: ${{ vars.ECS_API_SERVICE }}
+      WORKER_SERVICE: ${{ vars.ECS_WORKER_SERVICE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - uses: aws-actions/amazon-ecr-login@v2
+      - name: Build immutable images
+        run: |
+          docker build --build-arg MODULE=api -t "$API_REPOSITORY:$GITHUB_SHA" .
+          docker build --build-arg MODULE=worker -t "$WORKER_REPOSITORY:$GITHUB_SHA" .
+          docker push "$API_REPOSITORY:$GITHUB_SHA"
+          docker push "$WORKER_REPOSITORY:$GITHUB_SHA"
+      - name: Register and roll out revisions
+        run: |
+          set -euo pipefail
+          for module in api worker; do
+            if [ "$module" = api ]; then service="$API_SERVICE"; image="$API_REPOSITORY:$GITHUB_SHA"; else service="$WORKER_SERVICE"; image="$WORKER_REPOSITORY:$GITHUB_SHA"; fi
+            definition=$(aws ecs describe-services --cluster "$ECS_CLUSTER" --services "$service" --query 'services[0].taskDefinition' --output text)
+            aws ecs describe-task-definition --task-definition "$definition" --query taskDefinition > current.json
+            jq --arg image "$image" --arg module "$module" 'del(.taskDefinitionArn,.revision,.status,.requiresAttributes,.compatibilities,.registeredAt,.registeredBy,.deregisteredAt) | .containerDefinitions |= map(if .name == $module then .image = $image else . end)' current.json > next.json
+            revision=$(aws ecs register-task-definition --cli-input-json file://next.json --query 'taskDefinition.taskDefinitionArn' --output text)
+            aws ecs update-service --cluster "$ECS_CLUSTER" --service "$service" --task-definition "$revision" > /dev/null
+          done
+          aws ecs wait services-stable --cluster "$ECS_CLUSTER" --services "$API_SERVICE" "$WORKER_SERVICE"
