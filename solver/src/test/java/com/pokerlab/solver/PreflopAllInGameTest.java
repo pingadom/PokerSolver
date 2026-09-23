@@ -72,6 +72,36 @@ class PreflopAllInGameTest {
     }
 
     @Test
+    void bestResponseGapFallsForAReproducibleSmallSubgame() {
+        PreflopAllInGame game =
+                new PreflopAllInGame(
+                        List.of(combo("AS", "AH", 1), combo("7C", "7D", 1)),
+                        List.of(combo("KC", "KD", 1), combo("QH", "JH", 1)),
+                        1,
+                        2,
+                        30,
+                        0,
+                        (first, second) ->
+                                new EquityEstimate(
+                                        first.first().compact().startsWith("7")
+                                                ? (second.first().compact().startsWith("K")
+                                                        ? 0.19
+                                                        : 0.54)
+                                                : (second.first().compact().startsWith("K")
+                                                        ? 0.82
+                                                        : 0.90),
+                                        0,
+                                        1));
+
+        CfrSolver<PreflopAllInGame.State> solver = new CfrSolver<>(game);
+        double early = PreflopAllInBestResponse.assess(game, solver.solve(50)).gap();
+        double later = PreflopAllInBestResponse.assess(game, solver.solve(20_000)).gap();
+
+        assertTrue(early > later, () -> "Expected gap reduction: " + early + " -> " + later);
+        assertTrue(later < 0.05, () -> "Best-response gap: " + later);
+    }
+
+    @Test
     void rejectsImpossibleRangesAndCommitments() {
         WeightedCombo aces = combo("AS", "AH", 1);
         WeightedCombo kings = combo("KC", "KD", 1);

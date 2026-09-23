@@ -4,7 +4,7 @@
 
 ## Current implementation
 
-The independent `solver` Maven module now has alternating full-tree **vanilla CFR**, a Kuhn poker benchmark, exact strategy-profile evaluation, and a conditional two-player preflop shove/fold then call/fold game. The preflop prototype removes blocked card combinations, normalizes weighted range matchups, accounts for committed chips and dead money, and uses reproducible Monte Carlo equity estimates for called all-in payoffs. Automated checks cover the known Kuhn game value, a small best-response bound, chip payoffs and card removal. The backend is a correctness foundation; it has **no published 6-max strategy pack, trainer API or general 100bb opening chart**. CFR+, full best-response reporting for preflop, payoff uncertainty benchmarks and versioned packs remain the next solver milestones.
+The independent `solver` Maven module now has alternating full-tree **vanilla CFR**, a Kuhn poker benchmark, exact strategy-profile evaluation, and a conditional two-player preflop shove/fold then call/fold game. The preflop prototype removes blocked card combinations, normalizes weighted range matchups, accounts for committed chips and dead money, and uses reproducible Monte Carlo equity estimates for called all-in payoffs. It can measure an exact best-response gap against that **estimated, bounded game**. Automated checks cover the known Kuhn game value, gap reduction on a small preflop game, chip payoffs and card removal. The backend is a correctness foundation; it has **no published 6-max strategy pack, trainer API or general 100bb opening chart**. CFR+, payoff uncertainty benchmarks and versioned packs remain the next solver milestones.
 
 ## Product boundary
 
