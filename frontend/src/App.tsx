@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { parseScenario, request, type Results, type Simulation } from "./api";
+import { presets, scenarioFromPreset, type Preset } from "./presets";
 
 const number = new Intl.NumberFormat("en-GB");
 const initialPlayers = [
@@ -22,6 +23,30 @@ export default function App() {
   const [history, setHistory] = useState<Simulation[]>([]);
   const [historyError, setHistoryError] = useState(false);
   const [retry, setRetry] = useState(0);
+  const [loadedPreset, setLoadedPreset] = useState<Preset | null>(null);
+
+  function loadPreset(preset: Preset) {
+    const scenario = scenarioFromPreset(preset);
+    setPlayers(
+      scenario.players.map((player) => ({
+        name: player.name,
+        cards: player.cards.join(" "),
+      })),
+    );
+    setBoard(scenario.board.join(" "));
+    setIterations(String(scenario.iterations));
+    setSeed(scenario.seed ?? "");
+    setFormError("");
+    setLoadError("");
+    setSelected(null);
+    setSimulation(null);
+    setResults(null);
+    setLoadedPreset(preset);
+    document.getElementById("new-simulation")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
 
   useEffect(() => {
     const abort = new AbortController();
@@ -113,21 +138,16 @@ export default function App() {
         <a className="nav-item active" href="#new-simulation">
           <span>◈</span> Equity simulator
         </a>
+        <a className="nav-item" href="#matchups">
+          <span>◇</span> Example matchups
+        </a>
         <a className="nav-item" href="#recent">
           <span>◷</span> Recent simulations
         </a>
         <div className="sidebar-note">
-          <span className="small-label">THE METHOD</span>
-          <p>
-            Many possible boards.
-            <br />
-            One clearer decision.
-          </p>
-          <small>
-            Monte Carlo equity analysis
-            <br />
-            for Texas Hold’em.
-          </small>
+          <span className="small-label">ABOUT THIS TOOL</span>
+          <p>Texas Hold’em equity calculator</p>
+          <small>Exact hole cards · simulated remaining boards</small>
         </div>
         <div className="sidebar-bottom">EXACT HANDS · 2–9 PLAYERS</div>
       </aside>
@@ -141,10 +161,11 @@ export default function App() {
         <div className="page-content">
           <div className="page-heading">
             <div>
-              <p className="eyebrow">EXPLORE THE ODDS</p>
-              <h1>Every hand has a story.</h1>
+              <p className="eyebrow">TEXAS HOLD’EM</p>
+              <h1>Hand equity simulator</h1>
               <p className="subtitle">
-                Set the table. Run the numbers. Understand your equity.
+                Enter exact hands and known board cards to estimate each
+                player’s share of the pot.
               </p>
             </div>
             <span className="heading-suit" aria-hidden="true">
@@ -164,6 +185,12 @@ export default function App() {
                 </div>
                 <span className="pill">Texas Hold’em</span>
               </div>
+              {loadedPreset && (
+                <div className="loaded-preset" role="status">
+                  <strong>{loadedPreset.title} loaded.</strong> Review the
+                  cards, then run the simulation.
+                </div>
+              )}
               <form onSubmit={submit}>
                 <div className="section-title">
                   <h3>Players & hole cards</h3>
@@ -184,15 +211,16 @@ export default function App() {
                           maxLength={80}
                           aria-label={`Player ${index + 1} name`}
                           value={player.name}
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            setLoadedPreset(null);
                             setPlayers(
                               players.map((p, i) =>
                                 i === index
                                   ? { ...p, name: e.target.value }
                                   : p,
                               ),
-                            )
-                          }
+                            );
+                          }}
                           required
                         />
                       </label>
@@ -205,15 +233,16 @@ export default function App() {
                           aria-label={`Player ${index + 1} hole cards`}
                           aria-describedby="card-help"
                           value={player.cards}
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            setLoadedPreset(null);
                             setPlayers(
                               players.map((p, i) =>
                                 i === index
                                   ? { ...p, cards: e.target.value }
                                   : p,
                               ),
-                            )
-                          }
+                            );
+                          }}
                           required
                           placeholder="AS KH"
                         />
@@ -222,9 +251,10 @@ export default function App() {
                         className="remove"
                         type="button"
                         disabled={players.length <= 2}
-                        onClick={() =>
-                          setPlayers(players.filter((_, i) => i !== index))
-                        }
+                        onClick={() => {
+                          setLoadedPreset(null);
+                          setPlayers(players.filter((_, i) => i !== index));
+                        }}
                         aria-label={`Remove player ${index + 1}`}
                       >
                         ×
@@ -236,12 +266,13 @@ export default function App() {
                   className="text-button"
                   type="button"
                   disabled={players.length >= 9}
-                  onClick={() =>
+                  onClick={() => {
+                    setLoadedPreset(null);
                     setPlayers([
                       ...players,
                       { name: `Player ${players.length + 1}`, cards: "" },
-                    ])
-                  }
+                    ]);
+                  }}
                 >
                   + Add player
                 </button>
@@ -252,7 +283,10 @@ export default function App() {
                 <input
                   id="board"
                   value={board}
-                  onChange={(e) => setBoard(e.target.value)}
+                  onChange={(e) => {
+                    setLoadedPreset(null);
+                    setBoard(e.target.value);
+                  }}
                   placeholder="e.g.  7H  8H  9C"
                   aria-describedby="board-help"
                 />
@@ -272,7 +306,10 @@ export default function App() {
                       max="100000000"
                       step="1"
                       value={iterations}
-                      onChange={(e) => setIterations(e.target.value)}
+                      onChange={(e) => {
+                        setLoadedPreset(null);
+                        setIterations(e.target.value);
+                      }}
                       required
                     />
                   </div>
@@ -285,7 +322,10 @@ export default function App() {
                       type="text"
                       inputMode="numeric"
                       value={seed}
-                      onChange={(e) => setSeed(e.target.value)}
+                      onChange={(e) => {
+                        setLoadedPreset(null);
+                        setSeed(e.target.value);
+                      }}
                       placeholder="Auto"
                     />
                   </div>
@@ -315,10 +355,10 @@ export default function App() {
               <div className="panel-heading">
                 <div>
                   <span className="section-number">02</span>
-                  <h2 id="results-title">The equity picture</h2>
+                  <h2 id="results-title">Results</h2>
                 </div>
                 <span className={`pill ${results ? "success" : ""}`}>
-                  {simulation?.status.toLowerCase() ?? "Ready when you are"}
+                  {simulation?.status.toLowerCase() ?? "No run selected"}
                 </span>
               </div>
               {!selected && (
@@ -334,12 +374,9 @@ export default function App() {
                       Q<small>♣</small>
                     </span>
                   </div>
-                  <h3>A little less guesswork.</h3>
+                  <h3>No results yet</h3>
                   <p>
-                    Your results will appear here.
-                    <br />
-                    Start with the classic AA vs KK vs QQ matchup, or build your
-                    own scenario.
+                    Run the hands in the form, or load an example matchup below.
                   </p>
                   <div className="empty-stats">
                     <span>WIN PROBABILITY</span>
@@ -461,6 +498,55 @@ export default function App() {
               )}
             </section>
           </div>
+          <section
+            className="matchups"
+            id="matchups"
+            aria-labelledby="matchups-title"
+          >
+            <div className="matchups-heading">
+              <div>
+                <p className="eyebrow">EXAMPLE MATCHUPS</p>
+                <h2 id="matchups-title">Hands worth comparing</h2>
+                <p>
+                  Load a setup, run it, then change one card or add a player to
+                  see what moves the equity.
+                </p>
+              </div>
+              <span>200,000 trials per example</span>
+            </div>
+            <div className="preset-grid">
+              {presets.map((preset) => (
+                <button
+                  className={`preset-card ${loadedPreset?.id === preset.id ? "selected" : ""}`}
+                  type="button"
+                  key={preset.id}
+                  onClick={() => loadPreset(preset)}
+                  disabled={submitting}
+                  aria-label={`Load ${preset.title}`}
+                >
+                  <span className="preset-topline">
+                    <span>
+                      {preset.street} · {preset.players.length} players
+                    </span>
+                    <span aria-hidden="true">↗</span>
+                  </span>
+                  <strong>{preset.title}</strong>
+                  <span className="preset-hands">
+                    {preset.players.map((player) => (
+                      <span key={player.name}>
+                        <span>{player.name}</span>
+                        <code>{player.cards}</code>
+                      </span>
+                    ))}
+                  </span>
+                  {preset.board && (
+                    <span className="preset-board">Board: {preset.board}</span>
+                  )}
+                  <span className="preset-question">{preset.question}</span>
+                </button>
+              ))}
+            </div>
+          </section>
           <section className="recent" id="recent">
             <div className="recent-heading">
               <h2>Recent simulations</h2>
@@ -472,14 +558,17 @@ export default function App() {
               </p>
             ) : history.length === 0 ? (
               <p className="field-hint">
-                A fresh table. Your first simulation will appear here.
+                No simulations yet. Completed and recent runs will appear here.
               </p>
             ) : (
               <div className="history-grid">
                 {history.map((run) => (
                   <button
                     className={`history-item ${selected === run.simulationId ? "selected" : ""}`}
-                    onClick={() => setSelected(run.simulationId)}
+                    onClick={() => {
+                      setLoadedPreset(null);
+                      setSelected(run.simulationId);
+                    }}
                     key={run.simulationId}
                   >
                     <span className="history-title">
@@ -499,7 +588,7 @@ export default function App() {
             )}
           </section>
           <footer>
-            Built for curiosity. Backed by probability.
+            Monte Carlo estimates for exact Texas Hold’em hands.
             <span>POKERLAB CLOUD</span>
           </footer>
         </div>
