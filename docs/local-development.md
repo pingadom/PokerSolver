@@ -57,6 +57,23 @@ Do not point tests at a database containing useful application data. For an isol
 
 During development on the original Windows host, a separate PostgreSQL cluster ran on loopback port 55432 under ignored `.local/`. No installed database or global configuration was changed. Modern Node and a locally downloaded, checksum-verified Terraform binary were used because system Node was obsolete and Terraform was absent. These local tool paths are not part of repository configuration.
 
+## Research trainer API
+
+The validation-only drill is disabled by default. To try it locally, run the API on loopback with `TRAINER_RESEARCH_ENABLED=true` and `TRAINER_RESEARCH_PACK_PATH` set to the absolute path of `solver/src/test/resources/diverse-validation-pack.json`. The API reads the file at startup. It rejects missing, sampled-payoff or numerically unscreened packs; it does not solve a game on a request or bundle the synthetic pack into the API artifact. Keep this unauthenticated research route off public deployments. It has no attempt storage or trainer UI yet.
+
+For example, in PowerShell from the repository root, after starting the usual local dependencies:
+
+```powershell
+$env:TRAINER_RESEARCH_ENABLED = 'true'
+$env:TRAINER_RESEARCH_PACK_PATH = (Resolve-Path 'solver/src/test/resources/diverse-validation-pack.json').Path
+mvn -pl api -am -DskipTests package
+java -jar api/target/api-1.0.0.jar --server.port=18080
+```
+
+`GET /api/v1/trainer/research/questions/42` returns the public spot, exact hero cards, legal `SHOVE`/`FOLD` actions, a decimal-string seed and the pack's `spotHash`. It omits opponent private cards and action EVs. Submit that seed and hash to `POST /api/v1/trainer/research/grade` with `{"seed":"42","spotHash":"<hash from question>","action":"FOLD"}` to see both action EVs, solution frequencies and selected-action EV loss in big blinds. Grading recomputes the question from the seed; it rejects a stale hash or any browser-supplied EV. Both responses set `Cache-Control: no-store`.
+
+The pack has synthetic, narrow ranges and a no-rake all-in tree. Its exact payoff table and small best-response gap validate this bounded model only. Do not treat its feedback as advice for ordinary 100bb cash-game preflop decisions.
+
 ## Tests and formatting
 
 ```sh

@@ -38,6 +38,9 @@ server:
 pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
+  trainer:
+    research-enabled: ${TRAINER_RESEARCH_ENABLED:false}
+    research-pack-path: ${TRAINER_RESEARCH_PACK_PATH:}
   queue:
     mode: ${QUEUE_MODE:sqs}
     region: ${AWS_REGION:eu-west-2}
