@@ -2,6 +2,8 @@
 
 **Status:** implementation underway, 24 September 2026. Product direction confirmed: **6-max cash preflop first**, then turn, river, partial-hand and full-hand practice, with more game formats later. PokerLab will generate its own strategy data. Planning assumption: 100bb effective stacks and chip EV. Start solver validation without rake; realistic cash packs will specify rake, blinds and allowed bet sizes before solving.
 
+The immediate, user-confirmed scope is the [focused solver demo](GTO_Demo_Scope_Review.md): one explainable preflop all-in spot with two active players at a six-seat table and a playable ten-decision trainer. The broader milestones below are a roadmap, not work required to finish that demo.
+
 ## Current implementation
 
 The [multiway solver research path](multiway-solver-research.md) now handles up to six players in a forced-shove, sequential call/fold subgame. It includes blocker-aware joint deals, exact board enumeration reused across active subsets, per-seat chip accounting, multi-player regret matching and unilateral deviation measurement. Immutable packs feed a separate opt-in API with replayable ten-question sessions, mixed/fixed responding seats, conditional EV grading and complete session review. Exact payoffs remove the earlier sampling uncertainty; the synthetic ranges and restricted game still make this a **validation-only model**, not a publishable six-player chart. No general open/raise tree, rake, unequal-stack side pots or postflop trainer is implemented yet.
