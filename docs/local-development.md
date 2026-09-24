@@ -84,6 +84,8 @@ The pack has synthetic, narrow ranges and a no-rake all-in tree. Its exact payof
 
 The trainer page shows the same label and limits, the six-seat action history, exact hero cards, possible combos in both assumed ranges, solver frequencies and action EVs after each choice. The final review lists all ten decisions. The seed and full pack hash are kept in the URL for repeatable questions; refreshing starts at decision one because attempts are not persisted yet. A stale URL prompts a new session if the saved solution changes.
 
+The same local Compose overlay also enables the separate [bounded river research API and website drill](river-solver-research.md) using `river-validation-pack.json`; open [http://localhost:8080/#river](http://localhost:8080/#river). When running the API directly, set `TRAINER_RIVER_RESEARCH_ENABLED=true` and `TRAINER_RIVER_RESEARCH_PACK_PATH` to the absolute path of that file. Inspect `GET /api/v1/trainer/research/river`, then request `GET /api/v1/trainer/research/river/questions/42`. Submit one of that question's legal action codes to `POST /api/v1/trainer/research/river/grade` with the same seed and returned pack hash. This route is disabled without the explicit flag.
+
 ## Six-seat research sessions
 
 The separate multiway route is also disabled by default. Set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-exact-pack.json` before starting the API. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Keep this research API local; it has no account or attempt persistence yet.

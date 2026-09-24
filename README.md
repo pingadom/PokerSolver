@@ -106,6 +106,8 @@ The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects t
 
 The [exact-payoff scaling study](docs/preflop-payoff-scaling.md) counts the cost of larger ranges and adds suit-equivalence reuse to the offline solver. It confirms that the current demo pack has no duplicate suit patterns to reuse, so larger lessons still need explicit range review and payoff benchmarking.
 
+A separate [bounded river solver research path](docs/river-solver-research.md) now solves a fixed-board heads-up betting tree and serves opt-in, validation-only questions from a saved pack. With the local trainer overlay running, open `http://localhost:8080/#river` for its research drill. Its synthetic ranges are not a continuation of the preflop lesson or a general river strategy.
+
 ## Measured performance
 
 Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:

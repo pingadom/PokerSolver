@@ -4,5 +4,8 @@ services:
     environment:
       TRAINER_RESEARCH_ENABLED: "true"
       TRAINER_RESEARCH_PACK_PATH: /opt/pokerlab/trainer-pack.json
+      TRAINER_RIVER_RESEARCH_ENABLED: "true"
+      TRAINER_RIVER_RESEARCH_PACK_PATH: /opt/pokerlab/river-pack.json
     volumes:
       - ./solver/src/test/resources/diverse-validation-pack.json:/opt/pokerlab/trainer-pack.json:ro
+      - ./solver/src/test/resources/river-validation-pack.json:/opt/pokerlab/river-pack.json:ro
