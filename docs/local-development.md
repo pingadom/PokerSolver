@@ -74,6 +74,17 @@ java -jar api/target/api-1.0.0.jar --server.port=18080
 
 The pack has synthetic, narrow ranges and a no-rake all-in tree. Its exact payoff table and small best-response gap validate this bounded model only. Do not treat its feedback as advice for ordinary 100bb cash-game preflop decisions.
 
+## Six-seat research sessions
+
+The separate multiway route is also disabled by default. Set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-exact-pack.json` before starting the API. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Keep this research API local; it has no account or attempt persistence yet.
+
+- `GET /api/v1/trainer/research/multiway` returns the game assumptions, six seats, pack hash, numeric quality and session length.
+- `GET /api/v1/trainer/research/multiway/sessions/42/questions/0?player=0` starts a deterministic ten-question session. Index is 0–9. Player 0 mixes responding seats; 1–5 fixes HJ through BB for the supplied fixture. UTG has already shoved and is not a decision to practise.
+- `POST /api/v1/trainer/research/multiway/grade` accepts `{"sessionSeed":"42","index":0,"player":0,"packHash":"<hash from question>","action":"CALL"}`. Choose `CALL` or `FOLD`; the server reconstructs the question and computes conditional action EVs.
+- `POST /api/v1/trainer/research/multiway/review` accepts the same seed, player and pack hash, with `actions` containing exactly ten `CALL`/`FOLD` strings in question order. It returns every reconstructed question, feedback and total/average EV loss.
+
+Seeds are decimal strings to preserve signed 64-bit values in JavaScript. Every response uses `no-store`; grade and review reject an outdated full-pack hash and unknown JSON fields. Sessions are replayable but not persisted or anti-cheating assessments. See [the solver model and reproduction commands](multiway-solver-research.md) for the forced-shove, equal-stack, no-rake limits.
+
 ## Tests and formatting
 
 ```sh

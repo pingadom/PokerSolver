@@ -41,6 +41,8 @@ pokerlab:
   trainer:
     research-enabled: ${TRAINER_RESEARCH_ENABLED:false}
     research-pack-path: ${TRAINER_RESEARCH_PACK_PATH:}
+    multiway-research-enabled: ${TRAINER_MULTIWAY_RESEARCH_ENABLED:false}
+    multiway-research-pack-path: ${TRAINER_MULTIWAY_RESEARCH_PACK_PATH:}
   queue:
     mode: ${QUEUE_MODE:sqs}
     region: ${AWS_REGION:eu-west-2}
