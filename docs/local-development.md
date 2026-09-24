@@ -59,7 +59,13 @@ During development on the original Windows host, a separate PostgreSQL cluster r
 
 ## Research trainer API
 
-The validation-only drill is disabled by default. To try it locally, run the API on loopback with `TRAINER_RESEARCH_ENABLED=true` and `TRAINER_RESEARCH_PACK_PATH` set to the absolute path of `solver/src/test/resources/diverse-validation-pack.json`. The API reads the file at startup. It rejects missing, sampled-payoff or numerically unscreened packs; it does not solve a game on a request or bundle the synthetic pack into the API artifact. Keep this unauthenticated research route off public deployments. It has no attempt storage or trainer UI yet.
+The validation-only drill is disabled by default. The easiest complete local demo uses the Compose overlay below from the repository root. It mounts only the exact synthetic pack into the API container and enables the two-player research route. Open [http://localhost:8080/#trainer](http://localhost:8080/#trainer) to play ten decisions; the equity simulator remains at the home page. The overlay is for local development only.
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.trainer.yml up --build -d --scale worker=2
+```
+
+If running from an IDE instead, start the API on loopback with `TRAINER_RESEARCH_ENABLED=true` and `TRAINER_RESEARCH_PACK_PATH` set to the absolute path of `solver/src/test/resources/diverse-validation-pack.json`. The API reads the file at startup. It rejects missing, sampled-payoff or numerically unscreened packs; it does not solve a game on a request or bundle the synthetic pack into the API artifact. Keep this unauthenticated research route off public deployments. Attempts are not stored on the server.
 
 For example, in PowerShell from the repository root, after starting the usual local dependencies:
 
@@ -75,6 +81,8 @@ java -jar api/target/api-1.0.0.jar --server.port=18080
 For a ten-decision drill, `GET /api/v1/trainer/research/sessions/42/questions/0` returns the first question; index ranges from 0 to 9. `POST /api/v1/trainer/research/sessions/grade` accepts `{"sessionSeed":"42","index":0,"packHash":"<hash from question>","action":"SHOVE"}`. After all ten answers, `POST /api/v1/trainer/research/sessions/review` accepts the same seed and pack hash with `actions` containing exactly ten `SHOVE`/`FOLD` strings in order. It returns every reconstructed question and feedback plus total and average EV loss. No session is persisted on the server; replay uses the string seed and pack hash.
 
 The pack has synthetic, narrow ranges and a no-rake all-in tree. Its exact payoff table and small best-response gap validate this bounded model only. Do not treat its feedback as advice for ordinary 100bb cash-game preflop decisions.
+
+The trainer page shows the same label and limits, the six-seat action history, exact hero cards, possible combos in both assumed ranges, solver frequencies and action EVs after each choice. The final review lists all ten decisions. The seed and full pack hash are kept in the URL for repeatable questions; refreshing starts at decision one because attempts are not persisted yet. A stale URL prompts a new session if the saved solution changes.
 
 ## Six-seat research sessions
 

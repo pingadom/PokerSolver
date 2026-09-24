@@ -52,6 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
       - run: docker compose up --build -d --scale worker=2
       - name: Wait for API readiness
         run: |

@@ -102,7 +102,7 @@ For the wider synthetic research spot, use `exact-plus target/diverse-validation
 
 The [range-sensitivity study](docs/preflop-range-sensitivity.md) re-solves the exact fixture after ±25% one-combo weight changes and records which decisions move; it is part of the content review before any trainer API is enabled.
 
-The solver also has an experimental [six-seat all-in call game](docs/multiway-solver-research.md) with private weighted ranges, exact multiway showdown enumeration, versioned solution packs and per-seat deviation checks. Its opt-in research API supports ten-decision mixed-seat sessions, conditional EV grading and complete review. The synthetic restricted game remains validation-only; general 6-max betting trees and a website lesson are still in development.
+The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects the wider exact two-player solution pack to a ten-decision website drill, with saved-pack identity checks, server-side EV grading and a complete session review. Run it locally with `docker compose -f docker-compose.yml -f docker-compose.trainer.yml up --build -d --scale worker=2`, then open `http://localhost:8080/#trainer`. The synthetic ranges and restricted all-in tree remain validation-only. The solver also has an experimental [six-seat all-in call game](docs/multiway-solver-research.md) with exact multiway payoffs and its own research API; general 6-max betting trees remain future work.
 
 ## Measured performance
 
