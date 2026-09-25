@@ -1087,6 +1087,7 @@ footer span {
 .river-board { display: flex; gap: 9px; flex-wrap: wrap; margin: 25px 0 8px; padding: 20px; background: #e9f1e8; border-radius: 10px; }
 .river-board span { display: grid; place-items: center; width: 58px; height: 72px; border: 1px solid #cbd9cc; border-radius: 7px; background: white; color: #253e32; font-family: Manrope, sans-serif; font-size: 22px; font-weight: 800; }
 .river-board span.red { color: #b85145; }
+.river-board span.unrevealed { border-style: dashed; color: #80978a; background: #f5f8f3; }
 @media (max-width: 850px) {
   .trainer-layout { grid-template-columns: 1fr; }
   .trainer-play { min-height: 0; }

@@ -123,6 +123,26 @@ class TurnRiverGameTest {
                                 10,
                                 List.of(combo("2c", "Ah")),
                                 valid.secondRange()));
+        TurnRiverSpot reordered =
+                new TurnRiverSpot(
+                        valid.turnBoard().reversed(),
+                        valid.potBb(),
+                        valid.remainingStackBb(),
+                        valid.turnBetBb(),
+                        valid.riverBetBb(),
+                        valid.firstRange().reversed(),
+                        valid.secondRange().reversed());
+        assertEquals(valid.contentHash(), reordered.contentHash());
+        TurnRiverSpot changedBet =
+                new TurnRiverSpot(
+                        valid.turnBoard(),
+                        valid.potBb(),
+                        valid.remainingStackBb(),
+                        valid.turnBetBb() + 1,
+                        valid.riverBetBb(),
+                        valid.firstRange(),
+                        valid.secondRange());
+        assertNotEquals(valid.contentHash(), changedBet.contentHash());
     }
 
     @Test

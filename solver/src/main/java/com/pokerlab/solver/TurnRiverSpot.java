@@ -1,9 +1,13 @@
 package com.pokerlab.solver;
 
 import com.pokerlab.core.card.Card;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -46,6 +50,38 @@ public record TurnRiverSpot(
 
     public TurnRiverGame game() {
         return new TurnRiverGame(this);
+    }
+
+    /** Binds board, chip rules, and both exact weighted ranges to a stable identity. */
+    public String contentHash() {
+        StringBuilder canonical = new StringBuilder("turn-river-single-bet/v1|no-rake|");
+        append(canonical, Double.toHexString(potBb));
+        append(canonical, Double.toHexString(remainingStackBb));
+        append(canonical, Double.toHexString(turnBetBb));
+        append(canonical, Double.toHexString(riverBetBb));
+        for (Card card : turnBoard) append(canonical, card.compact());
+        append(canonical, "first-range");
+        for (WeightedCombo combo : firstRange) {
+            append(canonical, combo.key());
+            append(canonical, Double.toHexString(combo.weight()));
+        }
+        append(canonical, "second-range");
+        for (WeightedCombo combo : secondRange) {
+            append(canonical, combo.key());
+            append(canonical, Double.toHexString(combo.weight()));
+        }
+        try {
+            return HexFormat.of()
+                    .formatHex(
+                            MessageDigest.getInstance("SHA-256")
+                                    .digest(canonical.toString().getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("SHA-256 is required by Java", exception);
+        }
+    }
+
+    private static void append(StringBuilder builder, String value) {
+        builder.append(value.length()).append(':').append(value);
     }
 
     private static List<WeightedCombo> canonicalRange(List<WeightedCombo> range, List<Card> board) {

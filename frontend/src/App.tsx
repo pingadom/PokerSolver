@@ -520,6 +520,7 @@ export default function App() {
               </p>
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
             </div>
             <ol className="solver-milestones">
               <li>
@@ -535,8 +536,12 @@ export default function App() {
                 <strong>Fixed-board river decision drill</strong>
               </li>
               <li>
+                <span>RESEARCH</span>
+                <strong>Turn-to-river chance game and drill</strong>
+              </li>
+              <li>
                 <span>LATER</span>
-                <strong>Reviewed turn, river and connected-hand practice</strong>
+                <strong>Reviewed ranges and connected-hand practice</strong>
               </li>
             </ol>
           </section>
