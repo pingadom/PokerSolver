@@ -108,6 +108,8 @@ The [exact-payoff scaling study](docs/preflop-payoff-scaling.md) counts the cost
 
 A separate [bounded river solver research path](docs/river-solver-research.md) now solves a fixed-board heads-up betting tree and serves opt-in, validation-only questions from a saved pack. With the local trainer overlay running, open `http://localhost:8080/#river` for its research drill. Its synthetic ranges are not a continuation of the preflop lesson or a general river strategy.
 
+The backend [turn-to-river research model](docs/turn-river-solver-research.md) adds an exact public river-card chance node between two bounded betting rounds. Its synthetic validation fixture has a measured information-set best-response gap; it has no trainer/API route yet.
+
 ## Measured performance
 
 Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
