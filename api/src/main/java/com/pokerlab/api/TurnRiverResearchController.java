@@ -1,10 +1,14 @@
 package com.pokerlab.api;
 
 import com.pokerlab.core.card.Card;
+import com.pokerlab.solver.TurnRiverHandSession;
 import com.pokerlab.solver.TurnRiverResearchTrainer;
 import com.pokerlab.solver.WeightedCombo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import java.util.List;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -46,10 +50,19 @@ public class TurnRiverResearchController {
             @NotBlank @Pattern(regexp = "[0-9a-f]{64}") String packHash,
             @NotBlank @Pattern(regexp = "[kbcf]") String action) {}
 
-    private final TurnRiverResearchTrainer trainer;
+    public record HandReplayRequest(
+            @NotBlank String seed,
+            @NotBlank @Pattern(regexp = "[0-9a-f]{64}") String packHash,
+            @NotNull @Min(0) @Max(1) Integer heroPlayer,
+            @NotNull List<String> actions) {}
 
-    public TurnRiverResearchController(TurnRiverResearchTrainer trainer) {
+    private final TurnRiverResearchTrainer trainer;
+    private final TurnRiverHandSession handSession;
+
+    public TurnRiverResearchController(
+            TurnRiverResearchTrainer trainer, TurnRiverHandSession handSession) {
         this.trainer = trainer;
+        this.handSession = handSession;
     }
 
     @GetMapping
@@ -86,6 +99,17 @@ public class TurnRiverResearchController {
             @Valid @RequestBody GradeRequest request) {
         return response(
                 trainer.grade(parseSeed(request.seed()), request.packHash(), request.action()));
+    }
+
+    @PostMapping("/hands/replay")
+    public ResponseEntity<TurnRiverHandSession.Snapshot> replayHand(
+            @Valid @RequestBody HandReplayRequest request) {
+        return response(
+                handSession.replay(
+                        parseSeed(request.seed()),
+                        request.packHash(),
+                        request.heroPlayer(),
+                        request.actions()));
     }
 
     private static long parseSeed(String seed) {

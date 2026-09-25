@@ -211,6 +211,7 @@ export default function TurnRiverPage() {
             <div className="trainer-range"><strong>Second player · {metadata.secondRange.length}</strong><div>{metadata.secondRange.map((combo) => <span key={combo}>{combo}</span>)}</div></div>
             <p className="trainer-boundary">River cards are drawn exactly from the remaining deck. Earlier-street ranges, raises and other bet sizes are outside this saved game.</p>
             <a className="trainer-lab-link" href="#river">Try the fixed-board river drill ↗</a>
+            <p><a className="trainer-lab-link" href="#turn-river-hand">Play a connected turn-to-river hand ↗</a></p>
           </aside>
         </div>}
       </div>

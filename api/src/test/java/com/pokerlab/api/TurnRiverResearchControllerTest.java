@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.pokerlab.solver.TurnRiverHandSession;
 import com.pokerlab.solver.TurnRiverPackBuilder;
 import com.pokerlab.solver.TurnRiverResearchTrainer;
 import com.pokerlab.solver.TurnRiverValidationSpot;
@@ -32,6 +33,11 @@ class TurnRiverResearchControllerTest {
             return new TurnRiverResearchTrainer(
                     TurnRiverPackBuilder.generate(
                             TurnRiverValidationSpot.create(), 100, "2026-09-25T12:00:00Z"));
+        }
+
+        @Bean
+        TurnRiverHandSession turnRiverHandSession(TurnRiverResearchTrainer trainer) {
+            return new TurnRiverHandSession(trainer.pack());
         }
     }
 
@@ -85,5 +91,38 @@ class TurnRiverResearchControllerTest {
                                 .content(body.substring(0, body.length() - 1) + ",\"evLossBb\":0}"))
                 .andExpect(status().isBadRequest());
         mvc.perform(get(BASE + "/questions/nope")).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void handReplayKeepsOpponentPrivateAndRejectsChangedPack() throws Exception {
+        String body =
+                "{\"seed\":\"42\",\"packHash\":\""
+                        + trainer.packHash()
+                        + "\",\"heroPlayer\":0,\"actions\":[]}";
+        mvc.perform(post(BASE + "/hands/replay").contentType("application/json").content(body))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Cache-Control", containsString("no-store")))
+                .andExpect(jsonPath("$.complete").value(false))
+                .andExpect(jsonPath("$.heroCombo").isString())
+                .andExpect(jsonPath("$.opponentCombo").value(org.hamcrest.Matchers.nullValue()))
+                .andExpect(jsonPath("$.legalActions.length()").value(2))
+                .andExpect(jsonPath("$.feedback.length()").value(0));
+        mvc.perform(
+                        post(BASE + "/hands/replay")
+                                .contentType("application/json")
+                                .content(body.replace(trainer.packHash(), "0".repeat(64))))
+                .andExpect(status().isBadRequest());
+        mvc.perform(
+                        post(BASE + "/hands/replay")
+                                .contentType("application/json")
+                                .content(body.replace("\"heroPlayer\":0", "\"heroPlayer\":2")))
+                .andExpect(status().isBadRequest());
+        mvc.perform(
+                        post(BASE + "/hands/replay")
+                                .contentType("application/json")
+                                .content(
+                                        body.substring(0, body.length() - 1)
+                                                + ",\"opponentCombo\":\"Ah As\"}"))
+                .andExpect(status().isBadRequest());
     }
 }
