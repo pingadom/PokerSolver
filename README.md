@@ -110,7 +110,7 @@ A separate [bounded river solver research path](docs/river-solver-research.md) n
 
 The [turn-to-river research model](docs/turn-river-solver-research.md) adds an exact public river-card chance node between two bounded betting rounds. A saved, validation-only pack powers an opt-in API, `#turn-river` decision drill and `#turn-river-hand` connected partial-hand replay. Its synthetic fixture has a measured information-set best-response gap; it is not a reviewed full-hand lesson.
 
-The [flop-to-river solver research model](docs/flop-turn-river-solver-research.md) now connects all three postflop streets in one offline game and benchmarks both restricted and exact turn chance. Its small turn-card abstraction has measurable payoff bias, so this fixture is not yet a trainer pack or public lesson.
+The [flop-to-river solver research model](docs/flop-turn-river-solver-research.md) connects all three postflop streets. Its five-card turn abstraction has measurable payoff bias; the full-deck game now has a compressed validation-only solution pack with a 0.007446bb best-response gap. The local trainer overlay enables a connected partial-hand drill at `#flop-hand`. It is still synthetic research, not a reviewed 6-max lesson or general preflop continuation value.
 
 ## Measured performance
 
