@@ -67,6 +67,90 @@ jobs:
         run: |
           docker compose stop redis
           ./scripts/smoke.sh
+      - name: Validation-only trainer overlay serves saved packs
+        run: |
+          docker compose start redis
+          docker compose -f docker-compose.yml -f docker-compose.trainer.yml up -d --no-deps api
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/api/v1/trainer/research/river > river.json; then break; fi
+            sleep 2
+          done
+          python3 - <<'PY'
+          import json
+          with open('river.json', encoding='utf-8') as source:
+              river = json.load(source)
+          assert river['publicationStatus'] == 'VALIDATION_ONLY'
+          assert river['availableQuestions'] > 0
+          PY
+          curl --fail --silent http://localhost:18080/api/v1/trainer/research > preflop.json
+          python3 - <<'PY'
+          import json
+          with open('preflop.json', encoding='utf-8') as source:
+              preflop = json.load(source)
+          assert preflop['publicationStatus'] == 'VALIDATION_ONLY'
+          PY
+          curl --fail --silent http://localhost:18080/api/v1/trainer/research/river/questions/42 > river-question.json
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          with open('river-question.json', encoding='utf-8') as source:
+              question = json.load(source)
+          payload = json.dumps({
+              'seed': question['seed'],
+              'packHash': question['question']['packHash'],
+              'action': question['question']['legalActions'][0],
+          }).encode()
+          request = urllib.request.Request(
+              'http://localhost:18080/api/v1/trainer/research/river/grade',
+              data=payload,
+              headers={'Content-Type': 'application/json'},
+          )
+          with urllib.request.urlopen(request) as response:
+              feedback = json.load(response)
+          assert feedback['packHash'] == question['question']['packHash']
+          assert feedback['evLossBb'] >= 0
+          PY
+          curl --fail --silent http://localhost:18080/api/v1/trainer/research/flop > flop.json
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          with open('flop.json', encoding='utf-8') as source:
+              metadata = json.load(source)
+          assert metadata['publicationStatus'] == 'VALIDATION_ONLY'
+          assert metadata['chanceModel'] == 'FULL_PHYSICAL_DECK'
+          assert metadata['gameGapBb'] < 0.01
+          payload = json.dumps({
+              'seed': '42',
+              'packHash': metadata['packHash'],
+              'heroPlayer': 0,
+              'actions': [],
+          }).encode()
+          request = urllib.request.Request(
+              'http://localhost:18080/api/v1/trainer/research/flop/hands/replay',
+              data=payload,
+              headers={'Content-Type': 'application/json'},
+          )
+          with urllib.request.urlopen(request) as response:
+              hand = json.load(response)
+          assert hand['street'] == 'FLOP'
+          assert hand['opponentCombo'] is None
+          assert len(hand['legalActions']) == 2
+          payload = json.dumps({
+              'seed': '42',
+              'packHash': metadata['packHash'],
+              'heroPlayer': 0,
+              'actions': ['k'],
+          }).encode()
+          request = urllib.request.Request(
+              'http://localhost:18080/api/v1/trainer/research/flop/hands/replay',
+              data=payload,
+              headers={'Content-Type': 'application/json'},
+          )
+          with urllib.request.urlopen(request) as response:
+              after_check = json.load(response)
+          assert len(after_check['feedback']) == 1
+          assert after_check['feedback'][0]['selectedEvBb'] is not None
+          PY
       - name: Service logs
         if: always()
         run: docker compose logs --no-color > compose.log

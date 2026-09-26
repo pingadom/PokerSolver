@@ -260,6 +260,7 @@ export default function TrainerPage() {
               <div className="trainer-range"><strong>BTN · {metadata.opponentRange.length}</strong><div>{metadata.opponentRange.map((combo) => <span key={combo}>{combo}</span>)}</div></div>
               <p className="trainer-boundary">The solver considers shove/fold here and BTN call/fold after a shove. Other bet sizes, rake and later streets are outside this exercise.</p>
               <a className="trainer-lab-link" href="#new-simulation">Open Equity Lab ↗</a>
+              <p><a className="trainer-lab-link" href="#river">Try the river research drill ↗</a></p>
               <p className="trainer-boundary">Equity Lab compares specified hands at showdown. Strategy EV here averages BTN’s range and possible actions.</p>
             </aside>
           </div>

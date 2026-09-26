@@ -1,13 +1,31 @@
 import { useEffect, useState } from "react";
 import App from "./App";
+import RiverPage from "./RiverPage";
 import TrainerPage from "./TrainerPage";
+import TurnRiverPage from "./TurnRiverPage";
+import TurnRiverHandPage from "./TurnRiverHandPage";
+import FlopHandPage from "./FlopHandPage";
+
+function currentRoute() {
+  if (window.location.hash.startsWith("#trainer")) return "trainer";
+  if (window.location.hash.startsWith("#flop-hand")) return "flop-hand";
+  if (window.location.hash.startsWith("#turn-river-hand")) return "turn-river-hand";
+  if (window.location.hash.startsWith("#turn-river")) return "turn-river";
+  if (window.location.hash.startsWith("#river")) return "river";
+  return "home";
+}
 
 export default function FrontendRoot() {
-  const [trainer, setTrainer] = useState(() => window.location.hash.startsWith("#trainer"));
+  const [route, setRoute] = useState(currentRoute);
   useEffect(() => {
-    const changed = () => setTrainer(window.location.hash.startsWith("#trainer"));
+    const changed = () => setRoute(currentRoute());
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
-  return trainer ? <TrainerPage /> : <App />;
+  if (route === "trainer") return <TrainerPage />;
+  if (route === "flop-hand") return <FlopHandPage />;
+  if (route === "turn-river-hand") return <TurnRiverHandPage />;
+  if (route === "turn-river") return <TurnRiverPage />;
+  if (route === "river") return <RiverPage />;
+  return <App />;
 }
