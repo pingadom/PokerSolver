@@ -626,6 +626,15 @@ th:first-child {
   font-size: 11px;
   line-height: 1.7;
 }
+.solver-demo-link {
+  display: inline-block;
+  margin-top: 15px;
+  border-bottom: 1px solid #477b57;
+  padding-bottom: 4px;
+  color: #285e3a;
+  font-size: 11px;
+  font-weight: 700;
+}
 .solver-milestones {
   display: grid;
   gap: 11px;
@@ -983,4 +992,120 @@ footer span {
   .field-label {
     font-size: 10px;
   }
+}
+
+/* Focused preflop trainer */
+.trainer-page {
+  min-height: 100vh;
+  background: #f5f6f2;
+  color: #243e32;
+}
+.trainer-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px max(24px, calc((100vw - 1180px) / 2));
+  background: #153c35;
+  color: #f5f7f2;
+}
+.trainer-brand {
+  font-family: Manrope, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+}
+.trainer-brand span { color: #b8d9a4; font-size: 25px; margin-right: 5px; }
+.trainer-back { font-size: 12px; color: #d8e8da; }
+.trainer-back:hover, .trainer-lab-link:hover { text-decoration: underline; }
+.trainer-container { max-width: 1220px; margin: 0 auto; padding: 40px 24px 90px; }
+.trainer-title-row { display: flex; align-items: start; justify-content: space-between; gap: 24px; }
+.trainer-title-row h1 { font-size: clamp(28px, 4vw, 43px); margin-bottom: 11px; }
+.trainer-intro { max-width: 600px; font-size: 14px; line-height: 1.65; color: #566d5e; margin: 0; }
+.trainer-status { flex-shrink: 0; padding: 8px 11px; border: 1px solid #b9d0b2; border-radius: 5px; background: #e7f0e4; color: #41623d; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.trainer-disclosure { margin: 27px 0 22px; padding: 13px 17px; background: #f8efe0; border-left: 3px solid #bd9556; color: #705936; font-size: 12px; line-height: 1.6; }
+.trainer-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(275px, .85fr); gap: 20px; align-items: start; }
+.trainer-card { background: #fff; border: 1px solid #e0e7dc; border-radius: 10px; box-shadow: 0 4px 18px rgba(23, 59, 37, .035); }
+.trainer-play { padding: 27px; min-height: 610px; }
+.trainer-reference { padding: 25px; }
+.trainer-card-heading { display: flex; justify-content: space-between; gap: 12px; color: #648069; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.trainer-progress { height: 5px; background: #e9efe7; margin: 18px 0 27px; border-radius: 4px; overflow: hidden; }
+.trainer-progress span { display: block; height: 100%; background: #6a9a71; transition: width .2s ease; }
+.trainer-table { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 16px; background: #eef3ec; border: 1px solid #dce7d9; border-radius: 12px; }
+.trainer-seat { min-height: 57px; padding: 10px; border: 1px solid #dae3d8; border-radius: 7px; background: #fff; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+.trainer-seat strong { font-size: 12px; }
+.trainer-seat small { font-size: 10px; color: #617569; }
+.trainer-seat.folded { opacity: .56; }
+.trainer-seat.hero { border-color: #48835f; background: #e3f0e3; }
+.trainer-seat.opponent { border-color: #bd9c67; background: #f8f0e4; }
+.trainer-hand-row { display: flex; justify-content: space-between; align-items: end; gap: 16px; padding: 27px 0 14px; }
+.trainer-kicker, .trainer-pot span { display: block; color: #647a69; font-size: 10px; font-weight: 800; letter-spacing: .8px; }
+.trainer-cards { display: flex; gap: 7px; margin-top: 10px; }
+.trainer-cards span { display: grid; place-items: center; min-width: 61px; height: 70px; border: 1px solid #cddbd0; border-radius: 8px; background: #fcfdfa; font-family: Manrope, sans-serif; font-size: 23px; font-weight: 800; }
+.trainer-pot { text-align: right; }
+.trainer-pot strong { display: block; margin-top: 8px; font-size: 21px; }
+.trainer-context { margin: 5px 0 23px; color: #50685a; font-size: 13px; line-height: 1.6; }
+.trainer-actions { display: flex; gap: 10px; }
+.trainer-button { border: 1px solid #245842; border-radius: 6px; background: #245842; color: #fff; padding: 12px 19px; font-size: 13px; font-weight: 700; }
+.trainer-button:hover:not(:disabled) { background: #174631; }
+.trainer-button.secondary { background: #fff; color: #245842; }
+.trainer-button.secondary:hover:not(:disabled) { background: #eff6ef; }
+.trainer-feedback { margin-top: 27px; padding-top: 20px; border-top: 1px solid #e0e8dd; }
+.trainer-feedback h3 { font-family: Manrope, sans-serif; font-size: 17px; margin: 0 0 9px; }
+.trainer-feedback p { color: #50665a; font-size: 12px; line-height: 1.7; }
+.trainer-feedback p strong { color: #244c34; }
+.trainer-ev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.trainer-ev-grid > div { border: 1px solid #dce7db; border-radius: 7px; background: #f7faf5; padding: 12px; }
+.trainer-ev-grid span, .trainer-ev-grid strong, .trainer-ev-grid small { display: block; }
+.trainer-ev-grid span { color: #687f69; font-size: 11px; }
+.trainer-ev-grid strong { margin: 6px 0; font-size: 19px; }
+.trainer-ev-grid small { font-size: 10px; color: #647568; }
+.trainer-explanation { background: #f3f6f0; padding: 12px; border-radius: 6px; }
+.trainer-reference h2 { font-family: Manrope, sans-serif; font-size: 18px; margin: 0 0 20px; }
+.trainer-reference h3 { font-size: 12px; margin: 26px 0 11px; }
+.trainer-reference p { color: #617569; font-size: 11px; line-height: 1.6; }
+.trainer-facts { margin: 0; }
+.trainer-facts div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #edf1e9; font-size: 11px; }
+.trainer-facts dt { color: #748575; }
+.trainer-facts dd { margin: 0; text-align: right; font-weight: 700; }
+.trainer-history { padding-left: 20px; max-height: 220px; overflow: auto; font-size: 11px; line-height: 1.8; color: #5d7061; }
+.trainer-history strong { color: #2e5539; }
+.trainer-range { margin: 14px 0; }
+.trainer-range > strong { font-size: 11px; }
+.trainer-range div { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.trainer-range span { padding: 5px 6px; border-radius: 4px; background: #eff4ed; color: #31543a; font-size: 10px; font-weight: 700; }
+.trainer-reference .trainer-boundary { margin-top: 21px; }
+.trainer-lab-link { font-size: 12px; color: #28613d; font-weight: 800; }
+.trainer-error { margin: 16px 0; border: 1px solid #dfbdb4; background: #fff4f0; color: #793f36; border-radius: 6px; padding: 13px; font-size: 12px; }
+.trainer-error p { margin: 7px 0 0; }
+.trainer-loading { padding: 25px; color: #627364; }
+.trainer-play > h2 { font-family: Manrope, sans-serif; font-size: 25px; margin: 25px 0 8px; }
+.trainer-summary { color: #546b59; font-size: 13px; }
+.trainer-review-list { list-style: none; margin: 22px 0; padding: 0; }
+.trainer-review-list li { border-bottom: 1px solid #e5ebe2; }
+.trainer-review-list summary { display: flex; justify-content: space-between; gap: 10px; padding: 13px 0; cursor: pointer; font-size: 12px; }
+.trainer-review-list summary span:first-child { font-weight: 800; }
+.trainer-review-list p { margin: 0 0 12px; color: #5f7263; font-size: 11px; }
+.river-board { display: flex; gap: 9px; flex-wrap: wrap; margin: 25px 0 8px; padding: 20px; background: #e9f1e8; border-radius: 10px; }
+.river-board span { display: grid; place-items: center; width: 58px; height: 72px; border: 1px solid #cbd9cc; border-radius: 7px; background: white; color: #253e32; font-family: Manrope, sans-serif; font-size: 22px; font-weight: 800; }
+.river-board span.red { color: #b85145; }
+.river-board span.unrevealed { border-style: dashed; color: #80978a; background: #f5f8f3; }
+.hand-history { margin: 20px 0; padding: 16px 18px 16px 36px; background: #f5f8f3; border-radius: 8px; color: #375445; }
+.hand-history li + li { margin-top: 6px; }
+.hand-history li span { color: #6b8473; font-size: 11px; font-weight: 800; letter-spacing: .06em; margin-right: 7px; }
+.hand-feedback-item + .hand-feedback-item { border-top: 1px solid #d8e2d8; margin-top: 18px; padding-top: 18px; }
+@media (max-width: 850px) {
+  .trainer-layout { grid-template-columns: 1fr; }
+  .trainer-play { min-height: 0; }
+}
+@media (max-width: 600px) {
+  .trainer-container { padding: 26px 15px 70px; }
+  .trainer-topbar { padding: 14px 17px; }
+  .trainer-title-row { display: block; }
+  .trainer-status { display: inline-block; margin-top: 15px; }
+  .trainer-play, .trainer-reference { padding: 18px; }
+  .trainer-hand-row { align-items: start; }
+  .trainer-cards span { min-width: 47px; height: 60px; font-size: 18px; }
+  .trainer-pot strong { font-size: 16px; }
+  .trainer-review-list summary { flex-wrap: wrap; }
+  .river-board { gap: 6px; padding: 12px; }
+  .river-board span { width: 45px; height: 59px; font-size: 17px; }
 }
