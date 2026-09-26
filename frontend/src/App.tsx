@@ -519,6 +519,10 @@ export default function App() {
                 examples.
               </p>
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
+              <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river-hand">Play a turn-to-river partial hand ↗</a></p>
+              <p><a className="solver-demo-link" href="#flop-hand">Play a flop-to-river partial hand ↗</a></p>
             </div>
             <ol className="solver-milestones">
               <li>
@@ -530,8 +534,20 @@ export default function App() {
                 <strong>One exact-pack preflop drill</strong>
               </li>
               <li>
+                <span>RESEARCH</span>
+                <strong>Fixed-board river decision drill</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Connected turn-to-river partial hand</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Connected flop-to-river partial hand</strong>
+              </li>
+              <li>
                 <span>LATER</span>
-                <strong>Turn, river, partial-hand and full-hand drills</strong>
+                <strong>Reviewed ranges and connected-hand practice</strong>
               </li>
             </ol>
           </section>
