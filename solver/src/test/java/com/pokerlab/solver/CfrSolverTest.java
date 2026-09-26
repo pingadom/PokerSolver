@@ -58,6 +58,44 @@ class CfrSolverTest {
         assertEquals(solution, new CfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(3_000));
     }
 
+    @Test
+    void seededChanceSamplingApproachesTheKuhnEquilibrium() {
+        KuhnPoker game = new KuhnPoker();
+        CfrSolver<KuhnPoker.State> solver =
+                new CfrSolver<>(game, CfrSolver.Variant.VANILLA, CfrSolver.ChanceMode.SAMPLED, 42);
+        CfrSolution solution = solver.solve(100_000);
+        assertEquals(12, solution.strategy().size());
+        assertEquals(-1.0 / 18, StrategyEvaluator.playerZeroUtility(game, solution), 0.01);
+        assertTrue(bestResponseGap(game, solution) < 0.03);
+        assertEquals(solution, solver.solve(100_000));
+        assertNotEquals(
+                solution,
+                new CfrSolver<>(game, CfrSolver.Variant.VANILLA, CfrSolver.ChanceMode.SAMPLED, 7)
+                        .solve(100_000));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new CfrSolver<>(
+                                game,
+                                CfrSolver.Variant.CFR_PLUS,
+                                CfrSolver.ChanceMode.SAMPLED,
+                                42));
+    }
+
+    @Test
+    void samplingAfterRootMatchesExhaustiveKuhnWithNoLaterChance() {
+        KuhnPoker game = new KuhnPoker();
+        CfrSolution exhaustive = new CfrSolver<>(game, CfrSolver.Variant.VANILLA).solve(3_000);
+        CfrSolution afterRoot =
+                new CfrSolver<>(
+                                game,
+                                CfrSolver.Variant.VANILLA,
+                                CfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                                42)
+                        .solve(3_000);
+        assertEquals(exhaustive, afterRoot);
+    }
+
     private static double bestResponseGap(KuhnPoker game, CfrSolution solution) {
         double firstBest = Double.NEGATIVE_INFINITY;
         double secondBest = Double.POSITIVE_INFINITY;

@@ -1,45 +1,69 @@
 package com.pokerlab.solver;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SplittableRandom;
 
-/** Alternating, full-tree CFR. Suitable for correctness fixtures and small games. */
+/** Alternating CFR with exhaustive or seeded chance traversal. */
 public final class CfrSolver<S> {
     public enum Variant {
         VANILLA,
         CFR_PLUS
     }
 
+    public enum ChanceMode {
+        EXHAUSTIVE,
+        SAMPLED,
+        SAMPLED_AFTER_ROOT
+    }
+
     private static final double CHANCE_TOLERANCE = 1e-9;
     private final CfrGame<S> game;
     private final Variant variant;
+    private final ChanceMode chanceMode;
+    private final long chanceSeed;
     private final Map<String, InformationSet> informationSets = new LinkedHashMap<>();
     private final Map<String, double[]> iterationStrategies = new LinkedHashMap<>();
+    private final List<Double> iterationChanceDraws = new ArrayList<>();
+    private SplittableRandom chanceRandom;
 
     public CfrSolver(CfrGame<S> game) {
         this(game, Variant.VANILLA);
     }
 
     public CfrSolver(CfrGame<S> game, Variant variant) {
+        this(game, variant, ChanceMode.EXHAUSTIVE, 0);
+    }
+
+    /** Chance sampling traverses every player action but draws one outcome at each chance node. */
+    public CfrSolver(CfrGame<S> game, Variant variant, ChanceMode chanceMode, long chanceSeed) {
         this.game = Objects.requireNonNull(game, "game");
         this.variant = Objects.requireNonNull(variant, "variant");
+        this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
+        if (chanceMode != ChanceMode.EXHAUSTIVE && variant != Variant.VANILLA)
+            throw new IllegalArgumentException(
+                    "Chance sampling currently supports vanilla CFR only");
+        this.chanceSeed = chanceSeed;
     }
 
     public CfrSolution solve(int iterations) {
         if (iterations < 1) throw new IllegalArgumentException("iterations must be positive");
         informationSets.clear();
+        chanceRandom = new SplittableRandom(chanceSeed);
         for (int iteration = 0; iteration < iterations; iteration++) {
+            iterationChanceDraws.clear();
             iterationStrategies.clear();
-            traverse(game.initialState(), 1, 1, 1, 0, iteration + 1);
+            traverse(game.initialState(), 1, 1, 1, 0, iteration + 1, 0);
             // Aggregate all histories at each information set before applying regret-matching+.
             if (variant == Variant.CFR_PLUS)
                 informationSets.values().forEach(InformationSet::clipNegativeRegrets);
             iterationStrategies.clear();
-            traverse(game.initialState(), 1, 1, 1, 1, iteration + 1);
+            traverse(game.initialState(), 1, 1, 1, 1, iteration + 1, 0);
             if (variant == Variant.CFR_PLUS)
                 informationSets.values().forEach(InformationSet::clipNegativeRegrets);
         }
@@ -54,7 +78,8 @@ public final class CfrSolver<S> {
             double reach1,
             double chanceReach,
             int target,
-            int iterationWeight) {
+            int iterationWeight,
+            int chanceDepth) {
         if (game.isTerminal(state)) {
             double utility = game.terminalUtility(state);
             if (!Double.isFinite(utility)) throw new IllegalArgumentException("Non-finite payoff");
@@ -67,6 +92,16 @@ public final class CfrSolver<S> {
             double sum = outcomes.stream().mapToDouble(ChanceOutcome::probability).sum();
             if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
                 throw new IllegalArgumentException("Chance probabilities must sum to one");
+            if (chanceMode == ChanceMode.SAMPLED
+                    || (chanceMode == ChanceMode.SAMPLED_AFTER_ROOT && chanceDepth > 0))
+                return traverse(
+                        sampleChance(outcomes, chanceDepth).state(),
+                        reach0,
+                        reach1,
+                        chanceReach,
+                        target,
+                        iterationWeight,
+                        chanceDepth + 1);
             double utility = 0;
             for (ChanceOutcome<S> outcome : outcomes) {
                 utility +=
@@ -77,7 +112,8 @@ public final class CfrSolver<S> {
                                         reach1,
                                         chanceReach * outcome.probability(),
                                         target,
-                                        iterationWeight);
+                                        iterationWeight,
+                                        chanceDepth + 1);
             }
             return utility;
         }
@@ -108,7 +144,8 @@ public final class CfrSolver<S> {
                             player == 1 ? reach1 * probability : reach1,
                             chanceReach,
                             target,
-                            iterationWeight);
+                            iterationWeight,
+                            chanceDepth);
             nodeUtility += probability * actionUtilities[index];
         }
         if (player == target) {
@@ -123,6 +160,20 @@ public final class CfrSolver<S> {
                     variant == Variant.CFR_PLUS ? iterationWeight : 1);
         }
         return nodeUtility;
+    }
+
+    private ChanceOutcome<S> sampleChance(List<ChanceOutcome<S>> outcomes, int depth) {
+        // The same uniform quantile is reused at each chance depth across action branches and
+        // both player traversals in this iteration. Every node retains its correct marginal.
+        while (iterationChanceDraws.size() <= depth)
+            iterationChanceDraws.add(chanceRandom.nextDouble());
+        double draw = iterationChanceDraws.get(depth);
+        double cumulative = 0;
+        for (ChanceOutcome<S> outcome : outcomes) {
+            cumulative += outcome.probability();
+            if (draw < cumulative) return outcome;
+        }
+        return outcomes.getLast(); // Covers harmless floating-point under-sum within tolerance.
     }
 
     private static final class InformationSet {
