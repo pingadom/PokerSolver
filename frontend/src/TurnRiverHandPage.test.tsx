@@ -71,11 +71,14 @@ it("plays one connected hand and reveals the opponent only at showdown", async (
   });
   render(<TurnRiverHandPage />);
   expect(await screen.findByText("First player: check or bet?")).toBeInTheDocument();
+  expect(screen.getByLabelText("You, first player")).toHaveTextContent("Your turn");
+  expect(screen.getByLabelText("Opponent cards hidden")).toBeInTheDocument();
   expect(screen.getByLabelText("River not yet dealt")).toBeInTheDocument();
   expect(screen.queryByText("Kc Kd")).not.toBeInTheDocument();
   expect(screen.queryByText("Your decisions")).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Check" }));
   expect(await screen.findByText("9♣")).toBeInTheDocument();
+  expect(screen.getByLabelText("Players and table")).toHaveTextContent("Latest: Opponent checked · turn");
   expect(screen.getByText("Your decisions")).toBeInTheDocument();
   expect(screen.queryByText("Kc Kd")).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Check" }));

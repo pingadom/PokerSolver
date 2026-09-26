@@ -81,11 +81,15 @@ it("plays one connected three-street hand and reveals the opponent at showdown",
   });
   render(<FlopHandPage />);
   expect(await screen.findByText("First player: check or bet?")).toBeInTheDocument();
+  expect(screen.getByLabelText("Players and table")).toHaveTextContent("20.0 bb pot");
+  expect(screen.getByLabelText("You, first player")).toHaveTextContent("Your turn");
+  expect(screen.getByLabelText("Opponent cards hidden")).toBeInTheDocument();
   expect(screen.getByLabelText("Turn not yet dealt")).toBeInTheDocument();
   expect(screen.getByLabelText("River not yet dealt")).toBeInTheDocument();
   expect(screen.queryByText("Kc Kd")).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Check" }));
   expect(await screen.findByText("4♥")).toBeInTheDocument();
+  expect(screen.getByLabelText("Players and table")).toHaveTextContent("Latest: Opponent checked · flop");
   expect(screen.queryByText("Kc Kd")).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Check" }));
   expect(await screen.findByText("9♣")).toBeInTheDocument();
