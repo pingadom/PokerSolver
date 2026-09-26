@@ -2,6 +2,8 @@
 
 **Decision, 24 September 2026.** The next deliverable is one complete, explainable preflop all-in trainer demo. It uses PokerLab's own solver for **two active players at a six-seat cash table**. The demo is a bounded study exercise, labelled `VALIDATION_ONLY`. It does not claim to solve ordinary 100bb opening strategy. The long-term goal remains broader 6-max cash preflop, followed by later-street and mixed practice.
 
+**Implementation update.** The ten-decision backend contract and local website drill are now built. See the [local setup](local-development.md#research-trainer-api) and [content review](preflop-demo-content-review.md). The inventory below records the state at the start of this milestone; it is retained to show what the work addressed.
+
 ## What exists today
 
 | Area | Reviewed state | Evidence and limit |
