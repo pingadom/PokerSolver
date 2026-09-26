@@ -95,4 +95,47 @@ class MultiwayResearchConfigurationTest {
                                 originalService.metadata().packHash(),
                                 MultiwayCallTrainer.Action.CALL));
     }
+
+    @Test
+    void loadsSidePotPackAndRejectsSampledSidePotPayoffs() throws Exception {
+        Path fixture =
+                Path.of("..", "solver", "src", "test", "resources", "six-seat-side-pot-pack.json");
+        if (!Files.isRegularFile(fixture))
+            fixture = Path.of("solver", "src", "test", "resources", "six-seat-side-pot-pack.json");
+        var service = configuration.multiwayResearchService(fixture.toString());
+        assertEquals(MultiwaySidePotPack.SCHEMA_VERSION, service.metadata().packSchema());
+        assertEquals(
+                java.util.List.of(30.0, 10.0, 20.0, 15.0, 25.0, 5.0),
+                service.metadata().stacksBb());
+        assertEquals(9, service.question(42, 0, 1).callCostBb());
+        assertEquals(4, service.question(42, 0, 5).callCostBb());
+        assertEquals(5, service.question(42, 0, 5).stackBb());
+        assertEquals(
+                10,
+                service.review(
+                                42,
+                                0,
+                                service.metadata().packHash(),
+                                java.util.Collections.nCopies(10, MultiwayCallTrainer.Action.FOLD))
+                        .attempts()
+                        .size());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.grade(42, 0, 1, "0".repeat(64), MultiwayCallTrainer.Action.CALL));
+        MultiwaySidePotPack saved = MultiwayPackJson.readSidePot(Files.readString(fixture));
+        MultiwaySidePotPack sampled =
+                MultiwaySidePotPackBuilder.build(
+                        saved.spot(),
+                        10,
+                        CfrSolver.Variant.CFR_PLUS,
+                        new SeededMultiwayShowdownOracle(300, 42),
+                        MultiwaySolutionPack.SEEDED_MONTE_CARLO,
+                        42,
+                        saved.generatedAt());
+        Path sampledPath = temporary.resolve("side-pot-sampled.json");
+        Files.writeString(sampledPath, MultiwayPackJson.writeSidePot(sampled));
+        assertThrows(
+                IllegalStateException.class,
+                () -> configuration.multiwayResearchService(sampledPath.toString()));
+    }
 }

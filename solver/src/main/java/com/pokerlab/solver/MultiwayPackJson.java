@@ -3,6 +3,7 @@ package com.pokerlab.solver;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -72,6 +73,15 @@ public final class MultiwayPackJson {
 
     public static MultiwaySidePotSpot readSidePotSpot(String json) {
         return deserialize(json, MultiwaySidePotSpot.class);
+    }
+
+    /** Reads only the version discriminator before selecting the strict pack decoder. */
+    public static String schemaVersion(String json) {
+        JsonNode tree = deserialize(json, JsonNode.class);
+        JsonNode version = tree.get("schemaVersion");
+        if (version == null || !version.isTextual())
+            throw new IllegalArgumentException("Multiway pack needs a schema version");
+        return version.textValue();
     }
 
     private static String serialize(Object value) {

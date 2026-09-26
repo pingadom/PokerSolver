@@ -82,7 +82,7 @@ public final class MultiwayCallTrainer {
                 prior,
                 game.potBeforeDecision(state.history()),
                 game.callCostBb(actingPlayer),
-                game.stackBb(),
+                game.stacksBb().get(actingPlayer),
                 game.maximumTerminalPayoffStandardErrorBb(),
                 nashConvBb,
                 "VALIDATION_ONLY",

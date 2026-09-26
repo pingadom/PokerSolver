@@ -1,0 +1,5 @@
+# Use after docker-compose.trainer.yml to practise the unequal-stack fixture locally.
+services:
+  api:
+    volumes:
+      - ./solver/src/test/resources/six-seat-side-pot-pack.json:/opt/pokerlab/multiway-pack.json:ro

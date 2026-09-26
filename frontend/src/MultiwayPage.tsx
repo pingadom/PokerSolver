@@ -185,7 +185,9 @@ export default function MultiwayPage() {
           <span className="trainer-status">VALIDATION ONLY</span>
         </div>
         <div className="trainer-disclosure hand-play-disclosure" role="note">
-          Synthetic two-combo ranges, equal stacks, no rake and no further betting. This is a six-seat solver test, not a general preflop chart.
+          {metadata?.packSchema === "multiway-side-pot-pack/v1"
+            ? "Synthetic one-combo ranges, unequal stacks and side pots, no rake or further betting. This is a six-seat solver test, not a general preflop chart."
+            : "Synthetic narrow ranges, equal stacks, no rake or further betting. This is a six-seat solver test, not a general preflop chart."}
         </div>
         {error && <div className="trainer-error" role="alert">{error}{!metadata && <p>Enable the local multiway research API and load its exact pack to practise.</p>}</div>}
         {stale && metadata && <button className="trainer-button" disabled={busy} onClick={() => void newSession()}>Start with current solution</button>}
@@ -211,19 +213,21 @@ export default function MultiwayPage() {
             </> : !question ? (
               <p className="trainer-loading" role="status">{error ? "Decision unavailable. Try a new session." : "Loading decision…"}</p>
             ) : <>
-              <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{metadata.stackBb} bb stacks</span></div>
+              <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{metadata.packSchema === "multiway-side-pot-pack/v1" ? "Unequal stacks" : `${metadata.stackBb} bb stacks`}</span></div>
               <div className="trainer-progress" aria-hidden="true"><span style={{ width: `${(index + 1) / metadata.sessionLength * 100}%` }} /></div>
               <div className="multiway-table" aria-label="Six-seat action table">
-                {metadata.seats.map((seat) => {
+                {metadata.seats.map((seat, seatIndex) => {
                   const state = seatState(question, seat);
                   return <div key={seat} className={`multiway-seat ${state.className}`}>
                     <div className="multiway-seat-heading"><strong>{seat}</strong><span>{seat === question.actingSeat ? "You" : seat === question.aggressorSeat ? "Aggressor" : "Responder"}</span></div>
                     <p>{state.label}</p>
+                    <small className="multiway-stack">{metadata.stacksBb[seatIndex]} bb stack</small>
                     {seat === question.actingSeat && <div className="multiway-hole-cards" aria-label="Your cards">{question.heroCombo.split(" ").map((card) => <span key={card}>{card}</span>)}</div>}
                   </div>;
                 })}
               </div>
-              <div className="multiway-decision-bar"><div><span>Pot before your decision</span><strong>{question.potBb.toFixed(1)} bb</strong></div><div><span>To call</span><strong>{question.callCostBb.toFixed(1)} bb</strong></div></div>
+              <div className="multiway-decision-bar"><div><span>Pot before your decision</span><strong>{question.potBb.toFixed(1)} bb</strong></div><div><span>To call</span><strong>{question.callCostBb.toFixed(1)} bb</strong></div><div><span>Your stack</span><strong>{question.stackBb.toFixed(1)} bb</strong></div></div>
+              {metadata.packSchema === "multiway-side-pot-pack/v1" && <p className="multiway-side-pot-note">A short caller can win the main pot while deeper callers contest side pots. Your EV accounts for every possible later call or fold.</p>}
               <h2>{question.actingSeat}: call or fold?</h2>
               <div className="trainer-actions">{question.legalActions.map((action) => <button key={action} type="button" className={`trainer-button ${action === "FOLD" ? "secondary" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}>{action === "CALL" ? "Call" : "Fold"}</button>)}</div>
               {feedback && <div className="trainer-feedback" aria-live="polite">
@@ -239,7 +243,8 @@ export default function MultiwayPage() {
             <h2>Game details</h2>
             <dl className="trainer-facts">
               <div><dt>Game</dt><dd>Forced UTG shove · call/fold response</dd></div>
-              <div><dt>Stack</dt><dd>{metadata.stackBb} bb each</dd></div>
+              <div><dt>Stacks</dt><dd>{metadata.packSchema === "multiway-side-pot-pack/v1" ? "By seat, shown at the table" : `${metadata.stackBb} bb each`}</dd></div>
+              {metadata.packSchema === "multiway-side-pot-pack/v1" && <div><dt>Side pots</dt><dd>Settled by each caller's contribution</dd></div>}
               <div><dt>Dead money</dt><dd>{metadata.deadMoneyBb} bb</dd></div>
               <div><dt>Rake</dt><dd>None</dd></div>
               <div><dt>Payoffs</dt><dd>Exact board enumeration</dd></div>

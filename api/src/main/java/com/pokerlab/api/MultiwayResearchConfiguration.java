@@ -1,6 +1,8 @@
 package com.pokerlab.api;
 
 import com.pokerlab.solver.MultiwayPackJson;
+import com.pokerlab.solver.MultiwaySidePotPack;
+import com.pokerlab.solver.MultiwaySolutionPack;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +24,15 @@ class MultiwayResearchConfiguration {
         Path path = Path.of(packPath);
         if (Files.size(path) > 16 * 1024 * 1024)
             throw new IllegalStateException("Multiway research pack exceeds the 16 MiB file limit");
-        var service = new MultiwayResearchService(MultiwayPackJson.read(Files.readString(path)));
+        String json = Files.readString(path);
+        MultiwayResearchService service =
+                switch (MultiwayPackJson.schemaVersion(json)) {
+                    case MultiwaySolutionPack.SCHEMA_VERSION ->
+                            new MultiwayResearchService(MultiwayPackJson.read(json));
+                    case MultiwaySidePotPack.SCHEMA_VERSION ->
+                            new MultiwayResearchService(MultiwayPackJson.readSidePot(json));
+                    default -> throw new IllegalStateException("Unsupported multiway pack schema");
+                };
         LoggerFactory.getLogger(MultiwayResearchConfiguration.class)
                 .warn(
                         "Validation-only multiway research trainer enabled for {} with pack {}",
