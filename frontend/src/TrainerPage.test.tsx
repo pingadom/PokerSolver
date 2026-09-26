@@ -95,6 +95,8 @@ it("completes ten decisions with server grades and a full review", async () => {
   render(<TrainerPage />);
   expect(await screen.findByText("Face the five-bet")).toBeInTheDocument();
   expect(await screen.findByText("DECISION 1 OF 10")).toBeInTheDocument();
+  expect(screen.getByLabelText("Six-seat table")).toHaveTextContent("BTN");
+  expect(screen.getByLabelText("Six-seat table")).toHaveTextContent("raises to 40 bb");
   expect(screen.getByText("Ac")).toBeInTheDocument();
   expect(screen.queryByText("Decision feedback")).not.toBeInTheDocument();
   for (let index = 0; index < 10; index++) {

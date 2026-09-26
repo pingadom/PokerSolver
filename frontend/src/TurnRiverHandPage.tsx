@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import HandTable from "./HandTable";
 import {
   postTurnRiver,
   turnRiverRequest,
@@ -161,8 +162,8 @@ export default function TurnRiverHandPage() {
         <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
         <a className="trainer-back" href="#turn-river">← Single-decision drill</a>
       </header>
-      <div className="trainer-container">
-        <div className="trainer-title-row">
+      <div className="trainer-container hand-play-container">
+        <div className="trainer-title-row hand-play-title">
           <div>
             <p className="eyebrow">SOLVER RESEARCH / PARTIAL HAND</p>
             <h1>Play from turn to river</h1>
@@ -170,7 +171,7 @@ export default function TurnRiverHandPage() {
           </div>
           <span className="trainer-status">VALIDATION ONLY</span>
         </div>
-        <div className="trainer-disclosure" role="note">
+        <div className="trainer-disclosure hand-play-disclosure" role="note">
           This is a synthetic, no-rake, single-bet game with two active players. It does not model how the hand reached the turn or claim to solve ordinary 6-max cash play.
         </div>
         {error && <div className="trainer-error" role="alert">{error}{!metadata && <p>Enable the local turn-river research API and load its saved pack to play.</p>}</div>}
@@ -180,17 +181,19 @@ export default function TurnRiverHandPage() {
           <section className="trainer-card trainer-play" aria-label="Partial hand">
             {!snapshot ? <p className="trainer-loading" role="status">{error ? "Hand unavailable. Try a new hand." : "Dealing a hand…"}</p> : <>
               <div className="trainer-card-heading"><span>{snapshot.street} · {snapshot.complete ? "HAND COMPLETE" : "YOUR DECISION"}</span><span>{heroPlayer === 0 ? "First player" : "Second player"}</span></div>
-              <div className="river-board" aria-label={`${snapshot.street.toLowerCase()} board`}>
-                {board.map((card) => <span key={`${card.rank}-${card.suit}`} className={card.suit === "HEARTS" || card.suit === "DIAMONDS" ? "red" : ""}>{cardText(card)}</span>)}
-                {!snapshot.river && !snapshot.complete && <span className="unrevealed" aria-label="River not yet dealt">?</span>}
-              </div>
-              <div className="trainer-hand-row"><div><span className="trainer-kicker">YOUR HAND</span><div className="trainer-cards">{snapshot.heroCombo.split(" ").map((card) => <span key={card}>{card}</span>)}</div></div><div className="trainer-pot"><span>Current pot</span><strong>{snapshot.potBb.toFixed(1)} bb</strong></div></div>
-              <p className="trainer-context">Your remaining stack: {snapshot.heroRemainingStackBb.toFixed(1)} bb.</p>
-              {snapshot.publicActions.length > 0 && <ol className="hand-history" aria-label="Public betting history">{snapshot.publicActions.map((event, index) => <li key={index}><span>{event.street}</span> {event.player === 0 ? "First" : "Second"} player {actionName[event.action].toLowerCase()}s</li>)}</ol>}
+              <HandTable street={snapshot.street} heroPlayer={heroPlayer} heroCombo={snapshot.heroCombo}
+                opponentCombo={snapshot.opponentCombo} heroRemainingStackBb={snapshot.heroRemainingStackBb}
+                potBb={snapshot.potBb} complete={snapshot.complete} showdown={snapshot.showdown}
+                publicActions={snapshot.publicActions}
+                board={[
+                  ...board.map((card) => ({ text: cardText(card), red: card.suit === "HEARTS" || card.suit === "DIAMONDS" })),
+                  ...(!snapshot.river && !snapshot.complete ? [{ text: "?", label: "River not yet dealt" }] : []),
+                ]} />
               {!snapshot.complete && <>
                 <h2>{currentSituation(snapshot)}</h2>
                 <div className="trainer-actions">{snapshot.legalActions.map((action) => <button key={action} type="button" className={`trainer-button ${action === "k" || action === "f" ? "secondary" : ""}`} disabled={busy} onClick={() => void answer(action)}>{actionName[action]}</button>)}</div>
               </>}
+              {snapshot.publicActions.length > 0 && <details className="hand-history-details"><summary>Full betting history · {snapshot.publicActions.length} actions</summary><ol className="hand-history" aria-label="Public betting history">{snapshot.publicActions.map((event, index) => <li key={index}><span>{event.street}</span> {event.player === 0 ? "First" : "Second"} player {actionName[event.action].toLowerCase()}s</li>)}</ol></details>}
               {snapshot.feedback.length > 0 && <div className="trainer-feedback" aria-live="polite">
                 <h3>Your decisions</h3>
                 {snapshot.feedback.map((item, index) => <div className="hand-feedback-item" key={index}>

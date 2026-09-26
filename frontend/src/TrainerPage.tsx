@@ -185,8 +185,8 @@ export default function TrainerPage() {
         <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
         <a className="trainer-back" href="#solver">← Equity Lab</a>
       </header>
-      <div className="trainer-container">
-        <div className="trainer-title-row">
+      <div className="trainer-container hand-play-container">
+        <div className="trainer-title-row hand-play-title">
           <div>
             <p className="eyebrow">SOLVER DEMO / PREFLOP</p>
             <h1>Face the five-bet</h1>
@@ -195,7 +195,7 @@ export default function TrainerPage() {
           <span className="trainer-status">VALIDATION ONLY</span>
         </div>
 
-        <div className="trainer-disclosure" role="note">
+        <div className="trainer-disclosure hand-play-disclosure" role="note">
           This uses synthetic ranges and a no-rake, all-in decision tree. Its EVs describe this saved model, not general 100bb cash strategy.
         </div>
 
@@ -230,7 +230,14 @@ export default function TrainerPage() {
                   <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{spot.effectiveStackBb} bb stacks</span></div>
                   <div className="trainer-progress" aria-hidden="true"><span style={{ width: `${(index + 1) / metadata.sessionLength * 100}%` }} /></div>
                   <div className="trainer-table" aria-label="Six-seat table">
-                    {seats.map((seat) => <div key={seat} className={`trainer-seat ${seat === spot.heroSeat ? "hero" : seat === spot.opponentSeat ? "opponent" : "folded"}`}><strong>{seat}</strong><small>{seat === spot.heroSeat ? "You" : seat === spot.opponentSeat ? "Opponent" : "Folded"}</small></div>)}
+                    {seats.map((seat) => {
+                      const previous = [...spot.priorActions].reverse().find((action) => action.seat === seat);
+                      const active = seat === spot.heroSeat || seat === spot.opponentSeat;
+                      return <div key={seat} className={`trainer-seat ${seat === spot.heroSeat ? "hero" : seat === spot.opponentSeat ? "opponent" : "folded"}`}>
+                        <strong>{seat}<span>{seat === spot.heroSeat ? "You · to act" : seat === spot.opponentSeat ? "Opponent" : "Out"}</span></strong>
+                        <small>{previous ? actionLabel(previous) : active ? "In hand" : "Folded"}</small>
+                      </div>;
+                    })}
                   </div>
                   <div className="trainer-hand-row"><div><span className="trainer-kicker">YOUR HAND · {spot.heroSeat}</span><div className="trainer-cards">{spot.heroCombo.split(" ").map((card) => <span key={card}>{card}</span>)}</div></div><div className="trainer-pot"><span>Current pot</span><strong>{spot.potBb.toFixed(1)} bb</strong></div></div>
                   <p className="trainer-context">You have committed {spot.heroCommittedBb} bb. BTN has committed {spot.opponentCommittedBb} bb. Do you shove the remaining stack or fold?</p>
