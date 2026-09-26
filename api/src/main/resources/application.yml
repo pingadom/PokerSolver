@@ -38,6 +38,17 @@ server:
 pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
+  trainer:
+    research-enabled: ${TRAINER_RESEARCH_ENABLED:false}
+    research-pack-path: ${TRAINER_RESEARCH_PACK_PATH:}
+    multiway-research-enabled: ${TRAINER_MULTIWAY_RESEARCH_ENABLED:false}
+    multiway-research-pack-path: ${TRAINER_MULTIWAY_RESEARCH_PACK_PATH:}
+    river-research-enabled: ${TRAINER_RIVER_RESEARCH_ENABLED:false}
+    river-research-pack-path: ${TRAINER_RIVER_RESEARCH_PACK_PATH:}
+    turn-river-research-enabled: ${TRAINER_TURN_RIVER_RESEARCH_ENABLED:false}
+    turn-river-research-pack-path: ${TRAINER_TURN_RIVER_RESEARCH_PACK_PATH:}
+    flop-research-enabled: ${TRAINER_FLOP_RESEARCH_ENABLED:false}
+    flop-research-pack-path: ${TRAINER_FLOP_RESEARCH_PACK_PATH:}
   queue:
     mode: ${QUEUE_MODE:sqs}
     region: ${AWS_REGION:eu-west-2}

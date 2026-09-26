@@ -2,7 +2,7 @@ package com.pokerlab.solver;
 
 import java.util.Map;
 
-/** Average strategy produced by alternating vanilla CFR, not a certified equilibrium. */
+/** Average strategy produced by regret matching; not by itself a certified equilibrium. */
 public record CfrSolution(int iterations, Map<String, Map<String, Double>> strategy) {
     public CfrSolution {
         if (iterations < 1) throw new IllegalArgumentException("iterations must be positive");
