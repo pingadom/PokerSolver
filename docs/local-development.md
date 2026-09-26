@@ -94,7 +94,7 @@ The overlay also enables a [flop-to-river research hand](flop-turn-river-solver-
 
 ## Six-seat research sessions
 
-The separate multiway route is also disabled by default. Set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-exact-pack.json` before starting the API. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Keep this research API local; it has no account or attempt persistence yet.
+The separate multiway route is also disabled by default. The local trainer Compose overlay enables it and serves the website drill at [http://localhost:8080/#multiway](http://localhost:8080/#multiway). For a directly run API, set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-exact-pack.json` before starting it. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Keep this research API local; it has no account or attempt persistence yet.
 
 - `GET /api/v1/trainer/research/multiway` returns the game assumptions, six seats, pack hash, numeric quality and session length.
 - `GET /api/v1/trainer/research/multiway/sessions/42/questions/0?player=0` starts a deterministic ten-question session. Index is 0–9. Player 0 mixes responding seats; 1–5 fixes HJ through BB for the supplied fixture. UTG has already shoved and is not a decision to practise.
