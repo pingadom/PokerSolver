@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.pokerlab.solver.CfrSolver;
 import com.pokerlab.solver.DiverseValidationSpot;
+import com.pokerlab.solver.PreflopDrillSession;
 import com.pokerlab.solver.PreflopPackBuilder;
 import com.pokerlab.solver.PreflopTrainer;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,7 @@ class ResearchTrainerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Cache-Control", containsString("no-store")))
                 .andExpect(jsonPath("$.seed").value("42"))
+                .andExpect(jsonPath("$.packHash").value(trainer.packHash()))
                 .andExpect(jsonPath("$.question.spotHash").value(expected.spotHash()))
                 .andExpect(jsonPath("$.question.heroCombo").value(expected.heroCombo()))
                 .andExpect(jsonPath("$.question.publicationStatus").value("VALIDATION_ONLY"))
@@ -59,9 +61,9 @@ class ResearchTrainerControllerTest {
     }
 
     @Test
-    void gradeRecomputesQuestionAndRejectsChangedSpotOrSubmittedEv() throws Exception {
-        String spotHash = trainer.question(42).spotHash();
-        String body = "{\"seed\":\"42\",\"spotHash\":\"" + spotHash + "\",\"action\":\"FOLD\"}";
+    void gradeRecomputesQuestionAndRejectsChangedPackOrSubmittedEv() throws Exception {
+        String packHash = trainer.packHash();
+        String body = "{\"seed\":\"42\",\"packHash\":\"" + packHash + "\",\"action\":\"FOLD\"}";
         mvc.perform(
                         post("/api/v1/trainer/research/grade")
                                 .contentType("application/json")
@@ -75,7 +77,7 @@ class ResearchTrainerControllerTest {
         mvc.perform(
                         post("/api/v1/trainer/research/grade")
                                 .contentType("application/json")
-                                .content(body.replace(spotHash, "0".repeat(64))))
+                                .content(body.replace(packHash, "0".repeat(64))))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("INVALID_REQUEST"));
         mvc.perform(
@@ -89,6 +91,80 @@ class ResearchTrainerControllerTest {
                                 .content(
                                         body.substring(0, body.length() - 1)
                                                 + ",\"shoveEvBb\":999}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void metadataAndTenDecisionSessionRemainBoundToOnePack() throws Exception {
+        mvc.perform(get("/api/v1/trainer/research"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.packHash").value(trainer.packHash()))
+                .andExpect(jsonPath("$.heroRange.length()").value(8))
+                .andExpect(jsonPath("$.opponentRange.length()").value(7))
+                .andExpect(jsonPath("$.sessionLength").value(10));
+        var session = new PreflopDrillSession(trainer);
+        mvc.perform(get("/api/v1/trainer/research/sessions/9223372036854775807/questions/9"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.sessionSeed").value("9223372036854775807"))
+                .andExpect(jsonPath("$.packHash").value(trainer.packHash()))
+                .andExpect(
+                        jsonPath("$.question.heroCombo")
+                                .value(session.question(Long.MAX_VALUE, 9).heroCombo()))
+                .andExpect(jsonPath("$.question.opponentCards").doesNotExist())
+                .andExpect(jsonPath("$.question.shoveEvBb").doesNotExist());
+        String grade =
+                "{\"sessionSeed\":\"42\",\"index\":0,\"packHash\":\""
+                        + trainer.packHash()
+                        + "\",\"action\":\"SHOVE\"}";
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/grade")
+                                .contentType("application/json")
+                                .content(grade))
+                .andExpect(status().isOk())
+                .andExpect(
+                        jsonPath("$.feedback.heroCombo").value(session.question(42, 0).heroCombo()))
+                .andExpect(jsonPath("$.feedback.evLossBb").isNumber());
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/grade")
+                                .contentType("application/json")
+                                .content(grade.replace(trainer.packHash(), "0".repeat(64))))
+                .andExpect(status().isBadRequest());
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/grade")
+                                .contentType("application/json")
+                                .content(grade.replace("\"SHOVE\"", "\"CALL\"")))
+                .andExpect(status().isBadRequest());
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/grade")
+                                .contentType("application/json")
+                                .content(grade.replace("}", ",\"evLossBb\":0}")))
+                .andExpect(status().isBadRequest());
+        String review =
+                "{\"sessionSeed\":\"42\",\"packHash\":\""
+                        + trainer.packHash()
+                        + "\",\"actions\":["
+                        + "\"FOLD\",".repeat(9)
+                        + "\"FOLD\"]}";
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/review")
+                                .contentType("application/json")
+                                .content(review))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.attempts.length()").value(10))
+                .andExpect(
+                        jsonPath("$.totalEvLossBb")
+                                .value(
+                                        session.review(
+                                                        42,
+                                                        java.util.Collections.nCopies(
+                                                                10, PreflopTrainer.Action.FOLD))
+                                                .totalEvLossBb()));
+        mvc.perform(
+                        post("/api/v1/trainer/research/sessions/review")
+                                .contentType("application/json")
+                                .content(review.replace("\"FOLD\",", "")))
+                .andExpect(status().isBadRequest());
+        mvc.perform(get("/api/v1/trainer/research/sessions/42/questions/10"))
                 .andExpect(status().isBadRequest());
     }
 
