@@ -53,16 +53,30 @@ public final class PreflopTrainer {
             double foldEvBb) {}
 
     private final PreflopSolutionPack pack;
+    private final String packHash;
     private final Map<String, Double> heroDealProbabilities;
     private final Map<String, PreflopSolutionPack.HeroDecision> decisions;
 
     public PreflopTrainer(PreflopSolutionPack pack) {
         this.pack = Objects.requireNonNull(pack, "pack");
         pack.validate();
+        packHash = PreflopPackJson.contentHash(pack);
         this.heroDealProbabilities = marginalHeroDealProbabilities(pack.spot());
         Map<String, PreflopSolutionPack.HeroDecision> byCombo = new LinkedHashMap<>();
         for (var decision : pack.heroDecisions()) byCombo.put(decision.combo(), decision);
         this.decisions = Map.copyOf(byCombo);
+    }
+
+    public String packHash() {
+        return packHash;
+    }
+
+    public PreflopAllInSpot spot() {
+        return pack.spot();
+    }
+
+    public PreflopSolutionPack solutionPack() {
+        return pack;
     }
 
     public Question question(long seed) {
