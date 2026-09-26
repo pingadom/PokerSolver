@@ -1,6 +1,7 @@
 package com.pokerlab.solver;
 
 import com.pokerlab.core.card.Card;
+import com.pokerlab.core.card.Deck;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,54 +13,91 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-/** A small, exact, no-rake turn-to-river endgame with one bet size on each street. */
-public record TurnRiverSpot(
-        List<Card> turnBoard,
+/** A bounded three-street, no-rake heads-up game with a declared public turn deck. */
+public record FlopTurnRiverSpot(
+        List<Card> flop,
         double potBb,
         double remainingStackBb,
+        double flopBetBb,
         double turnBetBb,
         double riverBetBb,
         List<WeightedCombo> firstRange,
-        List<WeightedCombo> secondRange) {
-    public TurnRiverSpot {
-        if (turnBoard == null
-                || turnBoard.size() != 4
-                || turnBoard.stream().anyMatch(Objects::isNull)
-                || new HashSet<>(turnBoard).size() != 4)
-            throw new IllegalArgumentException("Turn board needs four distinct cards");
+        List<WeightedCombo> secondRange,
+        List<Card> turnCandidates) {
+    public FlopTurnRiverSpot {
+        if (flop == null
+                || flop.size() != 3
+                || flop.stream().anyMatch(Objects::isNull)
+                || new HashSet<>(flop).size() != 3)
+            throw new IllegalArgumentException("Flop needs three distinct cards");
         if (!Double.isFinite(potBb)
                 || !Double.isFinite(remainingStackBb)
+                || !Double.isFinite(flopBetBb)
                 || !Double.isFinite(turnBetBb)
                 || !Double.isFinite(riverBetBb)
                 || potBb <= 0
                 || remainingStackBb <= 0
+                || flopBetBb <= 0
                 || turnBetBb <= 0
                 || riverBetBb <= 0
-                || turnBetBb + riverBetBb > remainingStackBb)
+                || flopBetBb + turnBetBb + riverBetBb > remainingStackBb)
             throw new IllegalArgumentException("Invalid pot, stack, or bet sizes");
-        turnBoard = turnBoard.stream().sorted(Comparator.comparing(Card::compact)).toList();
-        firstRange = canonicalRange(firstRange, turnBoard);
-        secondRange = canonicalRange(secondRange, turnBoard);
+        flop = flop.stream().sorted(Comparator.comparing(Card::compact)).toList();
+        firstRange = canonicalRange(firstRange, flop);
+        secondRange = canonicalRange(secondRange, flop);
+        if (turnCandidates == null
+                || turnCandidates.isEmpty()
+                || turnCandidates.stream().anyMatch(Objects::isNull)
+                || new HashSet<>(turnCandidates).size() != turnCandidates.size()
+                || turnCandidates.stream().anyMatch(flop::contains))
+            throw new IllegalArgumentException(
+                    "Turn candidates must be distinct and outside the flop");
+        turnCandidates =
+                turnCandidates.stream().sorted(Comparator.comparing(Card::compact)).toList();
         for (WeightedCombo first : firstRange)
             if (secondRange.stream().noneMatch(second -> !first.conflictsWith(second)))
                 throw new IllegalArgumentException("First-player combo has no legal opponent");
         for (WeightedCombo second : secondRange)
             if (firstRange.stream().noneMatch(first -> !first.conflictsWith(second)))
                 throw new IllegalArgumentException("Second-player combo has no legal opponent");
+        for (WeightedCombo first : firstRange)
+            for (WeightedCombo second : secondRange)
+                if (!first.conflictsWith(second)
+                        && turnCandidates.stream().noneMatch(card -> !blocked(card, first, second)))
+                    throw new IllegalArgumentException("A joint deal has no legal turn candidate");
     }
 
-    public TurnRiverGame game() {
-        return new TurnRiverGame(this);
+    public FlopTurnRiverGame game() {
+        return new FlopTurnRiverGame(this);
     }
 
-    /** Binds board, chip rules, and both exact weighted ranges to a stable identity. */
+    /** Replaces the restricted turn deck with all 49 cards outside the public flop. */
+    public FlopTurnRiverSpot withFullTurnDeck() {
+        Deck deck = new Deck();
+        flop.forEach(deck::remove);
+        return new FlopTurnRiverSpot(
+                flop,
+                potBb,
+                remainingStackBb,
+                flopBetBb,
+                turnBetBb,
+                riverBetBb,
+                firstRange,
+                secondRange,
+                deck.cards());
+    }
+
+    /** The candidate list is part of the game, including its approximation. */
     public String contentHash() {
-        StringBuilder canonical = new StringBuilder("turn-river-single-bet/v1|no-rake|");
+        StringBuilder canonical = new StringBuilder("flop-turn-river-restricted-turn/v1|no-rake|");
         append(canonical, Double.toHexString(potBb));
         append(canonical, Double.toHexString(remainingStackBb));
+        append(canonical, Double.toHexString(flopBetBb));
         append(canonical, Double.toHexString(turnBetBb));
         append(canonical, Double.toHexString(riverBetBb));
-        for (Card card : turnBoard) append(canonical, card.compact());
+        flop.forEach(card -> append(canonical, card.compact()));
+        append(canonical, "turn-candidates");
+        turnCandidates.forEach(card -> append(canonical, card.compact()));
         append(canonical, "first-range");
         for (WeightedCombo combo : firstRange) {
             append(canonical, combo.key());
@@ -80,6 +118,13 @@ public record TurnRiverSpot(
         }
     }
 
+    static boolean blocked(Card card, WeightedCombo first, WeightedCombo second) {
+        return card.equals(first.first())
+                || card.equals(first.second())
+                || card.equals(second.first())
+                || card.equals(second.second());
+    }
+
     private static void append(StringBuilder builder, String value) {
         builder.append(value.length()).append(':').append(value);
     }
@@ -93,7 +138,7 @@ public record TurnRiverSpot(
             if (combo == null || !seen.add(combo.key()))
                 throw new IllegalArgumentException("Null or duplicate combo in range");
             if (board.contains(combo.first()) || board.contains(combo.second()))
-                throw new IllegalArgumentException("Range combo conflicts with the board");
+                throw new IllegalArgumentException("Range combo conflicts with the flop");
             sorted.add(combo);
         }
         sorted.sort(Comparator.comparing(WeightedCombo::key));
