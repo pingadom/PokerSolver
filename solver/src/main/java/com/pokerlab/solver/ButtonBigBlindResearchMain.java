@@ -1,7 +1,5 @@
 package com.pokerlab.solver;
 
-import com.pokerlab.core.card.Card;
-import java.util.List;
 import java.util.Locale;
 
 /** Reproducible, restricted-chance preflop-to-river CFR research demonstration. */
@@ -13,15 +11,7 @@ public final class ButtonBigBlindResearchMain {
             throw new IllegalArgumentException("Usage: ButtonBigBlindResearchMain [iterations]");
         int iterations = args.length == 0 ? 300 : Integer.parseInt(args[0]);
         if (iterations < 1) throw new IllegalArgumentException("Iterations must be positive");
-        ButtonBigBlindContinuationGame game =
-                new ButtonBigBlindContinuationGame(
-                        List.of(new WeightedCombo(card("Ac"), card("Ad"), 0.25), combo("Kh", "Qh")),
-                        List.of(combo("Jc", "Jd"), combo("As", "Ks")),
-                        List.of(List.of(card("2c"), card("7d"), card("Th"))),
-                        List.of(card("3s"), card("4s")),
-                        2,
-                        4,
-                        8);
+        ButtonBigBlindContinuationGame game = ButtonBigBlindResearchFixture.create(1, 2);
         long started = System.nanoTime();
         CfrSolution solution = new CfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(iterations);
         HeadsUpBestResponse.Report report = HeadsUpBestResponse.assess(game, solution);
@@ -42,13 +32,5 @@ public final class ButtonBigBlindResearchMain {
                 .filter(entry -> entry.getKey().contains(":P:"))
                 .sorted(java.util.Map.Entry.comparingByKey())
                 .forEach(entry -> System.out.println(entry.getKey() + " -> " + entry.getValue()));
-    }
-
-    private static Card card(String text) {
-        return Card.parse(text);
-    }
-
-    private static WeightedCombo combo(String first, String second) {
-        return new WeightedCombo(card(first), card(second), 1);
     }
 }
