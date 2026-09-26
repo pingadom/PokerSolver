@@ -110,6 +110,8 @@ A separate [bounded river solver research path](docs/river-solver-research.md) n
 
 The [turn-to-river research model](docs/turn-river-solver-research.md) adds an exact public river-card chance node between two bounded betting rounds. A saved, validation-only pack powers an opt-in API, `#turn-river` decision drill and `#turn-river-hand` connected partial-hand replay. Its synthetic fixture has a measured information-set best-response gap; it is not a reviewed full-hand lesson.
 
+The [flop-to-river solver research model](docs/flop-turn-river-solver-research.md) now connects all three postflop streets in one offline game and benchmarks both restricted and exact turn chance. Its small turn-card abstraction has measurable payoff bias, so this fixture is not yet a trainer pack or public lesson.
+
 ## Measured performance
 
 Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
