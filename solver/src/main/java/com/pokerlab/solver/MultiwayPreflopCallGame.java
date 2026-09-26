@@ -11,20 +11,24 @@ import java.util.Set;
 
 /**
  * Bounded 2-6 seat preflop all-in subgame. Seat 0 has already shoved; later seats call or fold in
- * order. All players have equal total stacks, no rake, and no side pots. This does not model opens,
- * raises, or postflop play. Showdown payoffs are computed before solving.
+ * order. Responders may have shorter stacks; contribution tiers settle main and side pots with no
+ * rake. This does not model opens, raises, or postflop play. Showdown payoffs are computed before
+ * solving.
  */
 public final class MultiwayPreflopCallGame
         implements MultiPlayerCfrGame<MultiwayPreflopCallGame.State> {
     public record State(int dealIndex, String history) {}
 
-    private record Deal(List<WeightedCombo> combos, double weight, Map<Integer, double[]> shares) {}
+    private record Deal(
+            List<WeightedCombo> combos,
+            double weight,
+            Map<Integer, MultiwayShowdownEstimate> estimates) {}
 
     private static final int MAX_JOINT_DEALS = 4096;
     private static final int MAX_PAYOFF_TABLE_ENTRIES = 2048;
     private final List<PreflopAllInSpot.Seat> seats;
     private final List<Double> committedBb;
-    private final double stackBb;
+    private final List<Double> stacksBb;
     private final double deadMoneyBb;
     private final double maximumTerminalPayoffStandardErrorBb;
     private final List<Deal> deals;
@@ -37,28 +41,57 @@ public final class MultiwayPreflopCallGame
             double stackBb,
             double deadMoneyBb,
             MultiwayShowdownOracle oracle) {
+        this(
+                seats,
+                ranges,
+                committedBb,
+                seats == null ? null : java.util.Collections.nCopies(seats.size(), stackBb),
+                deadMoneyBb,
+                oracle);
+    }
+
+    /** Research-only unequal-stack constructor; saved v1 packs still use equal stacks. */
+    public MultiwayPreflopCallGame(
+            List<PreflopAllInSpot.Seat> seats,
+            List<List<WeightedCombo>> ranges,
+            List<Double> committedBb,
+            List<Double> stacksBb,
+            double deadMoneyBb,
+            MultiwayShowdownOracle oracle) {
         Objects.requireNonNull(oracle, "oracle");
+        if (seats == null
+                || ranges == null
+                || committedBb == null
+                || stacksBb == null
+                || seats.size() < 2
+                || seats.size() > 6
+                || ranges.size() != seats.size()
+                || committedBb.size() != seats.size()
+                || stacksBb.size() != seats.size())
+            throw new IllegalArgumentException("Invalid seats, ranges, stacks, or commitments");
         this.seats = List.copyOf(seats);
         this.committedBb = List.copyOf(committedBb);
+        this.stacksBb = List.copyOf(stacksBb);
         if (this.seats.size() < 2
                 || this.seats.size() > 6
                 || new HashSet<>(this.seats).size() != this.seats.size()
-                || ranges == null
-                || ranges.size() != this.seats.size()
-                || this.committedBb.size() != this.seats.size()
-                || !Double.isFinite(stackBb)
-                || stackBb <= 1
+                || !Double.isFinite(this.stacksBb.get(0))
+                || this.stacksBb.get(0) <= 1
                 || !Double.isFinite(deadMoneyBb)
                 || deadMoneyBb < 0)
             throw new IllegalArgumentException("Invalid seats, ranges, stack, or dead money");
-        this.stackBb = stackBb;
         this.deadMoneyBb = deadMoneyBb;
         for (int player = 0; player < this.seats.size(); player++) {
             Double committed = this.committedBb.get(player);
+            double stack = this.stacksBb.get(player);
             if (committed == null
+                    || !Double.isFinite(stack)
+                    || stack <= 0
                     || !Double.isFinite(committed)
                     || committed < 0
-                    || (player == 0 ? committed != stackBb : committed >= stackBb))
+                    || (player == 0
+                            ? committed != stack
+                            : committed >= Math.min(stack, this.stacksBb.get(0))))
                 throw new IllegalArgumentException("Invalid seat commitment");
             List<WeightedCombo> range = ranges.get(player);
             if (range == null || range.isEmpty())
@@ -82,17 +115,24 @@ public final class MultiwayPreflopCallGame
         double maximumStandardError = 0;
         for (int index = 0; index < prepared.size(); index++) {
             Deal deal = prepared.get(index);
-            Map<Integer, double[]> shares = new LinkedHashMap<>();
+            Map<Integer, MultiwayShowdownEstimate> estimates = new LinkedHashMap<>();
             for (int mask = 3; mask < (1 << playerCount()); mask++) {
                 if ((mask & 1) == 0 || Integer.bitCount(mask) < 2) continue;
                 MultiwayShowdownEstimate estimate = oracle.estimate(deal.combos(), mask);
                 validateEstimate(estimate, mask);
-                shares.put(mask, estimate.shares());
-                double pot = potForMask(mask);
-                for (double error : estimate.standardErrors())
-                    maximumStandardError = Math.max(maximumStandardError, error * pot);
+                estimates.put(mask, estimate);
             }
-            finished.add(new Deal(deal.combos(), deal.weight(), Map.copyOf(shares)));
+            for (int mask = 1; mask < (1 << playerCount()); mask += 2)
+                maximumStandardError =
+                        Math.max(
+                                maximumStandardError,
+                                AllInSidePots.settle(
+                                                commitmentsForMask(mask),
+                                                mask,
+                                                deadMoneyBb,
+                                                estimates::get)
+                                        .maximumStandardErrorBb());
+            finished.add(new Deal(deal.combos(), deal.weight(), Map.copyOf(estimates)));
             outcomes.add(new ChanceOutcome<>(new State(index, ""), deal.weight() / totalWeight));
         }
         deals = List.copyOf(finished);
@@ -105,13 +145,17 @@ public final class MultiwayPreflopCallGame
     }
 
     public double stackBb() {
-        return stackBb;
+        return stacksBb.get(0);
+    }
+
+    public List<Double> stacksBb() {
+        return stacksBb;
     }
 
     public double callCostBb(int player) {
         if (player < 1 || player >= playerCount())
             throw new IllegalArgumentException("Choose a responding seat");
-        return stackBb - committedBb.get(player);
+        return Math.min(stacksBb.get(0), stacksBb.get(player)) - committedBb.get(player);
     }
 
     public double potBeforeDecision(String history) {
@@ -120,11 +164,11 @@ public final class MultiwayPreflopCallGame
         double pot = deadMoneyBb;
         for (double committed : committedBb) pot += committed;
         for (int index = 0; index < history.length(); index++)
-            if (history.charAt(index) == 'c') pot += stackBb - committedBb.get(index + 1);
+            if (history.charAt(index) == 'c') pot += callCostBb(index + 1);
         return pot;
     }
 
-    /** Largest one-standard-error terminal payoff estimate across seats, deals and call subsets. */
+    /** Largest terminal payoff SE bound across seats, deals and call subsets. */
     public double maximumTerminalPayoffStandardErrorBb() {
         return maximumTerminalPayoffStandardErrorBb;
     }
@@ -154,18 +198,12 @@ public final class MultiwayPreflopCallGame
         int mask = 1;
         for (int player = 1; player < playerCount(); player++)
             if (state.history().charAt(player - 1) == 'c') mask |= 1 << player;
-        double pot = potForMask(mask);
-        double[] utilities = new double[playerCount()];
-        if (mask == 1) utilities[0] = pot - stackBb;
-        else {
-            double[] shares = deals.get(state.dealIndex()).shares().get(mask);
-            for (int player = 0; player < playerCount(); player++)
-                if ((mask & (1 << player)) != 0) utilities[player] = shares[player] * pot - stackBb;
-        }
-        for (int player = 1; player < playerCount(); player++)
-            if ((mask & (1 << player)) == 0)
-                utilities[player] = committedBb.get(player) == 0 ? 0 : -committedBb.get(player);
-        return utilities;
+        return AllInSidePots.settle(
+                        commitmentsForMask(mask),
+                        mask,
+                        deadMoneyBb,
+                        deals.get(state.dealIndex()).estimates()::get)
+                .utilitiesBb();
     }
 
     @Override
@@ -226,11 +264,14 @@ public final class MultiwayPreflopCallGame
         }
     }
 
-    private double potForMask(int mask) {
-        double pot = deadMoneyBb;
+    private double[] commitmentsForMask(int mask) {
+        double[] amounts = new double[playerCount()];
         for (int player = 0; player < playerCount(); player++)
-            pot += (mask & (1 << player)) == 0 ? committedBb.get(player) : stackBb;
-        return pot;
+            amounts[player] =
+                    (mask & (1 << player)) == 0
+                            ? committedBb.get(player)
+                            : Math.min(stacksBb.get(0), stacksBb.get(player));
+        return amounts;
     }
 
     private void validateEstimate(MultiwayShowdownEstimate estimate, int mask) {

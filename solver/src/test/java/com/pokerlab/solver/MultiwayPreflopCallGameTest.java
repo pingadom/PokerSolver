@@ -67,6 +67,97 @@ class MultiwayPreflopCallGameTest {
     }
 
     @Test
+    void shorterCallersCreateMainAndSidePotsWithAnExactDeviationCheck() {
+        List<PreflopAllInSpot.Seat> seats =
+                List.of(
+                        PreflopAllInSpot.Seat.UTG,
+                        PreflopAllInSpot.Seat.BTN,
+                        PreflopAllInSpot.Seat.BB);
+        List<List<WeightedCombo>> ranges =
+                List.of(
+                        List.of(combo("AS", "AH", 1)),
+                        List.of(combo("KS", "KH", 1)),
+                        List.of(combo("QS", "QH", 1)));
+        MultiwayPreflopCallGame game =
+                new MultiwayPreflopCallGame(
+                        seats,
+                        ranges,
+                        List.of(30.0, 1.0, 2.0),
+                        List.of(30.0, 10.0, 20.0),
+                        0.5,
+                        (dealt, mask) -> {
+                            double[] shares = new double[3];
+                            shares[(mask & 0b010) != 0 ? 1 : (mask & 0b100) != 0 ? 2 : 0] = 1;
+                            return MultiwayShowdownEstimate.certain(shares);
+                        });
+        assertEquals(List.of(30.0, 10.0, 20.0), game.stacksBb());
+        assertEquals(9, game.callCostBb(1));
+        assertEquals(18, game.callCostBb(2));
+        assertEquals(33.5, game.potBeforeDecision(""));
+        assertEquals(42.5, game.potBeforeDecision("c"));
+        var root = game.chanceOutcomes(game.initialState()).get(0).state();
+        assertArrayEquals(
+                new double[] {3.5, -1, -2},
+                game.terminalUtilities(game.afterAction(game.afterAction(root, "f"), "f")),
+                1e-12);
+        assertArrayEquals(
+                new double[] {-20, 20.5, 0},
+                game.terminalUtilities(game.afterAction(game.afterAction(root, "c"), "c")),
+                1e-12);
+        CfrSolution solution =
+                new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(500);
+        assertTrue(MultiwayCallBestResponse.assess(game, solution).nashConvBb() < 0.05);
+        assertEquals(0.5, sum(MultiPlayerStrategyEvaluator.utilities(game, solution)), 1e-9);
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new MultiwayPreflopCallGame(
+                                seats,
+                                ranges,
+                                List.of(30.0, 10.0, 2.0),
+                                List.of(30.0, 10.0, 20.0),
+                                0,
+                                (dealt, mask) ->
+                                        MultiwayShowdownEstimate.certain(new double[] {1, 0, 0})));
+    }
+
+    @Test
+    void everySixSeatUnequalStackTerminalConservesChips() {
+        MultiwayPreflopCallGame game =
+                new MultiwayPreflopCallGame(
+                        sixSeats(),
+                        List.of(
+                                List.of(combo("AS", "AH", 1)),
+                                List.of(combo("KS", "KH", 1)),
+                                List.of(combo("QS", "QH", 1)),
+                                List.of(combo("JS", "JH", 1)),
+                                List.of(combo("TS", "TH", 1)),
+                                List.of(combo("9S", "9H", 1))),
+                        List.of(30.0, 1.0, 2.0, 0.0, 0.5, 1.0),
+                        List.of(30.0, 10.0, 20.0, 15.0, 25.0, 5.0),
+                        0.75,
+                        (dealt, activeMask) -> {
+                            double[] shares = new double[6];
+                            shares[31 - Integer.numberOfLeadingZeros(activeMask)] = 1;
+                            return MultiwayShowdownEstimate.certain(shares);
+                        });
+        var root = game.chanceOutcomes(game.initialState()).get(0).state();
+        for (int calls = 0; calls < 32; calls++) {
+            var state = root;
+            for (int responder = 0; responder < 5; responder++)
+                state = game.afterAction(state, (calls & (1 << responder)) == 0 ? "f" : "c");
+            assertEquals(0.75, sum(game.terminalUtilities(state)), 1e-9);
+        }
+        var allCall = root;
+        for (int responder = 0; responder < 5; responder++)
+            allCall = game.afterAction(allCall, "c");
+        assertArrayEquals(
+                new double[] {-25, -10, -20, -15, 45, 25.75},
+                game.terminalUtilities(allCall),
+                1e-12);
+    }
+
+    @Test
     void jointDealsRemoveBlockedCardsAndKeepWeights() {
         List<List<WeightedCombo>> ranges = new ArrayList<>();
         ranges.add(List.of(combo("AS", "AH", 2), combo("KS", "KH", 1)));
