@@ -212,5 +212,12 @@ public record PreflopAllInSpot(
                 || committed.get(secondSeat) >= stack)
             throw new IllegalArgumentException(
                     "History must end with two live seats facing a raise");
+        var replayed = SixMaxPreflopBetting.forHistory(stack, smallBlind, actions).replay(actions);
+        if (replayed.status() != SixMaxPreflopBetting.Status.DECISION
+                || replayed.actingSeat() != firstSeat
+                || replayed.liveSeats().size() != 2
+                || !replayed.liveSeats().contains(secondSeat))
+            throw new IllegalArgumentException(
+                    "History must leave the first player facing the second player's raise");
     }
 }

@@ -106,6 +106,8 @@ The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects t
 
 The [exact-payoff scaling study](docs/preflop-payoff-scaling.md) counts the cost of larger ranges and adds suit-equivalence reuse to the offline solver. It confirms that the current demo pack has no duplicate suit patterns to reuse, so larger lessons still need explicit range review and payoff benchmarking.
 
+The [bounded six-seat preflop betting rules](docs/preflop-betting-tree-research.md) now validate full action order, minimum raises and chip commitments for the existing all-in spot. Non-all-in branches remain explicitly unresolved until a compatible postflop continuation model is validated.
+
 A separate [bounded river solver research path](docs/river-solver-research.md) now solves a fixed-board heads-up betting tree and serves opt-in, validation-only questions from a saved pack. With the local trainer overlay running, open `http://localhost:8080/#river` for its research drill. Its synthetic ranges are not a continuation of the preflop lesson or a general river strategy.
 
 The [turn-to-river research model](docs/turn-river-solver-research.md) adds an exact public river-card chance node between two bounded betting rounds. A saved, validation-only pack powers an opt-in API, `#turn-river` decision drill and `#turn-river-hand` connected partial-hand replay. Its synthetic fixture has a measured information-set best-response gap; it is not a reviewed full-hand lesson.
