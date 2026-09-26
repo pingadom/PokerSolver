@@ -49,6 +49,31 @@ public final class MultiwayPackJson {
         return deserialize(json, MultiwayCallSpot.class);
     }
 
+    public static String writeSidePot(MultiwaySidePotPack pack) {
+        if (pack == null) throw new IllegalArgumentException("Pack is required");
+        pack.validate();
+        return serialize(pack);
+    }
+
+    public static MultiwaySidePotPack readSidePot(String json) {
+        MultiwaySidePotPack pack = deserialize(json, MultiwaySidePotPack.class);
+        pack.validate();
+        return pack;
+    }
+
+    public static String sidePotContentHash(MultiwaySidePotPack pack) {
+        return MultiwayCallSpot.sha256(writeSidePot(pack));
+    }
+
+    public static String writeSidePotSpot(MultiwaySidePotSpot spot) {
+        if (spot == null) throw new IllegalArgumentException("Spot is required");
+        return serialize(spot);
+    }
+
+    public static MultiwaySidePotSpot readSidePotSpot(String json) {
+        return deserialize(json, MultiwaySidePotSpot.class);
+    }
+
     private static String serialize(Object value) {
         try {
             return MAPPER.writeValueAsString(value);
