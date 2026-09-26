@@ -5,9 +5,11 @@ import TrainerPage from "./TrainerPage";
 import TurnRiverPage from "./TurnRiverPage";
 import TurnRiverHandPage from "./TurnRiverHandPage";
 import FlopHandPage from "./FlopHandPage";
+import MultiwayPage from "./MultiwayPage";
 
 function currentRoute() {
   if (window.location.hash.startsWith("#trainer")) return "trainer";
+  if (window.location.hash.startsWith("#multiway")) return "multiway";
   if (window.location.hash.startsWith("#flop-hand")) return "flop-hand";
   if (window.location.hash.startsWith("#turn-river-hand")) return "turn-river-hand";
   if (window.location.hash.startsWith("#turn-river")) return "turn-river";
@@ -23,6 +25,7 @@ export default function FrontendRoot() {
     return () => window.removeEventListener("hashchange", changed);
   }, []);
   if (route === "trainer") return <TrainerPage />;
+  if (route === "multiway") return <MultiwayPage />;
   if (route === "flop-hand") return <FlopHandPage />;
   if (route === "turn-river-hand") return <TurnRiverHandPage />;
   if (route === "turn-river") return <TurnRiverPage />;

@@ -519,6 +519,7 @@ export default function App() {
                 examples.
               </p>
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
+              <p><a className="solver-demo-link" href="#multiway">Six-seat call/fold research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#turn-river-hand">Play a turn-to-river partial hand ↗</a></p>
