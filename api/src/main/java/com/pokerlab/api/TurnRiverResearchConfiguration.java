@@ -1,5 +1,6 @@
 package com.pokerlab.api;
 
+import com.pokerlab.solver.TurnRiverHandSession;
 import com.pokerlab.solver.TurnRiverPackJson;
 import com.pokerlab.solver.TurnRiverResearchTrainer;
 import java.io.IOException;
@@ -34,5 +35,10 @@ class TurnRiverResearchConfiguration {
                         "Validation-only turn-river research trainer enabled with pack {}",
                         trainer.packHash());
         return trainer;
+    }
+
+    @Bean
+    TurnRiverHandSession turnRiverHandSession(TurnRiverResearchTrainer trainer) {
+        return new TurnRiverHandSession(trainer.pack());
     }
 }

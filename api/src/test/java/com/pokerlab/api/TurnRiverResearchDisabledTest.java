@@ -1,6 +1,7 @@
 package com.pokerlab.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,8 @@ class TurnRiverResearchDisabledTest {
     void routeIsAbsentByDefault() throws Exception {
         mvc.perform(get("/api/v1/trainer/research/turn-river")).andExpect(status().isNotFound());
         mvc.perform(get("/api/v1/trainer/research/turn-river/questions/42"))
+                .andExpect(status().isNotFound());
+        mvc.perform(post("/api/v1/trainer/research/turn-river/hands/replay"))
                 .andExpect(status().isNotFound());
     }
 }

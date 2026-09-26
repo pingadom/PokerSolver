@@ -54,6 +54,42 @@ export type TurnRiverFeedback = {
   actionEvBb: Record<TurnRiverAction, number>;
 };
 
+export type TurnRiverHandFeedback = {
+  street: "TURN" | "RIVER";
+  turnHistory: string;
+  river: TurnRiverCard | null;
+  riverHistory: string;
+  selectedAction: TurnRiverAction;
+  selectedEvBb: number;
+  bestEvBb: number;
+  evLossBb: number;
+  actionFrequency: Record<TurnRiverAction, number>;
+  actionEvBb: Record<TurnRiverAction, number>;
+};
+
+export type TurnRiverHandSnapshot = {
+  packHash: string;
+  publicationStatus: "VALIDATION_ONLY";
+  seed: string;
+  heroPlayer: 0 | 1;
+  heroCombo: string;
+  opponentCombo: string | null;
+  turnBoard: TurnRiverCard[];
+  river: TurnRiverCard | null;
+  street: "TURN" | "RIVER";
+  turnHistory: string;
+  riverHistory: string;
+  potBb: number;
+  heroRemainingStackBb: number;
+  publicActions: { street: "TURN" | "RIVER"; player: 0 | 1; action: TurnRiverAction }[];
+  legalActions: TurnRiverAction[];
+  feedback: TurnRiverHandFeedback[];
+  complete: boolean;
+  showdown: boolean;
+  heroCenteredResultBb: number | null;
+  gameGapBb: number;
+};
+
 export async function turnRiverRequest<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api/v1/trainer/research/turn-river${path}`, init);
   const body = await response.json();

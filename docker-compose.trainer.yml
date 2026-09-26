@@ -8,7 +8,10 @@ services:
       TRAINER_RIVER_RESEARCH_PACK_PATH: /opt/pokerlab/river-pack.json
       TRAINER_TURN_RIVER_RESEARCH_ENABLED: "true"
       TRAINER_TURN_RIVER_RESEARCH_PACK_PATH: /opt/pokerlab/turn-river-pack.json
+      TRAINER_FLOP_RESEARCH_ENABLED: "true"
+      TRAINER_FLOP_RESEARCH_PACK_PATH: /opt/pokerlab/flop-pack.json.gz
     volumes:
       - ./solver/src/test/resources/diverse-validation-pack.json:/opt/pokerlab/trainer-pack.json:ro
       - ./solver/src/test/resources/river-validation-pack.json:/opt/pokerlab/river-pack.json:ro
       - ./solver/src/test/resources/turn-river-validation-pack.json:/opt/pokerlab/turn-river-pack.json:ro
+      - ./solver/src/test/resources/flop-full-validation-pack.json.gz:/opt/pokerlab/flop-pack.json.gz:ro

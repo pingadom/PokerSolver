@@ -1088,6 +1088,10 @@ footer span {
 .river-board span { display: grid; place-items: center; width: 58px; height: 72px; border: 1px solid #cbd9cc; border-radius: 7px; background: white; color: #253e32; font-family: Manrope, sans-serif; font-size: 22px; font-weight: 800; }
 .river-board span.red { color: #b85145; }
 .river-board span.unrevealed { border-style: dashed; color: #80978a; background: #f5f8f3; }
+.hand-history { margin: 20px 0; padding: 16px 18px 16px 36px; background: #f5f8f3; border-radius: 8px; color: #375445; }
+.hand-history li + li { margin-top: 6px; }
+.hand-history li span { color: #6b8473; font-size: 11px; font-weight: 800; letter-spacing: .06em; margin-right: 7px; }
+.hand-feedback-item + .hand-feedback-item { border-top: 1px solid #d8e2d8; margin-top: 18px; padding-top: 18px; }
 @media (max-width: 850px) {
   .trainer-layout { grid-template-columns: 1fr; }
   .trainer-play { min-height: 0; }

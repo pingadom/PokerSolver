@@ -521,6 +521,8 @@ export default function App() {
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river-hand">Play a turn-to-river partial hand ↗</a></p>
+              <p><a className="solver-demo-link" href="#flop-hand">Play a flop-to-river partial hand ↗</a></p>
             </div>
             <ol className="solver-milestones">
               <li>
@@ -537,7 +539,11 @@ export default function App() {
               </li>
               <li>
                 <span>RESEARCH</span>
-                <strong>Turn-to-river chance game and drill</strong>
+                <strong>Connected turn-to-river partial hand</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Connected flop-to-river partial hand</strong>
               </li>
               <li>
                 <span>LATER</span>
