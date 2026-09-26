@@ -87,5 +87,38 @@ class PreflopAllInSpotTest {
                                 invalidRaise,
                                 spot.firstRange(),
                                 spot.secondRange()));
+
+        var outOfTurn = new ArrayList<>(spot.priorActions());
+        Collections.swap(outOfTurn, 3, 4);
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new PreflopAllInSpot(
+                                spot.id(),
+                                100,
+                                0.5,
+                                spot.firstSeat(),
+                                spot.secondSeat(),
+                                outOfTurn,
+                                spot.firstRange(),
+                                spot.secondRange()));
+
+        var underMinimumRaise = new ArrayList<>(spot.priorActions());
+        underMinimumRaise.set(
+                5,
+                new PreflopAllInSpot.Action(
+                        spot.secondSeat(), PreflopAllInSpot.ActionKind.RAISE_TO, 4));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new PreflopAllInSpot(
+                                spot.id(),
+                                100,
+                                0.5,
+                                spot.firstSeat(),
+                                spot.secondSeat(),
+                                underMinimumRaise,
+                                spot.firstRange(),
+                                spot.secondRange()));
     }
 }
