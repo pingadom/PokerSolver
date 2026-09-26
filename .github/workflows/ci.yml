@@ -53,6 +53,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: docker compose config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml config --quiet
       - run: docker compose up --build -d --scale worker=2
       - name: Wait for API readiness
         run: |
@@ -150,6 +151,44 @@ jobs:
               after_check = json.load(response)
           assert len(after_check['feedback']) == 1
           assert after_check['feedback'][0]['selectedEvBb'] is not None
+          PY
+      - name: Unequal-stack trainer overlay serves graded decisions
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml up -d --no-deps api
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/api/v1/trainer/research/multiway > multiway-side-pot.json; then
+              if python3 -c "import json; assert json.load(open('multiway-side-pot.json'))['packSchema'] == 'multiway-side-pot-pack/v1'"; then break; fi
+            fi
+            sleep 2
+          done
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          base = 'http://localhost:18080/api/v1/trainer/research/multiway'
+          with urllib.request.urlopen(base) as response:
+              metadata = json.load(response)
+          assert metadata['stacksBb'] == [30, 10, 20, 15, 25, 5]
+          assert metadata['payoffMethod'] == 'EXACT_ENUMERATION'
+          assert metadata['nashConvBb'] < 0.05
+          with urllib.request.urlopen(base + '/sessions/42/questions/0?player=5') as response:
+              question = json.load(response)
+          assert question['actingSeat'] == 'BB'
+          assert question['stackBb'] == 5
+          assert question['callCostBb'] == 4
+          assert 'opponentCards' not in question
+          assert 'callEvBb' not in question
+          payload = json.dumps({
+              'sessionSeed': '42', 'index': 0, 'player': 5,
+              'packHash': question['packHash'], 'action': 'CALL',
+          }).encode()
+          request = urllib.request.Request(
+              base + '/grade', data=payload,
+              headers={'Content-Type': 'application/json'},
+          )
+          with urllib.request.urlopen(request) as response:
+              graded = json.load(response)
+          assert graded['question']['packHash'] == metadata['packHash']
+          assert graded['feedback']['evLossBb'] >= 0
           PY
       - name: Service logs
         if: always()

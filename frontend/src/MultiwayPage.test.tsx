@@ -8,9 +8,11 @@ const response = (body: unknown, ok = true) =>
 const packHash = "a".repeat(64);
 const metadata = {
   spotId: "six-seat-fixture", spotHash: "b".repeat(64), packHash,
+  packSchema: "multiway-call-pack/v1",
   publicationStatus: "VALIDATION_ONLY", solverVersion: "research", payoffMethod: "EXACT_ENUMERATION",
   seats: ["UTG", "HJ", "CO", "BTN", "SB", "BB"],
-  committedBb: [20, 0, 0, 0, 0, 0], stackBb: 20, deadMoneyBb: 1.5,
+  committedBb: [20, 0, 0, 0, 0, 0], stackBb: 20,
+  stacksBb: [20, 20, 20, 20, 20, 20], deadMoneyBb: 1.5,
   rakeModel: "NO_RAKE", nashConvBb: 0.000058, maximumPayoffStandardErrorBb: 0,
   sessionLength: 10,
 };
@@ -103,4 +105,31 @@ it("refuses to draw questions from a stale pack link", async () => {
   await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("older solution"));
   expect(fetch.mock.calls.filter(([url]) => String(url).includes("/questions/"))).toHaveLength(0);
   expect(screen.queryByRole("button", { name: "Call" })).not.toBeInTheDocument();
+});
+
+it("shows each unequal stack and explains side-pot exposure at the decision", async () => {
+  window.history.replaceState(null, "", `#multiway?seed=42&player=5&pack=${packHash}`);
+  const sidePotMetadata = {
+    ...metadata,
+    packSchema: "multiway-side-pot-pack/v1",
+    stacksBb: [30, 10, 20, 15, 25, 5],
+    stackBb: 30,
+  };
+  vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+    const match = String(url).match(/\/sessions\/(-?\d+)\/questions\/(\d+)\?player=(\d+)/);
+    if (match) return response({
+      ...question(match[1], Number(match[2]), Number(match[3])),
+      actingPlayer: 5, actingSeat: "BB", callCostBb: 4, stackBb: 5,
+    });
+    return response(sidePotMetadata);
+  });
+  render(<MultiwayPage />);
+  expect(await screen.findByText("BB: call or fold?")).toBeInTheDocument();
+  const table = screen.getByLabelText("Six-seat action table");
+  expect(table).toHaveTextContent("30 bb stack");
+  expect(table).toHaveTextContent("5 bb stack");
+  expect(screen.getByText("Unequal stacks")).toBeInTheDocument();
+  expect(screen.getByText(/A short caller can win the main pot/)).toBeInTheDocument();
+  expect(screen.getByText("4.0 bb")).toBeInTheDocument();
+  expect(screen.queryByText("30 bb each")).not.toBeInTheDocument();
 });

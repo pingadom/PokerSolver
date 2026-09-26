@@ -1,8 +1,11 @@
 package com.pokerlab.api;
 
+import com.pokerlab.solver.CfrSolution;
 import com.pokerlab.solver.MultiwayCallTrainer;
 import com.pokerlab.solver.MultiwayDrillSession;
 import com.pokerlab.solver.MultiwayPackJson;
+import com.pokerlab.solver.MultiwayPreflopCallGame;
+import com.pokerlab.solver.MultiwaySidePotPack;
 import com.pokerlab.solver.MultiwaySolutionPack;
 import com.pokerlab.solver.PreflopAllInSpot;
 import java.util.List;
@@ -15,6 +18,7 @@ public final class MultiwayResearchService {
             String spotId,
             String spotHash,
             String packHash,
+            String packSchema,
             String publicationStatus,
             String solverVersion,
             String generatedAt,
@@ -22,6 +26,7 @@ public final class MultiwayResearchService {
             List<PreflopAllInSpot.Seat> seats,
             List<Double> committedBb,
             double stackBb,
+            List<Double> stacksBb,
             double deadMoneyBb,
             String rakeModel,
             double nashConvBb,
@@ -57,17 +62,14 @@ public final class MultiwayResearchService {
     private final MultiwayDrillSession session;
 
     public MultiwayResearchService(MultiwaySolutionPack pack) {
-        var game = pack.rebuildGame();
-        if (!"EXACT_ENUMERATION".equals(pack.payoffMethod()))
-            throw new IllegalStateException("Multiway research trainer requires exact payoffs");
-        if (pack.nashConvBb() > MAX_NASH_CONV_BB)
-            throw new IllegalStateException(
-                    "Multiway research pack exceeds the deviation threshold");
-        metadata =
+        this(
+                pack.rebuildGame(),
+                pack.solution(),
                 new Metadata(
                         pack.spot().id(),
                         pack.spotHash(),
                         MultiwayPackJson.contentHash(pack),
+                        pack.schemaVersion(),
                         pack.publicationStatus(),
                         pack.solverVersion(),
                         pack.generatedAt(),
@@ -75,12 +77,48 @@ public final class MultiwayResearchService {
                         pack.spot().seats(),
                         pack.spot().committedBb(),
                         pack.spot().stackBb(),
+                        java.util.Collections.nCopies(
+                                pack.spot().seats().size(), pack.spot().stackBb()),
                         pack.spot().deadMoneyBb(),
                         "NO_RAKE",
                         pack.nashConvBb(),
                         pack.maxTerminalPayoffSEBb(),
-                        MultiwayDrillSession.LENGTH);
-        session = new MultiwayDrillSession(game, pack.solution());
+                        MultiwayDrillSession.LENGTH));
+    }
+
+    public MultiwayResearchService(MultiwaySidePotPack pack) {
+        this(
+                pack.rebuildGame(),
+                pack.solution(),
+                new Metadata(
+                        pack.spot().id(),
+                        pack.spotHash(),
+                        MultiwayPackJson.sidePotContentHash(pack),
+                        pack.schemaVersion(),
+                        pack.publicationStatus(),
+                        pack.solverVersion(),
+                        pack.generatedAt(),
+                        pack.payoffMethod(),
+                        pack.spot().seats(),
+                        pack.spot().committedBb(),
+                        pack.spot().stacksBb().get(0),
+                        pack.spot().stacksBb(),
+                        pack.spot().deadMoneyBb(),
+                        "NO_RAKE",
+                        pack.nashConvBb(),
+                        pack.maxTerminalPayoffSEBb(),
+                        MultiwayDrillSession.LENGTH));
+    }
+
+    private MultiwayResearchService(
+            MultiwayPreflopCallGame game, CfrSolution solution, Metadata metadata) {
+        if (!"EXACT_ENUMERATION".equals(metadata.payoffMethod()))
+            throw new IllegalStateException("Multiway research trainer requires exact payoffs");
+        if (metadata.nashConvBb() > MAX_NASH_CONV_BB)
+            throw new IllegalStateException(
+                    "Multiway research pack exceeds the deviation threshold");
+        this.metadata = metadata;
+        session = new MultiwayDrillSession(game, solution);
     }
 
     public Metadata metadata() {

@@ -5,12 +5,14 @@ export type MultiwayMetadata = {
   spotId: string;
   spotHash: string;
   packHash: string;
+  packSchema: "multiway-call-pack/v1" | "multiway-side-pot-pack/v1";
   publicationStatus: "VALIDATION_ONLY";
   solverVersion: string;
   payoffMethod: "EXACT_ENUMERATION";
   seats: MultiwaySeat[];
   committedBb: number[];
   stackBb: number;
+  stacksBb: number[];
   deadMoneyBb: number;
   rakeModel: "NO_RAKE";
   nashConvBb: number;
