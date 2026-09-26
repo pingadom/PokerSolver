@@ -141,7 +141,7 @@ export default function App() {
         <a className="nav-item" href="#matchups">
           <span>◇</span> Example matchups
         </a>
-        <a className="nav-item" href="#solver">
+        <a className="nav-item" href="#trainer">
           <span>♧</span> GTO trainer
         </a>
         <a className="nav-item" href="#recent">
@@ -513,11 +513,16 @@ export default function App() {
               </div>
               <h2 id="solver-title">GTO trainer</h2>
               <p>
-                We’re building our own solver for 6-max cash preflop practice.
-                The backend currently tests its CFR algorithm on Kuhn poker and
-                models a limited preflop shove/call spot. Strategy charts and
-                drills are still in development.
+                Try a ten-decision preflop drill powered by our own solver. It
+                covers one clearly defined all-in spot with two active players
+                at a six-seat table. The strategy and ranges are validation
+                examples.
               </p>
+              <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
+              <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#turn-river-hand">Play a turn-to-river partial hand ↗</a></p>
+              <p><a className="solver-demo-link" href="#flop-hand">Play a flop-to-river partial hand ↗</a></p>
             </div>
             <ol className="solver-milestones">
               <li>
@@ -525,12 +530,24 @@ export default function App() {
                 <strong>CFR benchmark and all-in game model</strong>
               </li>
               <li>
-                <span>NEXT</span>
-                <strong>Validate and publish the first preflop spot</strong>
+                <span>DEMO</span>
+                <strong>One exact-pack preflop drill</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Fixed-board river decision drill</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Connected turn-to-river partial hand</strong>
+              </li>
+              <li>
+                <span>RESEARCH</span>
+                <strong>Connected flop-to-river partial hand</strong>
               </li>
               <li>
                 <span>LATER</span>
-                <strong>Turn, river, partial-hand and full-hand drills</strong>
+                <strong>Reviewed ranges and connected-hand practice</strong>
               </li>
             </ol>
           </section>

@@ -27,7 +27,7 @@ flowchart LR
 - Scenario form, progress polling, results and recent simulations.
 - OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR and a scalar CFR+ variant, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. A deterministic, exact-payoff solution pack is kept as a **validation-only test fixture**; no playable GTO trainer or trainer API is published yet. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
+The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR and a scalar CFR+ variant, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. An opt-in [research API](docs/local-development.md#research-trainer-api) can exercise a screened, exact-payoff **validation-only** pack locally. It is disabled by default and is not a published playable GTO trainer. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
 
 Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
@@ -99,6 +99,18 @@ The output is not served to users. It uses exhaustive preflop runouts for eight 
 Use `exact-plus` in place of `exact` to generate a separate CFR+ validation pack. `mc-plus` likewise selects CFR+ with seeded Monte Carlo payoffs. Existing `exact` and `mc` commands retain the vanilla solver and reproduce the committed fixture.
 
 For the wider synthetic research spot, use `exact-plus target/diverse-validation-pack.json 3000 2026-09-23T12:00:00Z diverse` as the generator arguments to reproduce the [committed exact fixture](solver/src/test/resources/diverse-validation-pack.json). Use `mc-plus target/diverse-sampled-pack.json 3000 10000 17 2026-09-23T12:00:00Z diverse` to compare a faster sampled payoff table. The command prints provisional content-screening findings. Exact payoffs pass the numeric screen, but the ranges remain synthetic and the pack is not served to users.
+
+The [range-sensitivity study](docs/preflop-range-sensitivity.md) re-solves the exact fixture after ±25% one-combo weight changes and records which decisions move; it is part of the content review before any trainer API is enabled.
+
+The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects the wider exact two-player solution pack to a ten-decision website drill, with saved-pack identity checks, server-side EV grading and a complete session review. Run it locally with `docker compose -f docker-compose.yml -f docker-compose.trainer.yml up --build -d --scale worker=2`, then open `http://localhost:8080/#trainer`. The synthetic ranges and restricted all-in tree remain validation-only. The solver also has an experimental [six-seat all-in call game](docs/multiway-solver-research.md) with exact multiway payoffs and its own research API; general 6-max betting trees remain future work.
+
+The [exact-payoff scaling study](docs/preflop-payoff-scaling.md) counts the cost of larger ranges and adds suit-equivalence reuse to the offline solver. It confirms that the current demo pack has no duplicate suit patterns to reuse, so larger lessons still need explicit range review and payoff benchmarking.
+
+A separate [bounded river solver research path](docs/river-solver-research.md) now solves a fixed-board heads-up betting tree and serves opt-in, validation-only questions from a saved pack. With the local trainer overlay running, open `http://localhost:8080/#river` for its research drill. Its synthetic ranges are not a continuation of the preflop lesson or a general river strategy.
+
+The [turn-to-river research model](docs/turn-river-solver-research.md) adds an exact public river-card chance node between two bounded betting rounds. A saved, validation-only pack powers an opt-in API, `#turn-river` decision drill and `#turn-river-hand` connected partial-hand replay. Its synthetic fixture has a measured information-set best-response gap; it is not a reviewed full-hand lesson.
+
+The [flop-to-river solver research model](docs/flop-turn-river-solver-research.md) connects all three postflop streets. Its five-card turn abstraction has measurable payoff bias; the full-deck game now has a compressed validation-only solution pack with a 0.007446bb best-response gap. The local trainer overlay enables a connected partial-hand drill at `#flop-hand`. It is still synthetic research, not a reviewed 6-max lesson or general preflop continuation value.
 
 ## Measured performance
 

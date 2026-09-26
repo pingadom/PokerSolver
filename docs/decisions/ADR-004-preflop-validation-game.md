@@ -38,6 +38,8 @@ A second `DiverseValidationSpot` research fixture retains the action history but
 
 `PreflopPackScreening` applies provisional cutoffs of 0.05bb game gap, 0.1bb maximum called-payoff standard error, at least six exact combos per range, and at least one clear action in each direction. A clear action needs an EV edge above 1bb and three times the maximum called-payoff standard error. The narrow exact fixture fails breadth and decision diversity; the wider sampled fixture fails precision; the wider exact fixture passes the numeric screen. These automated checks do not establish that a range, action tree or rake model is appropriate for human training.
 
+The [local range-sensitivity probe](../preflop-range-sensitivity.md) varies one exact-combo weight by ±25% at a time and re-solves all 30 scenarios. It shows that the preferred action for `Ks Qs` can reverse even though each perturbed solve has a small gap. Range assumptions therefore need separate review before this pack can support a lesson.
+
 ## Consequences and next checks
 
 - Keep solution generation offline; page requests must never run CFR.
