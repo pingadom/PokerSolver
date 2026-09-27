@@ -22,4 +22,4 @@ mvn -q -pl solver -am -DskipTests compile
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkConnectedBoardBuckets 5000 42 20000 5000
 ```
 
-The next quality gate is a broader, independently selected combo set and a strategic response estimate beyond one preflop choice, repeated across seeds. This bucket policy is neither serialized nor admitted to the trainer. Rake, endogenous actions from the other four seats, more bet sizes, and realistic hand ranges also remain outside this connected fixture.
+The [disjoint-range follow-up](connected-range-validation.md) now tests three new combos per seat and a sample-split audit of the first BB flop action. Aces remain sensible, while a medium pair and some flop observations remain unstable. The next quality gate is a much broader, independently justified range and a strategic response estimate spanning later streets. This bucket policy is neither serialized nor admitted to the trainer. Rake, endogenous actions from the other four seats, more bet sizes, and realistic hand ranges also remain outside this connected fixture.
