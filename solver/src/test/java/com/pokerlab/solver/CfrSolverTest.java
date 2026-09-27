@@ -96,6 +96,54 @@ class CfrSolverTest {
         assertEquals(exhaustive, afterRoot);
     }
 
+    @Test
+    void sampledChanceCanAvoidEnumeratingAChanceNode() {
+        CfrGame<Integer> game =
+                new CfrGame<>() {
+                    public Integer initialState() {
+                        return 0;
+                    }
+
+                    public boolean isTerminal(Integer state) {
+                        return state >= 2;
+                    }
+
+                    public double terminalUtility(Integer state) {
+                        return state == 2 ? 1 : -1;
+                    }
+
+                    public int currentPlayer(Integer state) {
+                        return state == 0 ? -1 : 0;
+                    }
+
+                    public List<String> legalActions(Integer state) {
+                        return List.of("a", "b");
+                    }
+
+                    public String informationSet(Integer state) {
+                        return "decision";
+                    }
+
+                    public Integer afterAction(Integer state, String action) {
+                        return action.equals("a") ? 2 : 3;
+                    }
+
+                    public List<ChanceOutcome<Integer>> chanceOutcomes(Integer state) {
+                        throw new AssertionError("Sampled traversal must not enumerate chance");
+                    }
+
+                    public ChanceOutcome<Integer> sampleChanceOutcome(
+                            Integer state, double quantile) {
+                        assertTrue(quantile >= 0 && quantile < 1);
+                        return new ChanceOutcome<>(1, 1);
+                    }
+                };
+        CfrSolution solution =
+                new CfrSolver<>(game, CfrSolver.Variant.VANILLA, CfrSolver.ChanceMode.SAMPLED, 42)
+                        .solve(10);
+        assertTrue(solution.strategy().containsKey("0:decision"));
+    }
+
     private static double bestResponseGap(KuhnPoker game, CfrSolution solution) {
         double firstBest = Double.NEGATIVE_INFINITY;
         double secondBest = Double.POSITIVE_INFINITY;
