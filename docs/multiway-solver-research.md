@@ -20,13 +20,25 @@ The six-seat research fixture has stacks **30/10/20/15/25/5bb** and one syntheti
 
 The [saved side-pot fixture](../solver/src/test/resources/six-seat-side-pot-pack.json) uses schema `multiway-side-pot-pack/v1`, contains 31 exact subset payoffs, and takes 9,941 bytes. The spot hash covers every seat's stack and commitment; its full-pack SHA-256 is `c7d4c313e03650bb1bb7bbd99e5e84725426e8e179587821bd66ab13c3fa4f07`. Loading rebuilds the finite game from those payoffs, checks complete deal/subset and information-set coverage, validates probabilities and exact-board metadata, and recomputes NashConv and the terminal payoff-error bound. A changed stack, payoff, strategy or quality metric is rejected. No board enumeration or online solve happens when loading. This artifact remains `VALIDATION_ONLY`; it is admitted only to the opt-in local research trainer and is not a published strategy.
 
+The [larger side-pot pack](../solver/src/test/resources/six-seat-side-pot-diverse-pack.json) keeps the same 30/10/20/15/25/5bb stacks but has **two synthetic combos per seat**. Its 64 legal joint deals require 1,984 exact subset payoffs and 62 strategy information sets. The saved JSON is 489,295 bytes. After 500 CFR+ iterations, measured NashConv is **0.000173bb** with zero board-sampling error; offline exact generation took about 98 seconds locally. The full-pack hash is `b3fedf48c8b4ea88d89ee7cb3ccc5b758429508f8cfd2eaaebbca20e1ef1003e`. The local side-pot trainer overlay now selects this pack so a fixed responding seat can receive different private hands across seeds. Range count is reported by the API and shown in the drill. This adds exercise variety, but the ranges and forced-shove tree remain validation-only.
+
+The reusable offline generator accepts either the built-in fixture or a strict side-pot spot JSON, with exact or seeded sampled payoffs. From the repository root:
+
+```powershell
+mvn -q -pl solver -am -DskipTests install
+cd solver
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateMultiwaySidePotPack' '-Dexec.args=exact six-seat-diverse-fixture src/test/resources/six-seat-side-pot-diverse-pack.json 500 2026-09-27T00:00:00Z'
+```
+
+Sampled output is useful for experiments but fails the trainer's exact-payoff gate.
+
 ```powershell
 mvn -q -pl solver -am -DskipTests install
 cd solver
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.MultiwaySidePotResearchMain' '-Dexec.args=500 src/test/resources/six-seat-side-pot-pack.json'
 ```
 
-All generated packs remain `VALIDATION_ONLY`. The research API additionally requires exact payoffs and NashConv at most 0.05bb. This is an engineering admission threshold, not a publication decision. The equal-stack fixture has two combos per seat; the side-pot fixture has one. Both use a restricted action tree.
+All generated packs remain `VALIDATION_ONLY`. The research API additionally requires exact payoffs and NashConv at most 0.05bb. This is an engineering admission threshold, not a publication decision. The equal-stack and larger side-pot fixtures have two combos per seat; the earlier small side-pot fixture has one. All use a restricted action tree.
 
 Generate the exact fixture from the repository root:
 

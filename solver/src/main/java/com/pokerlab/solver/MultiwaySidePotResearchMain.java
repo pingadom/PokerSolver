@@ -80,7 +80,7 @@ public final class MultiwaySidePotResearchMain {
             System.out.println("Wrote validation-only side-pot pack to " + output);
         }
         System.out.println(
-                "Synthetic single-combo ranges, forced shove, no rake or trainer route.");
+                "Synthetic single-combo ranges, forced shove, no rake; opt-in research trainer only.");
     }
 
     private static WeightedCombo combo(String first, String second) {

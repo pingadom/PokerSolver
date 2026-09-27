@@ -41,6 +41,27 @@ class MultiwaySidePotPackTest {
     }
 
     @Test
+    void diverseExactPackCoversAllSixtyFourDealsAndTwoCombosPerSeat() throws IOException {
+        String json;
+        try (var input = getClass().getResourceAsStream("/six-seat-side-pot-diverse-pack.json")) {
+            assertNotNull(input);
+            json = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
+        MultiwaySidePotPack pack = MultiwayPackJson.readSidePot(json);
+        assertEquals(SixSeatSidePotValidationSpot.create(), pack.spot());
+        assertEquals(1984, pack.payoffs().size());
+        assertEquals(62, pack.solution().strategy().size());
+        var game = pack.rebuildGame();
+        assertEquals(64, game.chanceOutcomes(game.initialState()).size());
+        assertEquals(0, pack.maxTerminalPayoffSEBb());
+        assertTrue(pack.nashConvBb() < 0.001);
+        assertEquals(
+                "b3fedf48c8b4ea88d89ee7cb3ccc5b758429508f8cfd2eaaebbca20e1ef1003e",
+                MultiwayPackJson.sidePotContentHash(pack));
+        assertEquals(json, MultiwayPackJson.writeSidePot(pack));
+    }
+
+    @Test
     void sampledThreeSeatPackIsDeterministicAndStacksAreHashed() {
         MultiwaySidePotSpot spot = threeSeatSpot();
         MultiwaySidePotPack pack = sampled(spot);

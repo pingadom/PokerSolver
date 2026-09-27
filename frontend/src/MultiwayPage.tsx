@@ -8,6 +8,10 @@ import {
 const params = () => new URLSearchParams(window.location.hash.split("?")[1] ?? "");
 const money = (amount: number) => `${amount >= 0 ? "+" : ""}${amount.toFixed(2)} bb`;
 const frequency = (value: number) => `${(100 * value).toFixed(1)}%`;
+const rangeSummary = (counts: number[] = []) =>
+  counts.length === 0 ? "limited exact combos" : counts.every((count) => count === counts[0])
+    ? `${counts[0]} exact combos per seat`
+    : `${counts.join("/")} exact combos by seat`;
 
 function freshSeed() {
   const words = crypto.getRandomValues(new Uint32Array(2));
@@ -186,8 +190,8 @@ export default function MultiwayPage() {
         </div>
         <div className="trainer-disclosure hand-play-disclosure" role="note">
           {metadata?.packSchema === "multiway-side-pot-pack/v1"
-            ? "Synthetic one-combo ranges, unequal stacks and side pots, no rake or further betting. This is a six-seat solver test, not a general preflop chart."
-            : "Synthetic narrow ranges, equal stacks, no rake or further betting. This is a six-seat solver test, not a general preflop chart."}
+            ? `Synthetic ranges (${rangeSummary(metadata.rangeComboCounts)}), unequal stacks and side pots, no rake or further betting. This is a six-seat solver test, not a general preflop chart.`
+            : `Synthetic ranges (${metadata ? rangeSummary(metadata.rangeComboCounts) : "limited combos"}), equal stacks, no rake or further betting. This is a six-seat solver test, not a general preflop chart.`}
         </div>
         {error && <div className="trainer-error" role="alert">{error}{!metadata && <p>Enable the local multiway research API and load its exact pack to practise.</p>}</div>}
         {stale && metadata && <button className="trainer-button" disabled={busy} onClick={() => void newSession()}>Start with current solution</button>}
@@ -243,6 +247,7 @@ export default function MultiwayPage() {
             <h2>Game details</h2>
             <dl className="trainer-facts">
               <div><dt>Game</dt><dd>Forced UTG shove · call/fold response</dd></div>
+              <div><dt>Ranges</dt><dd>{rangeSummary(metadata.rangeComboCounts)}</dd></div>
               <div><dt>Stacks</dt><dd>{metadata.packSchema === "multiway-side-pot-pack/v1" ? "By seat, shown at the table" : `${metadata.stackBb} bb each`}</dd></div>
               {metadata.packSchema === "multiway-side-pot-pack/v1" && <div><dt>Side pots</dt><dd>Settled by each caller's contribution</dd></div>}
               <div><dt>Dead money</dt><dd>{metadata.deadMoneyBb} bb</dd></div>

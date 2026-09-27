@@ -94,13 +94,13 @@ The overlay also enables a [flop-to-river research hand](flop-turn-river-solver-
 
 ## Six-seat research sessions
 
-The separate multiway route is also disabled by default. The local trainer Compose overlay enables it and serves the website drill at [http://localhost:8080/#multiway](http://localhost:8080/#multiway). Its default pack has equal stacks. To practise the unequal-stack main/side-pot fixture instead, apply the additional overlay last:
+The separate multiway route is also disabled by default. The local trainer Compose overlay enables it and serves the website drill at [http://localhost:8080/#multiway](http://localhost:8080/#multiway). Its default pack has equal stacks. To practise the unequal-stack main/side-pot fixture with two synthetic combos per seat instead, apply the additional overlay last:
 
 ```sh
 docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml up --build -d --scale worker=2
 ```
 
-For a directly run API, set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of either `solver/src/test/resources/six-seat-exact-pack.json` or `solver/src/test/resources/six-seat-side-pot-pack.json` before starting it. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Metadata exposes the pack schema and each seat's stack; the table and decision panel show these stacks and the acting seat's call cost. Keep this research API local; it has no account or attempt persistence yet.
+For a directly run API, set `TRAINER_MULTIWAY_RESEARCH_ENABLED=true` and `TRAINER_MULTIWAY_RESEARCH_PACK_PATH` to the absolute path of either `solver/src/test/resources/six-seat-exact-pack.json` or `solver/src/test/resources/six-seat-side-pot-diverse-pack.json` before starting it. The original single-combo side-pot fixture remains at `six-seat-side-pot-pack.json` for regression tests. Packs load once at startup, must be at most 16 MiB, and must pass structural validation plus the exact-payoff and 0.05bb deviation gates. Metadata exposes the pack schema, combo count and each seat's stack; the table and decision panel show these stacks and the acting seat's call cost. Keep this research API local; it has no account or attempt persistence yet.
 
 - `GET /api/v1/trainer/research/multiway` returns the game assumptions, six seats, pack hash, numeric quality and session length.
 - `GET /api/v1/trainer/research/multiway/sessions/42/questions/0?player=0` starts a deterministic ten-question session. Index is 0–9. Player 0 mixes responding seats; 1–5 fixes HJ through BB for the supplied fixture. UTG has already shoved and is not a decision to practise.

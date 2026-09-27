@@ -168,6 +168,7 @@ jobs:
           with urllib.request.urlopen(base) as response:
               metadata = json.load(response)
           assert metadata['stacksBb'] == [30, 10, 20, 15, 25, 5]
+          assert metadata['rangeComboCounts'] == [2, 2, 2, 2, 2, 2]
           assert metadata['payoffMethod'] == 'EXACT_ENUMERATION'
           assert metadata['nashConvBb'] < 0.05
           with urllib.request.urlopen(base + '/sessions/42/questions/0?player=5') as response:

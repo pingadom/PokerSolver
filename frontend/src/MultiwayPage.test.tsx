@@ -11,6 +11,7 @@ const metadata = {
   packSchema: "multiway-call-pack/v1",
   publicationStatus: "VALIDATION_ONLY", solverVersion: "research", payoffMethod: "EXACT_ENUMERATION",
   seats: ["UTG", "HJ", "CO", "BTN", "SB", "BB"],
+  rangeComboCounts: [2, 2, 2, 2, 2, 2],
   committedBb: [20, 0, 0, 0, 0, 0], stackBb: 20,
   stacksBb: [20, 20, 20, 20, 20, 20], deadMoneyBb: 1.5,
   rakeModel: "NO_RAKE", nashConvBb: 0.000058, maximumPayoffStandardErrorBb: 0,
@@ -129,6 +130,7 @@ it("shows each unequal stack and explains side-pot exposure at the decision", as
   expect(table).toHaveTextContent("30 bb stack");
   expect(table).toHaveTextContent("5 bb stack");
   expect(screen.getByText("Unequal stacks")).toBeInTheDocument();
+  expect(screen.getAllByText(/2 exact combos per seat/).length).toBeGreaterThan(0);
   expect(screen.getByText(/A short caller can win the main pot/)).toBeInTheDocument();
   expect(screen.getByText("4.0 bb")).toBeInTheDocument();
   expect(screen.queryByText("30 bb each")).not.toBeInTheDocument();
