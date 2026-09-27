@@ -17,6 +17,11 @@ import java.util.Set;
  */
 public final class ButtonBigBlindPhysicalDeckGame
         implements CfrGame<ButtonBigBlindPhysicalDeckGame.State> {
+    public enum InformationMode {
+        EXACT_PUBLIC_CARDS,
+        BOARD_BUCKETS
+    }
+
     private static final int FLOPS_PER_DEAL = 17_296; // C(48, 3)
     private static final int MAX_JOINT_DEALS = 64;
 
@@ -45,6 +50,7 @@ public final class ButtonBigBlindPhysicalDeckGame
     private final double turnBetBb;
     private final double riverBetBb;
     private final String contentHash;
+    private final InformationMode informationMode;
 
     public ButtonBigBlindPhysicalDeckGame(
             List<WeightedCombo> buttonRange,
@@ -52,6 +58,23 @@ public final class ButtonBigBlindPhysicalDeckGame
             double flopBetBb,
             double turnBetBb,
             double riverBetBb) {
+        this(
+                buttonRange,
+                bigBlindRange,
+                flopBetBb,
+                turnBetBb,
+                riverBetBb,
+                InformationMode.EXACT_PUBLIC_CARDS);
+    }
+
+    public ButtonBigBlindPhysicalDeckGame(
+            List<WeightedCombo> buttonRange,
+            List<WeightedCombo> bigBlindRange,
+            double flopBetBb,
+            double turnBetBb,
+            double riverBetBb,
+            InformationMode informationMode) {
+        this.informationMode = java.util.Objects.requireNonNull(informationMode, "informationMode");
         this.buttonRange = canonicalRange(buttonRange);
         this.bigBlindRange = canonicalRange(bigBlindRange);
         if (!Double.isFinite(flopBetBb)
@@ -117,6 +140,8 @@ public final class ButtonBigBlindPhysicalDeckGame
         appendRange(definition, this.buttonRange);
         definition.append("big-blind:").append(this.bigBlindRange.size()).append('|');
         appendRange(definition, this.bigBlindRange);
+        if (informationMode == InformationMode.BOARD_BUCKETS)
+            definition.append("information-mode:board-buckets/v1|");
         contentHash = MultiwayCallSpot.sha256(definition.toString());
     }
 
@@ -126,6 +151,10 @@ public final class ButtonBigBlindPhysicalDeckGame
 
     public double potBb() {
         return potBb;
+    }
+
+    public InformationMode informationMode() {
+        return informationMode;
     }
 
     @Override
@@ -215,6 +244,28 @@ public final class ButtonBigBlindPhysicalDeckGame
         if (state.preflopHistory().isEmpty()) return "P:BTN:" + state.button().key();
         if (state.preflopHistory().equals("o")) return "P:BB:open3:" + state.bigBlind().key();
         WeightedCombo own = player == 0 ? state.bigBlind() : state.button();
+        if (informationMode == InformationMode.BOARD_BUCKETS) {
+            String prefix =
+                    "B:F:"
+                            + PublicBoardBucket.key(state.flop(), own)
+                            + ":"
+                            + own.key()
+                            + "|F:"
+                            + state.flopHistory();
+            if (state.turn() == null) return prefix;
+            prefix +=
+                    "|T:"
+                            + PublicBoardBucket.key(withCard(state.flop(), state.turn()), own)
+                            + ":"
+                            + state.turnHistory();
+            if (state.river() == null) return prefix;
+            return prefix
+                    + "|R:"
+                    + PublicBoardBucket.key(
+                            withCard(withCard(state.flop(), state.turn()), state.river()), own)
+                    + ":"
+                    + state.riverHistory();
+        }
         String prefix =
                 "F:" + flopKey(state.flop()) + ":" + own.key() + "|F:" + state.flopHistory();
         if (state.turn() == null) return prefix;
@@ -420,6 +471,12 @@ public final class ButtonBigBlindPhysicalDeckGame
 
     private static String flopKey(List<Card> flop) {
         return flop.stream().map(Card::compact).sorted().reduce("", String::concat);
+    }
+
+    private static List<Card> withCard(List<Card> board, Card card) {
+        List<Card> extended = new ArrayList<>(board);
+        extended.add(card);
+        return extended;
     }
 
     private static String activeHistory(State state) {

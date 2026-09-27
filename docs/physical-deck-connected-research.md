@@ -17,4 +17,4 @@ mvn -q -pl solver -am -DskipTests compile
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalConnectedChance 1000 42 5000
 ```
 
-The next research step is to reduce or share public-board information sets with a measured abstraction, then evaluate strategy quality on independently held-out boards and combos. A trainer artifact needs both a complete policy for its declared game and evidence about abstraction and sampling error; this sparse research profile is deliberately not serialized or served.
+The [board-bucket experiment](connected-board-bucket-research.md) now shares coarse public observations and audits its strategy on independently sampled runouts. It reduces the visited information-set count and catches a major pocket-aces preflop error in the unbucketed profile, but still has preflop deviations and unmeasured full-game abstraction error. A trainer artifact needs both a complete policy for its declared game and evidence about abstraction and sampling error; neither profile is serialized or served.
