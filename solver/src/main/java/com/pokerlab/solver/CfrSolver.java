@@ -87,21 +87,21 @@ public final class CfrSolver<S> {
         }
         int player = game.currentPlayer(state);
         if (player == -1) {
-            List<ChanceOutcome<S>> outcomes = game.chanceOutcomes(state);
-            if (outcomes.isEmpty()) throw new IllegalArgumentException("Empty chance node");
-            double sum = outcomes.stream().mapToDouble(ChanceOutcome::probability).sum();
-            if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
-                throw new IllegalArgumentException("Chance probabilities must sum to one");
             if (chanceMode == ChanceMode.SAMPLED
                     || (chanceMode == ChanceMode.SAMPLED_AFTER_ROOT && chanceDepth > 0))
                 return traverse(
-                        sampleChance(outcomes, chanceDepth).state(),
+                        sampleChance(state, chanceDepth).state(),
                         reach0,
                         reach1,
                         chanceReach,
                         target,
                         iterationWeight,
                         chanceDepth + 1);
+            List<ChanceOutcome<S>> outcomes = game.chanceOutcomes(state);
+            if (outcomes.isEmpty()) throw new IllegalArgumentException("Empty chance node");
+            double sum = outcomes.stream().mapToDouble(ChanceOutcome::probability).sum();
+            if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
+                throw new IllegalArgumentException("Chance probabilities must sum to one");
             double utility = 0;
             for (ChanceOutcome<S> outcome : outcomes) {
                 utility +=
@@ -162,18 +162,14 @@ public final class CfrSolver<S> {
         return nodeUtility;
     }
 
-    private ChanceOutcome<S> sampleChance(List<ChanceOutcome<S>> outcomes, int depth) {
+    private ChanceOutcome<S> sampleChance(S state, int depth) {
         // The same uniform quantile is reused at each chance depth across action branches and
         // both player traversals in this iteration. Every node retains its correct marginal.
         while (iterationChanceDraws.size() <= depth)
             iterationChanceDraws.add(chanceRandom.nextDouble());
-        double draw = iterationChanceDraws.get(depth);
-        double cumulative = 0;
-        for (ChanceOutcome<S> outcome : outcomes) {
-            cumulative += outcome.probability();
-            if (draw < cumulative) return outcome;
-        }
-        return outcomes.getLast(); // Covers harmless floating-point under-sum within tolerance.
+        return Objects.requireNonNull(
+                game.sampleChanceOutcome(state, iterationChanceDraws.get(depth)),
+                "Chance sampler returned no outcome");
     }
 
     private static final class InformationSet {
