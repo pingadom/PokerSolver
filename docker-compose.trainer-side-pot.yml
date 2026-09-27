@@ -2,4 +2,4 @@
 services:
   api:
     volumes:
-      - ./solver/src/test/resources/six-seat-side-pot-pack.json:/opt/pokerlab/multiway-pack.json:ro
+      - ./solver/src/test/resources/six-seat-side-pot-diverse-pack.json:/opt/pokerlab/multiway-pack.json:ro

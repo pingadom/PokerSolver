@@ -10,6 +10,7 @@ export type MultiwayMetadata = {
   solverVersion: string;
   payoffMethod: "EXACT_ENUMERATION";
   seats: MultiwaySeat[];
+  rangeComboCounts: number[];
   committedBb: number[];
   stackBb: number;
   stacksBb: number[];

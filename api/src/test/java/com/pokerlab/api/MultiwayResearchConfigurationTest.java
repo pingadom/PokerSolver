@@ -104,6 +104,7 @@ class MultiwayResearchConfigurationTest {
             fixture = Path.of("solver", "src", "test", "resources", "six-seat-side-pot-pack.json");
         var service = configuration.multiwayResearchService(fixture.toString());
         assertEquals(MultiwaySidePotPack.SCHEMA_VERSION, service.metadata().packSchema());
+        assertEquals(java.util.Collections.nCopies(6, 1), service.metadata().rangeComboCounts());
         assertEquals(
                 java.util.List.of(30.0, 10.0, 20.0, 15.0, 25.0, 5.0),
                 service.metadata().stacksBb());
@@ -137,5 +138,39 @@ class MultiwayResearchConfigurationTest {
         assertThrows(
                 IllegalStateException.class,
                 () -> configuration.multiwayResearchService(sampledPath.toString()));
+    }
+
+    @Test
+    void diverseSidePotPackYieldsDistinctPrivateHandsWithoutChangingTheSafetyGate()
+            throws Exception {
+        Path fixture =
+                Path.of(
+                        "..",
+                        "solver",
+                        "src",
+                        "test",
+                        "resources",
+                        "six-seat-side-pot-diverse-pack.json");
+        if (!Files.isRegularFile(fixture))
+            fixture =
+                    Path.of(
+                            "solver",
+                            "src",
+                            "test",
+                            "resources",
+                            "six-seat-side-pot-diverse-pack.json");
+        var service = configuration.multiwayResearchService(fixture.toString());
+        assertEquals(java.util.Collections.nCopies(6, 2), service.metadata().rangeComboCounts());
+        assertEquals("EXACT_ENUMERATION", service.metadata().payoffMethod());
+        assertTrue(service.metadata().nashConvBb() < 0.05);
+        for (int player = 1; player < 6; player++) {
+            int fixedPlayer = player;
+            assertEquals(
+                    2,
+                    java.util.stream.LongStream.range(0, 100)
+                            .mapToObj(seed -> service.question(seed, 0, fixedPlayer).heroCombo())
+                            .distinct()
+                            .count());
+        }
     }
 }

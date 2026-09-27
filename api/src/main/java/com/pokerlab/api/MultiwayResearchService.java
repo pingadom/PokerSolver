@@ -24,6 +24,7 @@ public final class MultiwayResearchService {
             String generatedAt,
             String payoffMethod,
             List<PreflopAllInSpot.Seat> seats,
+            List<Integer> rangeComboCounts,
             List<Double> committedBb,
             double stackBb,
             List<Double> stacksBb,
@@ -75,6 +76,7 @@ public final class MultiwayResearchService {
                         pack.generatedAt(),
                         pack.payoffMethod(),
                         pack.spot().seats(),
+                        pack.spot().ranges().stream().map(List::size).toList(),
                         pack.spot().committedBb(),
                         pack.spot().stackBb(),
                         java.util.Collections.nCopies(
@@ -100,6 +102,7 @@ public final class MultiwayResearchService {
                         pack.generatedAt(),
                         pack.payoffMethod(),
                         pack.spot().seats(),
+                        pack.spot().ranges().stream().map(List::size).toList(),
                         pack.spot().committedBb(),
                         pack.spot().stacksBb().get(0),
                         pack.spot().stacksBb(),
