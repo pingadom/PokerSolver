@@ -8,6 +8,15 @@ public final class ButtonBigBlindPhysicalDeckFixture {
     private ButtonBigBlindPhysicalDeckFixture() {}
 
     public static ButtonBigBlindPhysicalDeckGame create() {
+        return create(ButtonBigBlindPhysicalDeckGame.InformationMode.EXACT_PUBLIC_CARDS);
+    }
+
+    public static ButtonBigBlindPhysicalDeckGame createBucketed() {
+        return create(ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS);
+    }
+
+    private static ButtonBigBlindPhysicalDeckGame create(
+            ButtonBigBlindPhysicalDeckGame.InformationMode informationMode) {
         return new ButtonBigBlindPhysicalDeckGame(
                 List.of(
                         new WeightedCombo(Card.parse("Ac"), Card.parse("Ad"), 0.25),
@@ -15,7 +24,8 @@ public final class ButtonBigBlindPhysicalDeckFixture {
                 List.of(combo("Jc", "Jd"), combo("As", "Ks")),
                 2,
                 4,
-                8);
+                8,
+                informationMode);
     }
 
     private static WeightedCombo combo(String first, String second) {
