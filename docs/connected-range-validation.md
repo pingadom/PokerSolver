@@ -35,3 +35,5 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 Each street audit measures only **one first-to-act BB decision under the learned earlier-street reach**. It does not optimize subsequent actions, audit BTN's later decisions, certify a best-response bound or quantify error from merging distinct physical boards. Ten held-out observations are only a descriptive support threshold, not a precision guarantee. The range is still tiny, with four seats folding by assumption. A trainer pack needs a better abstraction test and a much broader strategic quality check before admission.
+
+A [controlled board-granularity follow-up](connected-bucket-granularity-research.md) maps identical physical hands and action paths into fine and coarse observations. The coarse mode sharply improves river sample support, while held-out strategic quality remains unresolved. It is a research comparison rather than a replacement trainer pack.

@@ -7,17 +7,23 @@ public final class BenchmarkConnectedRangeValidation {
     private BenchmarkConnectedRangeValidation() {}
 
     public static void main(String[] args) {
-        if (args.length > 5)
+        if (args.length > 6)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action]");
+                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action] [fine|coarse]");
         int iterations = args.length >= 1 ? Integer.parseInt(args[0]) : 5_000;
         long seed = args.length >= 2 ? Long.parseLong(args[1]) : 42;
         int trials = args.length >= 3 ? Integer.parseInt(args[2]) : 2_000;
         int streetAttempts = args.length >= 4 ? Integer.parseInt(args[3]) : 10_000;
-        int continuations = args.length == 5 ? Integer.parseInt(args[4]) : 2;
+        int continuations = args.length >= 5 ? Integer.parseInt(args[4]) : 2;
         if (iterations < 1 || iterations > 100_000)
             throw new IllegalArgumentException("Iterations must be between 1 and 100000");
-        var game = ButtonBigBlindRangeValidationFixture.createBucketed();
+        String mode = args.length < 6 ? "fine" : args[5];
+        var game =
+                switch (mode) {
+                    case "fine" -> ButtonBigBlindRangeValidationFixture.createBucketed();
+                    case "coarse" -> ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
+                    default -> throw new IllegalArgumentException("Mode must be fine or coarse");
+                };
         long started = System.nanoTime();
         CfrSolution solution =
                 new CfrSolver<>(
@@ -31,7 +37,8 @@ public final class BenchmarkConnectedRangeValidation {
                 PhysicalConnectedPreflopDeviationAudit.assess(game, solution, trials, seed + 2);
         System.out.printf(
                 Locale.ROOT,
-                "Disjoint range: %d iterations, %d information sets, solve %.2fs, hash %s%n",
+                "Disjoint range %s: %d iterations, %d information sets, solve %.2fs, hash %s%n",
+                game.informationMode(),
                 iterations,
                 solution.strategy().size(),
                 solveSeconds,

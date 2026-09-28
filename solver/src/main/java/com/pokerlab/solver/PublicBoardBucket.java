@@ -14,6 +14,35 @@ public final class PublicBoardBucket {
     private PublicBoardBucket() {}
 
     public static String key(List<Card> board, WeightedCombo own) {
+        Features features = features(board, own);
+        return "m"
+                + features.madeCategory()
+                + "p"
+                + (features.boardPaired() ? 1 : 0)
+                + "s"
+                + (features.suitMaximum() >= 3 ? 1 : 0)
+                + "f"
+                + (features.ownFlushDraw() ? 1 : 0)
+                + "d"
+                + (features.straightDraw() ? 1 : 0)
+                + "h"
+                + (features.topRank() >= 12 ? 1 : 0);
+    }
+
+    public static String coarseKey(List<Card> board, WeightedCombo own) {
+        Features features = features(board, own);
+        return "m" + features.madeCategory() + "p" + (features.boardPaired() ? 1 : 0);
+    }
+
+    private record Features(
+            int madeCategory,
+            boolean boardPaired,
+            int suitMaximum,
+            boolean ownFlushDraw,
+            boolean straightDraw,
+            int topRank) {}
+
+    private static Features features(List<Card> board, WeightedCombo own) {
         if (board == null || board.size() < 3 || board.size() > 5 || own == null)
             throw new IllegalArgumentException("Expected three to five public cards and one hand");
         Set<Card> distinct = new HashSet<>(board);
@@ -56,17 +85,7 @@ public final class PublicBoardBucket {
                 break;
             }
         }
-        return "m"
-                + madeCategory
-                + "p"
-                + (boardPaired ? 1 : 0)
-                + "s"
-                + (suitMaximum >= 3 ? 1 : 0)
-                + "f"
-                + (ownFlushDraw ? 1 : 0)
-                + "d"
-                + (straightDraw ? 1 : 0)
-                + "h"
-                + (topRank >= 12 ? 1 : 0);
+        return new Features(
+                madeCategory, boardPaired, suitMaximum, ownFlushDraw, straightDraw, topRank);
     }
 }

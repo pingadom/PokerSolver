@@ -203,8 +203,7 @@ public final class PhysicalConnectedStreetDeviationAudit {
                 List.copyOf(decisions));
     }
 
-    private static boolean firstDecision(
-            ButtonBigBlindPhysicalDeckGame.State state, Street street) {
+    static boolean firstDecision(ButtonBigBlindPhysicalDeckGame.State state, Street street) {
         if (state.bigBlind() == null || !state.preflopHistory().equals("oc")) return false;
         return switch (street) {
             case FLOP ->
