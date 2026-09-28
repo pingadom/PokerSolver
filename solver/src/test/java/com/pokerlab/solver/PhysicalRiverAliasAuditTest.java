@@ -29,9 +29,15 @@ class PhysicalRiverAliasAuditTest {
         assertEquals(report, PhysicalRiverAliasAudit.assess(2_000, 42));
         assertTrue(report.comparedBoards() > 0);
         assertTrue(report.coarseBuckets() < report.fineBuckets());
+        assertTrue(report.coarseBuckets() <= report.textureBuckets());
+        assertTrue(report.textureBuckets() <= report.fineBuckets());
         assertTrue(report.coarseConflictedBoards() >= report.fineConflictedBoards());
+        assertTrue(report.textureConflictedBoards() >= report.fineConflictedBoards());
+        assertTrue(report.coarseConflictedBoards() >= report.textureConflictedBoards());
         assertTrue(report.coarseConflictedRate() >= report.fineConflictedRate());
         assertTrue(report.coarseObservationLossBb() >= report.fineObservationLossBb() - 1e-9);
+        assertTrue(report.textureObservationLossBb() >= report.fineObservationLossBb() - 1e-9);
+        assertTrue(report.coarseObservationLossBb() >= report.textureObservationLossBb() - 1e-9);
         assertTrue(report.fineObservationLossBb() >= 0);
         assertThrows(IllegalArgumentException.class, () -> PhysicalRiverAliasAudit.assess(1, 42));
     }

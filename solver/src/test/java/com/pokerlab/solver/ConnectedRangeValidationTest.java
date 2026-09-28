@@ -6,6 +6,24 @@ import org.junit.jupiter.api.Test;
 
 class ConnectedRangeValidationTest {
     @Test
+    void stressRangeHasTwentyFiveLegalPhysicalDealsAndDistinctHash() {
+        var base = ButtonBigBlindRangeValidationFixture.createBucketed();
+        var stress =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS,
+                        ButtonBigBlindRangeValidationFixture.RangeProfile.STRESS_5X5);
+        assertEquals(9, base.chanceOutcomes(base.initialState()).size());
+        assertEquals(25, stress.chanceOutcomes(stress.initialState()).size());
+        assertNotEquals(base.contentHash(), stress.contentHash());
+        assertEquals(
+                1.0,
+                stress.chanceOutcomes(stress.initialState()).stream()
+                        .mapToDouble(ChanceOutcome::probability)
+                        .sum(),
+                1e-12);
+    }
+
+    @Test
     void independentRangeHasNineLegalDealsAndOwnGameIdentity() {
         var game = ButtonBigBlindRangeValidationFixture.createBucketed();
         var deals = game.chanceOutcomes(game.initialState());

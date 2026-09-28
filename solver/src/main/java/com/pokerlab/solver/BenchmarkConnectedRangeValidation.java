@@ -7,9 +7,9 @@ public final class BenchmarkConnectedRangeValidation {
     private BenchmarkConnectedRangeValidation() {}
 
     public static void main(String[] args) {
-        if (args.length > 6)
+        if (args.length > 7)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action] [fine|coarse]");
+                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action] [fine|texture|coarse] [3x3|5x5]");
         int iterations = args.length >= 1 ? Integer.parseInt(args[0]) : 5_000;
         long seed = args.length >= 2 ? Long.parseLong(args[1]) : 42;
         int trials = args.length >= 3 ? Integer.parseInt(args[2]) : 2_000;
@@ -18,11 +18,29 @@ public final class BenchmarkConnectedRangeValidation {
         if (iterations < 1 || iterations > 100_000)
             throw new IllegalArgumentException("Iterations must be between 1 and 100000");
         String mode = args.length < 6 ? "fine" : args[5];
+        var profile =
+                args.length == 7
+                        ? ButtonBigBlindRangeValidationFixture.RangeProfile.parse(args[6])
+                        : ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3;
         var game =
                 switch (mode) {
-                    case "fine" -> ButtonBigBlindRangeValidationFixture.createBucketed();
-                    case "coarse" -> ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
-                    default -> throw new IllegalArgumentException("Mode must be fine or coarse");
+                    case "fine" ->
+                            ButtonBigBlindRangeValidationFixture.create(
+                                    ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS,
+                                    profile);
+                    case "texture" ->
+                            ButtonBigBlindRangeValidationFixture.create(
+                                    ButtonBigBlindPhysicalDeckGame.InformationMode
+                                            .TEXTURE_BOARD_BUCKETS,
+                                    profile);
+                    case "coarse" ->
+                            ButtonBigBlindRangeValidationFixture.create(
+                                    ButtonBigBlindPhysicalDeckGame.InformationMode
+                                            .COARSE_BOARD_BUCKETS,
+                                    profile);
+                    default ->
+                            throw new IllegalArgumentException(
+                                    "Mode must be fine, texture or coarse");
                 };
         long started = System.nanoTime();
         CfrSolution solution =
@@ -37,7 +55,8 @@ public final class BenchmarkConnectedRangeValidation {
                 PhysicalConnectedPreflopDeviationAudit.assess(game, solution, trials, seed + 2);
         System.out.printf(
                 Locale.ROOT,
-                "Disjoint range %s: %d iterations, %d information sets, solve %.2fs, hash %s%n",
+                "Disjoint range %s %s: %d iterations, %d information sets, solve %.2fs, hash %s%n",
+                profile,
                 game.informationMode(),
                 iterations,
                 solution.strategy().size(),
