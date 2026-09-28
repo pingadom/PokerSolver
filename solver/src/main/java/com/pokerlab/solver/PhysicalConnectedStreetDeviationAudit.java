@@ -8,18 +8,23 @@ import java.util.Objects;
 import java.util.SplittableRandom;
 
 /**
- * Samples reachable BB-first flop information sets and compares check with the declared flop bet.
- * The same action is chosen for every hidden state in a bucket; later policies stay fixed. Results
- * are exploratory; alternate samples within each bucket choose an action and evaluate that choice
- * independently to avoid scoring a decision on the samples that selected it.
+ * Samples reachable first-to-act BB information sets on a chosen postflop street. The same
+ * check/bet choice serves every hidden state in a bucket; later policies stay fixed. Alternate
+ * samples choose an action and evaluate it independently, without granting a hidden-card oracle.
  */
-public final class PhysicalConnectedFlopDeviationAudit {
+public final class PhysicalConnectedStreetDeviationAudit {
+    public enum Street {
+        FLOP,
+        TURN,
+        RIVER
+    }
+
     public record Decision(
             String informationSet,
             int sampledStates,
             int discoveryStates,
             int heldOutStates,
-            double reachedFlopWeight,
+            double reachedStreetWeight,
             String selectedAction,
             double heldOutCheckUtilityBb,
             double heldOutBetUtilityBb,
@@ -30,14 +35,29 @@ public final class PhysicalConnectedFlopDeviationAudit {
 
     public record Report(
             String gameHash,
+            Street street,
             long seed,
             int attemptedDeals,
-            int reachedFlops,
+            int reachedStreet,
             int continuationsPerAction,
             int missingPolicyDecisions,
             List<Decision> decisions) {
-        public double reachedFlopRate() {
-            return (double) reachedFlops / attemptedDeals;
+        public double reachedStreetRate() {
+            return (double) reachedStreet / attemptedDeals;
+        }
+
+        public int sampledStatesWithHeldOutSupport(int minimumHeldOutStates) {
+            if (minimumHeldOutStates < 1)
+                throw new IllegalArgumentException("Support threshold must be positive");
+            return decisions.stream()
+                    .filter(decision -> decision.heldOutStates() >= minimumHeldOutStates)
+                    .mapToInt(Decision::sampledStates)
+                    .sum();
+        }
+
+        public double sampledStateSupportRate(int minimumHeldOutStates) {
+            int supported = sampledStatesWithHeldOutSupport(minimumHeldOutStates);
+            return reachedStreet == 0 ? 0 : (double) supported / reachedStreet;
         }
     }
 
@@ -110,16 +130,18 @@ public final class PhysicalConnectedFlopDeviationAudit {
         }
     }
 
-    private PhysicalConnectedFlopDeviationAudit() {}
+    private PhysicalConnectedStreetDeviationAudit() {}
 
     public static Report assess(
             ButtonBigBlindPhysicalDeckGame game,
             CfrSolution solution,
+            Street street,
             int attemptedDeals,
             int continuationsPerAction,
             long seed) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(solution, "solution");
+        Objects.requireNonNull(street, "street");
         if (attemptedDeals < 2 || attemptedDeals > 1_000_000)
             throw new IllegalArgumentException("Expected 2-1000000 attempted deals");
         if (continuationsPerAction < 1 || continuationsPerAction > 1_000)
@@ -130,13 +152,16 @@ public final class PhysicalConnectedFlopDeviationAudit {
         int missing = 0;
         for (int attempt = 0; attempt < attemptedDeals; attempt++) {
             var state = game.sampleChanceOutcome(game.initialState(), random.nextDouble()).state();
-            state = sampleAction(game, solution, state, random);
+            while (!game.isTerminal(state) && !firstDecision(state, street)) {
+                int player = game.currentPlayer(state);
+                state =
+                        player == -1
+                                ? game.sampleChanceOutcome(state, random.nextDouble()).state()
+                                : sampleAction(game, solution, state, random);
+            }
             if (game.isTerminal(state)) continue;
-            state = sampleAction(game, solution, state, random);
-            if (game.isTerminal(state)) continue;
-            state = game.sampleChanceOutcome(state, random.nextDouble()).state();
-            if (game.currentPlayer(state) != 0 || !state.flopHistory().isEmpty())
-                throw new IllegalStateException("Expected first BB flop decision");
+            if (game.currentPlayer(state) != 0)
+                throw new IllegalStateException("Expected BB to act first on the street");
             reached++;
             String key = game.informationSet(state);
             Map<String, Double> policy = solution.at(0, key);
@@ -169,12 +194,25 @@ public final class PhysicalConnectedFlopDeviationAudit {
         }
         return new Report(
                 game.contentHash(),
+                street,
                 seed,
                 attemptedDeals,
                 reached,
                 continuationsPerAction,
                 missing,
                 List.copyOf(decisions));
+    }
+
+    private static boolean firstDecision(
+            ButtonBigBlindPhysicalDeckGame.State state, Street street) {
+        if (state.bigBlind() == null || !state.preflopHistory().equals("oc")) return false;
+        return switch (street) {
+            case FLOP ->
+                    state.flop() != null && state.turn() == null && state.flopHistory().isEmpty();
+            case TURN ->
+                    state.turn() != null && state.river() == null && state.turnHistory().isEmpty();
+            case RIVER -> state.river() != null && state.riverHistory().isEmpty();
+        };
     }
 
     private static ButtonBigBlindPhysicalDeckGame.State sampleAction(
@@ -216,7 +254,7 @@ public final class PhysicalConnectedFlopDeviationAudit {
                 || policy.get("k") < 0
                 || policy.get("b") < 0
                 || Math.abs(policy.get("k") + policy.get("b") - 1) > 1e-9)
-            throw new IllegalArgumentException("Invalid first-flop policy");
+            throw new IllegalArgumentException("Invalid first-street policy");
         return policy.get("b");
     }
 }

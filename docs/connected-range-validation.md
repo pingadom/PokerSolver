@@ -11,9 +11,20 @@ With 5,000 chance-sampled CFR iterations, the independent preflop-deviation audi
 
 The pocket-aces result extends to this new range, while the medium pair still has a potentially material one-decision improvement. Those gains use 5,000 seeded continuations per legal private deal and hold all later policies fixed. They are approximate, not a full best-response gap.
 
-`PhysicalConnectedFlopDeviationAudit` adds a second quality check beyond preflop. It samples private deals and the learned BTN/BB preflop decisions, then draws a legal physical flop only when both players continue. The first flop action belongs to BB. States are grouped by **BB's information set**, so one alternative check/bet decision must serve every hidden BTN hand and physical board mapped to that observation. Within each group, alternating samples choose an action on a discovery half and evaluate it on an independent held-out half. Later policies stay fixed; missing policy entries use the declared uniform fallback. The printed groups are ranked by discovery-side reach-weighted opportunity, not by the held-out outcome.
+`PhysicalConnectedStreetDeviationAudit` adds a quality check beyond preflop. It samples private deals and follows both learned policies through legal physical boards, stopping at **BB's first decision on a requested flop, turn or river** if the hand reaches it. States are grouped by **BB's information set**, so one alternative check/bet decision must serve every hidden BTN hand and physical board mapped to that observation. Within each group, alternating samples choose an action on a discovery half and evaluate it on an independent held-out half. Later policies stay fixed; missing policy entries use the declared uniform fallback. The printed groups are ranked by discovery-side reach-weighted opportunity, not by the held-out outcome.
 
-For seeds 42 and 43, each with 50,000 attempted deals and four continuation rollouts per action, **16,504** and **17,678** attempts reached the first flop decision. They populated **78** and **79** observable buckets; **2** and **0** reached decisions used the uniform fallback. The held-out results include both positive and negative gains from the action selected on discovery data. For example, seed 42's `8h8s` bucket `m1p0s0f0d1h0` had 154 discovery and 154 held-out states; choosing check from discovery was estimated **0.363bb worse** than the learned mixture on held-out states, with substantial sampling uncertainty. This is direct evidence that picking a promising flop action from a small sample can overfit even inside the coarse abstraction.
+For seeds 42 and 43, each with 50,000 attempted deals **per street** and four continuation rollouts per action:
+
+| Seed | Street | Reached first BB decision | Observed buckets | Missing first-action policies | Reached states in buckets with at least 10 held-out observations |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 42 | Flop | 16,504 | 78 | 2 | 98.6% |
+| 42 | Turn | 13,025 | 997 | 16 | 72.2% |
+| 42 | River | 9,478 | 4,026 | 158 | 9.1% |
+| 43 | Flop | 17,678 | 79 | 0 | 98.8% |
+| 43 | Turn | 13,818 | 1,057 | 33 | 70.8% |
+| 43 | River | 10,056 | 4,284 | 207 | 8.7% |
+
+The held-out results include both positive and negative gains from the action selected on discovery data. For example, seed 42's flop `8h8s` bucket `m1p0s0f0d1h0` had 154 discovery and 154 held-out states; choosing check from discovery was estimated **0.363bb worse** than the learned mixture on held-out states, with substantial sampling uncertainty. By the river, most buckets have fewer than ten held-out observations despite 50,000 attempted deals. This is a more precise scaling bottleneck than the total number of visited information sets: the current observation/history scheme offers too little evidence to validate most later-street choices.
 
 Reproduce after compiling from the repository root:
 
@@ -23,4 +34,4 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkConnectedRangeValidation 5000 43 5000 50000 4
 ```
 
-This audit measures only **one BB flop decision under the learned preflop reach**. It does not optimize later actions, evaluate turn/river deviations, certify a best-response bound or quantify error from merging distinct physical boards. The range is still tiny, with four seats folding by assumption. A trainer pack needs a better abstraction test and a much broader strategic quality check before admission.
+Each street audit measures only **one first-to-act BB decision under the learned earlier-street reach**. It does not optimize subsequent actions, audit BTN's later decisions, certify a best-response bound or quantify error from merging distinct physical boards. Ten held-out observations are only a descriptive support threshold, not a precision guarantee. The range is still tiny, with four seats folding by assumption. A trainer pack needs a better abstraction test and a much broader strategic quality check before admission.
