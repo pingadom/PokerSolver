@@ -8,13 +8,22 @@ public final class ButtonBigBlindRangeValidationFixture {
     private ButtonBigBlindRangeValidationFixture() {}
 
     public static ButtonBigBlindPhysicalDeckGame createBucketed() {
+        return create(ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS);
+    }
+
+    public static ButtonBigBlindPhysicalDeckGame createCoarseBucketed() {
+        return create(ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS);
+    }
+
+    private static ButtonBigBlindPhysicalDeckGame create(
+            ButtonBigBlindPhysicalDeckGame.InformationMode informationMode) {
         return new ButtonBigBlindPhysicalDeckGame(
                 List.of(combo("Ah", "Ad", 0.5), combo("Qh", "Jh", 1), combo("7c", "7d", 1)),
                 List.of(combo("Ac", "Kc", 1), combo("Tc", "Td", 1), combo("8h", "8s", 1)),
                 2,
                 4,
                 8,
-                ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS);
+                informationMode);
     }
 
     private static WeightedCombo combo(String first, String second, double weight) {

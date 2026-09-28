@@ -19,7 +19,8 @@ public final class ButtonBigBlindPhysicalDeckGame
         implements CfrGame<ButtonBigBlindPhysicalDeckGame.State> {
     public enum InformationMode {
         EXACT_PUBLIC_CARDS,
-        BOARD_BUCKETS
+        BOARD_BUCKETS,
+        COARSE_BOARD_BUCKETS
     }
 
     private static final int FLOPS_PER_DEAL = 17_296; // C(48, 3)
@@ -142,6 +143,8 @@ public final class ButtonBigBlindPhysicalDeckGame
         appendRange(definition, this.bigBlindRange);
         if (informationMode == InformationMode.BOARD_BUCKETS)
             definition.append("information-mode:board-buckets/v1|");
+        if (informationMode == InformationMode.COARSE_BOARD_BUCKETS)
+            definition.append("information-mode:coarse-board-buckets/v1|");
         contentHash = MultiwayCallSpot.sha256(definition.toString());
     }
 
@@ -244,10 +247,10 @@ public final class ButtonBigBlindPhysicalDeckGame
         if (state.preflopHistory().isEmpty()) return "P:BTN:" + state.button().key();
         if (state.preflopHistory().equals("o")) return "P:BB:open3:" + state.bigBlind().key();
         WeightedCombo own = player == 0 ? state.bigBlind() : state.button();
-        if (informationMode == InformationMode.BOARD_BUCKETS) {
+        if (informationMode != InformationMode.EXACT_PUBLIC_CARDS) {
             String prefix =
                     "B:F:"
-                            + PublicBoardBucket.key(state.flop(), own)
+                            + bucketKey(state.flop(), own)
                             + ":"
                             + own.key()
                             + "|F:"
@@ -255,14 +258,13 @@ public final class ButtonBigBlindPhysicalDeckGame
             if (state.turn() == null) return prefix;
             prefix +=
                     "|T:"
-                            + PublicBoardBucket.key(withCard(state.flop(), state.turn()), own)
+                            + bucketKey(withCard(state.flop(), state.turn()), own)
                             + ":"
                             + state.turnHistory();
             if (state.river() == null) return prefix;
             return prefix
                     + "|R:"
-                    + PublicBoardBucket.key(
-                            withCard(withCard(state.flop(), state.turn()), state.river()), own)
+                    + bucketKey(withCard(withCard(state.flop(), state.turn()), state.river()), own)
                     + ":"
                     + state.riverHistory();
         }
@@ -471,6 +473,12 @@ public final class ButtonBigBlindPhysicalDeckGame
 
     private static String flopKey(List<Card> flop) {
         return flop.stream().map(Card::compact).sorted().reduce("", String::concat);
+    }
+
+    private String bucketKey(List<Card> board, WeightedCombo own) {
+        return informationMode == InformationMode.COARSE_BOARD_BUCKETS
+                ? PublicBoardBucket.coarseKey(board, own)
+                : PublicBoardBucket.key(board, own);
     }
 
     private static List<Card> withCard(List<Card> board, Card card) {
