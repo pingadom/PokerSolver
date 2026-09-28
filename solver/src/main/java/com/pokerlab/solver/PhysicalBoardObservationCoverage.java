@@ -15,8 +15,10 @@ public final class PhysicalBoardObservationCoverage {
             PhysicalConnectedStreetDeviationAudit.Street street,
             int reached,
             int fineBuckets,
+            int textureBuckets,
             int coarseBuckets,
             int fineSupportedStates,
+            int textureSupportedStates,
             int coarseSupportedStates) {
         public double fineSupportRate() {
             return reached == 0 ? 0 : (double) fineSupportedStates / reached;
@@ -25,10 +27,16 @@ public final class PhysicalBoardObservationCoverage {
         public double coarseSupportRate() {
             return reached == 0 ? 0 : (double) coarseSupportedStates / reached;
         }
+
+        public double textureSupportRate() {
+            return reached == 0 ? 0 : (double) textureSupportedStates / reached;
+        }
     }
 
     public record Report(
+            ButtonBigBlindRangeValidationFixture.RangeProfile rangeProfile,
             String fineGameHash,
+            String textureGameHash,
             String coarseGameHash,
             long seed,
             int attemptedDeals,
@@ -38,19 +46,43 @@ public final class PhysicalBoardObservationCoverage {
     private PhysicalBoardObservationCoverage() {}
 
     public static Report assess(int attemptedDeals, int minimumObservationsPerBucket, long seed) {
+        return assess(
+                attemptedDeals,
+                minimumObservationsPerBucket,
+                seed,
+                ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3);
+    }
+
+    public static Report assess(
+            int attemptedDeals,
+            int minimumObservationsPerBucket,
+            long seed,
+            ButtonBigBlindRangeValidationFixture.RangeProfile profile) {
         if (attemptedDeals < 2 || attemptedDeals > 1_000_000)
             throw new IllegalArgumentException("Expected 2-1000000 attempted deals");
         if (minimumObservationsPerBucket < 2 || minimumObservationsPerBucket > attemptedDeals)
             throw new IllegalArgumentException("Invalid bucket-support threshold");
-        var fine = ButtonBigBlindRangeValidationFixture.createBucketed();
-        var coarse = ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
+        var fine =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS, profile);
+        var texture =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.TEXTURE_BOARD_BUCKETS,
+                        profile);
+        var coarse =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS,
+                        profile);
         var streets = PhysicalConnectedStreetDeviationAudit.Street.values();
         Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> fineCounts =
                 new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
         Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> coarseCounts =
                 new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
+        Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> textureCounts =
+                new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
         for (var street : streets) {
             fineCounts.put(street, new LinkedHashMap<>());
+            textureCounts.put(street, new LinkedHashMap<>());
             coarseCounts.put(street, new LinkedHashMap<>());
         }
         SplittableRandom random = new SplittableRandom(seed);
@@ -68,6 +100,9 @@ public final class PhysicalBoardObservationCoverage {
                             fineCounts
                                     .get(street)
                                     .merge(fine.informationSet(state), 1, Integer::sum);
+                            textureCounts
+                                    .get(street)
+                                    .merge(texture.informationSet(state), 1, Integer::sum);
                             coarseCounts
                                     .get(street)
                                     .merge(coarse.informationSet(state), 1, Integer::sum);
@@ -83,30 +118,40 @@ public final class PhysicalBoardObservationCoverage {
                         .map(
                                 street -> {
                                     Map<String, Integer> fineStreet = fineCounts.get(street);
+                                    Map<String, Integer> textureStreet = textureCounts.get(street);
                                     Map<String, Integer> coarseStreet = coarseCounts.get(street);
                                     int reached =
                                             fineStreet.values().stream()
                                                     .mapToInt(Integer::intValue)
                                                     .sum();
                                     if (reached
-                                            != coarseStreet.values().stream()
-                                                    .mapToInt(Integer::intValue)
-                                                    .sum())
+                                                    != textureStreet.values().stream()
+                                                            .mapToInt(Integer::intValue)
+                                                            .sum()
+                                            || reached
+                                                    != coarseStreet.values().stream()
+                                                            .mapToInt(Integer::intValue)
+                                                            .sum())
                                         throw new IllegalStateException(
                                                 "Reach differs by observation mode");
                                     return new StreetCoverage(
                                             street,
                                             reached,
                                             fineStreet.size(),
+                                            textureStreet.size(),
                                             coarseStreet.size(),
                                             supportedStates(
                                                     fineStreet, minimumObservationsPerBucket),
+                                            supportedStates(
+                                                    textureStreet, minimumObservationsPerBucket),
                                             supportedStates(
                                                     coarseStreet, minimumObservationsPerBucket));
                                 })
                         .toList();
         return new Report(
+                profile,
                 fine.contentHash(),
+                texture.contentHash(),
                 coarse.contentHash(),
                 seed,
                 attemptedDeals,

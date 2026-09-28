@@ -20,6 +20,7 @@ public final class ButtonBigBlindPhysicalDeckGame
     public enum InformationMode {
         EXACT_PUBLIC_CARDS,
         BOARD_BUCKETS,
+        TEXTURE_BOARD_BUCKETS,
         COARSE_BOARD_BUCKETS
     }
 
@@ -145,6 +146,8 @@ public final class ButtonBigBlindPhysicalDeckGame
             definition.append("information-mode:board-buckets/v1|");
         if (informationMode == InformationMode.COARSE_BOARD_BUCKETS)
             definition.append("information-mode:coarse-board-buckets/v1|");
+        if (informationMode == InformationMode.TEXTURE_BOARD_BUCKETS)
+            definition.append("information-mode:texture-board-buckets/v1|");
         contentHash = MultiwayCallSpot.sha256(definition.toString());
     }
 
@@ -476,9 +479,13 @@ public final class ButtonBigBlindPhysicalDeckGame
     }
 
     private String bucketKey(List<Card> board, WeightedCombo own) {
-        return informationMode == InformationMode.COARSE_BOARD_BUCKETS
-                ? PublicBoardBucket.coarseKey(board, own)
-                : PublicBoardBucket.key(board, own);
+        return switch (informationMode) {
+            case BOARD_BUCKETS -> PublicBoardBucket.key(board, own);
+            case TEXTURE_BOARD_BUCKETS -> PublicBoardBucket.textureKey(board, own);
+            case COARSE_BOARD_BUCKETS -> PublicBoardBucket.coarseKey(board, own);
+            case EXACT_PUBLIC_CARDS ->
+                    throw new IllegalStateException("Exact cards have no bucket key");
+        };
     }
 
     private static List<Card> withCard(List<Card> board, Card card) {

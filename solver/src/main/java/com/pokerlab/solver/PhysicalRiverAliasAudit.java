@@ -14,16 +14,21 @@ import java.util.SplittableRandom;
  */
 public final class PhysicalRiverAliasAudit {
     public record Report(
+            ButtonBigBlindRangeValidationFixture.RangeProfile rangeProfile,
             long seed,
             int sampledBoards,
             int comparedBoards,
             int fineBuckets,
+            int textureBuckets,
             int coarseBuckets,
             int fineConflictedBuckets,
+            int textureConflictedBuckets,
             int coarseConflictedBuckets,
             int fineConflictedBoards,
+            int textureConflictedBoards,
             int coarseConflictedBoards,
             double fineObservationLossBb,
+            double textureObservationLossBb,
             double coarseObservationLossBb) {
         public double fineConflictedRate() {
             return comparedBoards == 0 ? 0 : (double) fineConflictedBoards / comparedBoards;
@@ -31,6 +36,10 @@ public final class PhysicalRiverAliasAudit {
 
         public double coarseConflictedRate() {
             return comparedBoards == 0 ? 0 : (double) coarseConflictedBoards / comparedBoards;
+        }
+
+        public double textureConflictedRate() {
+            return comparedBoards == 0 ? 0 : (double) textureConflictedBoards / comparedBoards;
         }
     }
 
@@ -57,45 +66,79 @@ public final class PhysicalRiverAliasAudit {
     private static final double FIXTURE_RIVER_BET_BB = 8;
 
     public static Report assess(int sampledBoards, long seed) {
+        return assess(
+                sampledBoards,
+                seed,
+                ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3);
+    }
+
+    public static Report assess(
+            int sampledBoards,
+            long seed,
+            ButtonBigBlindRangeValidationFixture.RangeProfile profile) {
         if (sampledBoards < 2 || sampledBoards > 1_000_000)
             throw new IllegalArgumentException("Expected 2-1000000 sampled boards");
-        var fine = ButtonBigBlindRangeValidationFixture.createBucketed();
-        var coarse = ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
+        var fine =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.BOARD_BUCKETS, profile);
+        var texture =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.TEXTURE_BOARD_BUCKETS,
+                        profile);
+        var coarse =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS,
+                        profile);
         var deals = fine.chanceOutcomes(fine.initialState());
         Map<String, Group> fineGroups = new HashMap<>();
+        Map<String, Group> textureGroups = new HashMap<>();
         Map<String, Group> coarseGroups = new HashMap<>();
         SplittableRandom random = new SplittableRandom(seed);
         int compared = 0;
         double perfectMargin = 0;
         for (int attempt = 0; attempt < sampledBoards; attempt++) {
-            var state = fine.sampleChanceOutcome(fine.initialState(), random.nextDouble()).state();
-            state = fine.afterAction(fine.afterAction(state, "open3"), "call");
-            state = fine.sampleChanceOutcome(state, random.nextDouble()).state();
-            state = fine.afterAction(fine.afterAction(state, "k"), "k");
-            state = fine.sampleChanceOutcome(state, random.nextDouble()).state();
-            state = fine.afterAction(fine.afterAction(state, "k"), "k");
-            state = fine.sampleChanceOutcome(state, random.nextDouble()).state();
+            var state = sampleRiverState(fine, random);
             double margin = calledBetMargin(state, deals);
             if (margin == 0) continue;
             compared++;
             perfectMargin += Math.max(0, margin);
             fineGroups.computeIfAbsent(fine.informationSet(state), key -> new Group()).add(margin);
+            textureGroups
+                    .computeIfAbsent(texture.informationSet(state), key -> new Group())
+                    .add(margin);
             coarseGroups
                     .computeIfAbsent(coarse.informationSet(state), key -> new Group())
                     .add(margin);
         }
         return new Report(
+                profile,
                 seed,
                 sampledBoards,
                 compared,
                 fineGroups.size(),
+                textureGroups.size(),
                 coarseGroups.size(),
                 conflictedBuckets(fineGroups),
+                conflictedBuckets(textureGroups),
                 conflictedBuckets(coarseGroups),
                 conflictedBoards(fineGroups),
+                conflictedBoards(textureGroups),
                 conflictedBoards(coarseGroups),
                 observationLoss(fineGroups, perfectMargin, compared),
+                observationLoss(textureGroups, perfectMargin, compared),
                 observationLoss(coarseGroups, perfectMargin, compared));
+    }
+
+    /** Deals one physical hand and checks both players through flop and turn. */
+    static ButtonBigBlindPhysicalDeckGame.State sampleRiverState(
+            ButtonBigBlindPhysicalDeckGame game, SplittableRandom random) {
+        var state = game.sampleChanceOutcome(game.initialState(), random.nextDouble()).state();
+        state = game.afterAction(game.afterAction(state, "open3"), "call");
+        state = game.sampleChanceOutcome(state, random.nextDouble()).state();
+        state = game.afterAction(game.afterAction(state, "k"), "k");
+        state = game.sampleChanceOutcome(state, random.nextDouble()).state();
+        state = game.afterAction(game.afterAction(state, "k"), "k");
+        return game.sampleChanceOutcome(state, random.nextDouble()).state();
     }
 
     /**

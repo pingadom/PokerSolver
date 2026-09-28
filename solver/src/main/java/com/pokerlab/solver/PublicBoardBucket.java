@@ -34,6 +34,19 @@ public final class PublicBoardBucket {
         return "m" + features.madeCategory() + "p" + (features.boardPaired() ? 1 : 0);
     }
 
+    /** A middle resolution: made hand, paired board, public suit threat and high-card band. */
+    public static String textureKey(List<Card> board, WeightedCombo own) {
+        Features features = features(board, own);
+        return "m"
+                + features.madeCategory()
+                + "p"
+                + (features.boardPaired() ? 1 : 0)
+                + "s"
+                + (features.suitMaximum() >= 3 ? 1 : 0)
+                + "h"
+                + (features.topRank() >= 12 ? 1 : 0);
+    }
+
     private record Features(
             int madeCategory,
             boolean boardPaired,

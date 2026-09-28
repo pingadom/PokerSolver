@@ -10,14 +10,20 @@ class ConnectedCoarseBoardBucketsTest {
     @Test
     void coarserObservationSharesMoreBoardsWithoutChangingPhysicalPayoffs() {
         var fine = ButtonBigBlindRangeValidationFixture.createBucketed();
+        var texture = ButtonBigBlindRangeValidationFixture.createTextureBucketed();
         var coarse = ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
         assertEquals(
                 "25e28ef764e7972baa54710b37d78d3f839a60863b0849f76642abe9beb4ebbf",
                 fine.contentHash());
         assertNotEquals(fine.contentHash(), coarse.contentHash());
+        assertNotEquals(fine.contentHash(), texture.contentHash());
+        assertNotEquals(texture.contentHash(), coarse.contentHash());
         assertEquals(
                 fine.chanceOutcomes(fine.initialState()),
                 coarse.chanceOutcomes(coarse.initialState()));
+        assertEquals(
+                fine.chanceOutcomes(fine.initialState()),
+                texture.chanceOutcomes(texture.initialState()));
         var deal =
                 fine.chanceOutcomes(fine.initialState()).stream()
                         .map(ChanceOutcome::state)
@@ -51,6 +57,7 @@ class ConnectedCoarseBoardBucketsTest {
                         "");
         assertNotEquals(fine.informationSet(low), fine.informationSet(high));
         assertEquals(coarse.informationSet(low), coarse.informationSet(high));
+        assertNotEquals(texture.informationSet(low), texture.informationSet(high));
         var paired =
                 new ButtonBigBlindPhysicalDeckGame.State(
                         deal.bigBlind(),
@@ -65,9 +72,12 @@ class ConnectedCoarseBoardBucketsTest {
         assertNotEquals(coarse.informationSet(low), coarse.informationSet(paired));
         var folded = coarse.afterAction(coarse.afterAction(low, "b"), "f");
         assertEquals(fine.terminalUtility(folded), coarse.terminalUtility(folded));
+        assertEquals(fine.terminalUtility(folded), texture.terminalUtility(folded));
         var called = fine.afterAction(fine.afterAction(deal, "open3"), "call");
         assertEquals(
                 fine.sampleChanceOutcome(called, 0.37), coarse.sampleChanceOutcome(called, 0.37));
+        assertEquals(
+                fine.sampleChanceOutcome(called, 0.37), texture.sampleChanceOutcome(called, 0.37));
     }
 
     @Test
@@ -113,7 +123,11 @@ class ConnectedCoarseBoardBucketsTest {
         for (var street : report.streets()) {
             assertTrue(street.reached() > 0);
             assertTrue(street.coarseBuckets() <= street.fineBuckets());
+            assertTrue(street.coarseBuckets() <= street.textureBuckets());
+            assertTrue(street.textureBuckets() <= street.fineBuckets());
             assertTrue(street.coarseSupportedStates() >= street.fineSupportedStates());
+            assertTrue(street.textureSupportedStates() >= street.fineSupportedStates());
+            assertTrue(street.coarseSupportedStates() >= street.textureSupportedStates());
             assertTrue(street.coarseSupportRate() >= street.fineSupportRate());
         }
         assertThrows(
