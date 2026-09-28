@@ -19,6 +19,19 @@ Reducing buckets raises the number of observations available per decision, but i
 
 The common reach isolates the observation mapping: the game sees the same cards and actions under both modes, so the support increase is not an artifact of one trained policy folding earlier. It does not establish that the added samples describe strategically interchangeable states.
 
+## River information-loss counterfactual
+
+`PhysicalRiverAliasAudit` gives a direct, deliberately narrow test of whether merged physical boards can call for different actions. It forces a BTN open, BB call, and checks through flop and turn on sampled legal full-deck boards. At BB's first river decision, compare checking (BTN checks back) with an 8bb bet (BTN always calls). For each BB hand and board, it evaluates showdown **exactly against every legal BTN combo in the synthetic prior**, removing hands blocked by the board. The incremental value of betting is `8bb × (conditional win probability − conditional loss probability)`. A positive margin favors betting in this fixed-response model; a negative margin favors checking. It does not model BTN's real river response, prior strategic reach, or equilibrium.
+
+An observation bucket is *conflicted* if sampled physical boards mapped to it have both positive and negative margins. The audit also measures the sample-weighted betting value lost when one action must be chosen for the whole bucket, relative to choosing separately on each physical board. This is an empirical information-loss diagnostic for the fixed-response decision, **not** exploitability or actual-game EV.
+
+| Seed | Non-tie boards | Fine boards in conflicted buckets | Coarse boards in conflicted buckets | Fine observation loss | Coarse observation loss |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 42 | 46,941 | 81.1% | 97.9% | 0.893bb | 1.033bb |
+| 43 | 46,985 | 80.6% | 98.7% | 0.882bb | 1.026bb |
+
+These results show that **both** observations lose relevant information in this counterfactual. Coarsening adds about 0.14bb of empirical observation loss at the fixture's 8bb river bet. It cannot be justified solely by the large support gain. The sample estimates use the same boards for both mappings; they are not a statistical certification on new ranges or a full-game quality bound.
+
 ## Learned-policy check
 
 At 5,000 vanilla chance-sampled CFR iterations, both modes were trained on the same nine-combo synthetic range and audited with the existing independent preflop and sample-split BB flop/turn/river procedures. The coarse runs visited **4,174** information sets for each seed, versus **109,846** and **107,316** for the fine runs at seeds 42 and 43. Coarse BTN pocket aces opened **99.7%** and **99.6%**; the corresponding fine values were **99.4%** and **99.3%**. The coarse runs opened BTN `7c7d` about **59%**, versus **36.1%** and **34.7%** in the fine runs. Those frequencies are behavior, not a quality ranking.
@@ -31,8 +44,10 @@ Reproduce after compiling from the repository root:
 mvn -q -pl solver -am -DskipTests compile
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalBoardObservationCoverage 50000 42 20
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalBoardObservationCoverage 50000 43 20
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalRiverAlias 50000 42
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalRiverAlias 50000 43
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkConnectedRangeValidation 5000 42 5000 50000 4 coarse
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkConnectedRangeValidation 5000 43 5000 50000 4 coarse
 ```
 
-The fine mode keeps hash `25e28ef764e7972baa54710b37d78d3f839a60863b0849f76642abe9beb4ebbf`; the coarse mode has hash `6e2a88be7a3dbe371895148be5858317d0d57eccfea7222322171b2a4af2d46d`. The next quality gate is a controlled measure of strategic information loss and a broader range, with enough held-out samples to evaluate later-street choices. Neither mode is ready for a 6-max chart or a mixed-street trainer pack.
+The fine mode keeps hash `25e28ef764e7972baa54710b37d78d3f839a60863b0849f76642abe9beb4ebbf`; the coarse mode has hash `6e2a88be7a3dbe371895148be5858317d0d57eccfea7222322171b2a4af2d46d`. The next quality gate is a broader range and a strategic response audit under realistic continuation policies, with enough held-out samples to evaluate later-street choices. Neither mode is ready for a 6-max chart or a mixed-street trainer pack.
