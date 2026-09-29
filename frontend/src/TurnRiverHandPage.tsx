@@ -91,8 +91,6 @@ export default function TurnRiverHandPage() {
   useEffect(() => {
     if (!metadata || stale) return;
     let active = true;
-    setSnapshot(null);
-    setError("");
     postTurnRiver<TurnRiverHandSnapshot>("/hands/replay", {
       seed, packHash: metadata.packHash, heroPlayer, actions: [],
     })

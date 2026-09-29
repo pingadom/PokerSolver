@@ -86,9 +86,6 @@ export default function TrainerPage() {
   useEffect(() => {
     if (!metadata || stale || review) return;
     const controller = new AbortController();
-    setQuestion(null);
-    setFeedback(null);
-    setError("");
     trainerRequest<SessionQuestion>(`/sessions/${seed}/questions/${index}`, {
       signal: controller.signal,
     })
@@ -134,6 +131,9 @@ export default function TrainerPage() {
   async function advance() {
     if (!feedback || !metadata || busy) return;
     if (index < metadata.sessionLength - 1) {
+      setQuestion(null);
+      setFeedback(null);
+      setError("");
       setIndex(index + 1);
       return;
     }
@@ -167,6 +167,7 @@ export default function TrainerPage() {
       setSeed(next);
       setIndex(0);
       setAnswers([]);
+      setQuestion(null);
       setFeedback(null);
       setReview(null);
       setStale(false);

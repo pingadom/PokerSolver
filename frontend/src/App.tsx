@@ -25,6 +25,13 @@ export default function App() {
   const [retry, setRetry] = useState(0);
   const [loadedPreset, setLoadedPreset] = useState<Preset | null>(null);
 
+  function selectSimulation(id: string) {
+    setSimulation(null);
+    setResults(null);
+    setLoadError("");
+    setSelected(id);
+  }
+
   function loadPreset(preset: Preset) {
     const scenario = scenarioFromPreset(preset);
     setPlayers(
@@ -65,9 +72,6 @@ export default function App() {
     if (!selected) return;
     const abort = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
-    setSimulation(null);
-    setResults(null);
-    setLoadError("");
     async function poll() {
       try {
         const current = await request<Simulation>(`/${selected}`, {
@@ -113,7 +117,7 @@ export default function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(scenario),
       });
-      setSelected(created.simulationId);
+      selectSimulation(created.simulationId);
     } catch (error) {
       setFormError(
         error instanceof Error ? error.message : "Unable to submit simulation.",
@@ -396,7 +400,13 @@ export default function App() {
               {loadError && (
                 <div className="error" role="alert">
                   {loadError}{" "}
-                  <button type="button" onClick={() => setRetry(retry + 1)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoadError("");
+                      setRetry((value) => value + 1);
+                    }}
+                  >
                     Retry
                   </button>
                 </div>
@@ -621,7 +631,7 @@ export default function App() {
                     className={`history-item ${selected === run.simulationId ? "selected" : ""}`}
                     onClick={() => {
                       setLoadedPreset(null);
-                      setSelected(run.simulationId);
+                      selectSimulation(run.simulationId);
                     }}
                     key={run.simulationId}
                   >
