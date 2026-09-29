@@ -92,8 +92,6 @@ export default function FlopHandPage() {
   useEffect(() => {
     if (!metadata || stale) return;
     let active = true;
-    setSnapshot(null);
-    setError("");
     postFlop<FlopHandSnapshot>("/hands/replay", {
       seed, packHash: metadata.packHash, heroPlayer, actions: [],
     })

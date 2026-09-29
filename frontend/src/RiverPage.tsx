@@ -92,9 +92,6 @@ export default function RiverPage() {
   useEffect(() => {
     if (!metadata || stale) return;
     const controller = new AbortController();
-    setQuestion(null);
-    setFeedback(null);
-    setError("");
     riverRequest<RiverQuestionResponse>(`/questions/${seed}`, { signal: controller.signal })
       .then((loaded) => {
         if (controller.signal.aborted) return;
