@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Research-only BB river observation based on bet-minus-check EV under a declared fixed BTN call
- * response. Encoding the sign makes in-model action separation mechanical, not strategic proof.
+ * Research-only BB river observation based on bet-minus-check EV under a declared BTN call policy.
+ * Encoding the sign makes in-model action separation mechanical, not strategic proof.
  */
 public final class PublicRiverResponseValueBucket {
     private PublicRiverResponseValueBucket() {}
@@ -20,6 +20,24 @@ public final class PublicRiverResponseValueBucket {
             double halfPotBb,
             double riverBetBb,
             PhysicalActionBeliefAudit.ResponseModel assumedResponse) {
+        return key(
+                board,
+                bigBlind,
+                buttonPosterior,
+                halfPotBb,
+                riverBetBb,
+                RiverCallPolicy.fixed(assumedResponse),
+                null);
+    }
+
+    public static String key(
+            List<Card> board,
+            WeightedCombo bigBlind,
+            List<WeightedCombo> buttonPosterior,
+            double halfPotBb,
+            double riverBetBb,
+            RiverCallPolicy assumedResponse,
+            PublicRiverHistory publicRiverState) {
         return PublicBoardBucket.coarseKey(board, bigBlind)
                 + "v"
                 + band(
@@ -29,7 +47,8 @@ public final class PublicRiverResponseValueBucket {
                                 buttonPosterior,
                                 halfPotBb,
                                 riverBetBb,
-                                assumedResponse));
+                                assumedResponse,
+                                publicRiverState));
     }
 
     /** Exact weighted bet-minus-check value on the public river under the stated response. */
@@ -40,6 +59,24 @@ public final class PublicRiverResponseValueBucket {
             double halfPotBb,
             double riverBetBb,
             PhysicalActionBeliefAudit.ResponseModel assumedResponse) {
+        return betIncrement(
+                board,
+                bigBlind,
+                buttonPosterior,
+                halfPotBb,
+                riverBetBb,
+                RiverCallPolicy.fixed(assumedResponse),
+                null);
+    }
+
+    public static double betIncrement(
+            List<Card> board,
+            WeightedCombo bigBlind,
+            List<WeightedCombo> buttonPosterior,
+            double halfPotBb,
+            double riverBetBb,
+            RiverCallPolicy assumedResponse,
+            PublicRiverHistory publicRiverState) {
         if (board == null
                 || board.size() != 5
                 || bigBlind == null
@@ -66,8 +103,7 @@ public final class PublicRiverResponseValueBucket {
                     || board.contains(button.second())) continue;
             int sign = Integer.compare(bbScore, score(button, board));
             double increment =
-                    assumedResponse == PhysicalActionBeliefAudit.ResponseModel.ALWAYS_CALL
-                                    || PhysicalRiverPairCallResponse.calls(button, board)
+                    assumedResponse.calls(button, board, publicRiverState)
                             ? riverBetBb * sign
                             : halfPotBb * (1 - sign);
             legalWeight += button.weight();

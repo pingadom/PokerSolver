@@ -28,6 +28,12 @@ public record PostflopActionBelief(
             WeightedCombo candidate,
             ButtonBigBlindPhysicalDeckGame.State riverState,
             boolean candidateIsBigBlind) {
+        if (riverState == null) throw new IllegalArgumentException("Expected a dealt river state");
+        return likelihood(candidate, PublicRiverHistory.from(riverState), candidateIsBigBlind);
+    }
+
+    public double likelihood(
+            WeightedCombo candidate, PublicRiverHistory riverState, boolean candidateIsBigBlind) {
         if (candidate == null
                 || riverState == null
                 || riverState.flop() == null
@@ -46,6 +52,15 @@ public record PostflopActionBelief(
     public List<WeightedCombo> posteriorWeights(
             List<WeightedCombo> opponentPrior,
             ButtonBigBlindPhysicalDeckGame.State riverState,
+            boolean opponentIsBigBlind) {
+        if (riverState == null) throw new IllegalArgumentException("Expected a dealt river state");
+        return posteriorWeights(
+                opponentPrior, PublicRiverHistory.from(riverState), opponentIsBigBlind);
+    }
+
+    public List<WeightedCombo> posteriorWeights(
+            List<WeightedCombo> opponentPrior,
+            PublicRiverHistory riverState,
             boolean opponentIsBigBlind) {
         if (riverState == null
                 || riverState.flop() == null

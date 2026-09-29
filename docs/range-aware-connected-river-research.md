@@ -183,3 +183,29 @@ Reproduce after compiling:
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct pair pair
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct call pair
 ```
+
+## One-step strategic river caller and support backoff
+
+`StrategicRiverCallPolicy` replaces the BTN's fixed always-call or pair-call rule with an exact one-step call/fold best response to a **declared BB betting likelihood**. For each BTN combo and public river, it removes blocked BB combos, weights the remaining BB prior by its observed preflop call, flop/turn actions and the chance of a river bet, then calls if the weighted call-minus-fold value is nonnegative. The fixture bets with probability 0.25 with high card and 0.75 with pair or better; `strategic-reversed` swaps those two probabilities for a sensitivity test. The model receives a `PublicRiverHistory` containing no private BB cards, and tests verify that changing the dealt BB hand cannot change BTN's choice. Tests also cover pot odds, blockers, action-conditioned inference and agreement between the two independent BB bet-value calculations.
+
+This response is **one-step optimal against the declared betting frequencies only**. The BB bucket policy selected by this audit has different frequencies, and no equilibrium or full-game best-response claim follows. The audit keeps the same physical reached boards, discovery split and oracle when only the assumed response changes.
+
+The strategic model exposed a support problem. With a correctly assumed strategic caller, the raw response-value bucket creates roughly 493–513 discovered buckets and has only 86.5–87.1% held-out support, versus about 93.3–94.0% for the postflop-equity bucket. Unsupported raw response buckets check, erasing positive bets. `responseWithBackoff` instead uses the postflop bucket's discovery decision when the response-value bucket has fewer than ten discovery boards. On 20,000 accepted rivers, ten-board support and 5×5 seeds 42–45, the paired gain over postflop-only was:
+
+| True BTN response | Assumed response | Raw response-value | Response with support backoff |
+| --- | --- | ---: | ---: |
+| Strategic (0.25 high / 0.75 pair BB betting) | Matching strategic | −0.0358 to −0.0173bb | **+0.0654 to +0.0693bb** |
+| Strategic | Reversed strategic betting model | −0.0548 to −0.0252bb | +0.0512 to +0.0549bb |
+| Always calls | Pair or better calls | −0.2688 to −0.1745bb | **−0.1115 to −0.0902bb** |
+| Pair or better calls | Matching pair response | +0.0370 to +0.0813bb | +0.0802 to +0.0959bb |
+
+On the smaller 3×3 range, matching-strategic backoff gains +0.1373 to +0.1518bb across the same four seeds; reversing the assumed betting likelihood still yields +0.0957 to +0.1059bb. For the matching 5×5 strategic model at seed 42, the backoff gain is +0.0677bb with a conditional paired normal-approximation interval [+0.0608, +0.0746]bb. The same split's raw response-value gain is −0.0289bb, so more detailed information **without adequate support** worsens decisions. Backoff also reduces, but does not eliminate, the wrong pair-caller loss against an always-calling BTN. These intervals condition on one discovery split, synthetic reach and a declared response; the sweep is not multiplicity-adjusted. The feature remains audit-only and should not be exported as a trainer policy.
+
+Reproduce from the repository root after compiling:
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct strategic strategic
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct call pair
+```
+
+The next gate is to derive BTN responses from a **connected solved policy**, then score them against BB decisions on independently sampled physical hands. That would test strategic consistency across streets rather than assuming a separate river betting likelihood.
