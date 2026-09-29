@@ -41,19 +41,29 @@ public final class BenchmarkPhysicalRiverHeldOutDecision {
         print("Texture", report.texture());
         print("Coarse", report.coarse());
         print("Equity", report.equity());
+        var paired = report.equityVersusCoarse();
+        System.out.printf(
+                Locale.ROOT,
+                "Equity minus coarse selected gain: %.4fbb, paired SE %.4fbb, approximate 95%% interval [%.4f, %.4f]bb%n",
+                paired.equityMinusCoarseBb(),
+                paired.standardErrorBb(),
+                paired.approximateLower95Bb(),
+                paired.approximateUpper95Bb());
         System.out.println(
-                "Held-out gains are relative to always checking; the physical-board oracle sees exact conditional values under the fixed response. This is not equilibrium EV.");
+                "Held-out gains are relative to always checking. SE and intervals are conditional on the discovery policy and fixed BTN response; they cover held-out sampling only, not solver or model uncertainty. This is not equilibrium EV.");
     }
 
     private static void print(String label, PhysicalRiverHeldOutDecisionAudit.ModeResult result) {
         System.out.printf(
                 Locale.ROOT,
-                "%s: %d discovered buckets, %.1f%% held-out support, selected gain %.3fbb, physical oracle %.3fbb, regret %.3fbb%n",
+                "%s: %d discovered buckets, %.1f%% held-out support, selected gain %.3fbb, physical oracle %.3fbb, regret %.3fbb (SE %.3fbb, approximate upper 95%% %.3fbb)%n",
                 label,
                 result.discoveredBuckets(),
                 100 * result.supportRate(),
                 result.selectedGainBb(),
                 result.physicalOracleGainBb(),
-                result.regretBb());
+                result.regretBb(),
+                result.regretStandardErrorBb(),
+                result.approximateRegretUpper95Bb());
     }
 }

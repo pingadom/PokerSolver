@@ -31,13 +31,30 @@ public final class PhysicalRiverHeldOutDecisionAudit {
             int heldOutSupportedBoards,
             int heldOutBoards,
             double selectedGainBb,
-            double physicalOracleGainBb) {
+            double physicalOracleGainBb,
+            double regretStandardErrorBb) {
         public double supportRate() {
             return heldOutBoards == 0 ? 0 : (double) heldOutSupportedBoards / heldOutBoards;
         }
 
         public double regretBb() {
             return physicalOracleGainBb - selectedGainBb;
+        }
+
+        /** Conditional normal approximation for held-out board sampling only. */
+        public double approximateRegretUpper95Bb() {
+            return regretBb() + 1.96 * regretStandardErrorBb;
+        }
+    }
+
+    /** Paired comparison: both bucket policies are scored on the same held-out physical boards. */
+    public record PairedGainComparison(double equityMinusCoarseBb, double standardErrorBb) {
+        public double approximateLower95Bb() {
+            return equityMinusCoarseBb - 1.96 * standardErrorBb;
+        }
+
+        public double approximateUpper95Bb() {
+            return equityMinusCoarseBb + 1.96 * standardErrorBb;
         }
     }
 
@@ -51,7 +68,29 @@ public final class PhysicalRiverHeldOutDecisionAudit {
             ModeResult fine,
             ModeResult texture,
             ModeResult coarse,
-            ModeResult equity) {}
+            ModeResult equity,
+            PairedGainComparison equityVersusCoarse) {}
+
+    static final class SampleMoments {
+        private int count;
+        private double mean;
+        private double squaredDeviationSum;
+
+        void add(double value) {
+            count++;
+            double offset = value - mean;
+            mean += offset / count;
+            squaredDeviationSum += offset * (value - mean);
+        }
+
+        double mean() {
+            return mean;
+        }
+
+        double standardError() {
+            return count < 2 ? 0 : Math.sqrt(squaredDeviationSum / (count - 1) / count);
+        }
+    }
 
     private static final double FIXTURE_RIVER_BET_BB = 8;
 
@@ -188,7 +227,8 @@ public final class PhysicalRiverHeldOutDecisionAudit {
                 evaluate(heldOut, fineDiscovery, minimumDiscoveryBoards, HeldOut::fineKey),
                 evaluate(heldOut, textureDiscovery, minimumDiscoveryBoards, HeldOut::textureKey),
                 evaluate(heldOut, coarseDiscovery, minimumDiscoveryBoards, HeldOut::coarseKey),
-                evaluate(heldOut, equityDiscovery, minimumDiscoveryBoards, HeldOut::equityKey));
+                evaluate(heldOut, equityDiscovery, minimumDiscoveryBoards, HeldOut::equityKey),
+                comparePaired(heldOut, coarseDiscovery, equityDiscovery, minimumDiscoveryBoards));
     }
 
     private static ModeResult evaluate(
@@ -199,6 +239,7 @@ public final class PhysicalRiverHeldOutDecisionAudit {
         int supported = 0;
         double selectedIncrement = 0;
         double oracleIncrement = 0;
+        SampleMoments regret = new SampleMoments();
         for (HeldOut board : heldOut) {
             Discovery bucket = discovery.get(key.apply(board));
             boolean hasSupport = bucket != null && bucket.count >= minimum;
@@ -206,7 +247,10 @@ public final class PhysicalRiverHeldOutDecisionAudit {
                 supported++;
                 if (bucket.incrementSum > 0) selectedIncrement += board.betIncrementBb();
             }
-            oracleIncrement += Math.max(0, board.betIncrementBb());
+            double oracle = Math.max(0, board.betIncrementBb());
+            oracleIncrement += oracle;
+            regret.add(
+                    oracle - (hasSupport && bucket.incrementSum > 0 ? board.betIncrementBb() : 0));
         }
         int count = heldOut.size();
         return new ModeResult(
@@ -214,7 +258,29 @@ public final class PhysicalRiverHeldOutDecisionAudit {
                 supported,
                 count,
                 selectedIncrement / count,
-                oracleIncrement / count);
+                oracleIncrement / count,
+                regret.standardError());
+    }
+
+    private static PairedGainComparison comparePaired(
+            List<HeldOut> heldOut,
+            Map<String, Discovery> coarseDiscovery,
+            Map<String, Discovery> equityDiscovery,
+            int minimum) {
+        SampleMoments difference = new SampleMoments();
+        for (HeldOut board : heldOut) {
+            double increment = board.betIncrementBb();
+            double equityGain =
+                    selectsBet(equityDiscovery.get(board.equityKey()), minimum) ? increment : 0;
+            double coarseGain =
+                    selectsBet(coarseDiscovery.get(board.coarseKey()), minimum) ? increment : 0;
+            difference.add(equityGain - coarseGain);
+        }
+        return new PairedGainComparison(difference.mean(), difference.standardError());
+    }
+
+    private static boolean selectsBet(Discovery bucket, int minimum) {
+        return bucket != null && bucket.count >= minimum && bucket.incrementSum > 0;
     }
 
     /** Bet EV minus check EV when BTN's call probability does not depend on its private hand. */
