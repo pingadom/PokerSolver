@@ -34,13 +34,22 @@ class PhysicalPostflopActionBeliefAuditTest {
         assertEquals(report.staticRange().heldOutBoards(), report.preflopOnly().heldOutBoards());
         assertEquals(
                 report.staticRange().heldOutBoards(), report.postflopConditioned().heldOutBoards());
+        assertEquals(report.staticRange().heldOutBoards(), report.responseAware().heldOutBoards());
         assertEquals(
                 report.staticRange().physicalOracleGainBb(),
                 report.postflopConditioned().physicalOracleGainBb());
         assertEquals(
+                report.staticRange().physicalOracleGainBb(),
+                report.responseAware().physicalOracleGainBb());
+        assertEquals(
                 report.postflopConditioned().selectedGainBb()
                         - report.preflopOnly().selectedGainBb(),
                 report.postflopMinusPreflop().postflopMinusPreflopBb(),
+                1e-9);
+        assertEquals(
+                report.responseAware().selectedGainBb()
+                        - report.postflopConditioned().selectedGainBb(),
+                report.responseMinusPostflop().responseMinusPostflopBb(),
                 1e-9);
         assertThrows(
                 IllegalArgumentException.class,
@@ -132,5 +141,34 @@ class PhysicalPostflopActionBeliefAuditTest {
         assertNotEquals(
                 call.postflopConditioned().physicalOracleGainBb(),
                 pair.postflopConditioned().physicalOracleGainBb());
+    }
+
+    @Test
+    void incorrectAssumedRiverResponseKeepsPhysicalSampleAndOracleFixed() {
+        var profile = ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3;
+        var belief = ButtonBigBlindRangeValidationFixture.postflopBelief();
+        var truth = PhysicalActionBeliefAudit.ResponseModel.PAIR_OR_BETTER_CALL;
+        var correct =
+                PhysicalPostflopActionBeliefAudit.assess(
+                        2_000, 5, 42, profile, belief, belief, truth, truth);
+        var wrong =
+                PhysicalPostflopActionBeliefAudit.assess(
+                        2_000,
+                        5,
+                        42,
+                        profile,
+                        belief,
+                        belief,
+                        truth,
+                        PhysicalActionBeliefAudit.ResponseModel.ALWAYS_CALL);
+        assertEquals(correct.attemptedDeals(), wrong.attemptedDeals());
+        assertEquals(correct.staticRange(), wrong.staticRange());
+        assertEquals(correct.preflopOnly(), wrong.preflopOnly());
+        assertEquals(correct.postflopConditioned(), wrong.postflopConditioned());
+        assertEquals(
+                correct.responseAware().physicalOracleGainBb(),
+                wrong.responseAware().physicalOracleGainBb());
+        assertEquals(truth, wrong.responseModel());
+        assertNotEquals(truth, wrong.assumedResponseModel());
     }
 }

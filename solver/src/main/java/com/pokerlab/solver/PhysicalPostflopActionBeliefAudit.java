@@ -23,18 +23,31 @@ public final class PhysicalPostflopActionBeliefAudit {
         }
     }
 
+    public record ResponsePairedGain(double responseMinusPostflopBb, double standardErrorBb) {
+        public double approximateLower95Bb() {
+            return responseMinusPostflopBb - 1.96 * standardErrorBb;
+        }
+
+        public double approximateUpper95Bb() {
+            return responseMinusPostflopBb + 1.96 * standardErrorBb;
+        }
+    }
+
     public record Result(
             ButtonBigBlindRangeValidationFixture.RangeProfile profile,
             long seed,
             int sampledBoards,
             long attemptedDeals,
             PhysicalActionBeliefAudit.ResponseModel responseModel,
+            PhysicalActionBeliefAudit.ResponseModel assumedResponseModel,
             String generatingPostflopBeliefHash,
             String assumedPostflopBeliefHash,
             PhysicalRiverHeldOutDecisionAudit.ModeResult staticRange,
             PhysicalRiverHeldOutDecisionAudit.ModeResult preflopOnly,
             PhysicalRiverHeldOutDecisionAudit.ModeResult postflopConditioned,
-            PairedGain postflopMinusPreflop) {
+            PhysicalRiverHeldOutDecisionAudit.ModeResult responseAware,
+            PairedGain postflopMinusPreflop,
+            ResponsePairedGain responseMinusPostflop) {
         public double checkdownReachRate() {
             return (double) sampledBoards / attemptedDeals;
         }
@@ -51,7 +64,11 @@ public final class PhysicalPostflopActionBeliefAudit {
     }
 
     private record HeldOut(
-            String staticKey, String preflopKey, String postflopKey, double betIncrementBb) {}
+            String staticKey,
+            String preflopKey,
+            String postflopKey,
+            String responseKey,
+            double betIncrementBb) {}
 
     private PhysicalPostflopActionBeliefAudit() {}
 
@@ -63,6 +80,26 @@ public final class PhysicalPostflopActionBeliefAudit {
             PostflopActionBelief generatingPostflopBelief,
             PostflopActionBelief assumedPostflopBelief,
             PhysicalActionBeliefAudit.ResponseModel responseModel) {
+        return assess(
+                sampledBoards,
+                minimumDiscoveryBoards,
+                seed,
+                profile,
+                generatingPostflopBelief,
+                assumedPostflopBelief,
+                responseModel,
+                responseModel);
+    }
+
+    public static Result assess(
+            int sampledBoards,
+            int minimumDiscoveryBoards,
+            long seed,
+            ButtonBigBlindRangeValidationFixture.RangeProfile profile,
+            PostflopActionBelief generatingPostflopBelief,
+            PostflopActionBelief assumedPostflopBelief,
+            PhysicalActionBeliefAudit.ResponseModel responseModel,
+            PhysicalActionBeliefAudit.ResponseModel assumedResponseModel) {
         if (sampledBoards < 4 || sampledBoards > 1_000_000 || sampledBoards % 2 != 0)
             throw new IllegalArgumentException("Expected an even 4-1000000 sampled boards");
         if (minimumDiscoveryBoards < 1 || minimumDiscoveryBoards > sampledBoards / 2)
@@ -70,6 +107,7 @@ public final class PhysicalPostflopActionBeliefAudit {
         java.util.Objects.requireNonNull(generatingPostflopBelief, "generatingPostflopBelief");
         java.util.Objects.requireNonNull(assumedPostflopBelief, "assumedPostflopBelief");
         java.util.Objects.requireNonNull(responseModel, "responseModel");
+        java.util.Objects.requireNonNull(assumedResponseModel, "assumedResponseModel");
         var preflopBelief = ButtonBigBlindRangeValidationFixture.actionBelief(profile);
         var staticGame =
                 ButtonBigBlindRangeValidationFixture.create(
@@ -81,6 +119,10 @@ public final class PhysicalPostflopActionBeliefAudit {
                 ButtonBigBlindRangeValidationFixture.createPostflopActionBucketed(
                         profile, preflopBelief, assumedPostflopBelief);
         var deals = staticGame.chanceOutcomes(staticGame.initialState());
+        var buttonRange = deals.stream().map(deal -> deal.state().button()).distinct().toList();
+        var buttonPreflopPosterior =
+                preflopBelief.posteriorWeights(
+                        buttonRange, PreflopActionBelief.ObservedAction.BUTTON_OPEN);
         double[] cumulative = new double[deals.size()];
         double total = 0;
         for (int index = 0; index < deals.size(); index++) {
@@ -98,6 +140,7 @@ public final class PhysicalPostflopActionBeliefAudit {
         Map<String, Discovery> staticDiscovery = new HashMap<>();
         Map<String, Discovery> preflopDiscovery = new HashMap<>();
         Map<String, Discovery> postflopDiscovery = new HashMap<>();
+        Map<String, Discovery> responseDiscovery = new HashMap<>();
         List<HeldOut> heldOut = new ArrayList<>(sampledBoards / 2);
         SplittableRandom random = new SplittableRandom(seed);
         long attempted = 0;
@@ -120,13 +163,35 @@ public final class PhysicalPostflopActionBeliefAudit {
             String staticKey = staticGame.informationSet(state);
             String preflopKey = preflopGame.informationSet(state);
             String postflopKey = postflopGame.informationSet(state);
+            List<Card> riverBoard = new ArrayList<>(state.flop());
+            riverBoard.add(state.turn());
+            riverBoard.add(state.river());
+            var assumedButtonPosterior =
+                    assumedPostflopBelief.posteriorWeights(buttonPreflopPosterior, state, false);
+            String responseKey =
+                    postflopKey.substring(0, postflopKey.lastIndexOf("|R:"))
+                            + "|R:"
+                            + PublicRiverResponseValueBucket.key(
+                                    riverBoard,
+                                    state.bigBlind(),
+                                    assumedButtonPosterior,
+                                    staticGame.potBb() / 2,
+                                    8,
+                                    assumedResponseModel)
+                            + ":"
+                            + state.riverHistory();
             if (accepted % 2 == 0) {
                 staticDiscovery.computeIfAbsent(staticKey, key -> new Discovery()).add(increment);
                 preflopDiscovery.computeIfAbsent(preflopKey, key -> new Discovery()).add(increment);
                 postflopDiscovery
                         .computeIfAbsent(postflopKey, key -> new Discovery())
                         .add(increment);
-            } else heldOut.add(new HeldOut(staticKey, preflopKey, postflopKey, increment));
+                responseDiscovery
+                        .computeIfAbsent(responseKey, key -> new Discovery())
+                        .add(increment);
+            } else
+                heldOut.add(
+                        new HeldOut(staticKey, preflopKey, postflopKey, responseKey, increment));
             accepted++;
         }
         if (accepted < sampledBoards)
@@ -137,12 +202,16 @@ public final class PhysicalPostflopActionBeliefAudit {
                 sampledBoards,
                 attempted,
                 responseModel,
+                assumedResponseModel,
                 MultiwayCallSpot.sha256(generatingPostflopBelief.contentDefinition()),
                 MultiwayCallSpot.sha256(assumedPostflopBelief.contentDefinition()),
                 evaluate(heldOut, staticDiscovery, minimumDiscoveryBoards, HeldOut::staticKey),
                 evaluate(heldOut, preflopDiscovery, minimumDiscoveryBoards, HeldOut::preflopKey),
                 evaluate(heldOut, postflopDiscovery, minimumDiscoveryBoards, HeldOut::postflopKey),
-                paired(heldOut, preflopDiscovery, postflopDiscovery, minimumDiscoveryBoards));
+                evaluate(heldOut, responseDiscovery, minimumDiscoveryBoards, HeldOut::responseKey),
+                paired(heldOut, preflopDiscovery, postflopDiscovery, minimumDiscoveryBoards),
+                responsePaired(
+                        heldOut, postflopDiscovery, responseDiscovery, minimumDiscoveryBoards));
     }
 
     /** Returns null when a sampled player takes an action other than check. */
@@ -271,5 +340,25 @@ public final class PhysicalPostflopActionBeliefAudit {
 
     private static boolean selectsBet(Discovery bucket, int minimum) {
         return bucket != null && bucket.count >= minimum && bucket.sum > 0;
+    }
+
+    private static ResponsePairedGain responsePaired(
+            List<HeldOut> heldOut,
+            Map<String, Discovery> postflopDiscovery,
+            Map<String, Discovery> responseDiscovery,
+            int minimum) {
+        var difference = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        for (HeldOut board : heldOut) {
+            double postflopGain =
+                    selectsBet(postflopDiscovery.get(board.postflopKey()), minimum)
+                            ? board.betIncrementBb()
+                            : 0;
+            double responseGain =
+                    selectsBet(responseDiscovery.get(board.responseKey()), minimum)
+                            ? board.betIncrementBb()
+                            : 0;
+            difference.add(responseGain - postflopGain);
+        }
+        return new ResponsePairedGain(difference.mean(), difference.standardError());
     }
 }

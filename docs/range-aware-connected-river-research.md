@@ -158,3 +158,28 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 Repeat seeds and `reversed`/`uninformative` assumptions on the same seed. The model remains a synthetic checkdown experiment: real strategies' action frequencies vary with position, previous actions, ranges, bet sizes and opponent behaviour. Connected CFR actions are not constrained to match these assumed frequencies, and no full-game best-response bound exists. The next gate is an independently justified response-aware observation and a strategic-response audit; no policy from this mode belongs in a trainer pack yet.
+
+## River response-value observation
+
+`PublicRiverResponseValueBucket` is an **audit-only** BB river feature. On the same reached checkdown boards, it computes the exact posterior expectation of *8bb bet minus check* under a declared BTN river response, after BTN-open and flop/turn-check likelihoods and public-card blockers. It retains the coarse public-board key and replaces the showdown-equity band with five bands of that expected value. The true response that generates the held-out payoff can differ from the assumed response used in the observation. The discovery/held-out split, minimum-support rule, physical boards, and exact physical oracle are shared with the static, preflop-only and postflop-conditioned modes. A direct joint-deal test checks both response-value calculations. The new mode is not wired into connected CFR or a trainer pack.
+
+At 20,000 accepted rivers, ten discovery observations per bucket and correct synthetic flop/turn check likelihoods, **response-value minus postflop-equity selected gain** was:
+
+| Range | True BTN response | Assumed response | Seeds 42–45, paired gain |
+| --- | --- | --- | ---: |
+| 5×5 | Pair or better calls | Pair or better calls | +0.0370 to +0.0813bb |
+| 5×5 | Pair or better calls | Always calls | +0.0309 to +0.0499bb |
+| 5×5 | Always calls | Always calls | +0.0188 to +0.0521bb |
+| 5×5 | Always calls | Pair or better calls | **−0.2688 to −0.1745bb** |
+| 3×3 | Pair or better calls | Pair or better calls | +0.0789 to +0.1232bb |
+
+For 5×5, seed 42 with the correctly assumed pair caller, selected gain rises from 1.6518bb to 1.7331bb, while held-out support changes from 93.3% to 92.5%; the paired normal-approximation interval is [+0.0697, +0.0930]bb. Under a *wrong* pair-caller assumption when BTN always calls, seed 42 instead loses 0.1745bb with interval [−0.1954, −0.1536]bb. The asymmetric model error is a concrete blocker for promoting this observation. A trial feature based on the worse of the two response values collapsed to the pair-caller buckets on these fixtures and inherited the same always-call loss, so it was removed.
+
+These are in-model fixed-response experiments. The feature directly encodes the assumed response's bet/check value sign, so in-model separation is partly by construction; it is not evidence of an equilibrium policy or a realistic opponent model. The intervals condition on one discovery split and synthetic response and do not cover model uncertainty or the seed sweep. The next backend gate is a river response derived from independently solved or strategically adapting BTN decisions, with a held-out best-response test in the connected game. A credible 6-max trainer chart still needs the broader preflop tree, rake, range provenance and full-game validation.
+
+Reproduce after compiling:
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct pair pair
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct call pair
+```
