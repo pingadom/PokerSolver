@@ -23,7 +23,8 @@ public final class ButtonBigBlindPhysicalDeckGame
         TEXTURE_BOARD_BUCKETS,
         COARSE_BOARD_BUCKETS,
         RANGE_EQUITY_RIVER_BUCKETS,
-        PREFLOP_ACTION_RIVER_BUCKETS
+        PREFLOP_ACTION_RIVER_BUCKETS,
+        POSTFLOP_ACTION_RIVER_BUCKETS
     }
 
     private static final int FLOPS_PER_DEAL = 17_296; // C(48, 3)
@@ -56,6 +57,7 @@ public final class ButtonBigBlindPhysicalDeckGame
     private final String contentHash;
     private final InformationMode informationMode;
     private final PreflopActionBelief actionBelief;
+    private final PostflopActionBelief postflopBelief;
 
     public ButtonBigBlindPhysicalDeckGame(
             List<WeightedCombo> buttonRange,
@@ -90,13 +92,41 @@ public final class ButtonBigBlindPhysicalDeckGame
             double riverBetBb,
             InformationMode informationMode,
             PreflopActionBelief actionBelief) {
+        this(
+                buttonRange,
+                bigBlindRange,
+                flopBetBb,
+                turnBetBb,
+                riverBetBb,
+                informationMode,
+                actionBelief,
+                null);
+    }
+
+    public ButtonBigBlindPhysicalDeckGame(
+            List<WeightedCombo> buttonRange,
+            List<WeightedCombo> bigBlindRange,
+            double flopBetBb,
+            double turnBetBb,
+            double riverBetBb,
+            InformationMode informationMode,
+            PreflopActionBelief actionBelief,
+            PostflopActionBelief postflopBelief) {
         this.informationMode = java.util.Objects.requireNonNull(informationMode, "informationMode");
         this.buttonRange = canonicalRange(buttonRange);
         this.bigBlindRange = canonicalRange(bigBlindRange);
-        if ((informationMode == InformationMode.PREFLOP_ACTION_RIVER_BUCKETS)
-                != (actionBelief != null))
-            throw new IllegalArgumentException("Action belief requires its own information mode");
+        boolean validBeliefs =
+                switch (informationMode) {
+                    case PREFLOP_ACTION_RIVER_BUCKETS ->
+                            actionBelief != null && postflopBelief == null;
+                    case POSTFLOP_ACTION_RIVER_BUCKETS ->
+                            actionBelief != null && postflopBelief != null;
+                    default -> actionBelief == null && postflopBelief == null;
+                };
+        if (!validBeliefs)
+            throw new IllegalArgumentException("Action beliefs require their matching mode");
         this.actionBelief = actionBelief;
+        this.postflopBelief = postflopBelief;
         if (actionBelief != null) actionBelief.validateRanges(this.buttonRange, this.bigBlindRange);
         if (!Double.isFinite(flopBetBb)
                 || !Double.isFinite(turnBetBb)
@@ -173,6 +203,13 @@ public final class ButtonBigBlindPhysicalDeckGame
             definition
                     .append("information-mode:preflop-action-river-buckets/v1|")
                     .append(actionBelief.contentDefinition())
+                    .append('|');
+        if (informationMode == InformationMode.POSTFLOP_ACTION_RIVER_BUCKETS)
+            definition
+                    .append("information-mode:postflop-action-river-buckets/v1|")
+                    .append(actionBelief.contentDefinition())
+                    .append('|')
+                    .append(postflopBelief.contentDefinition())
                     .append('|');
         contentHash = MultiwayCallSpot.sha256(definition.toString());
     }
@@ -293,13 +330,17 @@ public final class ButtonBigBlindPhysicalDeckGame
                             + state.turnHistory();
             if (state.river() == null) return prefix;
             List<WeightedCombo> riverOpponents = opponents;
-            if (informationMode == InformationMode.PREFLOP_ACTION_RIVER_BUCKETS)
+            if (informationMode == InformationMode.PREFLOP_ACTION_RIVER_BUCKETS
+                    || informationMode == InformationMode.POSTFLOP_ACTION_RIVER_BUCKETS)
                 riverOpponents =
                         actionBelief.posteriorWeights(
                                 opponents,
                                 player == 0
                                         ? PreflopActionBelief.ObservedAction.BUTTON_OPEN
                                         : PreflopActionBelief.ObservedAction.BIG_BLIND_CALL);
+            if (informationMode == InformationMode.POSTFLOP_ACTION_RIVER_BUCKETS)
+                riverOpponents =
+                        postflopBelief.posteriorWeights(riverOpponents, state, player == 1);
             return prefix
                     + "|R:"
                     + bucketKey(
@@ -526,6 +567,10 @@ public final class ButtonBigBlindPhysicalDeckGame
                             ? PublicRiverEquityBucket.key(board, own, opponents)
                             : PublicBoardBucket.coarseKey(board, own);
             case PREFLOP_ACTION_RIVER_BUCKETS ->
+                    board.size() == 5
+                            ? PublicRiverEquityBucket.key(board, own, opponents)
+                            : PublicBoardBucket.coarseKey(board, own);
+            case POSTFLOP_ACTION_RIVER_BUCKETS ->
                     board.size() == 5
                             ? PublicRiverEquityBucket.key(board, own, opponents)
                             : PublicBoardBucket.coarseKey(board, own);
