@@ -28,6 +28,26 @@ class PhysicalRiverHeldOutDecisionAuditTest {
         assertTrue(report.texture().regretBb() >= -1e-9);
         assertTrue(report.coarse().regretBb() >= -1e-9);
         assertTrue(report.equity().regretBb() >= -1e-9);
+        assertTrue(report.equity().regretStandardErrorBb() >= 0);
+        assertEquals(
+                report.equity().selectedGainBb() - report.coarse().selectedGainBb(),
+                report.equityVersusCoarse().equityMinusCoarseBb(),
+                1e-9);
+        assertTrue(report.equityVersusCoarse().standardErrorBb() >= 0);
+        assertTrue(
+                report.equityVersusCoarse().approximateLower95Bb()
+                        <= report.equityVersusCoarse().equityMinusCoarseBb());
+        assertTrue(
+                report.equityVersusCoarse().equityMinusCoarseBb()
+                        <= report.equityVersusCoarse().approximateUpper95Bb());
+    }
+
+    @Test
+    void heldOutStandardErrorUsesSampleVariance() {
+        var moments = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        for (double value : new double[] {1, 2, 3, 4}) moments.add(value);
+        assertEquals(2.5, moments.mean(), 1e-12);
+        assertEquals(Math.sqrt(5.0 / 12.0), moments.standardError(), 1e-12);
     }
 
     @Test

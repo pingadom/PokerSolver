@@ -37,6 +37,23 @@ At 50,000 sampled boards, held-out regret in bb is:
 
 The hand-dependent test is a stronger check than always-call, but it is still a chosen heuristic opponent and forced check-down reach. The small 5×5 advantage over coarse at 50% calls illustrates that a richer feature is not automatically worth its lost sample support. The samples and ranges do not provide a confidence-certified exploitability bound.
 
+### Paired held-out uncertainty
+
+The benchmark now scores the **difference in selected gain** between the range-aware and coarse buckets on each of the *same* 25,000 held-out physical boards. It reports a standard error from the per-board paired differences and a normal-approximation 95% interval. Positive values favour the range-aware bucket in the stated fixed-response experiment:
+
+| Range | Seed | BTN response | Range-aware minus coarse gain (bb) | Paired SE (bb) | Approximate 95% interval (bb) |
+| --- | ---: | --- | ---: | ---: | ---: |
+| 3×3 | 42 | 50% independent call | 0.1145 | 0.0026 | [0.1094, 0.1196] |
+| 3×3 | 43 | 50% independent call | 0.0995 | 0.0028 | [0.0940, 0.1050] |
+| 5×5 | 42 | 50% independent call | 0.0052 | 0.0023 | [0.0006, 0.0098] |
+| 5×5 | 43 | 50% independent call | 0.0046 | 0.0025 | [−0.0002, 0.0094] |
+| 3×3 | 42 | pair-or-better call | 0.8000 | 0.0125 | [0.7755, 0.8246] |
+| 3×3 | 43 | pair-or-better call | 0.7876 | 0.0127 | [0.7626, 0.8125] |
+| 5×5 | 42 | pair-or-better call | 0.4140 | 0.0081 | [0.3981, 0.4300] |
+| 5×5 | 43 | pair-or-better call | 0.4088 | 0.0082 | [0.3928, 0.4248] |
+
+The 5×5, seed-43 independent-call interval includes zero. Even where the interval is positive, it conditions on the **one discovery sample** that selected each bucket action and on the declared fixed BTN response. It does not include uncertainty from reselecting the discovery sample, the opponent model, the synthetic ranges or the CFR strategy. The benchmark also prints held-out regret standard errors and approximate upper limits for each observation mode. None of these intervals is a full-game best-response bound.
+
 ## Connected-CFR smoke runs
 
 At 5,000 chance-sampled CFR iterations, the new mode remains affordable but costs more than the previous texture mode. Seeded runs with the existing preflop one-decision and sample-split first-BB-street audits give:
