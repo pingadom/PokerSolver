@@ -45,6 +45,23 @@ public final class ButtonBigBlindRangeValidationFixture {
         }
     }
 
+    public enum PostflopBeliefAssumption {
+        CORRECT,
+        UNINFORMATIVE,
+        REVERSED;
+
+        public static PostflopBeliefAssumption parse(String label) {
+            return switch (label) {
+                case "correct" -> CORRECT;
+                case "uninformative" -> UNINFORMATIVE;
+                case "reversed" -> REVERSED;
+                default ->
+                        throw new IllegalArgumentException(
+                                "Postflop belief must be correct, uninformative or reversed");
+            };
+        }
+    }
+
     private ButtonBigBlindRangeValidationFixture() {}
 
     public static ButtonBigBlindPhysicalDeckGame createBucketed() {
@@ -151,6 +168,38 @@ public final class ButtonBigBlindRangeValidationFixture {
                 8,
                 ButtonBigBlindPhysicalDeckGame.InformationMode.PREFLOP_ACTION_RIVER_BUCKETS,
                 belief);
+    }
+
+    public static PostflopActionBelief postflopBelief() {
+        return new PostflopActionBelief(0.85, 0.55, 0.25, 0.80);
+    }
+
+    /** Varies only the inferred check signal; the generating policy remains fixed. */
+    public static PostflopActionBelief assumedPostflopBelief(PostflopBeliefAssumption assumption) {
+        return switch (java.util.Objects.requireNonNull(assumption, "assumption")) {
+            case CORRECT -> postflopBelief();
+            case UNINFORMATIVE -> new PostflopActionBelief(0.70, 0.70, 0.25, 0.80);
+            case REVERSED -> new PostflopActionBelief(0.55, 0.85, 0.25, 0.80);
+        };
+    }
+
+    public static ButtonBigBlindPhysicalDeckGame createPostflopActionBucketed(
+            RangeProfile profile,
+            PreflopActionBelief preflopBelief,
+            PostflopActionBelief postflopBelief) {
+        var base = createActionBucketed(profile, preflopBelief);
+        var deals = base.chanceOutcomes(base.initialState());
+        var button = deals.stream().map(deal -> deal.state().button()).distinct().toList();
+        var bigBlind = deals.stream().map(deal -> deal.state().bigBlind()).distinct().toList();
+        return new ButtonBigBlindPhysicalDeckGame(
+                button,
+                bigBlind,
+                2,
+                4,
+                8,
+                ButtonBigBlindPhysicalDeckGame.InformationMode.POSTFLOP_ACTION_RIVER_BUCKETS,
+                preflopBelief,
+                postflopBelief);
     }
 
     private static WeightedCombo combo(String first, String second, double weight) {

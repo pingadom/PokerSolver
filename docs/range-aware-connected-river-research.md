@@ -131,4 +131,30 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalActionBelief 50000 42 10 3x3 correct pair
 ```
 
-Repeat `correct`, `shrunk`, `uninformative` and `reversed` on the same seed; runs with a shared seed use the same true deal and board draws. The next backend step is to model informative postflop actions and evaluate a response-aware observation against independent strategies, rather than promoting this belief feature based on its favourable synthetic cases.
+Repeat `correct`, `shrunk`, `uninformative` and `reversed` on the same seed; runs with a shared seed use the same true deal and board draws. The next experiment models informative flop and turn actions. A response-aware observation and independent strategic validation remain separate gates.
+
+## Flop and turn action-conditioned reach
+
+`PostflopActionBelief` extends the explicit likelihood model to completed flop and turn histories. For each candidate opponent combo and visible board, it assigns probabilities to checking, betting, calling and folding using a deliberately simple pair-or-better versus high-card split. The synthetic fixture checks with probability 0.85 on high card and 0.55 on pair or better; when facing a bet, it calls with probability 0.25 and 0.80 respectively. These probabilities are the same for BTN and BB and on both streets. For a `kbc` history, the BB candidate's likelihood is its check probability times its subsequent call probability; the BTN candidate's likelihood is its bet probability. The model uses only candidate cards and the public board/history. It does not inspect the dealt opponent combo to form an information set. Tests cover all three completed street histories (`kk`, `bc`, `kbc`), direct joint-deal conditioning, hidden-card privacy and unchanged physical payoffs. The new mode has a distinct hash and remains research-only.
+
+`PhysicalPostflopActionBeliefAudit` samples preflop deals conditional on the declared BTN open and BB call, then samples legal physical flop and turn cards. On each street it draws *both* players' check actions from the generating model and retains only check-check paths. At seed 42, about 14% of attempted deals reach the first-BB river decision on this path; the audit reports the actual attempted and accepted counts. For every reached board, the exact BTN posterior reweights the original joint deals by BTN-open, flop-check and turn-check likelihoods, while removing blocked combos. The BB's own call/check likelihoods cancel when conditioning on its known combo and public board. Static, preflop-only and postflop-conditioned observations choose check or an 8bb bet from alternating discovery boards and are scored on the **same** held-out reached boards. Unsupported buckets check. BTN's river response is either always-call or pair-or-better-call.
+
+The assumed postflop model can be correct, uninformative (both hand classes check with probability 0.70) or reversed (high cards check at 0.55 and pairs at 0.85). The generating actions and exact river values stay fixed across assumptions for a given seed. An uninformative assumed check model reproduces the preflop-only river observation and selected gain exactly in tests. At **20,000 accepted rivers**, ten discovery boards required per bucket, the paired *postflop minus preflop-only selected gain* is:
+
+| Range | BTN river response | Seeds | Correct check model | Reversed check model |
+| --- | --- | --- | ---: | ---: |
+| 5×5 | Always calls | 42–49 | +0.0929 to +0.1126bb | −0.2133 to −0.1811bb |
+| 5×5 | Pair or better calls | 42–49 | +0.0072 to +0.0306bb | −0.0877 to −0.0625bb |
+| 3×3 | Always calls | 42–45 | +0.1273 to +0.1348bb | −0.3907 to −0.3656bb |
+| 3×3 | Pair or better calls | 42–45 | +0.0055 to +0.0189bb | −0.1326 to −0.1172bb |
+
+The 5×5, seed-42 always-call paired interval is [+0.0825, +0.1053]bb for the correct model and [−0.2013, −0.1609]bb for the reversed model. Against a pair caller, the correct-model 5×5 seed-44 interval includes zero ([−0.0007, +0.0150]bb). The 3×3 pair-caller intervals include zero in three of four seeds. More importantly, on 3×3 seed 42, **static** selected gain is 1.7003bb, preflop-only is 1.6337bb and postflop-conditioned is 1.6402bb: adding true-model postflop information does not repair the response-dependent river abstraction. The increased detail can still group decision values poorly. These are conditional normal approximations for held-out board sampling with one discovery policy, not multiplicity-adjusted or opponent-model confidence intervals.
+
+Reproduce after compiling:
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 5x5 correct call
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalPostflopActionBelief 20000 42 10 3x3 correct pair
+```
+
+Repeat seeds and `reversed`/`uninformative` assumptions on the same seed. The model remains a synthetic checkdown experiment: real strategies' action frequencies vary with position, previous actions, ranges, bet sizes and opponent behaviour. Connected CFR actions are not constrained to match these assumed frequencies, and no full-game best-response bound exists. The next gate is an independently justified response-aware observation and a strategic-response audit; no policy from this mode belongs in a trainer pack yet.
