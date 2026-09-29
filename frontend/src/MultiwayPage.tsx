@@ -80,9 +80,6 @@ export default function MultiwayPage() {
   useEffect(() => {
     if (!metadata || stale || review) return;
     const controller = new AbortController();
-    setQuestion(null);
-    setFeedback(null);
-    setError("");
     multiwayRequest<MultiwayQuestion>(`/sessions/${seed}/questions/${index}?player=${player}`, {
       signal: controller.signal,
     })
@@ -128,6 +125,9 @@ export default function MultiwayPage() {
   async function advance() {
     if (!feedback || !metadata || busy) return;
     if (index < metadata.sessionLength - 1) {
+      setQuestion(null);
+      setFeedback(null);
+      setError("");
       setIndex(index + 1);
       return;
     }
