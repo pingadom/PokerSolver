@@ -39,6 +39,8 @@ class PhysicalRiverAliasAuditTest {
         assertTrue(report.textureObservationLossBb() >= report.fineObservationLossBb() - 1e-9);
         assertTrue(report.coarseObservationLossBb() >= report.textureObservationLossBb() - 1e-9);
         assertTrue(report.fineObservationLossBb() >= 0);
+        assertEquals(0, report.equityConflictedBoards());
+        assertEquals(0, report.equityObservationLossBb(), 1e-9);
         assertThrows(IllegalArgumentException.class, () -> PhysicalRiverAliasAudit.assess(1, 42));
     }
 }

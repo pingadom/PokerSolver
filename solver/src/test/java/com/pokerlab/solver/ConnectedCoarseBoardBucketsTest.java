@@ -125,9 +125,15 @@ class ConnectedCoarseBoardBucketsTest {
             assertTrue(street.coarseBuckets() <= street.fineBuckets());
             assertTrue(street.coarseBuckets() <= street.textureBuckets());
             assertTrue(street.textureBuckets() <= street.fineBuckets());
+            assertTrue(street.equityBuckets() >= street.coarseBuckets());
             assertTrue(street.coarseSupportedStates() >= street.fineSupportedStates());
             assertTrue(street.textureSupportedStates() >= street.fineSupportedStates());
             assertTrue(street.coarseSupportedStates() >= street.textureSupportedStates());
+            assertTrue(street.coarseSupportedStates() >= street.equitySupportedStates());
+            if (street.street() != PhysicalConnectedStreetDeviationAudit.Street.RIVER) {
+                assertEquals(street.coarseBuckets(), street.equityBuckets());
+                assertEquals(street.coarseSupportedStates(), street.equitySupportedStates());
+            }
             assertTrue(street.coarseSupportRate() >= street.fineSupportRate());
         }
         assertThrows(

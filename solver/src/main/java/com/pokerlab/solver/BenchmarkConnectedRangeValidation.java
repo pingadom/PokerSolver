@@ -2,14 +2,14 @@ package com.pokerlab.solver;
 
 import java.util.Locale;
 
-/** Runs the board-bucket experiment on a disjoint nine-deal synthetic range. */
+/** Runs connected board-observation experiments on disjoint synthetic ranges. */
 public final class BenchmarkConnectedRangeValidation {
     private BenchmarkConnectedRangeValidation() {}
 
     public static void main(String[] args) {
         if (args.length > 7)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action] [fine|texture|coarse] [3x3|5x5]");
+                    "Usage: BenchmarkConnectedRangeValidation [iterations] [seed] [deviation-trials-per-deal] [attempts-per-street] [continuations-per-action] [fine|texture|coarse|equity] [3x3|5x5]");
         int iterations = args.length >= 1 ? Integer.parseInt(args[0]) : 5_000;
         long seed = args.length >= 2 ? Long.parseLong(args[1]) : 42;
         int trials = args.length >= 3 ? Integer.parseInt(args[2]) : 2_000;
@@ -38,9 +38,14 @@ public final class BenchmarkConnectedRangeValidation {
                                     ButtonBigBlindPhysicalDeckGame.InformationMode
                                             .COARSE_BOARD_BUCKETS,
                                     profile);
+                    case "equity" ->
+                            ButtonBigBlindRangeValidationFixture.create(
+                                    ButtonBigBlindPhysicalDeckGame.InformationMode
+                                            .RANGE_EQUITY_RIVER_BUCKETS,
+                                    profile);
                     default ->
                             throw new IllegalArgumentException(
-                                    "Mode must be fine, texture or coarse");
+                                    "Mode must be fine, texture, coarse or equity");
                 };
         long started = System.nanoTime();
         CfrSolution solution =

@@ -17,9 +17,11 @@ public final class PhysicalBoardObservationCoverage {
             int fineBuckets,
             int textureBuckets,
             int coarseBuckets,
+            int equityBuckets,
             int fineSupportedStates,
             int textureSupportedStates,
-            int coarseSupportedStates) {
+            int coarseSupportedStates,
+            int equitySupportedStates) {
         public double fineSupportRate() {
             return reached == 0 ? 0 : (double) fineSupportedStates / reached;
         }
@@ -31,6 +33,10 @@ public final class PhysicalBoardObservationCoverage {
         public double textureSupportRate() {
             return reached == 0 ? 0 : (double) textureSupportedStates / reached;
         }
+
+        public double equitySupportRate() {
+            return reached == 0 ? 0 : (double) equitySupportedStates / reached;
+        }
     }
 
     public record Report(
@@ -38,6 +44,7 @@ public final class PhysicalBoardObservationCoverage {
             String fineGameHash,
             String textureGameHash,
             String coarseGameHash,
+            String equityGameHash,
             long seed,
             int attemptedDeals,
             int minimumObservationsPerBucket,
@@ -73,6 +80,10 @@ public final class PhysicalBoardObservationCoverage {
                 ButtonBigBlindRangeValidationFixture.create(
                         ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS,
                         profile);
+        var equity =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.RANGE_EQUITY_RIVER_BUCKETS,
+                        profile);
         var streets = PhysicalConnectedStreetDeviationAudit.Street.values();
         Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> fineCounts =
                 new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
@@ -80,10 +91,13 @@ public final class PhysicalBoardObservationCoverage {
                 new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
         Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> textureCounts =
                 new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
+        Map<PhysicalConnectedStreetDeviationAudit.Street, Map<String, Integer>> equityCounts =
+                new EnumMap<>(PhysicalConnectedStreetDeviationAudit.Street.class);
         for (var street : streets) {
             fineCounts.put(street, new LinkedHashMap<>());
             textureCounts.put(street, new LinkedHashMap<>());
             coarseCounts.put(street, new LinkedHashMap<>());
+            equityCounts.put(street, new LinkedHashMap<>());
         }
         SplittableRandom random = new SplittableRandom(seed);
         for (int attempt = 0; attempt < attemptedDeals; attempt++) {
@@ -106,6 +120,9 @@ public final class PhysicalBoardObservationCoverage {
                             coarseCounts
                                     .get(street)
                                     .merge(coarse.informationSet(state), 1, Integer::sum);
+                            equityCounts
+                                    .get(street)
+                                    .merge(equity.informationSet(state), 1, Integer::sum);
                         }
                 List<String> actions = fine.legalActions(state);
                 state =
@@ -120,6 +137,7 @@ public final class PhysicalBoardObservationCoverage {
                                     Map<String, Integer> fineStreet = fineCounts.get(street);
                                     Map<String, Integer> textureStreet = textureCounts.get(street);
                                     Map<String, Integer> coarseStreet = coarseCounts.get(street);
+                                    Map<String, Integer> equityStreet = equityCounts.get(street);
                                     int reached =
                                             fineStreet.values().stream()
                                                     .mapToInt(Integer::intValue)
@@ -131,6 +149,10 @@ public final class PhysicalBoardObservationCoverage {
                                             || reached
                                                     != coarseStreet.values().stream()
                                                             .mapToInt(Integer::intValue)
+                                                            .sum()
+                                            || reached
+                                                    != equityStreet.values().stream()
+                                                            .mapToInt(Integer::intValue)
                                                             .sum())
                                         throw new IllegalStateException(
                                                 "Reach differs by observation mode");
@@ -140,12 +162,15 @@ public final class PhysicalBoardObservationCoverage {
                                             fineStreet.size(),
                                             textureStreet.size(),
                                             coarseStreet.size(),
+                                            equityStreet.size(),
                                             supportedStates(
                                                     fineStreet, minimumObservationsPerBucket),
                                             supportedStates(
                                                     textureStreet, minimumObservationsPerBucket),
                                             supportedStates(
-                                                    coarseStreet, minimumObservationsPerBucket));
+                                                    coarseStreet, minimumObservationsPerBucket),
+                                            supportedStates(
+                                                    equityStreet, minimumObservationsPerBucket));
                                 })
                         .toList();
         return new Report(
@@ -153,6 +178,7 @@ public final class PhysicalBoardObservationCoverage {
                 fine.contentHash(),
                 texture.contentHash(),
                 coarse.contentHash(),
+                equity.contentHash(),
                 seed,
                 attemptedDeals,
                 minimumObservationsPerBucket,
