@@ -91,9 +91,6 @@ export default function TurnRiverPage() {
   useEffect(() => {
     if (!metadata || stale) return;
     const controller = new AbortController();
-    setQuestion(null);
-    setFeedback(null);
-    setError("");
     turnRiverRequest<TurnRiverQuestionResponse>(`/questions/${seed}`, { signal: controller.signal })
       .then((loaded) => {
         if (controller.signal.aborted) return;
