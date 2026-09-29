@@ -52,7 +52,9 @@ The benchmark now scores the **difference in selected gain** between the range-a
 | 5×5 | 42 | pair-or-better call | 0.4140 | 0.0081 | [0.3981, 0.4300] |
 | 5×5 | 43 | pair-or-better call | 0.4088 | 0.0082 | [0.3928, 0.4248] |
 
-The 5×5, seed-43 independent-call interval includes zero. Even where the interval is positive, it conditions on the **one discovery sample** that selected each bucket action and on the declared fixed BTN response. It does not include uncertainty from reselecting the discovery sample, the opponent model, the synthetic ranges or the CFR strategy. The benchmark also prints held-out regret standard errors and approximate upper limits for each observation mode. None of these intervals is a full-game best-response bound.
+The 5×5, seed-43 independent-call interval includes zero. A wider **seed-sensitivity sweep** of the same 5×5, 50% independent-call experiment (seeds 42–57, 50,000 attempted boards each) finds paired gains from **−0.0071bb to +0.0124bb**. Five of the 16 splits favour coarse; seed 44 gives −0.0071bb with an individual approximate interval of [−0.0124, −0.0018]bb. Eight of the 16 individual intervals include zero. Thus the small positive gain in the original two seeds is not robust to reselecting discovery and held-out samples. These are descriptive split-level results, not multiplicity-adjusted intervals.
+
+Each per-split interval conditions on the **one discovery sample** that selected its bucket actions and on the declared fixed BTN response. It does not include uncertainty from reselecting the discovery sample, the opponent model, the synthetic ranges or the CFR strategy. The benchmark also prints held-out regret standard errors and approximate upper limits for each observation mode. None of these intervals is a full-game best-response bound.
 
 ## Connected-CFR smoke runs
 
@@ -78,3 +80,5 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 Repeat with seed `43` and range `3x3`. The next gate is an action-conditioned opponent belief or another independently justified range model, followed by a strategic-response audit over the connected game. More fixed-response wins alone cannot make this a publishable 6-max trainer policy.
+
+To reproduce the 16-seed sensitivity sweep, repeat the independent-call command above with seeds `42` through `57` and range `5x5`.
