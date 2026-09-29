@@ -96,7 +96,7 @@ it("switches to a fixed responding seat with a fresh session", async () => {
   await userEvent.selectOptions(screen.getByLabelText("Practice seat"), "1");
   expect(await screen.findByText("HJ: call or fold?")).toBeInTheDocument();
   expect(window.location.hash).toContain("player=1");
-  expect(window.location.hash).not.toContain("seed=42");
+  expect(new URLSearchParams(window.location.hash.split("?")[1]).get("seed")).not.toBe("42");
 });
 
 it("refuses to draw questions from a stale pack link", async () => {
