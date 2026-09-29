@@ -79,6 +79,31 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkConnectedRangeValidation 5000 42 1000 10000 2 equity 5x5
 ```
 
-Repeat with seed `43` and range `3x3`. The next gate is an action-conditioned opponent belief or another independently justified range model, followed by a strategic-response audit over the connected game. More fixed-response wins alone cannot make this a publishable 6-max trainer policy.
+Repeat with seed `43` and range `3x3`. The next experiment is an explicitly action-conditioned opponent belief, followed by tests of its robustness and a strategic-response audit over the connected game. More fixed-response wins alone cannot make this a publishable 6-max trainer policy.
 
 To reproduce the 16-seed sensitivity sweep, repeat the independent-call command above with seeds `42` through `57` and range `5x5`.
+
+## Explicit preflop-action belief experiment
+
+`PreflopActionBelief` now supplies a separate, versioned river observation mode. For a BB river decision, each legal BTN combo's prior weight is multiplied by its declared probability of opening to 3bb; for a BTN river decision, the analogous update uses the BB combo's declared call probability. Own cards and the public river remove blocked combos before the equity band is calculated. The game hash includes every likelihood. Chance deals, legal actions, chip payoffs and the original static-range mode are unchanged. Tests compare this update with direct joint-deal conditioning and confirm that two states with the same own cards and public history have the same information set even when the dealt opponent cards differ.
+
+The synthetic fixture assigns BTN open probabilities of 0.95 for AA, 0.75 for QJ suited and 0.50 for 77; the 5×5 fixture also assigns 0.35 for 65 suited and 0.65 for KQ suited. BB call probabilities are 0.80 for AK suited, 0.75 for TT and 0.60 for 88; the 5×5 fixture adds 0.35 for 44 and 0.65 for 99. These are **chosen test likelihoods**, not estimated poker frequencies or a strategy learned by this solver.
+
+`PhysicalActionBeliefAudit` draws physical deals in proportion to prior weight times both observed-action likelihoods. It forces flop and turn checks, then compares the static and action-conditioned river bucket's check/bet decisions on the same held-out boards. Discovery uses alternating boards and needs ten observations per bucket; an unsupported bucket checks. BTN always calls the 8bb river bet. The oracle sees each physical board's exact BTN distribution after the declared BTN open likelihood and blockers, computed independently from the initial joint deals. The paired result is conditioned on this synthetic model and a single discovery split:
+
+| Range | Seeds | Action-conditioned minus static selected gain | Interpretation |
+| --- | --- | --- | --- |
+| 3×3 | 42 | +0.0008bb; approximate 95% interval [−0.0043, +0.0059]bb | No resolved gain |
+| 3×3 | 43 | −0.0030bb; approximate 95% interval [−0.0089, +0.0029]bb | No resolved gain |
+| 5×5 | 42 | +0.0733bb; approximate 95% interval [+0.0684, +0.0782]bb | Helps under the declared model |
+| 5×5 | 43–49 | +0.0669 to +0.0776bb | Positive in all seven further splits |
+
+At 5×5 seed 42, static and conditioned held-out regret are 0.1193bb and 0.0460bb respectively; both have about 97% ten-board support. The 5×5 improvement is an **in-model proof of concept**: the data-generating reach and posterior use the same specified likelihoods. It does not test mis-specified beliefs, data-estimated likelihoods, informative postflop actions, or a strategic BTN response. The connected CFR tree is still free to choose preflop actions with different frequencies, so its policies are not automatically calibrated to this exogenous belief. This mode stays out of solution packs and the trainer.
+
+Reproduce after compiling:
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalActionBelief 50000 42 10 5x5
+```
+
+Repeat with seeds `43`–`49` for the 5×5 sweep, and with seeds `42` and `43` and range `3x3` for the smaller-range runs. The next gate is robustness to deliberately mis-specified action likelihoods and a response model that changes with hidden BTN cards and public actions; only then should this be considered for a connected strategic-response audit.
