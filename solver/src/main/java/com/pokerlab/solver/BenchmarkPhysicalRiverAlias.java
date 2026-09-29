@@ -45,6 +45,13 @@ public final class BenchmarkPhysicalRiverAlias {
                 report.coarseConflictedBuckets(),
                 100 * report.coarseConflictedRate(),
                 report.coarseObservationLossBb());
+        System.out.printf(
+                Locale.ROOT,
+                "Equity: %d buckets, %d with opposite margin signs, %.1f%% of compared boards in conflicted buckets, %.3fbb observation loss%n",
+                report.equityBuckets(),
+                report.equityConflictedBuckets(),
+                100 * report.equityConflictedRate(),
+                report.equityObservationLossBb());
         System.out.println(
                 "This fixed-response witness is not a game-theoretic quality or exploitability estimate.");
     }

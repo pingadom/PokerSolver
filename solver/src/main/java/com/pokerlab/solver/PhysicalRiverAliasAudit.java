@@ -21,15 +21,19 @@ public final class PhysicalRiverAliasAudit {
             int fineBuckets,
             int textureBuckets,
             int coarseBuckets,
+            int equityBuckets,
             int fineConflictedBuckets,
             int textureConflictedBuckets,
             int coarseConflictedBuckets,
+            int equityConflictedBuckets,
             int fineConflictedBoards,
             int textureConflictedBoards,
             int coarseConflictedBoards,
+            int equityConflictedBoards,
             double fineObservationLossBb,
             double textureObservationLossBb,
-            double coarseObservationLossBb) {
+            double coarseObservationLossBb,
+            double equityObservationLossBb) {
         public double fineConflictedRate() {
             return comparedBoards == 0 ? 0 : (double) fineConflictedBoards / comparedBoards;
         }
@@ -40,6 +44,10 @@ public final class PhysicalRiverAliasAudit {
 
         public double textureConflictedRate() {
             return comparedBoards == 0 ? 0 : (double) textureConflictedBoards / comparedBoards;
+        }
+
+        public double equityConflictedRate() {
+            return comparedBoards == 0 ? 0 : (double) equityConflictedBoards / comparedBoards;
         }
     }
 
@@ -89,10 +97,15 @@ public final class PhysicalRiverAliasAudit {
                 ButtonBigBlindRangeValidationFixture.create(
                         ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS,
                         profile);
+        var equity =
+                ButtonBigBlindRangeValidationFixture.create(
+                        ButtonBigBlindPhysicalDeckGame.InformationMode.RANGE_EQUITY_RIVER_BUCKETS,
+                        profile);
         var deals = fine.chanceOutcomes(fine.initialState());
         Map<String, Group> fineGroups = new HashMap<>();
         Map<String, Group> textureGroups = new HashMap<>();
         Map<String, Group> coarseGroups = new HashMap<>();
+        Map<String, Group> equityGroups = new HashMap<>();
         SplittableRandom random = new SplittableRandom(seed);
         int compared = 0;
         double perfectMargin = 0;
@@ -109,6 +122,9 @@ public final class PhysicalRiverAliasAudit {
             coarseGroups
                     .computeIfAbsent(coarse.informationSet(state), key -> new Group())
                     .add(margin);
+            equityGroups
+                    .computeIfAbsent(equity.informationSet(state), key -> new Group())
+                    .add(margin);
         }
         return new Report(
                 profile,
@@ -118,15 +134,19 @@ public final class PhysicalRiverAliasAudit {
                 fineGroups.size(),
                 textureGroups.size(),
                 coarseGroups.size(),
+                equityGroups.size(),
                 conflictedBuckets(fineGroups),
                 conflictedBuckets(textureGroups),
                 conflictedBuckets(coarseGroups),
+                conflictedBuckets(equityGroups),
                 conflictedBoards(fineGroups),
                 conflictedBoards(textureGroups),
                 conflictedBoards(coarseGroups),
+                conflictedBoards(equityGroups),
                 observationLoss(fineGroups, perfectMargin, compared),
                 observationLoss(textureGroups, perfectMargin, compared),
-                observationLoss(coarseGroups, perfectMargin, compared));
+                observationLoss(coarseGroups, perfectMargin, compared),
+                observationLoss(equityGroups, perfectMargin, compared));
     }
 
     /** Deals one physical hand and checks both players through flop and turn. */
@@ -202,6 +222,6 @@ public final class PhysicalRiverAliasAudit {
         if (compared == 0) return 0;
         double observedMargin =
                 groups.values().stream().mapToDouble(group -> Math.max(0, group.marginSum)).sum();
-        return FIXTURE_RIVER_BET_BB * (perfectMargin - observedMargin) / compared;
+        return Math.max(0, FIXTURE_RIVER_BET_BB * (perfectMargin - observedMargin) / compared);
     }
 }

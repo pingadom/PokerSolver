@@ -2,7 +2,7 @@ package com.pokerlab.solver;
 
 import java.util.Locale;
 
-/** Reproducible common-reach comparison of fine and coarse public-board observation support. */
+/** Reproducible common-reach comparison of connected public-board observations. */
 public final class BenchmarkPhysicalBoardObservationCoverage {
     private BenchmarkPhysicalBoardObservationCoverage() {}
 
@@ -28,10 +28,11 @@ public final class BenchmarkPhysicalBoardObservationCoverage {
         System.out.println("Fine hash: " + report.fineGameHash());
         System.out.println("Texture hash: " + report.textureGameHash());
         System.out.println("Coarse hash: " + report.coarseGameHash());
+        System.out.println("Equity hash: " + report.equityGameHash());
         for (var street : report.streets())
             System.out.printf(
                     Locale.ROOT,
-                    "%s: %d reached; fine %d buckets, %.1f%% supported; texture %d buckets, %.1f%% supported; coarse %d buckets, %.1f%% supported%n",
+                    "%s: %d reached; fine %d buckets, %.1f%% supported; texture %d buckets, %.1f%% supported; coarse %d buckets, %.1f%% supported; equity %d buckets, %.1f%% supported%n",
                     street.street(),
                     street.reached(),
                     street.fineBuckets(),
@@ -39,7 +40,9 @@ public final class BenchmarkPhysicalBoardObservationCoverage {
                     street.textureBuckets(),
                     100 * street.textureSupportRate(),
                     street.coarseBuckets(),
-                    100 * street.coarseSupportRate());
+                    100 * street.coarseSupportRate(),
+                    street.equityBuckets(),
+                    100 * street.equitySupportRate());
         System.out.println(
                 "Support is descriptive; uniform actions isolate observation grouping and are not solver policy or strategy quality.");
     }
