@@ -13,6 +13,19 @@ import java.util.SplittableRandom;
  * likelihood model. This checks an observation under its own model, not equilibrium play.
  */
 public final class PhysicalActionBeliefAudit {
+    public enum ResponseModel {
+        ALWAYS_CALL,
+        PAIR_OR_BETTER_CALL;
+
+        public static ResponseModel parse(String label) {
+            return switch (label) {
+                case "call" -> ALWAYS_CALL;
+                case "pair" -> PAIR_OR_BETTER_CALL;
+                default -> throw new IllegalArgumentException("Response must be call or pair");
+            };
+        }
+    }
+
     public record PairedGain(double conditionedMinusStaticBb, double standardErrorBb) {
         public double approximateLower95Bb() {
             return conditionedMinusStaticBb - 1.96 * standardErrorBb;
@@ -27,6 +40,9 @@ public final class PhysicalActionBeliefAudit {
             ButtonBigBlindRangeValidationFixture.RangeProfile profile,
             long seed,
             int sampledBoards,
+            ResponseModel responseModel,
+            String generatingBeliefHash,
+            String assumedBeliefHash,
             PhysicalRiverHeldOutDecisionAudit.ModeResult staticRange,
             PhysicalRiverHeldOutDecisionAudit.ModeResult actionConditioned,
             PairedGain conditionedMinusStatic) {}
@@ -50,27 +66,64 @@ public final class PhysicalActionBeliefAudit {
             int minimumDiscoveryBoards,
             long seed,
             ButtonBigBlindRangeValidationFixture.RangeProfile profile) {
+        var trueBelief = ButtonBigBlindRangeValidationFixture.actionBelief(profile);
+        return assess(sampledBoards, minimumDiscoveryBoards, seed, profile, trueBelief, trueBelief);
+    }
+
+    /**
+     * The generating belief determines reached deals and exact decision values; the assumed belief
+     * affects only the river observation used to choose an action.
+     */
+    public static Result assess(
+            int sampledBoards,
+            int minimumDiscoveryBoards,
+            long seed,
+            ButtonBigBlindRangeValidationFixture.RangeProfile profile,
+            PreflopActionBelief generatingBelief,
+            PreflopActionBelief assumedBelief) {
+        return assess(
+                sampledBoards,
+                minimumDiscoveryBoards,
+                seed,
+                profile,
+                generatingBelief,
+                assumedBelief,
+                ResponseModel.ALWAYS_CALL);
+    }
+
+    public static Result assess(
+            int sampledBoards,
+            int minimumDiscoveryBoards,
+            long seed,
+            ButtonBigBlindRangeValidationFixture.RangeProfile profile,
+            PreflopActionBelief generatingBelief,
+            PreflopActionBelief assumedBelief,
+            ResponseModel responseModel) {
         if (sampledBoards < 4 || sampledBoards > 1_000_000 || sampledBoards % 2 != 0)
             throw new IllegalArgumentException("Expected an even 4-1000000 sampled boards");
         if (minimumDiscoveryBoards < 1 || minimumDiscoveryBoards > sampledBoards / 2)
             throw new IllegalArgumentException("Invalid discovery-support threshold");
+        java.util.Objects.requireNonNull(responseModel, "responseModel");
         var staticGame =
                 ButtonBigBlindRangeValidationFixture.create(
                         ButtonBigBlindPhysicalDeckGame.InformationMode.RANGE_EQUITY_RIVER_BUCKETS,
                         profile);
-        var conditionedGame = ButtonBigBlindRangeValidationFixture.createActionBucketed(profile);
-        var belief = ButtonBigBlindRangeValidationFixture.actionBelief(profile);
-        var deals = staticGame.chanceOutcomes(staticGame.initialState());
+        var generatingGame =
+                ButtonBigBlindRangeValidationFixture.createActionBucketed(
+                        profile, generatingBelief);
+        var conditionedGame =
+                ButtonBigBlindRangeValidationFixture.createActionBucketed(profile, assumedBelief);
+        var deals = generatingGame.chanceOutcomes(generatingGame.initialState());
         double[] cumulative = new double[deals.size()];
         double total = 0;
         for (int index = 0; index < deals.size(); index++) {
             var deal = deals.get(index);
             total +=
                     deal.probability()
-                            * belief.likelihood(
+                            * generatingBelief.likelihood(
                                     PreflopActionBelief.ObservedAction.BUTTON_OPEN,
                                     deal.state().button())
-                            * belief.likelihood(
+                            * generatingBelief.likelihood(
                                     PreflopActionBelief.ObservedAction.BIG_BLIND_CALL,
                                     deal.state().bigBlind());
             cumulative[index] = total;
@@ -84,7 +137,14 @@ public final class PhysicalActionBeliefAudit {
             int index = 0;
             while (index < cumulative.length - 1 && draw >= cumulative[index]) index++;
             var state = riverState(staticGame, deals.get(index).state(), random);
-            double increment = 8 * exactPosteriorMargin(state, deals, belief);
+            double increment =
+                    switch (responseModel) {
+                        case ALWAYS_CALL ->
+                                8 * exactPosteriorMargin(state, deals, generatingBelief);
+                        case PAIR_OR_BETTER_CALL ->
+                                exactPairCallBetIncrement(
+                                        state, deals, generatingBelief, staticGame.potBb() / 2, 8);
+                    };
             String staticKey = staticGame.informationSet(state);
             String conditionedKey = conditionedGame.informationSet(state);
             if (attempt % 2 == 0) {
@@ -98,6 +158,9 @@ public final class PhysicalActionBeliefAudit {
                 profile,
                 seed,
                 sampledBoards,
+                responseModel,
+                MultiwayCallSpot.sha256(generatingBelief.contentDefinition()),
+                MultiwayCallSpot.sha256(assumedBelief.contentDefinition()),
                 evaluate(heldOut, staticDiscovery, minimumDiscoveryBoards, false),
                 evaluate(heldOut, conditionedDiscovery, minimumDiscoveryBoards, true),
                 paired(heldOut, staticDiscovery, conditionedDiscovery, minimumDiscoveryBoards));
@@ -140,6 +203,40 @@ public final class PhysicalActionBeliefAudit {
         }
         if (total == 0) throw new IllegalStateException("No legal opponent on sampled board");
         return signed / total;
+    }
+
+    /** BTN's exact-hand pair-or-better response under the true, action-conditioned range. */
+    static double exactPairCallBetIncrement(
+            ButtonBigBlindPhysicalDeckGame.State state,
+            List<ChanceOutcome<ButtonBigBlindPhysicalDeckGame.State>> deals,
+            PreflopActionBelief belief,
+            double halfPotBb,
+            double riverBetBb) {
+        List<Card> board = new ArrayList<>(state.flop());
+        board.add(state.turn());
+        board.add(state.river());
+        int ownScore = score(state.bigBlind(), board);
+        double total = 0;
+        double weightedIncrement = 0;
+        for (var deal : deals) {
+            var candidate = deal.state();
+            if (!candidate.bigBlind().equals(state.bigBlind())) continue;
+            var button = candidate.button();
+            if (board.contains(button.first()) || board.contains(button.second())) continue;
+            double weight =
+                    deal.probability()
+                            * belief.likelihood(
+                                    PreflopActionBelief.ObservedAction.BUTTON_OPEN, button);
+            int sign = Integer.compare(ownScore, score(button, board));
+            double increment =
+                    PhysicalRiverPairCallResponse.calls(button, board)
+                            ? riverBetBb * sign
+                            : halfPotBb * (1 - sign);
+            total += weight;
+            weightedIncrement += weight * increment;
+        }
+        if (total == 0) throw new IllegalStateException("No legal opponent on sampled board");
+        return weightedIncrement / total;
     }
 
     private static int score(WeightedCombo combo, List<Card> board) {

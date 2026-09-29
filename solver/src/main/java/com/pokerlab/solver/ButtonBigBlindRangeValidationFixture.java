@@ -3,6 +3,7 @@ package com.pokerlab.solver;
 import com.pokerlab.core.card.Card;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /** A disjoint synthetic 3-by-3 prior for testing connected-game range sensitivity. */
 public final class ButtonBigBlindRangeValidationFixture {
@@ -15,6 +16,31 @@ public final class ButtonBigBlindRangeValidationFixture {
                 case "3x3" -> VALIDATION_3X3;
                 case "5x5" -> STRESS_5X5;
                 default -> throw new IllegalArgumentException("Range must be 3x3 or 5x5");
+            };
+        }
+    }
+
+    public enum ActionBeliefAssumption {
+        CORRECT(1),
+        SHRUNK(0.5),
+        UNINFORMATIVE(0),
+        REVERSED(-1);
+
+        private final double signalScale;
+
+        ActionBeliefAssumption(double signalScale) {
+            this.signalScale = signalScale;
+        }
+
+        public static ActionBeliefAssumption parse(String label) {
+            return switch (label) {
+                case "correct" -> CORRECT;
+                case "shrunk" -> SHRUNK;
+                case "uninformative" -> UNINFORMATIVE;
+                case "reversed" -> REVERSED;
+                default ->
+                        throw new IllegalArgumentException(
+                                "Action belief must be correct, shrunk, uninformative or reversed");
             };
         }
     }
@@ -86,7 +112,30 @@ public final class ButtonBigBlindRangeValidationFixture {
         return new PreflopActionBelief(button, bigBlind);
     }
 
+    /** Deliberate inference errors; the deal-generating action frequencies stay unchanged. */
+    public static PreflopActionBelief assumedActionBelief(
+            RangeProfile profile, ActionBeliefAssumption assumption) {
+        java.util.Objects.requireNonNull(assumption, "assumption");
+        var truth = actionBelief(profile);
+        return new PreflopActionBelief(
+                scaled(truth.buttonOpenProbability(), assumption.signalScale),
+                scaled(truth.bigBlindCallProbability(), assumption.signalScale));
+    }
+
+    private static Map<String, Double> scaled(Map<String, Double> trueProbabilities, double scale) {
+        return trueProbabilities.entrySet().stream()
+                .collect(
+                        Collectors.toUnmodifiableMap(
+                                Map.Entry::getKey,
+                                entry -> 0.5 + scale * (entry.getValue() - 0.5)));
+    }
+
     public static ButtonBigBlindPhysicalDeckGame createActionBucketed(RangeProfile profile) {
+        return createActionBucketed(profile, actionBelief(profile));
+    }
+
+    public static ButtonBigBlindPhysicalDeckGame createActionBucketed(
+            RangeProfile profile, PreflopActionBelief belief) {
         var base =
                 create(
                         ButtonBigBlindPhysicalDeckGame.InformationMode.COARSE_BOARD_BUCKETS,
@@ -101,7 +150,7 @@ public final class ButtonBigBlindRangeValidationFixture {
                 4,
                 8,
                 ButtonBigBlindPhysicalDeckGame.InformationMode.PREFLOP_ACTION_RIVER_BUCKETS,
-                actionBelief(profile));
+                belief);
     }
 
     private static WeightedCombo combo(String first, String second, double weight) {

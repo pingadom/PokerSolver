@@ -106,4 +106,29 @@ Reproduce after compiling:
 java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalActionBelief 50000 42 10 5x5
 ```
 
-Repeat with seeds `43`–`49` for the 5×5 sweep, and with seeds `42` and `43` and range `3x3` for the smaller-range runs. The next gate is robustness to deliberately mis-specified action likelihoods and a response model that changes with hidden BTN cards and public actions; only then should this be considered for a connected strategic-response audit.
+Repeat with seeds `43`–`49` for the 5×5 sweep, and with seeds `42` and `43` and range `3x3` for the smaller-range runs. The next experiment tests deliberately mis-specified action likelihoods and a response model that changes with hidden BTN cards. A connected strategic-response audit remains separate.
+
+### Belief mis-specification and hand-dependent response
+
+The audit can now separate the **generating** action frequencies from the **assumed** frequencies used to make the river observation. Every run below draws BTN-open/BB-call deals from the original synthetic model and scores the exact same conditional physical-board values for a given seed. Only the observation's belief changes. The four assumptions are: correct (`p`); shrunk halfway toward an uninformative 50% (`0.5 + 0.5(p - 0.5)`); uninformative (`0.5` for every combo); and reversed (`1 - p`). For this **BB** decision, the BB call likelihood is constant once its own combo is known, so only the assumed BTN-open frequencies affect the posterior key. Uniform must reproduce the static-range key and selected gain exactly; a test checks this control. The reversed model is an intentionally severe error, not an estimate of real opponent uncertainty.
+
+At 50,000 boards and ten required discovery boards per bucket, paired **action-conditioned minus static selected gain** in bb is:
+
+| Range | BTN river response | Seeds | Correct | Shrunk | Uninformative | Reversed |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| 5×5 | Always calls 8bb | 42–49 | +0.0669 to +0.0776 | +0.0558 to +0.0627 | 0 exactly | −0.2017 to −0.1835 |
+| 5×5 | Calls with pair or better | 42–45 | +0.0308 to +0.0374 | +0.0225 to +0.0269 | 0 exactly | −0.1524 to −0.1456 |
+| 3×3 | Calls with pair or better | 42–43 | −0.0269 to −0.0227 | +0.0076 to +0.0087 | 0 exactly | −0.0504 to −0.0485 |
+
+The **3×3 pair-caller** result is a useful counterexample: even the correct *preflop* posterior makes this equity-band observation worse than the static band under that fixed river response. At seed 42, both have about 98% held-out support, yet static regret is 0.0459bb and conditioned regret is 0.0686bb. The feature represents unconditional showdown margin, while the value of a bet depends on which hidden BTN hands call or fold; this response dependence is a plausible explanation, though the audit does not isolate it from other bucket effects. A more accurate preflop belief alone does not solve the action-value abstraction. On 5×5, moderate shrinkage keeps much of the in-model gain; reversing the signal loses substantially more than the correct belief gains. For example, seed 42's always-call paired intervals are [+0.0684, +0.0782]bb for correct, [+0.0553, +0.0639]bb for shrunk and [−0.2021, −0.1824]bb for reversed. These intervals describe held-out board sampling conditional on one discovery split and one fixed generating/response model; they are not adjusted for the displayed sweep or model uncertainty.
+
+The pair-or-better response reads the BTN's exact hidden hand to determine whether it calls, but the BB observation never sees that hand. Its exact bet increment is computed by independently reweighting the original joint deals by the *generating* BTN-open likelihood and removing board-blocked combos. A test confirms that uniform likelihood reduces to the existing hand-dependent response calculation. This is still forced check-down reach with a selected heuristic BTN response, not a strategic opponent or a calibrated connected policy. It strengthens the case for a response-aware observation and independent opponent-model validation before any trainer use.
+
+Reproduce the sensitivity audit after compiling:
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalActionBelief 50000 42 10 5x5 reversed call
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalActionBelief 50000 42 10 3x3 correct pair
+```
+
+Repeat `correct`, `shrunk`, `uninformative` and `reversed` on the same seed; runs with a shared seed use the same true deal and board draws. The next backend step is to model informative postflop actions and evaluate a response-aware observation against independent strategies, rather than promoting this belief feature based on its favourable synthetic cases.
