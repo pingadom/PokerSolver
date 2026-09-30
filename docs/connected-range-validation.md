@@ -67,3 +67,28 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalStrictCo
 ```
 
 Repeat seeds `42` and `43`, both iteration budgets, and both ranges for the displayed table. The next backend target is a full-game deviation or best-response measurement on a bounded connected game, with separate BTN and BB checks and an explicit policy for unvisited information sets.
+
+## Exact best responses on sampled physical-chance subgames
+
+`PhysicalDeckChanceSubgame` keeps the physical BTN/BB game, its real card evaluator, blockers, legal actions, information sets and **all original weighted private deals**, but replaces each subsequent chance node with one to four declared quantiles of that node's legal physical flop/turn/river distribution. Duplicate physical outcomes are combined with their multiplicity. This creates a finite **different game** on which the existing `HeadsUpBestResponse` can enumerate both players' full best responses. `PhysicalDeckSubgameBestResponseAudit` projects a sparse full-deck CFR policy onto that game, completes only subgame information sets missing from the policy with explicit uniform actions, and reports both the missing-key count and the probability that a trajectory under the completed profile touches one. The exact gap is a valid bound **for the restricted chance game and completed profile only**. The chance menu and completion are part of the model, never a hidden approximation to full-deck exploitability.
+
+At 3,000 physical-game sampled-chance CFR iterations (solve seed 42), with the 3×3 coarse-board synthetic range:
+
+| Chance points per street | Chance seed | Restricted states visited | Missing strategy keys | Physical-trained profile gap on this subgame | Same-subgame CFR+ control gap, 1,000 iterations |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 142 | 1,099 | 0 | 5.8982bb | — |
+| 2 | 142 | 7,012 | 0 | 3.9024bb | 0.000545bb |
+| 2 | 143 | 7,012 | 0 | 5.3650bb | 0.001257bb |
+| 2 | 144 | 7,012 | 0 | 3.4947bb | 0.001910bb |
+| 4 | 142 | 50,914 | 0 | 2.9140bb | — |
+
+On 5×5 at two chance points per street and chance seed 142, the physical-trained gap is **2.9429bb**, versus **0.000838bb** for the same-subgame CFR+ control; 19,476 restricted states and 1,758 learned information sets were visited with zero missing keys. Training the 3×3 physical policy for 10,000 rather than 3,000 iterations on the *same* two-point subgame did not close its gap (4.0756bb versus 3.9024bb). These are not signs that the exact best-response calculation is broken: the controls solve their respective finite games to small gaps. They expose that a two-point physical runout menu can induce a very different optimal strategy and public-card information structure. Even four points per street leave a large gap on the inspected menu. The tests check root-deal preservation, blocker-aware physical chance outcomes, duplicate-outcome weighting, state-budget enforcement and invalid strategy rejection.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalDeckSubgameBestResponse' '-Dexec.args=3000 2 42 142 3x3 2000000 1000'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalDeckSubgameBestResponse' '-Dexec.args=3000 2 42 142 5x5 2000000 1000'
+```
+
+Vary the chance seed and menu size to inspect sensitivity. The restricted-game gap cannot be cited as the full-deck policy's Nash gap or used to reject or publish a trainer chart by itself. A stronger next method needs full-deck chance sampling **inside** the best-response computation, or a much broader independently held-out chance approximation with quantified sampling error and fallback sensitivity.
