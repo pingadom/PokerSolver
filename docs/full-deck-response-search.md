@@ -30,4 +30,26 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 
 Repeat seeds `42` and `43`, baselines `3000` and `10000`, and ranges `3x3` and `5x5` for the table. The gain from any trained response is a **candidate one-player deviation** against a fixed opponent, evaluated with sampling error. It can demonstrate that the baseline leaves value under this model when a held-out interval is convincingly positive; it cannot upper-bound the *best* possible response or certify a Nash gap. The displayed intervals condition on the trained strategies, contain only held-out deal/continuation sampling error, and are not adjusted for the eight-run sweep or response-training uncertainty. The game is still a synthetic, no-rake, two-active-player BTN/BB tree from a six-seat table with fixed 2/4/8bb postflop bet sizes. No result here justifies a general 6-max 100bb trainer chart.
 
-The next gate is to test response-training stability across more seeds and budgets, then obtain a defensible upper bound or confidence-controlled exploitability estimate on a broader physical game. Range provenance, realistic rake, bet sizing and genuine multiway continuations remain separate product requirements.
+The stability experiment below probes response-training seeds and budgets. Beyond it, the solver still needs a defensible upper bound or confidence-controlled exploitability estimate on a broader physical game. Range provenance, realistic rake, bet sizing and genuine multiway continuations remain separate product requirements.
+
+## Seed and budget stability with an independent confirmation split
+
+`PhysicalResponseStabilityAudit` now trains four candidate responses for each target player: 10,000 and 50,000 iterations, each with two independent training seeds. All four candidates are compared on the **same** 10,000 validation deals, so the best validation gain determines a single candidate before the separate 20,000-deal confirmation stream is used. The CLI also prints confirmation scores for the other candidates to expose training sensitivity, but they cannot replace the preselected candidate after seeing confirmation results. The baseline is fixed at 10,000 sampled-CFR iterations. Training, validation, and confirmation seeds differ; the report records the game hash and missing-policy paths.
+
+| Synthetic range | Base seed | Validation-selected BB (budget, seed offset) | BB confirmation gain, bb (paired SE) | Validation-selected BTN (budget, seed offset) | BTN confirmation gain, bb (paired SE) |
+| --- | ---: | --- | ---: | --- | ---: |
+| 3×3 | 42 | 50,000, +200003 | +0.0569 (0.0435) | 50,000, +200103 | +0.0560 (0.0343) |
+| 3×3 | 43 | 50,000, +200103 | −0.0607 (0.0427) | 50,000, +200003 | +0.0374 (0.0321) |
+| 5×5 | 42 | 50,000, +200103 | −0.0050 (0.0411) | 50,000, +200103 | −0.0081 (0.0316) |
+| 5×5 | 43 | 50,000, +200103 | +0.0287 (0.0385) | 50,000, +200003 | +0.0532 (0.0293) |
+
+The offsets are relative to the base seed; the baseline solve instead adds `100003`, and the target player index is also added to the response seed. None of the eight **selected** confirmation intervals has a lower endpoint above zero. For example, the 5×5 seed-43 BTN interval is [−0.0043, +0.1107]bb. At 10,000 response iterations, some candidates actually lost value against the fixed baseline on confirmation; increasing the budget to 50,000 generally improved the results but did not remove seed sensitivity. The 3×3 seed-43 BTN candidate selected on +0.1715bb validation gain confirmed at only +0.0374bb, illustrating why selection and scoring must use separate physical hands. This split detects candidate-selection optimism; it still does not supply a best-response upper bound, prove the baseline is close to equilibrium, or account for variation across baseline solves. The nominal intervals cover only confirmation sampling, not the broader eight-comparison research sweep.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 3x3'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 43 5x5'
+```
+
+Repeat both baseline seeds (`42`, `43`) and range profiles (`3x3`, `5x5`) for the table. The next validation step needs materially more precise confirmation and a defensible way to bound the strongest possible deviation across full physical chance, while the game model itself still needs real range provenance and realistic multiway action trees.
