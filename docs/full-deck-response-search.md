@@ -91,3 +91,30 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 ```
 
 Repeat both base seeds and profiles to obtain the table. The exact-subgame calibration shows that sampled response optimization error can be larger than the true deviation on a small solved game. The full-deck split shows that retaining the final-regret policy can also uncover deviations that the average misses. The next backend task is to reduce and bound response-search error on broader physical chance, then replace synthetic ranges and fixed bet sizes before publishing strategic training advice.
+
+## Enumerating private deals while sampling public cards
+
+`FixedOpponentResponseCfr` now has an optional `EXACT_ROOT` chance mode. Each training iteration traverses **every legal weighted private deal** and multiplies both counterfactual regrets and average-strategy reach by that deal's probability; later flop, turn, and river cards remain sampled from their legal physical distributions. The existing `SAMPLED_ALL` mode remains the default. This is a stratified chance estimator, not a full-deck exact solve. A Kuhn control verifies that, when no later chance exists, exact-root results are independent of the random seed.
+
+The 3×3 fixture has nine root deals, so 1,000/5,000 exact-root iterations visit 9,000/45,000 initial deals, compared with 10,000/50,000 sampled-all iterations in the prior sweep. The 5×5 fixture has 25 root deals, so 500/2,000 exact-root iterations visit 12,500/50,000 initial deals. These are comparable *deal-traversal counts*, not equal CPU-time or equal variance guarantees.
+
+On the same two-point physical-card chance menu used above, 2,000 exact-root iterations on 5×5 (50,000 initial-deal traversals) leave final-regret shortfalls of 0.0037–0.0038bb for BB and 0.0012–0.0016bb for BTN, versus 0.0063–0.0070bb and 0.0013–0.0022bb at 50,000 sampled-all iterations. The 3×3 comparisons are mixed. Thus exact-root sampling reduces error in some work-matched cases but is not uniformly superior.
+
+The independent full-deck validation/confirmation protocol was repeated with the exact-root budgets above and both average/final-regret policy variants:
+
+| Synthetic range | Base seed | Selected BB (budget, variant) | BB confirmation gain, bb (paired SE) | Selected BTN (budget, variant) | BTN confirmation gain, bb (paired SE) |
+| --- | ---: | --- | ---: | --- | ---: |
+| 3×3 | 42 | 5k, final regret | +0.1590 (0.0602) | 5k, final regret | +0.0761 (0.0349) |
+| 3×3 | 43 | 1k, average | −0.0522 (0.0436) | 5k, final regret | +0.0603 (0.0352) |
+| 5×5 | 42 | 2k, average | −0.0238 (0.0415) | 2k, final regret | +0.1260 (0.0355) |
+| 5×5 | 43 | 2k, final regret | +0.0518 (0.0396) | 2k, final regret | +0.0765 (0.0358) |
+
+Four of eight selected results have nominal positive 95% intervals: both 3×3 seed-42 players and BTN for both 5×5 seeds. BB on the other seeds remains unresolved. Selection used only validation hands; other confirmation rows printed by the CLI are descriptive and cannot be substituted after inspection. The intervals are unadjusted for multiple comparisons, and this is still an approximate deviation search in a synthetic two-active-player game. The optional mode does **not** establish an exploitability upper bound or change trainer-pack eligibility.
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResponseCalibration' '-Dexec.args=300 500 2000 2 42 142 5x5 exact-root'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 1000 5000 10000 20000 42 3x3 both exact-root'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 500 2000 10000 20000 43 5x5 both exact-root'
+```
+
+Repeat both base seeds and profiles for the table. Future optimizer work should compare cost, variance, and convergence on more independent chance menus before preferring one mode as a default.

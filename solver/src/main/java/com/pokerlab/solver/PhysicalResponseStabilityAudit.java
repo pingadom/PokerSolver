@@ -27,6 +27,7 @@ public final class PhysicalResponseStabilityAudit {
     public record Candidate(
             int responseIterations,
             long responseSeed,
+            FixedOpponentResponseCfr.ChanceMode chanceMode,
             PolicyVariant variant,
             int learnedInformationSets,
             long missingOpponentQueries,
@@ -37,6 +38,7 @@ public final class PhysicalResponseStabilityAudit {
     public record Report(
             String gameHash,
             int targetPlayer,
+            FixedOpponentResponseCfr.ChanceMode chanceMode,
             long validationSeed,
             long confirmationSeed,
             int selectedIndex,
@@ -68,7 +70,8 @@ public final class PhysicalResponseStabilityAudit {
                 confirmationTrials,
                 validationSeed,
                 confirmationSeed,
-                List.of(PolicyVariant.AVERAGE));
+                List.of(PolicyVariant.AVERAGE),
+                FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL);
     }
 
     public static Report assess(
@@ -82,11 +85,38 @@ public final class PhysicalResponseStabilityAudit {
             long validationSeed,
             long confirmationSeed,
             List<PolicyVariant> variants) {
+        return assess(
+                game,
+                baseline,
+                target,
+                responseBudgets,
+                responseSeeds,
+                validationTrials,
+                confirmationTrials,
+                validationSeed,
+                confirmationSeed,
+                variants,
+                FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL);
+    }
+
+    public static Report assess(
+            ButtonBigBlindPhysicalDeckGame game,
+            CfrSolution baseline,
+            int target,
+            List<Integer> responseBudgets,
+            List<Long> responseSeeds,
+            int validationTrials,
+            int confirmationTrials,
+            long validationSeed,
+            long confirmationSeed,
+            List<PolicyVariant> variants,
+            FixedOpponentResponseCfr.ChanceMode chanceMode) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(responseBudgets, "responseBudgets");
         Objects.requireNonNull(responseSeeds, "responseSeeds");
         Objects.requireNonNull(variants, "variants");
+        Objects.requireNonNull(chanceMode, "chanceMode");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
         if (responseBudgets.isEmpty() || responseSeeds.isEmpty() || variants.isEmpty())
@@ -124,7 +154,8 @@ public final class PhysicalResponseStabilityAudit {
         for (int budget : responseBudgets) {
             for (long seed : responseSeeds) {
                 var trained =
-                        new FixedOpponentResponseCfr<>(game, baseline, target, seed).solve(budget);
+                        new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
+                                .solve(budget);
                 for (var variant : variants) {
                     var policy =
                             variant == PolicyVariant.AVERAGE
@@ -161,6 +192,7 @@ public final class PhysicalResponseStabilityAudit {
                     new Candidate(
                             draft.budget(),
                             draft.seed(),
+                            chanceMode,
                             draft.variant(),
                             draft.policy().strategy().size(),
                             draft.trained().missingFixedOpponentQueries(),
@@ -171,6 +203,7 @@ public final class PhysicalResponseStabilityAudit {
         return new Report(
                 game.contentHash(),
                 target,
+                chanceMode,
                 validationSeed,
                 confirmationSeed,
                 selectedIndex,

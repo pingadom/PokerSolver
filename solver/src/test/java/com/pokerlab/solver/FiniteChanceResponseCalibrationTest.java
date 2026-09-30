@@ -26,6 +26,19 @@ class FiniteChanceResponseCalibrationTest {
                 assertEquals(0, candidate.missingFixedOpponentQueries());
                 assertTrue(candidate.baselineTargetKeysWithoutResponse() >= 0);
             }
+            var exactRoot =
+                    FiniteChanceResponseCalibration.assess(
+                            game,
+                            baseline,
+                            target,
+                            List.of(50),
+                            List.of(42L),
+                            FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT);
+            assertEquals(
+                    FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT,
+                    exactRoot.candidates().getFirst().chanceMode());
+            assertTrue(exactRoot.candidates().getFirst().shortfallToExactBb() >= 0);
+            assertEquals(0, exactRoot.candidates().getFirst().missingFixedOpponentQueries());
         }
     }
 

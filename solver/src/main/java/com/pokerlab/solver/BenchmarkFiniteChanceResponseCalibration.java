@@ -10,9 +10,9 @@ public final class BenchmarkFiniteChanceResponseCalibration {
     private BenchmarkFiniteChanceResponseCalibration() {}
 
     public static void main(String[] args) {
-        if (args.length > 7)
+        if (args.length > 8)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkFiniteChanceResponseCalibration [baseline-iterations] [short-response-iterations] [long-response-iterations] [chance-points-per-street] [solve-seed] [chance-seed] [3x3|5x5]");
+                    "Usage: BenchmarkFiniteChanceResponseCalibration [baseline-iterations] [short-response-iterations] [long-response-iterations] [chance-points-per-street] [solve-seed] [chance-seed] [3x3|5x5] [sampled|exact-root]");
         int baselineIterations = args.length >= 1 ? Integer.parseInt(args[0]) : 300;
         int shortBudget = args.length >= 2 ? Integer.parseInt(args[1]) : 1_000;
         int longBudget = args.length >= 3 ? Integer.parseInt(args[2]) : 10_000;
@@ -20,9 +20,19 @@ public final class BenchmarkFiniteChanceResponseCalibration {
         long seed = args.length >= 5 ? Long.parseLong(args[4]) : 42;
         long chanceSeed = args.length >= 6 ? Long.parseLong(args[5]) : 142;
         var profile =
-                args.length == 7
+                args.length >= 7
                         ? ButtonBigBlindRangeValidationFixture.RangeProfile.parse(args[6])
                         : ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3;
+        var chanceMode =
+                args.length == 8
+                        ? switch (args[7]) {
+                            case "sampled" -> FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL;
+                            case "exact-root" -> FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT;
+                            default ->
+                                    throw new IllegalArgumentException(
+                                            "Chance mode must be sampled or exact-root");
+                        }
+                        : FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL;
         if (baselineIterations < 1 || baselineIterations > 10_000)
             throw new IllegalArgumentException("Baseline iterations must be in 1-10000");
         if (shortBudget < 1 || shortBudget >= longBudget || longBudget > 1_000_000)
@@ -44,14 +54,21 @@ public final class BenchmarkFiniteChanceResponseCalibration {
                         quantiles(random, chancePoints));
         var baseline =
                 new CfrSolver<>(subgame, CfrSolver.Variant.CFR_PLUS).solve(baselineIterations);
+        int rootDeals = subgame.chanceOutcomes(subgame.initialState()).size();
+        long dealsPerIteration =
+                chanceMode == FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT ? rootDeals : 1;
         System.out.printf(
                 Locale.ROOT,
-                "Finite response calibration %s: %d chance points/street (seed %d), %d CFR+ baseline iterations, %d information sets, physical hash %s%n",
+                "Finite response calibration %s: %d chance points/street (seed %d), %d CFR+ baseline iterations, %d information sets, %d root deals, response chance mode %s, budget deal traversals %d/%d, physical hash %s%n",
                 profile,
                 chancePoints,
                 chanceSeed,
                 baselineIterations,
                 baseline.strategy().size(),
+                rootDeals,
+                chanceMode,
+                shortBudget * dealsPerIteration,
+                longBudget * dealsPerIteration,
                 subgame.physicalGameHash());
         System.out.println(
                 "Flop/turn/river quantiles: "
@@ -67,7 +84,8 @@ public final class BenchmarkFiniteChanceResponseCalibration {
                             baseline,
                             target,
                             List.of(shortBudget, longBudget),
-                            List.of(seed + 200_003 + target, seed + 200_103 + target));
+                            List.of(seed + 200_003 + target, seed + 200_103 + target),
+                            chanceMode);
             System.out.printf(
                     Locale.ROOT,
                     "%s baseline target value %+.6fbb, exact best-response gain %+.6fbb%n",
