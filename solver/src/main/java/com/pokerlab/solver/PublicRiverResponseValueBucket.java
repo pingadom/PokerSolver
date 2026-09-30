@@ -102,10 +102,10 @@ public final class PublicRiverResponseValueBucket {
                     || board.contains(button.first())
                     || board.contains(button.second())) continue;
             int sign = Integer.compare(bbScore, score(button, board));
-            double increment =
-                    assumedResponse.calls(button, board, publicRiverState)
-                            ? riverBetBb * sign
-                            : halfPotBb * (1 - sign);
+            double call = assumedResponse.callProbability(button, board, publicRiverState);
+            if (!Double.isFinite(call) || call < 0 || call > 1)
+                throw new IllegalArgumentException("Invalid BTN call probability");
+            double increment = call * riverBetBb * sign + (1 - call) * halfPotBb * (1 - sign);
             legalWeight += button.weight();
             weightedIncrement += button.weight() * increment;
         }

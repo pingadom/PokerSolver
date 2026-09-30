@@ -8,7 +8,8 @@ import java.util.Objects;
 public interface RiverCallPolicy {
     String definition();
 
-    boolean calls(WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState);
+    double callProbability(
+            WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState);
 
     static RiverCallPolicy fixed(PhysicalActionBeliefAudit.ResponseModel model) {
         Objects.requireNonNull(model, "model");
@@ -19,10 +20,12 @@ public interface RiverCallPolicy {
             }
 
             @Override
-            public boolean calls(
+            public double callProbability(
                     WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState) {
                 return model == PhysicalActionBeliefAudit.ResponseModel.ALWAYS_CALL
-                        || PhysicalRiverPairCallResponse.calls(button, board);
+                                || PhysicalRiverPairCallResponse.calls(button, board)
+                        ? 1
+                        : 0;
             }
         };
     }

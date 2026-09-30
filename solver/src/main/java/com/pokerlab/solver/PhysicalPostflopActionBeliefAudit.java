@@ -314,10 +314,10 @@ public final class PhysicalPostflopActionBeliefAudit {
                                     PreflopActionBelief.ObservedAction.BUTTON_OPEN, button)
                             * postflopBelief.likelihood(button, state, false);
             int sign = Integer.compare(ownScore, score(button, board));
-            double increment =
-                    responseModel.calls(button, board, publicHistory)
-                            ? riverBetBb * sign
-                            : halfPotBb * (1 - sign);
+            double call = responseModel.callProbability(button, board, publicHistory);
+            if (!Double.isFinite(call) || call < 0 || call > 1)
+                throw new IllegalArgumentException("Invalid BTN call probability");
+            double increment = call * riverBetBb * sign + (1 - call) * halfPotBb * (1 - sign);
             total += weight;
             weightedIncrement += weight * increment;
         }

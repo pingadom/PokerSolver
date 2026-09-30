@@ -83,9 +83,9 @@ public final class StrategicRiverCallPolicy implements RiverCallPolicy {
 
     /** BTN calls exactly when its conditional call value is nonnegative. */
     @Override
-    public boolean calls(
+    public double callProbability(
             WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState) {
-        return callMinusFoldBb(button, board, publicRiverState) >= 0;
+        return callMinusFoldBb(button, board, publicRiverState) >= 0 ? 1 : 0;
     }
 
     public double callMinusFoldBb(

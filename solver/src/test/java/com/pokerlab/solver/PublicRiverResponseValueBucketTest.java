@@ -126,6 +126,33 @@ class PublicRiverResponseValueBucketTest {
                                 PhysicalActionBeliefAudit.ResponseModel.ALWAYS_CALL));
     }
 
+    @Test
+    void mixedResponseUsesProbabilityRatherThanThresholding() {
+        var board = cards("2c", "7s", "Th", "3d", "9c");
+        var bb = combo("Ac", "Kc");
+        var button = combo("Ah", "Ad");
+        RiverCallPolicy quarterCall =
+                new RiverCallPolicy() {
+                    @Override
+                    public String definition() {
+                        return "quarter-call";
+                    }
+
+                    @Override
+                    public double callProbability(
+                            WeightedCombo hand,
+                            List<Card> publicBoard,
+                            PublicRiverHistory history) {
+                        return 0.25;
+                    }
+                };
+        assertEquals(
+                2.875,
+                PublicRiverResponseValueBucket.betIncrement(
+                        board, bb, List.of(button), 3.25, 8, quarterCall, null),
+                1e-12);
+    }
+
     private static WeightedCombo combo(String first, String second) {
         return new WeightedCombo(Card.parse(first), Card.parse(second), 1);
     }
