@@ -37,3 +37,33 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 Each street audit measures only **one first-to-act BB decision under the learned earlier-street reach**. It does not optimize subsequent actions, audit BTN's later decisions, certify a best-response bound or quantify error from merging distinct physical boards. Ten held-out observations are only a descriptive support threshold, not a precision guarantee. The range is still tiny, with four seats folding by assumption. A trainer pack needs a better abstraction test and a much broader strategic quality check before admission.
 
 A [controlled board-granularity follow-up](connected-bucket-granularity-research.md) maps identical physical hands and action paths into fine and coarse observations. The coarse mode sharply improves river sample support, while held-out strategic quality remains unresolved. It is a research comparison rather than a replacement trainer pack.
+
+## Strict connected-policy street deviations
+
+`PhysicalStrictConnectedStreetDeviationAudit` revisits the first BB decision on flop, turn and river using the connected strategy's **own sampled physical reach**. It differs from the earlier audit above by rejecting a deal when an earlier action has no learned strategy and rejecting a candidate state when either check or bet continuation needs an unlearned strategy. It records missing reach, BB root and each continuation branch separately; no uniform action is silently inserted. A BB information set chooses one check/bet action from its discovery observations, then compares it with the original BB mixed strategy on separate held-out physical states. Future cards and actions before the river are sampled with paired random seeds for the two root actions. Once the river is dealt, all remaining positive-probability learned action branches are **enumerated exactly**. A unit test checks the river expectation against explicit terminal payoffs and checks that a missing positive-probability branch is rejected.
+
+The table reports **selected minus learned-mix BB utility**, in bb, for 50,000 attempted physical deals *per street*, four sampled continuation pairs per flop/turn state, ten required discovery observations per BB information set, and coarse-board information sets. The listed seed is the **base seed**: the solve uses `base seed + 100003`, while flop, turn and river audits use `base seed + 0`, `+ 1` and `+ 2`. River uses exact action continuation and only one evaluation per physical state. Parentheses contain the conditional held-out standard error:
+
+| Range | CFR iterations | Seed | Flop | Turn | River |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 3×3 | 3,000 | 42 | +0.0021 (0.0239) | **+0.0822 (0.0286)** | +0.0905 (0.0452) |
+| 3×3 | 3,000 | 43 | −0.0165 (0.0250) | **+0.0879 (0.0245)** | +0.0455 (0.0430) |
+| 5×5 | 3,000 | 42 | −0.0167 (0.0236) | −0.0008 (0.0347) | +0.0723 (0.0374) |
+| 5×5 | 3,000 | 43 | −0.0044 (0.0291) | +0.0601 (0.0306) | −0.0058 (0.0397) |
+| 3×3 | 10,000 | 42 | −0.0040 (0.0227) | −0.0014 (0.0269) | −0.0077 (0.0384) |
+| 3×3 | 10,000 | 43 | −0.0621 (0.0283) | +0.0170 (0.0264) | −0.0389 (0.0458) |
+| 5×5 | 10,000 | 42 | −0.0149 (0.0276) | −0.0105 (0.0332) | −0.0966 (0.0385) |
+| 5×5 | 10,000 | 43 | +0.0064 (0.0312) | −0.0165 (0.0320) | +0.0033 (0.0491) |
+
+The 3×3 turn gain at 3,000 iterations has an approximate held-out 95% interval above zero for both seeds, but at 10,000 iterations the same audit finds no resolved turn gain. This is **consistent with** improvement as training continues on this tiny fixture; it does not establish general CFR convergence. Selected actions can also be worse than the learned mix on held-out states: 3×3 seed 43's 10,000-iteration flop result is −0.0621bb. Discovery selection, sampled continuations, abstraction and the limited seed sweep all contribute uncertainty. These intervals condition on one trained policy and one discovery split and are not adjusted for looking at multiple streets, ranges, budgets and seeds.
+
+At 3,000 iterations the four runs discarded **zero** deals for missing earlier policy; root and continuation gaps were small but nonzero. At 10,000 iterations all four runs had zero missing keys in the sampled reach and continuations. Near-complete key coverage does not imply sufficient decision support: on 5×5 seed 42 at 10,000 iterations, 4,247 of 5,463 held-out river states belonged to BB information sets with ten discovery observations, versus 8,932 of 8,934 flop held-out states. The report prints both denominators. This remains a one-decision, first-to-act **BB** audit, not a BTN audit, a simultaneous full-game best response, a lower/upper exploitability bound or a 6-max cash trainer pack.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalStrictConnectedStreetDeviation' '-Dexec.args=3000 50000 4 10 42 3x3'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalStrictConnectedStreetDeviation' '-Dexec.args=10000 50000 4 10 43 5x5'
+```
+
+Repeat seeds `42` and `43`, both iteration budgets, and both ranges for the displayed table. The next backend target is a full-game deviation or best-response measurement on a bounded connected game, with separate BTN and BB checks and an explicit policy for unvisited information sets.
