@@ -8,9 +8,9 @@ public final class BenchmarkPhysicalResponseStability {
     private BenchmarkPhysicalResponseStability() {}
 
     public static void main(String[] args) {
-        if (args.length > 8)
+        if (args.length > 9)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkPhysicalResponseStability [baseline-iterations] [short-response-iterations] [long-response-iterations] [validation-trials] [confirmation-trials] [seed] [3x3|5x5] [average|both]");
+                    "Usage: BenchmarkPhysicalResponseStability [baseline-iterations] [short-response-iterations] [long-response-iterations] [validation-trials] [confirmation-trials] [seed] [3x3|5x5] [average|both] [sampled|exact-root]");
         int baselineIterations = args.length >= 1 ? Integer.parseInt(args[0]) : 10_000;
         int shortBudget = args.length >= 2 ? Integer.parseInt(args[1]) : 10_000;
         int longBudget = args.length >= 3 ? Integer.parseInt(args[2]) : 50_000;
@@ -22,13 +22,23 @@ public final class BenchmarkPhysicalResponseStability {
                         ? ButtonBigBlindRangeValidationFixture.RangeProfile.parse(args[6])
                         : ButtonBigBlindRangeValidationFixture.RangeProfile.VALIDATION_3X3;
         List<PhysicalResponseStabilityAudit.PolicyVariant> variants =
-                args.length == 8 && args[7].equals("both")
+                args.length >= 8 && args[7].equals("both")
                         ? List.of(
                                 PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE,
                                 PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET)
                         : List.of(PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE);
-        if (args.length == 8 && !args[7].equals("both") && !args[7].equals("average"))
+        if (args.length >= 8 && !args[7].equals("both") && !args[7].equals("average"))
             throw new IllegalArgumentException("Policy variants must be average or both");
+        var chanceMode =
+                args.length == 9
+                        ? switch (args[8]) {
+                            case "sampled" -> FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL;
+                            case "exact-root" -> FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT;
+                            default ->
+                                    throw new IllegalArgumentException(
+                                            "Chance mode must be sampled or exact-root");
+                        }
+                        : FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL;
         if (baselineIterations < 1 || baselineIterations > 100_000)
             throw new IllegalArgumentException("Baseline iterations must be in 1-100000");
         if (shortBudget >= longBudget)
@@ -44,16 +54,23 @@ public final class BenchmarkPhysicalResponseStability {
                                 CfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
                                 seed + 100_003)
                         .solve(baselineIterations);
+        int rootDeals = game.chanceOutcomes(game.initialState()).size();
+        long dealsPerIteration =
+                chanceMode == FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT ? rootDeals : 1;
         System.out.printf(
                 Locale.ROOT,
-                "Response stability %s: baseline %d iterations, seed %d, %d information sets; response budgets %d/%d, two training seeds, variants %s, validation %d and confirmation %d deals per candidate%n",
+                "Response stability %s: baseline %d iterations, seed %d, %d information sets; %d root deals; response budgets %d/%d (%d/%d private-deal traversals), two training seeds, variants %s, chance mode %s, validation %d and confirmation %d deals per candidate%n",
                 profile,
                 baselineIterations,
                 seed + 100_003,
                 baseline.strategy().size(),
+                rootDeals,
                 shortBudget,
                 longBudget,
+                shortBudget * dealsPerIteration,
+                longBudget * dealsPerIteration,
                 variants,
+                chanceMode,
                 validationTrials,
                 confirmationTrials);
         for (int target = 0; target <= 1; target++) {
@@ -68,7 +85,8 @@ public final class BenchmarkPhysicalResponseStability {
                             confirmationTrials,
                             seed + 300_003 + target,
                             seed + 400_003 + target,
-                            variants);
+                            variants,
+                            chanceMode);
             System.out.printf(
                     Locale.ROOT,
                     "%s: validation seed %d, confirmation seed %d; selected candidate %d by validation gain only%n",

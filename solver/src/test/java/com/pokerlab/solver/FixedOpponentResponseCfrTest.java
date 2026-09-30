@@ -53,4 +53,28 @@ class FixedOpponentResponseCfrTest {
                 IllegalArgumentException.class,
                 () -> new FixedOpponentResponseCfr<>(game, sparse, 0, 42).solve(0));
     }
+
+    @Test
+    void exactRootEnumeratesKuhnDealsIndependentlyOfSeed() {
+        var game = new KuhnPoker();
+        var baseline = new CfrSolver<>(game, CfrSolver.Variant.VANILLA).solve(1_000);
+        var first =
+                new FixedOpponentResponseCfr<>(
+                                game,
+                                baseline,
+                                0,
+                                42,
+                                FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT)
+                        .solve(500);
+        var second =
+                new FixedOpponentResponseCfr<>(
+                                game,
+                                baseline,
+                                0,
+                                99,
+                                FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT)
+                        .solve(500);
+        assertEquals(first, second);
+        assertEquals(0, first.missingFixedOpponentQueries());
+    }
 }

@@ -15,6 +15,11 @@ import java.util.SplittableRandom;
  * approximate response; it does not compute a certified best-response upper bound.
  */
 public final class FixedOpponentResponseCfr<S> {
+    public enum ChanceMode {
+        SAMPLED_ALL,
+        EXACT_ROOT
+    }
+
     public record Result(
             CfrSolution response,
             CfrSolution finalRegretPolicy,
@@ -77,6 +82,7 @@ public final class FixedOpponentResponseCfr<S> {
     private final CfrSolution fixedOpponent;
     private final int target;
     private final long seed;
+    private final ChanceMode chanceMode;
     private final Map<String, Node> nodes = new LinkedHashMap<>();
     private final Map<String, double[]> iterationStrategies = new HashMap<>();
     private final List<Double> chanceDraws = new ArrayList<>();
@@ -88,12 +94,22 @@ public final class FixedOpponentResponseCfr<S> {
 
     public FixedOpponentResponseCfr(
             CfrGame<S> game, CfrSolution fixedOpponent, int target, long seed) {
+        this(game, fixedOpponent, target, seed, ChanceMode.SAMPLED_ALL);
+    }
+
+    public FixedOpponentResponseCfr(
+            CfrGame<S> game,
+            CfrSolution fixedOpponent,
+            int target,
+            long seed,
+            ChanceMode chanceMode) {
         this.game = Objects.requireNonNull(game, "game");
         this.fixedOpponent = Objects.requireNonNull(fixedOpponent, "fixedOpponent");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
         this.target = target;
         this.seed = seed;
+        this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
     }
 
     public Result solve(int iterations) {
@@ -105,10 +121,33 @@ public final class FixedOpponentResponseCfr<S> {
         opponentQueries = 0;
         missingOpponentQueries = 0;
         random = new SplittableRandom(seed);
+        List<ChanceOutcome<S>> rootOutcomes = null;
+        if (chanceMode == ChanceMode.EXACT_ROOT) {
+            S root = game.initialState();
+            if (game.currentPlayer(root) != -1)
+                throw new IllegalArgumentException("Exact-root mode requires root chance");
+            rootOutcomes = List.copyOf(game.chanceOutcomes(root));
+            if (rootOutcomes.isEmpty())
+                throw new IllegalArgumentException("Exact-root mode requires root outcomes");
+            double sum = 0;
+            for (var outcome : rootOutcomes) {
+                if (!Double.isFinite(outcome.probability()) || outcome.probability() < 0)
+                    throw new IllegalArgumentException("Invalid root chance probability");
+                sum += outcome.probability();
+            }
+            if (Math.abs(sum - 1) > 1e-9)
+                throw new IllegalArgumentException("Root chance probabilities must sum to one");
+        }
         for (int iteration = 0; iteration < iterations; iteration++) {
             chanceDraws.clear();
             iterationStrategies.clear();
-            traverse(game.initialState(), 1, 1, 0);
+            if (rootOutcomes == null) {
+                traverse(game.initialState(), 1, 1, 1, 0);
+            } else {
+                for (var outcome : rootOutcomes)
+                    if (outcome.probability() > 0)
+                        traverse(outcome.state(), 1, 1, outcome.probability(), 1);
+            }
         }
         Map<String, Map<String, Double>> average = new LinkedHashMap<>();
         nodes.forEach((key, node) -> average.put(key, node.averageStrategy()));
@@ -123,7 +162,12 @@ public final class FixedOpponentResponseCfr<S> {
                 missingOpponentKeys.size());
     }
 
-    private double traverse(S state, double targetReach, double opponentReach, int chanceDepth) {
+    private double traverse(
+            S state,
+            double targetReach,
+            double opponentReach,
+            double chanceReach,
+            int chanceDepth) {
         if (game.isTerminal(state)) {
             double utility = game.terminalUtility(state);
             if (!Double.isFinite(utility)) throw new IllegalArgumentException("Non-finite payoff");
@@ -133,7 +177,8 @@ public final class FixedOpponentResponseCfr<S> {
         if (player == -1) {
             while (chanceDraws.size() <= chanceDepth) chanceDraws.add(random.nextDouble());
             var outcome = game.sampleChanceOutcome(state, chanceDraws.get(chanceDepth));
-            return traverse(outcome.state(), targetReach, opponentReach, chanceDepth + 1);
+            return traverse(
+                    outcome.state(), targetReach, opponentReach, chanceReach, chanceDepth + 1);
         }
         if (player != 0 && player != 1)
             throw new IllegalArgumentException("Expected player 0, player 1 or chance");
@@ -151,6 +196,7 @@ public final class FixedOpponentResponseCfr<S> {
                                             game.afterAction(state, action),
                                             targetReach,
                                             opponentReach * probability,
+                                            chanceReach,
                                             chanceDepth);
             }
             return value;
@@ -169,12 +215,13 @@ public final class FixedOpponentResponseCfr<S> {
                             game.afterAction(state, actions.get(index)),
                             targetReach * strategy[index],
                             opponentReach,
+                            chanceReach,
                             chanceDepth);
             value += strategy[index] * values[index];
         }
         for (int index = 0; index < actions.size(); index++) {
-            node.regrets[index] += opponentReach * (values[index] - value);
-            node.averageSum[index] += targetReach * strategy[index];
+            node.regrets[index] += opponentReach * chanceReach * (values[index] - value);
+            node.averageSum[index] += targetReach * chanceReach * strategy[index];
         }
         return value;
     }

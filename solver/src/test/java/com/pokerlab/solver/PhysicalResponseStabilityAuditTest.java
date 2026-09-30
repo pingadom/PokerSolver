@@ -70,6 +70,23 @@ class PhysicalResponseStabilityAuditTest {
                 PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET,
                 both.candidates().get(1).variant());
         assertTrue(both.selectedIndex() == 0 || both.selectedIndex() == 1);
+        var exactRoot =
+                PhysicalResponseStabilityAudit.assess(
+                        GAME,
+                        baseline,
+                        1,
+                        List.of(50),
+                        List.of(51L),
+                        500,
+                        500,
+                        53,
+                        54,
+                        List.of(PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET),
+                        FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT);
+        assertEquals(FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT, exactRoot.chanceMode());
+        assertEquals(
+                FixedOpponentResponseCfr.ChanceMode.EXACT_ROOT, exactRoot.selected().chanceMode());
+        assertTrue(Double.isFinite(exactRoot.selected().confirmation().responseGainBb()));
     }
 
     @Test

@@ -14,6 +14,7 @@ public final class FiniteChanceResponseCalibration {
     public record Candidate(
             int iterations,
             long seed,
+            FixedOpponentResponseCfr.ChanceMode chanceMode,
             double candidateGainBb,
             double shortfallToExactBb,
             double finalRegretGainBb,
@@ -36,10 +37,27 @@ public final class FiniteChanceResponseCalibration {
             int target,
             List<Integer> budgets,
             List<Long> seeds) {
+        return assess(
+                game,
+                baseline,
+                target,
+                budgets,
+                seeds,
+                FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL);
+    }
+
+    public static <S> Report assess(
+            CfrGame<S> game,
+            CfrSolution baseline,
+            int target,
+            List<Integer> budgets,
+            List<Long> seeds,
+            FixedOpponentResponseCfr.ChanceMode chanceMode) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(budgets, "budgets");
         Objects.requireNonNull(seeds, "seeds");
+        Objects.requireNonNull(chanceMode, "chanceMode");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
         if (budgets.isEmpty() || seeds.isEmpty())
@@ -59,7 +77,8 @@ public final class FiniteChanceResponseCalibration {
         for (int budget : budgets) {
             for (long seed : seeds) {
                 var trained =
-                        new FixedOpponentResponseCfr<>(game, baseline, target, seed).solve(budget);
+                        new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
+                                .solve(budget);
                 double gain =
                         gain(game, baseline, trained.response(), target, baselineTarget, budget);
                 double finalRegretGain =
@@ -83,6 +102,7 @@ public final class FiniteChanceResponseCalibration {
                         new Candidate(
                                 budget,
                                 seed,
+                                chanceMode,
                                 gain,
                                 Math.max(0, shortfall),
                                 finalRegretGain,
