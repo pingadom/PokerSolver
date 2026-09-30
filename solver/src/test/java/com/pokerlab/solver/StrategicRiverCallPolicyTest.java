@@ -29,8 +29,8 @@ class StrategicRiverCallPolicyTest {
         assertEquals(highDealt, pairDealt);
         assertEquals(12.25, versusValue.callMinusFoldBb(button, board, highDealt), 1e-12);
         assertEquals(-5.75, versusStrength.callMinusFoldBb(button, board, highDealt), 1e-12);
-        assertTrue(versusValue.calls(button, board, highDealt));
-        assertFalse(versusStrength.calls(button, board, highDealt));
+        assertEquals(1, versusValue.callProbability(button, board, highDealt));
+        assertEquals(0, versusStrength.callProbability(button, board, highDealt));
         assertEquals(
                 versusValue.callMinusFoldBb(button, board, highDealt),
                 versusValue.callMinusFoldBb(button, board, pairDealt),
@@ -109,11 +109,13 @@ class StrategicRiverCallPolicyTest {
                         0.5,
                         3.25,
                         8);
-        assertTrue(highChecks.calls(button, board, publicHistory));
-        assertFalse(pairChecks.calls(button, board, publicHistory));
+        assertEquals(1, highChecks.callProbability(button, board, publicHistory));
+        assertEquals(0, pairChecks.callProbability(button, board, publicHistory));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> highChecks.calls(button, cards("2c", "7s", "Th", "3d", "8c"), publicHistory));
+                () ->
+                        highChecks.callProbability(
+                                button, cards("2c", "7s", "Th", "3d", "8c"), publicHistory));
     }
 
     private static WeightedCombo combo(String first, String second) {
