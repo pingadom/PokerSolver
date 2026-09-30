@@ -118,3 +118,27 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 ```
 
 Repeat both base seeds and profiles for the table. Future optimizer work should compare cost, variance, and convergence on more independent chance menus before preferring one mode as a default.
+
+## Response optimizer across independent chance menus
+
+`FiniteChanceResponseMenuSweep` runs the same exact-game calibration across several independently seeded physical-card quantile menus. For each menu it solves a fresh 300-iteration CFR+ baseline, computes the **exact best response for that restricted game**, then compares fully sampled and exact-root response searches using the same response seed and approximately 50,000 private-deal traversals. Each candidate is scored by its exact shortfall to that menu's best response; both average and final-regret policies are reported. The CLI records the actual quantiles, legal root-deal count, exact-root iteration count, and missing target keys. This prevents a single favorable chance menu from setting the optimizer default.
+
+Three two-point-per-street menus (seeds 142–144) and two response seeds (200045, 200145) give six paired comparisons per player and range profile:
+
+| Synthetic range | Player | Exact-root final-regret wins | Mean exact shortfall, sampled → exact-root | Worst exact shortfall, sampled → exact-root |
+| --- | --- | ---: | ---: | ---: |
+| 3×3 | BB | 4/6 | 0.00542 → 0.00251bb | 0.01674 → 0.00423bb |
+| 3×3 | BTN | 0/6 | 0.00059 → 0.00077bb | 0.00147 → 0.00166bb |
+| 5×5 | BB | 5/6 | 0.00824 → 0.00343bb | 0.02129 → 0.00492bb |
+| 5×5 | BTN | 4/6 | 0.00171 → 0.00166bb | 0.00529 → 0.00571bb |
+
+Exact-root training reduces BB optimizer shortfall on most tested menus at this work budget, while BTN sees no consistent benefit and can be slightly worse. At a 10,000-traversal budget on 5×5, the preference also varies by menu: exact-root BB wins only one of three, and its BTN mean shortfall is higher. The number of menus and training seeds is still small, and these restricted chance games change the strategy problem; the values are **optimizer calibration within each menu**, not a full-deck quality bound. The fully sampled mode therefore stays the default, with exact-root available as an explicitly selected research option.
+
+From `solver/`, after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResponseMenuSweep' '-Dexec.args=5x5 300 50000 2 200045 142,143,144'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResponseMenuSweep' '-Dexec.args=3x3 300 50000 2 200145 142,143,144'
+```
+
+Repeat each profile with the other response seed for the table. Before choosing a target-specific default, expand menu and response-seed coverage and measure elapsed runtime as well as deal traversals. The more important product gates remain a broader physical-game quality bound and credible ranges, rake, and multiway betting trees.
