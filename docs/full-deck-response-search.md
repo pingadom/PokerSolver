@@ -142,3 +142,27 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResp
 ```
 
 Repeat each profile with the other response seed for the table. Before choosing a target-specific default, expand menu and response-seed coverage and measure elapsed runtime as well as deal traversals. The more important product gates remain a broader physical-game quality bound and credible ranges, rake, and multiway betting trees.
+
+## Stratified held-out full-deck evaluation
+
+`PhysicalResponseHeldOutAudit` now offers `STRATIFIED_ROOT` for validation and confirmation. A batch visits **every legal weighted private-card deal once**, then independently samples the remaining physical cards and action draws. The batch's payoff difference is weighted by the root-deal probabilities; the paired standard error is calculated **across independent batches**, not across correlated trajectories within a batch. `SAMPLED_ROOT` remains the default. Both modes count actual trajectories, so a 25,000-trial 5×5 stratified run has 1,000 independent batches of 25 deals. Trial counts must form at least two complete batches. The weighted-deal unit test checks an exactly calculable preflop response with nonuniform deal weights: stratification recovers its exact mean and zero sampling error, while sampled-root evaluation has nonzero error.
+
+The benchmark below trains one fixed final-regret response per player, then evaluates it using eight independent seeds per mode with **equal trajectory counts**. It reports the observed standard deviation of estimated gain across seeds and the mean within-run paired standard error. Lower is better for precision; these are small diagnostic samples, not proof of a universally better estimator.
+
+| Synthetic range | Player | Trajectories per seed | Across-seed gain SD, sampled → stratified | Mean reported paired SE, sampled → stratified |
+| --- | --- | ---: | ---: | ---: |
+| 3×3 | BB | 18,000 | 0.0579 → 0.0687bb | 0.0638 → 0.0624bb |
+| 3×3 | BTN | 18,000 | 0.0373 → 0.0540bb | 0.0363 → 0.0385bb |
+| 5×5 | BB | 25,000 | 0.0440 → 0.0348bb | 0.0382 → 0.0378bb |
+| 5×5 | BTN | 25,000 | 0.0379 → 0.0279bb | 0.0328 → 0.0345bb |
+
+The 3×3 and 5×5 patterns differ. Stratification removes private-deal sampling variance, but public-card and action variance dominate some comparisons, and only 8 replications are shown. The two modes' mean gains also differ with finite sampling; neither supplies a full-deck best-response upper bound. A few response paths used baseline fallback in both modes. Thus stratification is an optional precision diagnostic, not a reason to alter the default evaluator or release strategic charts. An exact-game root-weight test prevents a misleading SE calculation that would treat trajectories in the same batch as independent.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseEvaluationModes' '-Dexec.args=3000 5000 18000 42 3x3 final 8'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseEvaluationModes' '-Dexec.args=3000 5000 25000 42 5x5 final 8'
+```
+
+The validation/confirmation CLI accepts `stratified-eval` as its final argument after the response training chance mode, for example `... both sampled stratified-eval`. Candidate selection still uses validation alone; confirmation remains independent. Every validation and confirmation trial count must be divisible by the root-deal count. The CLI prints the independent batch counts. Existing commands retain sampled-root evaluation.
