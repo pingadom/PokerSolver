@@ -47,6 +47,29 @@ class PhysicalResponseStabilityAuditTest {
             assertEquals(
                     first.candidates().get(index).validation(),
                     changedConfirmation.candidates().get(index).validation());
+
+        var both =
+                PhysicalResponseStabilityAudit.assess(
+                        GAME,
+                        baseline,
+                        1,
+                        List.of(50),
+                        List.of(51L),
+                        500,
+                        500,
+                        53,
+                        54,
+                        List.of(
+                                PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE,
+                                PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET));
+        assertEquals(2, both.candidates().size());
+        assertEquals(
+                PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE,
+                both.candidates().get(0).variant());
+        assertEquals(
+                PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET,
+                both.candidates().get(1).variant());
+        assertTrue(both.selectedIndex() == 0 || both.selectedIndex() == 1);
     }
 
     @Test

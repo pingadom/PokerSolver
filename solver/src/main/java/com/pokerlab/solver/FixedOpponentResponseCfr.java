@@ -17,6 +17,7 @@ import java.util.SplittableRandom;
 public final class FixedOpponentResponseCfr<S> {
     public record Result(
             CfrSolution response,
+            CfrSolution finalRegretPolicy,
             long fixedOpponentQueries,
             long missingFixedOpponentQueries,
             int queriedFixedOpponentInformationSets,
@@ -62,6 +63,14 @@ public final class FixedOpponentResponseCfr<S> {
                         total == 0 ? 1.0 / actions.size() : averageSum[index] / total);
             return Map.copyOf(result);
         }
+
+        Map<String, Double> finalRegretStrategy() {
+            double[] probabilities = currentStrategy();
+            Map<String, Double> result = new LinkedHashMap<>();
+            for (int index = 0; index < actions.size(); index++)
+                result.put(actions.get(index), probabilities[index]);
+            return Map.copyOf(result);
+        }
     }
 
     private final CfrGame<S> game;
@@ -103,8 +112,11 @@ public final class FixedOpponentResponseCfr<S> {
         }
         Map<String, Map<String, Double>> average = new LinkedHashMap<>();
         nodes.forEach((key, node) -> average.put(key, node.averageStrategy()));
+        Map<String, Map<String, Double>> finalRegret = new LinkedHashMap<>();
+        nodes.forEach((key, node) -> finalRegret.put(key, node.finalRegretStrategy()));
         return new Result(
                 new CfrSolution(iterations, average),
+                new CfrSolution(iterations, finalRegret),
                 opponentQueries,
                 missingOpponentQueries,
                 queriedOpponentKeys.size(),
