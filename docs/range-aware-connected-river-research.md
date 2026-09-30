@@ -236,3 +236,28 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 The next gate is an **on-policy connected-game audit**: sample reaches from the learned preflop and postflop strategies, evaluate BB decisions against BTN responses from the same policy at those reached public histories, and quantify missing-policy mass and one-decision deviation on independent physical runouts. Only then can the response abstraction be judged as part of a connected solver rather than as a transfer onto a synthetic reach model.
+
+## On-policy connected river response and one-decision audit
+
+`PhysicalConnectedRiverResponseAudit` now samples **physical hands and public runouts through the primary connected CFR average strategy**. It stops at the first BB river decision. A trajectory with an unlearned earlier action policy is discarded and counted, instead of receiving a uniform continuation. At the reached state, it requires a learned BB check/bet strategy, learned BTN call/fold strategies from **both** independently solved policies, and learned primary-policy actions after a BB check. Missing keys are counted separately; this audit never invokes the pair-call fallback used by the earlier off-policy transfer experiment. The BTN response key uses its own cards and public history, without the BB's hidden cards.
+
+For each eligible physical state, the audit evaluates the entire short river tree exactly: BB bet followed by BTN call/fold, or BB check followed by BTN check/bet and then BB call/fold. The alternate solution changes **only BTN's response to a BB bet**. The primary solution generates reach, the BB reference mix and the other continuations. Alternating observations within each BB information set select check/bet on discovery states and score that selection on held-out states against the primary BTN response. This avoids choosing an action with knowledge of the held-out private hand. A same-solution control yields exactly zero response and selection difference. The reported paired standard error conditions on the two fixed solutions and discovery split; it does not cover CFR retraining, game abstraction, or selection across tested seeds.
+
+With 3,000 sampled-chance vanilla CFR iterations **per independent solve**, 50,000 attempted deals, ten discovery states required per BB information set, and coarse-board information sets:
+
+| Range | Seed | River reaches | Fully evaluated | Supported held-out / held-out | Mean absolute BTN call difference | Alternate-informed minus primary-informed held-out BB gain |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 3×3 | 42 | 13,318 | 13,317 | 5,369 / 6,470 | 0.0787 | −0.1021bb (paired SE 0.0283bb) |
+| 3×3 | 43 | 12,541 | 12,537 | 4,976 / 6,091 | 0.0857 | −0.0077bb (paired SE 0.0341bb) |
+| 5×5 | 42 | 11,178 | 11,177 | 4,188 / 5,402 | 0.0880 | −0.0668bb (paired SE 0.0319bb) |
+| 5×5 | 43 | 10,998 | 10,995 | 4,031 / 5,291 | 0.0926 | +0.0239bb (paired SE 0.0465bb) |
+
+Earlier-policy coverage was complete on these four runs, but river coverage was not universal: one missing BB root key on each seed-42 run, and up to four missing BTN response keys in a run. The audit reports those counts instead of hiding them behind rounded percentages. The 5×5 seed-42 paired normal-approximation interval is [−0.1292, −0.0043]bb; seed 43's is [−0.0672, +0.1150]bb. The direction changes across seeds, and the primary-informed action itself sometimes underperforms the original primary mix on held-out hands. Thus the result does **not** validate the learned river policy for trainer grading. It is also one river decision conditional on a primary-policy reach, not a full-game best response or a Nash-gap estimate. The synthetic 3×3/5×5 ranges and coarse observation remain far from general 6-max cash.
+
+Reproduce after compiling (repeat with seed `43` and range `3x3`):
+
+```powershell
+java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solver.BenchmarkPhysicalConnectedRiverResponse 3000 50000 42 10 5x5
+```
+
+The next solver gate is a multi-seed and iteration-budget stability study that includes full connected-game deviation measurement and an independently justified response-aware information set. A held-out gain at this one decision cannot substitute for an exploitability bound, so no new trainer pack should be promoted from this audit.

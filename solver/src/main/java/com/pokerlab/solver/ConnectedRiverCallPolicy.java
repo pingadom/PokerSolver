@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.OptionalDouble;
 import java.util.Set;
 
 /**
@@ -89,6 +90,15 @@ public final class ConnectedRiverCallPolicy implements RiverCallPolicy {
     @Override
     public double callProbability(
             WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState) {
+        OptionalDouble learned = learnedCallProbability(button, board, publicRiverState);
+        return learned.isPresent()
+                ? learned.getAsDouble()
+                : fallback.callProbability(button, board, publicRiverState);
+    }
+
+    /** Returns no value for an unvisited BTN information set; never applies the fallback. */
+    public OptionalDouble learnedCallProbability(
+            WeightedCombo button, List<Card> board, PublicRiverHistory publicRiverState) {
         if (button == null
                 || board == null
                 || publicRiverState == null
@@ -122,7 +132,7 @@ public final class ConnectedRiverCallPolicy implements RiverCallPolicy {
         Map<String, Double> actions = solution.at(1, key);
         queries++;
         queriedKeys.add(key);
-        if (actions == null) return fallback.callProbability(button, board, publicRiverState);
+        if (actions == null) return OptionalDouble.empty();
         if (actions.size() != 2
                 || actions.get("c") == null
                 || actions.get("f") == null
@@ -134,6 +144,6 @@ public final class ConnectedRiverCallPolicy implements RiverCallPolicy {
             throw new IllegalArgumentException("Invalid learned BTN river call policy: " + key);
         learnedQueries++;
         learnedKeys.add(key);
-        return actions.get("c");
+        return OptionalDouble.of(actions.get("c"));
     }
 }

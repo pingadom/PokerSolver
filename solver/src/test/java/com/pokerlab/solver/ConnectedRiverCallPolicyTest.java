@@ -51,6 +51,12 @@ class ConnectedRiverCallPolicyTest {
         assertEquals(1, coverage.learnedInformationSets());
         assertEquals(2.0 / 3, coverage.querySupportRate(), 1e-12);
         assertEquals(0.5, coverage.informationSetSupportRate(), 1e-12);
+        assertTrue(
+                policy.learnedCallProbability(
+                                button,
+                                differentBoard,
+                                publicRiver(bigBlind, button, differentBoard))
+                        .isEmpty());
     }
 
     @Test
