@@ -108,4 +108,36 @@ class PhysicalResponseStabilityAuditTest {
                         PhysicalResponseStabilityAudit.assess(
                                 GAME, empty, 0, List.of(10), List.of(51L), 1, 10, 53, 54));
     }
+
+    @Test
+    void stratifiedValidationAndConfirmationKeepIndependentBatchCounts() {
+        var baseline =
+                new CfrSolver<>(
+                                GAME,
+                                CfrSolver.Variant.VANILLA,
+                                CfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                                42)
+                        .solve(100);
+        int deals = GAME.chanceOutcomes(GAME.initialState()).size();
+        var report =
+                PhysicalResponseStabilityAudit.assess(
+                        GAME,
+                        baseline,
+                        1,
+                        List.of(30),
+                        List.of(51L),
+                        deals * 10,
+                        deals * 20,
+                        53,
+                        54,
+                        List.of(PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET),
+                        FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL,
+                        PhysicalResponseHeldOutAudit.EvaluationMode.STRATIFIED_ROOT);
+        assertEquals(
+                PhysicalResponseHeldOutAudit.EvaluationMode.STRATIFIED_ROOT,
+                report.evaluationMode());
+        assertEquals(10, report.selected().validation().independentBatches());
+        assertEquals(20, report.selected().confirmation().independentBatches());
+        assertEquals(deals * 20, report.selected().confirmation().trials());
+    }
 }

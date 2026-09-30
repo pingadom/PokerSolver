@@ -39,6 +39,7 @@ public final class PhysicalResponseStabilityAudit {
             String gameHash,
             int targetPlayer,
             FixedOpponentResponseCfr.ChanceMode chanceMode,
+            PhysicalResponseHeldOutAudit.EvaluationMode evaluationMode,
             long validationSeed,
             long confirmationSeed,
             int selectedIndex,
@@ -111,12 +112,41 @@ public final class PhysicalResponseStabilityAudit {
             long confirmationSeed,
             List<PolicyVariant> variants,
             FixedOpponentResponseCfr.ChanceMode chanceMode) {
+        return assess(
+                game,
+                baseline,
+                target,
+                responseBudgets,
+                responseSeeds,
+                validationTrials,
+                confirmationTrials,
+                validationSeed,
+                confirmationSeed,
+                variants,
+                chanceMode,
+                PhysicalResponseHeldOutAudit.EvaluationMode.SAMPLED_ROOT);
+    }
+
+    public static Report assess(
+            ButtonBigBlindPhysicalDeckGame game,
+            CfrSolution baseline,
+            int target,
+            List<Integer> responseBudgets,
+            List<Long> responseSeeds,
+            int validationTrials,
+            int confirmationTrials,
+            long validationSeed,
+            long confirmationSeed,
+            List<PolicyVariant> variants,
+            FixedOpponentResponseCfr.ChanceMode chanceMode,
+            PhysicalResponseHeldOutAudit.EvaluationMode evaluationMode) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(responseBudgets, "responseBudgets");
         Objects.requireNonNull(responseSeeds, "responseSeeds");
         Objects.requireNonNull(variants, "variants");
         Objects.requireNonNull(chanceMode, "chanceMode");
+        Objects.requireNonNull(evaluationMode, "evaluationMode");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
         if (responseBudgets.isEmpty() || responseSeeds.isEmpty() || variants.isEmpty())
@@ -168,7 +198,8 @@ public final class PhysicalResponseStabilityAudit {
                                     policy,
                                     target,
                                     validationTrials,
-                                    validationSeed);
+                                    validationSeed,
+                                    evaluationMode);
                     // Selection is frozen before the confirmation stream is evaluated.
                     if (validation.responseGainBb() > bestValidationGain) {
                         bestValidationGain = validation.responseGainBb();
@@ -187,7 +218,8 @@ public final class PhysicalResponseStabilityAudit {
                             draft.policy(),
                             target,
                             confirmationTrials,
-                            confirmationSeed);
+                            confirmationSeed,
+                            evaluationMode);
             candidates.add(
                     new Candidate(
                             draft.budget(),
@@ -204,6 +236,7 @@ public final class PhysicalResponseStabilityAudit {
                 game.contentHash(),
                 target,
                 chanceMode,
+                evaluationMode,
                 validationSeed,
                 confirmationSeed,
                 selectedIndex,

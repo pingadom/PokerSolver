@@ -8,6 +8,11 @@ import java.util.SplittableRandom;
  * Missing response keys use the baseline; missing baseline keys use explicit uniform actions.
  */
 public final class PhysicalResponseHeldOutAudit {
+    public enum EvaluationMode {
+        SAMPLED_ROOT,
+        STRATIFIED_ROOT
+    }
+
     public record Report(
             String gameHash,
             int targetPlayer,
@@ -21,7 +26,9 @@ public final class PhysicalResponseHeldOutAudit {
             long responseMissingBaselineDecisions,
             long responseFallbackToBaselineDecisions,
             int baselineFallbackTrajectories,
-            int responseFallbackTrajectories) {
+            int responseFallbackTrajectories,
+            EvaluationMode evaluationMode,
+            int independentBatches) {
         public double approximateGainLower95Bb() {
             return responseGainBb - 1.96 * pairedStandardErrorBb;
         }
@@ -45,13 +52,44 @@ public final class PhysicalResponseHeldOutAudit {
             int target,
             int trials,
             long seed) {
+        return assess(game, baseline, response, target, trials, seed, EvaluationMode.SAMPLED_ROOT);
+    }
+
+    public static Report assess(
+            ButtonBigBlindPhysicalDeckGame game,
+            CfrSolution baseline,
+            CfrSolution response,
+            int target,
+            int trials,
+            long seed,
+            EvaluationMode mode) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(response, "response");
+        Objects.requireNonNull(mode, "mode");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
         if (trials < 2 || trials > 1_000_000)
             throw new IllegalArgumentException("Expected 2-1000000 held-out trials");
+        var rootDeals =
+                mode == EvaluationMode.STRATIFIED_ROOT
+                        ? game.chanceOutcomes(game.initialState())
+                        : null;
+        int batchSize = rootDeals == null ? 1 : rootDeals.size();
+        if (rootDeals != null) {
+            if (batchSize == 0 || trials % batchSize != 0 || trials / batchSize < 2)
+                throw new IllegalArgumentException(
+                        "Stratified trials must contain at least two complete root-deal batches");
+            double mass = 0;
+            for (var deal : rootDeals) {
+                if (!Double.isFinite(deal.probability()) || deal.probability() < 0)
+                    throw new IllegalArgumentException("Invalid root-deal probability");
+                mass += deal.probability();
+            }
+            if (Math.abs(mass - 1) > 1e-9)
+                throw new IllegalArgumentException("Root-deal probabilities must sum to one");
+        }
+        int batches = trials / batchSize;
         var random = new SplittableRandom(seed);
         var baselineUtility = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
         var responseUtility = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
@@ -61,20 +99,46 @@ public final class PhysicalResponseHeldOutAudit {
         long responseFallback = 0;
         int baselineFallbackPaths = 0;
         int responseFallbackPaths = 0;
-        for (int trial = 0; trial < trials; trial++) {
-            var deal = game.sampleChanceOutcome(game.initialState(), random.nextDouble()).state();
-            long continuationSeed = random.nextLong();
-            var original = rollout(game, baseline, response, target, deal, continuationSeed, false);
-            var candidate = rollout(game, baseline, response, target, deal, continuationSeed, true);
-            baselineUtility.add(original.targetUtilityBb());
-            responseUtility.add(candidate.targetUtilityBb());
-            pairedGain.add(candidate.targetUtilityBb() - original.targetUtilityBb());
-            baselineMissing += original.missingBaselineDecisions();
-            responseMissing += candidate.missingBaselineDecisions();
-            responseFallback += candidate.responseFallbackDecisions();
-            if (original.missingBaselineDecisions() > 0) baselineFallbackPaths++;
-            if (candidate.missingBaselineDecisions() > 0
-                    || candidate.responseFallbackDecisions() > 0) responseFallbackPaths++;
+        for (int batch = 0; batch < batches; batch++) {
+            double batchBaseline = 0;
+            double batchResponse = 0;
+            for (int index = 0; index < batchSize; index++) {
+                var deal =
+                        rootDeals == null
+                                ? game.sampleChanceOutcome(game.initialState(), random.nextDouble())
+                                : rootDeals.get(index);
+                double weight = rootDeals == null ? 1 : deal.probability();
+                long continuationSeed = random.nextLong();
+                var original =
+                        rollout(
+                                game,
+                                baseline,
+                                response,
+                                target,
+                                deal.state(),
+                                continuationSeed,
+                                false);
+                var candidate =
+                        rollout(
+                                game,
+                                baseline,
+                                response,
+                                target,
+                                deal.state(),
+                                continuationSeed,
+                                true);
+                batchBaseline += weight * original.targetUtilityBb();
+                batchResponse += weight * candidate.targetUtilityBb();
+                baselineMissing += original.missingBaselineDecisions();
+                responseMissing += candidate.missingBaselineDecisions();
+                responseFallback += candidate.responseFallbackDecisions();
+                if (original.missingBaselineDecisions() > 0) baselineFallbackPaths++;
+                if (candidate.missingBaselineDecisions() > 0
+                        || candidate.responseFallbackDecisions() > 0) responseFallbackPaths++;
+            }
+            baselineUtility.add(batchBaseline);
+            responseUtility.add(batchResponse);
+            pairedGain.add(batchResponse - batchBaseline);
         }
         return new Report(
                 game.contentHash(),
@@ -89,7 +153,9 @@ public final class PhysicalResponseHeldOutAudit {
                 responseMissing,
                 responseFallback,
                 baselineFallbackPaths,
-                responseFallbackPaths);
+                responseFallbackPaths,
+                mode,
+                batches);
     }
 
     private static Rollout rollout(
