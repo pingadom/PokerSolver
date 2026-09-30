@@ -261,3 +261,27 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 The next solver gate is a multi-seed and iteration-budget stability study that includes full connected-game deviation measurement and an independently justified response-aware information set. A held-out gain at this one decision cannot substitute for an exploitability bound, so no new trainer pack should be promoted from this audit.
+
+### Independent-solve training-budget sweep
+
+`PhysicalConnectedRiverResponseSweep` repeats the same audit at selected iteration budgets and independent solver seeds. Its CSV benchmark includes learned information-set counts, every missing-policy category, river reach, discovery/held-out support, response disagreement and paired held-out BB choice difference. Each budget solves its own primary and alternate strategy from the same declared seeds and reuses the audit's physical-deal seed. **The reached state distribution changes with training**, so a cross-budget trend is descriptive rather than a paired estimate of improvement on an identical state population.
+
+With 50,000 attempted deals and ten required discovery states per BB information set, seeds 42 / 43 respectively gave:
+
+| Range | Iterations per solve | Mean absolute BTN call-frequency difference, seeds 42 / 43 | Alternate-informed minus primary-informed held-out BB gain, seeds 42 / 43 |
+| --- | ---: | ---: | ---: |
+| 3×3 | 300 | 0.1428 / 0.1370 | −0.2395 / −0.2536bb |
+| 3×3 | 1,000 | 0.1211 / 0.1107 | −0.1597 / −0.0732bb |
+| 3×3 | 3,000 | 0.0787 / 0.0857 | −0.1021 / −0.0077bb |
+| 5×5 | 300 | 0.1315 / 0.1791 | +0.0093 / −0.3182bb |
+| 5×5 | 1,000 | 0.1137 / 0.1207 | −0.0335 / −0.0558bb |
+| 5×5 | 3,000 | 0.0880 / 0.0926 | −0.0668 / +0.0239bb |
+
+The response mismatch falls with budget in these four seed/range pairs. That does not translate into a monotonic or consistently positive BB decision gain. At 300 iterations, 3×3 has 18–55 discarded reaches for missing earlier policies and 5×5 has 18–54; by 1,000 iterations both fixtures have zero discarded earlier reaches in these runs. River action keys can still be missing at 3,000 iterations. In the 5×5 seed-42 run, the 3,000-iteration held-out difference is −0.0668bb with conditional paired SE 0.0319bb, while seed 43 is +0.0239bb with SE 0.0465bb. Two seeds and conditional intervals do not establish a population trend or an equilibrium bound. The next validation should enlarge the independent-solve seed sweep and measure connected-game deviations at earlier streets on the same physical model.
+
+Reproduce from `solver/` after compiling, one profile at a time:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalConnectedRiverResponseSweep' '-Dexec.args=3x3 300,1000,3000 42,43 50000 10'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalConnectedRiverResponseSweep' '-Dexec.args=5x5 300,1000,3000 42,43 50000 10'
+```
