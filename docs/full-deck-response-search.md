@@ -52,4 +52,42 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 43 5x5'
 ```
 
-Repeat both baseline seeds (`42`, `43`) and range profiles (`3x3`, `5x5`) for the table. The next validation step needs materially more precise confirmation and a defensible way to bound the strongest possible deviation across full physical chance, while the game model itself still needs real range provenance and realistic multiway action trees.
+Repeat both base seeds (`42`, `43`) and range profiles (`3x3`, `5x5`) for the table. The follow-up below calibrates response-search error against exact answers on a restricted chance game and adds a second policy variant. Beyond that, validation still needs materially more precise confirmation and a defensible bound on the strongest possible deviation across full physical chance; the game model also needs real range provenance and realistic multiway action trees.
+
+## Exact-game calibration of response optimization
+
+`FiniteChanceResponseCalibration` evaluates the response search against the **exact** information-set best response on a finite physical-card chance subgame. Unlike a held-out rollout, this directly measures optimizer shortfall in that restricted game. The baseline is solved on that same two-quantile-per-street subgame for 300 CFR+ iterations, so its complete policy has zero missing keys. For each player, two response seeds are tested at 10,000 and 50,000 iterations. The calibration compares the usual reach-weighted average with the final regret-matched policy; the latter is exported as a second, explicitly named candidate rather than silently replacing the original.
+
+| Restricted game | Player | Exact response gain over baseline | Average shortfall at 10k → 50k, bb (two seeds) | Final-regret shortfall at 10k → 50k, bb (two seeds) |
+| --- | --- | ---: | --- | --- |
+| 3×3, chance seed 142 | BB | +0.002144bb | 0.0154–0.0203 → 0.0045–0.0098 | 0.0017–0.0065 → 0.0019–0.0065 |
+| 3×3, chance seed 142 | BTN | +0.000910bb | 0.0014–0.0081 → 0.0008–0.0022 | 0.0007–0.0008 → 0.0005–0.0008 |
+| 5×5, chance seed 142 | BB | +0.005216bb | 0.0315–0.0318 → 0.0135–0.0137 | 0.0049–0.0148 → 0.0063–0.0070 |
+| 5×5, chance seed 142 | BTN | +0.002170bb | 0.0279–0.0562 → 0.0073–0.0123 | 0.0013–0.0057 → 0.0013–0.0022 |
+
+All 16 average/final-regret pairs have complete target-key coverage and zero fixed-opponent fallback queries. In every pair, the final-regret policy has a smaller exact-game shortfall, often by much more than the baseline's total exact response gain. This is an optimizer finding on **one declared chance menu**, not evidence that the final policy always wins on the full deck. Final-regret policies can be more volatile, so the physical-deck follow-up below includes both variants and selects between them using validation hands.
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResponseCalibration' '-Dexec.args=300 10000 50000 2 42 142 3x3'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkFiniteChanceResponseCalibration' '-Dexec.args=300 10000 50000 2 42 142 5x5'
+```
+
+## Full-deck confirmation with both response policies
+
+The same stability audit can include both the averaged and final-regret policies for each of the two budgets and training seeds: eight candidates per player. Training still happens only four times per player; the two policies share each run's regrets. Validation selects one candidate before confirmation on independent full-deck hands. The earlier four-candidate, average-only table above remains reproducible with the default CLI mode.
+
+| Synthetic range | Base seed | Selected BB (budget, variant) | BB confirmation gain, bb (paired SE) | Selected BTN (budget, variant) | BTN confirmation gain, bb (paired SE) |
+| --- | ---: | --- | ---: | --- | ---: |
+| 3×3 | 42 | 50k, final regret | +0.2158 (0.0632) | 50k, final regret | +0.0751 (0.0360) |
+| 3×3 | 43 | 50k, final regret | −0.0346 (0.0496) | 50k, final regret | +0.0448 (0.0363) |
+| 5×5 | 42 | 10k, final regret | −0.0283 (0.0448) | 50k, final regret | +0.0884 (0.0366) |
+| 5×5 | 43 | 50k, final regret | +0.0721 (0.0410) | 50k, average | +0.0532 (0.0293) |
+
+Three of the eight **validation-selected** candidates have nominal positive 95% confirmation intervals: both players on 3×3 seed 42 and BTN on 5×5 seed 42. For 3×3 seed-42 BB, the interval is [+0.0920, +0.3397]bb with zero fallback paths; that response gives concrete evidence of exploitable value in this synthetic full-deck model. The other selected results are unresolved, including 5×5 seed-43 BTN even though some *nonselected* final-regret policies score higher on confirmation. Those nonselected scores cannot replace the validation winner after inspection. The eight nominal intervals are unadjusted for multiple comparisons and do not include response-training or baseline-solve uncertainty. The result still is **not** a full-deck best-response upper bound, a general 6-max strategy, or trainer-pack admission.
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 3x3 both'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 43 5x5 both'
+```
+
+Repeat both base seeds and profiles to obtain the table. The exact-subgame calibration shows that sampled response optimization error can be larger than the true deviation on a small solved game. The full-deck split shows that retaining the final-regret policy can also uncover deviations that the average misses. The next backend task is to reduce and bound response-search error on broader physical chance, then replace synthetic ranges and fixed bet sizes before publishing strategic training advice.

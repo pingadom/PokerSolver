@@ -11,15 +11,23 @@ import java.util.Objects;
  * scores describe seed/budget sensitivity; they must not be used to reselect a winner.
  */
 public final class PhysicalResponseStabilityAudit {
+    public enum PolicyVariant {
+        AVERAGE,
+        FINAL_REGRET
+    }
+
     private record Draft(
             int budget,
             long seed,
+            PolicyVariant variant,
             FixedOpponentResponseCfr.Result trained,
+            CfrSolution policy,
             PhysicalResponseHeldOutAudit.Report validation) {}
 
     public record Candidate(
             int responseIterations,
             long responseSeed,
+            PolicyVariant variant,
             int learnedInformationSets,
             long missingOpponentQueries,
             int missingOpponentInformationSets,
@@ -50,19 +58,49 @@ public final class PhysicalResponseStabilityAudit {
             int confirmationTrials,
             long validationSeed,
             long confirmationSeed) {
+        return assess(
+                game,
+                baseline,
+                target,
+                responseBudgets,
+                responseSeeds,
+                validationTrials,
+                confirmationTrials,
+                validationSeed,
+                confirmationSeed,
+                List.of(PolicyVariant.AVERAGE));
+    }
+
+    public static Report assess(
+            ButtonBigBlindPhysicalDeckGame game,
+            CfrSolution baseline,
+            int target,
+            List<Integer> responseBudgets,
+            List<Long> responseSeeds,
+            int validationTrials,
+            int confirmationTrials,
+            long validationSeed,
+            long confirmationSeed,
+            List<PolicyVariant> variants) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(responseBudgets, "responseBudgets");
         Objects.requireNonNull(responseSeeds, "responseSeeds");
+        Objects.requireNonNull(variants, "variants");
         if (target != 0 && target != 1)
             throw new IllegalArgumentException("Target player must be 0 or 1");
-        if (responseBudgets.isEmpty() || responseSeeds.isEmpty())
-            throw new IllegalArgumentException("Expected nonempty response budgets and seeds");
-        if ((long) responseBudgets.size() * responseSeeds.size() > 12)
+        if (responseBudgets.isEmpty() || responseSeeds.isEmpty() || variants.isEmpty())
+            throw new IllegalArgumentException(
+                    "Expected nonempty response budgets, seeds and variants");
+        if ((long) responseBudgets.size() * responseSeeds.size() * variants.size() > 12)
             throw new IllegalArgumentException("At most 12 response candidates are supported");
         if (new HashSet<>(responseBudgets).size() != responseBudgets.size()
-                || new HashSet<>(responseSeeds).size() != responseSeeds.size())
-            throw new IllegalArgumentException("Response budgets and seeds must be distinct");
+                || new HashSet<>(responseSeeds).size() != responseSeeds.size()
+                || new HashSet<>(variants).size() != variants.size())
+            throw new IllegalArgumentException(
+                    "Response budgets, seeds and variants must be distinct");
+        if (variants.stream().anyMatch(Objects::isNull))
+            throw new IllegalArgumentException("Response variants cannot be null");
         if (validationSeed == confirmationSeed
                 || responseSeeds.contains(validationSeed)
                 || responseSeeds.contains(confirmationSeed))
@@ -87,20 +125,26 @@ public final class PhysicalResponseStabilityAudit {
             for (long seed : responseSeeds) {
                 var trained =
                         new FixedOpponentResponseCfr<>(game, baseline, target, seed).solve(budget);
-                var validation =
-                        PhysicalResponseHeldOutAudit.assess(
-                                game,
-                                baseline,
-                                trained.response(),
-                                target,
-                                validationTrials,
-                                validationSeed);
-                // Selection is frozen before the confirmation stream is evaluated.
-                if (validation.responseGainBb() > bestValidationGain) {
-                    bestValidationGain = validation.responseGainBb();
-                    selectedIndex = drafts.size();
+                for (var variant : variants) {
+                    var policy =
+                            variant == PolicyVariant.AVERAGE
+                                    ? trained.response()
+                                    : trained.finalRegretPolicy();
+                    var validation =
+                            PhysicalResponseHeldOutAudit.assess(
+                                    game,
+                                    baseline,
+                                    policy,
+                                    target,
+                                    validationTrials,
+                                    validationSeed);
+                    // Selection is frozen before the confirmation stream is evaluated.
+                    if (validation.responseGainBb() > bestValidationGain) {
+                        bestValidationGain = validation.responseGainBb();
+                        selectedIndex = drafts.size();
+                    }
+                    drafts.add(new Draft(budget, seed, variant, trained, policy, validation));
                 }
-                drafts.add(new Draft(budget, seed, trained, validation));
             }
         }
         List<Candidate> candidates = new ArrayList<>();
@@ -109,7 +153,7 @@ public final class PhysicalResponseStabilityAudit {
                     PhysicalResponseHeldOutAudit.assess(
                             game,
                             baseline,
-                            draft.trained().response(),
+                            draft.policy(),
                             target,
                             confirmationTrials,
                             confirmationSeed);
@@ -117,7 +161,8 @@ public final class PhysicalResponseStabilityAudit {
                     new Candidate(
                             draft.budget(),
                             draft.seed(),
-                            draft.trained().response().strategy().size(),
+                            draft.variant(),
+                            draft.policy().strategy().size(),
                             draft.trained().missingFixedOpponentQueries(),
                             draft.trained().missingFixedOpponentInformationSets(),
                             draft.validation(),
