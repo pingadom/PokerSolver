@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.IntFunction;
 
 /**
  * Bridges a completed six-seat betting round to per-seat chip payoffs. All-in showdowns use a
@@ -42,6 +43,28 @@ public final class SixMaxPreflopTerminalPayoff {
                 && state.status() != SixMaxPreflopBetting.Status.ALL_IN_SHOWDOWN)
             throw new IllegalArgumentException("Betting round has no terminal preflop payoff");
         validateDeal(dealtBySeat);
+        return settleTerminal(state, rakeRule, mask -> showdown.estimate(dealtBySeat, mask));
+    }
+
+    /** Settles a fold win from public betting history alone, without invented hidden cards. */
+    public static Result settleUncontested(
+            SixMaxPreflopBetting.State state, CashRakeRule rakeRule) {
+        Objects.requireNonNull(state, "state");
+        Objects.requireNonNull(rakeRule, "rakeRule");
+        if (state.status() != SixMaxPreflopBetting.Status.UNCONTESTED)
+            throw new IllegalArgumentException("Expected an uncontested preflop pot");
+        return settleTerminal(
+                state,
+                rakeRule,
+                mask -> {
+                    throw new IllegalStateException("An uncontested pot needs no showdown");
+                });
+    }
+
+    private static Result settleTerminal(
+            SixMaxPreflopBetting.State state,
+            CashRakeRule rakeRule,
+            IntFunction<MultiwayShowdownEstimate> showdown) {
         double[] committed = new double[Seat.values().length];
         int activeMask = 0;
         for (Seat seat : Seat.values()) {
@@ -58,7 +81,7 @@ public final class SixMaxPreflopTerminalPayoff {
                         committed,
                         activeMask,
                         0,
-                        mask -> showdown.estimate(dealtBySeat, mask),
+                        showdown,
                         rakeRule,
                         state.status() == SixMaxPreflopBetting.Status.ALL_IN_SHOWDOWN);
         List<Double> utilities = new ArrayList<>(committed.length);

@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.pokerlab.core.card.Card;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
@@ -47,6 +49,7 @@ class SixMaxPreflopTerminalPayoffTest {
                 };
         var folded = betting.apply(decision, move(UTG, FOLD, 0));
         var foldPayoff = SixMaxPreflopTerminalPayoff.settle(folded, dealt(), rule, oracle);
+        assertEquals(foldPayoff, SixMaxPreflopTerminalPayoff.settleUncontested(folded, rule));
         assertEquals(UNCONTESTED, foldPayoff.status());
         assertEquals(0, foldPayoff.rakeBb());
         assertEquals(23.5, foldPayoff.utilitiesBb().get(BTN.ordinal()), 1e-12);
@@ -56,6 +59,9 @@ class SixMaxPreflopTerminalPayoffTest {
         var shove = betting.apply(decision, move(UTG, RAISE_TO, 100));
         var called = betting.apply(shove, move(BTN, CALL, 100));
         var payoff = SixMaxPreflopTerminalPayoff.settle(called, dealt(), rule, oracle);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxPreflopTerminalPayoff.settleUncontested(called, rule));
         assertEquals(ALL_IN_SHOWDOWN, payoff.status());
         assertEquals(201.5, called.potBb());
         assertEquals(1, payoff.rakeBb(), 1e-12);
@@ -110,6 +116,48 @@ class SixMaxPreflopTerminalPayoffTest {
                 201.5 * shares[BTN.ordinal()] - 100, payoff.utilitiesBb().get(BTN.ordinal()), 1e-8);
         assertEquals(0, sum(payoff.utilitiesBb()), 1e-8);
         assertEquals(0, payoff.maximumPayoffStandardErrorBb());
+    }
+
+    @Test
+    void allThirtyTwoShoveResponsesMatchTheIndependentMultiwayGame() {
+        var seats = Arrays.asList(PreflopAllInSpot.Seat.values());
+        var hands = dealt();
+        var ranges = hands.stream().map(List::of).toList();
+        var commitments = List.of(100.0, 0.0, 0.0, 0.0, 0.5, 1.0);
+        var oracle = new ExactMultiwayShowdownOracle();
+        var noRakeGame = new MultiwayPreflopCallGame(seats, ranges, commitments, 100, 0, oracle);
+        var rule = new CashRakeRule(0.05, 1, true);
+        var rakedGame =
+                new MultiwayPreflopCallGame(
+                        seats, ranges, commitments, Collections.nCopies(6, 100.0), 0, oracle, rule);
+        var betting = game();
+        for (int calls = 0; calls < 32; calls++) {
+            var bettingState = betting.apply(betting.initialState(), move(UTG, RAISE_TO, 100));
+            var noRakeState =
+                    noRakeGame.chanceOutcomes(noRakeGame.initialState()).getFirst().state();
+            var rakedState = rakedGame.chanceOutcomes(rakedGame.initialState()).getFirst().state();
+            for (int responder = 1; responder < 6; responder++) {
+                boolean call = (calls & (1 << (responder - 1))) != 0;
+                bettingState =
+                        betting.apply(
+                                bettingState,
+                                move(seats.get(responder), call ? CALL : FOLD, call ? 100 : 0));
+                noRakeState = noRakeGame.afterAction(noRakeState, call ? "c" : "f");
+                rakedState = rakedGame.afterAction(rakedState, call ? "c" : "f");
+            }
+            var noRake =
+                    SixMaxPreflopTerminalPayoff.settle(
+                            bettingState, hands, CashRakeRule.none(), oracle);
+            var raked = SixMaxPreflopTerminalPayoff.settle(bettingState, hands, rule, oracle);
+            assertArrayEquals(
+                    noRakeGame.terminalUtilities(noRakeState),
+                    noRake.utilitiesBb().stream().mapToDouble(Double::doubleValue).toArray(),
+                    1e-8);
+            assertArrayEquals(
+                    rakedGame.terminalUtilities(rakedState),
+                    raked.utilitiesBb().stream().mapToDouble(Double::doubleValue).toArray(),
+                    1e-8);
+        }
     }
 
     @Test
