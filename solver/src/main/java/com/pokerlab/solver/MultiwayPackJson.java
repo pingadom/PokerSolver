@@ -66,6 +66,22 @@ public final class MultiwayPackJson {
         return MultiwayCallSpot.sha256(writeSidePot(pack));
     }
 
+    public static String writeRakedSidePot(MultiwayRakedSidePotPack pack) {
+        if (pack == null) throw new IllegalArgumentException("Pack is required");
+        pack.validate();
+        return serialize(pack);
+    }
+
+    public static MultiwayRakedSidePotPack readRakedSidePot(String json) {
+        MultiwayRakedSidePotPack pack = deserialize(json, MultiwayRakedSidePotPack.class);
+        pack.validate();
+        return pack;
+    }
+
+    public static String rakedSidePotContentHash(MultiwayRakedSidePotPack pack) {
+        return MultiwayCallSpot.sha256(writeRakedSidePot(pack));
+    }
+
     public static String writeSidePotSpot(MultiwaySidePotSpot spot) {
         if (spot == null) throw new IllegalArgumentException("Spot is required");
         return serialize(spot);

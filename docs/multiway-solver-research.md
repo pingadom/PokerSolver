@@ -95,3 +95,18 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkMultiwayRakeSens
 ```
 
 This closes a payoff-modeling gap, but it does not make the forced-shove synthetic ranges representative of a real six-max cash table. Before a raked strategy can enter a drill pack, the rake rule must be bound into a new spot/pack version and validated against a declared room/stakes schedule; reviewed ranges, a broader betting tree and postflop continuation remain necessary.
+
+## Saved raked research artifact
+
+The offline raked solve now has a separate `multiway-raked-side-pot-pack/v1` artifact. It embeds the validated **exact** no-rake side-pot source pack and its full content hash, the explicit rake fraction/cap/no-flop-no-drop rule, the new strategy, a finite-game NashConv, maximum terminal payoff sampling SE, and expected rake under the saved strategy. Loading checks the source schema, payoffs and hash, reconstructs every raked payoff without board enumeration, verifies complete strategy keys and probabilities, and recomputes the quality and house-share metrics. Changing the source payoffs, rake rule, strategy or metrics invalidates the pack. The entire new artifact also has its own SHA-256 content hash. This version accepts only exact-enumeration source payoffs and is marked `VALIDATION_ONLY`; the HTTP drill loader does not serve it.
+
+The [committed six-seat raked fixture](../solver/src/test/resources/six-seat-raked-side-pot-pack.json) uses the one-deal exact source, a hypothetical 5% rule capped at 1bb, no-flop-no-drop, and 500 CFR+ iterations. Its 31 exact showdown entries are reused rather than re-enumerated. The raked pack is 11,578 bytes, has NashConv **0.000239441bb**, expected rake **0.000018663bb**, zero payoff sampling SE, and content hash `165a9632591d0d2a1f6500c848c368b17be8858c4f29cd160688c8887ce1a054`. The small expected rake reflects that this narrow fixture almost always folds before a flop, not a realistic rake estimate.
+
+The same generator was also run against the existing 64-deal exact source. It produced a 492,328-byte local artifact in about 7 seconds without a new board enumeration: NashConv **0.000176808bb**, expected rake **0.500007335bb**, zero payoff SE. That larger output is reproducible but is not committed because it embeds a second copy of the roughly 489KB source table. From `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateMultiwayRakedSidePotPack' '-Dexec.args=src/test/resources/six-seat-side-pot-pack.json src/test/resources/six-seat-raked-side-pot-pack.json 0.05 1 true 500 2026-10-01T00:00:00Z'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateMultiwayRakedSidePotPack' '-Dexec.args=src/test/resources/six-seat-side-pot-diverse-pack.json output/six-seat-diverse-raked-pack.json 0.05 1 true 500 2026-10-01T00:00:00Z'
+```
+
+The committed pack is a correctness fixture, not a cash-game lesson. A real release still needs a verified room/stakes rake schedule, reviewed ranges, opens and re-raises, postflop continuation, and a publication gate specific to this raked game. No raked pack enters the public or opt-in trainer from this change.
