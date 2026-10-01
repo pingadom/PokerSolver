@@ -43,7 +43,8 @@ public final class PhysicalResponseStabilityAudit {
             long validationSeed,
             long confirmationSeed,
             int selectedIndex,
-            List<Candidate> candidates) {
+            List<Candidate> candidates,
+            PhysicalResponseActionIntegratedAudit.Report integratedConfirmation) {
         public Candidate selected() {
             return candidates.get(selectedIndex);
         }
@@ -140,6 +141,38 @@ public final class PhysicalResponseStabilityAudit {
             List<PolicyVariant> variants,
             FixedOpponentResponseCfr.ChanceMode chanceMode,
             PhysicalResponseHeldOutAudit.EvaluationMode evaluationMode) {
+        return assess(
+                game,
+                baseline,
+                target,
+                responseBudgets,
+                responseSeeds,
+                validationTrials,
+                confirmationTrials,
+                validationSeed,
+                confirmationSeed,
+                variants,
+                chanceMode,
+                evaluationMode,
+                0,
+                0);
+    }
+
+    public static Report assess(
+            ButtonBigBlindPhysicalDeckGame game,
+            CfrSolution baseline,
+            int target,
+            List<Integer> responseBudgets,
+            List<Long> responseSeeds,
+            int validationTrials,
+            int confirmationTrials,
+            long validationSeed,
+            long confirmationSeed,
+            List<PolicyVariant> variants,
+            FixedOpponentResponseCfr.ChanceMode chanceMode,
+            PhysicalResponseHeldOutAudit.EvaluationMode evaluationMode,
+            int integratedConfirmationTraversals,
+            long integratedConfirmationSeed) {
         Objects.requireNonNull(game, "game");
         Objects.requireNonNull(baseline, "baseline");
         Objects.requireNonNull(responseBudgets, "responseBudgets");
@@ -166,6 +199,14 @@ public final class PhysicalResponseStabilityAudit {
                 || responseSeeds.contains(confirmationSeed))
             throw new IllegalArgumentException(
                     "Training, validation and confirmation seeds differ");
+        if (integratedConfirmationTraversals != 0
+                && (integratedConfirmationTraversals < 2
+                        || integratedConfirmationTraversals > 100_000
+                        || integratedConfirmationSeed == validationSeed
+                        || integratedConfirmationSeed == confirmationSeed
+                        || responseSeeds.contains(integratedConfirmationSeed)))
+            throw new IllegalArgumentException(
+                    "Integrated confirmation needs 2-100000 traversals and a separate seed");
         if (validationTrials < 2
                 || validationTrials > 1_000_000
                 || confirmationTrials < 2
@@ -232,6 +273,17 @@ public final class PhysicalResponseStabilityAudit {
                             draft.validation(),
                             confirmation));
         }
+        PhysicalResponseActionIntegratedAudit.Report integratedConfirmation =
+                integratedConfirmationTraversals == 0
+                        ? null
+                        : PhysicalResponseActionIntegratedAudit.assess(
+                                game,
+                                baseline,
+                                drafts.get(selectedIndex).policy(),
+                                target,
+                                integratedConfirmationTraversals,
+                                integratedConfirmationSeed,
+                                evaluationMode);
         return new Report(
                 game.contentHash(),
                 target,
@@ -240,6 +292,7 @@ public final class PhysicalResponseStabilityAudit {
                 validationSeed,
                 confirmationSeed,
                 selectedIndex,
-                List.copyOf(candidates));
+                List.copyOf(candidates),
+                integratedConfirmation);
     }
 }

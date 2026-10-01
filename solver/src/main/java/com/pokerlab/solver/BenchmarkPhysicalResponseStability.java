@@ -8,9 +8,9 @@ public final class BenchmarkPhysicalResponseStability {
     private BenchmarkPhysicalResponseStability() {}
 
     public static void main(String[] args) {
-        if (args.length > 10)
+        if (args.length > 11)
             throw new IllegalArgumentException(
-                    "Usage: BenchmarkPhysicalResponseStability [baseline-iterations] [short-response-iterations] [long-response-iterations] [validation-trials] [confirmation-trials] [seed] [3x3|5x5] [average|both] [sampled|exact-root] [sampled-eval|stratified-eval]");
+                    "Usage: BenchmarkPhysicalResponseStability [baseline-iterations] [short-response-iterations] [long-response-iterations] [validation-trials] [confirmation-trials] [seed] [3x3|5x5] [average|both] [sampled|exact-root] [sampled-eval|stratified-eval] [integrated-confirmation-traversals]");
         int baselineIterations = args.length >= 1 ? Integer.parseInt(args[0]) : 10_000;
         int shortBudget = args.length >= 2 ? Integer.parseInt(args[1]) : 10_000;
         int longBudget = args.length >= 3 ? Integer.parseInt(args[2]) : 50_000;
@@ -40,7 +40,7 @@ public final class BenchmarkPhysicalResponseStability {
                         }
                         : FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL;
         var evaluationMode =
-                args.length == 10
+                args.length >= 10
                         ? switch (args[9]) {
                             case "sampled-eval" ->
                                     PhysicalResponseHeldOutAudit.EvaluationMode.SAMPLED_ROOT;
@@ -51,6 +51,7 @@ public final class BenchmarkPhysicalResponseStability {
                                             "Evaluation mode must be sampled-eval or stratified-eval");
                         }
                         : PhysicalResponseHeldOutAudit.EvaluationMode.SAMPLED_ROOT;
+        int integratedTraversals = args.length == 11 ? Integer.parseInt(args[10]) : 0;
         if (baselineIterations < 1 || baselineIterations > 100_000)
             throw new IllegalArgumentException("Baseline iterations must be in 1-100000");
         if (shortBudget >= longBudget)
@@ -100,7 +101,9 @@ public final class BenchmarkPhysicalResponseStability {
                             seed + 400_003 + target,
                             variants,
                             chanceMode,
-                            evaluationMode);
+                            evaluationMode,
+                            integratedTraversals,
+                            seed + 500_003 + target);
             System.out.printf(
                     Locale.ROOT,
                     "%s: validation seed %d, confirmation seed %d; selected candidate %d by validation gain only (%d validation batches, %d confirmation batches)%n",
@@ -133,8 +136,23 @@ public final class BenchmarkPhysicalResponseStability {
                         confirmation.responseFallbackTrajectories(),
                         confirmation.trials());
             }
+            if (report.integratedConfirmation() != null) {
+                var integrated = report.integratedConfirmation();
+                System.out.printf(
+                        Locale.ROOT,
+                        "  Preselected candidate %d action-integrated confirmation: seed %d, %d private-deal traversals in %d independent batches, gain %+.4fbb (paired SE %.4f, 95%% [%.4f, %.4f]), fallback path probability %.4f%n",
+                        report.selectedIndex() + 1,
+                        integrated.seed(),
+                        integrated.privateDealTraversals(),
+                        integrated.independentBatches(),
+                        integrated.responseGainBb(),
+                        integrated.pairedStandardErrorBb(),
+                        integrated.approximateGainLower95Bb(),
+                        integrated.approximateGainUpper95Bb(),
+                        integrated.responseFallbackPathProbability());
+            }
         }
         System.out.println(
-                "Only the validation-selected candidate has a prespecified confirmation result. The other confirmation rows describe sensitivity and are not alternate winners. Intervals cover confirmation sampling only, not training variability or the wider search; none is a certified best response or Nash gap.");
+                "Only the validation-selected candidate has a prespecified confirmation result. Optional action integration also scores that candidate alone on an independent seed. The other sampled confirmation rows describe sensitivity and are not alternate winners. Intervals cover confirmation sampling only, not training variability or the wider search; none is a certified best response or Nash gap.");
     }
 }

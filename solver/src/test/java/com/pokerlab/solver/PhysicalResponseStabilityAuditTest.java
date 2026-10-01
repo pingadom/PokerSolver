@@ -140,4 +140,72 @@ class PhysicalResponseStabilityAuditTest {
         assertEquals(20, report.selected().confirmation().independentBatches());
         assertEquals(deals * 20, report.selected().confirmation().trials());
     }
+
+    @Test
+    void integratesOnlyTheValidationSelectedCandidateOnASeparateSeed() {
+        var baseline =
+                new CfrSolver<>(
+                                GAME,
+                                CfrSolver.Variant.VANILLA,
+                                CfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                                42)
+                        .solve(100);
+        int deals = GAME.chanceOutcomes(GAME.initialState()).size();
+        var report =
+                PhysicalResponseStabilityAudit.assess(
+                        GAME,
+                        baseline,
+                        1,
+                        List.of(20, 40),
+                        List.of(51L),
+                        deals * 10,
+                        deals * 20,
+                        53,
+                        54,
+                        List.of(
+                                PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE,
+                                PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET),
+                        FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL,
+                        PhysicalResponseHeldOutAudit.EvaluationMode.STRATIFIED_ROOT,
+                        deals * 10,
+                        55);
+        var selected = report.selected();
+        var trained =
+                new FixedOpponentResponseCfr<>(
+                                GAME, baseline, 1, selected.responseSeed(), selected.chanceMode())
+                        .solve(selected.responseIterations());
+        var policy =
+                selected.variant() == PhysicalResponseStabilityAudit.PolicyVariant.AVERAGE
+                        ? trained.response()
+                        : trained.finalRegretPolicy();
+        assertEquals(
+                PhysicalResponseActionIntegratedAudit.assess(
+                        GAME,
+                        baseline,
+                        policy,
+                        1,
+                        deals * 10,
+                        55,
+                        PhysicalResponseHeldOutAudit.EvaluationMode.STRATIFIED_ROOT),
+                report.integratedConfirmation());
+        assertEquals(55, report.integratedConfirmation().seed());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        PhysicalResponseStabilityAudit.assess(
+                                GAME,
+                                baseline,
+                                1,
+                                List.of(20),
+                                List.of(51L),
+                                deals * 10,
+                                deals * 20,
+                                53,
+                                54,
+                                List.of(PhysicalResponseStabilityAudit.PolicyVariant.FINAL_REGRET),
+                                FixedOpponentResponseCfr.ChanceMode.SAMPLED_ALL,
+                                PhysicalResponseHeldOutAudit.EvaluationMode.STRATIFIED_ROOT,
+                                deals * 10,
+                                53));
+    }
 }
