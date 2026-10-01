@@ -68,6 +68,7 @@ class ButtonBigBlindPhysicalDeckGameTest {
                         .findFirst()
                         .orElseThrow();
         assertEquals(6.5, physical.potBb());
+        assertEquals(17.25, physical.maximumAbsoluteTerminalUtilityBb());
         assertEquals(
                 restricted.terminalUtility(restricted.afterAction(restrictedDeal, "fold")),
                 physical.terminalUtility(physical.afterAction(physicalDeal, "fold")));
@@ -123,6 +124,10 @@ class ButtonBigBlindPhysicalDeckGameTest {
                         restricted.afterAction(restricted.afterAction(restrictedRiver, "k"), "k")),
                 physical.terminalUtility(
                         physical.afterAction(physical.afterAction(physicalRiver, "k"), "k")));
+        var betCalled = physical.afterAction(physical.afterAction(physicalRiver, "b"), "c");
+        assertTrue(
+                Math.abs(physical.terminalUtility(betCalled))
+                        <= physical.maximumAbsoluteTerminalUtilityBb());
 
         var otherButton =
                 physical.chanceOutcomes(physical.initialState()).stream()
