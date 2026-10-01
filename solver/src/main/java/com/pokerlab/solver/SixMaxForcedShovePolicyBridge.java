@@ -56,7 +56,7 @@ public final class SixMaxForcedShovePolicyBridge {
     /** Per-seat weights after the observed prior policy actions, before card-blocker filtering. */
     public static List<List<WeightedCombo>> actionConditionedRanges(
             MultiwayPreflopCallGame sourceGame, CfrSolution solution, String priorResponses) {
-        validateSource(sourceGame, priorResponses);
+        validateSource(sourceGame, priorResponses, true);
         Objects.requireNonNull(solution, "solution");
         List<Set<String>> reachable = new ArrayList<>();
         for (Seat ignored : SEATS) reachable.add(new HashSet<>());
@@ -101,7 +101,7 @@ public final class SixMaxForcedShovePolicyBridge {
         return List.copyOf(conditioned);
     }
 
-    private static double actionLikelihood(
+    static double actionLikelihood(
             CfrSolution solution, int seat, String combo, String publicPrefix, char action) {
         Map<String, Double> strategy = solution.at(seat, combo + ":" + publicPrefix);
         if (strategy == null || strategy.size() != 2)
@@ -122,10 +122,11 @@ public final class SixMaxForcedShovePolicyBridge {
         return action == 'c' ? call : fold;
     }
 
-    private static void validateSource(MultiwayPreflopCallGame sourceGame, String priorResponses) {
+    static void validateSource(
+            MultiwayPreflopCallGame sourceGame, String priorResponses, boolean lastBbOnly) {
         Objects.requireNonNull(sourceGame, "sourceGame");
-        if (priorResponses == null || !priorResponses.matches("[cf]{4}"))
-            throw new IllegalArgumentException("Expected four HJ-to-SB call/fold responses");
+        if (priorResponses == null || !priorResponses.matches(lastBbOnly ? "[cf]{4}" : "[cf]{0,4}"))
+            throw new IllegalArgumentException("Expected HJ-to-SB call/fold responses");
         if (!sourceGame.seats().equals(SEATS)
                 || !sourceGame.committedBb().equals(COMMITTED)
                 || sourceGame.stacksBb().stream().anyMatch(stack -> stack != 100)
