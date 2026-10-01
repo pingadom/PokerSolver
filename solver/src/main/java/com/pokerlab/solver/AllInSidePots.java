@@ -72,8 +72,22 @@ final class AllInSidePots {
                     throw new IllegalArgumentException("Missing side-pot showdown estimate");
                 double[] shares = estimate.shares();
                 double[] errors = estimate.standardErrors();
-                if (shares.length != commitments.length)
+                if (shares.length != commitments.length || errors.length != commitments.length)
                     throw new IllegalArgumentException("Wrong side-pot share count");
+                double totalShare = 0;
+                for (int seat = 0; seat < commitments.length; seat++) {
+                    if (!Double.isFinite(shares[seat])
+                            || shares[seat] < 0
+                            || shares[seat] > 1
+                            || ((eligible & (1 << seat)) == 0 && shares[seat] != 0)
+                            || !Double.isFinite(errors[seat])
+                            || errors[seat] < 0
+                            || ((eligible & (1 << seat)) == 0 && errors[seat] != 0))
+                        throw new IllegalArgumentException("Invalid side-pot showdown share");
+                    totalShare += shares[seat];
+                }
+                if (Math.abs(totalShare - 1) > 1e-9)
+                    throw new IllegalArgumentException("Side-pot showdown shares must sum to one");
                 for (int seat = 0; seat < commitments.length; seat++) {
                     utilities[seat] += pot * shares[seat];
                     // Multiple tiers use the same boards; summing SEs is conservative.

@@ -108,4 +108,18 @@ class AllInSidePotsTest {
                 IllegalArgumentException.class,
                 () -> new CashRakeRule(0.05, Double.POSITIVE_INFINITY, true));
     }
+
+    @Test
+    void rejectsShowdownCreditToFoldedSeatEvenWhenSharesSumToOne() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        AllInSidePots.settle(
+                                new double[] {10, 10, 2},
+                                0b011,
+                                0,
+                                mask ->
+                                        MultiwayShowdownEstimate.certain(
+                                                new double[] {0.5, 0.4, 0.1})));
+    }
 }
