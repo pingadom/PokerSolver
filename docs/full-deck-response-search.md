@@ -166,3 +166,31 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 ```
 
 The validation/confirmation CLI accepts `stratified-eval` as its final argument after the response training chance mode, for example `... both sampled stratified-eval`. Candidate selection still uses validation alone; confirmation remains independent. Every validation and confirmation trial count must be divisible by the root-deal count. The CLI prints the independent batch counts. Existing commands retain sampled-root evaluation.
+
+## Integrating policy actions on sampled physical runouts
+
+`PhysicalResponseActionIntegratedAudit` samples legal physical public cards but computes the expected payoff over **every positive-probability policy action branch** instead of drawing one action at each decision. At each public chance depth, all branches share a chance quantile; each branch still has the correct conditional card distribution. Baseline and candidate share the same private deal and public quantiles, giving a paired estimate. Missing baseline keys use uniform actions and missing response keys use the baseline, as in the rollout audit. This evaluator reports the probability mass of paths using any fallback rather than counting sampled fallback trajectories. It supports sampled or weighted-stratified private deals and computes standard error across independent deals or batches respectively. It is still a Monte Carlo estimate over the **full physical public deck**, not an exact best response.
+
+A mixed-action, unequal-root-weight preflop control has a known exact gain; the integrated evaluator recovers it with zero sampling error. A separate full-runout control agrees with sampled-action evaluation within its combined sampling error. The benchmark below fixes the same 300-iteration baseline and 500-iteration final-regret response per player, then uses eight independent evaluation seeds per method with equal private-deal traversal counts. The larger trial counts reduce runtime noise relative to a tiny smoke run.
+
+| Synthetic range | Player | Traversals/seed | Mean paired SE, sampled → integrated | Across-seed gain SD, sampled → integrated | Seconds/seed, sampled → integrated |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 3×3 | BB | 9,000 | 0.0845 → 0.0496bb | 0.0357 → 0.0548bb | 0.10 → 1.43 |
+| 3×3 | BTN | 9,000 | 0.0592 → 0.0155bb | 0.0435 → 0.0130bb | 0.08 → 1.75 |
+| 5×5 | BB | 10,000 | 0.0555 → 0.0286bb | 0.0690 → 0.0279bb | 0.06 → 1.41 |
+| 5×5 | BTN | 10,000 | 0.0512 → 0.0208bb | 0.0468 → 0.0187bb | 0.07 → 1.73 |
+
+Action integration lowered the **within-run paired SE** in all four cases, most sharply for BTN. Eight-seed observed spread is also lower in three cases, but those SD estimates are noisy with only eight replications. The extra action-tree work took roughly 14–26 times as long in this local run; the precision improvement did not clearly beat sampled-action evaluation **per CPU second**. These timings depend on machine and policy sparsity. The response-gain means agree within evaluation uncertainty; neither estimates the optimizer's shortfall to an unknown full-deck best response.
+
+Combining action integration with weighted root stratification on the 5×5 fixture gives mean paired SEs of 0.0237bb (BB) and 0.0209bb (BTN), versus 0.0286bb and 0.0208bb with sampled roots. The combination offers little additional precision for BTN in this run, so neither root mode is promoted as a universal default.
+
+The stability workflow can now spend this expensive evaluator on **only the candidate already chosen by validation**. Its action-integrated confirmation uses another independent seed and cannot reselect a candidate after the ordinary confirmation is inspected. The optional CLI argument is the number of integrated private-deal traversals after the evaluation mode; `0` leaves the existing workflow unchanged. The selected candidate and exact training variant are reused without retraining.
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseActionIntegration' '-Dexec.args=300 500 9000 42 3x3 8 sampled-root'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseActionIntegration' '-Dexec.args=300 500 10000 42 5x5 8 sampled-root'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseActionIntegration' '-Dexec.args=300 500 10000 42 5x5 8 stratified-root'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=300 50 100 90 180 42 3x3 both sampled stratified-eval 900'
+```
+
+The last command is a wiring smoke test with deliberately small training and confirmation budgets; its apparent intervals are not strategic findings. High-precision confirmation remains a **candidate-deviation lower-bound diagnostic**, not the missing full-deck best-response upper bound. Policy-support fallbacks and synthetic ranges remain separate limitations.
