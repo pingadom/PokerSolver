@@ -140,7 +140,7 @@ public final class BenchmarkPhysicalResponseStability {
                 var integrated = report.integratedConfirmation();
                 System.out.printf(
                         Locale.ROOT,
-                        "  Preselected candidate %d action-integrated confirmation: seed %d, %d private-deal traversals in %d independent batches, gain %+.4fbb (paired SE %.4f, 95%% [%.4f, %.4f]), fallback path probability %.4f%n",
+                        "  Preselected candidate %d action-integrated confirmation: seed %d, %d private-deal traversals in %d independent batches, gain %+.4fbb (paired SE %.4f, 95%% [%.4f, %.4f]), any fallback %.8f, missing response %.8f, completion-only upper estimate %+.4fbb (nominal one-sided 95%% upper %+.4fbb; Hoeffding one-sided 95%% upper %+.4fbb)%n",
                         report.selectedIndex() + 1,
                         integrated.seed(),
                         integrated.privateDealTraversals(),
@@ -149,7 +149,11 @@ public final class BenchmarkPhysicalResponseStability {
                         integrated.pairedStandardErrorBb(),
                         integrated.approximateGainLower95Bb(),
                         integrated.approximateGainUpper95Bb(),
-                        integrated.responseFallbackPathProbability());
+                        integrated.responseFallbackPathProbability(),
+                        integrated.responseMissingPathProbability(),
+                        integrated.completionGainUpperBb(),
+                        integrated.approximateCompletionGainUpper95Bb(),
+                        integrated.boundedCompletionGainUpper95Bb());
             }
         }
         System.out.println(

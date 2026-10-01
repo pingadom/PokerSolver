@@ -23,7 +23,11 @@ public final class PhysicalResponseActionIntegratedAudit {
             double responseGainBb,
             double pairedStandardErrorBb,
             double baselineFallbackPathProbability,
-            double responseFallbackPathProbability) {
+            double responseFallbackPathProbability,
+            double responseMissingPathProbability,
+            double terminalUtilitySpanBb,
+            double completionLowerStandardErrorBb,
+            double completionUpperStandardErrorBb) {
         public double approximateGainLower95Bb() {
             return responseGainBb - 1.96 * pairedStandardErrorBb;
         }
@@ -31,9 +35,39 @@ public final class PhysicalResponseActionIntegratedAudit {
         public double approximateGainUpper95Bb() {
             return responseGainBb + 1.96 * pairedStandardErrorBb;
         }
+
+        /** Sample estimate of the lower completion-only envelope. */
+        public double completionGainLowerBb() {
+            return responseGainBb - terminalUtilitySpanBb * responseMissingPathProbability;
+        }
+
+        /** Sample estimate of the upper completion-only envelope. */
+        public double completionGainUpperBb() {
+            return responseGainBb + terminalUtilitySpanBb * responseMissingPathProbability;
+        }
+
+        /** Nominal one-sided sampling limits, not a full-deck best-response guarantee. */
+        public double approximateCompletionGainLower95Bb() {
+            return completionGainLowerBb() - 1.645 * completionLowerStandardErrorBb;
+        }
+
+        public double approximateCompletionGainUpper95Bb() {
+            return completionGainUpperBb() + 1.645 * completionUpperStandardErrorBb;
+        }
+
+        /** One-sided Hoeffding limit for independent bounded batches; deliberately conservative. */
+        public double boundedCompletionGainUpper95Bb() {
+            return completionGainUpperBb()
+                    + 3
+                            * terminalUtilitySpanBb
+                            * Math.sqrt(Math.log(20) / (2.0 * independentBatches));
+        }
     }
 
-    private record Expected(double utilityBb, double fallbackPathProbability) {}
+    private record Expected(
+            double utilityBb,
+            double fallbackPathProbability,
+            double responseMissingPathProbability) {}
 
     private PhysicalResponseActionIntegratedAudit() {}
 
@@ -80,11 +114,16 @@ public final class PhysicalResponseActionIntegratedAudit {
         var pairedGain = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
         var baselineFallback = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
         var responseFallback = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        var responseMissing = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        var completionLower = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        var completionUpper = new PhysicalRiverHeldOutDecisionAudit.SampleMoments();
+        double terminalUtilitySpan = 2 * game.maximumAbsoluteTerminalUtilityBb();
         for (int batch = 0; batch < batches; batch++) {
             double batchBaseline = 0;
             double batchResponse = 0;
             double batchBaselineFallback = 0;
             double batchResponseFallback = 0;
+            double batchResponseMissing = 0;
             for (int index = 0; index < batchSize; index++) {
                 var deal =
                         rootDeals == null
@@ -105,6 +144,7 @@ public final class PhysicalResponseActionIntegratedAudit {
                                 publicQuantiles,
                                 0,
                                 false,
+                                false,
                                 false);
                 var candidate =
                         evaluate(
@@ -116,17 +156,23 @@ public final class PhysicalResponseActionIntegratedAudit {
                                 publicQuantiles,
                                 0,
                                 true,
+                                false,
                                 false);
                 batchBaseline += weight * original.utilityBb();
                 batchResponse += weight * candidate.utilityBb();
                 batchBaselineFallback += weight * original.fallbackPathProbability();
                 batchResponseFallback += weight * candidate.fallbackPathProbability();
+                batchResponseMissing += weight * candidate.responseMissingPathProbability();
             }
             baselineUtility.add(batchBaseline);
             responseUtility.add(batchResponse);
-            pairedGain.add(batchResponse - batchBaseline);
+            double batchGain = batchResponse - batchBaseline;
+            pairedGain.add(batchGain);
             baselineFallback.add(batchBaselineFallback);
             responseFallback.add(batchResponseFallback);
+            responseMissing.add(batchResponseMissing);
+            completionLower.add(batchGain - terminalUtilitySpan * batchResponseMissing);
+            completionUpper.add(batchGain + terminalUtilitySpan * batchResponseMissing);
         }
         return new Report(
                 game.contentHash(),
@@ -140,7 +186,11 @@ public final class PhysicalResponseActionIntegratedAudit {
                 pairedGain.mean(),
                 pairedGain.standardError(),
                 baselineFallback.mean(),
-                responseFallback.mean());
+                responseFallback.mean(),
+                responseMissing.mean(),
+                terminalUtilitySpan,
+                completionLower.standardError(),
+                completionUpper.standardError());
     }
 
     private static Expected evaluate(
@@ -152,10 +202,14 @@ public final class PhysicalResponseActionIntegratedAudit {
             double[] publicQuantiles,
             int chanceDepth,
             boolean useResponse,
-            boolean fallbackSeen) {
+            boolean fallbackSeen,
+            boolean responseMissingSeen) {
         if (game.isTerminal(state)) {
             double utility = game.terminalUtility(state);
-            return new Expected(target == 0 ? utility : -utility, fallbackSeen ? 1.0 : 0.0);
+            return new Expected(
+                    target == 0 ? utility : -utility,
+                    fallbackSeen ? 1.0 : 0.0,
+                    responseMissingSeen ? 1.0 : 0.0);
         }
         int player = game.currentPlayer(state);
         if (player == -1) {
@@ -171,20 +225,25 @@ public final class PhysicalResponseActionIntegratedAudit {
                     publicQuantiles,
                     chanceDepth + 1,
                     useResponse,
-                    fallbackSeen);
+                    fallbackSeen,
+                    responseMissingSeen);
         }
         var actions = game.legalActions(state);
         String informationSet = game.informationSet(state);
         Map<String, Double> policy = baseline.at(player, informationSet);
         boolean fallbackHere = false;
+        boolean responseMissingHere = false;
         if (useResponse && player == target) {
             var replacement = response.at(player, informationSet);
-            if (replacement == null) fallbackHere = true;
-            else policy = replacement;
+            if (replacement == null) {
+                fallbackHere = true;
+                responseMissingHere = true;
+            } else policy = replacement;
         }
         if (policy == null) fallbackHere = true;
         double expectedUtility = 0;
         double expectedFallback = 0;
+        double expectedResponseMissing = 0;
         double policyMass = 0;
         for (String action : actions) {
             double probability =
@@ -201,13 +260,15 @@ public final class PhysicalResponseActionIntegratedAudit {
                             publicQuantiles,
                             chanceDepth,
                             useResponse,
-                            fallbackSeen || fallbackHere);
+                            fallbackSeen || fallbackHere,
+                            responseMissingSeen || responseMissingHere);
             expectedUtility += probability * child.utilityBb();
             expectedFallback += probability * child.fallbackPathProbability();
+            expectedResponseMissing += probability * child.responseMissingPathProbability();
         }
         if (policy != null && (policy.size() != actions.size() || Math.abs(policyMass - 1) > 1e-9))
             throw new IllegalArgumentException("Strategy action probabilities differ from game");
-        return new Expected(expectedUtility, expectedFallback);
+        return new Expected(expectedUtility, expectedFallback, expectedResponseMissing);
     }
 
     private static double probability(Map<String, Double> policy, String action) {

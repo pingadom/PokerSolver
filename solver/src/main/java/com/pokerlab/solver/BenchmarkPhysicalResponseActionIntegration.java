@@ -77,6 +77,8 @@ public final class BenchmarkPhysicalResponseActionIntegration {
             double sampledSeconds = 0;
             double integratedSeconds = 0;
             double integratedFallback = 0;
+            double integratedMissingResponse = 0;
+            double completionUpper = 0;
             for (int replication = 0; replication < replications; replication++) {
                 long evaluationSeed = seed + 300_003 + target + 1_000L * replication;
                 long started = System.nanoTime();
@@ -106,6 +108,8 @@ public final class BenchmarkPhysicalResponseActionIntegration {
                 sampledErrors.add(sampled.pairedStandardErrorBb());
                 integratedErrors.add(integrated.pairedStandardErrorBb());
                 integratedFallback += integrated.responseFallbackPathProbability();
+                integratedMissingResponse += integrated.responseMissingPathProbability();
+                completionUpper += integrated.completionGainUpperBb();
             }
             print(
                     target,
@@ -123,8 +127,10 @@ public final class BenchmarkPhysicalResponseActionIntegration {
                     replications);
             System.out.printf(
                     Locale.ROOT,
-                    "  integrated fallback path probability %.4f; elapsed-time ratio %.1fx%n",
+                    "  integrated any-fallback probability %.4f, missing-response probability %.4f, completion-only upper estimate %+.4fbb; elapsed-time ratio %.1fx%n",
                     integratedFallback / replications,
+                    integratedMissingResponse / replications,
+                    completionUpper / replications,
                     integratedSeconds / sampledSeconds);
         }
         System.out.println(

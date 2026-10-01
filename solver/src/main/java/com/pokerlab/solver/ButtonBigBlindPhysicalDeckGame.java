@@ -222,6 +222,13 @@ public final class ButtonBigBlindPhysicalDeckGame
         return potBb;
     }
 
+    /** Conservative absolute bound for every terminal payoff in this fixed-size betting tree. */
+    public double maximumAbsoluteTerminalUtilityBb() {
+        return Math.max(
+                Math.max(Math.abs(buttonFoldUtility), Math.abs(bigBlindFoldUtility)),
+                potBb / 2 + flopBetBb + turnBetBb + riverBetBb);
+    }
+
     public InformationMode informationMode() {
         return informationMode;
     }

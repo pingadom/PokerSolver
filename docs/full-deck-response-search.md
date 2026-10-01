@@ -194,3 +194,25 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponse
 ```
 
 The last command is a wiring smoke test with deliberately small training and confirmation budgets; its apparent intervals are not strategic findings. High-precision confirmation remains a **candidate-deviation lower-bound diagnostic**, not the missing full-deck best-response upper bound. Policy-support fallbacks and synthetic ranges remain separate limitations.
+
+## Bounding the effect of missing response keys
+
+The action-integrated audit now separates **missing response information sets** from other baseline fallbacks. Let `p` be the probability that the fallback-defined candidate reaches its first missing target-player information set. Up to that first visit, every policy that agrees with the candidate on its known keys has exactly the same reach probability. The connected game's terminal target payoff lies in `[-M, M]`, where `M` is conservatively `max(abs(preflop fold payoffs), pot/2 + flop bet + turn bet + river bet)`; on the current 2/4/8bb tree, `M = 17.25bb`. Changing only the missing response decisions can therefore change expected gain against the **same fixed opponent** by at most `2M × p`. The audit reports the resulting lower/upper *completion-only* envelope. A unit control removes one weighted preflop response key, verifies its exact reach mass, and checks an adversarial completion stays inside the envelope. Fully covered policies collapse the envelope to their measured gain.
+
+For sampling uncertainty, the audit computes a paired standard error of each batch's `gain + 2M × missing-path probability`, giving a **nominal** one-sided 95% upper limit. It also reports a one-sided Hoeffding limit for bounded independent batches. The latter uses the conservative score range of `3 × (2M)` and is much wider; it does not depend on a normal approximation. Both limits concern completion of **this fixed sparse candidate only**. Neither permits changing its known actions, fixes missing opponent keys, or upper-bounds the game's strongest response.
+
+At the previous full-budget setting (10,000 baseline iterations; 10,000/50,000 response budgets, two response seeds and both policy variants; 10,000 validation and 20,000 ordinary confirmation deals), only the validation-selected candidate received a separate 20,000-traversal action-integrated confirmation. The table uses base seed 42 and sampled private deals:
+
+| Synthetic range | Player | Selected response | Integrated gain, bb (paired SE) | Missing-response path probability | Completion-only upper estimate, bb | One-sided 95% upper: nominal / Hoeffding, bb |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| 3×3 | BB | 50k, final regret | +0.1234 (0.0352) | 0 observed | +0.1234 | +0.1812 / +1.0191 |
+| 3×3 | BTN | 50k, final regret | +0.1018 (0.0125) | 0 observed | +0.1018 | +0.1224 / +0.9975 |
+| 5×5 | BB | 10k, final regret | −0.0007 (0.0192) | 0.00017089 | +0.0052 | +0.0370 / +0.9009 |
+| 5×5 | BTN | 50k, final regret | +0.0331 (0.0172) | 0 observed | +0.0331 | +0.0614 / +0.9288 |
+
+The 3×3 selected responses have positive nominal two-sided confirmation intervals, whereas the 5×5 BB and BTN intervals include zero. Zero observed missing-response mass on 20,000 traversals does **not** prove the policy has complete full-deck support. Even when the measured support effect is small, the bounded-sample limits remain about 0.9–1.0bb and cannot certify near-equilibrium play. This separates two blockers: sparse-key fallback and optimizer shortfall at **known** keys. The present envelope addresses only the first.
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 3x3 both sampled sampled-eval 20000'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 5x5 both sampled sampled-eval 20000'
+```
