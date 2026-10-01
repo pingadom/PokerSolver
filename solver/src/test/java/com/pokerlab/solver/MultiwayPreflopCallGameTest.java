@@ -158,6 +158,40 @@ class MultiwayPreflopCallGameTest {
     }
 
     @Test
+    void sixSeatRakedTerminalsAccountForHouseShareAcrossEveryCallHistory() {
+        var game =
+                new MultiwayPreflopCallGame(
+                        sixSeats(),
+                        List.of(
+                                List.of(combo("AS", "AH", 1)),
+                                List.of(combo("KS", "KH", 1)),
+                                List.of(combo("QS", "QH", 1)),
+                                List.of(combo("JS", "JH", 1)),
+                                List.of(combo("TS", "TH", 1)),
+                                List.of(combo("9S", "9H", 1))),
+                        List.of(30.0, 1.0, 2.0, 0.0, 0.5, 1.0),
+                        List.of(30.0, 10.0, 20.0, 15.0, 25.0, 5.0),
+                        0.75,
+                        (dealt, mask) -> {
+                            double[] shares = new double[6];
+                            shares[0] = 1;
+                            return MultiwayShowdownEstimate.certain(shares);
+                        },
+                        new CashRakeRule(0.05, 2, true));
+        var root = game.chanceOutcomes(game.initialState()).getFirst().state();
+        assertEquals(new CashRakeRule(0.05, 2, true), game.rakeRule());
+        for (int calls = 0; calls < 32; calls++) {
+            var state = root;
+            for (int responder = 0; responder < 5; responder++)
+                state = game.afterAction(state, (calls & (1 << responder)) == 0 ? "f" : "c");
+            double houseRake = 0.75 - sum(game.terminalUtilities(state));
+            assertTrue(houseRake >= -1e-9 && houseRake <= 2 + 1e-9);
+            if (calls == 0) assertEquals(0, houseRake, 1e-9);
+            else assertTrue(houseRake > 0);
+        }
+    }
+
+    @Test
     void jointDealsRemoveBlockedCardsAndKeepWeights() {
         List<List<WeightedCombo>> ranges = new ArrayList<>();
         ranges.add(List.of(combo("AS", "AH", 2), combo("KS", "KH", 1)));
@@ -344,6 +378,46 @@ class MultiwayPreflopCallGameTest {
                         0,
                         new SeededMultiwayShowdownOracle(500, 42));
         assertTrue(game.maximumTerminalPayoffStandardErrorBb() > 0);
+    }
+
+    @Test
+    void rakeCanReverseAThinCallWithoutChargingPreflopFold() {
+        var seats = List.of(PreflopAllInSpot.Seat.UTG, PreflopAllInSpot.Seat.BB);
+        var ranges = List.of(List.of(combo("AS", "AH", 1)), List.of(combo("KS", "KH", 1)));
+        MultiwayShowdownOracle oracle =
+                (dealt, mask) -> MultiwayShowdownEstimate.certain(new double[] {0.53, 0.47});
+        var noRake =
+                new MultiwayPreflopCallGame(
+                        seats, ranges, List.of(10.0, 1.0), List.of(10.0, 10.0), 0, oracle);
+        var raked =
+                new MultiwayPreflopCallGame(
+                        seats,
+                        ranges,
+                        List.of(10.0, 1.0),
+                        List.of(10.0, 10.0),
+                        0,
+                        oracle,
+                        new CashRakeRule(0.05, 1, true));
+        var root = noRake.chanceOutcomes(noRake.initialState()).getFirst().state();
+        var rakedRoot = raked.chanceOutcomes(raked.initialState()).getFirst().state();
+        assertArrayEquals(
+                new double[] {0.6, -0.6},
+                noRake.terminalUtilities(noRake.afterAction(root, "c")),
+                1e-12);
+        assertArrayEquals(
+                new double[] {0.07, -1.07},
+                raked.terminalUtilities(raked.afterAction(rakedRoot, "c")),
+                1e-12);
+        assertArrayEquals(
+                new double[] {1, -1},
+                raked.terminalUtilities(raked.afterAction(rakedRoot, "f")),
+                1e-12);
+        var noRakePolicy =
+                new MultiPlayerCfrSolver<>(noRake, CfrSolver.Variant.CFR_PLUS).solve(250);
+        var rakePolicy = new MultiPlayerCfrSolver<>(raked, CfrSolver.Variant.CFR_PLUS).solve(250);
+        assertTrue(noRakePolicy.at(1, noRake.informationSet(root)).get("c") > 0.99);
+        assertTrue(rakePolicy.at(1, raked.informationSet(rakedRoot)).get("f") > 0.99);
+        assertEquals(0, MultiwayCallBestResponse.assess(raked, rakePolicy).nashConvBb(), 0.01);
     }
 
     @Test
