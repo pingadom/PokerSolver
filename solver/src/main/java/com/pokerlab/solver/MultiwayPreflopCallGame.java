@@ -27,10 +27,12 @@ public final class MultiwayPreflopCallGame
     private static final int MAX_JOINT_DEALS = 4096;
     private static final int MAX_PAYOFF_TABLE_ENTRIES = 2048;
     private final List<PreflopAllInSpot.Seat> seats;
+    private final List<List<WeightedCombo>> ranges;
     private final List<Double> committedBb;
     private final List<Double> stacksBb;
     private final double deadMoneyBb;
     private final CashRakeRule rakeRule;
+    private final MultiwayShowdownOracle showdownOracle;
     private final double maximumTerminalPayoffStandardErrorBb;
     private final List<Deal> deals;
     private final List<ChanceOutcome<State>> chanceOutcomes;
@@ -71,7 +73,7 @@ public final class MultiwayPreflopCallGame
             double deadMoneyBb,
             MultiwayShowdownOracle oracle,
             CashRakeRule rakeRule) {
-        Objects.requireNonNull(oracle, "oracle");
+        showdownOracle = Objects.requireNonNull(oracle, "oracle");
         this.rakeRule = Objects.requireNonNull(rakeRule, "rakeRule");
         if (seats == null
                 || ranges == null
@@ -115,8 +117,9 @@ public final class MultiwayPreflopCallGame
                 if (combo == null || !seen.add(combo.key()))
                     throw new IllegalArgumentException("Null or duplicate combo in range");
         }
+        this.ranges = ranges.stream().map(List::copyOf).toList();
         List<Deal> prepared = new ArrayList<>();
-        enumerate(ranges, 0, new ArrayList<>(), new HashSet<>(), 1, prepared);
+        enumerate(this.ranges, 0, new ArrayList<>(), new HashSet<>(), 1, prepared);
         if (prepared.isEmpty())
             throw new IllegalArgumentException("Ranges have no unblocked joint deal");
         if ((long) prepared.size() * ((1 << (playerCount() - 1)) - 1) > MAX_PAYOFF_TABLE_ENTRIES)
@@ -132,7 +135,7 @@ public final class MultiwayPreflopCallGame
             Map<Integer, MultiwayShowdownEstimate> estimates = new LinkedHashMap<>();
             for (int mask = 3; mask < (1 << playerCount()); mask++) {
                 if ((mask & 1) == 0 || Integer.bitCount(mask) < 2) continue;
-                MultiwayShowdownEstimate estimate = oracle.estimate(deal.combos(), mask);
+                MultiwayShowdownEstimate estimate = showdownOracle.estimate(deal.combos(), mask);
                 validateEstimate(estimate, mask);
                 estimates.put(mask, estimate);
             }
@@ -160,6 +163,19 @@ public final class MultiwayPreflopCallGame
         return seats;
     }
 
+    /** Initial per-seat ranges, before card blockers and public-action likelihoods. */
+    public List<List<WeightedCombo>> ranges() {
+        return ranges;
+    }
+
+    public List<Double> committedBb() {
+        return committedBb;
+    }
+
+    public double deadMoneyBb() {
+        return deadMoneyBb;
+    }
+
     public double stackBb() {
         return stacksBb.get(0);
     }
@@ -170,6 +186,10 @@ public final class MultiwayPreflopCallGame
 
     public CashRakeRule rakeRule() {
         return rakeRule;
+    }
+
+    public MultiwayShowdownOracle showdownOracle() {
+        return showdownOracle;
     }
 
     public double callCostBb(int player) {
