@@ -79,3 +79,19 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.MultiwayResearchMain' '-D
 With 100 CFR+ iterations and 300 board trials per active subset on the development machine, it reported sampled-table NashConv **0.005798bb** and maximum terminal payoff sampling SE **3.433172bb**. The sampling error dwarfs the strategy deviation number; this run demonstrates six-seat mechanics and instrumentation, **not** reliable poker advice. Increase board trials to study payoff precision, and compare repeated seeds before drawing any strategy conclusion. The driver prints generation/solve times and each seat's profile EV and deviation gain.
 
 The precomputation caps joint deals at 4,096 and payoff-table entries at 2,048 so accidental broad ranges fail fast. These are research limits, not claims of production scalability. Exact generation is an offline CPU task and can take several minutes. The next solver work is broader, reviewed ranges and a legal betting tree covering opens and re-raises, explicit rake and postflop continuation values. Turn, river, partial-hand and full-hand practice depend on those later models; they are not implemented by this call/fold trainer.
+
+## Explicit rake in the offline six-seat game
+
+`CashRakeRule` adds an **opt-in payoff assumption** to the multiway call/fold game: a fractional charge on called pot tiers, capped once per hand. The cap is consumed from the main pot outward through side pots. A tier funded by only one contributor is uncalled excess and is never raked. With `noFlopNoDrop=true`, a hand won before a flop receives no charge; if at least two seats remain all-in, the board is dealt and the rule applies. The settlement result reports the rake, and chip conservation becomes total player profit = dead money − rake. Showdown-share sampling error is scaled by each tier's post-rake pot. Existing saved packs and constructors retain their explicit **no-rake** behavior and hashes.
+
+`MultiwayRakeSensitivity` first validates a saved no-rake side-pot pack, then reuses its exact or sampled showdown table without enumerating any boards again. It scores that saved strategy under the declared rake, solves the same finite game with rake, and reports each seat's EV and unilateral-deviation gain, NashConv, and expected rake for both policies. The raked result is an **offline research report**, not a versioned solution pack or trainer admission. The percentages and caps below are illustrative inputs, not a claimed card-room schedule.
+
+On the committed six-seat, 64-deal exact-payoff fixture, a 5% rule capped at 1bb with no-flop-no-drop collects about **0.5000bb** under the saved policy. Its finite-game NashConv changes only from **0.000173bb** no-rake to **0.000177bb** under rake; a 500-iteration raked CFR+ re-solve also reaches **0.000177bb**. The fixture's call/fold choices are too one-sided for a substantial policy shift, although the payoff change is real. A separate analytic two-seat control has a caller winning 47% of a 20bb called pot: calling returns −0.60bb versus folding at −1bb without rake; at 5% capped at 1bb, calling returns −1.07bb and the solver instead folds. Unit tests also cover capped main/side-pot charges, ties, no-flop-no-drop, uncalled excess, and conservation.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkMultiwayRakeSensitivity' '-Dexec.args=src/test/resources/six-seat-side-pot-diverse-pack.json 0.05 1 true 500'
+```
+
+This closes a payoff-modeling gap, but it does not make the forced-shove synthetic ranges representative of a real six-max cash table. Before a raked strategy can enter a drill pack, the rake rule must be bound into a new spot/pack version and validated against a declared room/stakes schedule; reviewed ranges, a broader betting tree and postflop continuation remain necessary.

@@ -6,7 +6,7 @@ import java.util.function.IntFunction;
 
 /** Settles all-in commitments by contribution tier, including folded chips and uncalled excess. */
 final class AllInSidePots {
-    record Result(double[] utilitiesBb, double maximumStandardErrorBb) {}
+    record Result(double[] utilitiesBb, double maximumStandardErrorBb, double rakeBb) {}
 
     private AllInSidePots() {}
 
@@ -15,8 +15,19 @@ final class AllInSidePots {
             int activeMask,
             double deadMoneyBb,
             IntFunction<MultiwayShowdownEstimate> showdown) {
+        return settle(commitments, activeMask, deadMoneyBb, showdown, CashRakeRule.none(), false);
+    }
+
+    static Result settle(
+            double[] commitments,
+            int activeMask,
+            double deadMoneyBb,
+            IntFunction<MultiwayShowdownEstimate> showdown,
+            CashRakeRule rakeRule,
+            boolean flopDealt) {
         Objects.requireNonNull(commitments, "commitments");
         Objects.requireNonNull(showdown, "showdown");
+        Objects.requireNonNull(rakeRule, "rakeRule");
         if (commitments.length < 2
                 || commitments.length > 6
                 || (activeMask & ~((1 << commitments.length) - 1)) != 0
@@ -30,6 +41,7 @@ final class AllInSidePots {
             throw new IllegalArgumentException("At least one player must have committed chips");
         double[] utilities = new double[commitments.length];
         double[] errorBounds = new double[commitments.length];
+        double rake = 0;
         for (int seat = 0; seat < commitments.length; seat++) {
             double amount = commitments[seat];
             if (!Double.isFinite(amount) || amount < 0)
@@ -47,7 +59,11 @@ final class AllInSidePots {
             }
             if (eligible == 0)
                 throw new IllegalArgumentException("A side pot has no eligible player");
-            double pot = (upper - lower) * contributors + (lower == 0 ? deadMoneyBb : 0);
+            double grossPot = (upper - lower) * contributors + (lower == 0 ? deadMoneyBb : 0);
+            double tierRake =
+                    rakeRule.forTier(grossPot, contributors, flopDealt, rakeRule.capBb() - rake);
+            rake += tierRake;
+            double pot = grossPot - tierRake;
             if (Integer.bitCount(eligible) == 1) {
                 utilities[Integer.numberOfTrailingZeros(eligible)] += pot;
             } else {
@@ -66,10 +82,10 @@ final class AllInSidePots {
             }
             lower = upper;
         }
-        double expected = deadMoneyBb;
+        double expected = deadMoneyBb - rake;
         double actual = Arrays.stream(utilities).sum();
         if (Math.abs(actual - expected) > 1e-8)
             throw new IllegalStateException("All-in settlement did not conserve chips");
-        return new Result(utilities, Arrays.stream(errorBounds).max().orElse(0));
+        return new Result(utilities, Arrays.stream(errorBounds).max().orElse(0), rake);
     }
 }

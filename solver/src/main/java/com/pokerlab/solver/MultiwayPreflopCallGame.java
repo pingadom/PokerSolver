@@ -30,6 +30,7 @@ public final class MultiwayPreflopCallGame
     private final List<Double> committedBb;
     private final List<Double> stacksBb;
     private final double deadMoneyBb;
+    private final CashRakeRule rakeRule;
     private final double maximumTerminalPayoffStandardErrorBb;
     private final List<Deal> deals;
     private final List<ChanceOutcome<State>> chanceOutcomes;
@@ -58,7 +59,20 @@ public final class MultiwayPreflopCallGame
             List<Double> stacksBb,
             double deadMoneyBb,
             MultiwayShowdownOracle oracle) {
+        this(seats, ranges, committedBb, stacksBb, deadMoneyBb, oracle, CashRakeRule.none());
+    }
+
+    /** Optional raked research game; existing saved solution packs remain explicitly no-rake. */
+    public MultiwayPreflopCallGame(
+            List<PreflopAllInSpot.Seat> seats,
+            List<List<WeightedCombo>> ranges,
+            List<Double> committedBb,
+            List<Double> stacksBb,
+            double deadMoneyBb,
+            MultiwayShowdownOracle oracle,
+            CashRakeRule rakeRule) {
         Objects.requireNonNull(oracle, "oracle");
+        this.rakeRule = Objects.requireNonNull(rakeRule, "rakeRule");
         if (seats == null
                 || ranges == null
                 || committedBb == null
@@ -130,7 +144,9 @@ public final class MultiwayPreflopCallGame
                                                 commitmentsForMask(mask),
                                                 mask,
                                                 deadMoneyBb,
-                                                estimates::get)
+                                                estimates::get,
+                                                rakeRule,
+                                                Integer.bitCount(mask) > 1)
                                         .maximumStandardErrorBb());
             finished.add(new Deal(deal.combos(), deal.weight(), Map.copyOf(estimates)));
             outcomes.add(new ChanceOutcome<>(new State(index, ""), deal.weight() / totalWeight));
@@ -150,6 +166,10 @@ public final class MultiwayPreflopCallGame
 
     public List<Double> stacksBb() {
         return stacksBb;
+    }
+
+    public CashRakeRule rakeRule() {
+        return rakeRule;
     }
 
     public double callCostBb(int player) {
@@ -202,7 +222,9 @@ public final class MultiwayPreflopCallGame
                         commitmentsForMask(mask),
                         mask,
                         deadMoneyBb,
-                        deals.get(state.dealIndex()).estimates()::get)
+                        deals.get(state.dealIndex()).estimates()::get,
+                        rakeRule,
+                        Integer.bitCount(mask) > 1)
                 .utilitiesBb();
     }
 
