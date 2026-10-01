@@ -1,8 +1,10 @@
 package com.pokerlab.solver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -219,14 +221,23 @@ public final class PhysicalResponseStabilityAudit {
         if (responseSeeds.stream().anyMatch(Objects::isNull))
             throw new IllegalArgumentException("Response seeds cannot be null");
 
+        List<Integer> checkpoints = responseBudgets.stream().sorted().toList();
+        Map<Long, Map<Integer, FixedOpponentResponseCfr.Result>> trainedBySeed = new HashMap<>();
+        for (long seed : responseSeeds) {
+            var results =
+                    new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
+                            .solveCheckpoints(checkpoints);
+            Map<Integer, FixedOpponentResponseCfr.Result> byBudget = new HashMap<>();
+            for (int index = 0; index < checkpoints.size(); index++)
+                byBudget.put(checkpoints.get(index), results.get(index));
+            trainedBySeed.put(seed, byBudget);
+        }
         List<Draft> drafts = new ArrayList<>();
         int selectedIndex = -1;
         double bestValidationGain = Double.NEGATIVE_INFINITY;
         for (int budget : responseBudgets) {
             for (long seed : responseSeeds) {
-                var trained =
-                        new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
-                                .solve(budget);
+                var trained = trainedBySeed.get(seed).get(budget);
                 for (var variant : variants) {
                     var policy =
                             variant == PolicyVariant.AVERAGE

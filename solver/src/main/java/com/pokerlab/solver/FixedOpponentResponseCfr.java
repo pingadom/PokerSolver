@@ -113,8 +113,25 @@ public final class FixedOpponentResponseCfr<S> {
     }
 
     public Result solve(int iterations) {
-        if (iterations < 1 || iterations > 1_000_000)
-            throw new IllegalArgumentException("Expected 1-1000000 response iterations");
+        return solveCheckpoints(List.of(iterations)).getFirst();
+    }
+
+    /**
+     * Captures immutable policies at increasing iteration budgets on one seeded training stream.
+     * Each checkpoint equals a standalone solve at that budget without repeating earlier
+     * traversals.
+     */
+    public List<Result> solveCheckpoints(List<Integer> checkpoints) {
+        Objects.requireNonNull(checkpoints, "checkpoints");
+        if (checkpoints.isEmpty())
+            throw new IllegalArgumentException("Expected response checkpoints");
+        int previous = 0;
+        for (Integer checkpoint : checkpoints) {
+            if (checkpoint == null || checkpoint <= previous || checkpoint > 1_000_000)
+                throw new IllegalArgumentException(
+                        "Response checkpoints must increase strictly within 1-1000000");
+            previous = checkpoint;
+        }
         nodes.clear();
         queriedOpponentKeys.clear();
         missingOpponentKeys.clear();
@@ -138,7 +155,9 @@ public final class FixedOpponentResponseCfr<S> {
             if (Math.abs(sum - 1) > 1e-9)
                 throw new IllegalArgumentException("Root chance probabilities must sum to one");
         }
-        for (int iteration = 0; iteration < iterations; iteration++) {
+        List<Result> results = new ArrayList<>(checkpoints.size());
+        int checkpointIndex = 0;
+        for (int iteration = 1; iteration <= checkpoints.getLast(); iteration++) {
             chanceDraws.clear();
             iterationStrategies.clear();
             if (rootOutcomes == null) {
@@ -148,7 +167,15 @@ public final class FixedOpponentResponseCfr<S> {
                     if (outcome.probability() > 0)
                         traverse(outcome.state(), 1, 1, outcome.probability(), 1);
             }
+            if (iteration == checkpoints.get(checkpointIndex)) {
+                results.add(snapshot(iteration));
+                checkpointIndex++;
+            }
         }
+        return List.copyOf(results);
+    }
+
+    private Result snapshot(int iterations) {
         Map<String, Map<String, Double>> average = new LinkedHashMap<>();
         nodes.forEach((key, node) -> average.put(key, node.averageStrategy()));
         Map<String, Map<String, Double>> finalRegret = new LinkedHashMap<>();
