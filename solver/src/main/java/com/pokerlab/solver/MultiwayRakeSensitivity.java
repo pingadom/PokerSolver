@@ -1,14 +1,10 @@
 package com.pokerlab.solver;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /** Offline no-rake-to-raked transfer on the same validated finite showdown payoff table. */
 public final class MultiwayRakeSensitivity {
-    private record PayoffKey(List<String> dealtCombos, int activeMask) {}
-
     public record Report(
             CashRakeRule rakeRule,
             double noRakeNashConvBb,
@@ -38,28 +34,8 @@ public final class MultiwayRakeSensitivity {
             throw new IllegalArgumentException("Expected 1-1000000 solver iterations");
         // The source pack is deliberately validated under its original no-rake contract first.
         var noRakeGame = pack.rebuildGame();
-        Map<PayoffKey, MultiwayShowdownEstimate> estimates = new HashMap<>();
-        for (var entry : pack.payoffs())
-            estimates.put(new PayoffKey(entry.dealtCombos(), entry.activeMask()), entry.estimate());
         var spot = pack.spot();
-        var rakedGame =
-                new MultiwayPreflopCallGame(
-                        spot.seats(),
-                        spot.ranges(),
-                        spot.committedBb(),
-                        spot.stacksBb(),
-                        spot.deadMoneyBb(),
-                        (dealt, mask) -> {
-                            var estimate =
-                                    estimates.get(
-                                            new PayoffKey(
-                                                    dealt.stream().map(WeightedCombo::key).toList(),
-                                                    mask));
-                            if (estimate == null)
-                                throw new IllegalArgumentException("Missing validated payoff");
-                            return estimate;
-                        },
-                        rakeRule);
+        var rakedGame = MultiwayRakedGameFactory.fromPack(pack, rakeRule);
         var noRake = MultiwayCallBestResponse.assess(noRakeGame, pack.solution());
         var transferred = MultiwayCallBestResponse.assess(rakedGame, pack.solution());
         var resolvedPolicy = new MultiPlayerCfrSolver<>(rakedGame, variant).solve(iterations);
