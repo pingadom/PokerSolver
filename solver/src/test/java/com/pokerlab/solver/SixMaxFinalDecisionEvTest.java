@@ -140,6 +140,28 @@ class SixMaxFinalDecisionEvTest {
     }
 
     @Test
+    void carriesSamplingErrorWithoutTreatingItAsRangeUncertainty() {
+        var game = game();
+        var state = bbFacesUtgShove(game);
+        var ranges = singleDeal();
+        var result =
+                SixMaxFinalDecisionEv.evaluate(
+                        game,
+                        state,
+                        ranges.get(BB.ordinal()).getFirst(),
+                        ranges,
+                        CashRakeRule.none(),
+                        (hands, mask) ->
+                                new MultiwayShowdownEstimate(
+                                        new double[] {0.5, 0, 0, 0, 0, 0.5},
+                                        new double[] {0.01, 0, 0, 0, 0, 0.01},
+                                        10_000));
+        assertEquals(0, result.foldPayoffStandardErrorBoundBb());
+        assertEquals(2.005, result.callPayoffStandardErrorBoundBb(), 1e-10);
+        assertEquals(2.005, result.advantagePayoffStandardErrorBoundBb(), 1e-10);
+    }
+
+    @Test
     void rejectsUnresolvedBranchesAndMalformedOrUnboundedRanges() {
         var game = game();
         var state = bbFacesUtgShove(game);
@@ -156,6 +178,16 @@ class SixMaxFinalDecisionEvTest {
                 () ->
                         SixMaxFinalDecisionEv.evaluate(
                                 game, early, hero, ranges, CashRakeRule.none(), oracle));
+        var smallRaise =
+                game.apply(game.initialState(), new SixMaxPreflopBetting.Move(UTG, RAISE_TO, 3));
+        for (var seat : List.of(HJ, CO, BTN, SB))
+            smallRaise = game.apply(smallRaise, new SixMaxPreflopBetting.Move(seat, FOLD, 0));
+        var postflopBoundary = smallRaise;
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxFinalDecisionEv.evaluate(
+                                game, postflopBoundary, hero, ranges, CashRakeRule.none(), oracle));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
