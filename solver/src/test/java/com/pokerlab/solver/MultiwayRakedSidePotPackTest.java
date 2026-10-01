@@ -75,6 +75,43 @@ class MultiwayRakedSidePotPackTest {
         reject(unknownField);
     }
 
+    @Test
+    void builderRejectsSampledSourcesAndInactiveRake() throws IOException {
+        var exact = build().sourcePack();
+        var sampledMetadata =
+                new MultiwaySidePotPack(
+                        exact.schemaVersion(),
+                        exact.solverVersion(),
+                        exact.publicationStatus(),
+                        exact.generatedAt(),
+                        exact.spot(),
+                        exact.spotHash(),
+                        MultiwaySolutionPack.SEEDED_MONTE_CARLO,
+                        42,
+                        exact.solution(),
+                        exact.payoffs(),
+                        exact.nashConvBb(),
+                        exact.maxTerminalPayoffSEBb());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        MultiwayRakedSidePotPackBuilder.build(
+                                sampledMetadata,
+                                new CashRakeRule(0.05, 1, true),
+                                10,
+                                CfrSolver.Variant.CFR_PLUS,
+                                "2026-10-01T00:00:00Z"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        MultiwayRakedSidePotPackBuilder.build(
+                                exact,
+                                CashRakeRule.none(),
+                                10,
+                                CfrSolver.Variant.CFR_PLUS,
+                                "2026-10-01T00:00:00Z"));
+    }
+
     private static MultiwayRakedSidePotPack build() throws IOException {
         String sourceJson;
         try (var input =

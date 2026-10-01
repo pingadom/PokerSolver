@@ -17,6 +17,10 @@ public final class MultiwayRakedSidePotPackBuilder {
         Objects.requireNonNull(variant, "variant");
         if (iterations < 1 || iterations > 1_000_000)
             throw new IllegalArgumentException("Expected 1-1000000 solver iterations");
+        if (!MultiwaySolutionPack.EXACT_ENUMERATION.equals(source.payoffMethod())
+                || rakeRule.fraction() <= 0
+                || rakeRule.capBb() <= 0)
+            throw new IllegalArgumentException("Raked packs require exact payoffs and active rake");
         var game = MultiwayRakedGameFactory.fromPack(source, rakeRule);
         var solution = new MultiPlayerCfrSolver<>(game, variant).solve(iterations);
         var report = MultiwayCallBestResponse.assess(game, solution);

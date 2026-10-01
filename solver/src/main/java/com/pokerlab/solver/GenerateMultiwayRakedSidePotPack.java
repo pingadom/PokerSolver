@@ -13,7 +13,11 @@ public final class GenerateMultiwayRakedSidePotPack {
         if (args.length != 7)
             throw new IllegalArgumentException(
                     "Usage: GenerateMultiwayRakedSidePotPack <exact-source-pack.json> <output.json> <rake-fraction> <cap-bb> <no-flop-no-drop:true|false> <iterations> <generated-at>");
-        var source = MultiwayPackJson.readSidePot(Files.readString(Path.of(args[0])));
+        Path sourcePath = Path.of(args[0]).toAbsolutePath().normalize();
+        Path output = Path.of(args[1]).toAbsolutePath().normalize();
+        if (sourcePath.equals(output))
+            throw new IllegalArgumentException("Source and raked output paths must differ");
+        var source = MultiwayPackJson.readSidePot(Files.readString(sourcePath));
         var rule =
                 new CashRakeRule(
                         Double.parseDouble(args[2]),
@@ -31,7 +35,6 @@ public final class GenerateMultiwayRakedSidePotPack {
         var pack =
                 MultiwayRakedSidePotPackBuilder.build(
                         source, rule, iterations, CfrSolver.Variant.CFR_PLUS, args[6]);
-        Path output = Path.of(args[1]).toAbsolutePath();
         Files.createDirectories(output.getParent());
         String json = MultiwayPackJson.writeRakedSidePot(pack);
         Files.writeString(output, json);
