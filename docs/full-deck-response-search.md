@@ -216,3 +216,25 @@ The 3×3 selected responses have positive nominal two-sided confirmation interva
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 3x3 both sampled sampled-eval 20000'
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 10000 50000 10000 20000 42 5x5 both sampled sampled-eval 20000'
 ```
+
+## Longer response searches on shared training streams
+
+`FixedOpponentResponseCfr.solveCheckpoints` captures the average and final-regret policies, along with fallback counters, at strictly increasing iteration budgets on one seeded training stream. A checkpoint is identical to a standalone solve at that budget; it does not restart or alter the random draw sequence. The stability audit and finite-chance exact calibration now reuse each seed's earlier iterations. For the two-budget 50k/200k sweep below, response training visits 200k rather than 250k sampled private deals per seed and player, while retaining the original candidate order and independent evaluation seeds. This saves repeated training work; it does not reduce evaluation cost or change statistical uncertainty.
+
+With the same 10k-iteration baseline and base seed 42, the 50k/200k sweep selected the following candidates **on validation alone** from two training seeds and both policy variants. Each selected candidate then received 20k ordinary confirmation deals and a separate 20k-traversal action-integrated confirmation:
+
+| Synthetic range | Player | Validation-selected response | Ordinary confirmation gain, bb (paired SE) | Action-integrated gain, bb (paired SE) | Observed missing-response path mass |
+| --- | --- | --- | ---: | ---: | ---: |
+| 3×3 | BB | 50k, final regret | +0.2158 (0.0632) | +0.1234 (0.0352) | 0 |
+| 3×3 | BTN | 200k, final regret | +0.0628 (0.0355) | +0.1059 (0.0122) | 0 |
+| 5×5 | BB | 200k, final regret | +0.0425 (0.0529) | +0.0977 (0.0247) | 0 |
+| 5×5 | BTN | 50k, final regret | +0.0884 (0.0366) | +0.0331 (0.0172) | 0 |
+
+The 200k budget won validation for two of the four player/profile combinations, so merely increasing iterations does not consistently improve a response. For 5×5 BB, the action-integrated nominal interval is [+0.0492, +0.1461]bb while the ordinary interval crosses zero; integrating actions makes this particular fixed-candidate comparison more precise. For 3×3 BTN, the ordinary interval crosses zero while the separate integrated interval is [+0.0819, +0.1299]bb. The 5×5 BTN integrated interval still crosses zero. Other candidates' ordinary confirmation scores remain sensitivity diagnostics, not post-confirmation replacements for the preselected candidate. These nominal intervals condition on the trained policies and are not adjusted for the research sweep. Zero observed missing path mass does not establish full support, and the Hoeffding completion-only upper limits remain roughly 0.9–1.0bb. None of these figures upper-bounds a best response or licenses a general 6-max trainer chart.
+
+Reproduce from `solver/` after compiling:
+
+```powershell
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 50000 200000 10000 20000 42 3x3 both sampled sampled-eval 20000'
+mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 50000 200000 10000 20000 42 5x5 both sampled sampled-eval 20000'
+```

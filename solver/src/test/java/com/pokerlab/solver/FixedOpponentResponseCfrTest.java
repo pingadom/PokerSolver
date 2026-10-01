@@ -3,6 +3,7 @@ package com.pokerlab.solver;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -76,5 +77,56 @@ class FixedOpponentResponseCfrTest {
                         .solve(500);
         assertEquals(first, second);
         assertEquals(0, first.missingFixedOpponentQueries());
+    }
+
+    @Test
+    void checkpointsExactlyMatchStandaloneSolvesAndRemainImmutable() {
+        var game = new KuhnPoker();
+        var baseline = new CfrSolver<>(game, CfrSolver.Variant.VANILLA).solve(1_000);
+        for (var mode : FixedOpponentResponseCfr.ChanceMode.values()) {
+            var trainer = new FixedOpponentResponseCfr<>(game, baseline, 0, 42, mode);
+            var checkpoints = trainer.solveCheckpoints(List.of(40, 100));
+            assertEquals(
+                    new FixedOpponentResponseCfr<>(game, baseline, 0, 42, mode).solve(40),
+                    checkpoints.get(0));
+            assertEquals(
+                    new FixedOpponentResponseCfr<>(game, baseline, 0, 42, mode).solve(100),
+                    checkpoints.get(1));
+            trainer.solve(150);
+            assertEquals(
+                    new FixedOpponentResponseCfr<>(game, baseline, 0, 42, mode).solve(40),
+                    checkpoints.get(0));
+        }
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new FixedOpponentResponseCfr<>(game, baseline, 0, 42)
+                                .solveCheckpoints(List.of(100, 40)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new FixedOpponentResponseCfr<>(game, baseline, 0, 42)
+                                .solveCheckpoints(List.of(40, 40)));
+    }
+
+    @Test
+    void physicalPublicChanceCheckpointsMatchStandaloneTraining() {
+        var game = ButtonBigBlindRangeValidationFixture.createCoarseBucketed();
+        var baseline =
+                new CfrSolver<>(
+                                game,
+                                CfrSolver.Variant.VANILLA,
+                                CfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                                42)
+                        .solve(100);
+        var checkpoints =
+                new FixedOpponentResponseCfr<>(game, baseline, 1, 43)
+                        .solveCheckpoints(List.of(50, 100));
+        assertEquals(
+                new FixedOpponentResponseCfr<>(game, baseline, 1, 43).solve(50),
+                checkpoints.get(0));
+        assertEquals(
+                new FixedOpponentResponseCfr<>(game, baseline, 1, 43).solve(100),
+                checkpoints.get(1));
     }
 }

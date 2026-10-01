@@ -73,12 +73,21 @@ public final class FiniteChanceResponseCalibration {
         double baselineTarget = target == 0 ? exact.profileValue() : -exact.profileValue();
         double exactTarget = target == 0 ? exact.firstBestResponse() : -exact.secondBestResponse();
         double exactGain = exactTarget - baselineTarget;
+        List<Integer> checkpoints = budgets.stream().distinct().sorted().toList();
+        Map<Long, Map<Integer, FixedOpponentResponseCfr.Result>> trainedBySeed = new HashMap<>();
+        for (long seed : seeds) {
+            var results =
+                    new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
+                            .solveCheckpoints(checkpoints);
+            Map<Integer, FixedOpponentResponseCfr.Result> byBudget = new HashMap<>();
+            for (int index = 0; index < checkpoints.size(); index++)
+                byBudget.put(checkpoints.get(index), results.get(index));
+            trainedBySeed.put(seed, byBudget);
+        }
         List<Candidate> candidates = new ArrayList<>();
         for (int budget : budgets) {
             for (long seed : seeds) {
-                var trained =
-                        new FixedOpponentResponseCfr<>(game, baseline, target, seed, chanceMode)
-                                .solve(budget);
+                var trained = trainedBySeed.get(seed).get(budget);
                 double gain =
                         gain(game, baseline, trained.response(), target, baselineTarget, budget);
                 double finalRegretGain =
