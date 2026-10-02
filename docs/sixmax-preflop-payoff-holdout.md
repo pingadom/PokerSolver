@@ -24,3 +24,5 @@ Both fixtures give each seat two non-colliding, equally weighted physical pocket
 | Mixed pairs | 713 holdout | 0.035435 | +0.012622 | 0.005853 | 0.011471 | 6.560442 |
 
 The hierarchy policy is nearly unchanged across these two samples, but the mixed-pair policy shows a roughly 55–68% higher measured NashConv off its training board seed. Those percentages describe only this finite game and two holdouts; they are not a statistical confidence interval. The 6.55–6.59bb largest terminal-payoff SE remains much larger than the observed profile-level differences. Future work needs more independent seeds and board trials, a predeclared precision target for decision EVs, realistic ranges and bet sizes, and a validated postflop continuation. Keep these six-seat packs validation-only until those gates pass.
+
+The follow-up [payoff sampling budget audit](sixmax-payoff-sampling-audit.md) now accepts a declared terminal-payoff SE target and reports whether a bounded board budget actually met it. That target is an estimated-payoff gate, not a substitute for this independent-board policy check.
