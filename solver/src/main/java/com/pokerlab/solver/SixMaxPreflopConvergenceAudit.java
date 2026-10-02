@@ -12,7 +12,9 @@ public final class SixMaxPreflopConvergenceAudit {
             double nashConvBb,
             List<Double> deviationGainsBb,
             List<Double> profileUtilitiesBb,
-            double maximumTerminalPayoffStandardErrorBb) {
+            double maximumTerminalPayoffStandardErrorBb,
+            SixMaxPreflopCheckdownGame.ChanceModel chanceModel,
+            int chanceSamples) {
         public Row {
             deviationGainsBb = List.copyOf(deviationGainsBb);
             profileUtilitiesBb = List.copyOf(profileUtilitiesBb);
@@ -51,7 +53,9 @@ public final class SixMaxPreflopConvergenceAudit {
                             report.nashConvBb(),
                             report.deviationGainsBb(),
                             report.profileUtilitiesBb(),
-                            game.maximumTerminalPayoffStandardErrorBb()));
+                            game.maximumTerminalPayoffStandardErrorBb(),
+                            game.chanceModel(),
+                            game.chanceSamples()));
         }
         return List.copyOf(rows);
     }

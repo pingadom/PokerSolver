@@ -19,8 +19,15 @@ import java.util.Set;
  */
 public final class SixMaxPreflopCheckdownGame
         implements MultiPlayerCfrGame<SixMaxPreflopCheckdownGame.State> {
-    public static final int MAX_JOINT_DEALS = 8;
+    public static final int MAX_JOINT_DEALS = 64;
+    public static final int MAX_SAMPLED_JOINT_DEALS = 64;
     public static final int MAX_PUBLIC_STATES = 20_000;
+    public static final int MAX_DEAL_PUBLIC_STATES = 160_000;
+
+    public enum ChanceModel {
+        EXACT_RANGE_PRODUCT,
+        EMPIRICAL_JOINT_DEALS
+    }
 
     public record State(int dealIndex, String publicHistory) {}
 
@@ -54,26 +61,68 @@ public final class SixMaxPreflopCheckdownGame
     private final List<Map<String, TerminalPayoff>> terminalPayoffs;
     private final TreeSummary treeSummary;
     private final double maximumTerminalPayoffStandardErrorBb;
+    private final ChanceModel chanceModel;
+    private final int chanceSamples;
 
     public SixMaxPreflopCheckdownGame(
             SixMaxPreflopBetting.Rules rules,
             List<List<WeightedCombo>> ranges,
             CashRakeRule rakeRule,
             MultiwayShowdownOracle showdown) {
+        this(
+                rules,
+                prepareRangeDeals(ranges),
+                rakeRule,
+                showdown,
+                ChanceModel.EXACT_RANGE_PRODUCT,
+                0);
+    }
+
+    /** Builds a larger bounded game over sampled deal support; chance error is not certified. */
+    public static SixMaxPreflopCheckdownGame fromSampledDeals(
+            SixMaxPreflopBetting.Rules rules,
+            SixMaxJointDealSampler.Sample sample,
+            CashRakeRule rakeRule,
+            MultiwayShowdownOracle showdown) {
+        Objects.requireNonNull(sample, "sample");
+        return new SixMaxPreflopCheckdownGame(
+                rules,
+                sample.deals().stream()
+                        .map(deal -> new Deal(deal.hands(), Math.log(deal.occurrences()), Map.of()))
+                        .toList(),
+                rakeRule,
+                showdown,
+                ChanceModel.EMPIRICAL_JOINT_DEALS,
+                sample.acceptedDraws());
+    }
+
+    private SixMaxPreflopCheckdownGame(
+            SixMaxPreflopBetting.Rules rules,
+            List<Deal> prepared,
+            CashRakeRule rakeRule,
+            MultiwayShowdownOracle showdown,
+            ChanceModel chanceModel,
+            int chanceSamples) {
         betting = new SixMaxPreflopBetting(Objects.requireNonNull(rules, "rules"));
         this.rakeRule = Objects.requireNonNull(rakeRule, "rakeRule");
+        this.chanceModel = Objects.requireNonNull(chanceModel, "chanceModel");
+        this.chanceSamples = chanceSamples;
         Objects.requireNonNull(showdown, "showdown");
-        validateRanges(ranges);
 
         Map<String, PublicNode> nodes = new LinkedHashMap<>();
         buildTree(betting.initialState(), "", nodes);
         publicNodes = Map.copyOf(nodes);
         treeSummary = summarize(nodes);
 
-        List<Deal> prepared = new ArrayList<>();
-        enumerate(ranges, 0, new ArrayList<>(), new HashSet<>(), 0, prepared);
         if (prepared.isEmpty())
             throw new IllegalArgumentException("Ranges have no unblocked six-seat joint deal");
+        int maxDeals =
+                chanceModel == ChanceModel.EXACT_RANGE_PRODUCT
+                        ? MAX_JOINT_DEALS
+                        : MAX_SAMPLED_JOINT_DEALS;
+        if (prepared.size() > maxDeals
+                || (long) prepared.size() * nodes.size() > MAX_DEAL_PUBLIC_STATES)
+            throw new IllegalArgumentException("Six-seat private/public state cap exceeded");
         double maxLogWeight = prepared.stream().mapToDouble(Deal::logWeight).max().orElseThrow();
         double totalMass =
                 prepared.stream()
@@ -119,6 +168,14 @@ public final class SixMaxPreflopCheckdownGame
 
     public double maximumTerminalPayoffStandardErrorBb() {
         return maximumTerminalPayoffStandardErrorBb;
+    }
+
+    public ChanceModel chanceModel() {
+        return chanceModel;
+    }
+
+    public int chanceSamples() {
+        return chanceSamples;
     }
 
     public List<WeightedCombo> dealtHands(State state) {
@@ -289,6 +346,13 @@ public final class SixMaxPreflopCheckdownGame
         }
     }
 
+    private static List<Deal> prepareRangeDeals(List<List<WeightedCombo>> ranges) {
+        validateRanges(ranges);
+        List<Deal> prepared = new ArrayList<>();
+        enumerate(ranges, 0, new ArrayList<>(), new HashSet<>(), 0, prepared);
+        return prepared;
+    }
+
     private static void enumerate(
             List<List<WeightedCombo>> ranges,
             int seat,
@@ -298,7 +362,8 @@ public final class SixMaxPreflopCheckdownGame
             List<Deal> deals) {
         if (seat == ranges.size()) {
             if (deals.size() == MAX_JOINT_DEALS)
-                throw new IllegalArgumentException("More than eight physical joint deals");
+                throw new IllegalArgumentException(
+                        "More than " + MAX_JOINT_DEALS + " physical joint deals");
             deals.add(new Deal(List.copyOf(hands), logWeight, Map.of()));
             return;
         }

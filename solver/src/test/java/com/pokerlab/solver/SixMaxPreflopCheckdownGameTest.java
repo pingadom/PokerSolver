@@ -215,6 +215,12 @@ class SixMaxPreflopCheckdownGameTest {
         tooWide.set(
                 CO.ordinal(),
                 List.of(combo("5C", "5D", 1), combo("6C", "6D", 1), combo("7C", "7D", 1)));
+        tooWide.set(
+                BTN.ordinal(),
+                List.of(combo("8C", "8D", 1), combo("9C", "9D", 1), combo("TC", "TD", 1)));
+        tooWide.set(
+                SB.ordinal(),
+                List.of(combo("JC", "JD", 1), combo("QC", "QD", 1), combo("KC", "KD", 1)));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->

@@ -37,11 +37,14 @@ public final class SixMaxPreflopConvergenceMain {
                         new ExactMultiwayShowdownOracle());
         System.out.printf(
                 Locale.ROOT,
-                "fixture=%s raise_menu=%s rake=%s joint_deals=%d public_states=%d "
+                "fixture=%s raise_menu=%s rake=%s chance_model=%s chance_samples=%d "
+                        + "joint_deals=%d public_states=%d "
                         + "max_payoff_se_bb=%.12f%n",
                 args[0],
                 args[1],
                 args[2],
+                game.chanceModel(),
+                game.chanceSamples(),
                 game.chanceOutcomes(game.initialState()).size(),
                 game.treeSummary().totalStates(),
                 game.maximumTerminalPayoffStandardErrorBb());

@@ -46,6 +46,9 @@ class SixMaxPreflopConvergenceAuditTest {
             assertEquals(0, row.profileTotalBb(), 1e-8);
             assertEquals(0, row.maximumTerminalPayoffStandardErrorBb(), 1e-12);
             assertEquals(
+                    SixMaxPreflopCheckdownGame.ChanceModel.EXACT_RANGE_PRODUCT, row.chanceModel());
+            assertEquals(0, row.chanceSamples());
+            assertEquals(
                     row.deviationGainsBb().stream().mapToDouble(Double::doubleValue).sum(),
                     row.nashConvBb(),
                     1e-8);
