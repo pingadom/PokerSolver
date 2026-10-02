@@ -19,14 +19,7 @@ public final class SixMaxExpandedConvergenceMain {
         int boards = Integer.parseInt(args[1]);
         long seed = Long.parseLong(args[2]);
         var budgets = SixMaxPreflopConvergenceMain.parseBudgets(args[3]);
-        var ranges =
-                List.of(
-                        List.of(combo("AS", "AH"), combo("AD", "AC")),
-                        List.of(combo("KS", "KH"), combo("KD", "KC")),
-                        List.of(combo("QS", "QH"), combo("QD", "QC")),
-                        List.of(combo("JS", "JH"), combo("JD", "JC")),
-                        List.of(combo("TS", "TH"), combo("TD", "TC")),
-                        List.of(combo("9S", "9H"), combo("9D", "9C")));
+        var ranges = fixtureRanges();
         var sample =
                 exactChance
                         ? null
@@ -78,6 +71,26 @@ public final class SixMaxExpandedConvergenceMain {
                     row.nashConvBb(),
                     row.largestDeviationBb(),
                     row.profileTotalBb());
+    }
+
+    static List<List<WeightedCombo>> fixtureRanges() {
+        return List.of(
+                List.of(combo("AS", "AH"), combo("AD", "AC")),
+                List.of(combo("KS", "KH"), combo("KD", "KC")),
+                List.of(combo("QS", "QH"), combo("QD", "QC")),
+                List.of(combo("JS", "JH"), combo("JD", "JC")),
+                List.of(combo("TS", "TH"), combo("TD", "TC")),
+                List.of(combo("9S", "9H"), combo("9D", "9C")));
+    }
+
+    static List<List<WeightedCombo>> mixedPairRanges() {
+        return List.of(
+                List.of(combo("AS", "AH"), combo("2S", "2H")),
+                List.of(combo("KS", "KH"), combo("3S", "3H")),
+                List.of(combo("QS", "QH"), combo("4S", "4H")),
+                List.of(combo("JS", "JH"), combo("5S", "5H")),
+                List.of(combo("TS", "TH"), combo("6S", "6H")),
+                List.of(combo("9S", "9H"), combo("7S", "7H")));
     }
 
     private static WeightedCombo combo(String first, String second) {

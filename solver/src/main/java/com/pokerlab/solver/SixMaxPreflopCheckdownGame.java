@@ -178,6 +178,14 @@ public final class SixMaxPreflopCheckdownGame
         return chanceSamples;
     }
 
+    public SixMaxPreflopBetting.Rules rules() {
+        return betting.rules();
+    }
+
+    public CashRakeRule rakeRule() {
+        return rakeRule;
+    }
+
     public List<WeightedCombo> dealtHands(State state) {
         requireDealtState(state);
         return deals.get(state.dealIndex()).hands();
