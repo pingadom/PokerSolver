@@ -161,6 +161,22 @@ public final class SixMaxPreflopCheckdownGame
         return node(state).betting().status();
     }
 
+    public double publicPotBb(State state) {
+        return node(state).betting().potBb();
+    }
+
+    public double publicToCallBb(State state) {
+        return node(state).betting().toCallBb();
+    }
+
+    public double stackBb() {
+        return betting.rules().stackBb();
+    }
+
+    public double smallBlindBb() {
+        return betting.rules().smallBlindBb();
+    }
+
     @Override
     public int currentPlayer(State state) {
         if (state.dealIndex() == -1) return -1;
