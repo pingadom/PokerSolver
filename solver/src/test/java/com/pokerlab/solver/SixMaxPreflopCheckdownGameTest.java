@@ -180,6 +180,25 @@ class SixMaxPreflopCheckdownGameTest {
     }
 
     @Test
+    void sharedBoardSamplingBuildsTwoDealGameWithOneBoardStreamPerDeal() {
+        var ranges = new ArrayList<>(oneDeal());
+        ranges.set(UTG.ordinal(), List.of(combo("AS", "AH", 1), combo("5S", "5H", 1)));
+        var oracle = new SharedBoardMultiwayShowdownOracle(1000, 2026);
+        var game =
+                new SixMaxPreflopCheckdownGame(
+                        new SixMaxPreflopBetting.Rules(100, 0.5, List.of(100.0)),
+                        ranges,
+                        CashRakeRule.none(),
+                        oracle);
+        assertEquals(2, game.chanceOutcomes(game.initialState()).size());
+        assertEquals(2000, oracle.boardsEvaluated());
+        assertTrue(game.maximumTerminalPayoffStandardErrorBb() > 0);
+        var dealt = game.chanceOutcomes(game.initialState()).getFirst().state();
+        assertEquals(UTG.ordinal(), game.currentPlayer(dealt));
+        assertEquals(2000, oracle.boardsEvaluated());
+    }
+
+    @Test
     void rejectsBlockedRangesOversizedChanceAndInvalidShowdownShares() {
         var rules = new SixMaxPreflopBetting.Rules(100, 0.5, List.of(100.0));
         var blocked = new ArrayList<>(oneDeal());
