@@ -85,6 +85,8 @@ class SixMaxPreflopResearchTrainerTest {
         assertNotNull(utg);
         assertEquals(List.of(), utg.priorActions());
         assertEquals("VALIDATION_ONLY", utg.publicationStatus());
+        assertEquals(SixMaxPreflopCheckdownGame.ChanceModel.EXACT_RANGE_PRODUCT, utg.chanceModel());
+        assertEquals(0, utg.chanceSamples());
         assertEquals(1.5, utg.potBb(), 1e-12);
         assertEquals(1, utg.toCallBb(), 1e-12);
         assertEquals(0, utg.maximumPayoffStandardErrorBb());
@@ -140,6 +142,8 @@ class SixMaxPreflopResearchTrainerTest {
                         question.smallBlindBb(),
                         question.nashConvBb(),
                         question.maximumPayoffStandardErrorBb(),
+                        question.chanceModel(),
+                        question.chanceSamples(),
                         question.publicationStatus());
         assertThrows(IllegalArgumentException.class, () -> trainer.grade(tampered, "call"));
     }

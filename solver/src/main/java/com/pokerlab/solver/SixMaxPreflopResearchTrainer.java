@@ -26,6 +26,8 @@ public final class SixMaxPreflopResearchTrainer {
             double smallBlindBb,
             double nashConvBb,
             double maximumPayoffStandardErrorBb,
+            SixMaxPreflopCheckdownGame.ChanceModel chanceModel,
+            int chanceSamples,
             String publicationStatus) {
         public Question {
             priorActions = List.copyOf(priorActions);
@@ -89,6 +91,8 @@ public final class SixMaxPreflopResearchTrainer {
                 game.smallBlindBb(),
                 nashConvBb,
                 game.maximumTerminalPayoffStandardErrorBb(),
+                game.chanceModel(),
+                game.chanceSamples(),
                 "VALIDATION_ONLY");
     }
 
