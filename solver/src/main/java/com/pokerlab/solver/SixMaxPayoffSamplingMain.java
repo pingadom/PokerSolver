@@ -35,19 +35,21 @@ public final class SixMaxPayoffSamplingMain {
         System.out.printf(
                 Locale.ROOT,
                 "fixture=%s chance_model=%s deals=%d target_max_terminal_se_bb=%.9f "
-                        + "target_met=%s final_boards_per_deal=%d%n",
+                        + "target_met=%s final_boards_per_deal=%d actual_boards_evaluated=%d%n",
                 args[0],
                 result.game().chanceModel(),
                 result.game().chanceOutcomes(result.game().initialState()).size(),
                 target,
                 result.targetMet(),
-                result.finalBoardsPerDeal());
-        System.out.println("boards_per_deal,max_terminal_payoff_se_bb");
+                result.finalBoardsPerDeal(),
+                result.totalBoardsEvaluated());
+        System.out.println("boards_per_deal,max_terminal_payoff_se_bb,cumulative_boards_evaluated");
         for (var row : result.rows())
             System.out.printf(
                     Locale.ROOT,
-                    "%d,%.9f%n",
+                    "%d,%.9f,%d%n",
                     row.boardsPerDeal(),
-                    row.maximumTerminalPayoffStandardErrorBb());
+                    row.maximumTerminalPayoffStandardErrorBb(),
+                    row.cumulativeBoardsEvaluated());
     }
 }

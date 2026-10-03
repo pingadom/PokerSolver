@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.pokerlab.core.card.Card;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,7 @@ class SixMaxPreflopPayoffSamplingAuditTest {
         assertEquals(result.game(), result.requireTargetMet());
         assertEquals(10, result.finalBoardsPerDeal());
         assertEquals(1, result.rows().size());
+        assertEquals(10, result.totalBoardsEvaluated());
         assertEquals(
                 result.game().maximumTerminalPayoffStandardErrorBb(),
                 result.rows().getFirst().maximumTerminalPayoffStandardErrorBb());
@@ -46,6 +48,7 @@ class SixMaxPreflopPayoffSamplingAuditTest {
         assertEquals(
                 List.of(10, 20, 25), result.rows().stream().map(r -> r.boardsPerDeal()).toList());
         assertEquals(25, result.finalBoardsPerDeal());
+        assertEquals(25, result.totalBoardsEvaluated());
         var fixed =
                 new SixMaxPreflopCheckdownGame(
                         RULES,
@@ -58,6 +61,30 @@ class SixMaxPreflopPayoffSamplingAuditTest {
                 fixed.terminalUtilities(fixedLeaf),
                 result.game().terminalUtilities(adaptiveLeaf),
                 1e-12);
+        assertEquals(
+                fixed.maximumTerminalPayoffStandardErrorBb(),
+                result.game().maximumTerminalPayoffStandardErrorBb(),
+                1e-12);
+    }
+
+    @Test
+    void retainsEveryJointDealAcrossBudgetEscalationWithoutRepeatingEarlierBoards() {
+        var twoDeals = new ArrayList<>(RANGES);
+        twoDeals.set(0, List.of(combo("AS", "AH"), combo("2S", "2H")));
+        var result =
+                SixMaxPreflopPayoffSamplingAudit.run(
+                        RULES, twoDeals, CashRakeRule.none(), 711, 10, 25, 1e-6);
+        assertEquals(2, result.game().chanceOutcomes(result.game().initialState()).size());
+        assertEquals(
+                List.of(20L, 40L, 50L),
+                result.rows().stream().map(r -> r.cumulativeBoardsEvaluated()).toList());
+        assertEquals(50, result.totalBoardsEvaluated());
+        var fixed =
+                new SixMaxPreflopCheckdownGame(
+                        RULES,
+                        twoDeals,
+                        CashRakeRule.none(),
+                        new SharedBoardMultiwayShowdownOracle(25, 711));
         assertEquals(
                 fixed.maximumTerminalPayoffStandardErrorBb(),
                 result.game().maximumTerminalPayoffStandardErrorBb(),

@@ -69,10 +69,70 @@ class SharedBoardMultiwayShowdownOracleTest {
     }
 
     @Test
+    void extendingTwoRetainedStreamsMatchesFreshFinalBudgetsAcrossEverySubset() {
+        var first = hands();
+        var second = new ArrayList<>(first);
+        second.set(5, combo("8S", "8H", 1));
+        var incremental = new SharedBoardMultiwayShowdownOracle(101, 42, 2);
+        var oldSnapshot = incremental.estimate(first, 0b111111);
+        incremental.estimate(second, 0b111111);
+        assertEquals(202, incremental.boardsEvaluated());
+
+        incremental.increaseTrialsTo(201);
+        incremental.estimate(second, 0b111111);
+        incremental.estimate(first, 0b111111);
+        incremental.increaseTrialsTo(257);
+        var fresh = new SharedBoardMultiwayShowdownOracle(257, 42);
+        for (var deal : List.of(first, second))
+            for (int mask = 1; mask < 64; mask++) {
+                if (Integer.bitCount(mask) < 2) continue;
+                var extended = incremental.estimate(deal, mask);
+                var fixed = fresh.estimate(deal, mask);
+                assertArrayEquals(fixed.shares(), extended.shares());
+                assertArrayEquals(fixed.standardErrors(), extended.standardErrors());
+                assertEquals(257, extended.trials());
+            }
+        assertEquals(514, incremental.boardsEvaluated());
+        assertEquals(2, incremental.cachedDeals());
+        assertEquals(101, oldSnapshot.trials());
+        incremental.increaseTrialsTo(257);
+        incremental.estimate(first, 0b111111);
+        assertEquals(514, incremental.boardsEvaluated());
+        assertThrows(IllegalArgumentException.class, () -> incremental.increaseTrialsTo(256));
+    }
+
+    @Test
+    void boundedCacheEvictsLeastRecentlyUsedStreamAndCountsRepeatedWork() {
+        var first = hands();
+        var second = new ArrayList<>(first);
+        second.set(5, combo("8S", "8H", 1));
+        var third = new ArrayList<>(first);
+        third.set(4, combo("7S", "7H", 1));
+        var oracle = new SharedBoardMultiwayShowdownOracle(100, 42, 2);
+        var expected = oracle.estimate(first, 0b111111);
+        oracle.estimate(second, 0b111111);
+        oracle.estimate(first, 0b111111);
+        oracle.estimate(third, 0b111111);
+        assertEquals(300, oracle.boardsEvaluated());
+        assertEquals(2, oracle.cachedDeals());
+        assertArrayEquals(expected.shares(), oracle.estimate(first, 0b111111).shares());
+        assertEquals(300, oracle.boardsEvaluated());
+        oracle.estimate(second, 0b111111);
+        assertEquals(400, oracle.boardsEvaluated());
+        assertEquals(2, oracle.cachedDeals());
+    }
+
+    @Test
     void rejectsInvalidDealsAndMasksBeforeSampling() {
         var oracle = new SharedBoardMultiwayShowdownOracle(10, 1);
         assertThrows(
                 IllegalArgumentException.class, () -> new SharedBoardMultiwayShowdownOracle(0, 1));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SharedBoardMultiwayShowdownOracle(10, 1, 0));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SharedBoardMultiwayShowdownOracle(10, 1, 65));
         assertThrows(IllegalArgumentException.class, () -> oracle.estimate(hands(), 1));
         assertThrows(IllegalArgumentException.class, () -> oracle.estimate(hands(), 1 << 6));
         var collision = new ArrayList<>(hands());

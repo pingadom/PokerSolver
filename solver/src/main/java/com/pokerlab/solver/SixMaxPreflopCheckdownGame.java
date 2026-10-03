@@ -222,6 +222,20 @@ public final class SixMaxPreflopCheckdownGame
         return terminalPayoffs.get(state.dealIndex()).get(state.publicHistory()).rakeBb();
     }
 
+    /** Conservative maximum of the per-seat payoff SEs at this terminal. */
+    public double terminalMaximumPayoffStandardErrorBb(State state) {
+        if (!isTerminal(state)) throw new IllegalArgumentException("Expected a terminal state");
+        return terminalPayoffs.get(state.dealIndex()).get(state.publicHistory()).errorBoundBb();
+    }
+
+    /** A folded player's payoff is fixed; active seats use the conservative terminal maximum. */
+    public double terminalPayoffStandardErrorBb(State state, int player) {
+        if (player < 0 || player >= playerCount())
+            throw new IllegalArgumentException("Invalid player");
+        double maximum = terminalMaximumPayoffStandardErrorBb(state);
+        return node(state).betting().isFolded(Seat.values()[player]) ? 0 : maximum;
+    }
+
     public Status publicStatus(State state) {
         return node(state).betting().status();
     }
