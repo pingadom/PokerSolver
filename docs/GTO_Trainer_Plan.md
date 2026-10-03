@@ -32,6 +32,8 @@ The [convergence audit](sixmax-preflop-convergence-audit.md) and [expanded chanc
 
 A [heads-up preflop-to-flop research handoff](preflop-flop-transition-research.md) now carries a completed two-player pot into the three-street game with correct postflop action order, pot, remaining stack and blocker-aware flop chance. It requires explicit per-combo likelihoods for the observed preflop actions; these are not yet supplied by a solved six-seat policy. This connects the models mechanically without treating independently invented postflop ranges as preflop continuation values.
 
+The [payoff sampling budget audit](sixmax-payoff-sampling-audit.md) can escalate board trials to a declared terminal-payoff SE target and explicitly fail at a cap. In the mixed-pair fixture, a 7bb target is met at 2,000 boards per deal, but a 4bb target remains unmet at 4,000. This is an estimated-payoff gate, not proof of equilibrium quality.
+
 A [connected BTN-versus-BB research game](connected-preflop-continuation-research.md) now learns a small preflop open/call strategy and flop/turn/river continuation in one CFR tree, with a measured best-response gap. Its fixed four-seat folds, synthetic ranges and restricted flop/turn deck mean it is still a solver correctness fixture, not a publishable 6-max preflop chart.
 
 An [exact full-deck chance audit](connected-chance-abstraction-audit.md) now quantifies the separate abstraction error for forced check-downs. The initial connected fixture has over 1bb of weighted bias, and a seeded menu calibrated to its four combos fails badly on unseen combos. Broader preflop content must therefore pass independent range/board validation; a small gap against the abstract game alone is insufficient.
