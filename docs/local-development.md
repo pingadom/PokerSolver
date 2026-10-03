@@ -51,6 +51,16 @@ Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Vite proxies `/api` to port
 
 ## Without Docker
 
+For the full-round saved-pack trainer alone, a database-free preview is available. From the repository root on PowerShell:
+
+```powershell
+mvn -pl api -am -DskipTests package
+$env:TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH = (Resolve-Path 'solver/src/test/resources/six-seat-full-round-pack.json').Path
+java -jar api/target/api-1.0.0.jar --research-preview --server.port=18080
+```
+
+Run Vite in a second terminal and open `http://127.0.0.1:5173/#sixmax-preflop`. The explicit `--research-preview` flag starts only the full-round trainer and web/health infrastructure, with loopback binding by default. It imports no simulation controller, datasource, Flyway migrations or queue transport. It still requires an explicit, validated exact pack. Other drills and equity simulations need the complete API. Omitting the flag retains normal application startup.
+
 Use a dedicated PostgreSQL 16+ database and set `DATABASE_URL`, `DATABASE_USER` and `DATABASE_PASSWORD`. Run the same packaged services with `QUEUE_MODE=postgres`. This selects a durable, lease-based development transport stored in PostgreSQL; API and workers remain separate processes. Use `CACHE_ENABLED=false` if Redis is absent, or leave it enabled to exercise fallback. Flyway applies both migrations at service startup.
 
 Do not point tests at a database containing useful application data. For an isolated native PostgreSQL test database, set `TEST_DATABASE_URL`, `TEST_DATABASE_USER` and `TEST_DATABASE_PASSWORD`, then run `mvn test`. The same migration/lifecycle/concurrency contract runs against that database. Without these variables, native tests skip; with Docker, separate Testcontainers suites use disposable PostgreSQL/Redis instances. Reports show which path ran.
