@@ -46,6 +46,31 @@ public final class MultiwayPackJson {
         return serialize(spot);
     }
 
+    public static String writeFullRound(SixMaxPreflopSolutionPack pack) {
+        if (pack == null) throw new IllegalArgumentException("Pack is required");
+        pack.validate();
+        return serialize(pack);
+    }
+
+    public static SixMaxPreflopSolutionPack readFullRound(String json) {
+        var pack = deserialize(json, SixMaxPreflopSolutionPack.class);
+        pack.validate();
+        return pack;
+    }
+
+    public static String fullRoundContentHash(SixMaxPreflopSolutionPack pack) {
+        return MultiwayCallSpot.sha256(writeFullRound(pack));
+    }
+
+    public static String writeFullRoundSpot(SixMaxPreflopResearchSpot spot) {
+        if (spot == null) throw new IllegalArgumentException("Spot is required");
+        return serialize(spot);
+    }
+
+    public static SixMaxPreflopResearchSpot readFullRoundSpot(String json) {
+        return deserialize(json, SixMaxPreflopResearchSpot.class);
+    }
+
     public static MultiwayCallSpot readSpot(String json) {
         return deserialize(json, MultiwayCallSpot.class);
     }

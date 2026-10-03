@@ -56,6 +56,8 @@ Feedback also exposes `actionPayoffStandardErrorBb`, a conditional estimated pay
 
 This backend is a bridge to a broader trainer, not a published six-max curriculum. It grades decisions in the same tiny mandatory-checkdown game as the convergence audit; realistic range provenance, postflop continuation, and scale remain open gates before serving these questions as real strategy advice.
 
+The [saved full-round pack and session API](sixmax-full-round-pack-trainer.md) now persists this bounded tree, its complete subset payoffs and policy. A committed exact-board fixture supports ten-decision sessions through an opt-in backend API and the local trainer Compose overlay. Reload checks strategy coverage and measured NashConv; question, grade and review requests use the frozen artifact without solving or simulating boards.
+
 ### Shared-board sampled payoffs
 
 `SharedBoardMultiwayShowdownOracle` offers a reproducible sampled-payoff path for the six-seat game. For one physical six-hand deal, it draws one seeded sequence of boards, evaluates each player's hand once per board, and derives showdown shares and standard errors for all **57** active subsets of size two or more. A bounded one-deal cache means the game's repeated subset requests do not resample boards. The previous `SeededMultiwayShowdownOracle` remains unchanged for existing saved-pack reproducibility. For a six-seat deal, the new path needs one board stream instead of 57 separately seeded streams and six hand evaluations per board instead of 186 across those separate subsets. The subset shares remain sampled estimates, with per-seat standard errors; using a common board stream does not make them exact.
