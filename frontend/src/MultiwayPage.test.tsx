@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, expect, it, vi } from "vitest";
 import MultiwayPage from "./MultiwayPage";
@@ -68,10 +68,17 @@ it("shows all six public actions and completes a server-graded session", async (
   expect(table).toHaveTextContent("Waiting");
   expect(screen.getByLabelText("Your cards")).toHaveTextContent("A♥A♠");
   expect(table).not.toHaveTextContent("Kc");
+  expect(screen.queryByText(/Policy frequency/)).not.toBeInTheDocument();
   for (let index = 0; index < 10; index++) {
     await userEvent.click(screen.getByRole("button", { name: "Call" }));
     expect(await screen.findByText("Decision feedback")).toBeInTheDocument();
-    expect(screen.getByText("Solver frequency 70.0%")).toBeInTheDocument();
+    const controls = screen.getByLabelText("Your decision controls");
+    expect(within(controls).getByRole("button", { name: "Call" })).toHaveTextContent("EV +2.00 bb");
+    expect(within(controls).getByRole("button", { name: "Call" })).toHaveAccessibleDescription(/Policy frequency 70.0%.*Your choice/);
+    expect(within(controls).getByRole("button", { name: "Fold" })).toHaveTextContent("EV -1.00 bb");
+    expect(within(controls).getByRole("button", { name: "Fold" })).toHaveAccessibleDescription(/Policy frequency 30.0%/);
+    expect(within(controls).getByText("Decision feedback")).toBeInTheDocument();
+    expect(within(controls).getByRole("button", { name: index === 9 ? "Review session" : "Next decision" })).toBeEnabled();
     await userEvent.click(screen.getByRole("button", {
       name: index === 9 ? "Review session" : "Next decision",
     }));
