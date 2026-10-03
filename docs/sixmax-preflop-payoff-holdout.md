@@ -26,3 +26,19 @@ Both fixtures give each seat two non-colliding, equally weighted physical pocket
 The hierarchy policy is nearly unchanged across these two samples, but the mixed-pair policy shows a roughly 55–68% higher measured NashConv off its training board seed. Those percentages describe only this finite game and two holdouts; they are not a statistical confidence interval. The 6.55–6.59bb largest terminal-payoff SE remains much larger than the observed profile-level differences. Future work needs more independent seeds and board trials, a predeclared precision target for decision EVs, realistic ranges and bet sizes, and a validated postflop continuation. Keep these six-seat packs validation-only until those gates pass.
 
 The follow-up [payoff sampling budget audit](sixmax-payoff-sampling-audit.md) now accepts a declared terminal-payoff SE target and reports whether a bounded board budget actually met it. That target is an estimated-payoff gate, not a substitute for this independent-board policy check.
+
+### Higher-board-budget holdout
+
+After adding retained board streams to the payoff budget audit, repeat the mixed-pair solve and holdouts at 32,000 boards per physical deal:
+
+```powershell
+mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxPreflopHoldoutMain' '-Dexec.args=mixed-pairs 32000 32000 711 712,713 500'
+```
+
+| Board seed | NashConv (bb) | Change from training (bb) | Largest absolute seat EV change (bb) | Largest absolute seat deviation-gain change (bb) | Largest terminal-payoff SE (bb) |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 711 training | 0.025029 | — | — | — | 1.634748 |
+| 712 holdout | 0.026577 | +0.001548 | 0.001772 | 0.001671 | 1.636360 |
+| 713 holdout | 0.023412 | −0.001617 | 0.003958 | 0.001396 | 1.635200 |
+
+The terminal-payoff SE is roughly one quarter of the 2,000-board run, consistent with using sixteen times as many boards. The observed NashConv drift is smaller in these two holdouts, while the training NashConv itself is slightly higher. This compares two separately solved policies at the same 500-iteration budget; it does not demonstrate monotonic convergence with additional boards. The limited seed count and the estimated nature of the payoff SE still prevent a statistical certification or a real cash-game GTO claim.

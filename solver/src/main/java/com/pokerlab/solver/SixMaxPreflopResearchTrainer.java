@@ -35,19 +35,27 @@ public final class SixMaxPreflopResearchTrainer {
         }
     }
 
-    /** One-step action EV assumes every later decision follows the fixed saved policy. */
+    /**
+     * One-step action EV assumes every later decision follows the fixed saved policy. Action SEs
+     * are conservative weighted envelopes of the game's reported terminal SEs; they exclude
+     * strategy, chance-support and continuation-model error and are not confidence intervals.
+     */
     public record Feedback(
             String selectedAction,
             double selectedEvBb,
             double bestEvBb,
             double evLossBb,
             Map<String, Double> actionEvBb,
-            Map<String, Double> actionFrequency) {
+            Map<String, Double> actionFrequency,
+            Map<String, Double> actionPayoffStandardErrorBb) {
         public Feedback {
             actionEvBb = Map.copyOf(actionEvBb);
             actionFrequency = Map.copyOf(actionFrequency);
+            actionPayoffStandardErrorBb = Map.copyOf(actionPayoffStandardErrorBb);
         }
     }
+
+    private record ContinuationEstimate(double valueBb, double payoffStandardErrorBb) {}
 
     private final SixMaxPreflopCheckdownGame game;
     private final CfrSolution solution;
@@ -111,8 +119,12 @@ public final class SixMaxPreflopResearchTrainer {
         double mass = 0;
         SixMaxPreflopCheckdownGame.State reached = null;
         Map<String, Double> weighted = new LinkedHashMap<>();
-        for (String action : question.legalActions()) weighted.put(action, 0.0);
-        Map<SixMaxPreflopCheckdownGame.State, Double> continuations = new HashMap<>();
+        Map<String, Double> weightedError = new LinkedHashMap<>();
+        for (String action : question.legalActions()) {
+            weighted.put(action, 0.0);
+            weightedError.put(action, 0.0);
+        }
+        Map<SixMaxPreflopCheckdownGame.State, ContinuationEstimate> continuations = new HashMap<>();
         for (var outcome : game.chanceOutcomes(game.initialState())) {
             var state = outcome.state();
             if (!game.dealtHands(state).get(target).key().equals(question.heroCombo())) continue;
@@ -127,17 +139,18 @@ public final class SixMaxPreflopResearchTrainer {
             }
             if (reach > 0 && reached == null) reached = state;
             mass += reach;
-            for (String action : question.legalActions())
-                weighted.merge(
-                        action,
-                        reach
-                                * continuation(
-                                        game.afterAction(state, action), target, continuations),
-                        Double::sum);
+            for (String action : question.legalActions()) {
+                var estimate = continuation(game.afterAction(state, action), target, continuations);
+                weighted.merge(action, reach * estimate.valueBb(), Double::sum);
+                weightedError.merge(action, reach * estimate.payoffStandardErrorBb(), Double::sum);
+            }
         }
         if (mass <= 0) throw new IllegalStateException("Question has no reachable hidden deals");
         Map<String, Double> ev = new LinkedHashMap<>();
+        Map<String, Double> errors = new LinkedHashMap<>();
         for (var entry : weighted.entrySet()) ev.put(entry.getKey(), entry.getValue() / mass);
+        for (var entry : weightedError.entrySet())
+            errors.put(entry.getKey(), entry.getValue() / mass);
         double selectedEv = ev.get(selectedAction);
         double bestEv = ev.values().stream().mapToDouble(Double::doubleValue).max().orElseThrow();
         Map<String, Double> frequency = solution.at(target, game.informationSet(reached));
@@ -148,7 +161,8 @@ public final class SixMaxPreflopResearchTrainer {
                 bestEv,
                 Math.max(0, bestEv - selectedEv),
                 ev,
-                frequency);
+                frequency,
+                errors);
     }
 
     private SixMaxPreflopCheckdownGame.State drawDeal(SplittableRandom random) {
@@ -175,22 +189,31 @@ public final class SixMaxPreflopResearchTrainer {
         return Objects.requireNonNull(selected);
     }
 
-    private double continuation(
+    private ContinuationEstimate continuation(
             SixMaxPreflopCheckdownGame.State state,
             int target,
-            Map<SixMaxPreflopCheckdownGame.State, Double> cache) {
-        Double cached = cache.get(state);
+            Map<SixMaxPreflopCheckdownGame.State, ContinuationEstimate> cache) {
+        ContinuationEstimate cached = cache.get(state);
         if (cached != null) return cached;
         double value;
-        if (game.isTerminal(state)) value = game.terminalUtilities(state)[target];
-        else {
+        double error;
+        if (game.isTerminal(state)) {
+            value = game.terminalUtilities(state)[target];
+            error = game.terminalPayoffStandardErrorBb(state, target);
+        } else {
             value = 0;
-            for (String action : game.legalActions(state))
-                value +=
-                        MultiPlayerStrategyEvaluator.probability(game, solution, state, action)
-                                * continuation(game.afterAction(state, action), target, cache);
+            error = 0;
+            for (String action : game.legalActions(state)) {
+                double probability =
+                        MultiPlayerStrategyEvaluator.probability(game, solution, state, action);
+                var estimate = continuation(game.afterAction(state, action), target, cache);
+                value += probability * estimate.valueBb();
+                // The same boards feed multiple leaves; do not assume their errors independent.
+                error += probability * estimate.payoffStandardErrorBb();
+            }
         }
-        cache.put(state, value);
-        return value;
+        var estimate = new ContinuationEstimate(value, error);
+        cache.put(state, estimate);
+        return estimate;
     }
 }

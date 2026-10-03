@@ -15,6 +15,10 @@ class SixMaxPreflopResearchTrainerTest {
     }
 
     private static SixMaxPreflopCheckdownGame game() {
+        return game(0, 0);
+    }
+
+    private static SixMaxPreflopCheckdownGame game(double strongPairError, double weakPairError) {
         return new SixMaxPreflopCheckdownGame(
                 new SixMaxPreflopBetting.Rules(100, 0.5, List.of(100.0)),
                 List.of(
@@ -39,7 +43,14 @@ class SixMaxPreflopResearchTrainerTest {
                         int winner = Integer.numberOfTrailingZeros(mask);
                         shares[winner] = 1;
                     }
-                    return MultiwayShowdownEstimate.certain(shares);
+                    double[] errors = new double[6];
+                    double error =
+                            hands.get(BTN.ordinal()).key().contains("Js")
+                                    ? strongPairError
+                                    : weakPairError;
+                    for (int seat = 0; seat < 6; seat++)
+                        if ((mask & (1 << seat)) != 0) errors[seat] = error;
+                    return new MultiwayShowdownEstimate(shares, errors, error == 0 ? 0 : 100);
                 });
     }
 
@@ -104,6 +115,26 @@ class SixMaxPreflopResearchTrainerTest {
         assertEquals(1, call.actionFrequency().get("call"), 1e-12);
         assertEquals(0, call.actionFrequency().get("raise:100.0"), 1e-12);
         assertEquals(call.actionEvBb(), fold.actionEvBb());
+        assertTrue(call.actionPayoffStandardErrorBb().values().stream().allMatch(v -> v == 0));
+    }
+
+    @Test
+    void reportsActionSpecificPayoffUncertaintyRatherThanOnlyTheGlobalMaximum() {
+        var sampledGame = game(0.01, 0.01);
+        var trainer = new SixMaxPreflopResearchTrainer(sampledGame, alwaysCallOrCheck(sampledGame));
+        SixMaxPreflopResearchTrainer.Question utg = null;
+        for (long seed = 0; seed < 100 && utg == null; seed++) {
+            var candidate = trainer.question(seed);
+            if (candidate.actingSeat() == UTG) utg = candidate;
+        }
+        assertNotNull(utg);
+        var feedback = trainer.grade(utg, "call");
+        assertEquals(6, utg.maximumPayoffStandardErrorBb(), 1e-12);
+        assertEquals(0, feedback.actionPayoffStandardErrorBb().get("fold"), 1e-12);
+        assertEquals(0.06, feedback.actionPayoffStandardErrorBb().get("call"), 1e-12);
+        assertEquals(6, feedback.actionPayoffStandardErrorBb().get("raise:100.0"), 1e-12);
+        assertEquals(
+                feedback.actionEvBb().keySet(), feedback.actionPayoffStandardErrorBb().keySet());
     }
 
     @Test
@@ -168,5 +199,29 @@ class SixMaxPreflopResearchTrainerTest {
         var feedback = trainer.grade(bigBlind, "check");
         // P(BTN holds 55 | call) = (3 * 0.2) / (1 * 0.8 + 3 * 0.2) = 3/7.
         assertEquals(6.0 * 3 / 7 - 1, feedback.selectedEvBb(), 1e-10);
+    }
+
+    @Test
+    void conditionalPayoffUncertaintyUsesTheSamePosteriorAsTheActionEv() {
+        var sampledGame = game(0.01, 0.02);
+        var trainer =
+                new SixMaxPreflopResearchTrainer(sampledGame, buttonCallRevealsHand(sampledGame));
+        SixMaxPreflopResearchTrainer.Question bigBlind = null;
+        for (long seed = 0; seed < 1000 && bigBlind == null; seed++) {
+            var candidate = trainer.question(seed);
+            if (candidate.actingSeat() == BB
+                    && candidate.priorActions().stream()
+                            .anyMatch(
+                                    action ->
+                                            action.seat() == BTN && action.action().equals("call")))
+                bigBlind = candidate;
+        }
+        assertNotNull(bigBlind);
+        var feedback = trainer.grade(bigBlind, "check");
+        // Same posterior as the EV: P(JJ | call)=4/7 and P(55 | call)=3/7.
+        assertEquals(
+                6 * (4.0 / 7 * 0.01 + 3.0 / 7 * 0.02),
+                feedback.actionPayoffStandardErrorBb().get("check"),
+                1e-12);
     }
 }

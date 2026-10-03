@@ -10,7 +10,10 @@ import java.util.Objects;
  * a confidence interval or an equilibrium-quality certificate.
  */
 public final class SixMaxPreflopPayoffSamplingAudit {
-    public record Row(int boardsPerDeal, double maximumTerminalPayoffStandardErrorBb) {}
+    public record Row(
+            int boardsPerDeal,
+            double maximumTerminalPayoffStandardErrorBb,
+            long cumulativeBoardsEvaluated) {}
 
     public record Result(
             SixMaxPreflopCheckdownGame game,
@@ -23,6 +26,10 @@ public final class SixMaxPreflopPayoffSamplingAudit {
 
         public int finalBoardsPerDeal() {
             return rows.getLast().boardsPerDeal();
+        }
+
+        public long totalBoardsEvaluated() {
+            return rows.getLast().cumulativeBoardsEvaluated();
         }
 
         /** Use this before consuming a game whose declared payoff-SE target is required. */
@@ -55,15 +62,14 @@ public final class SixMaxPreflopPayoffSamplingAudit {
 
         int boards = initialBoardsPerDeal;
         List<Row> rows = new ArrayList<>();
+        var oracle =
+                new SharedBoardMultiwayShowdownOracle(
+                        boards, seed, SixMaxPreflopCheckdownGame.MAX_JOINT_DEALS);
         while (true) {
-            var game =
-                    new SixMaxPreflopCheckdownGame(
-                            rules,
-                            ranges,
-                            rake,
-                            new SharedBoardMultiwayShowdownOracle(boards, seed));
+            oracle.increaseTrialsTo(boards);
+            var game = new SixMaxPreflopCheckdownGame(rules, ranges, rake, oracle);
             double estimatedError = game.maximumTerminalPayoffStandardErrorBb();
-            rows.add(new Row(boards, estimatedError));
+            rows.add(new Row(boards, estimatedError, oracle.boardsEvaluated()));
             boolean targetMet = estimatedError <= targetMaximumTerminalPayoffStandardErrorBb;
             if (targetMet || boards == maximumBoardsPerDeal)
                 return new Result(
