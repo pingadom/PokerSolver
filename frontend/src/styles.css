@@ -1196,3 +1196,61 @@ footer span {
   .multiway-decision-bar { padding: 8px 10px; margin-top: 8px; }
   .multiway-decision-bar strong { font-size: 15px; }
 }
+
+/* Full-round preflop practice keeps the table and decision together. */
+.preflop-layout { grid-template-columns: minmax(0, 2fr) minmax(265px, 1fr); }
+.preflop-table { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 10px; border: 1px solid #cfddce; border-radius: 10px; background: #edf3e9; }
+.preflop-seat { min-width: 0; min-height: 105px; padding: 10px; border: 1px solid #d6e0d3; border-radius: 7px; background: #fff; }
+.preflop-seat-top { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
+.preflop-seat-top strong { font-size: 13px; }
+.preflop-seat-top > span { font-size: 10px; font-weight: 700; color: #50674f; }
+.preflop-seat.acting { border-color: #347951; box-shadow: inset 0 0 0 1px #347951; background: #e1f0e2; }
+.preflop-seat.acting .preflop-seat-top > span { color: #205f3b; }
+.preflop-seat.folded { background: #f4f6f2; color: #60735f; }
+.preflop-seat.all_in { border-color: #c49e5c; background: #fbf2e3; }
+.preflop-last-action { margin: 7px 0 5px; font-size: 12px; font-weight: 700; }
+.preflop-seat-chips { display: flex; flex-wrap: wrap; gap: 2px 8px; color: #5b705e; font-size: 10px; }
+.preflop-hole-cards { display: flex; gap: 4px; margin-top: 7px; }
+.preflop-hole-cards span { display: grid; place-items: center; min-width: 29px; height: 33px; border: 1px solid #c3d3bf; border-radius: 4px; background: #fff; font-size: 15px; font-weight: 800; }
+.preflop-hole-cards .red { color: #ab493c; }
+.preflop-decision-bar { justify-content: space-between; gap: 8px; }
+.preflop-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.preflop-play > .preflop-table { position: sticky; top: 8px; z-index: 1; }
+.preflop-actions .trainer-button { min-width: 0 !important; padding: 11px 9px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.preflop-actions kbd { padding: 1px 5px; border: 1px solid currentColor; border-radius: 3px; opacity: .65; font: inherit; font-size: 10px; }
+.preflop-keyboard { color: #617460; font-size: 10px; margin: 9px 0 0; }
+.preflop-history { margin-top: 11px; font-size: 11px; color: #55705b; }
+.preflop-history summary { cursor: pointer; padding: 5px 0; }
+.preflop-history ol { padding-left: 20px; line-height: 1.8; }
+.preflop-feedback { margin-top: 17px; padding-top: 15px; }
+.preflop-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.preflop-values > div { border: 1px solid #d9e4d5; border-radius: 6px; padding: 10px; background: #f7faf5; }
+.preflop-values > div.chosen { border-color: #5b8963; }
+.preflop-values > div > span, .preflop-values strong, .preflop-values small { display: block; }
+.preflop-values > div > span { font-size: 11px; }
+.preflop-values strong { margin: 5px 0; font-size: 17px; }
+.preflop-values small { color: #5c725f; font-size: 10px; }
+.preflop-frequency { height: 4px; margin-top: 7px; border-radius: 3px; background: #e0e8dc; overflow: hidden; }
+.preflop-frequency span { display: block; height: 100%; background: #558460; }
+.preflop-session-tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.preflop-session-tools .trainer-button { font-size: 11px; padding: 9px; }
+.preflop-page .trainer-error .trainer-button { margin: 6px 8px; padding: 7px; font-size: 11px; }
+.preflop-review details { padding-bottom: 5px; }
+.preflop-actions .trainer-button:focus-visible, .preflop-history summary:focus-visible { outline: 3px solid #bd9556; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .preflop-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .preflop-page .hand-play-title h1 { font-size: 24px; }
+  .preflop-page .trainer-status { padding: 5px 7px; font-size: 9px; }
+  .preflop-table { gap: 5px; padding: 6px; }
+  .preflop-seat { padding: 7px; min-height: 95px; }
+  .preflop-seat-top { flex-wrap: wrap; gap: 2px; }
+  .preflop-seat-top > span { font-size: 9px; }
+  .preflop-last-action { margin: 5px 0; font-size: 10px; }
+  .preflop-seat-chips { font-size: 9px; }
+  .preflop-hole-cards span { min-width: 24px; height: 27px; font-size: 13px; }
+  .preflop-actions .trainer-button { font-size: 11px; padding: 10px 5px; gap: 5px; }
+  .preflop-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .preflop-decision-bar span { font-size: 9px; }
+}
