@@ -90,6 +90,11 @@ it("routes the drill and shows chips, blind posts and legal raise amounts before
   expect(screen.queryByLabelText("Action values")).not.toBeInTheDocument();
   expect(table).not.toHaveTextContent("K♠");
   expect(screen.getByRole("note")).toHaveTextContent("checked down");
+  const hero = screen.getByLabelText("UTG player");
+  expect(hero).toHaveClass("hero", "position-0", "acting");
+  expect(screen.getByLabelText("HJ player")).toHaveClass("villain", "position-1");
+  expect(screen.getByLabelText("BTN player")).toHaveTextContent("D");
+  expect(within(screen.getByLabelText("Your decision controls")).getByRole("button", { name: "Raise to 3 bb" })).toBeInTheDocument();
 });
 
 it("completes ten server-graded decisions, reviews full tables and replays the same 64-bit seed", async () => {
@@ -103,6 +108,11 @@ it("completes ten server-graded decisions, reviews full tables and replays the s
       const table = screen.getByLabelText("Six-seat action table");
       expect(table).toHaveTextContent("Raised to 100 bb"); expect(table).toHaveTextContent("Folded");
       expect(table).toHaveTextContent("0 bb behind"); expect(table).toHaveTextContent("99 bb behind");
+      expect(screen.getByLabelText("BB player")).toHaveClass("hero", "position-0", "move-fold");
+      expect(screen.getByLabelText("BB player")).not.toHaveClass("acting");
+      expect(screen.getByLabelText("UTG player")).toHaveClass("villain", "position-1", "move-raise");
+      expect(screen.getByLabelText("HJ player")).toHaveClass("folded", "move-fold");
+      expect(screen.getByLabelText("BB player")).toHaveTextContent("You chose · Fold");
     }
     await userEvent.click(screen.getByRole("button", { name: index === 9 ? "Review session" : "Next decision" }));
   }
@@ -119,6 +129,35 @@ it("completes ten server-graded decisions, reviews full tables and replays the s
   await userEvent.click(screen.getByRole("button", { name: "Replay this session" }));
   expect(await screen.findByText("DECISION 1 OF 10")).toBeInTheDocument();
   expect(window.location.hash).toContain("seed=9223372036854775807");
+});
+
+it("shows check and call outlines without revealing hidden cards or advancing the chip snapshot", async () => {
+  link("42");
+  const q = question("42", 0);
+  q.legalActions = ["check", "raise:3.0"];
+  q.toCallBb = 0;
+  q.players[1].lastAction = { seat: "HJ", kind: "CHECK", amountBb: 0 };
+  q.players[2].lastAction = { seat: "CO", kind: "CALL", amountBb: 1 };
+  vi.spyOn(globalThis, "fetch").mockImplementation((url, init) => {
+    if (String(url).endsWith("/grade")) {
+      const action = JSON.parse(String(init?.body)).action;
+      return response({ question: q, feedback: feedback(q, action) });
+    }
+    return response(String(url).includes("/questions/") ? q : metadata);
+  });
+  render(<SixMaxPreflopPage />);
+  await screen.findByText("DECISION 1 OF 10");
+  expect(screen.getByLabelText("HJ player")).toHaveClass("move-check");
+  expect(screen.getByLabelText("CO player")).toHaveClass("move-call");
+  expect(screen.getAllByLabelText("Your cards")).toHaveLength(1);
+  await userEvent.click(screen.getByRole("button", { name: "Check" }));
+  await screen.findByText("Decision feedback");
+  const hero = screen.getByLabelText("UTG player");
+  expect(hero).toHaveClass("hero", "move-check");
+  expect(hero).not.toHaveClass("acting");
+  expect(hero).toHaveTextContent("You chose · Check");
+  expect(hero).toHaveTextContent("100 bb behind");
+  expect(screen.getByRole("button", { name: "Check" })).toBeDisabled();
 });
 
 it("blocks stale links, then starts a fresh session with the current artifact", async () => {

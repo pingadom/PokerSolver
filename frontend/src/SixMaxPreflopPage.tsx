@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import SixMaxPreflopTable, { PreflopActionValues } from "./SixMaxPreflopTable";
+import SixMaxPreflopTable, { actionTone, PreflopActionValues } from "./SixMaxPreflopTable";
 import {
   actionLabel, postPreflop, preflopRequest, PreflopRequestError, sameQuestion,
   type PreflopAction, type PreflopFeedback, type PreflopGradedQuestion,
@@ -160,7 +160,6 @@ export default function SixMaxPreflopPage() {
     window.addEventListener("keydown", keys); return () => window.removeEventListener("keydown", keys);
   });
 
-  const hero = question?.players.find((p) => p.seat === question.actingSeat);
   return <main className="trainer-page preflop-page">
     <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <div className="trainer-container hand-play-container">
@@ -176,18 +175,18 @@ export default function SixMaxPreflopPage() {
             <p className="trainer-summary">Total EV loss: <strong>{review.totalEvLossBb.toFixed(2)} bb</strong> · Average: {review.averageEvLossBb.toFixed(2)} bb per decision</p>
             <ol className="trainer-review-list preflop-review">{review.attempts.map((attempt) => <li key={attempt.question.index}><details>
               <summary><span>{attempt.question.index + 1}. {attempt.question.actingSeat} · {attempt.question.heroCombo}</span><span>{actionLabel(attempt.feedback.selectedAction, metadata.stackBb)} · {attempt.feedback.evLossBb.toFixed(2)} bb lost</span></summary>
-              <SixMaxPreflopTable question={attempt.question} /><PreflopActionValues question={attempt.question} feedback={attempt.feedback} />
+              <SixMaxPreflopTable question={attempt.question} selectedAction={attempt.feedback.selectedAction} /><PreflopActionValues question={attempt.question} feedback={attempt.feedback} />
             </details></li>)}</ol>
             <p className="trainer-explanation">The total adds one-step decision losses against the saved policy. It is not full-hand exploitability.</p>
             <div className="trainer-actions"><button className="trainer-button" disabled={busy} onClick={() => void newSession()}>New session</button><button className="trainer-button secondary" disabled={busy} onClick={() => void newSession(true)}>Replay this session</button></div>
           </> : !question ? <p className="trainer-loading" role="status">{error ? "Decision unavailable." : "Loading decision…"}</p> : <>
-            <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{question.actingSeat} to act</span></div>
+            <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{question.actingSeat} {feedback ? "decision graded" : "to act"}</span></div>
             <div className="trainer-progress" aria-hidden="true"><span style={{ width: `${(index + 1) / metadata.sessionLength * 100}%` }} /></div>
-            <SixMaxPreflopTable question={question} />
-            <div className="multiway-decision-bar preflop-decision-bar"><div><span>Pot</span><strong>{question.potBb} bb</strong></div><div><span>To call</span><strong>{question.toCallBb} bb</strong></div><div><span>Your remaining stack</span><strong>{hero?.remainingStackBb} bb</strong></div></div>
-            <h2>{question.actingSeat}: {question.toCallBb > 0 ? `facing ${question.toCallBb} bb` : "no bet to call"}</h2>
-            <div className="trainer-actions preflop-actions">{question.legalActions.map((action, i) => <button key={action} className={`trainer-button ${action === "fold" || action === "check" ? "secondary" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}><kbd aria-hidden="true">{i + 1}</kbd>{actionLabel(action, question.stackBb)}</button>)}</div>
-            <p className="preflop-keyboard">Keyboard: 1–{question.legalActions.length} to choose · Enter to continue</p>
+            <SixMaxPreflopTable question={question} selectedAction={feedback?.selectedAction}>
+              <h2>{question.actingSeat}: {question.toCallBb > 0 ? `facing ${question.toCallBb} bb` : "no bet to call"}</h2>
+              <div className="trainer-actions preflop-actions">{question.legalActions.map((action, i) => <button key={action} className={`trainer-button poker-action move-${actionTone(action)} ${feedback?.selectedAction === action ? "selected" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}><kbd aria-hidden="true">{i + 1}</kbd>{actionLabel(action, question.stackBb)}</button>)}</div>
+              <p className="preflop-keyboard" role="status">{busy ? "Grading your decision…" : feedback ? "Decision graded · feedback below" : `Your turn · 1–${question.legalActions.length} to choose`} · Enter to continue</p>
+            </SixMaxPreflopTable>
             {question.priorActions.length > 0 && <details className="preflop-history"><summary>Betting history · {question.priorActions.length} actions</summary><ol>{question.priorActions.map((event, i) => <li key={i}><strong>{event.seat}</strong> · {actionLabel(event.action, question.stackBb)}</li>)}</ol></details>}
             {feedback && <div className="trainer-feedback preflop-feedback" aria-live="polite"><h3>Decision feedback</h3><p>You chose {actionLabel(feedback.selectedAction, question.stackBb).toLowerCase()}. EV loss: <strong>{feedback.evLossBb.toFixed(2)} bb</strong>.</p>
               <PreflopActionValues question={question} feedback={feedback} />
