@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SixMaxPreflopTable, { actionTone, PreflopActionValues } from "./SixMaxPreflopTable";
+import PokerActionButton, { PokerDecisionFeedback } from "./PokerActionButton";
 import {
   actionLabel, postPreflop, preflopRequest, PreflopRequestError, sameQuestion,
   type PreflopAction, type PreflopFeedback, type PreflopGradedQuestion,
@@ -184,15 +185,18 @@ export default function SixMaxPreflopPage() {
             <div className="trainer-progress" aria-hidden="true"><span style={{ width: `${(index + 1) / metadata.sessionLength * 100}%` }} /></div>
             <SixMaxPreflopTable question={question} selectedAction={feedback?.selectedAction}>
               <h2>{question.actingSeat}: {question.toCallBb > 0 ? `facing ${question.toCallBb} bb` : "no bet to call"}</h2>
-              <div className="trainer-actions preflop-actions">{question.legalActions.map((action, i) => <button key={action} className={`trainer-button poker-action move-${actionTone(action)} ${feedback?.selectedAction === action ? "selected" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}><kbd aria-hidden="true">{i + 1}</kbd>{actionLabel(action, question.stackBb)}</button>)}</div>
-              <p className="preflop-keyboard" role="status">{busy ? "Grading your decision…" : feedback ? "Decision graded · feedback below" : `Your turn · 1–${question.legalActions.length} to choose`} · Enter to continue</p>
+              <div className="trainer-actions preflop-actions">{question.legalActions.map((action, i) => <PokerActionButton key={action}
+                label={actionLabel(action, question.stackBb)} tone={actionTone(action)} shortcut={i + 1}
+                selected={feedback?.selectedAction === action} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}
+                value={feedback ? { evBb: feedback.actionEvBb[action], frequency: feedback.actionFrequency[action], standardErrorBb: feedback.actionPayoffStandardErrorBb[action] } : undefined} />)}
+                {feedback && <button className="trainer-button poker-next" disabled={busy} onClick={() => void advance()}>{index === metadata.sessionLength - 1 ? "Review session" : "Next decision"}<span aria-hidden="true">→</span></button>}
+              </div>
+              {feedback && <PokerDecisionFeedback choice={actionLabel(feedback.selectedAction, question.stackBb)} evLossBb={feedback.evLossBb}>
+                EVs average over hidden hands compatible with your cards and the public actions. Later play follows the saved policy; a mixed frequency is not a command to always choose one action.
+              </PokerDecisionFeedback>}
+              <p className="preflop-keyboard" role="status">{busy ? "Grading your decision…" : feedback ? "Decision graded · Enter to continue" : `Your turn · 1–${question.legalActions.length} to choose`}</p>
             </SixMaxPreflopTable>
             {question.priorActions.length > 0 && <details className="preflop-history"><summary>Betting history · {question.priorActions.length} actions</summary><ol>{question.priorActions.map((event, i) => <li key={i}><strong>{event.seat}</strong> · {actionLabel(event.action, question.stackBb)}</li>)}</ol></details>}
-            {feedback && <div className="trainer-feedback preflop-feedback" aria-live="polite"><h3>Decision feedback</h3><p>You chose {actionLabel(feedback.selectedAction, question.stackBb).toLowerCase()}. EV loss: <strong>{feedback.evLossBb.toFixed(2)} bb</strong>.</p>
-              <PreflopActionValues question={question} feedback={feedback} />
-              <p className="trainer-explanation">EVs average over hidden hands compatible with your cards and the public actions. Later play follows the saved policy; a mixed frequency is not a command to always choose one action.</p>
-              <button className="trainer-button" disabled={busy} onClick={() => void advance()}>{index === metadata.sessionLength - 1 ? "Review session" : "Next decision"}</button>
-            </div>}
           </>}
         </section>
         <aside className="trainer-card trainer-reference preflop-reference" aria-label="Preflop game details"><h2>Game details</h2><dl className="trainer-facts">

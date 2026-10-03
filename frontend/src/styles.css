@@ -1228,7 +1228,7 @@ footer span {
 .preflop-page .trainer-error .trainer-button { margin: 6px 8px; padding: 7px; font-size: 11px; }
 .preflop-review details { padding-bottom: 5px; }
 .preflop-actions .trainer-button:focus-visible, .preflop-history summary:focus-visible { outline: 3px solid #bd9556; outline-offset: 3px; }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .preflop-layout { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
@@ -1293,12 +1293,55 @@ footer span {
 .poker-hero-controls .poker-action:hover:not(:disabled) { filter: brightness(1.2); transform: translateY(-1px); }
 .poker-hero-controls .poker-action:disabled { opacity: .5; cursor: default; }
 .poker-hero-controls .poker-action.selected { opacity: 1; box-shadow: 0 0 0 2px #fff; }
+.poker-hero-controls .poker-action.graded { opacity: 1; flex-direction: column; justify-content: flex-start; gap: 5px; }
+.poker-action-label { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.poker-action-value { display: flex; flex-direction: column; width: 100%; gap: 3px; }
+.poker-action-value strong { font-size: 15px; font-variant-numeric: tabular-nums; }
+.poker-action-value small { font-size: 10px; font-weight: 500; color: #d2dee8; }
+.poker-action-value .preflop-frequency { background: #111e28; margin: 2px 0 0; }
+.poker-action-value .poker-your-choice { color: #fff; font-weight: 800; }
+.poker-hero-controls .poker-next { background: #216ab1; border: 2px solid #8fc7ff; color: #fff; flex-direction: column; gap: 4px; }
+.poker-next > span { font-size: 22px; }
+.poker-decision-feedback { margin: 12px 0 0; padding: 10px 12px; background: #223340; border: 1px solid #496173; border-radius: 6px; text-align: left; }
+.poker-decision-feedback h3 { font-size: 11px; color: #a6cff6; margin: 0 0 4px; }
+.poker-decision-feedback p { margin: 0; font-size: 12px; color: #eef5fb; line-height: 1.5; }
+.poker-decision-feedback details { margin-top: 5px; font-size: 10px; color: #bed0df; }
+.poker-decision-feedback summary { cursor: pointer; }
+.poker-decision-feedback details p { margin-top: 6px; font-size: 11px; color: #bed0df; }
+.poker-next:focus-visible, .poker-decision-feedback summary:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .poker-hero-controls .poker-action:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .poker-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px 12px; padding-top: 10px; font-size: 9px; color: #c5d0d8; }
 .poker-legend > span::before { content: ""; display: inline-block; width: 6px; height: 6px; border: 2px solid; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
 .poker-legend .hero::before { border-color: #60acff; }.poker-legend .villain::before { border-color: #ce6b76; }
 .poker-legend .check::before { border-color: #d9a817; }.poker-legend .call::before { border-color: #269967; }
 .poker-legend .raise::before { border-color: #e45757; }.poker-legend .fold::before { border-color: #88939f; }
+/* Keep the table, graded moves and continuation control together on laptop screens. */
+@media (min-width: 901px) and (max-height: 820px) {
+  .preflop-page .trainer-topbar { padding-top: 10px; padding-bottom: 10px; }
+  .preflop-page .hand-play-container { padding-top: 10px; }
+  .preflop-page .hand-play-title h1 { font-size: 25px; }
+  .preflop-page .hand-play-title .trainer-intro { display: none; }
+  .preflop-page .hand-play-disclosure { margin-top: 9px; margin-bottom: 11px; }
+  .preflop-page .trainer-play { padding: 14px; }
+  .preflop-page .trainer-progress { margin: 10px 0; }
+  .poker-table-stage { padding-top: 12px; }
+  .poker-table { height: 270px; }
+  .poker-table-center { top: 41%; gap: 2px; }
+  .poker-table-center > strong { font-size: 21px; }
+  .poker-player-panel { padding: 4px 5px; }
+  .poker-player-heading > strong { font-size: 11px; }
+  .poker-stack { font-size: 9px; }
+  .poker-contribution { font-size: 8px; }
+  .poker-card-backs > span { height: 14px; }
+  .poker-cards > span { height: 30px; }
+  .poker-move { margin-top: 4px; padding-top: 3px; padding-bottom: 3px; }
+  .poker-hero-controls { margin-top: 12px; padding-top: 8px; }
+  .poker-hero-controls .poker-action { padding-top: 8px; padding-bottom: 8px; }
+  .poker-action-value strong { font-size: 14px; }
+  .poker-decision-feedback { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; padding: 6px 10px; margin-top: 9px; }
+  .poker-decision-feedback h3 { margin: 0; align-self: center; }
+  .poker-decision-feedback details { grid-column: 1 / -1; margin-top: 0; }
+}
 @media (max-width: 600px) {
   .preflop-page .trainer-play { padding: 12px; }
   .poker-table-stage { padding: 12px 4px 8px; }
@@ -1321,5 +1364,6 @@ footer span {
   .poker-call { font-size: 9px; }
   .poker-felt { inset: 58px 4% 62px; border-width: 7px; }
   .poker-hero-controls { margin-top: 14px; }
+  .poker-hero-controls .poker-next { grid-column: 1 / -1; flex-direction: row; }
   .poker-legend { gap: 5px 8px; font-size: 8px; }
 }

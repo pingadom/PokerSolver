@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PokerTable, { type TablePlayer } from "./PokerTable";
+import PokerActionButton, { PokerDecisionFeedback } from "./PokerActionButton";
 import {
   multiwayRequest, postMultiway,
   type MultiwayAction, type MultiwayFeedback, type MultiwayGradedQuestion,
@@ -232,16 +233,17 @@ export default function MultiwayPage() {
                 heroCombo={question.heroCombo} potBb={question.potBb} toCallBb={question.callCostBb}
                 selectedMove={feedback ? { kind: feedback.selectedAction === "CALL" ? "call" : "fold", label: feedback.selectedAction === "CALL" ? "Call" : "Fold" } : undefined}>
                 <h2>{question.actingSeat}: call or fold?</h2>
-                <div className="trainer-actions preflop-actions">{question.legalActions.map((action) => <button key={action} type="button" className={`trainer-button poker-action move-${action.toLowerCase()} ${feedback?.selectedAction === action ? "selected" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}>{action === "CALL" ? "Call" : "Fold"}</button>)}</div>
+                <div className="trainer-actions preflop-actions">{question.legalActions.map((action) => <PokerActionButton key={action}
+                  label={action === "CALL" ? "Call" : "Fold"} tone={action === "CALL" ? "call" : "fold"}
+                  selected={feedback?.selectedAction === action} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}
+                  value={feedback ? { evBb: action === "CALL" ? feedback.callEvBb : feedback.foldEvBb, frequency: action === "CALL" ? feedback.callFrequency : feedback.foldFrequency } : undefined} />)}
+                  {feedback && <button className="trainer-button poker-next" disabled={busy} onClick={() => void advance()}>{index === metadata.sessionLength - 1 ? "Review session" : "Next decision"}<span aria-hidden="true">→</span></button>}
+                </div>
+                {feedback && <PokerDecisionFeedback choice={feedback.selectedAction} evLossBb={feedback.evLossBb}>
+                  These EVs average over hidden joint hands compatible with your cards and the prior calls or folds. They are not the payoff against one revealed deal. Policy frequencies describe a mix of actions.
+                </PokerDecisionFeedback>}
               </PokerTable>
               {metadata.packSchema === "multiway-side-pot-pack/v1" && <p className="multiway-side-pot-note">A short caller can win the main pot while deeper callers contest side pots. Your EV accounts for every possible later call or fold.</p>}
-              {feedback && <div className="trainer-feedback" aria-live="polite">
-                <h3>Decision feedback</h3>
-                <p>You chose {feedback.selectedAction.toLowerCase()}. EV loss: <strong>{feedback.evLossBb.toFixed(2)} bb</strong>.</p>
-                <div className="trainer-ev-grid"><div><span>Call</span><strong>{money(feedback.callEvBb)}</strong><small>Solver frequency {frequency(feedback.callFrequency)}</small></div><div><span>Fold</span><strong>{money(feedback.foldEvBb)}</strong><small>Solver frequency {frequency(feedback.foldFrequency)}</small></div></div>
-                <p className="trainer-explanation">These EVs average over hidden joint hands compatible with your cards and the prior calls or folds. They are not the payoff against one revealed deal.</p>
-                <button className="trainer-button" disabled={busy} onClick={() => void advance()}>{index === metadata.sessionLength - 1 ? "Review session" : "Next decision"}</button>
-              </div>}
             </>}
           </section>
           <aside className="trainer-card trainer-reference" aria-label="Six-seat game details">

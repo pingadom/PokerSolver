@@ -88,6 +88,8 @@ it("routes the drill and shows chips, blind posts and legal raise amounts before
   expect(screen.getByRole("button", { name: "Raise to 3 bb" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "All-in · 100 bb" })).toBeInTheDocument();
   expect(screen.queryByLabelText("Action values")).not.toBeInTheDocument();
+  expect(screen.queryByText(/Policy frequency/)).not.toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "Next decision" })).not.toBeInTheDocument();
   expect(table).not.toHaveTextContent("K♠");
   expect(screen.getByRole("note")).toHaveTextContent("checked down");
   const hero = screen.getByLabelText("UTG player");
@@ -103,7 +105,19 @@ it("completes ten server-graded decisions, reviews full tables and replays the s
     expect(await screen.findByText(`DECISION ${index + 1} OF 10`)).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Fold" }));
     expect(await screen.findByText("Decision feedback")).toBeInTheDocument();
-    if (index === 0) expect(screen.getAllByText("Policy frequency 25.0%")).toHaveLength(4);
+    if (index === 0) {
+      const controls = screen.getByLabelText("Your decision controls");
+      expect(within(controls).getAllByText("Policy frequency 25.0%")).toHaveLength(4);
+      for (const [i, action] of ["Fold", "Call", "Raise to 3 bb", "All-in · 100 bb"].entries()) {
+        const button = within(controls).getByRole("button", { name: action });
+        expect(button).toHaveTextContent(`EV +${i.toFixed(2)} bb`);
+        expect(button).toHaveAccessibleDescription(/Policy frequency 25.0%/);
+        expect(button).toBeDisabled();
+      }
+      expect(within(controls).getByRole("button", { name: "Fold" })).toHaveTextContent("Your choice");
+      expect(within(controls).getByText("Decision feedback")).toBeInTheDocument();
+      expect(within(controls).getByRole("button", { name: "Next decision" })).toBeEnabled();
+    }
     if (index === 1) {
       const table = screen.getByLabelText("Six-seat action table");
       expect(table).toHaveTextContent("Raised to 100 bb"); expect(table).toHaveTextContent("Folded");
@@ -245,11 +259,13 @@ it("uses number shortcuts once and preserves normal Enter behavior on focused co
   fireEvent.keyDown(document.body, { key: "3" });
   await screen.findByText("Decision feedback");
   expect(fetch.mock.calls.filter(([url]) => String(url).endsWith("/grade"))).toHaveLength(1);
-  expect(screen.getByLabelText("Action values")).toHaveTextContent("Raise to 3 bb · Your choice");
+  expect(screen.getByRole("button", { name: "Raise to 3 bb" })).toHaveTextContent("Your choice");
   fireEvent.keyDown(screen.getByRole("button", { name: "Copy session link" }), { key: "Enter" });
   expect(screen.getByText("DECISION 1 OF 10")).toBeInTheDocument();
   fireEvent.keyDown(document.body, { key: "Enter" });
   expect(await screen.findByText("DECISION 2 OF 10")).toBeInTheDocument();
+  expect(screen.queryByText(/Policy frequency/)).not.toBeInTheDocument();
+  expect(screen.queryByText("Decision feedback")).not.toBeInTheDocument();
 });
 
 it("copies a pack-bound session link and retains the full seed", async () => {
