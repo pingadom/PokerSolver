@@ -31,11 +31,13 @@ The [saved fixture](../solver/src/test/resources/six-seat-full-round-pack.json) 
 The generation timestamp is `2026-10-03T17:50:22Z`; the full-pack hash is `2ce2adc9a9cb69179e36f6de3d223b40542d9588da61c58ff66fc9d241b57dcf`. Reproduce from the repository root:
 
 ```powershell
-mvn -q -pl solver -am test
+mvn -q -pl solver -am install
 mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateSixMaxPreflopPack' '-Dexec.args=exact button-mix solver/src/test/resources/six-seat-full-round-pack.json 500 2026-10-03T17:50:22Z'
 ```
 
 The small deviation and exact board payoffs validate this tiny specified game. They do not validate position-specific starting ranges or real postflop cash-game decisions. The BTN range and mandatory checkdown are synthetic research controls.
+
+The `install` step makes the parent and engine artifacts available to the subsequent solver-only CLI invocation on a fresh checkout. For a custom experiment, serialize a `SixMaxPreflopResearchSpot` with `MultiwayPackJson.writeFullRoundSpot` and pass that JSON path instead of `button-mix`. The generator also accepts `sampled` with trailing board-budget and seed arguments; such packs can be inspected offline but cannot enter the exact-only session API.
 
 ## Session and API flow
 
