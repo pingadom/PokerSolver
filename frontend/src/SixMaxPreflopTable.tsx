@@ -1,4 +1,10 @@
-import { actionLabel, type PreflopFeedback, type PreflopPlayer, type PreflopQuestion } from "./sixMaxPreflopApi";
+import type { ReactNode } from "react";
+import PokerTable, { type TableMove } from "./PokerTable";
+import { actionLabel, type PreflopAction, type PreflopFeedback, type PreflopPlayer, type PreflopQuestion } from "./sixMaxPreflopApi";
+
+export function actionTone(action: PreflopAction): TableMove {
+  return action.startsWith("raise:") ? "raise" : action as TableMove;
+}
 
 function lastMove(player: PreflopPlayer) {
   const move = player.lastAction;
@@ -11,24 +17,25 @@ function lastMove(player: PreflopPlayer) {
     case "RAISE_TO": return `Raised to ${move.amountBb} bb`;
   }
 }
-export default function SixMaxPreflopTable({ question }: { question: PreflopQuestion }) {
-  return <div className="preflop-table" aria-label="Six-seat action table">
-    {question.players.map((player) => <div key={player.seat}
-      className={`preflop-seat ${player.status.toLowerCase()}`} aria-label={`${player.seat} player`}>
-      <div className="preflop-seat-top"><strong>{player.seat}</strong>
-        <span>{player.status === "ACTING" ? "Your turn" : player.status === "ALL_IN" ? "All-in" : player.status === "FOLDED" ? "Out" : "In hand"}</span>
-      </div><p className="preflop-last-action">{lastMove(player)}</p>
-      <div className="preflop-seat-chips"><span>{player.remainingStackBb} bb behind</span><span>{player.committedBb} bb in pot</span></div>
-      {player.seat === question.actingSeat && <div className="preflop-hole-cards" aria-label="Your cards">
-        {question.heroCombo.split(" ").map((card) => <span key={card}
-          className={card.endsWith("h") || card.endsWith("d") ? "red" : ""}>{card.slice(0, -1)}{({ s: "♠", h: "♥", d: "♦", c: "♣" } as Record<string, string>)[card.slice(-1)]}</span>)}
-      </div>}
-    </div>)}
-  </div>;
+export default function SixMaxPreflopTable({ question, selectedAction, children }: {
+  question: PreflopQuestion; selectedAction?: PreflopAction; children?: ReactNode;
+}) {
+  return <PokerTable heroSeat={question.actingSeat} heroCombo={question.heroCombo}
+    potBb={question.potBb} toCallBb={question.toCallBb}
+    selectedMove={selectedAction ? { kind: actionTone(selectedAction), label: actionLabel(selectedAction, question.stackBb) } : undefined}
+    players={question.players.map((player) => ({
+      seat: player.seat, status: player.status === "FOLDED" ? "Out of hand" : player.status === "ALL_IN" ? "All-in" : "In hand",
+      stack: `${player.remainingStackBb} bb behind`, contribution: `${player.committedBb} bb in pot`,
+      folded: player.status === "FOLDED", allIn: player.status === "ALL_IN",
+      move: player.lastAction?.kind === "CHECK" ? "check" : player.lastAction?.kind === "CALL" ? "call"
+        : player.lastAction?.kind === "RAISE_TO" ? "raise" : player.lastAction?.kind === "FOLD" ? "fold"
+        : player.lastAction ? "blind" : "waiting",
+      moveLabel: lastMove(player),
+    }))}>{children}</PokerTable>;
 }
 export function PreflopActionValues({ question, feedback }: { question: PreflopQuestion; feedback: PreflopFeedback }) {
   return <div className="preflop-values" aria-label="Action values">
-    {question.legalActions.map((action) => <div key={action} className={action === feedback.selectedAction ? "chosen" : ""}>
+    {question.legalActions.map((action) => <div key={action} className={`move-${actionTone(action)} ${action === feedback.selectedAction ? "chosen" : ""}`}>
       <span>{actionLabel(action, question.stackBb)}{action === feedback.selectedAction ? " · Your choice" : ""}</span>
       <strong>{feedback.actionEvBb[action] >= 0 ? "+" : ""}{feedback.actionEvBb[action].toFixed(2)} bb</strong>
       <small>Policy frequency {(100 * feedback.actionFrequency[action]).toFixed(1)}%</small>

@@ -66,7 +66,7 @@ it("shows all six public actions and completes a server-graded session", async (
   expect(table).toHaveTextContent("Folded");
   expect(table).toHaveTextContent("Your turn");
   expect(table).toHaveTextContent("Waiting");
-  expect(table).toHaveTextContent("Ah");
+  expect(screen.getByLabelText("Your cards")).toHaveTextContent("A♥A♠");
   expect(table).not.toHaveTextContent("Kc");
   for (let index = 0; index < 10; index++) {
     await userEvent.click(screen.getByRole("button", { name: "Call" }));
@@ -132,6 +132,6 @@ it("shows each unequal stack and explains side-pot exposure at the decision", as
   expect(screen.getByText("Unequal stacks")).toBeInTheDocument();
   expect(screen.getAllByText(/2 exact combos per seat/).length).toBeGreaterThan(0);
   expect(screen.getByText(/A short caller can win the main pot/)).toBeInTheDocument();
-  expect(screen.getByText("4.0 bb")).toBeInTheDocument();
+  expect(screen.getByText("4 bb to call")).toBeInTheDocument();
   expect(screen.queryByText("30 bb each")).not.toBeInTheDocument();
 });

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PokerTable, { type TablePlayer } from "./PokerTable";
 import {
   multiwayRequest, postMultiway,
   type MultiwayAction, type MultiwayFeedback, type MultiwayGradedQuestion,
@@ -36,12 +37,17 @@ function setLocation(seed: string, player: number, packHash: string) {
   window.history.replaceState(null, "", `#multiway?${new URLSearchParams({ seed, player: String(player), pack: packHash })}`);
 }
 
-function seatState(question: MultiwayQuestion, seat: string) {
-  if (seat === question.aggressorSeat) return { label: "Shoved", className: "aggressor" };
-  const prior = question.priorResponses.find((response) => response.seat === seat);
-  if (prior) return { label: prior.action === "CALL" ? "Called" : "Folded", className: prior.action.toLowerCase() };
-  if (seat === question.actingSeat) return { label: "Your turn", className: "hero" };
-  return { label: "Waiting", className: "waiting" };
+function tablePlayers(metadata: MultiwayMetadata, question: MultiwayQuestion): TablePlayer[] {
+  return metadata.seats.map((seat, index) => {
+    const aggressor = seat === question.aggressorSeat;
+    const action = question.priorResponses.find((response) => response.seat === seat)?.action;
+    return { seat, stack: `${metadata.stacksBb[index]} bb stack`,
+      contribution: "Starting stack", folded: action === "FOLD", allIn: aggressor,
+      status: action === "FOLD" ? "Out of hand" : action === "CALL" || aggressor ? "In hand" : "Waiting",
+      move: aggressor ? "raise" : action === "CALL" ? "call" : action === "FOLD" ? "fold" : "waiting",
+      moveLabel: aggressor ? "Shoved" : action === "CALL" ? "Called" : action === "FOLD" ? "Folded" : "Yet to act",
+    };
+  });
 }
 
 export default function MultiwayPage() {
@@ -174,7 +180,7 @@ export default function MultiwayPage() {
   }
 
   return (
-    <main className="trainer-page">
+    <main className="trainer-page preflop-page">
       <header className="trainer-topbar">
         <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
         <a className="trainer-back" href="#solver">← Solver project</a>
@@ -196,7 +202,7 @@ export default function MultiwayPage() {
         {error && <div className="trainer-error" role="alert">{error}{!metadata && <p>Enable the local multiway research API and load its exact pack to practise.</p>}</div>}
         {stale && metadata && <button className="trainer-button" disabled={busy} onClick={() => void newSession()}>Start with current solution</button>}
         {!metadata && !error && <p className="trainer-loading" role="status">Loading six-seat solution…</p>}
-        {metadata && !stale && <div className="trainer-layout">
+        {metadata && !stale && <div className="trainer-layout preflop-layout">
           <section className="trainer-card trainer-play multiway-play" aria-label="Six-seat decision">
             <div className="multiway-mode">
               <label htmlFor="multiway-player">Practice seat</label>
@@ -211,6 +217,9 @@ export default function MultiwayPage() {
               <p className="trainer-summary">Total EV loss: <strong>{review.totalEvLossBb.toFixed(2)} bb</strong> · Average: {review.averageEvLossBb.toFixed(2)} bb per decision</p>
               <ol className="trainer-review-list">{review.attempts.map((attempt) => <li key={attempt.question.index}><details>
                 <summary><span>{attempt.question.index + 1}. {attempt.question.actingSeat} · {attempt.question.heroCombo}</span><span>{attempt.feedback.selectedAction.toLowerCase()} · {attempt.feedback.evLossBb.toFixed(2)} bb lost</span></summary>
+                <PokerTable players={tablePlayers(metadata, attempt.question)} heroSeat={attempt.question.actingSeat}
+                  heroCombo={attempt.question.heroCombo} potBb={attempt.question.potBb} toCallBb={attempt.question.callCostBb}
+                  selectedMove={{ kind: attempt.feedback.selectedAction === "CALL" ? "call" : "fold", label: attempt.feedback.selectedAction === "CALL" ? "Call" : "Fold" }} />
                 <p>Call EV {money(attempt.feedback.callEvBb)} ({frequency(attempt.feedback.callFrequency)}) · Fold EV {money(attempt.feedback.foldEvBb)} ({frequency(attempt.feedback.foldFrequency)})</p>
               </details></li>)}</ol>
               <button className="trainer-button" disabled={busy} onClick={() => void newSession()}>New session</button>
@@ -219,21 +228,13 @@ export default function MultiwayPage() {
             ) : <>
               <div className="trainer-card-heading"><span>DECISION {index + 1} OF {metadata.sessionLength}</span><span>{metadata.packSchema === "multiway-side-pot-pack/v1" ? "Unequal stacks" : `${metadata.stackBb} bb stacks`}</span></div>
               <div className="trainer-progress" aria-hidden="true"><span style={{ width: `${(index + 1) / metadata.sessionLength * 100}%` }} /></div>
-              <div className="multiway-table" aria-label="Six-seat action table">
-                {metadata.seats.map((seat, seatIndex) => {
-                  const state = seatState(question, seat);
-                  return <div key={seat} className={`multiway-seat ${state.className}`}>
-                    <div className="multiway-seat-heading"><strong>{seat}</strong><span>{seat === question.actingSeat ? "You" : seat === question.aggressorSeat ? "Aggressor" : "Responder"}</span></div>
-                    <p>{state.label}</p>
-                    <small className="multiway-stack">{metadata.stacksBb[seatIndex]} bb stack</small>
-                    {seat === question.actingSeat && <div className="multiway-hole-cards" aria-label="Your cards">{question.heroCombo.split(" ").map((card) => <span key={card}>{card}</span>)}</div>}
-                  </div>;
-                })}
-              </div>
-              <div className="multiway-decision-bar"><div><span>Pot before your decision</span><strong>{question.potBb.toFixed(1)} bb</strong></div><div><span>To call</span><strong>{question.callCostBb.toFixed(1)} bb</strong></div><div><span>Your stack</span><strong>{question.stackBb.toFixed(1)} bb</strong></div></div>
+              <PokerTable players={tablePlayers(metadata, question)} heroSeat={question.actingSeat}
+                heroCombo={question.heroCombo} potBb={question.potBb} toCallBb={question.callCostBb}
+                selectedMove={feedback ? { kind: feedback.selectedAction === "CALL" ? "call" : "fold", label: feedback.selectedAction === "CALL" ? "Call" : "Fold" } : undefined}>
+                <h2>{question.actingSeat}: call or fold?</h2>
+                <div className="trainer-actions preflop-actions">{question.legalActions.map((action) => <button key={action} type="button" className={`trainer-button poker-action move-${action.toLowerCase()} ${feedback?.selectedAction === action ? "selected" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}>{action === "CALL" ? "Call" : "Fold"}</button>)}</div>
+              </PokerTable>
               {metadata.packSchema === "multiway-side-pot-pack/v1" && <p className="multiway-side-pot-note">A short caller can win the main pot while deeper callers contest side pots. Your EV accounts for every possible later call or fold.</p>}
-              <h2>{question.actingSeat}: call or fold?</h2>
-              <div className="trainer-actions">{question.legalActions.map((action) => <button key={action} type="button" className={`trainer-button ${action === "FOLD" ? "secondary" : ""}`} disabled={busy || Boolean(feedback)} onClick={() => void answer(action)}>{action === "CALL" ? "Call" : "Fold"}</button>)}</div>
               {feedback && <div className="trainer-feedback" aria-live="polite">
                 <h3>Decision feedback</h3>
                 <p>You chose {feedback.selectedAction.toLowerCase()}. EV loss: <strong>{feedback.evLossBb.toFixed(2)} bb</strong>.</p>
