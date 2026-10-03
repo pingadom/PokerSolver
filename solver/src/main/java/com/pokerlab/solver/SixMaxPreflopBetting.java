@@ -107,6 +107,14 @@ public final class SixMaxPreflopBetting {
             return fromUnits(committed[seat.ordinal()]);
         }
 
+        public double remainingStackBb(Seat seat) {
+            return fromUnits(game.stack - committed[seat.ordinal()]);
+        }
+
+        public boolean isAllIn(Seat seat) {
+            return !isFolded(seat) && committed[seat.ordinal()] == game.stack;
+        }
+
         public double toCallBb() {
             return fromUnits(currentBet - committed[actingSeat().ordinal()]);
         }

@@ -48,6 +48,13 @@ def main():
         assert question["index"] == index
         assert question["packHash"] == pack_hash
         assert question["actingSeat"] in metadata["seats"]
+        assert [player["seat"] for player in question["players"]] == metadata["seats"]
+        acting = [player for player in question["players"] if player["status"] == "ACTING"]
+        assert len(acting) == 1 and acting[0]["seat"] == question["actingSeat"]
+        assert math.isclose(sum(player["committedBb"] for player in question["players"]), question["potBb"], abs_tol=1e-9)
+        for player in question["players"]:
+            assert math.isclose(player["committedBb"] + player["remainingStackBb"], metadata["stackBb"], abs_tol=1e-9)
+            assert not {"heroCombo", "holeCards", "combo"} & player.keys()
         assert not {"seed", "opponentCards", "actionEvBb", "feedback"} & question.keys()
         action = question["legalActions"][0]
         actions.append(action)

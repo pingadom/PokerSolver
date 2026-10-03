@@ -329,7 +329,8 @@ public final class SixMaxPreflopCheckdownGame
                     nodes);
     }
 
-    private static String actionName(Move move) {
+    /** Canonical decision identifier shared by saved strategies and public-history replay. */
+    public static String actionName(Move move) {
         return switch (move.kind()) {
             case FOLD -> "fold";
             case CHECK -> "check";

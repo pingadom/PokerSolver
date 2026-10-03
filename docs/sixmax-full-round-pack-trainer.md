@@ -43,6 +43,8 @@ The small deviation and exact board payoffs validate this tiny specified game. T
 
 A question reveals the acting seat's cards and prior public actions, pot, amount to call and legal actions. Grading conditions on all compatible hidden deals and prior-action likelihoods; later decisions follow the frozen saved policy. Feedback returns conditional action EVs, selected-action EV loss, strategy frequencies and per-action payoff-SE envelopes. A review recomputes every decision and score from the session seed, full pack hash and exactly ten action strings. Clients cannot supply EVs. HTTP seeds are decimal strings so JavaScript does not lose 64-bit precision.
 
+Questions also contain a public `players` snapshot in seat order. Each entry identifies its seat, status (`ACTING`, `ACTIVE`, `FOLDED` or `ALL_IN`), committed chips, remaining stack and last public move, including blind posts. The backend reconstructs this table with the solver's betting engine and cross-checks actor, pot and call amount. No opponent hole cards enter the snapshot. A frontend can show the entire action table without implementing its own betting accounting.
+
 After starting the usual local dependencies, enable the API directly:
 
 ```powershell
