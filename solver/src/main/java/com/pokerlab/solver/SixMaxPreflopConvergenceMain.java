@@ -89,7 +89,7 @@ public final class SixMaxPreflopConvergenceMain {
         return List.copyOf(budgets);
     }
 
-    private static List<List<WeightedCombo>> ranges(String fixture) {
+    static List<List<WeightedCombo>> ranges(String fixture) {
         List<List<WeightedCombo>> ranges = new ArrayList<>();
         ranges.add(List.of(combo("AS", "AH")));
         ranges.add(List.of(combo("KS", "KH")));

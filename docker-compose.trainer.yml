@@ -12,9 +12,12 @@ services:
       TRAINER_TURN_RIVER_RESEARCH_PACK_PATH: /opt/pokerlab/turn-river-pack.json
       TRAINER_FLOP_RESEARCH_ENABLED: "true"
       TRAINER_FLOP_RESEARCH_PACK_PATH: /opt/pokerlab/flop-pack.json.gz
+      TRAINER_SIXMAX_PREFLOP_RESEARCH_ENABLED: "true"
+      TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH: /opt/pokerlab/sixmax-preflop-pack.json
     volumes:
       - ./solver/src/test/resources/diverse-validation-pack.json:/opt/pokerlab/trainer-pack.json:ro
       - ./solver/src/test/resources/six-seat-exact-pack.json:/opt/pokerlab/multiway-pack.json:ro
       - ./solver/src/test/resources/river-validation-pack.json:/opt/pokerlab/river-pack.json:ro
       - ./solver/src/test/resources/turn-river-validation-pack.json:/opt/pokerlab/turn-river-pack.json:ro
       - ./solver/src/test/resources/flop-full-validation-pack.json.gz:/opt/pokerlab/flop-pack.json.gz:ro
+      - ./solver/src/test/resources/six-seat-full-round-pack.json:/opt/pokerlab/sixmax-preflop-pack.json:ro

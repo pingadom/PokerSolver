@@ -152,6 +152,8 @@ jobs:
           assert len(after_check['feedback']) == 1
           assert after_check['feedback'][0]['selectedEvBb'] is not None
           PY
+      - name: Full-round preflop trainer serves replayable sessions
+        run: python3 scripts/smoke-full-round-trainer.py
       - name: Unequal-stack trainer overlay serves graded decisions
         run: |
           docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml up -d --no-deps api

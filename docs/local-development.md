@@ -92,6 +92,10 @@ The same opt-in pack also powers [http://localhost:8080/#turn-river-hand](http:/
 
 The overlay also enables a [flop-to-river research hand](flop-turn-river-solver-research.md) from the exact-deck compressed pack; open [http://localhost:8080/#flop-hand](http://localhost:8080/#flop-hand). For a directly run API, set `TRAINER_FLOP_RESEARCH_ENABLED=true` and `TRAINER_FLOP_RESEARCH_PACK_PATH` to its absolute path. `GET /api/v1/trainer/research/flop` returns the pack hash and game assumptions. Send `{"seed":"42","packHash":"<hash from metadata>","heroPlayer":0,"actions":[]}` to `POST /api/v1/trainer/research/flop/hands/replay`; append each chosen action code and resend. The opponent's private cards stay hidden until showdown. This route is absent without the explicit flag.
 
+## Full-round six-seat preflop API
+
+The [full-round saved-pack trainer](sixmax-full-round-pack-trainer.md) starts from the blind posts and permits the fixture's 3bb opens and 100bb shoves. To enable its separate backend route, set `TRAINER_SIXMAX_PREFLOP_RESEARCH_ENABLED=true` and `TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-full-round-pack.json`, then rebuild/restart the local API. Read `GET /api/v1/trainer/research/sixmax-preflop`, fetch a decision at `/sessions/711/questions/0`, and post its session seed, index, pack hash and one legal action to `/grade`. Post exactly ten action strings with the seed and hash to `/review`. These routes are absent by default; they require exact-board payoffs and a measured NashConv at most 0.05bb. The linked guide provides generation and PowerShell examples. This is a synthetic mandatory-checkdown research game, and the website has not yet been wired to this new route.
+
 ## Six-seat research sessions
 
 The separate multiway route is also disabled by default. The local trainer Compose overlay enables it and serves the website drill at [http://localhost:8080/#multiway](http://localhost:8080/#multiway). Its default pack has equal stacks. To practise the unequal-stack main/side-pot fixture with two synthetic combos per seat instead, apply the additional overlay last:
