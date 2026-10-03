@@ -240,6 +240,11 @@ public final class SixMaxPreflopCheckdownGame
         return node(state).betting().status();
     }
 
+    /** Immutable public betting state, including terminal commitments and live-seat order. */
+    public SixMaxPreflopBetting.State publicBettingState(State state) {
+        return node(state).betting();
+    }
+
     public double publicPotBb(State state) {
         return node(state).betting().potBb();
     }
