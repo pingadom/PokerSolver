@@ -1,0 +1,6 @@
+# Only used by the explicit --research-preview launcher.
+server:
+  address: 127.0.0.1
+pokerlab:
+  trainer:
+    sixmax-preflop-research-enabled: true

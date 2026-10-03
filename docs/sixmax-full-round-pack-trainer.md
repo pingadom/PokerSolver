@@ -88,4 +88,22 @@ $trainerAnswer = @{
 Invoke-RestMethod "$trainerBase/grade" -Method Post -ContentType 'application/json' -Body $trainerAnswer
 ```
 
-The startup loader requires an explicit file path and enforces a 16 MiB file limit. Tests cover disabled routes, metadata, answer/hidden-card omission, extreme seeds, deterministic review totals, stale artifact hashes, illegal actions, incomplete answers, forged fields, sampled-pack rejection and unconverged exact-pack rejection. Requests use the loaded policy and payoffs; they perform no solve or board simulation. The website has not yet been connected to this new full-round API.
+The startup loader requires an explicit file path and enforces a 16 MiB file limit. Tests cover disabled routes, metadata, answer/hidden-card omission, extreme seeds, deterministic review totals, stale artifact hashes, illegal actions, incomplete answers, forged fields, sampled-pack rejection and unconverged exact-pack rejection. Requests use the loaded policy and payoffs; they perform no solve or board simulation. The website is connected through the separate full-round drill described below.
+
+## Website drill and standalone preview
+
+The website now exposes the full-round drill at `#sixmax-preflop`, linked from the solver section. It shows all six public player states, blind posts, last moves, committed chips, remaining stacks and the acting hand alongside the legal action buttons. Raise buttons specify their total target; the stack-sized raise is labelled all-in. The compact layout keeps the table and controls visible at tested laptop and phone sizes, and the table remains visible while scrolling through feedback.
+
+After choosing an action, feedback shows conditional EVs, policy frequencies and the chosen action's EV loss. Numeric keys select the displayed actions and Enter advances after grading; normal Enter behavior on focused links, buttons and history disclosures is preserved. The session review uses server-computed totals and lets each decision expand into its original public table and action values. Replay retains the same full-width seed and artifact. Copied session links start at decision one and reject outdated pack hashes.
+
+The client checks that grade and review responses match the original shown questions, including cards, history, legal actions and every public player state. Failed question/grade requests can be retried; answer EVs appear only after a successful grade. Loading errors and disabled APIs have explicit recovery controls. Unsupported artifact assumptions are rejected before drawing questions.
+
+For this drill alone, no database or queue is needed:
+
+```powershell
+mvn -pl api -am -DskipTests package
+$env:TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH = (Resolve-Path 'solver/src/test/resources/six-seat-full-round-pack.json').Path
+java -jar api/target/api-1.0.0.jar --research-preview --server.port=18080
+```
+
+Start `pnpm dev` in `frontend` in another terminal, then open `http://127.0.0.1:5173/#sixmax-preflop`. The explicit preview launcher imports only this research controller, its validated saved-pack loader and API error handling. It excludes datasource/Flyway startup and simulation/queue services, with loopback binding by default. Other drills and equity simulations require the complete API; omitting the flag preserves normal startup. A real HTTP regression test runs the preview with an unreachable datasource URL to verify this separation.

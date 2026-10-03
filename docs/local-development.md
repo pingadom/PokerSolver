@@ -51,6 +51,16 @@ Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Vite proxies `/api` to port
 
 ## Without Docker
 
+For the full-round saved-pack trainer alone, a database-free preview is available. From the repository root on PowerShell:
+
+```powershell
+mvn -pl api -am -DskipTests package
+$env:TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH = (Resolve-Path 'solver/src/test/resources/six-seat-full-round-pack.json').Path
+java -jar api/target/api-1.0.0.jar --research-preview --server.port=18080
+```
+
+Run Vite in a second terminal and open `http://127.0.0.1:5173/#sixmax-preflop`. The explicit `--research-preview` flag starts only the full-round trainer and web/health infrastructure, with loopback binding by default. It imports no simulation controller, datasource, Flyway migrations or queue transport. It still requires an explicit, validated exact pack. Other drills and equity simulations need the complete API. Omitting the flag retains normal application startup.
+
 Use a dedicated PostgreSQL 16+ database and set `DATABASE_URL`, `DATABASE_USER` and `DATABASE_PASSWORD`. Run the same packaged services with `QUEUE_MODE=postgres`. This selects a durable, lease-based development transport stored in PostgreSQL; API and workers remain separate processes. Use `CACHE_ENABLED=false` if Redis is absent, or leave it enabled to exercise fallback. Flyway applies both migrations at service startup.
 
 Do not point tests at a database containing useful application data. For an isolated native PostgreSQL test database, set `TEST_DATABASE_URL`, `TEST_DATABASE_USER` and `TEST_DATABASE_PASSWORD`, then run `mvn test`. The same migration/lifecycle/concurrency contract runs against that database. Without these variables, native tests skip; with Docker, separate Testcontainers suites use disposable PostgreSQL/Redis instances. Reports show which path ran.
@@ -94,7 +104,7 @@ The overlay also enables a [flop-to-river research hand](flop-turn-river-solver-
 
 ## Full-round six-seat preflop API
 
-The [full-round saved-pack trainer](sixmax-full-round-pack-trainer.md) starts from the blind posts and permits the fixture's 3bb opens and 100bb shoves. To enable its separate backend route, set `TRAINER_SIXMAX_PREFLOP_RESEARCH_ENABLED=true` and `TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-full-round-pack.json`, then rebuild/restart the local API. Read `GET /api/v1/trainer/research/sixmax-preflop`, fetch a decision at `/sessions/711/questions/0`, and post its session seed, index, pack hash and one legal action to `/grade`. Post exactly ten action strings with the seed and hash to `/review`. These routes are absent by default; they require exact-board payoffs and a measured NashConv at most 0.05bb. The linked guide provides generation and PowerShell examples. This is a synthetic mandatory-checkdown research game, and the website has not yet been wired to this new route.
+The [full-round saved-pack trainer](sixmax-full-round-pack-trainer.md) starts from the blind posts and permits the fixture's 3bb opens and 100bb shoves. To enable its separate backend route, set `TRAINER_SIXMAX_PREFLOP_RESEARCH_ENABLED=true` and `TRAINER_SIXMAX_PREFLOP_RESEARCH_PACK_PATH` to the absolute path of `solver/src/test/resources/six-seat-full-round-pack.json`, then rebuild/restart the local API. Read `GET /api/v1/trainer/research/sixmax-preflop`, fetch a decision at `/sessions/711/questions/0`, and post its session seed, index, pack hash and one legal action to `/grade`. Post exactly ten action strings with the seed and hash to `/review`. These routes are absent by default; they require exact-board payoffs and a measured NashConv at most 0.05bb. The linked guide provides generation and PowerShell examples. Open the website drill at `#sixmax-preflop` for a compact public table, legal raises, conditional EV feedback and ten-decision review. The trainer Compose overlay enables it automatically. This remains a synthetic mandatory-checkdown research game; the database-free preview above can run this drill alone.
 
 ## Six-seat research sessions
 
