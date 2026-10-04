@@ -16,9 +16,16 @@ import java.util.SplittableRandom;
 /**
  * Offline heads-up flop handoff derived from a fixed six-seat policy. The posterior retains all six
  * physical hands, including folded-seat blockers; it is not a product of independent ranges. The
- * source policy still assumes mandatory checkdown. This bridge does not solve postflop play.
+ * source policy still assumes mandatory checkdown. Counterfactual-support mode instead retains the
+ * original private chance distribution for a parent CFR tree to supply action reach. This bridge
+ * does not itself solve postflop play.
  */
 public final class SixMaxPolicyFlopTransition {
+    public enum ReachModel {
+        POLICY_CONDITIONED,
+        COUNTERFACTUAL_PRIVATE_SUPPORT
+    }
+
     public static final int FLOPS_PER_DEAL = 9_880; // Choose 3 from 40 after six hands are dealt.
     private static final List<Seat> POSTFLOP_ORDER =
             List.of(Seat.SB, Seat.BB, Seat.UTG, Seat.HJ, Seat.CO, Seat.BTN);
@@ -52,11 +59,32 @@ public final class SixMaxPolicyFlopTransition {
     private final Seat secondToAct;
     private final double logReachProbability;
     private final SixMaxPreflopCheckdownGame.ChanceModel chanceModel;
+    private final ReachModel reachModel;
 
     public SixMaxPolicyFlopTransition(
             SixMaxPreflopCheckdownGame game, CfrSolution solution, List<PublicAction> history) {
+        this(game, solution, history, ReachModel.POLICY_CONDITIONED);
+    }
+
+    /**
+     * Full private support for a public terminal before any policy likelihood is applied. A parent
+     * CFR tree must supply action reach; these weights are not a reached-hand posterior.
+     */
+    public static SixMaxPolicyFlopTransition counterfactualSupport(
+            SixMaxPreflopCheckdownGame game, List<PublicAction> history) {
+        return new SixMaxPolicyFlopTransition(
+                game, null, history, ReachModel.COUNTERFACTUAL_PRIVATE_SUPPORT);
+    }
+
+    private SixMaxPolicyFlopTransition(
+            SixMaxPreflopCheckdownGame game,
+            CfrSolution solution,
+            List<PublicAction> history,
+            ReachModel reachModel) {
         Objects.requireNonNull(game, "game");
-        Objects.requireNonNull(solution, "solution");
+        if (reachModel == ReachModel.POLICY_CONDITIONED)
+            Objects.requireNonNull(solution, "solution");
+        this.reachModel = reachModel;
         this.history = List.copyOf(Objects.requireNonNull(history, "history"));
         if (game.rakeRule().fraction() > 0 && game.rakeRule().capBb() > 0)
             throw new IllegalArgumentException("Postflop rake is not supported by this handoff");
@@ -88,10 +116,12 @@ public final class SixMaxPolicyFlopTransition {
             var state = outcome.state();
             double logMass = Math.log(outcome.probability());
             for (var action : this.history) {
-                double probability =
-                        MultiPlayerStrategyEvaluator.probability(
-                                game, solution, state, action.action());
-                logMass += Math.log(probability);
+                if (reachModel == ReachModel.POLICY_CONDITIONED) {
+                    double probability =
+                            MultiPlayerStrategyEvaluator.probability(
+                                    game, solution, state, action.action());
+                    logMass += Math.log(probability);
+                }
                 state = game.afterAction(state, action.action());
             }
             if (Double.isFinite(logMass)) reached.add(new LogDeal(game.dealtHands(state), logMass));
@@ -141,11 +171,18 @@ public final class SixMaxPolicyFlopTransition {
     }
 
     public double reachProbability() {
-        return Math.exp(logReachProbability);
+        return Math.exp(logReachProbability());
     }
 
     public double logReachProbability() {
+        if (reachModel != ReachModel.POLICY_CONDITIONED)
+            throw new IllegalStateException(
+                    "Counterfactual support has no policy reach probability");
         return logReachProbability;
+    }
+
+    public ReachModel reachModel() {
+        return reachModel;
     }
 
     public SixMaxPreflopCheckdownGame.ChanceModel chanceModel() {
