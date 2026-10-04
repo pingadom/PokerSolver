@@ -23,7 +23,7 @@ class SixMaxHeadsUpFlopGameTest {
         return new WeightedCombo(Card.parse(split[0]), Card.parse(split[1]), weight);
     }
 
-    private static SixMaxPolicyFlopTransition handoff(List<List<WeightedCombo>> ranges) {
+    static SixMaxPolicyFlopTransition handoff(List<List<WeightedCombo>> ranges) {
         var source =
                 new SixMaxPreflopCheckdownGame(
                         new SixMaxPreflopBetting.Rules(100, 0.5, List.of(3.0, 100.0)),
