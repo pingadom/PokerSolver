@@ -20,8 +20,14 @@ public final class GenerateSixMaxPreflopPack {
         int iterations = Integer.parseInt(args[3]);
         if (iterations < 1) throw new IllegalArgumentException("iterations must be positive");
         Instant.parse(args[4]);
+        var path = Path.of(args[2]).toAbsolutePath();
+        boolean builtin = args[1].equals("utg-mix") || args[1].equals("button-mix");
+        if (!builtin && Files.exists(path) && Files.isSameFile(Path.of(args[1]), path))
+            throw new IllegalArgumentException("Generator must not overwrite its source spot");
+        if (!builtin && Files.size(Path.of(args[1])) > 16 * 1024 * 1024)
+            throw new IllegalArgumentException("Spot exceeds 16 MiB limit");
         var spot =
-                args[1].equals("utg-mix") || args[1].equals("button-mix")
+                builtin
                         ? new SixMaxPreflopResearchSpot(
                                 "six-seat-" + args[1] + "-open-shove",
                                 new SixMaxPreflopBetting.Rules(100, 0.5, List.of(3.0, 100.0)),
@@ -47,7 +53,6 @@ public final class GenerateSixMaxPreflopPack {
                                 : SixMaxPreflopSolutionPack.SHARED_BOARD_MONTE_CARLO,
                         seed,
                         args[4]);
-        var path = Path.of(args[2]).toAbsolutePath();
         Files.createDirectories(path.getParent());
         Files.writeString(path, MultiwayPackJson.writeFullRound(pack));
         System.out.printf(
