@@ -93,6 +93,11 @@ public final class SixMaxConnectedPreflopGame
     private final Map<SixMaxPreflopCheckdownGame.State, String> preflopKeys = new HashMap<>();
     private final Map<State, List<ChanceOutcome<State>>> chance = new HashMap<>();
 
+    private record Node(boolean terminal, int actor, List<String> actions, double[] utilities) {}
+
+    // States and this game's rules are immutable. Cache validation and settlement once per state.
+    private final Map<State, Node> nodes = new HashMap<>();
+
     public SixMaxConnectedPreflopGame(SixMaxPreflopCheckdownGame base, List<Selection> selections) {
         this.base = Objects.requireNonNull(base, "base");
         this.selections = List.copyOf(selections);
@@ -232,31 +237,20 @@ public final class SixMaxConnectedPreflopGame
 
     @Override
     public boolean isTerminal(State state) {
-        requireState(state);
-        if (state.otherFlopsCheckdown()) return true;
-        if (state.postflop() != null)
-            return branch(state).games.get(state.flopIndex()).isTerminal(state.postflop());
-        return base.isTerminal(state.preflop())
-                && !prepared.containsKey(state.preflop().publicHistory());
+        return node(state).terminal();
     }
 
     @Override
     public int currentPlayer(State state) {
-        if (isTerminal(state)) throw new IllegalArgumentException("Terminal state has no actor");
-        if (state.postflop() != null) {
-            var game = branch(state).games.get(state.flopIndex());
-            int actor = game.currentPlayer(state.postflop());
-            return actor == -1 ? -1 : game.seat(actor).ordinal();
-        }
-        return base.isTerminal(state.preflop()) ? -1 : base.currentPlayer(state.preflop());
+        var node = node(state);
+        if (node.terminal()) throw new IllegalArgumentException("Terminal state has no actor");
+        return node.actor();
     }
 
     @Override
     public List<String> legalActions(State state) {
         if (currentPlayer(state) == -1) throw new IllegalArgumentException("Chance has no actions");
-        return state.postflop() == null
-                ? base.legalActions(state.preflop())
-                : branch(state).games.get(state.flopIndex()).legalActions(state.postflop());
+        return node(state).actions();
     }
 
     @Override
@@ -334,7 +328,41 @@ public final class SixMaxConnectedPreflopGame
 
     @Override
     public double[] terminalUtilities(State state) {
-        if (!isTerminal(state)) throw new IllegalArgumentException("Expected terminal state");
+        var node = node(state);
+        if (!node.terminal()) throw new IllegalArgumentException("Expected terminal state");
+        return node.utilities().clone();
+    }
+
+    private Node node(State state) {
+        return nodes.computeIfAbsent(
+                state,
+                s -> {
+                    requireState(s);
+                    boolean terminal = s.otherFlopsCheckdown();
+                    int actor = -1;
+                    List<String> actions = List.of();
+                    if (!terminal && s.postflop() != null) {
+                        var game = branch(s).games.get(s.flopIndex());
+                        terminal = game.isTerminal(s.postflop());
+                        if (!terminal) {
+                            int localActor = game.currentPlayer(s.postflop());
+                            if (localActor != -1) {
+                                actor = game.seat(localActor).ordinal();
+                                actions = game.legalActions(s.postflop());
+                            }
+                        }
+                    } else if (!terminal) {
+                        terminal = base.isTerminal(s.preflop()) && branch(s) == null;
+                        if (!terminal && !base.isTerminal(s.preflop())) {
+                            actor = base.currentPlayer(s.preflop());
+                            if (actor != -1) actions = base.legalActions(s.preflop());
+                        }
+                    }
+                    return new Node(terminal, actor, actions, terminal ? settle(s) : null);
+                });
+    }
+
+    private double[] settle(State state) {
         if (state.otherFlopsCheckdown())
             return branch(state).remainder[state.preflop().dealIndex()].clone();
         if (state.postflop() == null) return base.terminalUtilities(state.preflop());
