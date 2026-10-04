@@ -142,6 +142,10 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
         return flop;
     }
 
+    String informationSetPrefix() {
+        return publicContext + "|seat:";
+    }
+
     public ChanceModel chanceModel() {
         return turnQuantiles.isEmpty()
                 ? ChanceModel.EXACT_PHYSICAL_TURN_RIVER

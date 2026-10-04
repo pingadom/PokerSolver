@@ -169,7 +169,7 @@ public final class SixMaxConnectedPreflopAudit {
     /**
      * Measure rare branches independently: the full-game gap can hide conditional postflop error.
      */
-    private static List<ConditionalPostflop> conditionalPostflop(
+    public static List<ConditionalPostflop> conditionalPostflop(
             SixMaxConnectedPreflopGame game, CfrSolution joint) {
         var results = new ArrayList<ConditionalPostflop>();
         for (var selection : game.selections()) {
@@ -198,10 +198,12 @@ public final class SixMaxConnectedPreflopAudit {
                                 selection.turnBetBb(),
                                 selection.riverBetBb());
                 var translated = new LinkedHashMap<String, Map<String, Double>>();
+                String informationPrefix = post.informationSetPrefix();
                 for (int player = 0; player < 2; player++) {
                     String prefix = post.seat(player).ordinal() + ":postflop:";
                     for (var row : joint.strategy().entrySet())
-                        if (row.getKey().startsWith(prefix))
+                        if (row.getKey().startsWith(prefix)
+                                && row.getKey().startsWith(informationPrefix, prefix.length()))
                             translated.put(
                                     player + ":" + row.getKey().substring(prefix.length()),
                                     row.getValue());
