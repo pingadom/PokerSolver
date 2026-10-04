@@ -27,6 +27,7 @@ public final class CfrSolver<S> {
     private final Variant variant;
     private final ChanceMode chanceMode;
     private final long chanceSeed;
+    private final boolean repeatActionValidation;
     private final Map<String, InformationSet> informationSets = new LinkedHashMap<>();
     private final Map<String, double[]> iterationStrategies = new LinkedHashMap<>();
     private final List<Double> iterationChanceDraws = new ArrayList<>();
@@ -42,6 +43,16 @@ public final class CfrSolver<S> {
 
     /** Chance sampling traverses every player action but draws one outcome at each chance node. */
     public CfrSolver(CfrGame<S> game, Variant variant, ChanceMode chanceMode, long chanceSeed) {
+        this(game, variant, chanceMode, chanceSeed, false);
+    }
+
+    // Paired performance audit control; both modes still check action consistency on every visit.
+    CfrSolver(
+            CfrGame<S> game,
+            Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            boolean repeatActionValidation) {
         this.game = Objects.requireNonNull(game, "game");
         this.variant = Objects.requireNonNull(variant, "variant");
         this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
@@ -49,6 +60,7 @@ public final class CfrSolver<S> {
             throw new IllegalArgumentException(
                     "Chance sampling currently supports vanilla CFR only");
         this.chanceSeed = chanceSeed;
+        this.repeatActionValidation = repeatActionValidation;
     }
 
     public CfrSolution solve(int iterations) {
@@ -120,10 +132,7 @@ public final class CfrSolver<S> {
         if (player != 0 && player != 1)
             throw new IllegalArgumentException("Expected player 0, player 1, or chance");
         List<String> actions = List.copyOf(game.legalActions(state));
-        if (actions.isEmpty()
-                || actions.stream().anyMatch(a -> a == null || a.isBlank())
-                || new HashSet<>(actions).size() != actions.size())
-            throw new IllegalArgumentException("Decision node needs named actions");
+        if (repeatActionValidation) validateActions(actions);
         String informationSet = game.informationSet(state);
         if (informationSet == null || informationSet.isBlank())
             throw new IllegalArgumentException("Decision node needs an information set");
@@ -172,12 +181,20 @@ public final class CfrSolver<S> {
                 "Chance sampler returned no outcome");
     }
 
+    static void validateActions(List<String> actions) {
+        if (actions.isEmpty()
+                || actions.stream().anyMatch(a -> a == null || a.isBlank())
+                || new HashSet<>(actions).size() != actions.size())
+            throw new IllegalArgumentException("Decision node needs named actions");
+    }
+
     private static final class InformationSet {
         private final List<String> actions;
         private final double[] regret;
         private final double[] strategySum;
 
         private InformationSet(List<String> actions) {
+            validateActions(actions);
             this.actions = actions;
             regret = new double[actions.size()];
             strategySum = new double[actions.size()];

@@ -39,6 +39,16 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
     private final double[][][] shares;
     private final Map<State, List<ChanceOutcome<State>>> chance = new HashMap<>();
     private final Map<State, String> informationSets = new HashMap<>();
+    private final boolean cacheTraversal;
+    private final Map<State, Node> nodes = new HashMap<>();
+
+    private record Node(
+            boolean terminal,
+            int actor,
+            List<String> actions,
+            Map<String, State> children,
+            double utility) {}
+
     private final double liveUtilityOffsetBb;
     private final String publicContext;
 
@@ -59,6 +69,18 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
             double turnBetBb,
             double riverBetBb,
             List<Double> turnQuantiles) {
+        this(flop, flopBetBb, turnBetBb, riverBetBb, turnQuantiles, false);
+    }
+
+    // Disabling this cache is only for paired performance and semantic equivalence audits.
+    SixMaxHeadsUpPostflopGame(
+            SixMaxPolicyFlopTransition.FlopState flop,
+            double flopBetBb,
+            double turnBetBb,
+            double riverBetBb,
+            List<Double> turnQuantiles,
+            boolean cacheTraversal) {
+        this.cacheTraversal = cacheTraversal;
         this.flop = Objects.requireNonNull(flop, "flop");
         for (double bet : new double[] {flopBetBb, turnBetBb, riverBetBb})
             if (!Double.isFinite(bet) || bet <= 0)
@@ -190,6 +212,10 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
 
     @Override
     public boolean isTerminal(State state) {
+        return cacheTraversal ? node(state).terminal() : uncachedTerminal(state);
+    }
+
+    private boolean uncachedTerminal(State state) {
         requireState(state);
         return folded(state.flopHistory())
                 || folded(state.turnHistory())
@@ -200,7 +226,15 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
 
     @Override
     public int currentPlayer(State state) {
-        if (isTerminal(state)) throw new IllegalArgumentException("Terminal state has no player");
+        if (!cacheTraversal) return uncachedActor(state);
+        var node = node(state);
+        if (node.terminal()) throw new IllegalArgumentException("Terminal state has no player");
+        return node.actor();
+    }
+
+    private int uncachedActor(State state) {
+        if (uncachedTerminal(state))
+            throw new IllegalArgumentException("Terminal state has no player");
         if (state.dealIndex() < 0
                 || state.turn() == null && complete(state.flopHistory())
                 || state.turn() != null
@@ -212,7 +246,13 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
 
     @Override
     public List<String> legalActions(State state) {
+        if (!cacheTraversal) return uncachedActions(state);
         if (currentPlayer(state) == -1) throw new IllegalArgumentException("Chance has no actions");
+        return node(state).actions();
+    }
+
+    private List<String> uncachedActions(State state) {
+        if (uncachedActor(state) == -1) throw new IllegalArgumentException("Chance has no actions");
         String history = activeHistory(state);
         return history.isEmpty() || history.equals("k")
                 ? List.of("check", "bet")
@@ -223,6 +263,10 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
     public State afterAction(State state, String action) {
         if (!legalActions(state).contains(action))
             throw new IllegalArgumentException("Illegal action: " + action);
+        return cacheTraversal ? node(state).children().get(action) : applyAction(state, action);
+    }
+
+    private static State applyAction(State state, String action) {
         String code =
                 switch (action) {
                     case "check" -> "k";
@@ -325,7 +369,14 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
 
     @Override
     public double terminalUtility(State state) {
-        if (!isTerminal(state)) throw new IllegalArgumentException("Not terminal");
+        if (!cacheTraversal) return uncachedUtility(state);
+        var node = node(state);
+        if (!node.terminal()) throw new IllegalArgumentException("Not terminal");
+        return node.utility();
+    }
+
+    private double uncachedUtility(State state) {
+        if (!uncachedTerminal(state)) throw new IllegalArgumentException("Not terminal");
         double matched =
                 matchedFlop(state)
                         + matchedTurn(state)
@@ -345,6 +396,24 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
                 - flop.handoff().committedBb(seat(0))
                 - matched
                 - liveUtilityOffsetBb;
+    }
+
+    private Node node(State state) {
+        return nodes.computeIfAbsent(
+                state,
+                s -> {
+                    boolean terminal = uncachedTerminal(s);
+                    int actor = terminal ? -1 : uncachedActor(s);
+                    var actions = actor == -1 ? List.<String>of() : uncachedActions(s);
+                    var children = new LinkedHashMap<String, State>();
+                    for (String action : actions) children.put(action, applyAction(s, action));
+                    return new Node(
+                            terminal,
+                            actor,
+                            actions,
+                            Map.copyOf(children),
+                            terminal ? uncachedUtility(s) : 0);
+                });
     }
 
     public Map<Seat, Double> terminalUtilitiesBb(State state) {

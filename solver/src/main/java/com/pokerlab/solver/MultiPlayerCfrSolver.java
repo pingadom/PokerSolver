@@ -2,7 +2,6 @@ package com.pokerlab.solver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -194,10 +193,6 @@ public final class MultiPlayerCfrSolver<S> {
         if (player < 0 || player >= players)
             throw new IllegalArgumentException("Invalid player index");
         List<String> actions = List.copyOf(game.legalActions(state));
-        if (actions.isEmpty()
-                || actions.stream().anyMatch(a -> a == null || a.isBlank())
-                || new HashSet<>(actions).size() != actions.size())
-            throw new IllegalArgumentException("Decision node needs named actions");
         String informationSet = game.informationSet(state);
         if (informationSet == null || informationSet.isBlank())
             throw new IllegalArgumentException("Decision node needs an information set");
@@ -268,6 +263,7 @@ public final class MultiPlayerCfrSolver<S> {
         private final double[] strategySum;
 
         private InformationSet(List<String> actions) {
+            CfrSolver.validateActions(actions);
             this.actions = actions;
             regret = new double[actions.size()];
             strategySum = new double[actions.size()];
