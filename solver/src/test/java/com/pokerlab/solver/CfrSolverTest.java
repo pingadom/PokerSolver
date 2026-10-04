@@ -144,6 +144,72 @@ class CfrSolverTest {
         assertTrue(solution.strategy().containsKey("0:decision"));
     }
 
+    @Test
+    void validationOnInformationSetCreationKeepsEveryTraversalModeBitIdentical() {
+        for (var mode : CfrSolver.ChanceMode.values())
+            for (var variant : CfrSolver.Variant.values()) {
+                if (mode != CfrSolver.ChanceMode.EXHAUSTIVE
+                        && variant == CfrSolver.Variant.CFR_PLUS) continue;
+                var reference =
+                        new CfrSolver<>(new KuhnPoker(), variant, mode, 711, true).solve(200);
+                var optimized = new CfrSolver<>(new KuhnPoker(), variant, mode, 711).solve(200);
+                assertEquals(reference, optimized);
+            }
+    }
+
+    @Test
+    void validatesNewActionListsAndStillRejectsChangesAtPreviouslySeenInformationSets() {
+        for (var malformed : List.of(List.<String>of(), List.of("a", "a"), List.of("a", " "))) {
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> new CfrSolver<>(validationGame(malformed, malformed)).solve(1));
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> new CfrSolver<>(validationGame(List.of("a", "b"), malformed)).solve(1));
+        }
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new CfrSolver<>(validationGame(List.of("a", "b"), List.of("b", "a")))
+                                .solve(1));
+    }
+
+    private static CfrGame<Integer> validationGame(List<String> first, List<String> second) {
+        return new CfrGame<>() {
+            public Integer initialState() {
+                return 0;
+            }
+
+            public boolean isTerminal(Integer s) {
+                return s == 3;
+            }
+
+            public double terminalUtility(Integer s) {
+                return 1;
+            }
+
+            public int currentPlayer(Integer s) {
+                return s == 0 ? -1 : 0;
+            }
+
+            public List<String> legalActions(Integer s) {
+                return s == 1 ? first : second;
+            }
+
+            public String informationSet(Integer s) {
+                return "same-hidden-information";
+            }
+
+            public Integer afterAction(Integer s, String action) {
+                return 3;
+            }
+
+            public List<ChanceOutcome<Integer>> chanceOutcomes(Integer s) {
+                return List.of(new ChanceOutcome<>(1, .5), new ChanceOutcome<>(2, .5));
+            }
+        };
+    }
+
     private static double bestResponseGap(KuhnPoker game, CfrSolution solution) {
         double firstBest = Double.NEGATIVE_INFINITY;
         double secondBest = Double.POSITIVE_INFINITY;

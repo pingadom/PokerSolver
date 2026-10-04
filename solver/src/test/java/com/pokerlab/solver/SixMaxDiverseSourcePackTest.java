@@ -37,6 +37,9 @@ class SixMaxDiverseSourcePackTest {
         }
         assertEquals(0, pack.maxTerminalPayoffSEBb());
         assertEquals(8_305, pack.solution().strategy().size());
+        assertEquals(
+                pack.solution(),
+                new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(500));
         assertTrue(pack.nashConvBb() < .02);
         assertEquals(
                 "3a8781ca8ab82966bc7290b51fcee4db328c37b862636a682dae4cf3703c9fb6",
