@@ -173,19 +173,7 @@ public final class SixMaxConnectedPreflopAudit {
             SixMaxConnectedPreflopGame game, CfrSolution joint) {
         var results = new ArrayList<ConditionalPostflop>();
         for (var selection : game.selections()) {
-            double historyReach = 0;
-            for (var root : game.source().chanceOutcomes(game.source().initialState())) {
-                double mass = root.probability();
-                var state = root.state();
-                for (var action : selection.history()) {
-                    mass *=
-                            MultiPlayerStrategyEvaluator.probability(
-                                    game.source(), joint, state, action.action());
-                    state = game.source().afterAction(state, action.action());
-                }
-                historyReach += mass;
-            }
-            if (historyReach == 0) continue;
+            if (historyReach(game, joint, selection) == 0) continue;
             var transition =
                     new SixMaxPolicyFlopTransition(game.source(), joint, selection.history());
             for (var board : selection.flops()) {
@@ -197,18 +185,7 @@ public final class SixMaxConnectedPreflopAudit {
                                 selection.flopBetBb(),
                                 selection.turnBetBb(),
                                 selection.riverBetBb());
-                var translated = new LinkedHashMap<String, Map<String, Double>>();
-                String informationPrefix = post.informationSetPrefix();
-                for (int player = 0; player < 2; player++) {
-                    String prefix = post.seat(player).ordinal() + ":postflop:";
-                    for (var row : joint.strategy().entrySet())
-                        if (row.getKey().startsWith(prefix)
-                                && row.getKey().startsWith(informationPrefix, prefix.length()))
-                            translated.put(
-                                    player + ":" + row.getKey().substring(prefix.length()),
-                                    row.getValue());
-                }
-                var policy = new CfrSolution(joint.iterations(), translated);
+                var policy = postflopPolicy(post, joint);
                 var evaluator = new SixMaxPostflopDecisionEvaluator(post, policy);
                 var decisions =
                         post.chanceOutcomes(post.initialState()).stream()
@@ -233,6 +210,39 @@ public final class SixMaxConnectedPreflopAudit {
             }
         }
         return List.copyOf(results);
+    }
+
+    static double historyReach(
+            SixMaxConnectedPreflopGame game,
+            CfrSolution joint,
+            SixMaxConnectedPreflopGame.Selection selection) {
+        double reach = 0;
+        for (var root : game.source().chanceOutcomes(game.source().initialState())) {
+            double mass = root.probability();
+            var state = root.state();
+            for (var action : selection.history()) {
+                mass *=
+                        MultiPlayerStrategyEvaluator.probability(
+                                game.source(), joint, state, action.action());
+                state = game.source().afterAction(state, action.action());
+            }
+            reach += mass;
+        }
+        return reach;
+    }
+
+    static CfrSolution postflopPolicy(SixMaxHeadsUpPostflopGame post, CfrSolution joint) {
+        var translated = new LinkedHashMap<String, Map<String, Double>>();
+        String informationPrefix = post.informationSetPrefix();
+        for (int player = 0; player < 2; player++) {
+            String prefix = post.seat(player).ordinal() + ":postflop:";
+            for (var row : joint.strategy().entrySet())
+                if (row.getKey().startsWith(prefix)
+                        && row.getKey().startsWith(informationPrefix, prefix.length()))
+                    translated.put(
+                            player + ":" + row.getKey().substring(prefix.length()), row.getValue());
+        }
+        return new CfrSolution(joint.iterations(), translated);
     }
 
     /** Extend every postflop information set, even off-policy ones, with forced checks/calls. */
