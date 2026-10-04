@@ -2,7 +2,7 @@
 
 `SixMaxConnectedPreflopGame` connects all six preflop policies to selected heads-up flop, turn and river branches in **one six-player CFR tree**. Preflop decisions are updated using the current postflop policies, and postflop decisions use the current preflop action reach. This advances beyond the [connected postflop study](sixmax-connected-postflop.md), whose preflop policy was frozen.
 
-This is a bounded, sparse physical-flop experiment, marked `VALIDATION_ONLY`. One or two completed heads-up histories and one or two physical flops per history can be selected. All other flops retain mandatory checkdown. Fold wins, all-in preflop showdowns and multiway checkdown terminals retain their original payoffs. Postflop allows check/bet and call/fold with one configured, stack-capped bet per street, no raises and no rake. No new trainer pack is published.
+This is a bounded, sparse physical-flop experiment, marked `VALIDATION_ONLY`. The initial prototype supported two histories and two flops per history. The [chance-sampling follow-up](sixmax-flop-coverage.md) expands this to four completed heads-up histories and eight physical flops per history, with a global 32 compatible deal/flop limit. All other flops retain mandatory checkdown. Fold wins, all-in preflop showdowns and multiway checkdown terminals retain their original payoffs. Postflop allows check/bet and call/fold with one configured, stack-capped bet per street, no raises and no rake. No new trainer pack is published.
 
 ## Private support and physical chance
 
@@ -62,7 +62,7 @@ mvn -q -pl solver -am install '-DskipTests'
 mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxConnectedPreflopAuditMain' '-Dexec.args=solver/src/test/resources/six-seat-full-round-pack.json docs/data/sixmax-connected-preflop.json 711 200 0.5'
 ```
 
-The CLI requires five arguments, refuses source overwrite and caps input files at 16 MiB. The audit caps the budget at 500 iterations. The game caps source support at four private deals and connected compatible deal/flop pairs at four. Output JSON is sorted and excludes elapsed time. Repeated bounded exports must be byte-identical and leave the input unchanged.
+The CLI requires five arguments, refuses source overwrite and caps input files at 16 MiB. The audit caps the budget at 500 iterations and still selects one history and one flop. The game caps source support at four private deals; the original four-pair limit has been expanded to 32 in the chance-sampling follow-up. Output JSON is sorted and excludes elapsed time. Repeated bounded exports must be byte-identical and leave the input unchanged.
 
 Tests cover zero-source-reach counterfactual support, physical flop probabilities, folded-card blockers, continuity of private cards, information privacy, actual seat mapping, uncalled refunds, unchanged unselected terminals, full-profile checkdown recovery, jointly updated preflop/postflop strategies, six-player best responses, conditional postflop quality, unsupported rake and sampled payoffs, support limits, forged state rejection and reproducible source-bound export.
 

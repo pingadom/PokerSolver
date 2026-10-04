@@ -1,0 +1,261 @@
+{
+  "schemaVersion" : "six-max-flop-coverage-audit/v1",
+  "sourcePackHash" : "2ce2adc9a9cb69179e36f6de3d223b40542d9588da61c58ff66fc9d241b57dcf",
+  "sourceSpotHash" : "c3cf59c229ccdb921b3be5bb50c8bfa2ab32ecbcae9c1cb302f20db4b221d838",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "interpretation" : "Sampled unclipped CFR updates all six preflop and selected heads-up postflop policies; the report declares ordinary or linear regret and averaging weights. Proposal probabilities only guide traversal; likelihood ratios retain the declared physical game. Missing information sets receive explicit uniform completion solely for bounded exact-game audits. Full-game and conditional gaps include that completion; traversal savings do not imply decision quality, full-deck flop coverage, or six-player equilibrium convergence. No trainer pack is published.",
+  "report" : {
+    "continuationModel" : "SPARSE_PHYSICAL_FLOPS_CONNECTED_PREFLOP_FLOP_TURN_RIVER",
+    "algorithm" : "LINEAR_CFR_IMPORTANCE_WEIGHTED_CHANCE_SAMPLING",
+    "chanceTraversal" : "SAMPLED_RUNOUTS",
+    "flopSelectionSeed" : 711,
+    "cases" : [ {
+      "selectedFlops" : 1,
+      "connectedDealFlops" : 2,
+      "coverage" : [ {
+        "publicHistory" : "|UTG:call|HJ:fold|CO:fold|BTN:fold|SB:fold|BB:check",
+        "actions" : [ {
+          "seat" : "UTG",
+          "action" : "call"
+        }, {
+          "seat" : "HJ",
+          "action" : "fold"
+        }, {
+          "seat" : "CO",
+          "action" : "fold"
+        }, {
+          "seat" : "BTN",
+          "action" : "fold"
+        }, {
+          "seat" : "SB",
+          "action" : "fold"
+        }, {
+          "seat" : "BB",
+          "action" : "check"
+        } ],
+        "flops" : [ [ "3c", "7s", "9d" ] ],
+        "firstToAct" : "BB",
+        "secondToAct" : "UTG",
+        "flopBetBb" : 1.25,
+        "requestedTurnBetBb" : 2.5,
+        "requestedRiverBetBb" : 5.0,
+        "legalSelectedFlopsByDeal" : [ 1, 1 ],
+        "bettingFlopProbabilityByDeal" : [ 1.0121457489878542E-4, 1.0121457489878542E-4 ]
+      } ],
+      "sourceBettingContinuationProbability" : 1.6722178348920535E-6,
+      "runs" : [ {
+        "seed" : 711,
+        "iterations" : 500,
+        "uniformProposalMixture" : 0.0,
+        "checkdownControlVariate" : true,
+        "visitedInformationSets" : 56341,
+        "uniformlyCompletedInformationSets" : 4284,
+        "completeTreeVisits" : 243467,
+        "exhaustiveVisitsAtSameIterations" : 730401000,
+        "sampledTraversal" : {
+          "visitedNodes" : 77703000,
+          "terminalNodes" : 40902000,
+          "sampledChanceNodes" : 72000,
+          "baselineCorrections" : 0
+        },
+        "traversalReductionFactor" : 9.399907339484962,
+        "sampledSolutionHash" : "1a12abb20cf3534dc806e6ebc6f9d040b3d1da3ce71186512717b8ab85fde7ab",
+        "completedSolutionHash" : "97300e2138894a2f5f2dce75b11af39cc681a736a1bc6b9bdea54133c4a56a50",
+        "quality" : {
+          "profileUtilitiesBb" : [ 1.5024688978366751, -1.0275169967793093E-4, -3.387828849679502E-4, -6.299406522030756E-4, -0.5007723795804517, -1.000625043019375 ],
+          "bestResponseUtilitiesBb" : [ 1.5035216383604086, 1.6516988944039867E-4, 6.481805353475553E-5, 1.1004906812140713E-5, -0.4999255629006118, -0.9995412563545216 ],
+          "deviationGainsBb" : [ 0.0010527405237334975, 2.679215891183296E-4, 4.036009385027057E-4, 6.409455590152162E-4, 8.468166798399346E-4, 0.0010837866648534256 ],
+          "nashConvBb" : 0.004295811955063109
+        },
+        "bettingContinuationProbability" : 5.1222394823870375E-8,
+        "conditionalPostflop" : [ {
+          "flop" : [ "3c", "7s", "9d" ],
+          "preflopReachProbability" : 5.060772608598399E-4,
+          "flopProbabilityGivenHistory" : 1.0121457489878542E-4,
+          "posteriorJointDeals" : 2,
+          "bestResponse" : {
+            "firstBestResponse" : 4.496160510850341,
+            "secondBestResponse" : 0.6249008123345543,
+            "profileValue" : 2.4832512780597487,
+            "gap" : 3.8712596985157868
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "9h 9s",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 7.680193025224905E-4,
+              "check" : 0.9992319806974775
+            },
+            "actionEvBb" : {
+              "bet" : 1.6091532109833095,
+              "check" : 2.734115270636167
+            }
+          } ]
+        } ]
+      } ]
+    }, {
+      "selectedFlops" : 4,
+      "connectedDealFlops" : 6,
+      "coverage" : [ {
+        "publicHistory" : "|UTG:call|HJ:fold|CO:fold|BTN:fold|SB:fold|BB:check",
+        "actions" : [ {
+          "seat" : "UTG",
+          "action" : "call"
+        }, {
+          "seat" : "HJ",
+          "action" : "fold"
+        }, {
+          "seat" : "CO",
+          "action" : "fold"
+        }, {
+          "seat" : "BTN",
+          "action" : "fold"
+        }, {
+          "seat" : "SB",
+          "action" : "fold"
+        }, {
+          "seat" : "BB",
+          "action" : "check"
+        } ],
+        "flops" : [ [ "3c", "7s", "9d" ], [ "5s", "8c", "Qc" ], [ "2s", "3c", "5s" ], [ "2s", "5d", "Tc" ] ],
+        "firstToAct" : "BB",
+        "secondToAct" : "UTG",
+        "flopBetBb" : 1.25,
+        "requestedTurnBetBb" : 2.5,
+        "requestedRiverBetBb" : 5.0,
+        "legalSelectedFlopsByDeal" : [ 2, 4 ],
+        "bettingFlopProbabilityByDeal" : [ 2.0242914979757084E-4, 4.048582995951417E-4 ]
+      } ],
+      "sourceBettingContinuationProbability" : 5.016636390467175E-6,
+      "runs" : [ {
+        "seed" : 711,
+        "iterations" : 500,
+        "uniformProposalMixture" : 0.0,
+        "checkdownControlVariate" : true,
+        "visitedInformationSets" : 192961,
+        "uniformlyCompletedInformationSets" : 18000,
+        "completeTreeVisits" : 679067,
+        "exhaustiveVisitsAtSameIterations" : 2037201000,
+        "sampledTraversal" : {
+          "visitedNodes" : 79107000,
+          "terminalNodes" : 41538000,
+          "sampledChanceNodes" : 216000,
+          "baselineCorrections" : 0
+        },
+        "traversalReductionFactor" : 25.752474496567938,
+        "sampledSolutionHash" : "656ae4d2445a7c3329fda436d0ea3768ff68e5e4c2d6460be44b602dfde04f02",
+        "completedSolutionHash" : "4c217ee5302ab4e739880f4f15a5628f3d543827c26537d7ea2ff4dd1ba18963",
+        "quality" : {
+          "profileUtilitiesBb" : [ 1.5024688493627287, -1.0275172086132486E-4, -3.387829291320667E-4, -6.299407344446272E-4, -0.5007723740667809, -1.0006249999115104 ],
+          "bestResponseUtilitiesBb" : [ 1.5035216383559293, 1.6516988944039867E-4, 6.481805353475553E-5, 1.1004906812140713E-5, -0.4999255537557402, -0.9995410437558011 ],
+          "deviationGainsBb" : [ 0.001052788993200604, 2.679216103017235E-4, 4.036009826668222E-4, 6.409456412567679E-4, 8.468203110406636E-4, 0.0010839561557093313 ],
+          "nashConvBb" : 0.004296033694175912
+        },
+        "bettingContinuationProbability" : 1.5368132868960233E-7,
+        "conditionalPostflop" : [ {
+          "flop" : [ "3c", "7s", "9d" ],
+          "preflopReachProbability" : 5.06124314612347E-4,
+          "flopProbabilityGivenHistory" : 1.0121457489878542E-4,
+          "posteriorJointDeals" : 2,
+          "bestResponse" : {
+            "firstBestResponse" : 4.496156507026887,
+            "secondBestResponse" : 0.624888094967507,
+            "profileValue" : 2.4832386833776114,
+            "gap" : 3.87126841205938
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "9h 9s",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 7.680115533487872E-4,
+              "check" : 0.9992319884466513
+            },
+            "actionEvBb" : {
+              "bet" : 1.6091378445808542,
+              "check" : 2.7341026693601522
+            }
+          } ]
+        }, {
+          "flop" : [ "5s", "8c", "Qc" ],
+          "preflopReachProbability" : 5.06124314612347E-4,
+          "flopProbabilityGivenHistory" : 5.06071458254113E-5,
+          "posteriorJointDeals" : 1,
+          "bestResponse" : {
+            "firstBestResponse" : 0.5539477874706629,
+            "secondBestResponse" : -5.611952342471117,
+            "profileValue" : -1.0926538732515083,
+            "gap" : 6.16590012994178
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "9h 9s",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 1,
+            "actionFrequency" : {
+              "bet" : 0.17023674330025793,
+              "check" : 0.829763256699742
+            },
+            "actionEvBb" : {
+              "bet" : -0.8395570977485114,
+              "check" : -0.8432892170945934
+            }
+          } ]
+        }, {
+          "flop" : [ "2s", "3c", "5s" ],
+          "preflopReachProbability" : 5.06124314612347E-4,
+          "flopProbabilityGivenHistory" : 5.06071458254113E-5,
+          "posteriorJointDeals" : 1,
+          "bestResponse" : {
+            "firstBestResponse" : 0.4076698740724232,
+            "secondBestResponse" : -6.658687678342009,
+            "profileValue" : -1.1193155025729815,
+            "gap" : 7.066357552414432
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "9h 9s",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 1,
+            "actionFrequency" : {
+              "bet" : 0.999577266238451,
+              "check" : 4.2273376154900225E-4
+            },
+            "actionEvBb" : {
+              "bet" : -0.8692063193971202,
+              "check" : -1.1274851364501748
+            }
+          } ]
+        }, {
+          "flop" : [ "2s", "5d", "Tc" ],
+          "preflopReachProbability" : 5.06124314612347E-4,
+          "flopProbabilityGivenHistory" : 1.0121457489878542E-4,
+          "posteriorJointDeals" : 2,
+          "bestResponse" : {
+            "firstBestResponse" : 0.5175812452286174,
+            "secondBestResponse" : -5.775854505235348,
+            "profileValue" : -1.2001983855785026,
+            "gap" : 6.293435750463965
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "9h 9s",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 6.96097536022716E-5,
+              "check" : 0.9999303902463977
+            },
+            "actionEvBb" : {
+              "bet" : -1.3270371877657103,
+              "check" : -0.9501721520962283
+            }
+          } ]
+        } ]
+      } ]
+    } ]
+  }
+}
