@@ -17,7 +17,9 @@ public final class MultiPlayerCfrSolver<S> {
     public enum ChanceMode {
         EXHAUSTIVE,
         SAMPLED,
-        SAMPLED_AFTER_ROOT
+        SAMPLED_AFTER_ROOT,
+        /** Enumerate chance depths 0 and 1; connected poker uses private deals then flops. */
+        SAMPLED_RUNOUTS
     }
 
     public record Statistics(
@@ -36,6 +38,7 @@ public final class MultiPlayerCfrSolver<S> {
     private final long chanceSeed;
     private final double uniformMixture;
     private final boolean chanceBaselineEnabled;
+    private final boolean linearWeighting;
     private final List<Double> passChanceDraws = new ArrayList<>();
     private SplittableRandom chanceRandom;
     private long visitedNodes, terminalNodes, sampledChanceNodes, baselineCorrections;
@@ -67,6 +70,18 @@ public final class MultiPlayerCfrSolver<S> {
             long chanceSeed,
             double uniformMixture,
             boolean chanceBaselineEnabled) {
+        this(game, variant, chanceMode, chanceSeed, uniformMixture, chanceBaselineEnabled, false);
+    }
+
+    /** Linear weighting applies to BOTH cumulative regret updates and strategy averaging. */
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            double uniformMixture,
+            boolean chanceBaselineEnabled,
+            boolean linearWeighting) {
         this.game = Objects.requireNonNull(game, "game");
         this.variant = Objects.requireNonNull(variant, "variant");
         this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
@@ -79,6 +94,10 @@ public final class MultiPlayerCfrSolver<S> {
             throw new IllegalArgumentException("Chance sampling supports vanilla CFR only");
         this.uniformMixture = uniformMixture;
         this.chanceBaselineEnabled = chanceBaselineEnabled;
+        if (linearWeighting && variant != CfrSolver.Variant.VANILLA)
+            throw new IllegalArgumentException(
+                    "Linear weighting requires unclipped vanilla regret matching");
+        this.linearWeighting = linearWeighting;
         this.players = game.playerCount();
         if (players < 2 || players > 6)
             throw new IllegalArgumentException("Expected two to six players");
@@ -137,7 +156,8 @@ public final class MultiPlayerCfrSolver<S> {
             if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
                 throw new IllegalArgumentException("Chance probabilities must sum to one");
             if (chanceMode == ChanceMode.SAMPLED
-                    || chanceMode == ChanceMode.SAMPLED_AFTER_ROOT && chanceDepth > 0) {
+                    || chanceMode == ChanceMode.SAMPLED_AFTER_ROOT && chanceDepth > 0
+                    || chanceMode == ChanceMode.SAMPLED_RUNOUTS && chanceDepth > 1) {
                 sampledChanceNodes++;
                 while (passChanceDraws.size() <= chanceDepth)
                     passChanceDraws.add(chanceRandom.nextDouble());
@@ -212,7 +232,8 @@ public final class MultiPlayerCfrSolver<S> {
                     nodeUtility,
                     counterfactualReach,
                     reach[player] * chanceReach,
-                    variant == CfrSolver.Variant.CFR_PLUS ? iterationWeight : 1);
+                    variant == CfrSolver.Variant.CFR_PLUS || linearWeighting ? iterationWeight : 1,
+                    linearWeighting ? iterationWeight : 1);
         }
         return nodeUtility;
     }
@@ -278,9 +299,11 @@ public final class MultiPlayerCfrSolver<S> {
                 double nodeUtility,
                 double counterfactualReach,
                 double ownReach,
-                int averagingWeight) {
+                int averagingWeight,
+                int regretWeight) {
             for (int index = 0; index < strategy.length; index++) {
-                regret[index] += counterfactualReach * (actionUtilities[index] - nodeUtility);
+                regret[index] +=
+                        counterfactualReach * regretWeight * (actionUtilities[index] - nodeUtility);
                 strategySum[index] += averagingWeight * ownReach * strategy[index];
             }
         }

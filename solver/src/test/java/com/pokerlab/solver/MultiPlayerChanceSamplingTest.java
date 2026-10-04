@@ -232,6 +232,131 @@ class MultiPlayerChanceSamplingTest {
     }
 
     @Test
+    void linearWeightingDiscountsInitialMistakeWithoutClippingRegrets() {
+        var game = new RareGame(false);
+        var ordinary = new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.VANILLA);
+        var linear =
+                new MultiPlayerCfrSolver<>(
+                        game,
+                        CfrSolver.Variant.VANILLA,
+                        MultiPlayerCfrSolver.ChanceMode.EXHAUSTIVE,
+                        711,
+                        0,
+                        true,
+                        true);
+        var uniformPolicy = ordinary.solve(100);
+        var weightedPolicy = linear.solve(100);
+        assertEquals(.995, uniformPolicy.at(0, "hero").get("safe"), 1e-12);
+        assertEquals(1 - .5 / 5050, weightedPolicy.at(0, "hero").get("safe"), 1e-12);
+        assertTrue(
+                MultiPlayerInformationSetBestResponse.assess(game, weightedPolicy).nashConvBb()
+                        < MultiPlayerInformationSetBestResponse.assess(game, uniformPolicy)
+                                        .nashConvBb()
+                                / 40);
+        assertEquals(weightedPolicy, linear.solve(100));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new MultiPlayerCfrSolver<>(
+                                game,
+                                CfrSolver.Variant.CFR_PLUS,
+                                MultiPlayerCfrSolver.ChanceMode.EXHAUSTIVE,
+                                1,
+                                0,
+                                true,
+                                true));
+    }
+
+    @Test
+    void linearRegretsMatchIndependentFiveRoundMatrixCalculation() {
+        record MatrixState(int first, int second) {}
+        var game =
+                new MultiPlayerCfrGame<MatrixState>() {
+                    public int playerCount() {
+                        return 6;
+                    }
+
+                    public MatrixState initialState() {
+                        return new MatrixState(-1, -1);
+                    }
+
+                    public boolean isTerminal(MatrixState s) {
+                        return s.second() >= 0;
+                    }
+
+                    public int currentPlayer(MatrixState s) {
+                        return s.first() < 0 ? 0 : 1;
+                    }
+
+                    public List<String> legalActions(MatrixState s) {
+                        return List.of("a", "b");
+                    }
+
+                    // Player 1 cannot observe player 0's simultaneous matrix action.
+                    public String informationSet(MatrixState s) {
+                        return "matrix";
+                    }
+
+                    public MatrixState afterAction(MatrixState s, String a) {
+                        int action = a.equals("a") ? 0 : 1;
+                        return s.first() < 0
+                                ? new MatrixState(action, -1)
+                                : new MatrixState(s.first(), action);
+                    }
+
+                    public List<ChanceOutcome<MatrixState>> chanceOutcomes(MatrixState s) {
+                        return List.of();
+                    }
+
+                    public double[] terminalUtilities(MatrixState s) {
+                        double[][] matrix = {{3, -1}, {-2, 1}};
+                        double value = matrix[s.first()][s.second()];
+                        return new double[] {value, -value, 0, 0, 0, 0};
+                    }
+                };
+        var linear =
+                new MultiPlayerCfrSolver<>(
+                                game,
+                                CfrSolver.Variant.VANILLA,
+                                MultiPlayerCfrSolver.ChanceMode.EXHAUSTIVE,
+                                711,
+                                0,
+                                true,
+                                true)
+                        .solve(5);
+        // Independent alternating matrix regret-matching calculation: both regret increments
+        // and average contributions receive weights 1, 2, 3, 4, 5. Averaging alone differs.
+        assertEquals(.3847655423724438, linear.at(0, "matrix").get("a"), 1e-12);
+        assertEquals(.42803841103584495, linear.at(1, "matrix").get("a"), 1e-12);
+    }
+
+    @Test
+    void runoutSamplingEnumeratesTheFirstTwoChanceLayers() {
+        var game = new RareGame(true);
+        var exact =
+                new MultiPlayerCfrSolver<>(
+                        game,
+                        CfrSolver.Variant.VANILLA,
+                        MultiPlayerCfrSolver.ChanceMode.EXHAUSTIVE,
+                        711,
+                        0,
+                        true,
+                        true);
+        var phase =
+                new MultiPlayerCfrSolver<>(
+                        game,
+                        CfrSolver.Variant.VANILLA,
+                        MultiPlayerCfrSolver.ChanceMode.SAMPLED_RUNOUTS,
+                        711,
+                        .5,
+                        true,
+                        true);
+        assertEquals(exact.solve(20), phase.solve(20));
+        assertEquals(exact.statistics(), phase.statistics());
+        assertEquals(0, phase.statistics().sampledChanceNodes());
+    }
+
+    @Test
     void completionIsExplicitBudgetedAndRejectsForeignOrInvalidPolicies() {
         var game = new RareGame(false);
         var empty = new CfrSolution(1, Map.of());

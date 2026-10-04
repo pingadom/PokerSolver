@@ -84,7 +84,34 @@ public final class SixMaxFlopCoverageAudit {
             int maximumFlops,
             List<Double> mixtures,
             BiConsumer<Integer, Run> progress) {
+        return assess(
+                base,
+                source,
+                flopSeed,
+                trainingSeeds,
+                iterations,
+                maximumFlops,
+                mixtures,
+                MultiPlayerCfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                false,
+                progress);
+    }
+
+    public static Report assess(
+            SixMaxPreflopCheckdownGame base,
+            CfrSolution source,
+            long flopSeed,
+            List<Long> trainingSeeds,
+            int iterations,
+            int maximumFlops,
+            List<Double> mixtures,
+            MultiPlayerCfrSolver.ChanceMode chanceMode,
+            boolean linearWeighting,
+            BiConsumer<Integer, Run> progress) {
         Objects.requireNonNull(progress, "progress");
+        if (chanceMode != MultiPlayerCfrSolver.ChanceMode.SAMPLED_AFTER_ROOT
+                && chanceMode != MultiPlayerCfrSolver.ChanceMode.SAMPLED_RUNOUTS)
+            throw new IllegalArgumentException("Coverage audit requires enumerated private deals");
         trainingSeeds = List.copyOf(trainingSeeds);
         mixtures = List.copyOf(mixtures);
         if (trainingSeeds.isEmpty()
@@ -154,10 +181,11 @@ public final class SixMaxFlopCoverageAudit {
                                 new MultiPlayerCfrSolver<>(
                                         game,
                                         CfrSolver.Variant.VANILLA,
-                                        MultiPlayerCfrSolver.ChanceMode.SAMPLED_AFTER_ROOT,
+                                        chanceMode,
                                         seed,
                                         mixture,
-                                        centered);
+                                        centered,
+                                        linearWeighting);
                         var sampled = solver.solve(iterations);
                         var complete =
                                 MultiPlayerStrategyCompletion.uniformAtUnseen(
@@ -204,8 +232,10 @@ public final class SixMaxFlopCoverageAudit {
         }
         return new Report(
                 "SPARSE_PHYSICAL_FLOPS_CONNECTED_PREFLOP_FLOP_TURN_RIVER",
-                "VANILLA_CFR_IMPORTANCE_WEIGHTED_CHANCE_SAMPLING",
-                "SAMPLED_AFTER_ROOT",
+                linearWeighting
+                        ? "LINEAR_CFR_IMPORTANCE_WEIGHTED_CHANCE_SAMPLING"
+                        : "VANILLA_CFR_IMPORTANCE_WEIGHTED_CHANCE_SAMPLING",
+                chanceMode.name(),
                 flopSeed,
                 cases);
     }

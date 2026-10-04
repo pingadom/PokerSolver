@@ -75,6 +75,35 @@ class SixMaxFlopCoverageAuditTest {
     }
 
     @Test
+    void runoutScheduleVisitsEveryFlopRootAndRecordsLinearAlgorithm(@TempDir Path temp)
+            throws Exception {
+        String input = "src/test/resources/six-seat-full-round-pack.json";
+        var output = temp.resolve("runout.json");
+        String[] args = {input, output.toString(), "711", "2", "1", "0", "SAMPLED_RUNOUTS", "true"};
+        SixMaxFlopCoverageAuditMain.main(args);
+        var artifact =
+                new ObjectMapper()
+                        .readValue(output.toFile(), SixMaxFlopCoverageAuditMain.Artifact.class);
+        assertEquals("SAMPLED_RUNOUTS", artifact.report().chanceTraversal());
+        assertEquals(
+                "LINEAR_CFR_IMPORTANCE_WEIGHTED_CHANCE_SAMPLING", artifact.report().algorithm());
+        var run = artifact.report().cases().getFirst().runs().getFirst();
+        assertTrue(run.visitedInformationSets() > 7089);
+        assertTrue(run.sampledTraversal().sampledChanceNodes() > 0);
+        assertEquals(0, run.sampledTraversal().baselineCorrections());
+        assertEquals(1, run.conditionalPostflop().size());
+        assertTrue(run.traversalReductionFactor() > 1);
+        args[1] = temp.resolve("repeat.json").toString();
+        SixMaxFlopCoverageAuditMain.main(args);
+        assertArrayEquals(Files.readAllBytes(output), Files.readAllBytes(Path.of(args[1])));
+        args[7] = "yes";
+        assertThrows(IllegalArgumentException.class, () -> SixMaxFlopCoverageAuditMain.main(args));
+        args[7] = "false";
+        args[6] = "SAMPLED";
+        assertThrows(IllegalArgumentException.class, () -> SixMaxFlopCoverageAuditMain.main(args));
+    }
+
+    @Test
     void rejectsInvalidOrExcessiveStudySettingsBeforeBuildingGame() {
         var base = SixMaxConnectedPreflopGameTest.base();
         var source = new MultiPlayerCfrSolver<>(base, CfrSolver.Variant.CFR_PLUS).solve(1);
