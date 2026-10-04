@@ -69,7 +69,7 @@ Physical sampling never visits a selected betting flop in either original 500-it
 
 Linear weighting sharply improves the full-game score at the same traversal count, but **does not improve the worst conditional postflop gap**. Its learned probability of entering any selected betting continuation is only 0.0000153681%, roughly 33 times below the source policy's reach. Those conditional games consequently have little weight in the full-game score. The smaller number is not evidence of a playable postflop trainer, broad poker quality, or superiority to exhaustive CFR+. These experiments change the algorithm as well as traversal when comparing ordinary and linear runs; they do not supply an equal-quality runtime comparison.
 
-The next priority is useful conditional strategy quality and support at histories actually reached by learned policies, with independent seeds and training budgets. Further widening the flop menu before that gate would add mostly untrained decisions. The existing trainer source and its publication status remain unchanged.
+The [conditional refinement follow-up](sixmax-conditional-refinement.md) now addresses the observed postflop error by freezing the learned preflop posterior, solving exact heads-up continuations with CFR+, replacing supported rows, and rechecking the full parent profile. Its two-seed study lowers the maximum conditional gap to 0.014419bb with a small parent-score improvement. That does not fix the very low continuation reach or broad poker coverage. The next priority is significant reached histories and wider private-hand support under both parent and conditional audits. The existing trainer source and its publication status remain unchanged.
 
 ## Reproduce and inspect
 
