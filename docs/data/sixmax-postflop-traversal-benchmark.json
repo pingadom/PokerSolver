@@ -1,0 +1,68 @@
+{
+  "schemaVersion" : "six-max-postflop-traversal-benchmark/v1",
+  "sourcePackHash" : "3a8781ca8ab82966bc7290b51fcee4db328c37b862636a682dae4cf3703c9fb6",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "interpretation" : "Same physical posterior, observations, actions and chip settlement. Compare the original repeated action-list validation with validation on information-set creation plus consistency checks on every visit, then add experimental game-state caching. Two warmup iterations populate each game's existing chance/information caches; experimental node facts and action children are also populated. Measured solves restart CFR+ from zero regrets. All strategy hashes and exact best-response reports must match. Wall-clock timings depend on machine, JVM, warmup and load; they are not a universal speedup or a strategy quality improvement. Game-state caching remains disabled by default.",
+  "flopSeed" : 711,
+  "warmupIterations" : 2,
+  "measuredIterations" : 20,
+  "flop" : [ "3c", "4h", "Ks" ],
+  "publicHistory" : [ {
+    "seat" : "UTG",
+    "action" : "fold"
+  }, {
+    "seat" : "HJ",
+    "action" : "fold"
+  }, {
+    "seat" : "CO",
+    "action" : "fold"
+  }, {
+    "seat" : "BTN",
+    "action" : "call"
+  }, {
+    "seat" : "SB",
+    "action" : "fold"
+  }, {
+    "seat" : "BB",
+    "action" : "check"
+  } ],
+  "repeatedActionValidation" : {
+    "solutionHash" : "fefa8690f97593ec1fca6c1df5d30bb7876ff0d7babc66e9b20ab153be0519cd",
+    "informationSets" : 107072,
+    "solveSeconds" : 14.0920356,
+    "auditSeconds" : 2.2152524,
+    "quality" : {
+      "firstBestResponse" : 0.18294838806288327,
+      "secondBestResponse" : -0.10409330771916137,
+      "profileValue" : 0.025120386416805418,
+      "gap" : 0.28704169578204464
+    }
+  },
+  "oncePerInformationSetValidation" : {
+    "solutionHash" : "fefa8690f97593ec1fca6c1df5d30bb7876ff0d7babc66e9b20ab153be0519cd",
+    "informationSets" : 107072,
+    "solveSeconds" : 13.2037052,
+    "auditSeconds" : 1.9628313,
+    "quality" : {
+      "firstBestResponse" : 0.18294838806288327,
+      "secondBestResponse" : -0.10409330771916137,
+      "profileValue" : 0.025120386416805418,
+      "gap" : 0.28704169578204464
+    }
+  },
+  "experimentalGameCache" : {
+    "solutionHash" : "fefa8690f97593ec1fca6c1df5d30bb7876ff0d7babc66e9b20ab153be0519cd",
+    "informationSets" : 107072,
+    "solveSeconds" : 13.3208846,
+    "auditSeconds" : 2.0482392,
+    "quality" : {
+      "firstBestResponse" : 0.18294838806288327,
+      "secondBestResponse" : -0.10409330771916137,
+      "profileValue" : 0.025120386416805418,
+      "gap" : 0.28704169578204464
+    }
+  },
+  "actionValidationSolveSpeedup" : 1.0672788726000941,
+  "gameCacheSolveSpeedup" : 0.9912033319468889,
+  "gameCacheAuditSpeedup" : 0.9583017940482733
+}
