@@ -217,6 +217,35 @@ public final class SixMaxConnectedPreflopGame
                 .toList();
     }
 
+    /**
+     * Counts a full traversal before training allocates policy rows. Public-card identities do not
+     * change legal actions or stack caps in this game. After a selected flop, all children of a
+     * turn/river chance node therefore have the same tree shape: count one and multiply by the
+     * physical fanout. Preflop and selected-flop chance are enumerated, including blocked boards
+     * and the residual-checkdown child. This counts states, not unique information sets.
+     */
+    public long completeTreeStateCount() {
+        return countTree(initialState());
+    }
+
+    private long countTree(State state) {
+        if (isTerminal(state)) return 1;
+        long count = 1;
+        if (currentPlayer(state) == -1) {
+            var outcomes = chanceOutcomes(state);
+            if (state.postflop() != null)
+                return Math.addExact(
+                        count,
+                        Math.multiplyExact(
+                                outcomes.size(), countTree(outcomes.getFirst().state())));
+            for (var outcome : outcomes) count = Math.addExact(count, countTree(outcome.state()));
+        } else {
+            for (String action : legalActions(state))
+                count = Math.addExact(count, countTree(afterAction(state, action)));
+        }
+        return count;
+    }
+
     @Override
     public int playerCount() {
         return 6;

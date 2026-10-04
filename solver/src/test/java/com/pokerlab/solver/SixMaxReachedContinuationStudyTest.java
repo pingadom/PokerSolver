@@ -59,6 +59,76 @@ class SixMaxReachedContinuationStudyTest {
     }
 
     @Test
+    void widerMenusAreNestedUniqueAndUsePhysicalBlockerProbabilities() {
+        var base = SixMaxConnectedPreflopGameTest.base();
+        var policy = SixMaxConditionalPostflopRefinementTest.uniform(base);
+        var narrow = SixMaxReachedContinuationStudy.select(base, policy, 2, 711);
+        var wide =
+                SixMaxReachedContinuationStudy.select(
+                        base, policy, 2, 2, 711, SixMaxContinuationStudyBudget.widerFlops());
+        var repeated =
+                SixMaxReachedContinuationStudy.select(
+                        base, policy, 2, 2, 711, SixMaxContinuationStudyBudget.widerFlops());
+        assertEquals(wide.selectedHistories(), repeated.selectedHistories());
+        assertEquals(
+                narrow.sourceReach().selectedHistoryProbability(),
+                wide.sourceReach().selectedHistoryProbability());
+        assertEquals(
+                narrow.sourceReach().headsUpProbability(), wide.sourceReach().headsUpProbability());
+        double physicalReach = 0;
+        int pairs = 0;
+        for (int rank = 0; rank < narrow.selectedHistories().size(); rank++) {
+            var before = narrow.selectedHistories().get(rank);
+            var after = wide.selectedHistories().get(rank);
+            assertEquals(before.coverage().actions(), after.coverage().actions());
+            assertEquals(before.coverage().flops(), after.coverage().flops().subList(0, 1));
+            assertEquals(2, after.coverage().flops().stream().distinct().count());
+            var posterior =
+                    new SixMaxPolicyFlopTransition(base, policy, after.coverage().actions());
+            var support =
+                    SixMaxPolicyFlopTransition.counterfactualSupport(
+                            base, after.coverage().actions());
+            for (var flop : after.coverage().flops()) {
+                var cards = flop.stream().map(com.pokerlab.core.card.Card::parse).toList();
+                physicalReach += after.sourceReachProbability() * posterior.flopProbability(cards);
+                pairs += support.conditionOnFlop(cards).deals().size();
+            }
+        }
+        assertEquals(pairs, wide.compatibleDealFlops());
+        assertEquals(physicalReach, wide.sourceReach().selectedPhysicalFlopProbability(), 1e-15);
+        assertTrue(physicalReach > narrow.sourceReach().selectedPhysicalFlopProbability());
+        assertTrue(
+                physicalReach
+                        <= 2 * narrow.sourceReach().selectedHistoryProbability() / 9880 + 1e-15);
+        for (int width : List.of(0, 5))
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () ->
+                            SixMaxReachedContinuationStudy.select(
+                                    base,
+                                    policy,
+                                    2,
+                                    width,
+                                    711,
+                                    SixMaxContinuationStudyBudget.widerFlops()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxReachedContinuationStudy.select(
+                                base,
+                                policy,
+                                2,
+                                2,
+                                711,
+                                new SixMaxContinuationStudyBudget(1, 2_000_000)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxReachedContinuationStudy.select(
+                                base, policy, 2, 2, 711, new SixMaxContinuationStudyBudget(16, 1)));
+    }
+
+    @Test
     void refusesTooManyCompatibleBranchesRatherThanTrimmingHiddenDeals() throws Exception {
         var pack =
                 MultiwayPackJson.readFullRound(
