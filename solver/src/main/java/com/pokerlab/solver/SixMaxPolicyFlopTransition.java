@@ -136,6 +136,10 @@ public final class SixMaxPolicyFlopTransition {
         return publicState.remainingStackBb(firstToAct);
     }
 
+    public double committedBb(Seat seat) {
+        return publicState.committedBb(Objects.requireNonNull(seat, "seat"));
+    }
+
     public double reachProbability() {
         return Math.exp(logReachProbability);
     }
@@ -208,6 +212,10 @@ public final class SixMaxPolicyFlopTransition {
             return board;
         }
 
+        public SixMaxPolicyFlopTransition handoff() {
+            return SixMaxPolicyFlopTransition.this;
+        }
+
         public List<JointDeal> deals() {
             return posterior;
         }
@@ -234,32 +242,43 @@ public final class SixMaxPolicyFlopTransition {
         public Checkdown exactCheckdown() {
             double firstShare = 0;
             long runouts = 0;
-            for (var deal : posterior) {
-                var deck = remainingDeck(deal, board);
-                Card[][] hands = new Card[2][7];
-                for (int player = 0; player < 2; player++) {
-                    var combo =
-                            deal.hands().get((player == 0 ? firstToAct : secondToAct).ordinal());
-                    hands[player][0] = combo.first();
-                    hands[player][1] = combo.second();
-                    for (int card = 0; card < 3; card++) hands[player][card + 2] = board.get(card);
-                }
-                double sum = 0;
-                long count = 0;
-                for (int turn = 0; turn < deck.size() - 1; turn++)
-                    for (int river = turn + 1; river < deck.size(); river++) {
-                        for (var hand : hands) {
-                            hand[5] = deck.get(turn);
-                            hand[6] = deck.get(river);
-                        }
-                        int first = HandEvaluator.evaluateBestScore(hands[0]);
-                        int second = HandEvaluator.evaluateBestScore(hands[1]);
-                        sum += first > second ? 1 : first == second ? 0.5 : 0;
-                        count++;
-                    }
-                firstShare += deal.probability() * sum / count;
-                runouts += count;
+            for (int index = 0; index < posterior.size(); index++) {
+                var baseline = exactCheckdown(index);
+                firstShare +=
+                        posterior.get(index).probability() * baseline.shares().get(firstToAct);
+                runouts += baseline.runouts();
             }
+            return checkdown(firstShare, runouts);
+        }
+
+        /** Offline per-deal payoff table; this reveals hidden hands and is not trainer input. */
+        public Checkdown exactCheckdown(int dealIndex) {
+            var deal = posterior.get(dealIndex);
+            var deck = remainingDeck(deal, board);
+            Card[][] hands = new Card[2][7];
+            for (int player = 0; player < 2; player++) {
+                var combo = deal.hands().get((player == 0 ? firstToAct : secondToAct).ordinal());
+                hands[player][0] = combo.first();
+                hands[player][1] = combo.second();
+                for (int card = 0; card < 3; card++) hands[player][card + 2] = board.get(card);
+            }
+            double sum = 0;
+            long count = 0;
+            for (int turn = 0; turn < deck.size() - 1; turn++)
+                for (int river = turn + 1; river < deck.size(); river++) {
+                    for (var hand : hands) {
+                        hand[5] = deck.get(turn);
+                        hand[6] = deck.get(river);
+                    }
+                    int first = HandEvaluator.evaluateBestScore(hands[0]);
+                    int second = HandEvaluator.evaluateBestScore(hands[1]);
+                    sum += first > second ? 1 : first == second ? 0.5 : 0;
+                    count++;
+                }
+            return checkdown(sum / count, count);
+        }
+
+        private Checkdown checkdown(double firstShare, long runouts) {
             var shares = Map.of(firstToAct, firstShare, secondToAct, 1 - firstShare);
             Map<Seat, Double> utilities = new LinkedHashMap<>();
             for (Seat seat : Seat.values())

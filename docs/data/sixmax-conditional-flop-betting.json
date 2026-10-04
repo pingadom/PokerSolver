@@ -1,0 +1,996 @@
+{
+  "schemaVersion" : "six-max-conditional-flop-betting-audit/v1",
+  "sourcePackHash" : "2ce2adc9a9cb69179e36f6de3d223b40542d9588da61c58ff66fc9d241b57dcf",
+  "sourceSpotHash" : "c3cf59c229ccdb921b3be5bb50c8bfa2ab32ecbcae9c1cb302f20db4b221d838",
+  "sourceContinuationModel" : "MANDATORY_CHECKDOWN",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "sourceNashConvBb" : 0.02110264048518399,
+  "interpretation" : "Separate heads-up flop games conditional on a fixed six-seat preflop policy; one flop bet then mandatory turn/river checkdown. Conditional best-response gaps do not certify the source preflop policy under betting continuation, other boards, or a six-player connected equilibrium.",
+  "report" : {
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "continuationModel" : "ONE_FLOP_BET_THEN_MANDATORY_CHECKDOWN",
+    "flopSeed" : 711,
+    "iterations" : 5000,
+    "requestedBetPotFraction" : 0.5,
+    "sourceHeadsUpContinuationProbability" : 0.016778332255490934,
+    "sourceReachedHeadsUpHistories" : 191,
+    "maximumConditionalBestResponseGapBb" : 7.066006921796486E-7,
+    "examples" : [ {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "call"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "preflopReachProbability" : 0.016521512208733498,
+      "board" : [ "3c", "7s", "9d" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "UTG",
+      "potBb" : 2.5,
+      "remainingStackBb" : 99.0,
+      "betBb" : 1.25,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : 1.2500000292734246,
+        "secondBestResponse" : 1.2499999602020142,
+        "profileValue" : 1.2499999894754446,
+        "gap" : 6.907141036904818E-8
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : -0.7409909909909909,
+        "HJ" : 0.0,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : 1.2409909909909906
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : -0.9999999894754446,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : 1.4999999894754446
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.2590089984844537,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : 0.2590089984844539
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "BB",
+        "heroCombo" : "9h 9s",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.999999846345168,
+          "check" : 1.5365483194995389E-7
+        },
+        "actionEvBb" : {
+          "bet" : 1.5000000292734246,
+          "check" : 1.2409910594246196
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|BB:UTG|pre:UTG:call;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:check|board:3c 7s 9d|pot:2.5|stack:99.0|bet:1.25|seat:BB|own:9h 9s|actions:" : {
+            "bet" : 0.999999846345168,
+            "check" : 1.5365483194995389E-7
+          },
+          "0:six-seat-flop|BB:UTG|pre:UTG:call;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:check|board:3c 7s 9d|pot:2.5|stack:99.0|bet:1.25|seat:BB|own:9h 9s|actions:kb" : {
+            "call" : 0.8698641588677614,
+            "fold" : 0.1301358411322387
+          },
+          "1:six-seat-flop|BB:UTG|pre:UTG:call;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:check|board:3c 7s 9d|pot:2.5|stack:99.0|bet:1.25|seat:UTG|own:Ah As|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|BB:UTG|pre:UTG:call;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:check|board:3c 7s 9d|pot:2.5|stack:99.0|bet:1.25|seat:UTG|own:Ah As|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "preflopReachProbability" : 2.0627000390163036E-4,
+      "board" : [ "5s", "8c", "Qc" ],
+      "flopProbability" : 5.0607136653391746E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "UTG",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.25,
+      "posteriorJointDeals" : 1,
+      "exactRunouts" : 666,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : -3.2499998981284826,
+        "secondBestResponse" : -3.250000528822358,
+        "profileValue" : -3.2500004269507663,
+        "gap" : 6.306938753475322E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 2.6509009009009006,
+        "HJ" : 0.0,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : -2.150900900900901
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : 3.5000004269507663,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : -3.0000004269507663
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : 0.8490995260498657,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : -0.8490995260498653
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "BB",
+        "heroCombo" : "9h 9s",
+        "history" : [ ],
+        "compatibleJointDeals" : 1,
+        "actionFrequency" : {
+          "bet" : 3.2078357363839135E-7,
+          "check" : 0.9999996792164264
+        },
+        "actionEvBb" : {
+          "bet" : -4.551801479794132,
+          "check" : -2.999999929158319
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|BB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:call|board:5s 8c Qc|pot:6.5|stack:97.0|bet:3.25|seat:BB|own:9h 9s|actions:" : {
+            "bet" : 3.2078357363839135E-7,
+            "check" : 0.9999996792164264
+          },
+          "0:six-seat-flop|BB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:call|board:5s 8c Qc|pot:6.5|stack:97.0|bet:3.25|seat:BB|own:9h 9s|actions:kb" : {
+            "call" : 1.9996007214230684E-8,
+            "fold" : 0.9999999800039928
+          },
+          "1:six-seat-flop|BB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:call|board:5s 8c Qc|pot:6.5|stack:97.0|bet:3.25|seat:UTG|own:Ah As|actions:b" : {
+            "call" : 0.9999999600079984,
+            "fold" : 3.9992001599680065E-8
+          },
+          "1:six-seat-flop|BB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:fold;BB:call|board:5s 8c Qc|pot:6.5|stack:97.0|bet:3.25|seat:UTG|own:Ah As|actions:k" : {
+            "bet" : 0.9999998800239952,
+            "check" : 1.199760047990402E-7
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 3.7227489579870637E-5,
+      "board" : [ "2s", "3c", "5s" ],
+      "flopProbability" : 5.060713665339166E-5,
+      "firstToAct" : "SB",
+      "secondToAct" : "UTG",
+      "potBb" : 7.0,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.5,
+      "posteriorJointDeals" : 1,
+      "exactRunouts" : 666,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : -3.4999999110988615,
+        "secondBestResponse" : -3.5000006176995537,
+        "profileValue" : -3.5000005287983322,
+        "gap" : 7.066006921796486E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 3.2590090090090085,
+        "HJ" : 0.0,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -2.259009009009009,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : 4.000000528798332,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -3.0000005287983322,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : 0.7409915197893238,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.7409915197893233,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "SB",
+        "heroCombo" : "Th Ts",
+        "history" : [ ],
+        "compatibleJointDeals" : 1,
+        "actionFrequency" : {
+          "bet" : 2.860961884890834E-7,
+          "check" : 0.9999997139038116
+        },
+        "actionEvBb" : {
+          "bet" : -5.018017657369427,
+          "check" : -2.999999951451158
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|SB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:call;BB:fold|board:2s 3c 5s|pot:7.0|stack:97.0|bet:3.5|seat:SB|own:Th Ts|actions:" : {
+            "bet" : 2.860961884890834E-7,
+            "check" : 0.9999997139038116
+          },
+          "0:six-seat-flop|SB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:call;BB:fold|board:2s 3c 5s|pot:7.0|stack:97.0|bet:3.5|seat:SB|own:Th Ts|actions:kb" : {
+            "call" : 1.999600652062128E-8,
+            "fold" : 0.9999999800039935
+          },
+          "1:six-seat-flop|SB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:call;BB:fold|board:2s 3c 5s|pot:7.0|stack:97.0|bet:3.5|seat:UTG|own:Ah As|actions:b" : {
+            "call" : 0.9999999600079984,
+            "fold" : 3.9992001599680065E-8
+          },
+          "1:six-seat-flop|SB:UTG|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:fold;SB:call;BB:fold|board:2s 3c 5s|pot:7.0|stack:97.0|bet:3.5|seat:UTG|own:Ah As|actions:k" : {
+            "bet" : 0.9999998800239952,
+            "check" : 1.199760047990402E-7
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 7.6294640691791E-6,
+      "board" : [ "2s", "5d", "Tc" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "firstToAct" : "UTG",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.75,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 6,
+      "bestResponse" : {
+        "firstBestResponse" : -0.5482260390236178,
+        "secondBestResponse" : -0.5482263598695667,
+        "profileValue" : -0.548226113864065,
+        "gap" : 3.208459489201232E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 1.0804915180909447,
+        "HJ" : 0.0,
+        "CO" : 0.0,
+        "BTN" : 0.4195084819090549,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : 0.20177388613593505,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : 1.298226113864065,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.8787176319550096,
+        "HJ" : -0.0,
+        "CO" : -0.0,
+        "BTN" : 0.8787176319550101,
+        "SB" : 0.0,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "UTG",
+        "heroCombo" : "Ah As",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.9999994326047139,
+          "check" : 5.673952861055903E-7
+        },
+        "actionEvBb" : {
+          "bet" : 0.20177396097638223,
+          "check" : 0.06987218269005346
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:" : {
+            "bet" : 0.9999994326047139,
+            "check" : 5.673952861055903E-7
+          },
+          "0:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:kb" : {
+            "call" : 0.728050143346133,
+            "fold" : 0.27194985665386695
+          },
+          "1:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:5h 5s|actions:b" : {
+            "call" : 0.9999999600079983,
+            "fold" : 3.999200159968007E-8
+          },
+          "1:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:5h 5s|actions:k" : {
+            "bet" : 0.9999998800239952,
+            "check" : 1.1997600479904022E-7
+          },
+          "1:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:Jh Js|actions:b" : {
+            "call" : 3.999200159968006E-8,
+            "fold" : 0.9999999600079985
+          },
+          "1:six-seat-flop|UTG:BTN|pre:UTG:raise:3.0;HJ:fold;CO:fold;BTN:call;SB:fold;BB:fold|board:2s 5d Tc|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:Jh Js|actions:k" : {
+            "bet" : 0.24279847680726177,
+            "check" : 0.7572015231927381
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 3.7679636723799876E-6,
+      "board" : [ "7d", "9d", "Jc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "UTG",
+      "secondToAct" : "CO",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.75,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : 3.7500000788130654,
+        "secondBestResponse" : 3.7499999051498056,
+        "profileValue" : 3.7499999839628773,
+        "gap" : 1.736632597726384E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 3.6103603603603602,
+        "HJ" : 0.0,
+        "CO" : -2.1103603603603602,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : 4.499999983962877,
+        "HJ" : -0.0,
+        "CO" : -2.9999999839628773,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : 0.889639623602517,
+        "HJ" : -0.0,
+        "CO" : -0.889639623602517,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "UTG",
+        "heroCombo" : "Ah As",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.9999998933835793,
+          "check" : 1.0661642075055704E-7
+        },
+        "actionEvBb" : {
+          "bet" : 4.500000078813065,
+          "check" : 3.610360490428578
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|UTG:CO|pre:UTG:raise:3.0;HJ:fold;CO:call;BTN:fold;SB:fold;BB:fold|board:7d 9d Jc|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:" : {
+            "bet" : 0.9999998933835793,
+            "check" : 1.0661642075055704E-7
+          },
+          "0:six-seat-flop|UTG:CO|pre:UTG:raise:3.0;HJ:fold;CO:call;BTN:fold;SB:fold;BB:fold|board:7d 9d Jc|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:kb" : {
+            "call" : 0.8124491456468673,
+            "fold" : 0.18755085435313265
+          },
+          "1:six-seat-flop|UTG:CO|pre:UTG:raise:3.0;HJ:fold;CO:call;BTN:fold;SB:fold;BB:fold|board:7d 9d Jc|pot:7.5|stack:97.0|bet:3.75|seat:CO|own:Qh Qs|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|UTG:CO|pre:UTG:raise:3.0;HJ:fold;CO:call;BTN:fold;SB:fold;BB:fold|board:7d 9d Jc|pot:7.5|stack:97.0|bet:3.75|seat:CO|own:Qh Qs|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 1.8356603095923075E-6,
+      "board" : [ "3c", "4h", "8s" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "UTG",
+      "secondToAct" : "HJ",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.75,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : 3.7500000896217154,
+        "secondBestResponse" : 3.749999875787285,
+        "profileValue" : 3.749999965409021,
+        "gap" : 2.138344301627626E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 3.7454954954954953,
+        "HJ" : -2.2454954954954953,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : 4.499999965409021,
+        "HJ" : -2.999999965409021,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : 0.7545044699135257,
+        "HJ" : -0.7545044699135257,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "UTG",
+        "heroCombo" : "Ah As",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.9999998353718043,
+          "check" : 1.6462819576721322E-7
+        },
+        "actionEvBb" : {
+          "bet" : 4.500000089621715,
+          "check" : 3.745495712932729
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|UTG:HJ|pre:UTG:raise:3.0;HJ:call;CO:fold;BTN:fold;SB:fold;BB:fold|board:3c 4h 8s|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:" : {
+            "bet" : 0.9999998353718043,
+            "check" : 1.6462819576721322E-7
+          },
+          "0:six-seat-flop|UTG:HJ|pre:UTG:raise:3.0;HJ:call;CO:fold;BTN:fold;SB:fold;BB:fold|board:3c 4h 8s|pot:7.5|stack:97.0|bet:3.75|seat:UTG|own:Ah As|actions:kb" : {
+            "call" : 0.8785384198213853,
+            "fold" : 0.12146158017861461
+          },
+          "1:six-seat-flop|UTG:HJ|pre:UTG:raise:3.0;HJ:call;CO:fold;BTN:fold;SB:fold;BB:fold|board:3c 4h 8s|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|UTG:HJ|pre:UTG:raise:3.0;HJ:call;CO:fold;BTN:fold;SB:fold;BB:fold|board:3c 4h 8s|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 6.160518469234327E-9,
+      "board" : [ "4s", "9d", "Ac" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "HJ",
+      "secondToAct" : "CO",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.75,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : 3.750000089621715,
+        "secondBestResponse" : 3.7499998757872848,
+        "profileValue" : 3.749999965409021,
+        "gap" : 2.138344301627626E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 0.0,
+        "HJ" : 3.7454954954954953,
+        "CO" : -2.2454954954954953,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : -0.0,
+        "HJ" : 4.499999965409021,
+        "CO" : -2.999999965409021,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.0,
+        "HJ" : 0.7545044699135257,
+        "CO" : -0.7545044699135257,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "HJ",
+        "heroCombo" : "Kh Ks",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.9999998353718043,
+          "check" : 1.646281957672132E-7
+        },
+        "actionEvBb" : {
+          "bet" : 4.5000000896217145,
+          "check" : 3.7454957129327284
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|HJ:CO|pre:UTG:fold;HJ:raise:3.0;CO:call;BTN:fold;SB:fold;BB:fold|board:4s 9d Ac|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:" : {
+            "bet" : 0.9999998353718043,
+            "check" : 1.646281957672132E-7
+          },
+          "0:six-seat-flop|HJ:CO|pre:UTG:fold;HJ:raise:3.0;CO:call;BTN:fold;SB:fold;BB:fold|board:4s 9d Ac|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:kb" : {
+            "call" : 0.8785384198213854,
+            "fold" : 0.12146158017861464
+          },
+          "1:six-seat-flop|HJ:CO|pre:UTG:fold;HJ:raise:3.0;CO:call;BTN:fold;SB:fold;BB:fold|board:4s 9d Ac|pot:7.5|stack:97.0|bet:3.75|seat:CO|own:Qh Qs|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|HJ:CO|pre:UTG:fold;HJ:raise:3.0;CO:call;BTN:fold;SB:fold;BB:fold|board:4s 9d Ac|pot:7.5|stack:97.0|bet:3.75|seat:CO|own:Qh Qs|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 6.160518469234327E-9,
+      "board" : [ "3c", "3h", "9c" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "HJ",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.75,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 6,
+      "bestResponse" : {
+        "firstBestResponse" : 3.750000089621715,
+        "secondBestResponse" : 3.7499998757872848,
+        "profileValue" : 3.749999965409021,
+        "gap" : 2.138344301627626E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 0.0,
+        "HJ" : 3.7454954954954953,
+        "CO" : 0.0,
+        "BTN" : -2.2454954954954953,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : -0.0,
+        "HJ" : 4.499999965409021,
+        "CO" : -0.0,
+        "BTN" : -2.999999965409021,
+        "SB" : -0.5,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.0,
+        "HJ" : 0.7545044699135257,
+        "CO" : -0.0,
+        "BTN" : -0.7545044699135257,
+        "SB" : 0.0,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "HJ",
+        "heroCombo" : "Kh Ks",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 0.9999998353718043,
+          "check" : 1.646281957672132E-7
+        },
+        "actionEvBb" : {
+          "bet" : 4.5000000896217145,
+          "check" : 3.7454957129327284
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:" : {
+            "bet" : 0.9999998353718043,
+            "check" : 1.646281957672132E-7
+          },
+          "0:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:HJ|own:Kh Ks|actions:kb" : {
+            "call" : 0.8785384198213854,
+            "fold" : 0.12146158017861464
+          },
+          "1:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:5h 5s|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:5h 5s|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          },
+          "1:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:Jh Js|actions:b" : {
+            "call" : 3.9992001599680065E-8,
+            "fold" : 0.9999999600079984
+          },
+          "1:six-seat-flop|HJ:BTN|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:call;SB:fold;BB:fold|board:3c 3h 9c|pot:7.5|stack:97.0|bet:3.75|seat:BTN|own:Jh Js|actions:k" : {
+            "bet" : 1.199760047990402E-7,
+            "check" : 0.9999998800239952
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "preflopReachProbability" : 6.160518469234327E-9,
+      "board" : [ "4c", "6d", "8c" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "SB",
+      "secondToAct" : "HJ",
+      "potBb" : 7.0,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.5,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : -3.4999998978582663,
+        "secondBestResponse" : -3.5000005895679998,
+        "profileValue" : -3.5000004874261847,
+        "gap" : 6.91709733491308E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 0.0,
+        "HJ" : 3.148648648648649,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -2.1486486486486487,
+        "BB" : -1.0
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : -0.0,
+        "HJ" : 4.000000487426185,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -3.0000004874261847,
+        "BB" : -1.0
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.0,
+        "HJ" : 0.8513518387775356,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.8513518387775361,
+        "BB" : 0.0
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "SB",
+        "heroCombo" : "Th Ts",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 3.0803431485127147E-7,
+          "check" : 0.9999996919656852
+        },
+        "actionEvBb" : {
+          "bet" : -4.79729694547577,
+          "check" : -2.9999999337970307
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|SB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:call;BB:fold|board:4c 6d 8c|pot:7.0|stack:97.0|bet:3.5|seat:SB|own:Th Ts|actions:" : {
+            "bet" : 3.0803431485127147E-7,
+            "check" : 0.9999996919656852
+          },
+          "0:six-seat-flop|SB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:call;BB:fold|board:4c 6d 8c|pot:7.0|stack:97.0|bet:3.5|seat:SB|own:Th Ts|actions:kb" : {
+            "call" : 1.9996006959296336E-8,
+            "fold" : 0.999999980003993
+          },
+          "1:six-seat-flop|SB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:call;BB:fold|board:4c 6d 8c|pot:7.0|stack:97.0|bet:3.5|seat:HJ|own:Kh Ks|actions:b" : {
+            "call" : 0.9999999600079984,
+            "fold" : 3.9992001599680065E-8
+          },
+          "1:six-seat-flop|SB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:call;BB:fold|board:4c 6d 8c|pot:7.0|stack:97.0|bet:3.5|seat:HJ|own:Kh Ks|actions:k" : {
+            "bet" : 0.9999998800239952,
+            "check" : 1.199760047990402E-7
+          }
+        }
+      }
+    }, {
+      "preflopHistory" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "preflopReachProbability" : 6.160518469234327E-9,
+      "board" : [ "3c", "Jd", "Tc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "betBb" : 3.25,
+      "posteriorJointDeals" : 2,
+      "exactRunouts" : 1332,
+      "informationSets" : 4,
+      "bestResponse" : {
+        "firstBestResponse" : -3.2499998934447345,
+        "secondBestResponse" : -3.2500005148975792,
+        "profileValue" : -3.25000040834224,
+        "gap" : 6.214528447401335E-7
+      },
+      "checkdownUtilitiesBb" : {
+        "UTG" : 0.0,
+        "HJ" : 2.611861861861862,
+        "CO" : 0.0,
+        "BTN" : 0.0,
+        "SB" : -0.5,
+        "BB" : -2.111861861861862
+      },
+      "solvedUtilitiesBb" : {
+        "UTG" : -0.0,
+        "HJ" : 3.50000040834224,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : -0.5,
+        "BB" : -3.00000040834224
+      },
+      "changeFromCheckdownBb" : {
+        "UTG" : -0.0,
+        "HJ" : 0.8881385464803779,
+        "CO" : -0.0,
+        "BTN" : -0.0,
+        "SB" : 0.0,
+        "BB" : -0.8881385464803779
+      },
+      "firstPlayerDecisions" : [ {
+        "actingSeat" : "BB",
+        "heroCombo" : "9h 9s",
+        "history" : [ ],
+        "compatibleJointDeals" : 2,
+        "actionFrequency" : {
+          "bet" : 3.2938941742148573E-7,
+          "check" : 0.9999996706105825
+        },
+        "actionEvBb" : {
+          "bet" : -4.473723404838553,
+          "check" : -2.999999922913321
+        }
+      } ],
+      "solution" : {
+        "iterations" : 5000,
+        "strategy" : {
+          "0:six-seat-flop|BB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:fold;BB:call|board:3c Jd Tc|pot:6.5|stack:97.0|bet:3.25|seat:BB|own:9h 9s|actions:" : {
+            "bet" : 3.2938941742148573E-7,
+            "check" : 0.9999996706105825
+          },
+          "0:six-seat-flop|BB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:fold;BB:call|board:3c Jd Tc|pot:6.5|stack:97.0|bet:3.25|seat:BB|own:9h 9s|actions:kb" : {
+            "call" : 1.9996007386313256E-8,
+            "fold" : 0.9999999800039926
+          },
+          "1:six-seat-flop|BB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:fold;BB:call|board:3c Jd Tc|pot:6.5|stack:97.0|bet:3.25|seat:HJ|own:Kh Ks|actions:b" : {
+            "call" : 0.9999999600079984,
+            "fold" : 3.9992001599680065E-8
+          },
+          "1:six-seat-flop|BB:HJ|pre:UTG:fold;HJ:raise:3.0;CO:fold;BTN:fold;SB:fold;BB:call|board:3c Jd Tc|pot:6.5|stack:97.0|bet:3.25|seat:HJ|own:Kh Ks|actions:k" : {
+            "bet" : 0.9999998800239952,
+            "check" : 1.199760047990402E-7
+          }
+        }
+      }
+    } ]
+  }
+}
