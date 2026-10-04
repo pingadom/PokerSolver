@@ -1,27 +1,103 @@
 package com.pokerlab.solver;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SplittableRandom;
 
 /**
- * Alternating full-tree regret matching for small multi-player research games. Unlike two-player
- * zero-sum CFR, a small regret value here does not certify a Nash equilibrium.
+ * Alternating exhaustive or chance-sampled regret matching for bounded multi-player research games.
+ * Unlike two-player zero-sum CFR, a small regret value here does not certify a Nash equilibrium.
  */
 public final class MultiPlayerCfrSolver<S> {
+    public enum ChanceMode {
+        EXHAUSTIVE,
+        SAMPLED,
+        SAMPLED_AFTER_ROOT,
+        /** Enumerate chance depths 0 and 1; connected poker uses private deals then flops. */
+        SAMPLED_RUNOUTS
+    }
+
+    public record Statistics(
+            long visitedNodes,
+            long terminalNodes,
+            long sampledChanceNodes,
+            long baselineCorrections) {}
+
+    record Sample<T>(T state, double importanceRatio) {}
+
     private static final double CHANCE_TOLERANCE = 1e-9;
     private final MultiPlayerCfrGame<S> game;
     private final CfrSolver.Variant variant;
     private final int players;
+    private final ChanceMode chanceMode;
+    private final long chanceSeed;
+    private final double uniformMixture;
+    private final boolean chanceBaselineEnabled;
+    private final boolean linearWeighting;
+    private final List<Double> passChanceDraws = new ArrayList<>();
+    private SplittableRandom chanceRandom;
+    private long visitedNodes, terminalNodes, sampledChanceNodes, baselineCorrections;
     private final Map<String, InformationSet> informationSets = new LinkedHashMap<>();
     private final Map<String, double[]> iterationStrategies = new LinkedHashMap<>();
 
     public MultiPlayerCfrSolver(MultiPlayerCfrGame<S> game, CfrSolver.Variant variant) {
+        this(game, variant, ChanceMode.EXHAUSTIVE, 0, 0);
+    }
+
+    /**
+     * Sample chance with proposal q=(1-mixture)*p+mixture/N. Every player action is still
+     * traversed; sampled prefix and suffix likelihood ratios correct regrets, averages and returned
+     * values.
+     */
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            double uniformMixture) {
+        this(game, variant, chanceMode, chanceSeed, uniformMixture, true);
+    }
+
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            double uniformMixture,
+            boolean chanceBaselineEnabled) {
+        this(game, variant, chanceMode, chanceSeed, uniformMixture, chanceBaselineEnabled, false);
+    }
+
+    /** Linear weighting applies to BOTH cumulative regret updates and strategy averaging. */
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            double uniformMixture,
+            boolean chanceBaselineEnabled,
+            boolean linearWeighting) {
         this.game = Objects.requireNonNull(game, "game");
         this.variant = Objects.requireNonNull(variant, "variant");
+        this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
+        this.chanceSeed = chanceSeed;
+        if (!Double.isFinite(uniformMixture) || uniformMixture < 0 || uniformMixture > 0.95)
+            throw new IllegalArgumentException("Uniform proposal mixture must be in [0, 0.95]");
+        if (chanceMode == ChanceMode.EXHAUSTIVE && uniformMixture != 0)
+            throw new IllegalArgumentException("Exhaustive traversal has no sampling proposal");
+        if (chanceMode != ChanceMode.EXHAUSTIVE && variant != CfrSolver.Variant.VANILLA)
+            throw new IllegalArgumentException("Chance sampling supports vanilla CFR only");
+        this.uniformMixture = uniformMixture;
+        this.chanceBaselineEnabled = chanceBaselineEnabled;
+        if (linearWeighting && variant != CfrSolver.Variant.VANILLA)
+            throw new IllegalArgumentException(
+                    "Linear weighting requires unclipped vanilla regret matching");
+        this.linearWeighting = linearWeighting;
         this.players = game.playerCount();
         if (players < 2 || players > 6)
             throw new IllegalArgumentException("Expected two to six players");
@@ -30,12 +106,17 @@ public final class MultiPlayerCfrSolver<S> {
     public CfrSolution solve(int iterations) {
         if (iterations < 1) throw new IllegalArgumentException("iterations must be positive");
         informationSets.clear();
+        chanceRandom = new SplittableRandom(chanceSeed);
+        visitedNodes = terminalNodes = sampledChanceNodes = baselineCorrections = 0;
         for (int iteration = 1; iteration <= iterations; iteration++) {
             for (int target = 0; target < players; target++) {
                 iterationStrategies.clear();
+                // A fresh world for each alternating pass is independent of earlier players'
+                // updates. Within a pass, depth quantiles are shared across action branches only.
+                passChanceDraws.clear();
                 double[] reach = new double[players];
                 Arrays.fill(reach, 1);
-                traverse(game.initialState(), reach, 1, target, iteration);
+                traverse(game.initialState(), reach, 1, target, iteration, 0);
                 if (variant == CfrSolver.Variant.CFR_PLUS)
                     informationSets.values().forEach(InformationSet::clipNegativeRegrets);
             }
@@ -45,9 +126,20 @@ public final class MultiPlayerCfrSolver<S> {
         return new CfrSolution(iterations, Map.copyOf(average));
     }
 
+    public Statistics statistics() {
+        return new Statistics(visitedNodes, terminalNodes, sampledChanceNodes, baselineCorrections);
+    }
+
     private double traverse(
-            S state, double[] reach, double chanceReach, int target, int iterationWeight) {
+            S state,
+            double[] reach,
+            double chanceReach,
+            int target,
+            int iterationWeight,
+            int chanceDepth) {
+        visitedNodes++;
         if (game.isTerminal(state)) {
+            terminalNodes++;
             double[] utilities = game.terminalUtilities(state);
             if (utilities == null || utilities.length != players)
                 throw new IllegalArgumentException("Terminal utility count must match players");
@@ -63,6 +155,29 @@ public final class MultiPlayerCfrSolver<S> {
             double sum = outcomes.stream().mapToDouble(ChanceOutcome::probability).sum();
             if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
                 throw new IllegalArgumentException("Chance probabilities must sum to one");
+            if (chanceMode == ChanceMode.SAMPLED
+                    || chanceMode == ChanceMode.SAMPLED_AFTER_ROOT && chanceDepth > 0
+                    || chanceMode == ChanceMode.SAMPLED_RUNOUTS && chanceDepth > 1) {
+                sampledChanceNodes++;
+                while (passChanceDraws.size() <= chanceDepth)
+                    passChanceDraws.add(chanceRandom.nextDouble());
+                var sampled = sample(outcomes, passChanceDraws.get(chanceDepth), uniformMixture);
+                double continuation =
+                        traverse(
+                                sampled.state(),
+                                reach,
+                                chanceReach * sampled.importanceRatio(),
+                                target,
+                                iterationWeight,
+                                chanceDepth + 1);
+                if (sampled.importanceRatio() == 1) return continuation;
+                double baseline =
+                        chanceBaselineEnabled ? game.chanceBaselineUtility(state, target) : 0;
+                if (!Double.isFinite(baseline))
+                    throw new IllegalArgumentException("Non-finite chance baseline");
+                if (baseline != 0) baselineCorrections++;
+                return baseline + sampled.importanceRatio() * (continuation - baseline);
+            }
             double utility = 0;
             for (ChanceOutcome<S> outcome : outcomes)
                 utility +=
@@ -72,7 +187,8 @@ public final class MultiPlayerCfrSolver<S> {
                                         reach,
                                         chanceReach * outcome.probability(),
                                         target,
-                                        iterationWeight);
+                                        iterationWeight,
+                                        chanceDepth + 1);
             return utility;
         }
         if (player < 0 || player >= players)
@@ -102,7 +218,8 @@ public final class MultiPlayerCfrSolver<S> {
                             nextReach,
                             chanceReach,
                             target,
-                            iterationWeight);
+                            iterationWeight,
+                            chanceDepth);
             nodeUtility += strategy[index] * actionUtilities[index];
         }
         if (player == target) {
@@ -115,9 +232,34 @@ public final class MultiPlayerCfrSolver<S> {
                     nodeUtility,
                     counterfactualReach,
                     reach[player] * chanceReach,
-                    variant == CfrSolver.Variant.CFR_PLUS ? iterationWeight : 1);
+                    variant == CfrSolver.Variant.CFR_PLUS || linearWeighting ? iterationWeight : 1,
+                    linearWeighting ? iterationWeight : 1);
         }
         return nodeUtility;
+    }
+
+    /** Package-visible for exact proposal/importance accounting tests. */
+    static <T> Sample<T> sample(List<ChanceOutcome<T>> outcomes, double quantile, double mixture) {
+        if (outcomes.isEmpty()
+                || !Double.isFinite(quantile)
+                || quantile < 0
+                || quantile >= 1
+                || !Double.isFinite(mixture)
+                || mixture < 0
+                || mixture > 0.95)
+            throw new IllegalArgumentException("Invalid chance proposal request");
+        double sum = outcomes.stream().mapToDouble(ChanceOutcome::probability).sum();
+        if (Math.abs(sum - 1) > CHANCE_TOLERANCE)
+            throw new IllegalArgumentException("Chance probabilities must sum to one");
+        double cumulative = 0;
+        for (int i = 0; i < outcomes.size(); i++) {
+            var outcome = outcomes.get(i);
+            double proposal = (1 - mixture) * outcome.probability() + mixture / outcomes.size();
+            cumulative += proposal;
+            if (quantile < cumulative || i == outcomes.size() - 1)
+                return new Sample<>(outcome.state(), outcome.probability() / proposal);
+        }
+        throw new IllegalStateException("Missing proposal outcome");
     }
 
     private static final class InformationSet {
@@ -157,9 +299,11 @@ public final class MultiPlayerCfrSolver<S> {
                 double nodeUtility,
                 double counterfactualReach,
                 double ownReach,
-                int averagingWeight) {
+                int averagingWeight,
+                int regretWeight) {
             for (int index = 0; index < strategy.length; index++) {
-                regret[index] += counterfactualReach * (actionUtilities[index] - nodeUtility);
+                regret[index] +=
+                        counterfactualReach * regretWeight * (actionUtilities[index] - nodeUtility);
                 strategySum[index] += averagingWeight * ownReach * strategy[index];
             }
         }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import SixMaxPreflopTable, { actionTone, PreflopActionValues } from "./SixMaxPreflopTable";
 import PokerActionButton, { PokerDecisionFeedback } from "./PokerActionButton";
 import {
@@ -146,7 +146,8 @@ export default function SixMaxPreflopPage() {
     try { await navigator.clipboard.writeText(window.location.href); setCopied(true); }
     catch { setError("Could not copy the link. You can copy the address from your browser."); }
   }
-  useEffect(() => {
+  // Update shortcuts in the same commit that makes a new decision visible.
+  useLayoutEffect(() => {
     const keys = (event: KeyboardEvent) => {
       if (event.repeat || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey ||
           (event.target instanceof HTMLElement && (event.target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName))) ||

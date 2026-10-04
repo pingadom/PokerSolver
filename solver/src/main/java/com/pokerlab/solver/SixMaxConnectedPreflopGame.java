@@ -17,7 +17,9 @@ import java.util.Objects;
  */
 public final class SixMaxConnectedPreflopGame
         implements MultiPlayerCfrGame<SixMaxConnectedPreflopGame.State> {
-    public static final int MAX_CONNECTED_DEAL_FLOPS = 4;
+    public static final int MAX_CONNECTED_DEAL_FLOPS = 32;
+    public static final int MAX_SELECTED_FLOPS = 8;
+    public static final int MAX_SELECTED_HISTORIES = 4;
 
     public record Selection(
             List<PublicAction> history,
@@ -28,8 +30,8 @@ public final class SixMaxConnectedPreflopGame
         public Selection {
             history = List.copyOf(history);
             flops = flops.stream().map(List::copyOf).toList();
-            if (flops.isEmpty() || flops.size() > 2)
-                throw new IllegalArgumentException("Select one or two flops per history");
+            if (flops.isEmpty() || flops.size() > MAX_SELECTED_FLOPS)
+                throw new IllegalArgumentException("Select 1–8 flops per history");
             for (double bet : new double[] {flopBetBb, turnBetBb, riverBetBb})
                 if (!Double.isFinite(bet) || bet <= 0)
                     throw new IllegalArgumentException(
@@ -101,8 +103,8 @@ public final class SixMaxConnectedPreflopGame
     public SixMaxConnectedPreflopGame(SixMaxPreflopCheckdownGame base, List<Selection> selections) {
         this.base = Objects.requireNonNull(base, "base");
         this.selections = List.copyOf(selections);
-        if (selections.isEmpty() || selections.size() > 2)
-            throw new IllegalArgumentException("Select one or two heads-up histories");
+        if (selections.isEmpty() || selections.size() > MAX_SELECTED_HISTORIES)
+            throw new IllegalArgumentException("Select 1–4 heads-up histories");
         if (base.rakeRule().fraction() > 0 && base.rakeRule().capBb() > 0)
             throw new IllegalArgumentException("Connected continuation does not support rake");
         if (base.maximumTerminalPayoffStandardErrorBb() != 0)
@@ -333,6 +335,16 @@ public final class SixMaxConnectedPreflopGame
         return node.utilities().clone();
     }
 
+    @Override
+    public double chanceBaselineUtility(State state, int player) {
+        if (player < 0 || player >= playerCount())
+            throw new IllegalArgumentException("Invalid baseline player");
+        var node = node(state);
+        if (node.terminal() || node.actor() != -1)
+            throw new IllegalArgumentException("Baseline requires a chance node");
+        return node.utilities() == null ? 0 : node.utilities()[player];
+    }
+
     private Node node(State state) {
         return nodes.computeIfAbsent(
                 state,
@@ -358,7 +370,13 @@ public final class SixMaxConnectedPreflopGame
                             if (actor != -1) actions = base.legalActions(s.preflop());
                         }
                     }
-                    return new Node(terminal, actor, actions, terminal ? settle(s) : null);
+                    double[] values =
+                            terminal
+                                    ? settle(s)
+                                    : s.postflop() == null && base.isTerminal(s.preflop())
+                                            ? base.terminalUtilities(s.preflop())
+                                            : null;
+                    return new Node(terminal, actor, actions, values);
                 });
     }
 

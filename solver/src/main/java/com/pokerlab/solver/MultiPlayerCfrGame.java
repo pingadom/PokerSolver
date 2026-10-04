@@ -24,4 +24,9 @@ public interface MultiPlayerCfrGame<S> {
     S afterAction(S state, String action);
 
     List<ChanceOutcome<S>> chanceOutcomes(S state);
+
+    /** Fixed internal control variate; never a policy feature or a replacement payoff. */
+    default double chanceBaselineUtility(S state, int player) {
+        return 0;
+    }
 }

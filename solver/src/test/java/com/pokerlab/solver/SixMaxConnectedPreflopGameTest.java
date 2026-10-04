@@ -332,11 +332,35 @@ class SixMaxConnectedPreflopGameTest {
         var extra =
                 new SixMaxConnectedPreflopGame.Selection(
                         otherHistory, selection("2h 3h 4h").flops(), 1, 2, 4);
+        var wider =
+                new SixMaxConnectedPreflopGame(
+                        source, List.of(selection("2d 3d 4d", "2c 3c 4c"), extra));
+        assertEquals(2, wider.coverage().size());
+        var boards =
+                java.util.stream.IntStream.range(0, 8)
+                        .mapToObj(
+                                i ->
+                                        List.of(
+                                                Card.parse(i % 2 == 0 ? "2c" : "2d"),
+                                                Card.parse(i / 2 % 2 == 0 ? "3c" : "3d"),
+                                                Card.parse(i / 4 % 2 == 0 ? "4c" : "4d")))
+                        .toList();
+        var first = new SixMaxConnectedPreflopGame.Selection(HISTORY, boards, 1, 2, 4);
+        var second = new SixMaxConnectedPreflopGame.Selection(otherHistory, boards, 1, 2, 4);
+        var thirdHistory =
+                List.of(
+                        new PublicAction(Seat.UTG, "raise:3.0"),
+                        new PublicAction(Seat.HJ, "fold"),
+                        new PublicAction(Seat.CO, "fold"),
+                        new PublicAction(Seat.BTN, "fold"),
+                        new PublicAction(Seat.SB, "fold"),
+                        new PublicAction(Seat.BB, "call"));
+        var third =
+                new SixMaxConnectedPreflopGame.Selection(
+                        thirdHistory, List.of(boards.getFirst()), 1, 2, 4);
         assertThrows(
                 IllegalArgumentException.class,
-                () ->
-                        new SixMaxConnectedPreflopGame(
-                                source, List.of(selection("2d 3d 4d", "2c 3c 4c"), extra)));
+                () -> new SixMaxConnectedPreflopGame(source, List.of(first, second, third)));
     }
 
     @Test
@@ -404,5 +428,23 @@ class SixMaxConnectedPreflopGameTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new SixMaxConnectedPreflopGame(inconsistent, List.of(selection("2d 3d 4d"))));
+    }
+
+    @Test
+    void chanceControlVariateUsesExactPreflopCheckdownWithoutBecomingATerminal() {
+        var game = game();
+        var selected = game.replayPreflop(HISTORY, 0);
+        var expected = game.source().terminalUtilities(selected.preflop());
+        for (int seat = 0; seat < 6; seat++)
+            assertEquals(expected[seat], game.chanceBaselineUtility(selected, seat), 1e-12);
+        assertFalse(game.isTerminal(selected));
+        assertThrows(IllegalArgumentException.class, () -> game.terminalUtilities(selected));
+        assertThrows(IllegalArgumentException.class, () -> game.chanceBaselineUtility(selected, 6));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        game.chanceBaselineUtility(
+                                game.chanceOutcomes(selected).getFirst().state(), 0));
+        assertEquals(0, game.chanceBaselineUtility(game.initialState(), 0));
     }
 }
