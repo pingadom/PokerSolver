@@ -150,7 +150,8 @@ public final class SixMaxPrivateSupportAudit {
             var state = root.state();
             boolean positive = true;
             for (var action : selection.history()) {
-                if (MultiPlayerStrategyEvaluator.probability(source, policy, state, action.action()) == 0) {
+                if (MultiPlayerStrategyEvaluator.probability(source, policy, state, action.action())
+                        == 0) {
                     positive = false;
                     break;
                 }

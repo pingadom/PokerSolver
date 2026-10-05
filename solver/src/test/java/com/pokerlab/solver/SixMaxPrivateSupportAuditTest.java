@@ -195,9 +195,16 @@ class SixMaxPrivateSupportAuditTest {
             for (var action : selection.history()) {
                 String key = base.currentPlayer(state) + ":" + base.informationSet(state);
                 var legal = base.legalActions(state);
-                String other = legal.stream().filter(a -> !a.equals(action.action())).findFirst().orElseThrow();
+                String other =
+                        legal.stream()
+                                .filter(a -> !a.equals(action.action()))
+                                .findFirst()
+                                .orElseThrow();
                 var row = new LinkedHashMap<String, Double>();
-                for (var name : legal) row.put(name, name.equals(action.action()) ? 1e-100 : name.equals(other) ? 1.0 : 0.0);
+                for (var name : legal)
+                    row.put(
+                            name,
+                            name.equals(action.action()) ? 1e-100 : name.equals(other) ? 1.0 : 0.0);
                 rows.put(key, row);
                 state = base.afterAction(state, action.action());
             }
@@ -208,6 +215,8 @@ class SixMaxPrivateSupportAuditTest {
         assertEquals(0, board.reachedPhysicalFlopProbability());
         assertEquals(8, board.reachedJointDeals());
         assertEquals(6, board.reachedMarginals().size());
-        for (var marginal : board.reachedMarginals().values()) assertEquals(1, marginal.values().stream().mapToDouble(Double::doubleValue).sum(), 1e-12);
+        for (var marginal : board.reachedMarginals().values())
+            assertEquals(
+                    1, marginal.values().stream().mapToDouble(Double::doubleValue).sum(), 1e-12);
     }
 }

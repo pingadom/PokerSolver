@@ -35,6 +35,8 @@ The second history differs from the preceding four-deal study because the change
 - Separate counterfactual and reached seat marginals, with an empty reached distribution when a history or board has zero reach. Positive history likelihoods that underflow in the displayed probability still retain log-normalized private beliefs.
 - Which folded seats remain uncertain, and distinct root information-set counts for the two active players.
 
+The complete connected policy has 245,104 rows: 9,264 preflop and 235,840 postflop. Initial checkpoints for the two seeds are approximately 65 MiB, within the existing 128 MiB loading cap. Hidden-world variation is merged at own-hand/public-state information sets. These files are smaller than the preceding four-deal checkpoints because this study selects two physical betting flops instead of four; this is not a general compression result.
+
 The source audit describes the source policy's reached ranges. The retained audit describes the final retained connected policy, including a rejected candidate's unchanged input. Each report binds its own policy hash. The alternating-study schema is now `six-max-alternating-continuation-study/v2`; committed v1 reports remain readable and simply have no private-support fields.
 
 Marginals are descriptive. Multiplying them would lose physical-card correlations and action likelihoods. Counterfactual support preserves deals with zero policy reach so future preflop deviations are still evaluated. A physical flop has probability 1/9,880 per compatible six-seat deal, not equal probability among the selected boards.
@@ -53,7 +55,32 @@ $env:MAVEN_OPTS = '-Xmx5g'
 mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxAlternatingContinuationStudyMain' '-Dexec.args=docs/data/sixmax-eight-deal-source-pack.json .local/sixmax-eight-deal-plan.json .local/sixmax-eight-deal-policy-711.json 711 500 300 500 300 1 2 711 1 0.05 0.000001 --plan-only'
 ```
 
+To independently regenerate the exact source using its fixed artifact timestamp:
+
+```powershell
+mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.GenerateSixMaxPreflopPack' '-Dexec.args=exact docs/data/sixmax-eight-deal-spot.json .local/sixmax-eight-deal-regenerated-source.json 500 2026-10-05T18:30:59Z'
+```
+
 Plan-only computes cost and source range diagnostics without training or creating a policy checkpoint. Remove `--plan-only` and choose a separate report path to execute the declared joint training, initial refinement and one whole quality-gated round. Complete policy checkpoints belong in ignored `.local/`; compact audit evidence belongs in `docs/data/`.
+
+## Paired whole-round evidence
+
+The [seed 711 report](data/sixmax-eight-deal-alternating-seed-711.json) and [seed 712 report](data/sixmax-eight-deal-alternating-seed-712.json) use the identical declared eight-deal tree, 500 joint / 300 initial postflop iterations, and one whole round of 500 preflop / 300 postflop iterations. Both accept the candidate and stop at `ROUND_LIMIT_REACHED`.
+
+| Seed | Initial parent NashConv (bb) | Accepted parent NashConv (bb) | Initial maximum conditional gap (bb) | Accepted maximum conditional gap (bb) |
+| --- | ---: | ---: | ---: | ---: |
+| 711 | 0.017177689 | 0.009732879 | 0.004145645 | 0.004706361 |
+| 712 | 0.016977827 | 0.009754979 | 0.002879975 | 0.004021085 |
+
+Each candidate passes the declared 0.05bb conditional target and improves its own same-game parent score by more than 0.000001bb. Conditional gaps increase relative to the initial policies while staying below the target; this is not an improvement in every quality metric. The intermediate changed-range conditional gaps are 0.157785538bb and 0.133394836bb, so the final postflop re-solve is necessary before acceptance.
+
+Every preflop stage visits 307,971,000 states and 162,336,000 terminals with exhaustive chance and no sampling corrections. The frozen projection preserves sixteen literal utility vectors, one for every selected history and original private deal. Each final checkpoint preserves all 245,104 policy rows and matches the accepted policy hash; final files are approximately 65.35/65.37 MiB. Initial sampled traversal visits 232,018/233,098 rows; explicit completion supplies 13,086/12,006 missing rows before conditional refinement. Completion is recorded, not treated as evidence that those sampled rows were learned.
+
+The complete local checkpoints retain accepted policy hashes `957bd8a1f8fc9e9e83872a089baa0f2dbcf400cf5dd8416fd734f70960f23e67` and `50e6794f2f858e5776513ad1f8d6ce84f4857ecfb90faeb7f4d8adde878daa30`. Committed reports contain audit evidence, not those full strategies. Tests independently reconstruct source selection and private support, recompute recorded gate decisions, verify policy hash chains and traversal budgets, and match retained range reach to the parent audit. They do not repeat the long connected training runs in CI.
+
+The range diagnostics expose a significant coverage limit: at both selected histories the reached cutoff marginal is approximately **99.9994476% Ah Kh / 0.0005524% Qh Th**, despite its 50/50 original prior. The source and retained marginals reproduce this skew. Eight nominal worlds therefore do not provide eight equally represented reached worlds. Both selected histories also have the same active seats, BTN and BB. Broader coverage should select different active-seat pairs and require material reached hand mass, while retaining all counterfactual support. The full six-seat parent audit still accounts for every player's preflop deviations.
+
+The older standalone exact-versus-restricted public-chance comparison now also accepts up to eight posterior deals. A bounded regression exercises all eight hands, checks the literal tree size and recovers exact physical checkdown values; the alternating workflow above supplies the whole-parent training evidence.
 
 ## Remaining scope
 

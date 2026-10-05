@@ -100,7 +100,7 @@ This command requires the **round-two** checkpoint. The in-place resume advances
 
 Tests independently re-evaluate retained policies, verify accepted-round hash chains and persistence callbacks, and check that conditional failures and plateaus stop after one rejected attempt. Checkpoint tests cover deterministic round trips, strict parsing, provenance/hash failures, missing policy rows, oversized input and preservation on failed writes. CLI tests cover planning, source/output alias protection, baseline failure before mutation, resume without initial training and identical resumed decisions.
 
-The solver still uses four physical private deals in the wider fixture, two selected heads-up histories, sparse physical betting flops, one requested bet size per street, no postflop raises, no multiway postflop betting and no rake. Most boards retain mandatory checkdown. A passing round is a measured improvement in that finite game. The gates do not establish a safe subgame-solving theorem or multiplayer convergence, and do not admit a policy to the trainer. Broader private and board coverage, richer betting and realistic cash assumptions remain the next model gates.
+The measured fixtures above use four physical private deals, two selected heads-up histories, sparse physical betting flops, one requested bet size per street, no postflop raises, no multiway postflop betting and no rake. Most boards retain mandatory checkdown. A passing round is a measured improvement in that finite game. The gates do not establish a safe subgame-solving theorem or multiplayer convergence, and do not admit a policy to the trainer. Broader private and board coverage, richer betting and realistic cash assumptions remain the next model gates.
 
 ## Private-support follow-up
 

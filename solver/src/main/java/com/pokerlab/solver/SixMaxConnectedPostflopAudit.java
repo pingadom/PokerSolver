@@ -112,9 +112,9 @@ public final class SixMaxConnectedPostflopAudit {
         var examples = new ArrayList<Example>();
         double maxExact = 0, maxRestricted = 0, maxBias = 0;
         for (var selected : previous.examples()) {
-            if (selected.posteriorJointDeals() > 4)
+            if (selected.posteriorJointDeals() > SixMaxConnectedPreflopGame.MAX_PRIVATE_DEALS)
                 throw new IllegalArgumentException(
-                        "Exact connected audit supports at most four posterior deals per flop");
+                        "Exact connected audit supports at most eight posterior deals per flop");
             var handoff =
                     new SixMaxPolicyFlopTransition(sourceGame, source, selected.preflopHistory());
             var flop = handoff.conditionOnFlop(selected.board().stream().map(Card::parse).toList());
