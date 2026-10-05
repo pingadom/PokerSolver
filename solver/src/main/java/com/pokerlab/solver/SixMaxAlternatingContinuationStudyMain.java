@@ -41,7 +41,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
             SixMaxAlternatingContinuationSolver.Report rounds,
             SixMaxPrivateSupportAudit.Report sourcePrivateSupport,
             SixMaxPrivateSupportAudit.Report retainedPrivateSupport,
-            SixMaxReachedContinuationStudy.SelectionAudit selectionAudit) {
+            SixMaxReachedContinuationStudy.SelectionAudit selectionAudit,
+            SixMaxPrivateRangeCorrelationAudit.Report sourcePrivateCorrelation) {
         public Artifact {
             selectedHistories = List.copyOf(selectedHistories);
         }
@@ -217,7 +218,7 @@ public final class SixMaxAlternatingContinuationStudyMain {
         }
         var artifact =
                 new Artifact(
-                        "six-max-alternating-continuation-study/v3",
+                        "six-max-alternating-continuation-study/v4",
                         "VALIDATION_ONLY",
                         planOnly ? "PLANNED" : "COMPLETED",
                         resume == null ? "FRESH" : "RESUMED",
@@ -237,7 +238,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         rounds,
                         sourcePrivateSupport,
                         retainedPrivateSupport,
-                        plan.selectionAudit());
+                        plan.selectionAudit(),
+                        SixMaxPrivateRangeCorrelationAudit.assess(plan.game().source()));
         var output = reportPath.toAbsolutePath().normalize();
         Files.createDirectories(output.getParent());
         new ObjectMapper()

@@ -155,7 +155,9 @@ public final class SixMaxReachedContinuationStudy {
         if (base.chanceOutcomes(base.initialState()).size()
                 > SixMaxConnectedPreflopGame.MAX_PRIVATE_DEALS)
             throw new IllegalArgumentException(
-                    "Connected study supports at most eight private deals");
+                    "Connected study supports at most "
+                            + SixMaxConnectedPreflopGame.MAX_PRIVATE_DEALS
+                            + " private deals");
         if (MultiPlayerStrategyCompletion.uniformAtUnseen(base, source, 200_000)
                         .addedInformationSets()
                 != 0)

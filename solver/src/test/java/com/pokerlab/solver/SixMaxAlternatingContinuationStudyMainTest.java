@@ -48,7 +48,7 @@ class SixMaxAlternatingContinuationStudyMainTest {
         args[16] = "0.05";
         SixMaxAlternatingContinuationStudyMain.main(args);
         var artifact = read(report);
-        assertEquals("six-max-alternating-continuation-study/v3", artifact.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v4", artifact.schemaVersion());
         assertEquals(
                 SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05),
                 artifact.selectionAudit().settings());
@@ -81,6 +81,28 @@ class SixMaxAlternatingContinuationStudyMainTest {
     }
 
     @Test
+    void oversizedCorrelatedMenuDoesNotReplaceReportOrCheckpoint(@TempDir Path temp)
+            throws Exception {
+        var source = Path.of("../docs/data/sixmax-correlated-source-pack.json");
+        var report = temp.resolve("correlated.json");
+        var checkpoint = temp.resolve("policy.json");
+        Files.writeString(report, "keep report");
+        Files.writeString(checkpoint, "keep checkpoint");
+        var args = Arrays.copyOf(arguments(source, report, checkpoint), 17);
+        args[9] = "2";
+        args[14] = "--plan-only";
+        args[15] = "--diverse-pairs";
+        args[16] = "0.05";
+        var rejected =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> SixMaxAlternatingContinuationStudyMain.main(args));
+        assertTrue(rejected.getMessage().contains("18 compatible deal/flop pairs"));
+        assertEquals("keep report", Files.readString(report));
+        assertEquals("keep checkpoint", Files.readString(checkpoint));
+    }
+
+    @Test
     void persistsAcceptedPolicyAndResumesWithoutTrainingOrReplacingRejectedPolicy(
             @TempDir Path temp) throws Exception {
         var source = Path.of("src/test/resources/six-seat-full-round-pack.json");
@@ -101,8 +123,10 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertNotNull(fresh.initialTraining());
         assertNull(fresh.resumedSolutionHash());
         assertEquals(1, fresh.rounds().acceptedRounds());
-        assertEquals("six-max-alternating-continuation-study/v3", fresh.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v4", fresh.schemaVersion());
         assertNotNull(fresh.sourcePrivateSupport());
+        assertNotNull(fresh.sourcePrivateCorrelation());
+        assertEquals(15, fresh.sourcePrivateCorrelation().pairs().size());
         assertEquals(
                 fresh.rounds().retainedAudit().solutionHash(),
                 fresh.retainedPrivateSupport().solutionHash());

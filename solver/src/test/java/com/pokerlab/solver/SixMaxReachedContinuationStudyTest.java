@@ -351,12 +351,13 @@ class SixMaxReachedContinuationStudyTest {
                 List.of(
                         SixMaxConnectedPreflopGameTest.combo("As Ah", 1),
                         SixMaxConnectedPreflopGameTest.combo("Ac Ad", 1),
-                        SixMaxConnectedPreflopGameTest.combo("2c 2d", 1)));
+                        SixMaxConnectedPreflopGameTest.combo("2c 2d", 1),
+                        SixMaxConnectedPreflopGameTest.combo("2h 2s", 1)));
         wider.set(3, List.of(hands.get(3), SixMaxConnectedPreflopGameTest.combo("3c 3d", 1)));
         wider.set(5, List.of(hands.get(5), SixMaxConnectedPreflopGameTest.combo("5c 5d", 1)));
         var oversized =
                 new SixMaxPreflopCheckdownGame(
-                        new SixMaxPreflopBetting.Rules(100, .5, List.of(3.0, 100.0)),
+                        new SixMaxPreflopBetting.Rules(100, .5, List.of(100.0)),
                         wider,
                         CashRakeRule.none(),
                         (h, mask) -> {
@@ -365,7 +366,7 @@ class SixMaxReachedContinuationStudyTest {
                                 if ((mask & 1 << i) != 0) shares[i] = 1.0 / Integer.bitCount(mask);
                             return MultiwayShowdownEstimate.certain(shares);
                         });
-        assertEquals(12, oversized.chanceOutcomes(oversized.initialState()).size());
+        assertEquals(16, oversized.chanceOutcomes(oversized.initialState()).size());
         assertThrows(
                 IllegalArgumentException.class,
                 () ->
