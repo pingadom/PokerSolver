@@ -10,6 +10,146 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class SixMaxReachedContinuationStudyTest {
+    static SixMaxPreflopSolutionPack eightDealSource() throws Exception {
+        return MultiwayPackJson.readFullRound(
+                java.nio.file.Files.readString(
+                        java.nio.file.Path.of("../docs/data/sixmax-eight-deal-source-pack.json")));
+    }
+
+    @Test
+    void diverseSelectionChoosesMaterialHandsOnDifferentSeatPairsWithoutPruningRoots()
+            throws Exception {
+        var pack = eightDealSource();
+        var base = pack.rebuildGame();
+        var settings = SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05);
+        var plan =
+                SixMaxReachedContinuationStudy.select(
+                        base,
+                        pack.solution(),
+                        2,
+                        1,
+                        711,
+                        SixMaxContinuationStudyBudget.widerFlops(),
+                        settings);
+        assertEquals(
+                List.of(1, 5),
+                plan.selectedHistories().stream()
+                        .map(SixMaxReachedContinuationStudy.SelectedHistory::sourceReachRank)
+                        .toList());
+        assertEquals(8, plan.game().chanceOutcomes(plan.game().initialState()).size());
+        assertEquals(12, plan.compatibleDealFlops());
+        assertEquals(
+                new SixMaxContinuationStudyBudget.Cost(12, 1_409_473),
+                SixMaxContinuationStudyBudget.widerFlops().validate(plan.game()));
+        assertEquals(settings, plan.selectionAudit().settings());
+        var considered = plan.selectionAudit().considered();
+        assertEquals(5, considered.size());
+        assertEquals(
+                List.of(
+                        "SELECTED",
+                        "DUPLICATE_ACTIVE_PAIR",
+                        "DUPLICATE_ACTIVE_PAIR",
+                        "INSUFFICIENT_ACTIVE_HAND_MASS",
+                        "SELECTED"),
+                considered.stream()
+                        .map(SixMaxReachedContinuationStudy.CandidateAssessment::disposition)
+                        .toList());
+        var cutoff = considered.get(4);
+        assertEquals(Seat.CO, cutoff.firstToAct());
+        assertEquals(Seat.BTN, cutoff.secondToAct());
+        assertEquals(List.of("3h", "Ac", "Ad"), cutoff.flops().getFirst().flop());
+        assertEquals(.602633, cutoff.flops().getFirst().first().get("Ah Kh"), 1e-6);
+        assertEquals(.750795, cutoff.flops().getFirst().second().get("8h 8s"), 1e-6);
+        for (var candidate : considered)
+            if (candidate.disposition().equals("SELECTED"))
+                for (var flop : candidate.flops())
+                    for (var marginal : List.of(flop.first(), flop.second())) {
+                        assertEquals(
+                                1,
+                                marginal.values().stream().mapToDouble(Double::doubleValue).sum(),
+                                1e-12);
+                        assertEquals(2, marginal.values().stream().filter(v -> v >= .05).count());
+                        assertThrows(UnsupportedOperationException.class, () -> marginal.clear());
+                    }
+        var support = SixMaxPrivateSupportAudit.assess(plan.game(), pack.solution());
+        assertEquals(4, support.boards().get(1).counterfactualJointDeals());
+        assertEquals(1, support.boards().get(1).counterfactualMarginals().get(Seat.BB).size());
+        assertEquals(2, support.boards().get(1).reachedMarginals().get(Seat.CO).size());
+        assertEquals(
+                plan.selectedHistories(),
+                SixMaxReachedContinuationStudy.select(
+                                base,
+                                pack.solution(),
+                                2,
+                                1,
+                                711,
+                                SixMaxContinuationStudyBudget.widerFlops(),
+                                settings)
+                        .selectedHistories());
+    }
+
+    @Test
+    void materialHandRequirementAppliesToEveryFlopRatherThanOnlyTheFirst() throws Exception {
+        var pack = eightDealSource();
+        var base = pack.rebuildGame();
+        var budget = SixMaxContinuationStudyBudget.widerFlops();
+        var settings = SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05);
+        var narrow =
+                SixMaxReachedContinuationStudy.select(
+                        base, pack.solution(), 1, 1, 711, budget, settings);
+        assertEquals(1, narrow.selectedHistories().getFirst().sourceReachRank());
+        var wide =
+                SixMaxReachedContinuationStudy.select(
+                        base, pack.solution(), 1, 2, 711, budget, settings);
+        assertEquals(5, wide.selectedHistories().getFirst().sourceReachRank());
+        var firstCandidate = wide.selectionAudit().considered().getFirst();
+        assertEquals("INSUFFICIENT_ACTIVE_HAND_MASS", firstCandidate.disposition());
+        assertEquals(2, firstCandidate.flops().getFirst().second().size());
+        assertEquals(Map.of("Js Ts", 1.0), firstCandidate.flops().get(1).second());
+        assertEquals(2, wide.selectionAudit().considered().get(4).flops().size());
+        assertEquals(8, wide.game().chanceOutcomes(wide.game().initialState()).size());
+    }
+
+    @Test
+    void diverseSelectionFailsWhenItsCandidateWindowOrHandMassCannotMeetTheRequest()
+            throws Exception {
+        var pack = eightDealSource();
+        var base = pack.rebuildGame();
+        for (var settings :
+                List.of(
+                        new SixMaxReachedContinuationStudy.SelectionSettings(
+                                SixMaxReachedContinuationStudy.SelectionMode.DIVERSE_ACTIVE_PAIRS,
+                                4,
+                                .05),
+                        SixMaxReachedContinuationStudy.SelectionSettings.diverse(.49)))
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () ->
+                            SixMaxReachedContinuationStudy.select(
+                                    base,
+                                    pack.solution(),
+                                    2,
+                                    1,
+                                    711,
+                                    SixMaxContinuationStudyBudget.widerFlops(),
+                                    settings));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxReachedContinuationStudy.select(
+                                base,
+                                pack.solution(),
+                                2,
+                                1,
+                                711,
+                                new SixMaxContinuationStudyBudget(11, 2_000_000),
+                                SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05)));
+        for (double invalid : new double[] {0, -.1, .50001, Double.NaN, Double.POSITIVE_INFINITY})
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> SixMaxReachedContinuationStudy.SelectionSettings.diverse(invalid));
+    }
+
     @Test
     void ranksMultipleHistoriesAndAccountsForPhysicalAndUnselectedMass() {
         var base = SixMaxConnectedPreflopGameTest.base();
