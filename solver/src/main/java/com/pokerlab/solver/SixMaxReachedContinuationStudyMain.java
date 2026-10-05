@@ -110,6 +110,53 @@ public final class SixMaxReachedContinuationStudyMain {
                 plan.sourceReach().headsUpProbability(),
                 plan.sourceReach().selectedHistoryProbability(),
                 plan.sourceReach().selectedPhysicalFlopProbability());
+        var runs =
+                train(
+                        game,
+                        seeds,
+                        jointIterations,
+                        refinementBudgets,
+                        gapTarget,
+                        SixMaxContinuationStudyBudget.standard());
+        var artifact =
+                new Artifact(
+                        "six-max-reached-continuation-study/v1",
+                        MultiwayPackJson.fullRoundContentHash(pack),
+                        pack.spotHash(),
+                        "VALIDATION_ONLY",
+                        "Select the highest-reach non-all-in heads-up histories from the source checkdown policy, retaining full counterfactual private support and one physical flop per history. Identical declared coverage is used across seeds. Joint linear CFR samples runouts; explicit uniform completion precedes exact conditional CFR+ and six-player parent best responses. Each refinement budget starts from the same completed joint policy, not a previous candidate; training is reused while before/after comparisons stay paired. Reach reports distinguish selected histories, physical betting flops, unselected heads-up histories and other terminal categories. Refinement leaves preflop unchanged. Quality flags describe this bounded research experiment, not safe subgame replacement, full cash-poker equilibrium or trainer admission.",
+                        pack.solution().iterations(),
+                        pack.nashConvBb(),
+                        flopSeed,
+                        maximumHistories,
+                        plan.compatibleDealFlops(),
+                        refinementBudgets,
+                        gapTarget,
+                        parentTolerance,
+                        plan.sourceReach(),
+                        plan.selectedHistories(),
+                        runs);
+        Files.createDirectories(output.getParent());
+        new ObjectMapper()
+                .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
+                .writerWithDefaultPrettyPrinter()
+                .writeValue(output.toFile(), artifact);
+    }
+
+    static List<Run> train(
+            SixMaxConnectedPreflopGame game,
+            List<Long> seeds,
+            int jointIterations,
+            List<Integer> refinementBudgets,
+            double gapTarget,
+            SixMaxContinuationStudyBudget budget) {
+        var cost = budget.validate(game);
+        double parentTolerance = 1e-9;
+        System.out.printf(
+                Locale.ROOT,
+                "preflight_complete_tree_states=%d state_budget=%d%n",
+                cost.completeTreeStates(),
+                budget.maximumCompleteTreeStates());
         var runs = new ArrayList<Run>();
         for (long seed : seeds) {
             var solver =
@@ -122,7 +169,11 @@ public final class SixMaxReachedContinuationStudyMain {
                             true,
                             true);
             var sampled = solver.solve(jointIterations);
-            var complete = MultiPlayerStrategyCompletion.uniformAtUnseen(game, sampled, 2_000_000);
+            var complete =
+                    MultiPlayerStrategyCompletion.uniformAtUnseen(
+                            game, sampled, budget.maximumCompleteTreeStates());
+            if (complete.visitedStates() != cost.completeTreeStates())
+                throw new IllegalStateException("Preflight state count disagrees with completion");
             var reach = SixMaxReachedContinuationStudy.reach(game, complete.solution());
             var attempts = new ArrayList<RefinementAttempt>();
             for (int refinementIterations : refinementBudgets) {
@@ -131,6 +182,7 @@ public final class SixMaxReachedContinuationStudyMain {
                                         game,
                                         complete.solution(),
                                         refinementIterations,
+                                        budget,
                                         branch ->
                                                 System.out.printf(
                                                         Locale.ROOT,
@@ -203,28 +255,6 @@ public final class SixMaxReachedContinuationStudyMain {
                             firstBudget,
                             attempts));
         }
-        var artifact =
-                new Artifact(
-                        "six-max-reached-continuation-study/v1",
-                        MultiwayPackJson.fullRoundContentHash(pack),
-                        pack.spotHash(),
-                        "VALIDATION_ONLY",
-                        "Select the highest-reach non-all-in heads-up histories from the source checkdown policy, retaining full counterfactual private support and one physical flop per history. Identical declared coverage is used across seeds. Joint linear CFR samples runouts; explicit uniform completion precedes exact conditional CFR+ and six-player parent best responses. Each refinement budget starts from the same completed joint policy, not a previous candidate; training is reused while before/after comparisons stay paired. Reach reports distinguish selected histories, physical betting flops, unselected heads-up histories and other terminal categories. Refinement leaves preflop unchanged. Quality flags describe this bounded research experiment, not safe subgame replacement, full cash-poker equilibrium or trainer admission.",
-                        pack.solution().iterations(),
-                        pack.nashConvBb(),
-                        flopSeed,
-                        maximumHistories,
-                        plan.compatibleDealFlops(),
-                        refinementBudgets,
-                        gapTarget,
-                        parentTolerance,
-                        plan.sourceReach(),
-                        plan.selectedHistories(),
-                        runs);
-        Files.createDirectories(output.getParent());
-        new ObjectMapper()
-                .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
-                .writerWithDefaultPrettyPrinter()
-                .writeValue(output.toFile(), artifact);
+        return List.copyOf(runs);
     }
 }

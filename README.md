@@ -27,7 +27,7 @@ flowchart LR
 - Scenario form, progress polling, results and recent simulations.
 - OpenAPI, structured logs, Actuator metrics, Docker Compose, AWS Terraform and GitHub Actions.
 
-The separate `solver` Maven module is an early GTO trainer foundation. It implements vanilla CFR and a scalar CFR+ variant, validates against Kuhn poker, and models a bounded preflop all-in subgame with weighted exact-card ranges. Its backend drill logic draws blocker-adjusted hands and grades action EV loss from a saved pack. An opt-in [research API](docs/local-development.md#research-trainer-api) can exercise a screened, exact-payoff **validation-only** pack locally. It is disabled by default and is not a published playable GTO trainer. See the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for scope and validation steps.
+The separate `solver` Maven module implements PokerLab's own CFR/CFR+ solvers, exact finite-game best responses, weighted physical-card ranges and saved-pack EV grading. Local **validation-only** drills include an all-in demo, bounded street decisions and a full-round six-seat preflop table. The backend also connects every seat's preflop decisions to selected heads-up flop/turn/river betting continuations; [physical-flop width studies](docs/sixmax-flop-width-study.md) measure coverage, cost and conditional quality before broader trainer content. The opt-in [research API](docs/local-development.md#research-trainer-api) is disabled by default. These synthetic, restricted games are not general cash-poker charts; see the [GTO trainer plan](docs/GTO_Trainer_Plan.md) for remaining scope and validation gates.
 
 Java 21 · Maven · Spring Boot 3.5 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
@@ -38,7 +38,6 @@ Requires Docker with Linux containers and Compose v2. The stack includes applica
 ```sh
 git clone https://github.com/pingadom/PokerSolver.git
 cd PokerSolver
-git checkout codex/pokerlab-cloud
 cp .env.example .env
 docker compose up --build -d --scale worker=2
 ```
@@ -106,7 +105,7 @@ The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects t
 
 The [exact-payoff scaling study](docs/preflop-payoff-scaling.md) counts the cost of larger ranges and adds suit-equivalence reuse to the offline solver. It confirms that the current demo pack has no duplicate suit patterns to reuse, so larger lessons still need explicit range review and payoff benchmarking.
 
-The [bounded six-seat preflop betting rules](docs/preflop-betting-tree-research.md) now validate full action order, minimum raises and chip commitments for the existing all-in spot. Non-all-in branches remain explicitly unresolved until a compatible postflop continuation model is validated.
+The [bounded six-seat preflop betting rules](docs/preflop-betting-tree-research.md) validate full action order, minimum raises and chip commitments. A [saved full-round pack](docs/sixmax-full-round-pack-trainer.md) powers the local `#sixmax-preflop` trainer with exact grading. The [sparse connected solver](docs/sixmax-connected-preflop.md) adds selected physical heads-up betting continuations; other non-all-in branches use explicitly declared mandatory checkdown. Broader ranges, board coverage, multiway postflop, raises and rake remain research gates.
 
 A separate [bounded river solver research path](docs/river-solver-research.md) now solves a fixed-board heads-up betting tree and serves opt-in, validation-only questions from a saved pack. With the local trainer overlay running, open `http://localhost:8080/#river` for its research drill. Its synthetic ranges are not a continuation of the preflop lesson or a general river strategy.
 

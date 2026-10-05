@@ -53,17 +53,23 @@ public final class SixMaxConditionalPostflopRefinement {
             CfrSolution original,
             int iterations,
             Consumer<Branch> progress) {
+        return refine(
+                game, original, iterations, SixMaxContinuationStudyBudget.standard(), progress);
+    }
+
+    public static Result refine(
+            SixMaxConnectedPreflopGame game,
+            CfrSolution original,
+            int iterations,
+            SixMaxContinuationStudyBudget budget,
+            Consumer<Branch> progress) {
         if (iterations < 1 || iterations > 500)
             throw new IllegalArgumentException("Conditional refinement requires 1–500 iterations");
         Objects.requireNonNull(progress, "progress");
-        if (game.coverage().stream()
-                        .flatMap(c -> c.legalSelectedFlopsByDeal().stream())
-                        .mapToInt(Integer::intValue)
-                        .sum()
-                > 8)
-            throw new IllegalArgumentException(
-                    "Refinement supports at most eight compatible deal/flop pairs");
-        var validated = MultiPlayerStrategyCompletion.uniformAtUnseen(game, original, 2_000_000);
+        Objects.requireNonNull(budget, "budget").validate(game);
+        var validated =
+                MultiPlayerStrategyCompletion.uniformAtUnseen(
+                        game, original, budget.maximumCompleteTreeStates());
         if (validated.addedInformationSets() != 0)
             throw new IllegalArgumentException(
                     "Refinement requires an explicitly completed input policy");
@@ -147,7 +153,8 @@ public final class SixMaxConditionalPostflopRefinement {
             }
         }
         var candidate = new CfrSolution(original.iterations(), updated);
-        MultiPlayerStrategyCompletion.uniformAtUnseen(game, candidate, 2_000_000);
+        MultiPlayerStrategyCompletion.uniformAtUnseen(
+                game, candidate, budget.maximumCompleteTreeStates());
         var candidateQuality =
                 SixMaxConnectedPreflopAudit.Quality.of(
                         MultiPlayerInformationSetBestResponse.assess(game, candidate));

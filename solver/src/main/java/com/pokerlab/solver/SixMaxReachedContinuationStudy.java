@@ -47,8 +47,28 @@ public final class SixMaxReachedContinuationStudy {
             CfrSolution source,
             int maximumHistories,
             long flopSeed) {
+        return select(
+                base,
+                source,
+                maximumHistories,
+                1,
+                flopSeed,
+                SixMaxContinuationStudyBudget.standard());
+    }
+
+    /** Nested, unique physical-flop menus; width one preserves the preceding study exactly. */
+    public static Plan select(
+            SixMaxPreflopCheckdownGame base,
+            CfrSolution source,
+            int maximumHistories,
+            int flopsPerHistory,
+            long flopSeed,
+            SixMaxContinuationStudyBudget budget) {
         if (maximumHistories < 1 || maximumHistories > 4)
             throw new IllegalArgumentException("Select 1–4 reached histories");
+        if (flopsPerHistory < 1 || flopsPerHistory > 4)
+            throw new IllegalArgumentException("Select 1–4 physical flops per history");
+        java.util.Objects.requireNonNull(budget, "budget");
         if (base.chanceOutcomes(base.initialState()).size() > 4)
             throw new IllegalArgumentException(
                     "Connected study supports at most four private deals");
@@ -64,10 +84,21 @@ public final class SixMaxReachedContinuationStudy {
         int pairs = 0;
         for (var example : audit.examples()) {
             var support = SixMaxPolicyFlopTransition.counterfactualSupport(base, example.history());
-            var board = example.sampledFlop().stream().map(Card::parse).toList();
-            pairs += support.conditionOnFlop(board).deals().size();
-            if (pairs > 8)
-                throw new IllegalArgumentException("Study supports at most eight deal/flop pairs");
+            var boards = new ArrayList<List<Card>>();
+            boards.add(example.sampledFlop().stream().map(Card::parse).toList());
+            var posterior = new SixMaxPolicyFlopTransition(base, source, example.history());
+            long historySeed = flopSeed + selections.size();
+            for (int attempt = 1; boards.size() < flopsPerHistory; attempt++) {
+                if (attempt > 10_000)
+                    throw new IllegalStateException("Could not draw a unique physical-flop menu");
+                var board =
+                        posterior.sampleFlop(historySeed + attempt * 0x9e3779b97f4a7c15L).board();
+                if (!boards.contains(board)) boards.add(board);
+            }
+            for (var board : boards) {
+                pairs += support.conditionOnFlop(board).deals().size();
+                budget.requireCompatiblePairs(pairs);
+            }
             double flopBet = Math.min(support.potBb() * .5, support.remainingStackBb());
             double turnBet = (support.potBb() + 2 * flopBet) * .5;
             double riverBet =
@@ -77,9 +108,10 @@ public final class SixMaxReachedContinuationStudy {
                             * .5;
             selections.add(
                     new SixMaxConnectedPreflopGame.Selection(
-                            example.history(), List.of(board), flopBet, turnBet, riverBet));
+                            example.history(), boards, flopBet, turnBet, riverBet));
         }
         var game = new SixMaxConnectedPreflopGame(base, selections);
+        budget.validate(game);
         var selected = new ArrayList<SelectedHistory>();
         for (int rank = 0; rank < audit.examples().size(); rank++) {
             var example = audit.examples().get(rank);
