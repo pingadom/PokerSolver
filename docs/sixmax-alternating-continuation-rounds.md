@@ -75,6 +75,27 @@ Round two improves full-parent NashConv by 0.000082285bb and 0.000175187bb again
 
 These measured rounds passed. Separate real-game tests exercise rejection and checkpoint preservation, including a resumed candidate whose parent score regresses. No monotonic-convergence guarantee follows from two accepted rounds. The complete local checkpoints are approximately 98 MiB each; the committed reports contain audit evidence and hashes, not those strategy rows.
 
+## Higher-budget resume
+
+The [resumed seed 711 report](data/sixmax-alternating-resumed-seed-711.json) loads the accepted round-two checkpoint and attempts one additional round with **1,000 preflop / 300 postflop iterations**. It repeats no initial joint or postflop training. Fresh audits reproduce the previous retained scores, source identity and continuation menu.
+
+| Seed 711 stage | Full-parent NashConv (bb) | Maximum conditional gap (bb) |
+| --- | ---: | ---: |
+| Retained round-two input | 0.019084882 | 0.011376811 |
+| Accepted higher-budget round | 0.004971259 | 0.011417169 |
+
+The candidate improves parent NashConv by 0.014113623bb, **73.95% relative to this same input policy in this same game**, and meets the conditional target on all four branches. The intermediate conditional gap after preflop is 0.013021280bb. Its exhaustive preflop traversal visits 307,974,000 states and 162,336,000 terminals, exactly twice the preceding 500-iteration traversal. The checkpoint is replaced with the accepted policy hash `581ecb4fb3facb981b18d38093f0d870b45656c58a170bc48bc7b11df017c1e0`.
+
+This is one higher-budget case, not a paired-seed result or evidence that feedback beats a matched 1,000-iteration unrefined control. It shows that the large checkpoint can be loaded, freshly audited and advanced successfully, and that increasing preflop work can substantially improve the finite-game score. The remaining private/board and betting limits are unchanged.
+
+To reproduce it after the fresh seed 711 run:
+
+```powershell
+mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxAlternatingContinuationStudyMain' '-Dexec.args=docs/data/sixmax-diverse-source-pack.json docs/data/sixmax-alternating-resumed-seed-711.json .local/sixmax-alternating-seed-711-policy.json 711 500 300 1000 300 1 2 711 2 0.05 0.000001 --resume .local/sixmax-alternating-seed-711-policy.json'
+```
+
+This command requires the **round-two** checkpoint. The in-place resume advances it; repeating against the already advanced checkpoint starts from a different policy and is a different experiment. Re-run the fresh study to reconstruct the original input.
+
 ## Verification and limits
 
 Tests independently re-evaluate retained policies, verify accepted-round hash chains and persistence callbacks, and check that conditional failures and plateaus stop after one rejected attempt. Checkpoint tests cover deterministic round trips, strict parsing, provenance/hash failures, missing policy rows, oversized input and preservation on failed writes. CLI tests cover planning, source/output alias protection, baseline failure before mutation, resume without initial training and identical resumed decisions.
