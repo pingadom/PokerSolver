@@ -40,7 +40,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
             String resumedSolutionHash,
             SixMaxAlternatingContinuationSolver.Report rounds,
             SixMaxPrivateSupportAudit.Report sourcePrivateSupport,
-            SixMaxPrivateSupportAudit.Report retainedPrivateSupport) {
+            SixMaxPrivateSupportAudit.Report retainedPrivateSupport,
+            SixMaxReachedContinuationStudy.SelectionAudit selectionAudit) {
         public Artifact {
             selectedHistories = List.copyOf(selectedHistories);
         }
@@ -49,13 +50,32 @@ public final class SixMaxAlternatingContinuationStudyMain {
     private SixMaxAlternatingContinuationStudyMain() {}
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 14
-                && !(args.length == 15 && args[14].equals("--plan-only"))
-                && !(args.length == 16 && args[14].equals("--resume")))
+        if (args.length < 14)
             throw new IllegalArgumentException(
-                    "Usage: SixMaxAlternatingContinuationStudyMain <pack.json> <report.json> <checkpoint-output.json> <seed> <joint-iterations> <initial-postflop-iterations> <preflop-iterations> <postflop-iterations> <max-rounds> <max-histories> <flop-seed> <flops-per-history> <conditional-target-bb> <minimum-improvement-bb> [--plan-only | --resume checkpoint.json]");
-        boolean planOnly = args.length == 15;
-        Path resume = args.length == 16 ? Path.of(args[15]) : null;
+                    "Usage: SixMaxAlternatingContinuationStudyMain <pack.json> <report.json> <checkpoint-output.json> <seed> <joint-iterations> <initial-postflop-iterations> <preflop-iterations> <postflop-iterations> <max-rounds> <max-histories> <flop-seed> <flops-per-history> <conditional-target-bb> <minimum-improvement-bb> [--plan-only | --resume checkpoint.json] [--diverse-pairs minimum-combo-mass]");
+        boolean planOnly = false;
+        Path resume = null;
+        Double minimumComboMass = null;
+        for (int index = 14; index < args.length; index++) {
+            switch (args[index]) {
+                case "--plan-only" -> {
+                    if (planOnly || resume != null)
+                        throw new IllegalArgumentException("Conflicting execution modes");
+                    planOnly = true;
+                }
+                case "--resume" -> {
+                    if (planOnly || resume != null || ++index >= args.length)
+                        throw new IllegalArgumentException("Require one resume checkpoint path");
+                    resume = Path.of(args[index]);
+                }
+                case "--diverse-pairs" -> {
+                    if (minimumComboMass != null || ++index >= args.length)
+                        throw new IllegalArgumentException("Require one minimum combo mass");
+                    minimumComboMass = Double.parseDouble(args[index]);
+                }
+                default -> throw new IllegalArgumentException("Unknown option: " + args[index]);
+            }
+        }
         var sourcePath = Path.of(args[0]);
         var reportPath = Path.of(args[1]);
         var checkpointPath = Path.of(args[2]);
@@ -72,6 +92,11 @@ public final class SixMaxAlternatingContinuationStudyMain {
         int histories = Integer.parseInt(args[9]);
         long flopSeed = Long.parseLong(args[10]);
         int width = Integer.parseInt(args[11]);
+        var selectionSettings =
+                minimumComboMass == null
+                        ? SixMaxReachedContinuationStudy.SelectionSettings.reachFirst(histories)
+                        : SixMaxReachedContinuationStudy.SelectionSettings.diverse(
+                                minimumComboMass);
         if (joint < 1 || joint > 3000 || initialPost < 1 || initialPost > 500)
             throw new IllegalArgumentException(
                     "Require joint iterations in [1,3000] and initial postflop in [1,500]");
@@ -97,7 +122,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         histories,
                         width,
                         flopSeed,
-                        budget);
+                        budget,
+                        selectionSettings);
         var cost = budget.validate(plan.game());
         var sourcePrivateSupport = SixMaxPrivateSupportAudit.assess(plan.game(), source.solution());
         SixMaxPrivateSupportAudit.Report retainedPrivateSupport = null;
@@ -191,7 +217,7 @@ public final class SixMaxAlternatingContinuationStudyMain {
         }
         var artifact =
                 new Artifact(
-                        "six-max-alternating-continuation-study/v2",
+                        "six-max-alternating-continuation-study/v3",
                         "VALIDATION_ONLY",
                         planOnly ? "PLANNED" : "COMPLETED",
                         resume == null ? "FRESH" : "RESUMED",
@@ -210,7 +236,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         resumedHash,
                         rounds,
                         sourcePrivateSupport,
-                        retainedPrivateSupport);
+                        retainedPrivateSupport,
+                        plan.selectionAudit());
         var output = reportPath.toAbsolutePath().normalize();
         Files.createDirectories(output.getParent());
         new ObjectMapper()

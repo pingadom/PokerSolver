@@ -85,3 +85,5 @@ The older standalone exact-versus-restricted public-chance comparison now also a
 ## Remaining scope
 
 Eight physical deals are a bounded support experiment, not broad poker ranges. Three seats still have singleton hands. Only two public histories and one physical betting flop per history are connected. There is one bet size per street, no postflop raises, no multiway postflop betting and no rake. Expanding private and board support simultaneously, richer betting, realistic cash assumptions and validated trainer admission remain separate model gates.
+
+An opt-in [diverse active-pair selector](sixmax-diverse-active-pair-selection.md) now addresses the same-pair coverage limitation. Historical reports above retain their original reach-first menus.

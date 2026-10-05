@@ -36,6 +36,51 @@ class SixMaxAlternatingContinuationStudyMainTest {
     }
 
     @Test
+    void diversePlanPublishesSelectionReasonsAndFailsBeforeReplacingFiles(@TempDir Path temp)
+            throws Exception {
+        var source = Path.of("../docs/data/sixmax-eight-deal-source-pack.json");
+        var report = temp.resolve("diverse.json");
+        var checkpoint = temp.resolve("policy.json");
+        var args = Arrays.copyOf(arguments(source, report, checkpoint), 17);
+        args[9] = "2";
+        args[14] = "--plan-only";
+        args[15] = "--diverse-pairs";
+        args[16] = "0.05";
+        SixMaxAlternatingContinuationStudyMain.main(args);
+        var artifact = read(report);
+        assertEquals("six-max-alternating-continuation-study/v3", artifact.schemaVersion());
+        assertEquals(
+                SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05),
+                artifact.selectionAudit().settings());
+        assertEquals(
+                List.of(1, 5),
+                artifact.selectedHistories().stream()
+                        .map(SixMaxReachedContinuationStudy.SelectedHistory::sourceReachRank)
+                        .toList());
+        assertEquals(12, artifact.cost().compatibleDealFlops());
+        assertFalse(Files.exists(checkpoint));
+        var bytes = Files.readAllBytes(report);
+        Files.writeString(checkpoint, "keep checkpoint");
+        for (var suffix :
+                List.of(
+                        new String[] {"--diverse-pairs", "NaN"},
+                        new String[] {"--diverse-pairs", "0.49"},
+                        new String[] {"--diverse-pairs"},
+                        new String[] {"--plan-only", "--plan-only"},
+                        new String[] {"--resume", checkpoint.toString(), "--plan-only"},
+                        new String[] {"--diverse-pairs", ".05", "--diverse-pairs", ".05"},
+                        new String[] {"--unknown"})) {
+            var invalid = Arrays.copyOf(args, 14 + suffix.length);
+            System.arraycopy(suffix, 0, invalid, 14, suffix.length);
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> SixMaxAlternatingContinuationStudyMain.main(invalid));
+            assertArrayEquals(bytes, Files.readAllBytes(report));
+            assertEquals("keep checkpoint", Files.readString(checkpoint));
+        }
+    }
+
+    @Test
     void persistsAcceptedPolicyAndResumesWithoutTrainingOrReplacingRejectedPolicy(
             @TempDir Path temp) throws Exception {
         var source = Path.of("src/test/resources/six-seat-full-round-pack.json");
@@ -56,7 +101,7 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertNotNull(fresh.initialTraining());
         assertNull(fresh.resumedSolutionHash());
         assertEquals(1, fresh.rounds().acceptedRounds());
-        assertEquals("six-max-alternating-continuation-study/v2", fresh.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v3", fresh.schemaVersion());
         assertNotNull(fresh.sourcePrivateSupport());
         assertEquals(
                 fresh.rounds().retainedAudit().solutionHash(),
