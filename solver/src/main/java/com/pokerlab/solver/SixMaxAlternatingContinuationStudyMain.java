@@ -96,23 +96,25 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         width,
                         flopSeed,
                         budget);
-        var game = plan.game();
-        var cost = budget.validate(game);
+        var cost = budget.validate(plan.game());
         InitialTraining training = null;
         String resumedHash = null;
         SixMaxAlternatingContinuationSolver.Report rounds = null;
         if (!planOnly) {
             CfrSolution initial;
+            SixMaxConnectedPreflopGame game;
             if (resume != null) {
                 var loaded = SixMaxConnectedPolicyCheckpoint.read(resume, source);
-                if (!loaded.snapshot().selections().equals(game.selections())
+                if (!loaded.snapshot().selections().equals(plan.game().selections())
                         || !loaded.snapshot().budget().equals(budget))
                     throw new IllegalArgumentException(
                             "Resume checkpoint must match the declared continuation menu and budget");
+                game = loaded.game();
                 initial = loaded.snapshot().policy();
                 resumedHash = loaded.snapshot().solutionHash();
                 log("RESUME_FRESH_AUDITS hash=" + resumedHash);
             } else {
+                game = plan.game();
                 log("JOINT_LINEAR_CFR seed=" + seed);
                 var solver =
                         new MultiPlayerCfrSolver<>(

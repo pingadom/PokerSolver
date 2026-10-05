@@ -37,17 +37,24 @@ Equity simulation and strategy training have different jobs. A worker estimates 
 The current connected six-seat research pipeline is offline:
 
 ```mermaid
-flowchart LR
+flowchart TB
   Source[Saved ranges, rules and exact payoff tables] --> Joint[Joint six-seat CFR]
   Joint --> Complete[Explicit policy completion]
   Complete --> Post[Conditional postflop CFR+]
-  Post --> Values[Exact frozen continuation values]
+  Post --> Initial[Fresh audit and initial checkpoint]
+  Resume[Validated average-policy checkpoint] --> Initial
+  Initial --> Values[Exact frozen continuation values]
   Values --> Pre[Six-seat preflop CFR+]
-  Pre --> Audits[Full-parent and changed-range audits]
+  Pre --> Changed[Postflop CFR+ at changed ranges]
+  Changed --> Audits[Full-parent and conditional audits]
+  Audits --> Gate{Material improvement + conditional target?}
+  Gate -->|Pass| Saved[Retained policy checkpoint]
+  Saved --> Values
+  Gate -->|Fail| Stop[Keep last retained policy and stop]
   Audits --> Reports[Source-bound validation reports]
 ```
 
-Every seat makes preflop decisions. Selected heads-up histories and physical flops permit connected flop/turn/river betting; other flops and multiway non-all-in pots retain mandatory checkdown. Freezing a completed postflop policy produces one literal utility vector per selected public history and original private deal. Preflop re-solving retains original root chance and own-hand observations, replaces only preflop strategy rows, then recomputes both parent deviations and conditional postflop quality under the changed ranges. A matched control freezes the unrefined continuations; an optional final postflop stage solves at the new ranges. See [continuation feedback](sixmax-continuation-preflop-feedback.md) for budgets, paired evidence and remaining model limits.
+Every seat makes preflop decisions. Selected heads-up histories and physical flops permit connected flop/turn/river betting; other flops and multiway non-all-in pots retain mandatory checkdown. Freezing a completed postflop policy produces one literal utility vector per selected public history and original private deal. Preflop re-solving retains original root chance and own-hand observations, replaces only preflop strategy rows, then recomputes both parent deviations and conditional postflop quality under the changed ranges. A matched control freezes the unrefined continuations; an optional final postflop stage solves at the new ranges. The [alternating workflow](sixmax-alternating-continuation-rounds.md) compares each complete round against the last retained policy, persists only passing candidates and stops on rejection or plateau. Strict checkpoints preserve the explicit average policy and source/menu identity; resume recomputes quality and starts fresh CFR stages. See [continuation feedback](sixmax-continuation-preflop-feedback.md) for paired evidence and remaining model limits.
 
 The live trainer consumes separately saved, strictly loaded solution packs. Its opt-in research endpoints bind questions, submitted decisions and reviews to a pack hash. Loading reconstructs the declared game and checks complete strategy/payoff support and numerical quality. Requests replay a reached public history and evaluate legal-action EVs from that saved policy; they do not launch CFR training or Monte Carlo board work. Research reports from the pipeline above contain audit evidence, not a newly admitted trainer pack. Synthetic ranges and restricted betting rules keep the current drills `VALIDATION_ONLY`; see the [full-round pack and trainer contract](sixmax-full-round-pack-trainer.md).
 
