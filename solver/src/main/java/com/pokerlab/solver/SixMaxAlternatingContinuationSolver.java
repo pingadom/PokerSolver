@@ -13,8 +13,27 @@ public final class SixMaxAlternatingContinuationSolver {
             int preflopIterations,
             int postflopIterations,
             double conditionalGapTargetBb,
-            double minimumParentImprovementBb) {
+            double minimumParentImprovementBb,
+            SixMaxPreflopContinuationFeedback.Algorithm preflopAlgorithm) {
+        public Settings(
+                int maximumRounds,
+                int preflopIterations,
+                int postflopIterations,
+                double conditionalGapTargetBb,
+                double minimumParentImprovementBb) {
+            this(
+                    maximumRounds,
+                    preflopIterations,
+                    postflopIterations,
+                    conditionalGapTargetBb,
+                    minimumParentImprovementBb,
+                    SixMaxPreflopContinuationFeedback.Algorithm.CFR_PLUS);
+        }
+
         public Settings {
+            // Historical reports omit this optional field and retain their CFR+ semantics.
+            if (preflopAlgorithm == null)
+                preflopAlgorithm = SixMaxPreflopContinuationFeedback.Algorithm.CFR_PLUS;
             if (maximumRounds < 1
                     || maximumRounds > 3
                     || preflopIterations < 1
@@ -108,7 +127,18 @@ public final class SixMaxAlternatingContinuationSolver {
             progress.accept("round=" + n + " stage=PREFLOP_FEEDBACK");
             var feedback =
                     SixMaxPreflopContinuationFeedback.solve(
-                            game, retained, settings.preflopIterations(), budget);
+                            game,
+                            retained,
+                            settings.preflopIterations(),
+                            budget,
+                            settings.preflopAlgorithm());
+            progress.accept(
+                    "round="
+                            + n
+                            + " preflop_algorithm="
+                            + settings.preflopAlgorithm()
+                            + " parent_nash_conv_bb="
+                            + feedback.report().candidateParentQuality().nashConvBb());
             progress.accept("round=" + n + " stage=POSTFLOP_AT_CHANGED_RANGES");
             var post =
                     SixMaxConditionalPostflopRefinement.refine(

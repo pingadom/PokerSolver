@@ -79,6 +79,42 @@ class SixMaxPreflopContinuationFeedbackTest {
     }
 
     @Test
+    void linearVanillaOptionKeepsExactSupportAndTheFrozenProjection() {
+        var game = SixMaxConnectedPreflopGameTest.game();
+        var original =
+                SixMaxConnectedPreflopAudit.liftCheckdown(
+                        game, SixMaxConditionalPostflopRefinementTest.uniform(game.source()));
+        var result =
+                SixMaxPreflopContinuationFeedback.solve(
+                        game,
+                        original,
+                        4,
+                        SixMaxContinuationStudyBudget.standard(),
+                        SixMaxPreflopContinuationFeedback.Algorithm.LINEAR_VANILLA);
+        assertEquals("LINEAR_VANILLA", result.report().preflopAlgorithm());
+        assertEquals("EXHAUSTIVE", result.report().preflopChanceTraversal());
+        assertEquals(0, result.report().preflopTraversal().sampledChanceNodes());
+        assertEquals(original.strategy().keySet(), result.candidate().strategy().keySet());
+        for (var row : original.strategy().entrySet())
+            if (row.getKey().contains(":postflop:"))
+                assertEquals(row.getValue(), result.candidate().strategy().get(row.getKey()));
+        for (int seat = 0; seat < 6; seat++)
+            assertEquals(
+                    result.report().candidateParentQuality().profileUtilitiesBb().get(seat),
+                    result.report().candidateProjectedQuality().profileUtilitiesBb().get(seat),
+                    1e-12);
+        assertEquals(
+                0,
+                MultiPlayerStrategyCompletion.uniformAtUnseen(game, result.candidate(), 2_000_000)
+                        .addedInformationSets());
+        assertThrows(
+                NullPointerException.class,
+                () ->
+                        SixMaxPreflopContinuationFeedback.solve(
+                                game, original, 4, SixMaxContinuationStudyBudget.standard(), null));
+    }
+
+    @Test
     void revivesUnreachedHistoriesUsingTheExplicitCounterfactualPostflopPolicy() {
         var game = SixMaxConnectedPreflopGameTest.game();
         var rows =

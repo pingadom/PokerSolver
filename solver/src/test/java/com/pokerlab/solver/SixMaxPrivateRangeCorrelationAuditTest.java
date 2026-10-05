@@ -87,6 +87,84 @@ class SixMaxPrivateRangeCorrelationAuditTest {
     }
 
     @Test
+    void sampledAbsenceDoesNotEstablishPhysicalImpossibility() {
+        var base = SixMaxConnectedPreflopGameTest.base();
+        var original = base.dealtHands(base.chanceOutcomes(base.initialState()).getFirst().state());
+        var worlds = new java.util.ArrayList<SixMaxJointDealSampler.JointDeal>();
+        for (int[] choice : new int[][] {{0, 0}, {0, 1}, {1, 0}}) {
+            var hands = new java.util.ArrayList<>(original);
+            hands.set(
+                    0, SixMaxConnectedPreflopGameTest.combo(choice[0] == 0 ? "As Ah" : "Ac Ad", 1));
+            hands.set(
+                    1, SixMaxConnectedPreflopGameTest.combo(choice[1] == 0 ? "Ks Kh" : "Kc Kd", 1));
+            worlds.add(new SixMaxJointDealSampler.JointDeal(hands, 1));
+        }
+        var missing = new java.util.ArrayList<>(original);
+        missing.set(0, SixMaxConnectedPreflopGameTest.combo("Ac Ad", 1));
+        missing.set(1, SixMaxConnectedPreflopGameTest.combo("Kc Kd", 1));
+        // The unobserved fourth product is physically legal.
+        assertDoesNotThrow(() -> new SixMaxJointDealSampler.JointDeal(missing, 1));
+        var sampled =
+                SixMaxPreflopCheckdownGame.fromSampledDeals(
+                        base.rules(),
+                        new SixMaxJointDealSampler.Sample(711, 3, 0, worlds),
+                        CashRakeRule.none(),
+                        (hands, mask) -> {
+                            double[] shares = new double[6];
+                            for (int i = 0; i < 6; i++)
+                                if ((mask & 1 << i) != 0) shares[i] = 1.0 / Integer.bitCount(mask);
+                            return MultiwayShowdownEstimate.certain(shares);
+                        });
+        var audit = SixMaxPrivateRangeCorrelationAudit.assess(sampled);
+        assertEquals("EMPIRICAL_JOINT_DEALS", audit.chanceModel());
+        assertTrue(
+                audit.interpretation()
+                        .contains(
+                                "only an exact range-product game establishes physical impossibility"));
+        var pair = audit.pairs().getFirst();
+        assertEquals(3, pair.supportedPairs());
+        assertEquals(1.0 / 9, pair.unsupportedIndependentMass(), 1e-15);
+    }
+
+    @Test
+    void logMutualInformationSurvivesUnderflowOfTheIndependentProduct() {
+        var base = SixMaxConnectedPreflopGameTest.base();
+        var original = base.dealtHands(base.chanceOutcomes(base.initialState()).getFirst().state());
+        var ranges = new java.util.ArrayList<>(original.stream().map(List::of).toList());
+        ranges.set(
+                0,
+                List.of(
+                        SixMaxConnectedPreflopGameTest.combo("As Ah", 1),
+                        SixMaxConnectedPreflopGameTest.combo("Kc Kd", 1e-150)));
+        ranges.set(
+                1,
+                List.of(
+                        SixMaxConnectedPreflopGameTest.combo("Kc 2h", 1),
+                        SixMaxConnectedPreflopGameTest.combo("As 2d", 1e-150)));
+        var coupled =
+                new SixMaxPreflopCheckdownGame(
+                        base.rules(),
+                        ranges,
+                        CashRakeRule.none(),
+                        (hands, mask) -> {
+                            double[] shares = new double[6];
+                            for (int i = 0; i < 6; i++)
+                                if ((mask & 1 << i) != 0) shares[i] = 1.0 / Integer.bitCount(mask);
+                            return MultiwayShowdownEstimate.certain(shares);
+                        });
+        var roots = coupled.chanceOutcomes(coupled.initialState());
+        assertEquals(2, roots.size());
+        double rare = roots.stream().mapToDouble(ChanceOutcome::probability).min().orElseThrow();
+        assertTrue(rare > 0);
+        assertEquals(0, rare * rare);
+        var pair = SixMaxPrivateRangeCorrelationAudit.assess(coupled).pairs().getFirst();
+        assertTrue(Double.isFinite(pair.mutualInformationBits()));
+        assertTrue(pair.mutualInformationBits() > 0);
+        assertEquals(
+                -rare * Math.log(rare) / Math.log(2), pair.mutualInformationBits(), rare * 1e-10);
+    }
+
+    @Test
     void twelveConnectedWorldsPreserveFoldedBlockersAndConcealOtherHands() throws Exception {
         var base = correlatedBase();
         var game =

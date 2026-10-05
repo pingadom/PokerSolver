@@ -59,6 +59,16 @@ class SixMaxAlternatingContinuationStudyMainTest {
                         .toList());
         assertEquals(12, artifact.cost().compatibleDealFlops());
         assertFalse(Files.exists(checkpoint));
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.Algorithm.CFR_PLUS,
+                artifact.settings().preflopAlgorithm());
+        var linearArgs = Arrays.copyOf(args, 19);
+        linearArgs[17] = "--preflop-algorithm";
+        linearArgs[18] = "LINEAR_VANILLA";
+        SixMaxAlternatingContinuationStudyMain.main(linearArgs);
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.Algorithm.LINEAR_VANILLA,
+                read(report).settings().preflopAlgorithm());
         var bytes = Files.readAllBytes(report);
         Files.writeString(checkpoint, "keep checkpoint");
         for (var suffix :
@@ -69,6 +79,14 @@ class SixMaxAlternatingContinuationStudyMainTest {
                         new String[] {"--plan-only", "--plan-only"},
                         new String[] {"--resume", checkpoint.toString(), "--plan-only"},
                         new String[] {"--diverse-pairs", ".05", "--diverse-pairs", ".05"},
+                        new String[] {"--preflop-algorithm"},
+                        new String[] {"--preflop-algorithm", "UNKNOWN"},
+                        new String[] {
+                            "--preflop-algorithm",
+                            "LINEAR_VANILLA",
+                            "--preflop-algorithm",
+                            "CFR_PLUS"
+                        },
                         new String[] {"--unknown"})) {
             var invalid = Arrays.copyOf(args, 14 + suffix.length);
             System.arraycopy(suffix, 0, invalid, 14, suffix.length);
