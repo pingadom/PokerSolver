@@ -9,6 +9,41 @@ import org.junit.jupiter.api.Test;
 
 class SixMaxDiverseSourcePackTest {
     @Test
+    void exactEightDealSourceIncludesCutoffUncertaintyAndEveryActiveSubset() throws Exception {
+        var pack =
+                MultiwayPackJson.readFullRound(
+                        Files.readString(
+                                Path.of("../docs/data/sixmax-eight-deal-source-pack.json")));
+        var declared =
+                MultiwayPackJson.readFullRoundSpot(
+                        Files.readString(Path.of("../docs/data/sixmax-eight-deal-spot.json")));
+        assertEquals(declared, pack.spot());
+        assertEquals("VALIDATION_ONLY", pack.publicationStatus());
+        assertEquals("EXACT_ENUMERATION", pack.payoffMethod());
+        assertEquals(List.of("Ah Kh", "Qh Th"), keys(pack, 2));
+        assertEquals(500, pack.solution().iterations());
+        assertEquals(9_264, pack.solution().strategy().size());
+        assertEquals(8 * 57, pack.payoffs().size());
+        for (var payoff : pack.payoffs()) {
+            assertEquals(658_008, payoff.estimate().trials());
+            for (double error : payoff.estimate().standardErrors()) assertEquals(0, error);
+        }
+        var game = pack.rebuildGame();
+        var roots = game.chanceOutcomes(game.initialState());
+        assertEquals(8, roots.size());
+        for (var root : roots) assertEquals(.125, root.probability(), 1e-15);
+        assertEquals(
+                0,
+                MultiPlayerStrategyCompletion.uniformAtUnseen(game, pack.solution(), 200_000)
+                        .addedInformationSets());
+        assertEquals(
+                pack.nashConvBb(),
+                MultiPlayerInformationSetBestResponse.assess(game, pack.solution()).nashConvBb(),
+                1e-12);
+        assertTrue(pack.nashConvBb() < .01);
+    }
+
+    @Test
     void exactPayoffsBindFourDealsAndTheDeclaredSuitPairAndBroadwayRanges() throws Exception {
         var pack =
                 MultiwayPackJson.readFullRound(
