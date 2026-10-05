@@ -13,6 +13,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class SixMaxConnectedPostflopAuditTest {
+    @Test
+    void eightDealChanceComparisonRetainsFoldedCardsAndExactCheckdownValues() throws Exception {
+        var source =
+                MultiwayPackJson.readFullRound(
+                        Files.readString(
+                                Path.of("../docs/data/sixmax-eight-deal-source-pack.json")));
+        var report =
+                SixMaxConnectedPostflopAudit.assess(
+                        source.rebuildGame(), source.solution(), 711, 1, 1, 1, .5, List.of(.1, .9));
+        var example = report.examples().getFirst();
+        assertEquals(8, example.posteriorJointDeals());
+        assertEquals(List.of("3c", "4h", "Ks"), example.flop());
+        assertEquals(0, example.exact().signedCheckdownBiasBb(), 1e-10);
+        assertEquals(
+                8 * 108_900 + 1,
+                example.exact().treeSize().chanceNodes()
+                        + example.exact().treeSize().decisionNodes()
+                        + example.exact().treeSize().terminalNodes());
+        assertTrue(example.exact().informationSets() > example.restrictedTurn().informationSets());
+        assertTrue(example.exact().bestResponse().gap() > .05);
+    }
+
     private static SixMaxPreflopSolutionPack pack() throws Exception {
         return MultiwayPackJson.readFullRound(
                 Files.readString(Path.of("src/test/resources/six-seat-full-round-pack.json")));

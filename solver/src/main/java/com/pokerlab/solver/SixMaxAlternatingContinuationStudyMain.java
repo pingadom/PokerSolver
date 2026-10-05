@@ -38,7 +38,9 @@ public final class SixMaxAlternatingContinuationStudyMain {
             FreshTrainingSettings freshTrainingSettings,
             InitialTraining initialTraining,
             String resumedSolutionHash,
-            SixMaxAlternatingContinuationSolver.Report rounds) {
+            SixMaxAlternatingContinuationSolver.Report rounds,
+            SixMaxPrivateSupportAudit.Report sourcePrivateSupport,
+            SixMaxPrivateSupportAudit.Report retainedPrivateSupport) {
         public Artifact {
             selectedHistories = List.copyOf(selectedHistories);
         }
@@ -97,6 +99,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         flopSeed,
                         budget);
         var cost = budget.validate(plan.game());
+        var sourcePrivateSupport = SixMaxPrivateSupportAudit.assess(plan.game(), source.solution());
+        SixMaxPrivateSupportAudit.Report retainedPrivateSupport = null;
         InitialTraining training = null;
         String resumedHash = null;
         SixMaxAlternatingContinuationSolver.Report rounds = null;
@@ -182,10 +186,12 @@ public final class SixMaxAlternatingContinuationStudyMain {
                                 }
                             });
             rounds = result.report();
+            retainedPrivateSupport =
+                    SixMaxPrivateSupportAudit.assess(game, result.retainedPolicy());
         }
         var artifact =
                 new Artifact(
-                        "six-max-alternating-continuation-study/v1",
+                        "six-max-alternating-continuation-study/v2",
                         "VALIDATION_ONLY",
                         planOnly ? "PLANNED" : "COMPLETED",
                         resume == null ? "FRESH" : "RESUMED",
@@ -202,7 +208,9 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         resume == null ? new FreshTrainingSettings(seed, joint, initialPost) : null,
                         training,
                         resumedHash,
-                        rounds);
+                        rounds,
+                        sourcePrivateSupport,
+                        retainedPrivateSupport);
         var output = reportPath.toAbsolutePath().normalize();
         Files.createDirectories(output.getParent());
         new ObjectMapper()

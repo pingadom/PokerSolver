@@ -56,6 +56,11 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertNotNull(fresh.initialTraining());
         assertNull(fresh.resumedSolutionHash());
         assertEquals(1, fresh.rounds().acceptedRounds());
+        assertEquals("six-max-alternating-continuation-study/v2", fresh.schemaVersion());
+        assertNotNull(fresh.sourcePrivateSupport());
+        assertEquals(
+                fresh.rounds().retainedAudit().solutionHash(),
+                fresh.retainedPrivateSupport().solutionHash());
         assertEquals(1, fresh.rounds().rounds().size());
         assertNotEquals(
                 fresh.rounds().initialAudit().solutionHash(),
@@ -85,6 +90,7 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertEquals(0, result.rounds().acceptedRounds());
         assertEquals(fresh.rounds().retainedAudit(), result.rounds().retainedAudit());
         assertArrayEquals(checkpointBytes, Files.readAllBytes(checkpoint));
+        assertEquals(fresh.retainedPrivateSupport(), result.retainedPrivateSupport());
         assertArrayEquals(sourceBytes, Files.readAllBytes(source));
         resumed[10] = "712";
         assertThrows(
@@ -117,6 +123,9 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertEquals(1_358_137, artifact.cost().completeTreeStates());
         assertNull(artifact.rounds());
         assertNull(artifact.initialTraining());
+        assertEquals(4, artifact.sourcePrivateSupport().sourceJointDeals());
+        assertEquals(4, artifact.sourcePrivateSupport().boards().size());
+        assertNull(artifact.retainedPrivateSupport());
         assertEquals(
                 new SixMaxAlternatingContinuationStudyMain.FreshTrainingSettings(711, 1, 1),
                 artifact.freshTrainingSettings());

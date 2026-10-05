@@ -69,9 +69,10 @@ public final class SixMaxReachedContinuationStudy {
         if (flopsPerHistory < 1 || flopsPerHistory > 4)
             throw new IllegalArgumentException("Select 1–4 physical flops per history");
         java.util.Objects.requireNonNull(budget, "budget");
-        if (base.chanceOutcomes(base.initialState()).size() > 4)
+        if (base.chanceOutcomes(base.initialState()).size()
+                > SixMaxConnectedPreflopGame.MAX_PRIVATE_DEALS)
             throw new IllegalArgumentException(
-                    "Connected study supports at most four private deals");
+                    "Connected study supports at most eight private deals");
         if (MultiPlayerStrategyCompletion.uniformAtUnseen(base, source, 200_000)
                         .addedInformationSets()
                 != 0)
