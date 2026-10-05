@@ -1,0 +1,1159 @@
+{
+  "schemaVersion" : "six-max-alternating-continuation-study/v3",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "executionStatus" : "COMPLETED",
+  "executionMode" : "FRESH",
+  "interpretation" : "Each whole round re-solves preflop against frozen exact continuation values, then re-solves postflop at the changed ranges. A candidate replaces the retained policy only when every selected branch is reached, conditional gaps meet the declared target and full six-seat NashConv improves materially. Stop at the first rejected round. Resume restores an explicit average policy and freshly audits it; it does not restore CFR regret tables. Unselected flops and multiway pots check down. These finite-game checks do not certify safe subgame solving, convergence, full cash poker or trainer admission.",
+  "sourcePackHash" : "e6258260ecc1010ef43eaac0df72337a8781031013af21e276f169a633fa2c39",
+  "sourceSpotHash" : "e377a233e5c2ee03a97726c8f422213e9cb80cf8b910cd11d53022010333c669",
+  "flopSelectionSeed" : 711,
+  "requestedMaximumHistories" : 2,
+  "flopsPerHistory" : 1,
+  "budget" : {
+    "maximumCompatibleDealFlops" : 16,
+    "maximumCompleteTreeStates" : 2000000
+  },
+  "cost" : {
+    "compatibleDealFlops" : 12,
+    "completeTreeStates" : 1409473
+  },
+  "selectedHistories" : [ {
+    "sourceReachRank" : 1,
+    "sourceReachProbability" : 0.03206399922431296,
+    "sourcePosteriorJointDeals" : 8,
+    "coverage" : {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+      "actions" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "flops" : [ [ "3c", "4h", "Ks" ] ],
+      "firstToAct" : "BB",
+      "secondToAct" : "BTN",
+      "flopBetBb" : 1.25,
+      "requestedTurnBetBb" : 2.5,
+      "requestedRiverBetBb" : 5.0,
+      "legalSelectedFlopsByDeal" : [ 1, 1, 1, 1, 1, 1, 1, 1 ],
+      "bettingFlopProbabilityByDeal" : [ 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4, 1.0121457489878542E-4 ]
+    }
+  }, {
+    "sourceReachRank" : 5,
+    "sourceReachProbability" : 1.302950127957949E-4,
+    "sourcePosteriorJointDeals" : 8,
+    "coverage" : {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+      "actions" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "flops" : [ [ "3h", "Ac", "Ad" ] ],
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "flopBetBb" : 3.75,
+      "requestedTurnBetBb" : 7.5,
+      "requestedRiverBetBb" : 15.0,
+      "legalSelectedFlopsByDeal" : [ 1, 0, 1, 0, 1, 0, 1, 0 ],
+      "bettingFlopProbabilityByDeal" : [ 1.0121457489878542E-4, 0.0, 1.0121457489878542E-4, 0.0, 1.0121457489878542E-4, 0.0, 1.0121457489878542E-4, 0.0 ]
+    }
+  } ],
+  "settings" : {
+    "maximumRounds" : 1,
+    "preflopIterations" : 500,
+    "postflopIterations" : 300,
+    "conditionalGapTargetBb" : 0.05,
+    "minimumParentImprovementBb" : 1.0E-6
+  },
+  "freshTrainingSettings" : {
+    "seed" : 712,
+    "jointIterations" : 500,
+    "initialPostflopIterations" : 300
+  },
+  "initialTraining" : {
+    "seed" : 712,
+    "jointIterations" : 500,
+    "initialPostflopIterations" : 300,
+    "visitedInformationSets" : 220162,
+    "uniformlyCompletedInformationSets" : 14094,
+    "traversal" : {
+      "visitedNodes" : 312231000,
+      "terminalNodes" : 164244000,
+      "sampledChanceNodes" : 432000,
+      "baselineCorrections" : 0
+    },
+    "refinement" : {
+      "refinementIterations" : 300,
+      "inputInformationSets" : 234256,
+      "replacedInformationSets" : 224992,
+      "preservedInformationSets" : 9264,
+      "originalSolutionHash" : "092323a4a3e0551c0900ce19f18385cd8c90dd3aec386dde19cd9ad9b4f483fd",
+      "candidateSolutionHash" : "55f444d4a98b35ab0c39c675d465f9382d3d1b9530e18cee315f9bbf9a155a10",
+      "originalQuality" : {
+        "profileUtilitiesBb" : [ -9.427614341521313E-5, -1.1579679977305116E-4, 1.1155750892856209, 0.12288628615765966, -0.5002833108058102, -0.7379679916942703 ],
+        "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1175907335114816, 0.14813786438219648, -0.49999986557552034, -0.7331924897641291 ],
+        "deviationGainsBb" : [ 9.427614341521313E-5, 1.3366512102026715E-4, 0.0020156442258607576, 0.025251578224536816, 2.8344523028989155E-4, 0.004775501930141202 ],
+        "nashConvBb" : 0.03255411087526415
+      },
+      "candidateQuality" : {
+        "profileUtilitiesBb" : [ -9.427614341521313E-5, -1.1579679977305116E-4, 1.1155750900045043, 0.12288630865443552, -0.5002833108058102, -0.7379680149099299 ],
+        "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1175907335114816, 0.14813784798526944, -0.49999986557552034, -0.7331924897641291 ],
+        "deviationGainsBb" : [ 9.427614341521313E-5, 1.3366512102026715E-4, 0.0020156435069773604, 0.02525153933083392, 2.8344523028989155E-4, 0.0047755251458008185 ],
+        "nashConvBb" : 0.03255409447833747
+      },
+      "nashConvChangeBb" : -1.6396926677542112E-8,
+      "bettingContinuationProbability" : 1.1247281087985572E-7,
+      "branches" : [ {
+        "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+        "flop" : [ "3c", "4h", "Ks" ],
+        "status" : "REFINED",
+        "historyReachProbability" : 0.0010941659256243335,
+        "flopProbabilityGivenHistory" : 1.0121457489878541E-4,
+        "posteriorJointDeals" : 8,
+        "replacedInformationSets" : 117920,
+        "before" : {
+          "firstBestResponse" : 3.7872405898876047,
+          "secondBestResponse" : -0.8373504286688799,
+          "profileValue" : 1.4190968123844492,
+          "gap" : 4.624591018556485
+        },
+        "after" : {
+          "firstBestResponse" : 1.2103849832933804,
+          "secondBestResponse" : 1.2093055083261774,
+          "profileValue" : 1.2094661593307188,
+          "gap" : 0.0010794749672029536
+        }
+      }, {
+        "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+        "flop" : [ "3h", "Ac", "Ad" ],
+        "status" : "REFINED",
+        "historyReachProbability" : 1.7067122460265813E-5,
+        "flopProbabilityGivenHistory" : 1.0120463206811961E-4,
+        "posteriorJointDeals" : 4,
+        "replacedInformationSets" : 107072,
+        "before" : {
+          "firstBestResponse" : 12.701570661895195,
+          "secondBestResponse" : -3.295520354914762,
+          "profileValue" : 3.3349021828471743,
+          "gap" : 15.997091016809957
+        },
+        "after" : {
+          "firstBestResponse" : 3.7523349593702697,
+          "secondBestResponse" : 3.7490553625770215,
+          "profileValue" : 3.7510981685794436,
+          "gap" : 0.003279596793248185
+        }
+      } ]
+    }
+  },
+  "resumedSolutionHash" : null,
+  "rounds" : {
+    "settings" : {
+      "maximumRounds" : 1,
+      "preflopIterations" : 500,
+      "postflopIterations" : 300,
+      "conditionalGapTargetBb" : 0.05,
+      "minimumParentImprovementBb" : 1.0E-6
+    },
+    "initialAudit" : {
+      "solutionHash" : "55f444d4a98b35ab0c39c675d465f9382d3d1b9530e18cee315f9bbf9a155a10",
+      "parentQuality" : {
+        "profileUtilitiesBb" : [ -9.427614341521313E-5, -1.1579679977305116E-4, 1.1155750900045043, 0.12288630865443552, -0.5002833108058102, -0.7379680149099299 ],
+        "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1175907335114816, 0.14813784798526944, -0.49999986557552034, -0.7331924897641291 ],
+        "deviationGainsBb" : [ 9.427614341521313E-5, 1.3366512102026715E-4, 0.0020156435069773604, 0.02525153933083392, 2.8344523028989155E-4, 0.0047755251458008185 ],
+        "nashConvBb" : 0.03255409447833747
+      },
+      "maximumConditionalGapBb" : 0.003279596793248185,
+      "everySelectedBranchReached" : true,
+      "reach" : {
+        "terminalProbability" : {
+          "ALL_IN_SHOWDOWN" : 0.11019184179913544,
+          "POSTFLOP_CONTINUATION_REQUIRED" : 0.29491500166009754,
+          "UNCONTESTED" : 0.5948931565407635
+        },
+        "checkdownProbabilityByLiveSeats" : {
+          "2" : 0.0019228894481536723,
+          "3" : 0.29298822753193193,
+          "4" : 3.664669834336171E-6,
+          "5" : 2.1078321597231635E-7,
+          "6" : 9.226963788222213E-9
+        },
+        "reachedHeadsUpHistories" : 191,
+        "headsUpProbability" : 0.0019228894481536723,
+        "selectedHistoryProbability" : 0.0011112330480845993,
+        "unselectedHeadsUpProbability" : 8.116564000690729E-4,
+        "fractionOfHeadsUpProbabilitySelected" : 0.5778975224767017,
+        "selectedPhysicalFlopProbability" : 1.1247281087985572E-7,
+        "selectedHistoryOtherFlopsProbability" : 0.0011111205752737194
+      }
+    },
+    "retainedAudit" : {
+      "solutionHash" : "53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0",
+      "parentQuality" : {
+        "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269385645, 0.250154380277268, -0.5003163969561707, -0.8602375662131918 ],
+        "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.25220605591644707, -0.49999983258869246, -0.8588141539482042 ],
+        "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.0045910352485403205, 0.0020516756391790736, 3.165643674782337E-4, 0.0014234122649876557 ],
+        "nashConvBb" : 0.00859259988789934
+      },
+      "maximumConditionalGapBb" : 0.005960909354291499,
+      "everySelectedBranchReached" : true,
+      "reach" : {
+        "terminalProbability" : {
+          "ALL_IN_SHOWDOWN" : 0.11424961337576743,
+          "POSTFLOP_CONTINUATION_REQUIRED" : 0.13468211307524633,
+          "UNCONTESTED" : 0.7510682735489818
+        },
+        "checkdownProbabilityByLiveSeats" : {
+          "2" : 0.043101395794245934,
+          "3" : 0.09157855719934899,
+          "4" : 1.9971425166717543E-6,
+          "5" : 1.5192279053732203E-7,
+          "6" : 1.1016345260135986E-8
+        },
+        "reachedHeadsUpHistories" : 191,
+        "headsUpProbability" : 0.043101395794245934,
+        "selectedHistoryProbability" : 0.030652623510615016,
+        "unselectedHeadsUpProbability" : 0.012448772283630918,
+        "fractionOfHeadsUpProbabilitySelected" : 0.7111747298612349,
+        "selectedPhysicalFlopProbability" : 3.098188191143571E-6,
+        "selectedHistoryOtherFlopsProbability" : 0.030649525322423873
+      }
+    },
+    "acceptedRounds" : 1,
+    "stopReason" : "ROUND_LIMIT_REACHED",
+    "rounds" : [ {
+      "number" : 1,
+      "acceptedInputHash" : "55f444d4a98b35ab0c39c675d465f9382d3d1b9530e18cee315f9bbf9a155a10",
+      "preflopFeedback" : {
+        "preflopIterations" : 500,
+        "preflopAlgorithm" : "CFR_PLUS",
+        "preflopChanceTraversal" : "EXHAUSTIVE",
+        "preflopTraversal" : {
+          "visitedNodes" : 307971000,
+          "terminalNodes" : 162336000,
+          "sampledChanceNodes" : 0,
+          "baselineCorrections" : 0
+        },
+        "replacedPreflopInformationSets" : 9264,
+        "preservedPostflopInformationSets" : 224992,
+        "maximumPreflopActionFrequencyChange" : 0.9999246318637169,
+        "originalSolutionHash" : "55f444d4a98b35ab0c39c675d465f9382d3d1b9530e18cee315f9bbf9a155a10",
+        "candidateSolutionHash" : "e1658174b2aade8fd938b7fbf5e26ef6ca2160bc916cfb4ff64887f179012e91",
+        "frozenTerminalValues" : [ {
+          "dealIndex" : 0,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 1.008880020704149, -0.5, -0.508880020704149 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 1.0085432092011042, -0.5, -0.508543209201104 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 3.3681150304487595E-4, 0.0, -3.3681150304498697E-4 ]
+        }, {
+          "dealIndex" : 1,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 0.4163605931156905, -0.5, 0.08363940688430951 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.4161833898676005, -0.5, 0.0838166101323995 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 1.7720324809000765E-4, 0.0, -1.772032480899799E-4 ]
+        }, {
+          "dealIndex" : 2,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 0.4152363216480967, -0.5, 0.08476367835190327 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.4153323363849679, -0.5, 0.08466766361503208 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, -9.601473687120832E-5, 0.0, 9.601473687118056E-5 ]
+        }, {
+          "dealIndex" : 3,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 0.0016360500936677203, -0.5, 0.49836394990633215 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.0016918487313223873, -0.5, 0.49830815126867745 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, -5.579863765466705E-5, 0.0, 5.579863765470261E-5 ]
+        }, {
+          "dealIndex" : 4,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 1.0084137572082352, -0.5, -0.5084137572082355 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 1.008064491617123, -0.5, -0.5080644916171233 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 3.492655911121467E-4, 0.0, -3.492655911121467E-4 ]
+        }, {
+          "dealIndex" : 5,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 0.29339668030259397, -0.5, 0.20660331969740603 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.2932574527969265, -0.5, 0.2067425472030735 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 1.3922750566747188E-4, 0.0, -1.3922750566747188E-4 ]
+        }, {
+          "dealIndex" : 6,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, 0.31124876525952516, -0.5, 0.188751234740475 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.3113328409381042, -0.5, 0.18866715906189596 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, -8.407567857904308E-5, 0.0, 8.407567857904308E-5 ]
+        }, {
+          "dealIndex" : 7,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "utilitiesBb" : [ 0.0, 0.0, 0.0, -0.20168433122554438, -0.5, 0.7016843312255444 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.0, -0.20163964571859305, -0.5, 0.701639645718593 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, -4.468550695133078E-5, 0.0, 4.4685506951358533E-5 ]
+        }, {
+          "dealIndex" : 0,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 0.5566373702245141, 0.9433626297754855, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.5565696009774956, 0.9434303990225039, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 6.776924701845655E-5, -6.776924701845655E-5, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 1,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 0.1814373837400154, 1.3185626162599844, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.1814373837400154, 1.3185626162599844, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 2,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 1.1581182718813912, 0.3418817281186083, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 1.158118138381296, 0.3418818616187036, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 1.335000952007448E-7, -1.335000953117671E-7, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 3,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 1.2710669931064666, 0.22893300689353313, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 1.2710669931064666, 0.22893300689353313, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 4,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 0.9843095848828332, 0.5156904151171664, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.9838193456614506, 0.516180654338549, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 4.902392213825824E-4, -4.902392213825824E-4, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 5,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 0.9636163238136921, 0.5363836761863081, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 0.9636163238136921, 0.5363836761863081, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 6,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 1.8976163735461142, -0.3976163735461142, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 1.897497446839552, -0.397497446839552, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 1.1892670656221682E-4, -1.1892670656216131E-4, 0.0, 0.0 ]
+        }, {
+          "dealIndex" : 7,
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "utilitiesBb" : [ 0.0, 0.0, 2.2520106138527196, -0.7520106138527192, -0.5, -1.0 ],
+          "sourceCheckdownUtilitiesBb" : [ 0.0, 0.0, 2.2520106138527196, -0.7520106138527192, -0.5, -1.0 ],
+          "continuationMinusCheckdownBb" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        } ],
+        "originalProjectedQuality" : {
+          "profileUtilitiesBb" : [ -9.427614341521313E-5, -1.1579679977305116E-4, 1.1155750900045043, 0.12288630865443552, -0.5002833108058102, -0.7379680149099299 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1175907335114816, 0.1481378479805147, -0.49999986557552034, -0.7331924897641291 ],
+          "deviationGainsBb" : [ 9.427614341521313E-5, 1.3366512102026715E-4, 0.0020156435069773604, 0.025251539326079167, 2.8344523028989155E-4, 0.0047755251458008185 ],
+          "nashConvBb" : 0.03255409447358272
+        },
+        "candidateProjectedQuality" : {
+          "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269486893, 0.25015440427587116, -0.5003163969561707, -0.8602375902219198 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.25220601466675036, -0.49999983258869246, -0.8588140898458366 ],
+          "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.004591035238415531, 0.0020516103908791994, 3.165643674782337E-4, 0.0014235003760831866 ],
+          "nashConvBb" : 0.008592622740570207
+        },
+        "originalParentQuality" : {
+          "profileUtilitiesBb" : [ -9.427614341521313E-5, -1.1579679977305116E-4, 1.1155750900045043, 0.12288630865443552, -0.5002833108058102, -0.7379680149099299 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1175907335114816, 0.14813784798526944, -0.49999986557552034, -0.7331924897641291 ],
+          "deviationGainsBb" : [ 9.427614341521313E-5, 1.3366512102026715E-4, 0.0020156435069773604, 0.02525153933083392, 2.8344523028989155E-4, 0.0047755251458008185 ],
+          "nashConvBb" : 0.03255409447833747
+        },
+        "candidateParentQuality" : {
+          "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269486893, 0.25015440427587116, -0.5003163969561707, -0.8602375902219198 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.2522060189193526, -0.49999983258869246, -0.8588138050098926 ],
+          "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.004591035238415531, 0.0020516146434814697, 3.165643674782337E-4, 0.0014237852120272398 ],
+          "nashConvBb" : 0.00859291182911653
+        },
+        "parentNashConvChangeBb" : -0.023961182649220942,
+        "parentNashConvDidNotIncrease" : true,
+        "originalReach" : {
+          "terminalProbability" : {
+            "ALL_IN_SHOWDOWN" : 0.11019184179913544,
+            "POSTFLOP_CONTINUATION_REQUIRED" : 0.29491500166009754,
+            "UNCONTESTED" : 0.5948931565407635
+          },
+          "checkdownProbabilityByLiveSeats" : {
+            "2" : 0.0019228894481536723,
+            "3" : 0.29298822753193193,
+            "4" : 3.664669834336171E-6,
+            "5" : 2.1078321597231635E-7,
+            "6" : 9.226963788222213E-9
+          },
+          "reachedHeadsUpHistories" : 191,
+          "headsUpProbability" : 0.0019228894481536723,
+          "selectedHistoryProbability" : 0.0011112330480845993,
+          "unselectedHeadsUpProbability" : 8.116564000690729E-4,
+          "fractionOfHeadsUpProbabilitySelected" : 0.5778975224767017,
+          "selectedPhysicalFlopProbability" : 1.1247281087985572E-7,
+          "selectedHistoryOtherFlopsProbability" : 0.0011111205752737194
+        },
+        "candidateReach" : {
+          "terminalProbability" : {
+            "ALL_IN_SHOWDOWN" : 0.11424961337576743,
+            "POSTFLOP_CONTINUATION_REQUIRED" : 0.13468211307524633,
+            "UNCONTESTED" : 0.7510682735489818
+          },
+          "checkdownProbabilityByLiveSeats" : {
+            "2" : 0.043101395794245934,
+            "3" : 0.09157855719934899,
+            "4" : 1.9971425166717543E-6,
+            "5" : 1.5192279053732203E-7,
+            "6" : 1.1016345260135986E-8
+          },
+          "reachedHeadsUpHistories" : 191,
+          "headsUpProbability" : 0.043101395794245934,
+          "selectedHistoryProbability" : 0.030652623510615016,
+          "unselectedHeadsUpProbability" : 0.012448772283630918,
+          "fractionOfHeadsUpProbabilitySelected" : 0.7111747298612349,
+          "selectedPhysicalFlopProbability" : 3.098188191143571E-6,
+          "selectedHistoryOtherFlopsProbability" : 0.030649525322423873
+        },
+        "originalConditionalPostflop" : [ {
+          "flop" : [ "3c", "4h", "Ks" ],
+          "preflopReachProbability" : 0.0010941659256243326,
+          "flopProbabilityGivenHistory" : 1.0121457489878541E-4,
+          "posteriorJointDeals" : 8,
+          "bestResponse" : {
+            "firstBestResponse" : 1.2103849832933804,
+            "secondBestResponse" : 1.2093055083261774,
+            "profileValue" : 1.2094661593307188,
+            "gap" : 0.0010794749672029536
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "7d 7h",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 4,
+            "actionFrequency" : {
+              "bet" : 0.9998855664621845,
+              "check" : 1.144335378155059E-4
+            },
+            "actionEvBb" : {
+              "bet" : 1.449676134407579,
+              "check" : 0.3750271527365997
+            }
+          }, {
+            "actingSeat" : "BB",
+            "heroCombo" : "Ac Jc",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 4,
+            "actionFrequency" : {
+              "bet" : 0.9989698826918074,
+              "check" : 0.0010301173081926362
+            },
+            "actionEvBb" : {
+              "bet" : 1.4824142265162854,
+              "check" : 1.1240931351730952
+            }
+          } ]
+        }, {
+          "flop" : [ "3h", "Ac", "Ad" ],
+          "preflopReachProbability" : 1.7067122460265806E-5,
+          "flopProbabilityGivenHistory" : 1.0120463206811961E-4,
+          "posteriorJointDeals" : 4,
+          "bestResponse" : {
+            "firstBestResponse" : 3.7523349593702697,
+            "secondBestResponse" : 3.7490553625770215,
+            "profileValue" : 3.7510981685794436,
+            "gap" : 0.003279596793248185
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "CO",
+            "heroCombo" : "Ah Kh",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 0.9979123217348634,
+              "check" : 0.0020876782651365923
+            },
+            "actionEvBb" : {
+              "bet" : 4.506337240750431,
+              "check" : 3.935521149454521
+            }
+          }, {
+            "actingSeat" : "CO",
+            "heroCombo" : "Qh Th",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 0.9994731939348772,
+              "check" : 5.268060651227587E-4
+            },
+            "actionEvBb" : {
+              "bet" : 4.496196253525585,
+              "check" : 3.3466406153652635
+            }
+          } ]
+        } ],
+        "candidateConditionalPostflop" : [ {
+          "flop" : [ "3c", "4h", "Ks" ],
+          "preflopReachProbability" : 0.03052753807054043,
+          "flopProbabilityGivenHistory" : 1.0121457489878541E-4,
+          "posteriorJointDeals" : 8,
+          "bestResponse" : {
+            "firstBestResponse" : 1.0298847557787316,
+            "secondBestResponse" : 0.897565143684198,
+            "profileValue" : 0.9011396271510301,
+            "gap" : 0.13231961209453358
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "BB",
+            "heroCombo" : "7d 7h",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 4,
+            "actionFrequency" : {
+              "bet" : 0.9998855664621845,
+              "check" : 1.144335378155059E-4
+            },
+            "actionEvBb" : {
+              "bet" : 1.0963372324122738,
+              "check" : 0.06959291405233836
+            }
+          }, {
+            "actingSeat" : "BB",
+            "heroCombo" : "Ac Jc",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 4,
+            "actionFrequency" : {
+              "bet" : 0.9989698826918074,
+              "check" : 0.0010301173081926362
+            },
+            "actionEvBb" : {
+              "bet" : 1.260196636784752,
+              "check" : 0.7896005680190376
+            }
+          } ]
+        }, {
+          "flop" : [ "3h", "Ac", "Ad" ],
+          "preflopReachProbability" : 1.2508544007459372E-4,
+          "flopProbabilityGivenHistory" : 6.680555804377214E-5,
+          "posteriorJointDeals" : 4,
+          "bestResponse" : {
+            "firstBestResponse" : 3.752361094981914,
+            "secondBestResponse" : 3.7490761018366765,
+            "profileValue" : 3.7510552475927974,
+            "gap" : 0.003284993145237447
+          },
+          "firstPlayerDecisions" : [ {
+            "actingSeat" : "CO",
+            "heroCombo" : "Ah Kh",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 0.9979123217348634,
+              "check" : 0.0020876782651365923
+            },
+            "actionEvBb" : {
+              "bet" : 4.505393437560899,
+              "check" : 3.9564579879709463
+            }
+          }, {
+            "actingSeat" : "CO",
+            "heroCombo" : "Qh Th",
+            "street" : "FLOP",
+            "compatibleJointDeals" : 2,
+            "actionFrequency" : {
+              "bet" : 0.9994731939348772,
+              "check" : 5.268060651227587E-4
+            },
+            "actionEvBb" : {
+              "bet" : 4.4967765078468735,
+              "check" : 3.4056493146238505
+            }
+          } ]
+        } ]
+      },
+      "maximumConditionalGapAfterPreflopBb" : 0.13231961209453358,
+      "postflopRefinement" : {
+        "refinementIterations" : 300,
+        "inputInformationSets" : 234256,
+        "replacedInformationSets" : 224992,
+        "preservedInformationSets" : 9264,
+        "originalSolutionHash" : "e1658174b2aade8fd938b7fbf5e26ef6ca2160bc916cfb4ff64887f179012e91",
+        "candidateSolutionHash" : "53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0",
+        "originalQuality" : {
+          "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269486893, 0.25015440427587116, -0.5003163969561707, -0.8602375902219198 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.2522060189193526, -0.49999983258869246, -0.8588138050098926 ],
+          "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.004591035238415531, 0.0020516146434814697, 3.165643674782337E-4, 0.0014237852120272398 ],
+          "nashConvBb" : 0.00859291182911653
+        },
+        "candidateQuality" : {
+          "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269385645, 0.250154380277268, -0.5003163969561707, -0.8602375662131918 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.25220605591644707, -0.49999983258869246, -0.8588141539482042 ],
+          "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.0045910352485403205, 0.0020516756391790736, 3.165643674782337E-4, 0.0014234122649876557 ],
+          "nashConvBb" : 0.00859259988789934
+        },
+        "nashConvChangeBb" : -3.1194121719035905E-7,
+        "bettingContinuationProbability" : 3.098188191143571E-6,
+        "branches" : [ {
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+          "flop" : [ "3c", "4h", "Ks" ],
+          "status" : "REFINED",
+          "historyReachProbability" : 0.03052753807054042,
+          "flopProbabilityGivenHistory" : 1.0121457489878541E-4,
+          "posteriorJointDeals" : 8,
+          "replacedInformationSets" : 117920,
+          "before" : {
+            "firstBestResponse" : 1.0298847557787316,
+            "secondBestResponse" : 0.897565143684198,
+            "profileValue" : 0.9011396271510301,
+            "gap" : 0.13231961209453358
+          },
+          "after" : {
+            "firstBestResponse" : 0.9099100799958355,
+            "secondBestResponse" : 0.903949170641544,
+            "profileValue" : 0.908909865031118,
+            "gap" : 0.005960909354291499
+          }
+        }, {
+          "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+          "flop" : [ "3h", "Ac", "Ad" ],
+          "status" : "REFINED",
+          "historyReachProbability" : 1.2508544007459375E-4,
+          "flopProbabilityGivenHistory" : 6.680555804377214E-5,
+          "posteriorJointDeals" : 4,
+          "replacedInformationSets" : 107072,
+          "before" : {
+            "firstBestResponse" : 3.752361094981914,
+            "secondBestResponse" : 3.7490761018366765,
+            "profileValue" : 3.7510552475927974,
+            "gap" : 0.003284993145237447
+          },
+          "after" : {
+            "firstBestResponse" : 3.750685205390843,
+            "secondBestResponse" : 3.7492180188118813,
+            "profileValue" : 3.749843607853739,
+            "gap" : 0.001467186578961499
+          }
+        } ]
+      },
+      "candidateAudit" : {
+        "solutionHash" : "53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0",
+        "parentQuality" : {
+          "profileUtilitiesBb" : [ -9.28936066104172E-5, -9.915043985642255E-5, 1.1105916269385645, 0.250154380277268, -0.5003163969561707, -0.8602375662131918 ],
+          "bestResponseUtilitiesBb" : [ 0.0, 1.7868321247215995E-5, 1.1151826621871048, 0.25220605591644707, -0.49999983258869246, -0.8588141539482042 ],
+          "deviationGainsBb" : [ 9.28936066104172E-5, 1.1701876110363854E-4, 0.0045910352485403205, 0.0020516756391790736, 3.165643674782337E-4, 0.0014234122649876557 ],
+          "nashConvBb" : 0.00859259988789934
+        },
+        "maximumConditionalGapBb" : 0.005960909354291499,
+        "everySelectedBranchReached" : true,
+        "reach" : {
+          "terminalProbability" : {
+            "ALL_IN_SHOWDOWN" : 0.11424961337576743,
+            "POSTFLOP_CONTINUATION_REQUIRED" : 0.13468211307524633,
+            "UNCONTESTED" : 0.7510682735489818
+          },
+          "checkdownProbabilityByLiveSeats" : {
+            "2" : 0.043101395794245934,
+            "3" : 0.09157855719934899,
+            "4" : 1.9971425166717543E-6,
+            "5" : 1.5192279053732203E-7,
+            "6" : 1.1016345260135986E-8
+          },
+          "reachedHeadsUpHistories" : 191,
+          "headsUpProbability" : 0.043101395794245934,
+          "selectedHistoryProbability" : 0.030652623510615016,
+          "unselectedHeadsUpProbability" : 0.012448772283630918,
+          "fractionOfHeadsUpProbabilitySelected" : 0.7111747298612349,
+          "selectedPhysicalFlopProbability" : 3.098188191143571E-6,
+          "selectedHistoryOtherFlopsProbability" : 0.030649525322423873
+        }
+      },
+      "decision" : {
+        "status" : "ACCEPTED",
+        "accepted" : true,
+        "everySelectedBranchReached" : true,
+        "conditionalGapWithinTarget" : true,
+        "parentNashConvDidNotIncrease" : true,
+        "parentImprovementBb" : 0.023961494590438132,
+        "materialParentImprovement" : true
+      },
+      "retainedSolutionHash" : "53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0"
+    } ]
+  },
+  "sourcePrivateSupport" : {
+    "interpretation" : "Offline private beliefs only; never expose joint hands to a trainer. Marginals are descriptive, not independent ranges. Counterfactual support retains zero-policy-reach deals. Root information-set counts check own-hand/public-state grouping; they do not certify every later information set or solver convergence.",
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "solutionHash" : "85e076c7a0c305428c7d12017860f3d52c5872e6a32a1f239f5f562b48fcfc56",
+    "sourceJointDeals" : 8,
+    "sourceMarginals" : {
+      "UTG" : {
+        "4c 4d" : 1.0
+      },
+      "HJ" : {
+        "9d Kd" : 1.0
+      },
+      "CO" : {
+        "Ah Kh" : 0.5,
+        "Qh Th" : 0.5
+      },
+      "BTN" : {
+        "8h 8s" : 0.5,
+        "Js Ts" : 0.5
+      },
+      "SB" : {
+        "5c 6c" : 1.0
+      },
+      "BB" : {
+        "7d 7h" : 0.5,
+        "Ac Jc" : 0.5
+      }
+    },
+    "uncertainSeats" : [ "CO", "BTN", "BB" ],
+    "boards" : [ {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+      "flop" : [ "3c", "4h", "Ks" ],
+      "counterfactualJointDeals" : 8,
+      "compatiblePriorMass" : 1.0,
+      "priorPhysicalFlopProbability" : 1.0121457489878542E-4,
+      "policyHistoryReach" : 0.03206399922431294,
+      "reachedJointDeals" : 8,
+      "reachedPhysicalFlopProbability" : 3.2453440510438194E-6,
+      "counterfactualMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.5,
+          "Qh Th" : 0.5
+        },
+        "BTN" : {
+          "8h 8s" : 0.5,
+          "Js Ts" : 0.5
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 0.5,
+          "Ac Jc" : 0.5
+        }
+      },
+      "reachedMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.9999944759257526,
+          "Qh Th" : 5.5240742473122795E-6
+        },
+        "BTN" : {
+          "8h 8s" : 0.07247703328907402,
+          "Js Ts" : 0.9275229667109259
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 0.6402874803252391,
+          "Ac Jc" : 0.3597125196747609
+        }
+      },
+      "uncertainFoldedSeats" : [ "CO" ],
+      "firstPlayerRootInformationSets" : 2,
+      "secondPlayerRootInformationSets" : 2
+    }, {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+      "flop" : [ "3h", "Ac", "Ad" ],
+      "counterfactualJointDeals" : 4,
+      "compatiblePriorMass" : 0.5,
+      "priorPhysicalFlopProbability" : 5.060728744939271E-5,
+      "policyHistoryReach" : 1.3029501279579486E-4,
+      "reachedJointDeals" : 4,
+      "reachedPhysicalFlopProbability" : 8.846081243029824E-9,
+      "counterfactualMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.5,
+          "Qh Th" : 0.5
+        },
+        "BTN" : {
+          "8h 8s" : 0.5,
+          "Js Ts" : 0.5
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 1.0
+        }
+      },
+      "reachedMarginals" : {
+        "UTG" : {
+          "4c 4d" : 0.9999999999999999
+        },
+        "HJ" : {
+          "9d Kd" : 0.9999999999999999
+        },
+        "CO" : {
+          "Ah Kh" : 0.6026330774135779,
+          "Qh Th" : 0.39736692258642203
+        },
+        "BTN" : {
+          "8h 8s" : 0.7507948337631407,
+          "Js Ts" : 0.24920516623685923
+        },
+        "SB" : {
+          "5c 6c" : 0.9999999999999999
+        },
+        "BB" : {
+          "7d 7h" : 0.9999999999999999
+        }
+      },
+      "uncertainFoldedSeats" : [ ],
+      "firstPlayerRootInformationSets" : 2,
+      "secondPlayerRootInformationSets" : 2
+    } ]
+  },
+  "retainedPrivateSupport" : {
+    "interpretation" : "Offline private beliefs only; never expose joint hands to a trainer. Marginals are descriptive, not independent ranges. Counterfactual support retains zero-policy-reach deals. Root information-set counts check own-hand/public-state grouping; they do not certify every later information set or solver convergence.",
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "solutionHash" : "53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0",
+    "sourceJointDeals" : 8,
+    "sourceMarginals" : {
+      "UTG" : {
+        "4c 4d" : 1.0
+      },
+      "HJ" : {
+        "9d Kd" : 1.0
+      },
+      "CO" : {
+        "Ah Kh" : 0.5,
+        "Qh Th" : 0.5
+      },
+      "BTN" : {
+        "8h 8s" : 0.5,
+        "Js Ts" : 0.5
+      },
+      "SB" : {
+        "5c 6c" : 1.0
+      },
+      "BB" : {
+        "7d 7h" : 0.5,
+        "Ac Jc" : 0.5
+      }
+    },
+    "uncertainSeats" : [ "CO", "BTN", "BB" ],
+    "boards" : [ {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:fold|BTN:call|SB:fold|BB:check",
+      "flop" : [ "3c", "4h", "Ks" ],
+      "counterfactualJointDeals" : 8,
+      "compatiblePriorMass" : 1.0,
+      "priorPhysicalFlopProbability" : 1.0121457489878542E-4,
+      "policyHistoryReach" : 0.03052753807054042,
+      "reachedJointDeals" : 8,
+      "reachedPhysicalFlopProbability" : 3.0898317885162362E-6,
+      "counterfactualMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.5,
+          "Qh Th" : 0.5
+        },
+        "BTN" : {
+          "8h 8s" : 0.5,
+          "Js Ts" : 0.5
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 0.5,
+          "Ac Jc" : 0.5
+        }
+      },
+      "reachedMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.9999944294005308,
+          "Qh Th" : 5.5705994692462945E-6
+        },
+        "BTN" : {
+          "8h 8s" : 0.07204447523338568,
+          "Js Ts" : 0.9279555247666144
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 0.6640823690307569,
+          "Ac Jc" : 0.3359176309692431
+        }
+      },
+      "uncertainFoldedSeats" : [ "CO" ],
+      "firstPlayerRootInformationSets" : 2,
+      "secondPlayerRootInformationSets" : 2
+    }, {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:call|SB:fold|BB:fold",
+      "flop" : [ "3h", "Ac", "Ad" ],
+      "counterfactualJointDeals" : 4,
+      "compatiblePriorMass" : 0.5,
+      "priorPhysicalFlopProbability" : 5.060728744939271E-5,
+      "policyHistoryReach" : 1.2508544007459375E-4,
+      "reachedJointDeals" : 4,
+      "reachedPhysicalFlopProbability" : 8.356402627334054E-9,
+      "counterfactualMarginals" : {
+        "UTG" : {
+          "4c 4d" : 1.0
+        },
+        "HJ" : {
+          "9d Kd" : 1.0
+        },
+        "CO" : {
+          "Ah Kh" : 0.5,
+          "Qh Th" : 0.5
+        },
+        "BTN" : {
+          "8h 8s" : 0.5,
+          "Js Ts" : 0.5
+        },
+        "SB" : {
+          "5c 6c" : 1.0
+        },
+        "BB" : {
+          "7d 7h" : 1.0
+        }
+      },
+      "reachedMarginals" : {
+        "UTG" : {
+          "4c 4d" : 0.9999999999999999
+        },
+        "HJ" : {
+          "9d Kd" : 0.9999999999999999
+        },
+        "CO" : {
+          "Ah Kh" : 0.6032448533099027,
+          "Qh Th" : 0.39675514669009726
+        },
+        "BTN" : {
+          "8h 8s" : 0.7652562594336312,
+          "Js Ts" : 0.23474374056636882
+        },
+        "SB" : {
+          "5c 6c" : 0.9999999999999999
+        },
+        "BB" : {
+          "7d 7h" : 0.9999999999999999
+        }
+      },
+      "uncertainFoldedSeats" : [ ],
+      "firstPlayerRootInformationSets" : 2,
+      "secondPlayerRootInformationSets" : 2
+    } ]
+  },
+  "selectionAudit" : {
+    "settings" : {
+      "mode" : "DIVERSE_ACTIVE_PAIRS",
+      "candidateLimit" : 20,
+      "minimumComboMass" : 0.05
+    },
+    "considered" : [ {
+      "sourceReachRank" : 1,
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "firstToAct" : "BB",
+      "secondToAct" : "BTN",
+      "sourceReachProbability" : 0.03206399922431296,
+      "disposition" : "SELECTED",
+      "flops" : [ {
+        "flop" : [ "3c", "4h", "Ks" ],
+        "first" : {
+          "7d 7h" : 0.6402874803252391,
+          "Ac Jc" : 0.3597125196747609
+        },
+        "second" : {
+          "8h 8s" : 0.07247703328907402,
+          "Js Ts" : 0.9275229667109259
+        }
+      } ]
+    }, {
+      "sourceReachRank" : 2,
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      } ],
+      "firstToAct" : "BB",
+      "secondToAct" : "BTN",
+      "sourceReachProbability" : 0.00629832288480903,
+      "disposition" : "DUPLICATE_ACTIVE_PAIR",
+      "flops" : [ ]
+    }, {
+      "sourceReachRank" : 3,
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "firstToAct" : "BB",
+      "secondToAct" : "BTN",
+      "sourceReachProbability" : 0.002779588530236087,
+      "disposition" : "DUPLICATE_ACTIVE_PAIR",
+      "flops" : [ ]
+    }, {
+      "sourceReachRank" : 4,
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "sourceReachProbability" : 0.001743163781949634,
+      "disposition" : "INSUFFICIENT_ACTIVE_HAND_MASS",
+      "flops" : [ {
+        "flop" : [ "2d", "6s", "Qd" ],
+        "first" : {
+          "7d 7h" : 3.146360591540852E-5,
+          "Ac Jc" : 0.9999685363940846
+        },
+        "second" : {
+          "Ah Kh" : 0.7350437827949956,
+          "Qh Th" : 0.2649562172050044
+        }
+      } ]
+    }, {
+      "sourceReachRank" : 5,
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "sourceReachProbability" : 1.302950127957949E-4,
+      "disposition" : "SELECTED",
+      "flops" : [ {
+        "flop" : [ "3h", "Ac", "Ad" ],
+        "first" : {
+          "Ah Kh" : 0.6026330774135779,
+          "Qh Th" : 0.39736692258642203
+        },
+        "second" : {
+          "8h 8s" : 0.7507948337631407,
+          "Js Ts" : 0.24920516623685923
+        }
+      } ]
+    } ]
+  }
+}

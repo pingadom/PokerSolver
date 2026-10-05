@@ -42,3 +42,22 @@ Remove `--plan-only` to execute the declared training and quality-gated round. K
 The model still has tiny private ranges, no rake, one bet size per postflop street, no postflop raises and no multiway postflop betting. The source hand-mass rule is not a replacement for the conditional and whole-parent quality gates or for later realistic cash-game validation.
 
 A wider one-history/two-flop preflight also exercises the rule across boards: rank 1 passes on its first flop but its second flop contains 8s and leaves BTN with only Js Ts. It is rejected. Rank 5 retains material hands on both its boards and is selected instead. The selector never replaces a sampled board just to force eligibility.
+
+## Paired whole-round results
+
+The [seed 711 report](data/sixmax-diverse-pair-alternating-seed-711.json) and [seed 712 report](data/sixmax-diverse-pair-alternating-seed-712.json) use the identical declared menu, 500 joint / 300 initial conditional iterations, and one round of 500 exhaustive preflop / 300 conditional postflop iterations. Both accept the whole round and stop at `ROUND_LIMIT_REACHED`.
+
+| Seed | Initial parent NashConv (bb) | Accepted parent NashConv (bb) | Initial maximum conditional gap (bb) | Accepted maximum conditional gap (bb) |
+| --- | ---: | ---: | ---: | ---: |
+| 711 | 0.027213766 | 0.008657585 | 0.006626742 | 0.004226265 |
+| 712 | 0.032554094 | 0.008592600 | 0.003279597 | 0.005960909 |
+
+Each accepted policy improves its own same-game parent score materially and meets the 0.05bb conditional target. Seed 712's conditional maximum increases relative to its initial policy, so this is not an improvement in every metric. After preflop feedback alone, the changed-range conditional maxima are 4.411449703bb / 0.132319612bb, both above the target; the final postflop re-solve is necessary before acceptance. Changing the continuation menu changes the game; these scores cannot establish greater accuracy than the historical reach-first study. Two single-round trials do not establish convergence.
+
+The CO/BTN branch's final conditional gaps are 0.001467186bb and 0.001467187bb. Both final board-conditioned CO marginals remain approximately 60.32% Ah Kh / 39.68% Qh Th, and BTN approximately 76.53% 8h 8s / 23.47% Js Ts. These describe the retained policies; they were not imposed as a final strategy constraint.
+
+Each preflop stage freezes sixteen exact six-seat utility vectors, including the four private worlds incompatible with the CO/BTN betting flop. It visits 307,971,000 states and 162,336,000 terminals with exhaustive chance. Both final policies preserve all 234,256 explicit rows; initial sampled traversal visits 219,550 / 220,162 rows, with explicit completion of the remaining 14,706 / 14,094 recorded before refinement.
+
+Full checkpoints stay in ignored `.local/` and are approximately 61.00 / 60.98 MiB. Their saved hashes match the retained audits: `f40dc45ebcec3eb8461f8a10b5bfcbe513ab760b9662855b5c63177910a77a00` and `53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0`. The different row count and file size reflect the changed physical support and board, not a compression or algorithm-performance claim.
+
+Tests reconstruct source selection and board-conditioned beliefs independently, check exact source/menu/budget binding, recompute acceptance decisions, verify policy hash chains and all-six-seat payoff accounting, and reconcile physical branch reach with the retained audit. They do not repeat long CFR training in CI. No new trainer pack is admitted by this evidence.
