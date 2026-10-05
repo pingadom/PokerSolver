@@ -10,8 +10,15 @@ public final class MultiPlayerStrategyEvaluator {
 
     public static <S> double[] utilities(MultiPlayerCfrGame<S> game, CfrSolution solution) {
         Objects.requireNonNull(game, "game");
+        return utilitiesFrom(game, solution, game.initialState());
+    }
+
+    /** Literal continuation values at one private/public state; no posterior reweighting. */
+    static <S> double[] utilitiesFrom(MultiPlayerCfrGame<S> game, CfrSolution solution, S state) {
+        Objects.requireNonNull(game, "game");
         Objects.requireNonNull(solution, "solution");
-        return evaluate(game, solution, game.initialState());
+        Objects.requireNonNull(state, "state");
+        return evaluate(game, solution, state);
     }
 
     static <S> double probability(

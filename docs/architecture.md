@@ -21,13 +21,37 @@ flowchart LR
 | Component                  | Responsibility                                                                                                               |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `engine`                   | Immutable cards/player scenarios, validation, hand ranking, seeded board sampling, batch planning/results, benchmark harness |
+| `solver`                   | Offline CFR/CFR+, bounded two-to-six-player games, exact best responses, continuation feedback, saved-policy EV grading       |
 | `shared`                   | Validated message codec, relational repositories, Flyway, queue adapters, outbox and transactional aggregation               |
 | `api`                      | REST DTOs/validation, status/history/results, cache, OpenAPI, HTTP correlation IDs, publication scheduler                    |
 | `worker`                   | Consume, renew visibility, compute outside transactions, submit results, acknowledge after commit, handle dead letters       |
-| `frontend`                 | Accessible text-card form, progress polling, per-player results, recent history                                              |
+| `frontend`                 | Equity form and results, progress/history, validation-only drills with a six-seat table, action EVs and decision feedback      |
 | `infrastructure/terraform` | Restricted AWS demonstration environment; no automatic provisioning                                                          |
 
 The original five-card evaluator is reused. Its seven-card path checks all 21 five-card combinations, comparing packed numeric scores without constructing verbose hand objects. No new external evaluator dependency was introduced.
+
+## Solver and trainer boundary
+
+Equity simulation and strategy training have different jobs. A worker estimates showdown equity for the submitted exact hands. The framework-free `solver` module instead learns action probabilities in an explicitly declared betting game, using chip utilities and private information sets. Its CFR/CFR+ implementation and finite-game best-response evaluators are PokerLab's own code. Weighted ranges, folded-card blockers, correlated reached hands and public betting history determine the game being solved; showdown equity alone cannot grade a betting decision.
+
+The current connected six-seat research pipeline is offline:
+
+```mermaid
+flowchart LR
+  Source[Saved ranges, rules and exact payoff tables] --> Joint[Joint six-seat CFR]
+  Joint --> Complete[Explicit policy completion]
+  Complete --> Post[Conditional postflop CFR+]
+  Post --> Values[Exact frozen continuation values]
+  Values --> Pre[Six-seat preflop CFR+]
+  Pre --> Audits[Full-parent and changed-range audits]
+  Audits --> Reports[Source-bound validation reports]
+```
+
+Every seat makes preflop decisions. Selected heads-up histories and physical flops permit connected flop/turn/river betting; other flops and multiway non-all-in pots retain mandatory checkdown. Freezing a completed postflop policy produces one literal utility vector per selected public history and original private deal. Preflop re-solving retains original root chance and own-hand observations, replaces only preflop strategy rows, then recomputes both parent deviations and conditional postflop quality under the changed ranges. A matched control freezes the unrefined continuations; an optional final postflop stage solves at the new ranges. See [continuation feedback](sixmax-continuation-preflop-feedback.md) for budgets, paired evidence and remaining model limits.
+
+The live trainer consumes separately saved, strictly loaded solution packs. Its opt-in research endpoints bind questions, submitted decisions and reviews to a pack hash. Loading reconstructs the declared game and checks complete strategy/payoff support and numerical quality. Requests replay a reached public history and evaluate legal-action EVs from that saved policy; they do not launch CFR training or Monte Carlo board work. Research reports from the pipeline above contain audit evidence, not a newly admitted trainer pack. Synthetic ranges and restricted betting rules keep the current drills `VALIDATION_ONLY`; see the [full-round pack and trainer contract](sixmax-full-round-pack-trainer.md).
+
+This separation makes trainer responses reproducible and keeps long numerical work out of HTTP handlers, database transactions and the equity queue. Broader cash-game ranges, physical betting coverage, postflop raises, multiway betting and rake remain solver gates before general GTO content.
 
 ## Submission and completion
 
