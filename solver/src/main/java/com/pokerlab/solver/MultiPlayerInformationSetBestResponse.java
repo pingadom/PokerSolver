@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.OptionalDouble;
 
 /**
  * Exact pure best response to a fixed multi-player profile in a finite game with public-depth
@@ -125,6 +126,7 @@ public final class MultiPlayerInformationSetBestResponse {
             double opponentChanceReach,
             Map<String, InformationSet<S>> informationSets) {
         if (game.isTerminal(state)) return;
+        if (inactiveUtility(game, state, target).isPresent()) return;
         int actor = game.currentPlayer(state);
         if (actor == -1) {
             for (var outcome : game.chanceOutcomes(state))
@@ -185,6 +187,12 @@ public final class MultiPlayerInformationSetBestResponse {
                 throw new IllegalArgumentException("Terminal utility count must match players");
             value = utilities[target];
         } else {
+            var inactive = inactiveUtility(game, state, target);
+            if (inactive.isPresent()) {
+                value = inactive.getAsDouble();
+                cache.put(state, value);
+                return value;
+            }
             int actor = game.currentPlayer(state);
             if (actor == -1) {
                 value = 0;
@@ -228,5 +236,15 @@ public final class MultiPlayerInformationSetBestResponse {
             throw new IllegalArgumentException("Best-response continuation is not finite");
         cache.put(state, value);
         return value;
+    }
+
+    private static <S> OptionalDouble inactiveUtility(
+            MultiPlayerCfrGame<S> game, S state, int target) {
+        var utility =
+                Objects.requireNonNull(
+                        game.inactivePlayerUtility(state, target), "inactive utility");
+        if (utility.isPresent() && !Double.isFinite(utility.getAsDouble()))
+            throw new IllegalArgumentException("Inactive player utility must be finite");
+        return utility;
     }
 }

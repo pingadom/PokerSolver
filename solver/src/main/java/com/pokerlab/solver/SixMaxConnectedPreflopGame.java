@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.OptionalDouble;
 
 /**
  * Six-seat CFR with connected betting on explicitly selected physical flops and mandatory checkdown
@@ -362,6 +363,21 @@ public final class SixMaxConnectedPreflopGame
         var node = node(state);
         if (!node.terminal()) throw new IllegalArgumentException("Expected terminal state");
         return node.utilities().clone();
+    }
+
+    @Override
+    public OptionalDouble inactivePlayerUtility(State state, int player) {
+        if (player < 0 || player >= playerCount())
+            throw new IllegalArgumentException("Invalid inactive-utility player");
+        node(state); // Keep the same state validation as every other public game operation.
+        var selected = branch(state);
+        if (selected == null
+                || player == selected.coverage.firstToAct().ordinal()
+                || player == selected.coverage.secondToAct().ordinal())
+            return OptionalDouble.empty();
+        // Selection occurs only at a completed preflop history. Folded seats cannot act in any
+        // descendant; residual checkdown and every physical betting branch lose their commitment.
+        return OptionalDouble.of(selected.foldedUtilities[player]);
     }
 
     @Override
