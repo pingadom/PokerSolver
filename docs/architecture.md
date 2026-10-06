@@ -130,6 +130,10 @@ Wins count outright pots; ties count participation in a split pot. Fractional eq
 
 `CANCELLED` is modelled and rendered, but cancellation is not exposed as an endpoint. Authentication, ranges, S3 exports and autoscaling remain stretch goals. No code assumes exactly-once queue delivery.
 
+## Solver continuation experiments
+
+The [flop-texture continuation experiment](sixmax-texture-continuation.md) is an offline solver path. It computes exact pair equities conditioned on six coarse public flop classes, preserves the full six-hand private distribution and folded blockers, and replaces selected preflop checkdowns with a stack-capped one-bet round. Checkpoints bind source/table/model/menu/policy identity and require every legal row. Independent replay measures parent and reached conditional deviations, checkdown recovery and unchanged physical-flop content bounds. Actual board ranks/cards and later betting are omitted; no trainer or HTTP generation path accepts this model.
+
 ## Security and deployment limits
 
 Card/name/count validation applies before persistence, with a 100-million-trial request cap and at most 10,000 batches. Fractional integers are rejected. Browser seeds use decimal strings to avoid losing precision; Java preserves all signed 64-bit values. The API uses explicit detached DTOs. CORS is same-origin by default; Vite and nginx proxy local API requests. No cross-origin wildcard is enabled.

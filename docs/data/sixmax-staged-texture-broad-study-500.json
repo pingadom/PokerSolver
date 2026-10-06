@@ -1,0 +1,3231 @@
+{
+  "algorithm" : "CFR_PLUS",
+  "chanceTraversal" : "EXHAUSTIVE",
+  "checkdownBaselineInTextureGame" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09949410735921421, 0.6615985273893297, 0.42738002793017293, -0.4442645516401008, -0.42249523414124435 ],
+    "deviationGainsBb" : [ 1.1039635932752713E-5, 4.521331880033286E-4, 0.22337556260518354, 0.08893545020549398, 1.9472010306548215E-4, 0.008743971159405228 ],
+    "nashConvBb" : 0.3217128768970843,
+    "profileUtilitiesBb" : [ -1.1039635932752713E-5, 0.09904197417121088, 0.43822296478414613, 0.33844457772467895, -0.4444592717431663, -0.4312392053006496 ]
+  },
+  "checkdownRecoveryErrorBb" : [ 0.0, 0.0, 1.1102230246251565E-16, 1.1102230246251565E-16, 0.0, 0.0 ],
+  "completeTreeStates" : 142681,
+  "coverage" : [ {
+    "betBb" : 1.25,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:fold|SB:fold|BB:check",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 2.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 3.75,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:raise:3.0|SB:fold|BB:fold|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 7.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  }, {
+    "betBb" : 9.75,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:raise:3.0|SB:fold|BB:fold|CO:raise:9.0|BTN:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 19.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  }, {
+    "betBb" : 3.25,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 6.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 9.25,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:raise:9.0|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 18.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 9.75,
+    "dealTexturePairs" : 72,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:raise:9.0|SB:fold|BB:fold|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 19.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  } ],
+  "gameHash" : "5c2e67e05ad9c33eebb7a1f4c8839747937ab6dfbd3feffa0f245696c4f81048",
+  "iterations" : 500,
+  "jointlySolvedConditionalTextures" : [ {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 4.0157796354101594E-5,
+      "Qh Th" : 0.9999598422036459
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.299344027522471, 0.20067113985552343, -0.5000000000000001, -1.0000000000000002 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 4.143788310484453E-6, 1.1023589683939461E-5, 0.0, 0.0 ],
+      "nashConvBb" : 1.5167377994423914E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.2993398837341605, 0.2006601162658395, -0.5, -1.0 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999939312436973,
+      "Js Ts" : 6.068756302929877E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.05182187134759049
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 3.994065734987339E-5,
+      "Qh Th" : 0.9999600593426501
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 2.547278459997802, -1.0472663675276448, -0.5000000000000001, -1.0000000000000002 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 4.4728989312403655E-6, 7.619571226191724E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.209247015743209E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 2.5472739870988708, -1.047273987098871, -0.5000000000000001, -1.0000000000000002 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.999993776655718,
+      "Js Ts" : 6.223344282139839E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.46791487448943736
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 3.982059053460722E-5,
+      "Qh Th" : 0.9999601794094652
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.8067721544655628, -0.3067612424232484, -0.5000000000000001, -1.0000000000000002 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 4.04217364780024E-6, 6.8698686663259956E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.0912042314126236E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.806768112291915, -0.30676811229191475, -0.5000000000000001, -1.0000000000000002 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999937261211737,
+      "Js Ts" : 6.273878826398405E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.3133601762404995
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 4.139109261904639E-5,
+      "Qh Th" : 0.9999586089073809
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.0430031188192708, 0.4570089887029913, -0.4999999999999999, -0.9999999999999998 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 3.7722696100139785E-6, 8.335252652258429E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.2107522262272408E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.0429993465496608, 0.457000653450339, -0.4999999999999999, -0.9999999999999998 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999937313524229,
+      "Js Ts" : 6.268647576915116E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08238878700494628
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 4.129243858599009E-5,
+      "Qh Th" : 0.9999587075614139
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.11209385867581553, 1.387916934596786, -0.4999999999999999, -0.9999999999999998 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 3.243075989298183E-6, 7.550196614136695E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.0793272603434878E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.11209061559982623, 1.3879093844001718, -0.49999999999999983, -0.9999999999999997 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999936546234055,
+      "Js Ts" : 6.3453765944990895E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08238877049674923
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 4.589432004732188E-5,
+      "Qh Th" : 0.9999541056799527
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "historyProbability" : 0.16613409239085736,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -3.451657829165789, 4.951668793996799, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 1.638637008749555E-6, 9.326194000180976E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.0964831008930531E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -3.4516594678027976, 4.9516594678027985, -0.5, -1.0 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999934569802943,
+      "Js Ts" : 6.543019705988631E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.0021255204207769043
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.99999707905197,
+      "Qh Th" : 2.920948030174432E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.20345045401401657, 1.2965617113346186, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 7.940863808370002E-6, 4.224484827286545E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.2165348635656548E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.2034425131502082, 1.2965574868497913, -0.5, -1.0 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999915976157235,
+      "Js Ts" : 8.402384276371098E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.051821848188630504
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.9999970631715536,
+      "Qh Th" : 2.9368284462680364E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.31043129467954883, 1.1895812002731074, -0.49999999999999994, -0.9999999999999999 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 5.420129079281022E-6, 7.074823576758149E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.2494952656039171E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.31042587455046955, 1.1895741254495307, -0.49999999999999983, -0.9999999999999997 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999913499030404,
+      "Js Ts" : 8.650096959518637E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.46538462261976304
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.9999970543161275,
+      "Qh Th" : 2.9456838725115193E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.14354639257945292, 1.643560421522812, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 6.6944815634017996E-6, 7.334461796792979E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.4028943360194779E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.14355308706101633, 1.643553087061015, -0.5, -1.0 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999912682235681,
+      "Js Ts" : 8.73177643203237E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.3107287818202415
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.9999971660881523,
+      "Qh Th" : 2.833911847901962E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.41971458653449817, 1.9197288938354697, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 6.33703784186368E-6, 7.970263130818722E-6, 0.0, 0.0 ],
+      "nashConvBb" : 1.4307300972682402E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.41972092357234003, 1.919720923572339, -0.49999999999999994, -0.9999999999999999 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999915073221642,
+      "Js Ts" : 8.49267783596549E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08491900671907715
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.9999971593172667,
+      "Qh Th" : 2.8406827333672736E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.9552909966475165, 2.455306412413708, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 5.338903705243148E-6, 1.0076862485774996E-5, 0.0, 0.0 ],
+      "nashConvBb" : 1.5415766191018143E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.9552963355512217, 2.455296335551222, -0.49999999999999994, -0.9999999999999999 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.999991363054926,
+      "Js Ts" : 8.636945074151709E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08471659261686816
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "Ah Kh" : 0.9999974441667051,
+      "Qh Th" : 2.5558332948656004E-6
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 0.16616664868066494,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -2.3885446526053964, 3.888562303875311, -0.49999999999999994, -0.9999999999999999 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 2.2799906203019304E-6, 1.537127929296389E-5, 0.0, 0.0 ],
+      "nashConvBb" : 1.765126991326582E-5,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -2.3885469325960167, 3.888546932596018, -0.49999999999999994, -0.9999999999999999 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999917130234556,
+      "Js Ts" : 8.286976544462143E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.0024291480354196606
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.4260446076760612,
+      "Ac Jc" : 0.5739553923239389
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.8041155843728736, 0.0, -0.5000000000000001, -0.30411220925446186 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 2.4075450623106676E-6, 0.0, 0.0, 9.67573349219819E-7 ],
+      "nashConvBb" : 3.3751184115304866E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.8041131768278112, 0.0, -0.5000000000000001, -0.3041131768278111 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.5000660938372896,
+      "Qh Th" : 0.4999339061627104
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.0504733008576183
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.4339720323078056,
+      "Ac Jc" : 0.5660279676921943
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.5923266522838527, 0.0, -0.49999999999999994, -0.09232335803071628 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 2.124897003907833E-6, 0.0, 0.0, 1.169356132688093E-6 ],
+      "nashConvBb" : 3.294253136595926E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.5923245273868488, 0.0, -0.49999999999999994, -0.09232452738684897 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4996176031792836,
+      "Qh Th" : 0.5003823968207164
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.4659473333519615
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.43771580391363013,
+      "Ac Jc" : 0.5622841960863698
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.49080270723552494, 0.0, -0.5, 0.009200709436228149 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 1.989403214497365E-6, 0.0, 0.0, 1.427268538335691E-6 ],
+      "nashConvBb" : 3.416671752833056E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.49080071783231044, 0.0, -0.5, 0.009199282167689813 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.49917005004485665,
+      "Qh Th" : 0.5008299499551433
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.31398352610962493
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.4293433045206992,
+      "Ac Jc" : 0.5706566954793004
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.4458685426382446, 0.0, -0.4999999999999998, 0.05413465262321602 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 1.9426866079141902E-6, 0.0, 0.0, 1.2525748529987335E-6 ],
+      "nashConvBb" : 3.1952614609129237E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.4458665999516367, 0.0, -0.4999999999999998, 0.05413340004836302 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.502579255337495,
+      "Qh Th" : 0.4974207446625044
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08316157911623336
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.43471179935009197,
+      "Ac Jc" : 0.5652882006499081
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.32941367136323435, 0.0, -0.5, 0.17058956255453864 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 1.802355167723757E-6, 0.0, 0.0, 1.4315626052363584E-6 ],
+      "nashConvBb" : 3.2339177729601154E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.3294118690080666, 0.0, -0.49999999999999994, 0.1705881309919334 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.5030669696867884,
+      "Qh Th" : 0.4969330303132116
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08415034257500145
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "7d 7h" : 0.42360662170934865,
+      "Ac Jc" : 0.5763933782906513
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 2.739152087801374E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.04193465294494829, 0.0, -0.49999999999999994, 0.4580689191095243 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 1.4553835411615368E-6, 0.0, 0.0, 2.1166709314179855E-6 ],
+      "nashConvBb" : 3.5720544725795222E-6,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.04193319756140713, 0.0, -0.49999999999999994, 0.4580668024385929 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.5126956504789383,
+      "Qh Th" : 0.4873043495210615
+    },
+    "secondToAct" : "CO",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.0022839179895605714
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.47655406749103757,
+      "Qh Th" : 0.5234459325089623
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.36044500591140943, 1.1407070500919545, -0.4999999999999999, -0.9999999999999998 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0010979484472263823, 5.4107556138216495E-5, 0.0, 0.0 ],
+      "nashConvBb" : 0.0011520560033645988,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.35934705746418305, 1.1406529425358163, -0.4999999999999999, -0.9999999999999998 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999922418976301,
+      "Js Ts" : 7.758102369791122E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.051821846476676786
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.475201732202923,
+      "Qh Th" : 0.5247982677970768
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.1502277229922389, 0.35100038285402047, -0.49999999999999983, -0.9999999999999997 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0011841447937348537, 4.396105252357785E-5, 0.0, 0.0 ],
+      "nashConvBb" : 0.0012281058462584316,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.149043578198504, 0.3509564218014969, -0.49999999999999983, -0.9999999999999997 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999920294975408,
+      "Js Ts" : 7.97050245882997E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.4667090922998318
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.47445095176905644,
+      "Qh Th" : 0.5255490482309436
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.2032643118079701, 1.297853027284894, -0.49999999999999994, -0.9999999999999999 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0010765829076027078, 4.0756185262003086E-5, 0.0, 0.0 ],
+      "nashConvBb" : 0.001117339092864711,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.2021877289003674, 1.297812271099632, -0.49999999999999983, -0.9999999999999997 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999919597871885,
+      "Js Ts" : 8.040212811626078E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.31210623861585196
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.4841047048512109,
+      "Qh Th" : 0.5158952951487892
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.5709919747854596, 2.0720270600189377, -0.49999999999999994, -0.9999999999999999 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 9.889982381842133E-4, 4.6086995294736255E-5, 0.0, 0.0 ],
+      "nashConvBb" : 0.0010350852334789495,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.5719809730236438, 2.071980973023643, -0.49999999999999994, -0.9999999999999999 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999920697062625,
+      "Js Ts" : 7.930293737376569E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08359453037454344
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.4835087495358196,
+      "Qh Th" : 0.5164912504641803
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -1.7230802346300849, 3.2239866360739136, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 8.623742348767838E-4, 4.4027208951913366E-5, 0.0, 0.0 ],
+      "nashConvBb" : 9.064014438286971E-4,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -1.7239426088649616, 3.2239426088649616, -0.5, -1.0 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999919545358086,
+      "Js Ts" : 8.045464191211406E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08349808094848511
+  }, {
+    "firstCombosAtFivePercent" : 2,
+    "firstMarginal" : {
+      "Ah Kh" : 0.5099177635539179,
+      "Qh Th" : 0.490082236446082
+    },
+    "firstToAct" : "CO",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 9.57855804325921E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -5.470026845884772, 6.970521973134605, -0.5, -1.0 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 4.2874131228565204E-4, 6.638593754626498E-5, 0.0, 0.0 ],
+      "nashConvBb" : 4.95127249831917E-4,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -5.4704555871970575, 6.970455587197058, -0.49999999999999994, -0.9999999999999999 ]
+    },
+    "secondCombosAtFivePercent" : 1,
+    "secondMarginal" : {
+      "8h 8s" : 0.9999919990998863,
+      "Js Ts" : 8.000900113757168E-6
+    },
+    "secondToAct" : "BTN",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.002270211284610928
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999917362882185,
+      "Ac Jc" : 8.263711781395644E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 2.3708941951632387, 0.0, -0.5, -1.8682396959091447 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.002632241916080247, 0.0, 0.0, 2.225733801353158E-5 ],
+      "nashConvBb" : 0.0026544992540937784,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 2.3682619532471585, 0.0, -0.5, -1.8682619532471583 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.47655411252545876,
+      "Qh Th" : 0.5234458874745411
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.049493961374447025
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999919992947751,
+      "Ac Jc" : 8.00070522484781E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.8153416064508622, 0.0, -0.49999999999999994, -0.3130455525376577 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0022677688058078127, 0.0, 0.0, 2.828510739671941E-5 ],
+      "nashConvBb" : 0.002296053913204532,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.8130738376450544, 0.0, -0.49999999999999994, -0.3130738376450544 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4766626277424992,
+      "Qh Th" : 0.5233373722575008
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.4654810934141292
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999921202568137,
+      "Ac Jc" : 7.879743186297153E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.272215043884753, 0.0, -0.5, 0.7742606087978711 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.002014296075813493, 0.0, 0.0, 3.126883730286689E-5 ],
+      "nashConvBb" : 0.00204556491311636,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.2742293399605665, 0.0, -0.5, 0.7742293399605682 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.47639457006483177,
+      "Qh Th" : 0.523605429935168
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.3164014269491625
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999918508852601,
+      "Ac Jc" : 8.149114739937897E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -0.7660142513545464, 0.0, -0.5000000000000001, 1.2679525502684306 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0019050680040864076, 0.0, 0.0, 3.323090979834298E-5 ],
+      "nashConvBb" : 0.0019382989138847506,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -0.7679193193586328, 0.0, -0.5000000000000001, 1.2679193193586322 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.47593983267734347,
+      "Qh Th" : 0.5240601673226565
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08219101449695111
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999920266692736,
+      "Ac Jc" : 7.973330726502996E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -2.0466153383769714, 0.0, -0.5, 2.548258962025826 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0016070571718325155, 0.0, 0.0, 3.656647702232618E-5 ],
+      "nashConvBb" : 0.0016436236488548417,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -2.048222395548804, 0.0, -0.5, 2.5482223955488035 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4771538910201732,
+      "Qh Th" : 0.5228461089798269
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08420578097160533
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 0.9999916679432691,
+      "Ac Jc" : 8.332056731086889E-6
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "historyProbability" : 4.783748186560589E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, -6.182788213700918, 0.0, -0.5, 6.683488290997694 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 6.528797963571975E-4, 0.0, 0.0, 4.719750041992654E-5 ],
+      "nashConvBb" : 7.00077296777124E-4,
+      "profileUtilitiesBb" : [ 0.0, 0.0, -6.183441093497275, 0.0, -0.5, 6.683441093497274 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.47655439494884466,
+      "Qh Th" : 0.5234456050511554
+    },
+    "secondToAct" : "CO",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.0022267227937049876
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.2037020912657E-4,
+      "Ac Jc" : 0.9996796297908737
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 2.137787431201104, 0.0, -0.5, -1.6353661422504329 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0024113298884196332, 0.0, 0.0, 9.959062251763129E-6 ],
+      "nashConvBb" : 0.0024212889506713964,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 2.1353761013126844, 0.0, -0.49999999999999994, -1.6353761013126846 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4765649586030413,
+      "Qh Th" : 0.5234350413969588
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_MONOTONE",
+    "textureProbabilityGivenHistory" : 0.05121401833153567
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.3089833010045277E-4,
+      "Ac Jc" : 0.9996691016698994
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.5791764791439233, 0.0, -0.49999999999999994, -1.076999507281248 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0021639032198497166, 0.0, 0.0, 1.3068642825686538E-5 ],
+      "nashConvBb" : 0.002176971862675403,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.5770125759240736, 0.0, -0.49999999999999994, -1.0770125759240736 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4756990721062532,
+      "Qh Th" : 0.5243009278937467
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.46633321424273455
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.359762932918336E-4,
+      "Ac Jc" : 0.9996640237067081
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.404454601891247, 0.0, -0.5, -0.9023514755883743 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0020884587350180617, 0.0, 0.0, 1.4667567854287356E-5 ],
+      "nashConvBb" : 0.002103126302872349,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.4023661431562289, 0.0, -0.5, -0.9023661431562285 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.475109737306489,
+      "Qh Th" : 0.5248902626935109
+    },
+    "secondToAct" : "CO",
+    "texture" : "DISTINCT_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.3121898112134704
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.2487391660406814E-4,
+      "Ac Jc" : 0.9996751260833959
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.3052695827679777, 0.0, -0.49999999999999994, -0.8032115868665896 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.002042923591861756, 0.0, 0.0, 1.5072309526908967E-5 ],
+      "nashConvBb" : 0.002057995901388665,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.303226659176116, 0.0, -0.49999999999999994, -0.8032266591761165 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.4813798633435255,
+      "Qh Th" : 0.5186201366564744
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_TWO_TONE",
+    "textureProbabilityGivenHistory" : 0.08386838829904832
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.320339463983647E-4,
+      "Ac Jc" : 0.9996679660536016
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 1.1192089367508482, 0.0, -0.49999999999999983, -0.6172296940421111 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.00196229332059894, 0.0, 0.0, 1.694938813767699E-5 ],
+      "nashConvBb" : 0.001979242708736617,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 1.1172466434302493, 0.0, -0.4999999999999997, -0.6172466434302488 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.48136864711546623,
+      "Qh Th" : 0.5186313528845335
+    },
+    "secondToAct" : "CO",
+    "texture" : "PAIRED_RAINBOW",
+    "textureProbabilityGivenHistory" : 0.08407140793076792
+  }, {
+    "firstCombosAtFivePercent" : 1,
+    "firstMarginal" : {
+      "7d 7h" : 3.1774283723998734E-4,
+      "Ac Jc" : 0.9996822571627602
+    },
+    "firstToAct" : "BB",
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "historyProbability" : 3.6344359531106273E-4,
+    "posteriorPrivateDeals" : 12,
+    "quality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.8203868626504378, 0.0, -0.4999999999999999, -0.31852517222367555 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0018407579654590167, 0.0, 0.0, 2.0932461303191374E-5 ],
+      "nashConvBb" : 0.001861690426762208,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.8185461046849788, 0.0, -0.4999999999999998, -0.31854610468497874 ]
+    },
+    "secondCombosAtFivePercent" : 2,
+    "secondMarginal" : {
+      "Ah Kh" : 0.49829363071480715,
+      "Qh Th" : 0.5017063692851926
+    },
+    "secondToAct" : "CO",
+    "texture" : "TRIPS",
+    "textureProbabilityGivenHistory" : 0.0023231599824431234
+  } ],
+  "jointlySolvedInTextureGame" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09949410735921421, 0.45015185211999054, 0.28828740635042943, -0.39952629468375217, -0.43725820366096396 ],
+    "deviationGainsBb" : [ 1.1039635932752713E-5, 4.521331880033286E-4, 1.1135762512565206E-4, 2.4318833106806714E-4, 2.1049664960076653E-4, 1.2065205490363606E-4 ],
+    "nashConvBb" : 0.001148867484634203,
+    "profileUtilitiesBb" : [ -1.1039635932752713E-5, 0.09904197417121088, 0.4500404944948649, 0.28804421801936136, -0.39973679133335294, -0.4373788557158676 ]
+  },
+  "jointlySolvedPhysicalFlopFeasibility" : {
+    "boardsEnumeratedPerHistory" : 22100,
+    "headsUpProbability" : 0.3345872932582799,
+    "histories" : [ {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.16616664868066494,
+      "reachRank" : 1,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.16613409239085725,
+      "reachRank" : 2,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 9.578558043259209E-4,
+      "reachRank" : 3,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.7837481865605836E-4,
+      "reachRank" : 4,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 3.634435953110625E-4,
+      "reachRank" : 5,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 2.73915208780137E-4,
+      "reachRank" : 6,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 9.76103201685039E-5,
+      "reachRank" : 7,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.3944849463244012E-5,
+      "reachRank" : 8,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 2.3476703217834976E-5,
+      "reachRank" : 9,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9567402374387208E-5,
+      "reachRank" : 10,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.8212622934238312E-5,
+      "reachRank" : 11,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.1993050596498821E-5,
+      "reachRank" : 12,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.457856057087566E-6,
+      "reachRank" : 13,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 2.800986093690819E-6,
+      "reachRank" : 14,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.3265757931437702E-6,
+      "reachRank" : 15,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.622290465686493E-7,
+      "reachRank" : 16,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.509942587736754E-7,
+      "reachRank" : 17,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.5183442742234694E-7,
+      "reachRank" : 18,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.4219899210967375E-7,
+      "reachRank" : 19,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.308427454327689E-7,
+      "reachRank" : 20,
+      "secondToAct" : "BTN"
+    } ],
+    "numericMargin" : 1.0E-12,
+    "numericReachUnresolved" : false,
+    "optimisticHeadsUpFraction" : 8.334133062266394E-4,
+    "optimisticSelectedHistoryProbability" : 2.788495022958052E-4,
+    "policyValidationStates" : 138793,
+    "reachedHeadsUpHistories" : 1873,
+    "rootPrivateDeals" : 12,
+    "settings" : {
+      "candidateLimit" : 20,
+      "coverage" : {
+        "minimumComboMass" : 0.05,
+        "minimumHeadsUpFraction" : 0.25,
+        "minimumHistoryProbability" : 1.0E-4,
+        "minimumMaterialCombosPerActiveSeat" : 2
+      },
+      "maximumHistories" : 4
+    },
+    "status" : "INFEASIBLE_UNDER_FIXED_POLICY",
+    "unexaminedHistoryProbability" : 4.934293515668209E-6
+  },
+  "jointlySolvedReach" : {
+    "headsUpProbability" : 0.3345872932582799,
+    "selectedHeadsUpFraction" : 0.9993635061343467,
+    "selectedHistoryProbability" : 0.33437433049859544
+  },
+  "maximumPreflopActionFrequencyChange" : 0.7706297215773885,
+  "model" : "SIX_PUBLIC_FLOP_TEXTURES_ONE_BET_THEN_CHECKDOWN/v1",
+  "payoffTableHash" : "b30b33fef6af4d3ff44be379c46be5ebca41b6c5e2ac5129a469f2b8024ff9a7",
+  "postflopInformationSets" : 288,
+  "preflopInformationSets" : 9161,
+  "publicationStatus" : "VALIDATION_ONLY",
+  "schemaVersion" : "six-max-texture-study/v1",
+  "selections" : [ {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "potFraction" : 0.5
+  } ],
+  "solutionHash" : "ce9049fd39516587e01796e8a15049bec09c9f4a7e0f9a7fec1894530455003b",
+  "sourceIterations" : 500,
+  "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+  "sourcePhysicalFlopFeasibility" : {
+    "boardsEnumeratedPerHistory" : 22100,
+    "headsUpProbability" : 0.4786164617572327,
+    "histories" : [ {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.14681305060475722,
+      "reachRank" : 1,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.11397006095304354,
+      "reachRank" : 2,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.09522754602919581,
+      "reachRank" : 3,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.07231232636519526,
+      "reachRank" : 4,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.024691037737879753,
+      "reachRank" : 5,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.024559192856035698,
+      "reachRank" : 6,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 6.579843695065483E-4,
+      "reachRank" : 7,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9285896370799366E-4,
+      "reachRank" : 8,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 9.76103201685039E-5,
+      "reachRank" : 9,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9567402374387208E-5,
+      "reachRank" : 10,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.8212622934238312E-5,
+      "reachRank" : 11,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.8093439523357574E-5,
+      "reachRank" : 12,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.1395795240263418E-5,
+      "reachRank" : 13,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.457856057087566E-6,
+      "reachRank" : 14,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.216415286513668E-6,
+      "reachRank" : 15,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.352041147491199E-6,
+      "reachRank" : 16,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.5334902879833358E-6,
+      "reachRank" : 17,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.0412059703640267E-6,
+      "reachRank" : 18,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.509942587736754E-7,
+      "reachRank" : 19,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.5183442742234694E-7,
+      "reachRank" : 20,
+      "secondToAct" : "CO"
+    } ],
+    "numericMargin" : 1.0E-12,
+    "numericReachUnresolved" : false,
+    "optimisticHeadsUpFraction" : 0.2003511339891511,
+    "optimisticSelectedHistoryProbability" : 0.09589135085893676,
+    "policyValidationStates" : 138793,
+    "reachedHeadsUpHistories" : 1873,
+    "rootPrivateDeals" : 12,
+    "settings" : {
+      "candidateLimit" : 20,
+      "coverage" : {
+        "minimumComboMass" : 0.05,
+        "minimumHeadsUpFraction" : 0.25,
+        "minimumHistoryProbability" : 1.0E-4,
+        "minimumMaterialCombosPerActiveSeat" : 2
+      },
+      "maximumHistories" : 4
+    },
+    "status" : "INFEASIBLE_UNDER_FIXED_POLICY",
+    "unexaminedHistoryProbability" : 5.820460234395863E-6
+  },
+  "sourceReach" : {
+    "headsUpProbability" : 0.4786164617572327,
+    "selectedHeadsUpFraction" : 0.9978202855637371,
+    "selectedHistoryProbability" : 0.4775732145461074
+  },
+  "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6"
+}
