@@ -18,7 +18,7 @@ import java.util.OptionalDouble;
  */
 public final class SixMaxConnectedPreflopGame
         implements MultiPlayerCfrGame<SixMaxConnectedPreflopGame.State> {
-    public static final int MAX_PRIVATE_DEALS = 8;
+    public static final int MAX_PRIVATE_DEALS = 12;
     public static final int MAX_CONNECTED_DEAL_FLOPS = 32;
     public static final int MAX_SELECTED_FLOPS = 8;
     public static final int MAX_SELECTED_HISTORIES = 4;
@@ -115,7 +115,7 @@ public final class SixMaxConnectedPreflopGame
         var sourceDeals = base.chanceOutcomes(base.initialState());
         if (sourceDeals.size() > MAX_PRIVATE_DEALS)
             throw new IllegalArgumentException(
-                    "Connected prototype supports at most eight private deals");
+                    "Connected prototype supports at most " + MAX_PRIVATE_DEALS + " private deals");
         var entries = new LinkedHashMap<String, Prepared>();
         int connectedDealFlops = 0;
         for (var selection : selections) {

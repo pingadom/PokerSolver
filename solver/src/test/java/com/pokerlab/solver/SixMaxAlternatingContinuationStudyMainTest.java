@@ -48,7 +48,7 @@ class SixMaxAlternatingContinuationStudyMainTest {
         args[16] = "0.05";
         SixMaxAlternatingContinuationStudyMain.main(args);
         var artifact = read(report);
-        assertEquals("six-max-alternating-continuation-study/v3", artifact.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v4", artifact.schemaVersion());
         assertEquals(
                 SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05),
                 artifact.selectionAudit().settings());
@@ -59,6 +59,16 @@ class SixMaxAlternatingContinuationStudyMainTest {
                         .toList());
         assertEquals(12, artifact.cost().compatibleDealFlops());
         assertFalse(Files.exists(checkpoint));
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.Algorithm.CFR_PLUS,
+                artifact.settings().preflopAlgorithm());
+        var linearArgs = Arrays.copyOf(args, 19);
+        linearArgs[17] = "--preflop-algorithm";
+        linearArgs[18] = "LINEAR_VANILLA";
+        SixMaxAlternatingContinuationStudyMain.main(linearArgs);
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.Algorithm.LINEAR_VANILLA,
+                read(report).settings().preflopAlgorithm());
         var bytes = Files.readAllBytes(report);
         Files.writeString(checkpoint, "keep checkpoint");
         for (var suffix :
@@ -69,6 +79,14 @@ class SixMaxAlternatingContinuationStudyMainTest {
                         new String[] {"--plan-only", "--plan-only"},
                         new String[] {"--resume", checkpoint.toString(), "--plan-only"},
                         new String[] {"--diverse-pairs", ".05", "--diverse-pairs", ".05"},
+                        new String[] {"--preflop-algorithm"},
+                        new String[] {"--preflop-algorithm", "UNKNOWN"},
+                        new String[] {
+                            "--preflop-algorithm",
+                            "LINEAR_VANILLA",
+                            "--preflop-algorithm",
+                            "CFR_PLUS"
+                        },
                         new String[] {"--unknown"})) {
             var invalid = Arrays.copyOf(args, 14 + suffix.length);
             System.arraycopy(suffix, 0, invalid, 14, suffix.length);
@@ -78,6 +96,28 @@ class SixMaxAlternatingContinuationStudyMainTest {
             assertArrayEquals(bytes, Files.readAllBytes(report));
             assertEquals("keep checkpoint", Files.readString(checkpoint));
         }
+    }
+
+    @Test
+    void oversizedCorrelatedMenuDoesNotReplaceReportOrCheckpoint(@TempDir Path temp)
+            throws Exception {
+        var source = Path.of("../docs/data/sixmax-correlated-source-pack.json");
+        var report = temp.resolve("correlated.json");
+        var checkpoint = temp.resolve("policy.json");
+        Files.writeString(report, "keep report");
+        Files.writeString(checkpoint, "keep checkpoint");
+        var args = Arrays.copyOf(arguments(source, report, checkpoint), 17);
+        args[9] = "2";
+        args[14] = "--plan-only";
+        args[15] = "--diverse-pairs";
+        args[16] = "0.05";
+        var rejected =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> SixMaxAlternatingContinuationStudyMain.main(args));
+        assertTrue(rejected.getMessage().contains("18 compatible deal/flop pairs"));
+        assertEquals("keep report", Files.readString(report));
+        assertEquals("keep checkpoint", Files.readString(checkpoint));
     }
 
     @Test
@@ -101,8 +141,10 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertNotNull(fresh.initialTraining());
         assertNull(fresh.resumedSolutionHash());
         assertEquals(1, fresh.rounds().acceptedRounds());
-        assertEquals("six-max-alternating-continuation-study/v3", fresh.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v4", fresh.schemaVersion());
         assertNotNull(fresh.sourcePrivateSupport());
+        assertNotNull(fresh.sourcePrivateCorrelation());
+        assertEquals(15, fresh.sourcePrivateCorrelation().pairs().size());
         assertEquals(
                 fresh.rounds().retainedAudit().solutionHash(),
                 fresh.retainedPrivateSupport().solutionHash());

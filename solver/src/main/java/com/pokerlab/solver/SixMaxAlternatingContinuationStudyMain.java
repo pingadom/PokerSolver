@@ -41,7 +41,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
             SixMaxAlternatingContinuationSolver.Report rounds,
             SixMaxPrivateSupportAudit.Report sourcePrivateSupport,
             SixMaxPrivateSupportAudit.Report retainedPrivateSupport,
-            SixMaxReachedContinuationStudy.SelectionAudit selectionAudit) {
+            SixMaxReachedContinuationStudy.SelectionAudit selectionAudit,
+            SixMaxPrivateRangeCorrelationAudit.Report sourcePrivateCorrelation) {
         public Artifact {
             selectedHistories = List.copyOf(selectedHistories);
         }
@@ -52,10 +53,11 @@ public final class SixMaxAlternatingContinuationStudyMain {
     public static void main(String[] args) throws Exception {
         if (args.length < 14)
             throw new IllegalArgumentException(
-                    "Usage: SixMaxAlternatingContinuationStudyMain <pack.json> <report.json> <checkpoint-output.json> <seed> <joint-iterations> <initial-postflop-iterations> <preflop-iterations> <postflop-iterations> <max-rounds> <max-histories> <flop-seed> <flops-per-history> <conditional-target-bb> <minimum-improvement-bb> [--plan-only | --resume checkpoint.json] [--diverse-pairs minimum-combo-mass]");
+                    "Usage: SixMaxAlternatingContinuationStudyMain <pack.json> <report.json> <checkpoint-output.json> <seed> <joint-iterations> <initial-postflop-iterations> <preflop-iterations> <postflop-iterations> <max-rounds> <max-histories> <flop-seed> <flops-per-history> <conditional-target-bb> <minimum-improvement-bb> [--plan-only | --resume checkpoint.json] [--diverse-pairs minimum-combo-mass] [--preflop-algorithm CFR_PLUS|LINEAR_VANILLA]");
         boolean planOnly = false;
         Path resume = null;
         Double minimumComboMass = null;
+        SixMaxPreflopContinuationFeedback.Algorithm preflopAlgorithm = null;
         for (int index = 14; index < args.length; index++) {
             switch (args[index]) {
                 case "--plan-only" -> {
@@ -73,6 +75,12 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         throw new IllegalArgumentException("Require one minimum combo mass");
                     minimumComboMass = Double.parseDouble(args[index]);
                 }
+                case "--preflop-algorithm" -> {
+                    if (preflopAlgorithm != null || ++index >= args.length)
+                        throw new IllegalArgumentException("Require one preflop algorithm");
+                    preflopAlgorithm =
+                            SixMaxPreflopContinuationFeedback.Algorithm.valueOf(args[index]);
+                }
                 default -> throw new IllegalArgumentException("Unknown option: " + args[index]);
             }
         }
@@ -88,7 +96,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         Integer.parseInt(args[6]),
                         Integer.parseInt(args[7]),
                         Double.parseDouble(args[12]),
-                        Double.parseDouble(args[13]));
+                        Double.parseDouble(args[13]),
+                        preflopAlgorithm);
         int histories = Integer.parseInt(args[9]);
         long flopSeed = Long.parseLong(args[10]);
         int width = Integer.parseInt(args[11]);
@@ -217,7 +226,7 @@ public final class SixMaxAlternatingContinuationStudyMain {
         }
         var artifact =
                 new Artifact(
-                        "six-max-alternating-continuation-study/v3",
+                        "six-max-alternating-continuation-study/v4",
                         "VALIDATION_ONLY",
                         planOnly ? "PLANNED" : "COMPLETED",
                         resume == null ? "FRESH" : "RESUMED",
@@ -237,7 +246,8 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         rounds,
                         sourcePrivateSupport,
                         retainedPrivateSupport,
-                        plan.selectionAudit());
+                        plan.selectionAudit(),
+                        SixMaxPrivateRangeCorrelationAudit.assess(plan.game().source()));
         var output = reportPath.toAbsolutePath().normalize();
         Files.createDirectories(output.getParent());
         new ObjectMapper()

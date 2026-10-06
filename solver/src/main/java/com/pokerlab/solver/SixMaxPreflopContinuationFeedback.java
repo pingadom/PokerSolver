@@ -6,6 +6,11 @@ import java.util.Objects;
 
 /** Alternating experiment: re-solve all preflop decisions against fixed continuation values. */
 public final class SixMaxPreflopContinuationFeedback {
+    public enum Algorithm {
+        CFR_PLUS,
+        LINEAR_VANILLA
+    }
+
     public record Report(
             int preflopIterations,
             String preflopAlgorithm,
@@ -43,12 +48,32 @@ public final class SixMaxPreflopContinuationFeedback {
             CfrSolution original,
             int iterations,
             SixMaxContinuationStudyBudget budget) {
+        return solve(game, original, iterations, budget, Algorithm.CFR_PLUS);
+    }
+
+    public static Result solve(
+            SixMaxConnectedPreflopGame game,
+            CfrSolution original,
+            int iterations,
+            SixMaxContinuationStudyBudget budget,
+            Algorithm algorithm) {
+        Objects.requireNonNull(algorithm, "algorithm");
         if (iterations < 1 || iterations > 3000)
             throw new IllegalArgumentException("Preflop feedback requires 1–3000 iterations");
         Objects.requireNonNull(original, "original");
         var projected = new SixMaxFrozenContinuationPreflopGame(game, original, budget);
         var oldPre = preflopPolicy(original);
-        var solver = new MultiPlayerCfrSolver<>(projected, CfrSolver.Variant.CFR_PLUS);
+        var solver =
+                algorithm == Algorithm.CFR_PLUS
+                        ? new MultiPlayerCfrSolver<>(projected, CfrSolver.Variant.CFR_PLUS)
+                        : new MultiPlayerCfrSolver<>(
+                                projected,
+                                CfrSolver.Variant.VANILLA,
+                                MultiPlayerCfrSolver.ChanceMode.EXHAUSTIVE,
+                                0,
+                                0,
+                                true,
+                                true);
         var newPre = solver.solve(iterations);
         if (!newPre.strategy().keySet().equals(oldPre.strategy().keySet()))
             throw new IllegalStateException(
@@ -84,7 +109,7 @@ public final class SixMaxPreflopContinuationFeedback {
                 candidate,
                 new Report(
                         iterations,
-                        "CFR_PLUS",
+                        algorithm.name(),
                         "EXHAUSTIVE",
                         solver.statistics(),
                         newPre.strategy().size(),

@@ -39,6 +39,7 @@ class SixMaxDiversePairArtifactTest {
         for (int seed : new int[] {711, 712}) {
             var report = read(seed);
             assertEquals("six-max-alternating-continuation-study/v3", report.schemaVersion());
+            assertNull(report.sourcePrivateCorrelation());
             assertEquals("VALIDATION_ONLY", report.publicationStatus());
             assertEquals("COMPLETED", report.executionStatus());
             assertEquals("FRESH", report.executionMode());

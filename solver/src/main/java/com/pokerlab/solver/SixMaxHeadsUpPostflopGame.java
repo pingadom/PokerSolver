@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /** A single flop/turn/river betting tree retaining all six physical private hands. */
@@ -26,8 +27,8 @@ public final class SixMaxHeadsUpPostflopGame implements CfrGame<SixMaxHeadsUpPos
             Card river,
             String riverHistory) {}
 
-    private static final List<String> HISTORIES =
-            List.of("", "k", "b", "kb", "kk", "bc", "kbc", "bf", "kbf");
+    private static final Set<String> HISTORIES =
+            Set.of("", "k", "b", "kb", "kk", "bc", "kbc", "bf", "kbf");
     private final SixMaxPolicyFlopTransition.FlopState flop;
     private final double flopBetBb;
     private final double requestedTurnBetBb;

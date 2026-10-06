@@ -21,7 +21,7 @@ docker compose down
 
 `docker compose down` preserves PostgreSQL volume data. `docker compose down -v` deletes the local database, so use it only when intentionally resetting demo data. Stop Redis with `docker compose stop redis` to exercise cache fallback, then restart it with `docker compose start redis`.
 
-The GitHub CI Compose job starts from a clean checkout, builds images, starts two workers, completes a simulation through LocalStack, checks OpenAPI/frontend availability, stops Redis, and completes a second simulation.
+CI runs once per pull request update and on pushes to `main`. Feature-branch pushes do not start a duplicate workflow; all four validation jobs still run on the PR and after merge. The GitHub CI Compose job starts from a clean checkout, builds images, starts two workers, completes a simulation through LocalStack, checks OpenAPI/frontend availability, stops Redis, and completes a second simulation.
 
 ## API and worker from an IDE
 

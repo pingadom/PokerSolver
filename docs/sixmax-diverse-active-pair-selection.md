@@ -6,7 +6,7 @@ This is an offline curriculum selection rule on the source policy. It does not i
 
 ## Selection and accounting
 
-1. Validate complete source preflop rows and the eight-private-deal cap.
+1. Validate complete source preflop rows and the connected private-deal cap (now twelve; this benchmark uses eight).
 2. Enumerate source-policy terminal reach; inspect the highest-reach 20 heads-up histories, with deterministic tie breaking. The candidate limit is explicit in the Java settings and report.
 3. In reach order, skip an active-seat pair already selected. Generate the same seeded physical flop menu the reach-first audit assigns to that original rank.
 4. Condition the complete joint reached distribution on each physical board, retaining folded hands as blockers. Aggregate each active player's own-hand marginal. Reject a history if either player lacks two combos meeting the threshold on any selected board.

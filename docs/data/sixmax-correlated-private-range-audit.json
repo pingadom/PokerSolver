@@ -1,0 +1,329 @@
+{
+  "schemaVersion" : "six-max-private-range-correlation/v2",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "sourcePackHash" : "7d077588d06a4100336cc989892cf953c94f82220f73008c8962a6f974b9cbc8",
+  "sourceSpotHash" : "75b0e61e77ed83dcc91762e6faffa9b9966f664f201adee4e597bd1a6d17ccbf",
+  "correlation" : {
+    "interpretation" : "Offline physical joint prior only; never expose concealed joint hands to a trainer. Zero-probability pairs are absent from this joint support; only an exact range-product game establishes physical impossibility. Pairwise independence does not establish full joint independence. Metrics compare against the product of the physical marginals, not the original input range weights or a reached policy.",
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "jointDeals" : 12,
+    "pairs" : [ {
+      "firstSeat" : "UTG",
+      "secondSeat" : "HJ",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "9d Kd",
+        "probability" : 0.6666666666666666
+      }, {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "Ah Jh",
+        "probability" : 0.3333333333333333
+      } ]
+    }, {
+      "firstSeat" : "UTG",
+      "secondSeat" : "CO",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "Ah Kh",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "Qh Th",
+        "probability" : 0.6666666666666666
+      } ]
+    }, {
+      "firstSeat" : "UTG",
+      "secondSeat" : "BTN",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "8h 8s",
+        "probability" : 0.49999999999999994
+      }, {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "Js Ts",
+        "probability" : 0.49999999999999994
+      } ]
+    }, {
+      "firstSeat" : "UTG",
+      "secondSeat" : "SB",
+      "marginalProductPairs" : 1,
+      "supportedPairs" : 1,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "5c 6c",
+        "probability" : 1.0
+      } ]
+    }, {
+      "firstSeat" : "UTG",
+      "secondSeat" : "BB",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.49999999999999994
+      }, {
+        "firstCombo" : "4c 4d",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.49999999999999994
+      } ]
+    }, {
+      "firstSeat" : "HJ",
+      "secondSeat" : "CO",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 3,
+      "unsupportedIndependentMass" : 0.1111111111111111,
+      "mutualInformationBits" : 0.2516291673878228,
+      "totalVariationFromIndependent" : 0.2222222222222222,
+      "jointProbabilities" : [ {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "Ah Kh",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "Qh Th",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "Ah Kh",
+        "probability" : 0.0
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "Qh Th",
+        "probability" : 0.3333333333333333
+      } ]
+    }, {
+      "firstSeat" : "HJ",
+      "secondSeat" : "BTN",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 4,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 1.0678088346049725E-16,
+      "totalVariationFromIndependent" : 8.326672684688674E-17,
+      "jointProbabilities" : [ {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "8h 8s",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "Js Ts",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "8h 8s",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "Js Ts",
+        "probability" : 0.16666666666666666
+      } ]
+    }, {
+      "firstSeat" : "HJ",
+      "secondSeat" : "SB",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.6666666666666666
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.3333333333333333
+      } ]
+    }, {
+      "firstSeat" : "HJ",
+      "secondSeat" : "BB",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 4,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 1.0678088346049725E-16,
+      "totalVariationFromIndependent" : 8.326672684688674E-17,
+      "jointProbabilities" : [ {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "9d Kd",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Ah Jh",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.16666666666666666
+      } ]
+    }, {
+      "firstSeat" : "CO",
+      "secondSeat" : "BTN",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 4,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 1.0678088346049725E-16,
+      "totalVariationFromIndependent" : 8.326672684688674E-17,
+      "jointProbabilities" : [ {
+        "firstCombo" : "Ah Kh",
+        "secondCombo" : "8h 8s",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Ah Kh",
+        "secondCombo" : "Js Ts",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Qh Th",
+        "secondCombo" : "8h 8s",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Qh Th",
+        "secondCombo" : "Js Ts",
+        "probability" : 0.3333333333333333
+      } ]
+    }, {
+      "firstSeat" : "CO",
+      "secondSeat" : "SB",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "Ah Kh",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Qh Th",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.6666666666666666
+      } ]
+    }, {
+      "firstSeat" : "CO",
+      "secondSeat" : "BB",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 4,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 1.0678088346049725E-16,
+      "totalVariationFromIndependent" : 8.326672684688674E-17,
+      "jointProbabilities" : [ {
+        "firstCombo" : "Ah Kh",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Ah Kh",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.16666666666666666
+      }, {
+        "firstCombo" : "Qh Th",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.3333333333333333
+      }, {
+        "firstCombo" : "Qh Th",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.3333333333333333
+      } ]
+    }, {
+      "firstSeat" : "BTN",
+      "secondSeat" : "SB",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "8h 8s",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.49999999999999994
+      }, {
+        "firstCombo" : "Js Ts",
+        "secondCombo" : "5c 6c",
+        "probability" : 0.49999999999999994
+      } ]
+    }, {
+      "firstSeat" : "BTN",
+      "secondSeat" : "BB",
+      "marginalProductPairs" : 4,
+      "supportedPairs" : 4,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 3.2034265038149176E-16,
+      "totalVariationFromIndependent" : 1.1102230246251565E-16,
+      "jointProbabilities" : [ {
+        "firstCombo" : "8h 8s",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.25
+      }, {
+        "firstCombo" : "8h 8s",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.25
+      }, {
+        "firstCombo" : "Js Ts",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.25
+      }, {
+        "firstCombo" : "Js Ts",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.25
+      } ]
+    }, {
+      "firstSeat" : "SB",
+      "secondSeat" : "BB",
+      "marginalProductPairs" : 2,
+      "supportedPairs" : 2,
+      "unsupportedIndependentMass" : 0.0,
+      "mutualInformationBits" : 0.0,
+      "totalVariationFromIndependent" : 0.0,
+      "jointProbabilities" : [ {
+        "firstCombo" : "5c 6c",
+        "secondCombo" : "7d 7h",
+        "probability" : 0.49999999999999994
+      }, {
+        "firstCombo" : "5c 6c",
+        "secondCombo" : "Ac Jc",
+        "probability" : 0.49999999999999994
+      } ]
+    } ]
+  },
+  "jointDependence" : {
+    "interpretation" : "Offline full physical joint prior, not an action-conditioned belief or strategy-quality score. Total correlation compares the joint prior against the product of its physical marginals, including higher-order dependence missed by seat pairs. Unsupported independent mass is absent from this support; empirical absence does not prove physical impossibility. Concealed joint hands must remain outside trainer questions.",
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "supportedJointDeals" : 12,
+    "marginalProductDeals" : 16,
+    "jointEntropyBits" : 3.584962500721156,
+    "marginalEntropyBits" : {
+      "UTG" : 0.0,
+      "HJ" : 0.9182958340544896,
+      "CO" : 0.9182958340544896,
+      "BTN" : 1.0,
+      "SB" : 0.0,
+      "BB" : 1.0
+    },
+    "totalCorrelationBits" : 0.2516291673878231,
+    "unsupportedIndependentMass" : 0.11111111111111116,
+    "totalVariationFromIndependent" : 0.22222222222222227
+  }
+}
