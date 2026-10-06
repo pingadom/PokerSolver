@@ -135,6 +135,9 @@ class SixMaxCorrelatedContinuationArtifactTest {
                             .05,
                             .000001);
             assertEquals(decision, round.decision());
+            assertFalse(decision.accepted());
+            assertEquals("PARENT_QUALITY_REGRESSION", decision.status());
+            assertEquals("PARENT_QUALITY_REGRESSION", rounds.stopReason());
             assertEquals(decision.accepted() ? 1 : 0, rounds.acceptedRounds());
             assertEquals(
                     decision.accepted() ? round.candidateAudit() : rounds.initialAudit(),

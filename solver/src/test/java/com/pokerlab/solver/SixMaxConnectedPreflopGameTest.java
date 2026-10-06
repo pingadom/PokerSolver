@@ -303,9 +303,13 @@ class SixMaxConnectedPreflopGameTest {
         }
         var expanded =
                 new SixMaxPreflopCheckdownGame(
-                        source.rules(),
+                        new SixMaxPreflopBetting.Rules(100, .5, List.of(100.0)),
                         List.of(
-                                List.of(combo("As Ah", 1), combo("Ac Ad", 1), combo("2s 2h", 1)),
+                                List.of(
+                                        combo("As Ah", 1),
+                                        combo("Ac Ad", 1),
+                                        combo("2s 2h", 1),
+                                        combo("2c 2d", 1)),
                                 List.of(combo("Ks Kh", 1), combo("Kc Kd", 1)),
                                 List.of(combo("Qs Qh", 1), combo("Qc Qd", 1)),
                                 singletonRanges.get(3),
@@ -318,10 +322,16 @@ class SixMaxConnectedPreflopGameTest {
                                 if ((mask & 1 << i) != 0) shares[i] = 1.0 / Integer.bitCount(mask);
                             return MultiwayShowdownEstimate.certain(shares);
                         });
-        assertEquals(12, expanded.chanceOutcomes(expanded.initialState()).size());
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> new SixMaxConnectedPreflopGame(expanded, List.of(selection("2d 3d 4d"))));
+        assertEquals(16, expanded.chanceOutcomes(expanded.initialState()).size());
+        var excessiveSupport =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () ->
+                                new SixMaxConnectedPreflopGame(
+                                        expanded, List.of(selection("2d 3d 4d"))));
+        assertEquals(
+                "Connected prototype supports at most 12 private deals",
+                excessiveSupport.getMessage());
         var otherHistory =
                 List.of(
                         new PublicAction(Seat.UTG, "call"),

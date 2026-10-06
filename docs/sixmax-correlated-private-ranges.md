@@ -95,3 +95,22 @@ The retained checkpoints keep the original average policies, hashes `4da23ffe39c
 The preflop stage now accepts `--preflop-algorithm CFR_PLUS|LINEAR_VANILLA`. CFR+ remains the default, including for historical reports lacking this optional setting. `LINEAR_VANILLA` uses exhaustive chance with unclipped regrets and linear weighting of both regret updates and strategy averages. Both algorithms start fresh regret tables, preserve the original postflop rows during preflop feedback and use the same full-game/conditional quality gate afterward. The feedback report records the actual algorithm and traversal; it does not infer a convergence guarantee from its label.
 
 The next trials resume each preserved input using 1,000 preflop iterations with `LINEAR_VANILLA` and 300 exact postflop iterations. Both algorithm and iteration budget change relative to the rejected controls. This is a higher-budget practical follow-up, not a same-budget causal comparison. The original checkpoints are preserved as separate inputs.
+
+
+## Reproduce the paired controls and resumed follow-ups
+
+Run from the repository root after generating the exact source above. Each invocation runs one trial; this sequential loop avoids requiring two 5 GiB JVMs at once. The original checkpoints and higher-budget outputs use distinct paths. Keep the source and checkpoints unchanged between the two stages.
+
+```powershell
+$env:MAVEN_OPTS = '-Xmx5g'
+foreach ($trialSeed in 711, 712) {
+    mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxAlternatingContinuationStudyMain' "-Dexec.args=docs/data/sixmax-correlated-source-pack.json .local/sixmax-correlated-seed-$trialSeed.json .local/sixmax-correlated-policy-$trialSeed.json $trialSeed 500 300 500 300 1 2 715 1 0.05 0.000001 --diverse-pairs 0.05"
+    if ($LASTEXITCODE -ne 0) { throw "Control trial $trialSeed failed" }
+    mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxAlternatingContinuationStudyMain' "-Dexec.args=docs/data/sixmax-correlated-source-pack.json .local/sixmax-correlated-linear-seed-$trialSeed.json .local/sixmax-correlated-linear-policy-$trialSeed.json $trialSeed 500 300 1000 300 1 2 715 1 0.05 0.000001 --resume .local/sixmax-correlated-policy-$trialSeed.json --diverse-pairs 0.05 --preflop-algorithm LINEAR_VANILLA"
+    if ($LASTEXITCODE -ne 0) { throw "Resumed trial $trialSeed failed" }
+}
+```
+
+Resume reloads the saved average policy and independently checks its source, menu, completeness, hash and conditional quality. It starts fresh regret tables. The joint and initial-postflop positional budgets are unused in resumed mode; the completed report records this with null fresh-training metadata. An initial checkpoint alone is not evidence that a trial finished: require a `COMPLETED` report and inspect its gate decision and retained hash. Accepted policies replace only the output checkpoint atomically; rejected candidates preserve the previously retained policy.
+
+Avoid rebuilding classes used by a running study. Finish builds first or run the study with a separate copy of the compiled runtime. CI verifies saved evidence and finite-game invariants; it does not rerun these large training budgets on every change.
