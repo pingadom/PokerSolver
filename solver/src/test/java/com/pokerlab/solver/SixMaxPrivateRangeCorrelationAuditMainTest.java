@@ -30,13 +30,25 @@ class SixMaxPrivateRangeCorrelationAuditMainTest {
                                         .toFile(),
                                 SixMaxPrivateRangeCorrelationAuditMain.Artifact.class));
         var pack = SixMaxCorrelatedSourcePackTest.source();
-        assertEquals("six-max-private-range-correlation/v1", artifact.schemaVersion());
+        assertEquals("six-max-private-range-correlation/v2", artifact.schemaVersion());
         assertEquals("VALIDATION_ONLY", artifact.publicationStatus());
         assertEquals(MultiwayPackJson.fullRoundContentHash(pack), artifact.sourcePackHash());
         assertEquals(pack.spotHash(), artifact.sourceSpotHash());
         assertEquals(
                 SixMaxPrivateRangeCorrelationAudit.assess(pack.rebuildGame()),
                 artifact.correlation());
+        assertEquals(
+                SixMaxJointRangeDependenceAudit.assess(pack.rebuildGame()),
+                artifact.jointDependence());
+        var legacy = new ObjectMapper().valueToTree(artifact);
+        ((com.fasterxml.jackson.databind.node.ObjectNode) legacy).remove("jointDependence");
+        ((com.fasterxml.jackson.databind.node.ObjectNode) legacy)
+                .put("schemaVersion", "six-max-private-range-correlation/v1");
+        var historical =
+                new ObjectMapper()
+                        .treeToValue(legacy, SixMaxPrivateRangeCorrelationAuditMain.Artifact.class);
+        assertNull(historical.jointDependence());
+        assertEquals(artifact.correlation(), historical.correlation());
         assertArrayEquals(original, Files.readAllBytes(source));
         try (var children = Files.list(output.getParent())) {
             assertEquals(1, children.count());

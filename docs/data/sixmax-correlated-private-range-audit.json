@@ -1,5 +1,5 @@
 {
-  "schemaVersion" : "six-max-private-range-correlation/v1",
+  "schemaVersion" : "six-max-private-range-correlation/v2",
   "publicationStatus" : "VALIDATION_ONLY",
   "sourcePackHash" : "7d077588d06a4100336cc989892cf953c94f82220f73008c8962a6f974b9cbc8",
   "sourceSpotHash" : "75b0e61e77ed83dcc91762e6faffa9b9966f664f201adee4e597bd1a6d17ccbf",
@@ -307,5 +307,23 @@
         "probability" : 0.49999999999999994
       } ]
     } ]
+  },
+  "jointDependence" : {
+    "interpretation" : "Offline full physical joint prior, not an action-conditioned belief or strategy-quality score. Total correlation compares the joint prior against the product of its physical marginals, including higher-order dependence missed by seat pairs. Unsupported independent mass is absent from this support; empirical absence does not prove physical impossibility. Concealed joint hands must remain outside trainer questions.",
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "supportedJointDeals" : 12,
+    "marginalProductDeals" : 16,
+    "jointEntropyBits" : 3.584962500721156,
+    "marginalEntropyBits" : {
+      "UTG" : 0.0,
+      "HJ" : 0.9182958340544896,
+      "CO" : 0.9182958340544896,
+      "BTN" : 1.0,
+      "SB" : 0.0,
+      "BB" : 1.0
+    },
+    "totalCorrelationBits" : 0.2516291673878231,
+    "unsupportedIndependentMass" : 0.11111111111111116,
+    "totalVariationFromIndependent" : 0.22222222222222227
   }
 }

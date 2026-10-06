@@ -69,7 +69,19 @@ Audit any validated saved six-seat preflop source without constructing a connect
 mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxPrivateRangeCorrelationAuditMain' '-Dexec.args=docs/data/sixmax-correlated-source-pack.json .local/correlated-private-range-audit.json'
 ```
 
-The `six-max-private-range-correlation/v1` report binds the source's content hash and spot hash. It is validation-only and describes the saved prior, not convergence or a postflop strategy. The source size limit is 16 MiB. Malformed inputs, excess arguments and report paths aliasing the source are rejected before output is written; an existing report is preserved on input validation failure. No connected-deal cap is needed for this diagnostic; the source game's own validated support and public-tree caps still apply.
+The `six-max-private-range-correlation/v2` report binds the source's content hash and spot hash. It is validation-only and describes the saved prior, not convergence or a postflop strategy. The source size limit is 16 MiB. Malformed inputs, excess arguments and report paths aliasing the source are rejected before output is written; an existing report is preserved on input validation failure. No connected-deal cap is needed for this diagnostic; the source game's own validated support and public-tree caps still apply.
+
+## Full joint dependence beyond seat pairs
+
+The standalone v2 export adds `jointDependence`; existing v1 exports remain readable with that field null. Alternating-study v4 artifacts retain their original pairwise diagnostic and are unchanged by this export extension.
+
+`SixMaxJointRangeDependenceAudit` measures the entropy of the entire six-seat prior, each seat's marginal entropy, total correlation, absent independent-product mass and total variation. Total correlation is the KL divergence from the full joint prior to the product of all six physical marginals, equivalently the sum of marginal entropies minus joint entropy. Log probabilities keep its evaluation finite when a tiny independent product underflows. This describes range dependence, not strategy exploitability.
+
+The twelve-world fixture has joint entropy log2(12), sixteen marginal-product worlds, total correlation about 0.251629 bits, unsupported independent mass 1/9 and total variation 2/9. Its higher-order metric agrees with the HJ/CO dependence because the other uncertain seats are independent of that pair in the source prior.
+
+A separate four-world empirical test encodes three binary hand choices with the third equal to the XOR of the first two. Every pair is independent, yet the full joint prior has two bits of entropy versus three for the independent product: total correlation is one bit, and half the independent mass is absent. All eight products are physically legal, so the empirical report explicitly avoids calling their absence physical impossibility. This test demonstrates why checking fifteen pairs cannot certify independence of the whole table.
+
+The implementation only visits supported joint worlds. It sums the independent-product probability on that support and uses the remaining mass for absent worlds; this computes total variation without enumerating the full marginal Cartesian product. Duplicate world keys aggregate before calculation, zero-probability roots are ignored, and exported marginal entropy maps are immutable. A 52-world empirical stress fixture gives every seat 52 distinct combos: its marginal product has 19,770,609,664 worlds. The audit still visits only the 52 supported worlds and recovers the analytical entropy and dependence. It retains the source game's existing support caps. No joint hands or diagnostics are added to live trainer questions.
 
 ## Explaining the implementation in an interview
 
@@ -94,7 +106,22 @@ The retained checkpoints keep the original average policies, hashes `4da23ffe39c
 
 The preflop stage now accepts `--preflop-algorithm CFR_PLUS|LINEAR_VANILLA`. CFR+ remains the default, including for historical reports lacking this optional setting. `LINEAR_VANILLA` uses exhaustive chance with unclipped regrets and linear weighting of both regret updates and strategy averages. Both algorithms start fresh regret tables, preserve the original postflop rows during preflop feedback and use the same full-game/conditional quality gate afterward. The feedback report records the actual algorithm and traversal; it does not infer a convergence guarantee from its label.
 
-The next trials resume each preserved input using 1,000 preflop iterations with `LINEAR_VANILLA` and 300 exact postflop iterations. Both algorithm and iteration budget change relative to the rejected controls. This is a higher-budget practical follow-up, not a same-budget causal comparison. The original checkpoints are preserved as separate inputs.
+## Higher-budget resumed results
+
+Both preserved inputs were resumed with 1,000 preflop iterations using `LINEAR_VANILLA` and 300 exact postflop iterations. Both complete candidates pass the unchanged quality gate and are retained:
+
+| Input seed | Initial parent NashConv (bb) | Retained parent NashConv (bb) | Retained worst conditional gap (bb) | Accepted rounds |
+| --- | ---: | ---: | ---: | ---: |
+| 711 | 0.0083853140 | 0.0025733538 | 0.0200733445 | 1 |
+| 712 | 0.0093710957 | 0.0026258296 | 0.0199668233 | 1 |
+
+These are approximately 69.3% / 72.0% reductions in each input's same-game parent score. Both algorithm and iteration budget change relative to the rejected controls. This is a higher-budget practical follow-up, not a same-budget causal comparison. The original checkpoints remain separate unchanged inputs. The retained hashes are `e44d987395983ec5bb6db2d809e19d9f38c14f06a0aa9d376ecdece67e2df11f` / `61e7e51faef7f5dc31cedcb0662fe0ef069a8374ea13550ee359df3432db178c`.
+
+The preflop stages retain all 24 history/deal utility vectors and traverse 923,910,000 states / 487,008,000 terminals exhaustively. Resumed reports declare null fresh-training metadata and bind their inputs to the rejected controls' retained hashes. Saved tests reconstruct the gate and hash chain, verify every original deal's six-player utility vector, validate the traversal counts and preserve counterfactual board support.
+
+The retained policy exposes an important coverage limitation. The selected physical flops together have probability only about 3.76e-9 under either retained policy. On the limped BB/BTN board, BTN suited connectors reach approximately 99.945% of BTN's posterior. On the CO/BTN board, BTN 88 reaches about 99.99954%, although CO retains roughly 29.69% AK / 70.31% QT. Folded BB's posterior is also nearly all 77 on that board. All twelve counterfactual worlds remain available; many are very rarely reached.
+
+The final postflop refinement changes parent NashConv by less than 2e-11bb relative to the preflop-stage candidate, consistent with this very small physical-flop probability. Final conditional gaps remain below 0.05bb, but meaningful retained continuation reach and material retained active-hand mixes are still missing. These accepted finite-game policies remain offline validation; they do not supply a realistic six-max trainer lesson. The next coverage gate must inspect the final policy's reach and mixes alongside its quality scores before broader content is promoted.
 
 
 ## Reproduce the paired controls and resumed follow-ups
@@ -114,3 +141,18 @@ foreach ($trialSeed in 711, 712) {
 Resume reloads the saved average policy and independently checks its source, menu, completeness, hash and conditional quality. It starts fresh regret tables. The joint and initial-postflop positional budgets are unused in resumed mode; the completed report records this with null fresh-training metadata. An initial checkpoint alone is not evidence that a trial finished: require a `COMPLETED` report and inspect its gate decision and retained hash. Accepted policies replace only the output checkpoint atomically; rejected candidates preserve the previously retained policy.
 
 Avoid rebuilding classes used by a running study. Finish builds first or run the study with a separate copy of the compiled runtime. CI verifies saved evidence and finite-game invariants; it does not rerun these large training budgets on every change.
+
+
+## Observed postflop CPU cost
+
+A 45-second Java Flight Recorder `profile` window sampled the seed-711 second postflop refinement on this local Windows machine (Microsoft OpenJDK 21.0.3, 5 GiB configured heap, two concurrent trials). Among 3,892 execution samples, the first PokerLab frame was:
+
+| First PokerLab frame | Samples | Fraction of execution samples |
+| --- | ---: | ---: |
+| CfrSolver.traverse | 1,457 | 37.4% |
+| SixMaxHeadsUpPostflopGame.requireState | 959 | 24.6% |
+| SixMaxHeadsUpPostflopGame.informationSet | 501 | 12.9% |
+
+Separately, leaf frames included HashMap.computeIfAbsent in 978 samples and String.equals in 581. These categories overlap the table and must not be added to it. This is a sampled window, not a whole-run wall-time breakdown or a before/after speed comparison. The raw recording remains local under `.local/`.
+
+The state validator currently performs three linear membership searches through nine history strings on each validation. Avoiding those repeated searches while preserving every invalid-state check is a concrete candidate for a paired performance experiment. Strategy hashes, exact best responses and rejection behavior must agree before adopting an optimization. No upstream library defect was established.

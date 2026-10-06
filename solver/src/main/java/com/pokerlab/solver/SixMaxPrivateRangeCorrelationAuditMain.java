@@ -12,7 +12,8 @@ public final class SixMaxPrivateRangeCorrelationAuditMain {
             String publicationStatus,
             String sourcePackHash,
             String sourceSpotHash,
-            SixMaxPrivateRangeCorrelationAudit.Report correlation) {}
+            SixMaxPrivateRangeCorrelationAudit.Report correlation,
+            SixMaxJointRangeDependenceAudit.Report jointDependence) {}
 
     private SixMaxPrivateRangeCorrelationAuditMain() {}
 
@@ -28,13 +29,15 @@ public final class SixMaxPrivateRangeCorrelationAuditMain {
         if (Files.size(sourcePath) > 16L * 1024 * 1024)
             throw new IllegalArgumentException("Source pack exceeds 16 MiB limit");
         var source = MultiwayPackJson.readFullRound(Files.readString(sourcePath));
+        var game = source.rebuildGame();
         var report =
                 new Artifact(
-                        "six-max-private-range-correlation/v1",
+                        "six-max-private-range-correlation/v2",
                         "VALIDATION_ONLY",
                         MultiwayPackJson.fullRoundContentHash(source),
                         source.spotHash(),
-                        SixMaxPrivateRangeCorrelationAudit.assess(source.rebuildGame()));
+                        SixMaxPrivateRangeCorrelationAudit.assess(game),
+                        SixMaxJointRangeDependenceAudit.assess(game));
         Files.createDirectories(output.getParent());
         new ObjectMapper()
                 .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
