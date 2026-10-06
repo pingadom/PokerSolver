@@ -13,6 +13,12 @@ import java.util.SplittableRandom;
  * Unlike two-player zero-sum CFR, a small regret value here does not certify a Nash equilibrium.
  */
 public final class MultiPlayerCfrSolver<S> {
+    public enum InactivePruning {
+        NONE,
+        /** Requires an exact literal payoff guarantee from the game, never a value estimate. */
+        FIXED_UTILITY
+    }
+
     public enum ChanceMode {
         EXHAUSTIVE,
         SAMPLED,
@@ -38,6 +44,8 @@ public final class MultiPlayerCfrSolver<S> {
     private final double uniformMixture;
     private final boolean chanceBaselineEnabled;
     private final boolean linearWeighting;
+    private final InactivePruning inactivePruning;
+    private long inactiveUtilityPrunedNodes;
     private final List<Double> passChanceDraws = new ArrayList<>();
     private SplittableRandom chanceRandom;
     private long visitedNodes, terminalNodes, sampledChanceNodes, baselineCorrections;
@@ -46,6 +54,13 @@ public final class MultiPlayerCfrSolver<S> {
 
     public MultiPlayerCfrSolver(MultiPlayerCfrGame<S> game, CfrSolver.Variant variant) {
         this(game, variant, ChanceMode.EXHAUSTIVE, 0, 0);
+    }
+
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            InactivePruning inactivePruning) {
+        this(game, variant, ChanceMode.EXHAUSTIVE, 0, 0, true, false, inactivePruning);
     }
 
     /**
@@ -81,9 +96,35 @@ public final class MultiPlayerCfrSolver<S> {
             double uniformMixture,
             boolean chanceBaselineEnabled,
             boolean linearWeighting) {
+        this(
+                game,
+                variant,
+                chanceMode,
+                chanceSeed,
+                uniformMixture,
+                chanceBaselineEnabled,
+                linearWeighting,
+                InactivePruning.NONE);
+    }
+
+    /**
+     * Opt-in pruning skips a target's suffix only when it contains no future target decision and
+     * every descendant utility is identical. Other players' own passes still update their rows.
+     * Exhaustive policies may differ by rounding; sampled traversals may consume different draws.
+     */
+    public MultiPlayerCfrSolver(
+            MultiPlayerCfrGame<S> game,
+            CfrSolver.Variant variant,
+            ChanceMode chanceMode,
+            long chanceSeed,
+            double uniformMixture,
+            boolean chanceBaselineEnabled,
+            boolean linearWeighting,
+            InactivePruning inactivePruning) {
         this.game = Objects.requireNonNull(game, "game");
         this.variant = Objects.requireNonNull(variant, "variant");
         this.chanceMode = Objects.requireNonNull(chanceMode, "chanceMode");
+        this.inactivePruning = Objects.requireNonNull(inactivePruning, "inactivePruning");
         this.chanceSeed = chanceSeed;
         if (!Double.isFinite(uniformMixture) || uniformMixture < 0 || uniformMixture > 0.95)
             throw new IllegalArgumentException("Uniform proposal mixture must be in [0, 0.95]");
@@ -107,6 +148,7 @@ public final class MultiPlayerCfrSolver<S> {
         informationSets.clear();
         chanceRandom = new SplittableRandom(chanceSeed);
         visitedNodes = terminalNodes = sampledChanceNodes = baselineCorrections = 0;
+        inactiveUtilityPrunedNodes = 0;
         for (int iteration = 1; iteration <= iterations; iteration++) {
             for (int target = 0; target < players; target++) {
                 iterationStrategies.clear();
@@ -123,6 +165,11 @@ public final class MultiPlayerCfrSolver<S> {
         Map<String, Map<String, Double>> average = new LinkedHashMap<>();
         informationSets.forEach((key, node) -> average.put(key, node.averageStrategy()));
         return new CfrSolution(iterations, Map.copyOf(average));
+    }
+
+    /** Counts skipped suffix roots, not the number of omitted descendants. Reset by solve. */
+    public long inactiveUtilityPrunedNodes() {
+        return inactiveUtilityPrunedNodes;
     }
 
     public Statistics statistics() {
@@ -146,6 +193,15 @@ public final class MultiPlayerCfrSolver<S> {
                 if (!Double.isFinite(utility))
                     throw new IllegalArgumentException("Non-finite terminal utility");
             return utilities[target];
+        }
+        if (inactivePruning == InactivePruning.FIXED_UTILITY) {
+            var fixed = game.inactivePlayerUtility(state, target);
+            if (fixed.isPresent()) {
+                if (!Double.isFinite(fixed.getAsDouble()))
+                    throw new IllegalArgumentException("Non-finite inactive player utility");
+                inactiveUtilityPrunedNodes++;
+                return fixed.getAsDouble();
+            }
         }
         int player = game.currentPlayer(state);
         if (player == -1) {

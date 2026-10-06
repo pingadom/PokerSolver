@@ -11,6 +11,71 @@ import org.junit.jupiter.api.io.TempDir;
 
 class SixMaxTextureStudyTest {
     @Test
+    void prunedStudiesRecordTheirAlgorithmAndReplayCompleteSupport(@TempDir Path temp)
+            throws Exception {
+        var source = SixMaxTextureFlopGameTest.source();
+        var table = SixMaxTextureFlopGameTest.table(source);
+        var menu =
+                List.of(
+                        new SixMaxTextureFlopGame.Selection(
+                                SixMaxConnectedPreflopGameTest.HISTORY, .5));
+        var original = SixMaxTextureStudy.solve(source, table, menu, 5);
+        var candidate =
+                SixMaxTextureStudy.solve(
+                        source, table, menu, 5, MultiPlayerCfrSolver.InactivePruning.FIXED_UTILITY);
+        assertEquals(original.checkpoint().gameHash(), candidate.checkpoint().gameHash());
+        assertEquals(SixMaxTextureStudy.PRUNED_ALGORITHM, candidate.checkpoint().algorithm());
+        assertEquals(candidate.checkpoint().algorithm(), candidate.report().algorithm());
+        assertEquals(0, original.inactiveUtilityPrunedNodes());
+        assertTrue(candidate.inactiveUtilityPrunedNodes() > 0);
+        assertTrue(candidate.traversal().visitedNodes() < original.traversal().visitedNodes());
+        MultiPlayerInactivePruningTest.samePolicy(
+                original.checkpoint().solution(), candidate.checkpoint().solution(), 1e-12);
+        assertEquals(
+                original.report().jointlySolvedInTextureGame().nashConvBb(),
+                candidate.report().jointlySolvedInTextureGame().nashConvBb(),
+                1e-12);
+        var path = temp.resolve("pruned.json.gz");
+        SixMaxTextureStudy.write(path, candidate.checkpoint(), source, table);
+        var loaded = SixMaxTextureStudy.read(path, source, table);
+        assertEquals(candidate.checkpoint(), loaded);
+        var comparison =
+                SixMaxTexturePruningAudit.assess(source, table, original.checkpoint(), loaded);
+        assertTrue(comparison.frequenciesWithinTolerance());
+        assertEquals(1e-10, comparison.roundingTolerance());
+        assertTrue(comparison.maximumProfileUtilityDifferenceBb() < 1e-12);
+        assertTrue(comparison.maximumDeviationGainDifferenceBb() < 1e-12);
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxTexturePruningAudit.assess(
+                                source, table, loaded, original.checkpoint()));
+        var otherBudget =
+                SixMaxTextureStudy.checkpoint(
+                        source,
+                        table,
+                        SixMaxTextureStudy.rebuild(source, table, loaded),
+                        new CfrSolution(
+                                loaded.solution().iterations() + 1, loaded.solution().strategy()),
+                        MultiPlayerCfrSolver.InactivePruning.FIXED_UTILITY);
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxTexturePruningAudit.assess(
+                                source, table, original.checkpoint(), otherBudget));
+        assertEquals(
+                SixMaxTextureStudy.json(candidate.report()),
+                SixMaxTextureStudy.json(SixMaxTextureStudy.assess(source, table, loaded)));
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        SixMaxTexturePayoffTable.mapper().readTree(SixMaxTextureStudy.json(loaded));
+        tree.put("algorithm", "CFR_PLUS_APPROXIMATE_PRUNING");
+        var plain = temp.resolve("invalid.json");
+        Files.writeString(plain, tree.toString());
+        assertThrows(Exception.class, () -> SixMaxTextureStudy.read(plain, source, table));
+    }
+
+    @Test
     void freshJointSolveReplaysIdenticallyWithoutTrainingAndRejectsIncompletePolicies(
             @TempDir Path temp) throws Exception {
         var source = SixMaxTextureFlopGameTest.source();

@@ -83,12 +83,39 @@ class SixMaxTextureStudyMainTest {
                                 new String[] {sourcePath.toString(), alias.toString()}));
         assertThrows(
                 IllegalArgumentException.class, () -> SixMaxTextureStudyMain.main(new String[0]));
+        var badPruning = java.util.Arrays.copyOf(solve, 9);
+        badPruning[8] = "APPROXIMATE";
+        assertThrows(IllegalArgumentException.class, () -> SixMaxTextureStudyMain.main(badPruning));
         assertArrayEquals(sourceBytes, Files.readAllBytes(sourcePath));
         assertArrayEquals(tableBytes, Files.readAllBytes(tablePath));
         Files.writeString(tablePath, "{}");
         assertThrows(Exception.class, () -> SixMaxTextureStudyMain.main(solve));
         assertArrayEquals(policyBytes, Files.readAllBytes(checkpoint));
         assertArrayEquals(reportBytes, Files.readAllBytes(report));
+        // Restore table and check the opt-in CLI and same-game read-only comparison.
+        Files.write(tablePath, tableBytes);
+        var pruned = java.util.Arrays.copyOf(solve, 9);
+        pruned[3] = temp.resolve("pruned.json.gz").toString();
+        pruned[4] = temp.resolve("pruned-report.json").toString();
+        pruned[8] = "FIXED_UTILITY";
+        SixMaxTextureStudyMain.main(pruned);
+        var comparison = temp.resolve("comparison.json");
+        String[] compare = {
+            sourcePath.toString(),
+            tablePath.toString(),
+            checkpoint.toString(),
+            pruned[3],
+            comparison.toString()
+        };
+        SixMaxTexturePruningAuditMain.main(compare);
+        var comparisonBytes = Files.readAllBytes(comparison);
+        SixMaxTexturePruningAuditMain.main(compare);
+        assertArrayEquals(comparisonBytes, Files.readAllBytes(comparison));
+        var invalidCompare = compare.clone();
+        invalidCompare[4] = alias.toString();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxTexturePruningAuditMain.main(invalidCompare));
         try (var files = Files.list(checkpoint.getParent())) {
             assertEquals(2, files.count());
         }

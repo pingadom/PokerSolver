@@ -11,6 +11,7 @@ public final class SixMaxTextureStudy {
     public static final String MODEL = "SIX_PUBLIC_FLOP_TEXTURES_ONE_BET_THEN_CHECKDOWN/v1";
     public static final String CHECKPOINT_SCHEMA = "six-max-texture-checkpoint/v1";
     public static final String REPORT_SCHEMA = "six-max-texture-study/v1";
+    public static final String PRUNED_ALGORITHM = "CFR_PLUS_FIXED_UTILITY_PRUNING";
 
     public record Checkpoint(
             String schemaVersion,
@@ -30,7 +31,7 @@ public final class SixMaxTextureStudy {
             if (!CHECKPOINT_SCHEMA.equals(schemaVersion)
                     || !"VALIDATION_ONLY".equals(publicationStatus)
                     || !MODEL.equals(model)
-                    || !"CFR_PLUS".equals(algorithm)
+                    || !("CFR_PLUS".equals(algorithm) || PRUNED_ALGORITHM.equals(algorithm))
                     || !"EXHAUSTIVE".equals(chanceTraversal))
                 throw new IllegalArgumentException("Unsupported texture checkpoint identity");
             for (String hash :
@@ -95,7 +96,10 @@ public final class SixMaxTextureStudy {
     }
 
     public record Result(
-            Checkpoint checkpoint, Report report, MultiPlayerCfrSolver.Statistics traversal) {}
+            Checkpoint checkpoint,
+            Report report,
+            MultiPlayerCfrSolver.Statistics traversal,
+            long inactiveUtilityPrunedNodes) {}
 
     private SixMaxTextureStudy() {}
 
@@ -137,13 +141,28 @@ public final class SixMaxTextureStudy {
             List<SixMaxTextureFlopGame.Selection> selections,
             int iterations)
             throws Exception {
+        return solve(
+                source, table, selections, iterations, MultiPlayerCfrSolver.InactivePruning.NONE);
+    }
+
+    public static Result solve(
+            SixMaxPreflopSolutionPack source,
+            SixMaxTexturePayoffTable.Artifact table,
+            List<SixMaxTextureFlopGame.Selection> selections,
+            int iterations,
+            MultiPlayerCfrSolver.InactivePruning pruning)
+            throws Exception {
         if (iterations < 1 || iterations > 3000)
             throw new IllegalArgumentException("Study requires 1–3000 iterations");
         var game = new SixMaxTextureFlopGame(source, table, selections);
-        var solver = new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS);
+        var solver = new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS, pruning);
         var policy = solver.solve(iterations);
-        var checkpoint = checkpoint(source, table, game, policy);
-        return new Result(checkpoint, assess(source, table, checkpoint), solver.statistics());
+        var checkpoint = checkpoint(source, table, game, policy, pruning);
+        return new Result(
+                checkpoint,
+                assess(source, table, checkpoint),
+                solver.statistics(),
+                solver.inactiveUtilityPrunedNodes());
     }
 
     static Checkpoint checkpoint(
@@ -152,11 +171,24 @@ public final class SixMaxTextureStudy {
             SixMaxTextureFlopGame game,
             CfrSolution policy)
             throws Exception {
+        return checkpoint(source, table, game, policy, MultiPlayerCfrSolver.InactivePruning.NONE);
+    }
+
+    static Checkpoint checkpoint(
+            SixMaxPreflopSolutionPack source,
+            SixMaxTexturePayoffTable.Artifact table,
+            SixMaxTextureFlopGame game,
+            CfrSolution policy,
+            MultiPlayerCfrSolver.InactivePruning pruning)
+            throws Exception {
+        Objects.requireNonNull(pruning, "pruning");
         return new Checkpoint(
                 CHECKPOINT_SCHEMA,
                 "VALIDATION_ONLY",
                 MODEL,
-                "CFR_PLUS",
+                pruning == MultiPlayerCfrSolver.InactivePruning.NONE
+                        ? "CFR_PLUS"
+                        : PRUNED_ALGORITHM,
                 "EXHAUSTIVE",
                 MultiwayPackJson.fullRoundContentHash(source),
                 source.spotHash(),
