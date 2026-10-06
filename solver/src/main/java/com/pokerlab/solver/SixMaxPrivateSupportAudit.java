@@ -75,7 +75,7 @@ public final class SixMaxPrivateSupportAudit {
                     SixMaxPolicyFlopTransition.counterfactualSupport(source, selection.history());
             double historyReach = SixMaxConnectedPreflopAudit.historyReach(game, policy, selection);
             var reached =
-                    hasPositiveHistoryReach(source, policy, selection)
+                    hasPositiveHistoryReach(source, policy, selection.history())
                             ? new SixMaxPolicyFlopTransition(source, policy, selection.history())
                             : null;
             for (var board : selection.flops()) {
@@ -141,15 +141,15 @@ public final class SixMaxPrivateSupportAudit {
         return game.replayPreflop(selection.history(), 0).preflop().publicHistory();
     }
 
-    private static boolean hasPositiveHistoryReach(
+    static boolean hasPositiveHistoryReach(
             SixMaxPreflopCheckdownGame source,
             CfrSolution policy,
-            SixMaxConnectedPreflopGame.Selection selection) {
+            List<SixMaxPreflopResearchTrainer.PublicAction> history) {
         // A positive product can underflow to zero; the transition normalizes log likelihoods.
         for (var root : source.chanceOutcomes(source.initialState())) {
             var state = root.state();
             boolean positive = true;
-            for (var action : selection.history()) {
+            for (var action : history) {
                 if (MultiPlayerStrategyEvaluator.probability(source, policy, state, action.action())
                         == 0) {
                     positive = false;
