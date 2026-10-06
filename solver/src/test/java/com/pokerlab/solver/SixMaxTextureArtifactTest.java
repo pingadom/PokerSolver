@@ -6,14 +6,15 @@ import java.nio.file.Path;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-/** Replays exact-table checks and four complete saved policies; never reruns long CFR studies. */
+/** Replays exact-table checks and complete saved policies; never reruns long CFR studies. */
 class SixMaxTextureArtifactTest {
     @ParameterizedTest
     @CsvSource({
         "'',500,3,0.0010227107950958438",
         "'',1000,3,0.0002581481955057924",
         "-broad,500,6,0.001148867484634203",
-        "-broad,1000,6,0.0002897451039000082"
+        "-broad,1000,6,0.0002897451039000082",
+        "-pruned,1000,6,0.0002897451038998972"
     })
     void savedEvidenceBindsExactSourceAndReplaysCompleteParentConditionalAndContentAudits(
             String suffix, int iterations, int histories, double expectedGap) throws Exception {
@@ -43,6 +44,9 @@ class SixMaxTextureArtifactTest {
                                 SixMaxTextureStudy.Report.class);
         var replayed = SixMaxTextureStudy.assess(source, table, checkpoint);
         assertEquals(saved, replayed);
+        assertEquals(
+                suffix.equals("-pruned") ? SixMaxTextureStudy.PRUNED_ALGORITHM : "CFR_PLUS",
+                checkpoint.algorithm());
         assertEquals(expectedGap, replayed.jointlySolvedInTextureGame().nashConvBb(), 1e-12);
         assertTrue(
                 replayed.checkdownBaselineInTextureGame().nashConvBb()

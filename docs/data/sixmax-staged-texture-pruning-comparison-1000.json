@@ -1,0 +1,30 @@
+{
+  "completeTreeStates" : 142681,
+  "frequenciesWithinTolerance" : true,
+  "gameHash" : "5c2e67e05ad9c33eebb7a1f4c8839747937ab6dfbd3feffa0f245696c4f81048",
+  "informationSets" : 9449,
+  "iterations" : 1000,
+  "maximumActionFrequencyDifference" : 6.927791673660977E-14,
+  "maximumDeviationGainDifferenceBb" : 1.1102230246251565E-16,
+  "maximumProfileUtilityDifferenceBb" : 1.1102230246251565E-16,
+  "originalAlgorithm" : "CFR_PLUS",
+  "originalQuality" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09958194520179187, 0.4500120750640511, 0.2874069240503713, -0.3993596092808974, -0.4373515899311318 ],
+    "deviationGainsBb" : [ 2.762681704002759E-6, 1.137373834141503E-4, 2.791370212851252E-5, 6.212962623403095E-5, 5.283592639421242E-5, 3.0365784025099263E-5 ],
+    "nashConvBb" : 2.897451039000082E-4,
+    "profileUtilitiesBb" : [ -2.762681704002759E-6, 0.09946820781837772, 0.4499841613619226, 0.2873447944241373, -0.39941244520729163, -0.4373819557151569 ]
+  },
+  "originalSolutionHash" : "3a3f5982a22343f93c10ee3946f2c19d3298a6828b06ff69b64ded043c76bf51",
+  "prunedAlgorithm" : "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "prunedQuality" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09958194520179187, 0.4500120750640511, 0.2874069240503713, -0.3993596092808974, -0.4373515899311318 ],
+    "deviationGainsBb" : [ 2.762681704002759E-6, 1.137373834141503E-4, 2.791370212851252E-5, 6.212962623403095E-5, 5.2835926394101396E-5, 3.0365784025099263E-5 ],
+    "nashConvBb" : 2.897451038998972E-4,
+    "profileUtilitiesBb" : [ -2.762681704002759E-6, 0.09946820781837772, 0.4499841613619226, 0.2873447944241373, -0.3994124452072915, -0.4373819557151569 ]
+  },
+  "prunedSolutionHash" : "4bf62fb01ff00fda24bfdbefec33e14d6d63e6dbc8acaedef131b18209e4ae42",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "roundingTolerance" : 1.0E-10,
+  "schemaVersion" : "six-max-texture-pruning-comparison/v1",
+  "uniformInformationSetMeanTotalVariation" : 1.1537194096694894E-17
+}
