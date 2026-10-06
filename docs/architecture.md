@@ -34,6 +34,8 @@ The original five-card evaluator is reused. Its seven-card path checks all 21 fi
 
 Equity simulation and strategy training have different jobs. A worker estimates showdown equity for the submitted exact hands. The framework-free `solver` module instead learns action probabilities in an explicitly declared betting game, using chip utilities and private information sets. Its CFR/CFR+ implementation and finite-game best-response evaluators are PokerLab's own code. Weighted ranges, folded-card blockers, correlated reached hands and public betting history determine the game being solved; showdown equity alone cannot grade a betting decision.
 
+The offline [exact payoff-reuse builder](sixmax-preflop-payoff-reuse.md) separates physical showdown shares from betting utilities. A strictly validated exact source can seed a fresh game with different raise targets, stack, rake or positive range weights only when all six-hand deal/subset keys match exactly. It recomputes chance probabilities, pot commitments, utilities, information sets, strategy and best-response quality; missing or removed private worlds fail before solving. Provenance binds both spot hashes and the original pack, while the new pack remains validation-only. A changed source cannot resume an old connected policy checkpoint. Different-game scores do not establish policy improvement.
+
 The current connected six-seat research pipeline is offline:
 
 ```mermaid
