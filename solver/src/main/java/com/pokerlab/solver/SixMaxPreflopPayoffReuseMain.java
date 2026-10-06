@@ -62,6 +62,10 @@ public final class SixMaxPreflopPayoffReuseMain {
                 throw new IllegalArgumentException("Input exceeds 16 MiB limit");
         var source = MultiwayPackJson.readFullRound(Files.readString(paths.get(0)));
         var target = MultiwayPackJson.readFullRoundSpot(Files.readString(paths.get(1)));
+        for (var rake : List.of(source.spot().rake(), target.rake()))
+            if (rake.fraction() > 0 && rake.capBb() > 0)
+                throw new IllegalArgumentException(
+                        "Reach/menu comparison requires zero applied rake; use buildExact for raked games");
         var result =
                 SixMaxPreflopPayoffReuse.buildExact(
                         source, target, iterations, CfrSolver.Variant.CFR_PLUS, args[5]);

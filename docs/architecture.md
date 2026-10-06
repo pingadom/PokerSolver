@@ -36,6 +36,8 @@ Equity simulation and strategy training have different jobs. A worker estimates 
 
 The offline [exact payoff-reuse builder](sixmax-preflop-payoff-reuse.md) separates physical showdown shares from betting utilities. A strictly validated exact source can seed a fresh game with different raise targets, stack, rake or positive range weights only when all six-hand deal/subset keys match exactly. It recomputes chance probabilities, pot commitments, utilities, information sets, strategy and best-response quality; missing or removed private worlds fail before solving. Provenance binds both spot hashes and the original pack, while the new pack remains validation-only. A changed source cannot resume an old connected policy checkpoint. Different-game scores do not establish policy improvement.
 
+A [same-game policy comparison](sixmax-connected-policy-stability.md) strictly reloads two source/menu-bound checkpoints and recomputes quality and retained content before reporting independent-solve action-frequency disagreement. It weights information sets by the symmetric average of both policies' full physical decision encounter masses, with separate preflop/postflop normalization so rare selected boards do not hide conditional differences. Unreachable-row differences remain visible through uniform means and maxima. It never selects or admits a trainer policy.
+
 The current connected six-seat research pipeline is offline:
 
 ```mermaid

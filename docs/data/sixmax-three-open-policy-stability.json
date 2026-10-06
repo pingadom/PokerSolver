@@ -1,0 +1,291 @@
+{
+  "schemaVersion" : "six-max-connected-policy-stability/v1",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "sourcePackHash" : "d5322b3a0d716d9aca33c21b40e1747d27d4ad0003b54b6d06dee75814979a9f",
+  "sourceSpotHash" : "b8321a29bfcb4e8975056d8607983066a98912ef6579b2ee16c3600cad61f365",
+  "budget" : {
+    "maximumCompatibleDealFlops" : 16,
+    "maximumCompleteTreeStates" : 2000000
+  },
+  "selections" : [ {
+    "history" : [ {
+      "seat" : "UTG",
+      "action" : "fold"
+    }, {
+      "seat" : "HJ",
+      "action" : "fold"
+    }, {
+      "seat" : "CO",
+      "action" : "raise:3.0"
+    }, {
+      "seat" : "BTN",
+      "action" : "fold"
+    }, {
+      "seat" : "SB",
+      "action" : "fold"
+    }, {
+      "seat" : "BB",
+      "action" : "call"
+    } ],
+    "flops" : [ [ {
+      "rank" : "TWO",
+      "suit" : "HEARTS"
+    }, {
+      "rank" : "THREE",
+      "suit" : "CLUBS"
+    }, {
+      "rank" : "KING",
+      "suit" : "SPADES"
+    } ] ],
+    "flopBetBb" : 3.25,
+    "turnBetBb" : 6.5,
+    "riverBetBb" : 13.0
+  } ],
+  "comparison" : {
+    "interpretation" : "Same-game action-frequency disagreement, not a convergence certificate or trainer admission. Each row uses total variation (half the sum of absolute action-probability differences). Reach weighting uses the symmetric mean of both policies' full physical on-policy decision encounter masses, including own actions, opponents and chance. Each stage is normalized separately; postflop disagreement is not diluted by rare physical flops. Encounter mass is expected decision count, not hand probability. Uniform means and maxima include unreachable rows. Null weighted disagreement means neither policy reaches any decision in that stage. Double underflow is treated as zero numerical reach.",
+    "firstSolutionHash" : "d28e4aefb76252c5fc404a137b4bda16a11549ef47fa90944e73ee170bcc16e5",
+    "secondSolutionHash" : "acca93fcaf35465e0da4639403d607666b39e2b518de10810f4e29837e26e89e",
+    "visitedStates" : 1323133,
+    "stages" : [ {
+      "stage" : "PREFLOP",
+      "informationSets" : 1118,
+      "reachedByEitherPolicy" : 1118,
+      "firstExpectedDecisionEncounters" : 6.000606359713546,
+      "secondExpectedDecisionEncounters" : 6.000606354048623,
+      "uniformMeanTotalVariation" : 8.121976744482297E-11,
+      "maximumTotalVariation" : 1.5115792006969997E-8,
+      "maximumDifferenceInformationSet" : "5:Ac Jc:|UTG:fold|HJ:fold|CO:call|BTN:call|SB:fold",
+      "reachWeightedTotalVariation" : 9.444400621677568E-10
+    }, {
+      "stage" : "POSTFLOP",
+      "informationSets" : 126200,
+      "reachedByEitherPolicy" : 126200,
+      "firstExpectedDecisionEncounters" : 2.5785072789575523E-4,
+      "secondExpectedDecisionEncounters" : 2.5785201233036404E-4,
+      "uniformMeanTotalVariation" : 8.374794342541343E-5,
+      "maximumTotalVariation" : 0.058023182068765305,
+      "maximumDifferenceInformationSet" : "5:postflop:six-seat-connected-postflop|BB:CO|pre:UTG:fold;HJ:fold;CO:raise:3.0;BTN:fold;SB:fold;BB:call|flop:2h 3c Ks|pot:6.5|stack:97.0|bets:3.25:6.5:13.0|chance:EXACT_PHYSICAL_TURN_RIVER:[]|seat:BB|own:Ac Jc|F:bc|T:Jd:bc|R:Tc:kb",
+      "reachWeightedTotalVariation" : 1.528315895130553E-5
+    } ]
+  },
+  "firstQuality" : {
+    "solutionHash" : "d28e4aefb76252c5fc404a137b4bda16a11549ef47fa90944e73ee170bcc16e5",
+    "parentQuality" : {
+      "profileUtilitiesBb" : [ -8.458246801021413E-7, -2.894519024970857E-6, 0.470243719453079, 0.288922663524894, -0.5000008512888305, -0.25916179134537076 ],
+      "bestResponseUtilitiesBb" : [ 0.0, 3.4769582155050265E-7, 0.47030035736316267, 0.28892696113692995, -0.4999964155814912, -0.2591517839533563 ],
+      "deviationGainsBb" : [ 8.458246801021413E-7, 3.2422148465213597E-6, 5.6637910083645604E-5, 4.297612035963905E-6, 4.435707339323081E-6, 1.0007392014454997E-5 ],
+      "nashConvBb" : 7.946666100001109E-5
+    },
+    "maximumConditionalGapBb" : 0.012146990700765858,
+    "everySelectedBranchReached" : true,
+    "reach" : {
+      "terminalProbability" : {
+        "POSTFLOP_CONTINUATION_REQUIRED" : 0.9999922241857995,
+        "UNCONTESTED" : 7.775814193044807E-6
+      },
+      "checkdownProbabilityByLiveSeats" : {
+        "2" : 0.7499591302571929,
+        "3" : 0.25000577408957797,
+        "4" : 9.326879285086926E-6,
+        "5" : 1.6919492444478714E-5,
+        "6" : 1.0734673023567107E-6
+      },
+      "reachedHeadsUpHistories" : 191,
+      "headsUpProbability" : 0.7499591302571929,
+      "selectedHistoryProbability" : 0.4996717705877093,
+      "unselectedHeadsUpProbability" : 0.25028735966948357,
+      "fractionOfHeadsUpProbabilitySelected" : 0.6662653342407481,
+      "selectedPhysicalFlopProbability" : 5.057406584895843E-5,
+      "selectedHistoryOtherFlopsProbability" : 0.4996211965218603
+    }
+  },
+  "secondQuality" : {
+    "solutionHash" : "acca93fcaf35465e0da4639403d607666b39e2b518de10810f4e29837e26e89e",
+    "parentQuality" : {
+      "profileUtilitiesBb" : [ -8.458246801021413E-7, -2.894519024970857E-6, 0.47024371940935444, 0.28892266352490026, -0.5000008512888332, -0.2591617913016499 ],
+      "bestResponseUtilitiesBb" : [ 0.0, 3.4769582155050265E-7, 0.47030035852037433, 0.28892696113692795, -0.4999964155814912, -0.25915178234698316 ],
+      "deviationGainsBb" : [ 8.458246801021413E-7, 3.2422148465213597E-6, 5.663911101988495E-5, 4.297612027692743E-6, 4.435707341987616E-6, 1.0008954666740344E-5 ],
+      "nashConvBb" : 7.946942458292915E-5
+    },
+    "maximumConditionalGapBb" : 0.012168955590447394,
+    "everySelectedBranchReached" : true,
+    "reach" : {
+      "terminalProbability" : {
+        "POSTFLOP_CONTINUATION_REQUIRED" : 0.9999922241858168,
+        "UNCONTESTED" : 7.775814175356868E-6
+      },
+      "checkdownProbabilityByLiveSeats" : {
+        "2" : 0.7499591302572258,
+        "3" : 0.2500057740895853,
+        "4" : 9.32687926260788E-6,
+        "5" : 1.6919492444478714E-5,
+        "6" : 1.0734673023567107E-6
+      },
+      "reachedHeadsUpHistories" : 191,
+      "headsUpProbability" : 0.7499591302572258,
+      "selectedHistoryProbability" : 0.4996717734201463,
+      "unselectedHeadsUpProbability" : 0.25028735683707953,
+      "fractionOfHeadsUpProbabilitySelected" : 0.6662653380175072,
+      "selectedPhysicalFlopProbability" : 5.057406613564234E-5,
+      "selectedHistoryOtherFlopsProbability" : 0.49962119935401067
+    }
+  },
+  "firstContent" : {
+    "interpretation" : "Offline engineering screen, not a convergence or trainer-publication certificate. History reach and fraction of reached heads-up history mass are distinct from physical-board coverage. A physical flop has probability at most 1/9880 given a history; no absolute physical-flop floor is applied. Counterfactual support is preserved. Marginals are descriptive, not independent ranges. Quality acceptance remains a separate decision.",
+    "solutionHash" : "d28e4aefb76252c5fc404a137b4bda16a11549ef47fa90944e73ee170bcc16e5",
+    "settings" : {
+      "minimumHistoryProbability" : 1.0E-4,
+      "minimumHeadsUpFraction" : 0.25,
+      "minimumComboMass" : 0.05,
+      "minimumMaterialCombosPerActiveSeat" : 2
+    },
+    "status" : "CONTENT_CRITERIA_MET",
+    "criteriaMet" : true,
+    "reach" : {
+      "terminalProbability" : {
+        "POSTFLOP_CONTINUATION_REQUIRED" : 0.9999922241857995,
+        "UNCONTESTED" : 7.775814193044807E-6
+      },
+      "checkdownProbabilityByLiveSeats" : {
+        "2" : 0.7499591302571929,
+        "3" : 0.25000577408957797,
+        "4" : 9.326879285086926E-6,
+        "5" : 1.6919492444478714E-5,
+        "6" : 1.0734673023567107E-6
+      },
+      "reachedHeadsUpHistories" : 191,
+      "headsUpProbability" : 0.7499591302571929,
+      "selectedHistoryProbability" : 0.4996717705877093,
+      "unselectedHeadsUpProbability" : 0.25028735966948357,
+      "fractionOfHeadsUpProbabilitySelected" : 0.6662653342407481,
+      "selectedPhysicalFlopProbability" : 5.057406584895843E-5,
+      "selectedHistoryOtherFlopsProbability" : 0.4996211965218603
+    },
+    "histories" : [ {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+      "probability" : 0.4996717705877093,
+      "logProbability" : -0.6938038549479653,
+      "reachStatus" : "POSITIVE_REACH",
+      "boards" : [ {
+        "flop" : [ "2h", "3c", "Ks" ],
+        "counterfactualJointDeals" : 12,
+        "reachedJointDeals" : 12,
+        "probabilityGivenHistory" : 1.0121457489878542E-4,
+        "compatiblePosteriorMass" : 1.0,
+        "absolutePhysicalProbability" : 5.057406584895843E-5,
+        "first" : {
+          "seat" : "BB",
+          "counterfactualMarginal" : {
+            "7d 7h" : 0.49999999999999994,
+            "Ac Jc" : 0.49999999999999994
+          },
+          "reachedMarginal" : {
+            "7d 7h" : 0.5000022663656959,
+            "Ac Jc" : 0.49999773363430405
+          },
+          "materialReachedCombos" : 2,
+          "largestReachedComboMass" : 0.5000022663656959,
+          "reachedEntropyBits" : 0.9999999999851794,
+          "effectiveReachedCombos" : 1.9999999999794542
+        },
+        "second" : {
+          "seat" : "CO",
+          "counterfactualMarginal" : {
+            "Ah Kh" : 0.3333333333333333,
+            "Qh Th" : 0.6666666666666666
+          },
+          "reachedMarginal" : {
+            "Ah Kh" : 0.3335299120733173,
+            "Qh Th" : 0.6664700879266827
+          },
+          "materialReachedCombos" : 2,
+          "largestReachedComboMass" : 0.6664700879266827,
+          "reachedEntropyBits" : 0.9184922873684997,
+          "effectiveReachedCombos" : 1.8901389395434016
+        },
+        "failures" : [ ]
+      } ],
+      "failures" : [ ]
+    } ],
+    "failures" : [ ]
+  },
+  "secondContent" : {
+    "interpretation" : "Offline engineering screen, not a convergence or trainer-publication certificate. History reach and fraction of reached heads-up history mass are distinct from physical-board coverage. A physical flop has probability at most 1/9880 given a history; no absolute physical-flop floor is applied. Counterfactual support is preserved. Marginals are descriptive, not independent ranges. Quality acceptance remains a separate decision.",
+    "solutionHash" : "acca93fcaf35465e0da4639403d607666b39e2b518de10810f4e29837e26e89e",
+    "settings" : {
+      "minimumHistoryProbability" : 1.0E-4,
+      "minimumHeadsUpFraction" : 0.25,
+      "minimumComboMass" : 0.05,
+      "minimumMaterialCombosPerActiveSeat" : 2
+    },
+    "status" : "CONTENT_CRITERIA_MET",
+    "criteriaMet" : true,
+    "reach" : {
+      "terminalProbability" : {
+        "POSTFLOP_CONTINUATION_REQUIRED" : 0.9999922241858168,
+        "UNCONTESTED" : 7.775814175356868E-6
+      },
+      "checkdownProbabilityByLiveSeats" : {
+        "2" : 0.7499591302572258,
+        "3" : 0.2500057740895853,
+        "4" : 9.32687926260788E-6,
+        "5" : 1.6919492444478714E-5,
+        "6" : 1.0734673023567107E-6
+      },
+      "reachedHeadsUpHistories" : 191,
+      "headsUpProbability" : 0.7499591302572258,
+      "selectedHistoryProbability" : 0.4996717734201463,
+      "unselectedHeadsUpProbability" : 0.25028735683707953,
+      "fractionOfHeadsUpProbabilitySelected" : 0.6662653380175072,
+      "selectedPhysicalFlopProbability" : 5.057406613564234E-5,
+      "selectedHistoryOtherFlopsProbability" : 0.49962119935401067
+    },
+    "histories" : [ {
+      "publicHistory" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+      "probability" : 0.4996717734201463,
+      "logProbability" : -0.6938038492793701,
+      "reachStatus" : "POSITIVE_REACH",
+      "boards" : [ {
+        "flop" : [ "2h", "3c", "Ks" ],
+        "counterfactualJointDeals" : 12,
+        "reachedJointDeals" : 12,
+        "probabilityGivenHistory" : 1.0121457489878542E-4,
+        "compatiblePosteriorMass" : 1.0,
+        "absolutePhysicalProbability" : 5.057406613564233E-5,
+        "first" : {
+          "seat" : "BB",
+          "counterfactualMarginal" : {
+            "7d 7h" : 0.49999999999999994,
+            "Ac Jc" : 0.49999999999999994
+          },
+          "reachedMarginal" : {
+            "7d 7h" : 0.500002266365637,
+            "Ac Jc" : 0.49999773363436295
+          },
+          "materialReachedCombos" : 2,
+          "largestReachedComboMass" : 0.500002266365637,
+          "reachedEntropyBits" : 0.9999999999851794,
+          "effectiveReachedCombos" : 1.9999999999794542
+        },
+        "second" : {
+          "seat" : "CO",
+          "counterfactualMarginal" : {
+            "Ah Kh" : 0.3333333333333333,
+            "Qh Th" : 0.6666666666666666
+          },
+          "reachedMarginal" : {
+            "Ah Kh" : 0.3335299101826988,
+            "Qh Th" : 0.6664700898173013
+          },
+          "materialReachedCombos" : 2,
+          "largestReachedComboMass" : 0.6664700898173013,
+          "reachedEntropyBits" : 0.9184922854802937,
+          "effectiveReachedCombos" : 1.890138937069579
+        },
+        "failures" : [ ]
+      } ],
+      "failures" : [ ]
+    } ],
+    "failures" : [ ]
+  }
+}

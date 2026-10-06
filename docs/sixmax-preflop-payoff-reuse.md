@@ -56,7 +56,7 @@ foreach ($model in 'three-nine', 'three-open') {
 }
 ```
 
-The optional `--search` takes first seed, seed count (1–16), histories (1–4) and physical flops per history (1–4). Omit it for the fresh pack and terminal-reach audit only. The CLI bounds training to 1–3,000 iterations and each input to 16 MiB. All four paths must be distinct, including normalized aliases and existing hard links. It builds and serializes all results before replacing either output. Each output uses an atomic rename and cleans temporary files; the two output replacements are not a filesystem-wide transaction if an I/O failure interrupts the second rename. Validation failures preserve both old outputs and both inputs.
+The optional `--search` takes first seed, seed count (1–16), histories (1–4) and physical flops per history (1–4). Omit it for the fresh pack and terminal-reach audit only. The CLI's existing reach/menu audits require zero applied rake in both models; it rejects raked inputs before training. Use the `buildExact` API for raked-game rebuilds, which are separately tested. The CLI bounds training to 1–3,000 iterations and each input to 16 MiB. All four paths must be distinct, including normalized aliases and existing hard links. It builds and serializes all results before replacing either output. Each output uses an atomic rename and cleans temporary files; the two output replacements are not a filesystem-wide transaction if an I/O failure interrupts the second rename. Validation failures preserve both old outputs and both inputs.
 
 The saved reports bind both model hashes, record full source/target reach, and retain every finite search attempt and rejection. Tests reload exact packs, compare all reused share arrays and masks with the original source, recompute same-game quality, reproduce menu coverage/cost, and enforce the existing tree cap. Small fixtures separately verify changed chip utilities and rake, changed root weights, source immutability, invalid metadata, sampled-source rejection, physical support changes, path aliases, input limits and output preservation.
 
@@ -71,4 +71,17 @@ foreach ($trialSeed in 711, 712) {
 }
 ```
 
-The `[3]` control isolates a useful, limited scenario for further backend validation. General 6-max cash play still needs wider physical hand support, history-dependent raise menus, multiway postflop betting, broader physical-board coverage and independent-solve stability. High public-history reach cannot substitute for those model gates.
+Both fresh trials accept the complete round and pass the unchanged **retained** content screen:
+
+| Fresh seed | Initial parent NashConv (bb) | Retained parent NashConv (bb) | Retained worst conditional gap (bb) | Retained selected history reach | Retained content |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 711 | 0.0002107952 | 0.0000794667 | 0.0121469907 | 0.4996717706 | Pass |
+| 712 | 0.0002126442 | 0.0000794694 | 0.0121689556 | 0.4996717734 | Pass |
+
+The initial/retained comparison is within the same connected game for each seed. Both retained policies cover about **66.63%** of reached heads-up history mass. All twelve private worlds remain counterfactually available and positively reached on the selected board. BB retains approximately 50/50 `77` / `AJ`; CO retains approximately 33/67 `AK` / `QT`. Folded HJ and BTN uncertainty remains. Selected absolute physical-flop probability is approximately **0.0000505741**, still a single-board continuation model.
+
+The intermediate preflop-only update is not acceptable on its own: its changed private ranges raise the conditional postflop gap to **4.8449bb / 5.0018bb**, despite the initial conditional gaps being about 0.0032bb. Re-solving all 126,200 postflop rows at the changed ranges restores the target and permits the complete round to pass. This illustrates why the whole-round gate audits the final connected policy instead of assuming that frozen continuation play remains accurate after preflop learning.
+
+Each saved policy has **127,318 complete rows**. The exhaustive preflop stage visits 97,926,000 nodes and 50,112,000 terminals. Its frozen continuation table includes a six-seat utility vector for every one of the twelve original private deals. Reports [711](data/sixmax-three-open-alternating-seed-711.json) and [712](data/sixmax-three-open-alternating-seed-712.json) bind the fresh training budgets, source, menu, whole-round decision, retained policy hash and both source/retained coverage. The large policy checkpoints remain ignored local files.
+
+An [independent-policy comparison](sixmax-connected-policy-stability.md) now reloads those checkpoints and recomputes quality, content and stage-normalized action-frequency disagreement. Two passing seeds are useful finite-game evidence, not a broad stability certificate or trainer admission. General 6-max cash play still needs wider physical hand support, history-dependent raise menus, multiway postflop betting, broader physical-board coverage and independent tests across more seeds and budgets. High public-history reach cannot substitute for those model gates.

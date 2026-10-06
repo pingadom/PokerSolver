@@ -141,6 +141,16 @@ class SixMaxPreflopPayoffReuseMainTest {
                     () -> SixMaxPreflopPayoffReuseMain.main(arguments.toArray(String[]::new)));
         }
         var source = SixMaxPreflopPayoffReuseTest.source();
+        Files.writeString(
+                paths.get(1),
+                MultiwayPackJson.writeFullRoundSpot(
+                        SixMaxPreflopPayoffReuseTest.spot(
+                                source.spot().ranges(), 9, new CashRakeRule(.05, 1, true))));
+        var rakeFailure =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> SixMaxPreflopPayoffReuseMain.main(args(paths)));
+        assertTrue(rakeFailure.getMessage().contains("zero applied rake"));
         var ranges = new java.util.ArrayList<>(source.spot().ranges());
         ranges.set(3, List.of(ranges.get(3).getFirst()));
         Files.writeString(
