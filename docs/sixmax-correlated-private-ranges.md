@@ -155,4 +155,24 @@ A 45-second Java Flight Recorder `profile` window sampled the seed-711 second po
 
 Separately, leaf frames included HashMap.computeIfAbsent in 978 samples and String.equals in 581. These categories overlap the table and must not be added to it. This is a sampled window, not a whole-run wall-time breakdown or a before/after speed comparison. The raw recording remains local under `.local/`.
 
-The state validator currently performs three linear membership searches through nine history strings on each validation. Avoiding those repeated searches while preserving every invalid-state check is a concrete candidate for a paired performance experiment. Strategy hashes, exact best responses and rejection behavior must agree before adopting an optimization. No upstream library defect was established.
+The prior state validator performed three linear membership searches through nine history strings on each validation. The implementation now uses a fixed immutable set containing the same nine strings. All other malformed-state checks remain intact. No upstream library defect was established.
+
+A paired local experiment measures a separate two-world synthetic postflop fixture with exact physical turn/river chance, 20 CFR+ iterations, five runs per process and the first two excluded as warm-up. Timing includes only solving; game construction, policy hashing and exact best-response auditing are outside the timed region. Baseline revision `b8353f0` uses the list. The candidate uses the set. Both process orders were checked:
+
+| Process order | List median solve time (s) | Set median solve time (s) | Reduction |
+| --- | ---: | ---: | ---: |
+| List, then set | 4.1123 | 3.5770 | 13.02% |
+| Set, then list | 4.1849 | 3.6113 | 13.71% |
+
+Every run produces the same complete 53,536-row policy hash, `5deaf015345148302ba82be3a260211561e9b8b741e75bafd78369c10771dc73`, and exact best-response gap 0.865192846933875bb. The low training budget is for cost comparison, not lesson quality. This is a narrow local result; it does not predict a 13% improvement for the twelve-world study or another machine. Raw timings and declared assumptions are saved in `docs/data/sixmax-history-validation-cost.json`.
+
+The test-scope `BenchmarkSixMaxHistoryValidation` harness fixes the source hands, public history, bet sizes and exact chance model using existing test fixtures. It reports the compiled history-container type and checks repeatability of every run's full policy hash. Run from the repository root:
+
+```powershell
+mvn -q -pl solver -am install -DskipTests
+mvn -q -pl solver dependency:build-classpath '-Dmdep.outputFile=target/history-validation-classpath.txt'
+$benchmarkClasspath = 'solver/target/test-classes;solver/target/classes;engine/target/classes;' + (Get-Content solver/target/history-validation-classpath.txt -Raw).Trim()
+java -Xmx2g -cp $benchmarkClasspath com.pokerlab.solver.BenchmarkSixMaxHistoryValidation
+```
+
+For a baseline comparison, use the same harness in an isolated checkout of `b8353f0`; copy only the harness into its test scope before compiling. It does not change the baseline game. Keep JVM settings and hardware the same, run both orders, exclude the declared warm-up runs and compare full hashes and exact scores before interpreting timings.
