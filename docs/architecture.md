@@ -38,6 +38,8 @@ The offline [exact payoff-reuse builder](sixmax-preflop-payoff-reuse.md) separat
 
 A [same-game policy comparison](sixmax-connected-policy-stability.md) strictly reloads two source/menu-bound checkpoints and recomputes quality and retained content before reporting independent-solve action-frequency disagreement. It weights information sets by the symmetric average of both policies' full physical decision encounter masses, with separate preflop/postflop normalization so rare selected boards do not hide conditional differences. Unreachable-row differences remain visible through uniform means and maxima. It never selects or admits a trainer policy.
 
+[History-dependent preflop raises](sixmax-staged-raise-schedules.md) are an explicit rules identity: NEXT_TARGET advances through one configured total commitment per raise, while historical GLOBAL_TARGETS still permits every legal higher target. Strict rules decoding preserves canonical legacy JSON and hashes; scheduled sources use pack/spot v2 and cannot resume a global-source checkpoint. The same rules drive solving, public-table replay and trainer action EVs. A separate range-weight sensitivity audit compares matching finite budgets and unchanged physical payoffs/rules while allowing declared prior changes. It reports physical chance TV separately from action TV weighted by each game's own reach. This is a different-game model diagnostic, distinct from checkpoint stability and trainer admission.
+
 The current connected six-seat research pipeline is offline:
 
 ```mermaid
