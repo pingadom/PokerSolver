@@ -113,6 +113,8 @@ The [turn-to-river research model](docs/turn-river-solver-research.md) adds an e
 
 The [flop-to-river solver research model](docs/flop-turn-river-solver-research.md) connects all three postflop streets. Its five-card turn abstraction has measurable payoff bias; the full-deck game now has a compressed validation-only solution pack with a 0.007446bb best-response gap. The local trainer overlay enables a connected partial-hand drill at `#flop-hand`. It is still synthetic research, not a reviewed 6-max lesson or general preflop continuation value.
 
+The [joint preflop/flop-texture experiment](docs/sixmax-texture-continuation.md) replaces mandatory checkdown at declared heads-up histories with one betting round across all physical flop textures. It retains folded blockers, generates exact conditional equity tables offline, trains the complete six-player game, and audits saved checkpoints independently. The coarse public signal hides board ranks/cards, so its scores and coverage remain research evidence rather than full-poker GTO or trainer admission.
+
 ## Measured performance
 
 Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
