@@ -9,6 +9,19 @@ import java.util.Map;
 
 /** Selects reached heads-up histories, without removing counterfactual private support. */
 public final class SixMaxReachedContinuationStudy {
+    public static final class NoEligibleMenu extends IllegalArgumentException {
+        private final SelectionAudit audit;
+
+        NoEligibleMenu(String message, SelectionAudit audit) {
+            super(message);
+            this.audit = audit;
+        }
+
+        public SelectionAudit audit() {
+            return audit;
+        }
+    }
+
     public enum SelectionMode {
         REACH_FIRST,
         DIVERSE_ACTIVE_PAIRS
@@ -167,7 +180,9 @@ public final class SixMaxReachedContinuationStudy {
                 SixMaxPreflopContinuationAudit.assess(
                         base, source, flopSeed, settings.candidateLimit());
         if (audit.examples().isEmpty())
-            throw new IllegalArgumentException("Source has no reached heads-up continuation");
+            throw new NoEligibleMenu(
+                    "Source has no reached heads-up continuation",
+                    new SelectionAudit(settings, List.of()));
         var selections = new ArrayList<SixMaxConnectedPreflopGame.Selection>();
         int pairs = 0;
         var chosenRanks = new ArrayList<Integer>();
@@ -250,8 +265,9 @@ public final class SixMaxReachedContinuationStudy {
         }
         if (settings.mode() == SelectionMode.DIVERSE_ACTIVE_PAIRS
                 && selections.size() != maximumHistories)
-            throw new IllegalArgumentException(
-                    "Not enough distinct active pairs with material hands in the declared candidate window");
+            throw new NoEligibleMenu(
+                    "Not enough distinct active pairs with material hands in the declared candidate window",
+                    new SelectionAudit(settings, assessments));
         var game = new SixMaxConnectedPreflopGame(base, selections);
         budget.validate(game);
         var selected = new ArrayList<SelectedHistory>();
