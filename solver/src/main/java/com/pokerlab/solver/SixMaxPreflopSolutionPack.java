@@ -25,6 +25,7 @@ public record SixMaxPreflopSolutionPack(
         double nashConvBb,
         double maxTerminalPayoffSEBb) {
     public static final String SCHEMA_VERSION = "six-max-preflop-checkdown-pack/v1";
+    public static final String STAGED_SCHEMA_VERSION = "six-max-preflop-checkdown-pack/v2";
     public static final String SHARED_BOARD_MONTE_CARLO = "SHARED_BOARD_MONTE_CARLO";
     public static final long EXACT_BOARDS_PER_DEAL = 658_008;
     private static final double TOLERANCE = 1e-8;
@@ -51,6 +52,12 @@ public record SixMaxPreflopSolutionPack(
 
     public void validate() {
         rebuildGame();
+    }
+
+    public static String schemaFor(SixMaxPreflopBetting.Rules rules) {
+        return rules.raiseSchedule() == SixMaxPreflopBetting.RaiseSchedule.NEXT_TARGET
+                ? STAGED_SCHEMA_VERSION
+                : SCHEMA_VERSION;
     }
 
     /** Reconstructs and audits using saved data only, without sampling boards or solving. */
@@ -98,7 +105,7 @@ public record SixMaxPreflopSolutionPack(
     }
 
     private void validateMetadata() {
-        if (!SCHEMA_VERSION.equals(schemaVersion)
+        if (!schemaFor(spot.rules()).equals(schemaVersion)
                 || (!MultiwaySolutionPack.SOLVER_VERSION.equals(solverVersion)
                         && !MultiwaySolutionPack.CFR_PLUS_SOLVER_VERSION.equals(solverVersion))
                 || !MultiwaySolutionPack.VALIDATION_ONLY.equals(publicationStatus))

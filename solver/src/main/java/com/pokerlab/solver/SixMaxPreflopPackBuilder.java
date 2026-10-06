@@ -35,7 +35,7 @@ public final class SixMaxPreflopPackBuilder {
         var solution = new MultiPlayerCfrSolver<>(game, variant).solve(iterations);
         var pack =
                 new SixMaxPreflopSolutionPack(
-                        SixMaxPreflopSolutionPack.SCHEMA_VERSION,
+                        SixMaxPreflopSolutionPack.schemaFor(spot.rules()),
                         variant == CfrSolver.Variant.CFR_PLUS
                                 ? MultiwaySolutionPack.CFR_PLUS_SOLVER_VERSION
                                 : MultiwaySolutionPack.SOLVER_VERSION,
