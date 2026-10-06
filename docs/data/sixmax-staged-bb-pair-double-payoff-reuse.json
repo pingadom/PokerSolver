@@ -1,0 +1,2021 @@
+{
+  "schemaVersion" : "six-max-preflop-payoff-reuse/v1",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "provenance" : {
+    "interpretation" : "Exact showdown shares are reused only for identical six-hand deals and active subsets. Betting commitments, rake, chance weights, policy and quality are recomputed in the target game. No source strategy rows or continuation checkpoint are transferred. Scores from different games are not a convergence comparison. VALIDATION_ONLY.",
+    "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+    "targetSpotHash" : "78337067f997974185d402c0869562e8313a9230fdfd66019f57042e886ec0c4",
+    "reusedPayoffEntries" : 684,
+    "jointDeals" : 12,
+    "sourceRules" : {
+      "raiseSchedule" : "NEXT_TARGET",
+      "raiseToBb" : [ 3.0, 9.0 ],
+      "smallBlindBb" : 0.5,
+      "stackBb" : 100.0
+    },
+    "targetRules" : {
+      "raiseSchedule" : "NEXT_TARGET",
+      "raiseToBb" : [ 3.0, 9.0 ],
+      "smallBlindBb" : 0.5,
+      "stackBb" : 100.0
+    },
+    "sourceNashConvBb" : 0.0018644720549709061,
+    "targetNashConvBb" : 4.780870711307692E-4
+  },
+  "targetPackHash" : "6f637a6f14db37760b3a28d6a07657d1c53849d58ad07ecff11a4a2869caf794",
+  "sourceTree" : {
+    "decisionStates" : 5466,
+    "uncontestedTerminals" : 665,
+    "allInTerminals" : 0,
+    "checkdownTerminals" : 5435
+  },
+  "targetTree" : {
+    "decisionStates" : 5466,
+    "uncontestedTerminals" : 665,
+    "allInTerminals" : 0,
+    "checkdownTerminals" : 5435
+  },
+  "sourceReach" : {
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "terminalProbability" : {
+      "POSTFLOP_CONTINUATION_REQUIRED" : 0.9998642349622764,
+      "UNCONTESTED" : 1.35765037649673E-4
+    },
+    "checkdownProbabilityByLiveSeats" : {
+      "2" : 0.4786164617572086,
+      "3" : 0.27461795841509934,
+      "4" : 0.24594369017865314,
+      "5" : 6.857196644963405E-4,
+      "6" : 4.0494685820130524E-7
+    },
+    "headsUpContinuationProbability" : 0.4786164617572086,
+    "reachedHeadsUpHistories" : 1873,
+    "flopsPerSixHandDeal" : 9880,
+    "flopSeed" : 711,
+    "examples" : [ {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.14681305060475727,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "4h", "Ks" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -1.914090878548743,
+          "BTN" : 3.414090878548743,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.36337995494621833,
+          "BTN" : 0.6366200450537817
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.11397006095304357,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "5d", "Js", "Qc" ],
+      "flopProbability" : 1.0121430537719876E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 0.0687277837688911,
+          "BTN" : 1.4312722162311085,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.4091637045025188,
+          "BTN" : 0.5908362954974812
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "reachProbability" : 0.09522754602919582,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 2.5,
+      "remainingStackBb" : 99.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "6s", "9s" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -0.03133666788246714,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 0.5313366678824671
+        },
+        "shares" : {
+          "CO" : 0.3874653328470131,
+          "BB" : 0.6125346671529869
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.07231232636519522,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2d", "7s", "Qd" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -0.8608818778843492,
+          "BTN" : 2.3608818778843492,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.4173906729290077,
+          "BTN" : 0.5826093270709922
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.024691037737879767,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 18.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3h", "Ac", "Ad" ],
+      "flopProbability" : 1.011990320695331E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 4.878348031096669,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -4.378348031096668
+        },
+        "shares" : {
+          "CO" : 0.750180974653874,
+          "BB" : 0.24981902534612602
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.024559192856035705,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "Ah", "As" ],
+      "flopProbability" : 2.7619740144792766E-5,
+      "flopPosteriorJointDeals" : 4,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -2.7167926805209315,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 3.216792680520931
+        },
+        "shares" : {
+          "CO" : 0.043570356842933644,
+          "BB" : 0.9564296431570664
+        },
+        "runouts" : 2664
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 6.579843695065479E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 20.0,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "4h", "7d", "8s" ],
+      "flopProbability" : 5.1384913252205326E-5,
+      "flopPosteriorJointDeals" : 3,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 2.2326187500001886,
+          "BTN" : -1.0,
+          "SB" : -1.0,
+          "BB" : -0.2326187500001886
+        },
+        "shares" : {
+          "CO" : 0.5616309375000095,
+          "BB" : 0.4383690624999905
+        },
+        "runouts" : 1998
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 1.9285896370799347E-4,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "Jh", "Qc" ],
+      "flopProbability" : 1.0121441730642715E-4,
+      "flopPosteriorJointDeals" : 8,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 0.8994914891793262,
+          "BTN" : 0.6005085108206738,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.5199321985572435,
+          "BTN" : 0.4800678014427565
+        },
+        "runouts" : 5328
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 9.761032016850382E-5,
+      "firstToAct" : "HJ",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "7c", "Qc", "Qd" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -0.8913042954428696,
+          "CO" : 0.0,
+          "BTN" : 2.391304295442869,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "HJ" : 0.28115942727428406,
+          "BTN" : 0.7188405727257159
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.956740237438724E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "3h", "Kc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -3.407385509297308,
+          "CO" : -1.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 4.907385509297308
+        },
+        "shares" : {
+          "HJ" : 0.28680074311295856,
+          "BB" : 0.7131992568870414
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "reachProbability" : 1.8212622934238295E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 2.5,
+      "remainingStackBb" : 99.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "7d", "Ad", "Td" ],
+      "flopProbability" : 6.855751865032436E-5,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.25027040426835256,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 0.24972959573164744
+        },
+        "shares" : {
+          "HJ" : 0.5001081617073411,
+          "BB" : 0.49989183829265893
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.809343952335755E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 19.0,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "7c", "Jd", "Kc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -4.6720925755274125,
+          "BTN" : 0.0,
+          "SB" : -1.0,
+          "BB" : 5.672092575527413
+        },
+        "shares" : {
+          "CO" : 0.2277846012880309,
+          "BB" : 0.7722153987119691
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.139579524026344E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 18.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "6s", "Th" ],
+      "flopProbability" : 2.2741838818043875E-5,
+      "flopPosteriorJointDeals" : 4,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -2.9321015142787044,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 3.4321015142787044
+        },
+        "shares" : {
+          "CO" : 0.32799451274169167,
+          "BB" : 0.6720054872583083
+        },
+        "runouts" : 2664
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 6.457856057087561E-6,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "3h", "4h" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 3.2852472421866734,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -2.785247242186673
+        },
+        "shares" : {
+          "HJ" : 0.9669611141825651,
+          "BB" : 0.0330388858174349
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 6.216415286513675E-6,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 7.0,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "5s", "6d", "Ks" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 2.9895536639209412,
+          "BTN" : 0.0,
+          "SB" : -1.0,
+          "BB" : -1.9895536639209415
+        },
+        "shares" : {
+          "CO" : 0.8556505234172773,
+          "BB" : 0.14434947658272265
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 4.3520411474912E-6,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "5h", "Kc" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 2.7102973878766745,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -2.210297387876675
+        },
+        "shares" : {
+          "CO" : 0.8785072904425654,
+          "BB" : 0.12149270955743464
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 2.533490287983336E-6,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 22.0,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "9c", "Qd" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 4.511883861259152,
+          "BTN" : -0.5118838612591521,
+          "SB" : -1.0,
+          "BB" : -3.0
+        },
+        "shares" : {
+          "CO" : 0.6141765391481433,
+          "BTN" : 0.3858234608518567
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 1.0412059703640282E-6,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 21.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2c", "Qd", "Tc" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 5.429020254783403,
+          "BTN" : -1.9290202547834037,
+          "SB" : -0.5,
+          "BB" : -3.0
+        },
+        "shares" : {
+          "CO" : 0.6711172211527164,
+          "BTN" : 0.32888277884728356
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 6.509942587736758E-7,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 22.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "Qc", "Td" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -1.0,
+          "CO" : 5.1671098694470174,
+          "BTN" : -3.0,
+          "SB" : -0.5,
+          "BB" : -0.6671098694470174
+        },
+        "shares" : {
+          "CO" : 0.6296493275309786,
+          "BB" : 0.3703506724690214
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 4.5183442742234715E-7,
+      "firstToAct" : "HJ",
+      "secondToAct" : "CO",
+      "potBb" : 22.0,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "5d", "Ad", "Ks" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 11.059200335998746,
+          "CO" : -7.059200335998747,
+          "BTN" : 0.0,
+          "SB" : -1.0,
+          "BB" : -3.0
+        },
+        "shares" : {
+          "HJ" : 0.9117818334544885,
+          "CO" : 0.08821816654551151
+        },
+        "runouts" : 7992
+      }
+    } ]
+  },
+  "targetReach" : {
+    "chanceModel" : "EXACT_RANGE_PRODUCT",
+    "terminalProbability" : {
+      "POSTFLOP_CONTINUATION_REQUIRED" : 0.9999965754883925,
+      "UNCONTESTED" : 3.42451157190542E-6
+    },
+    "checkdownProbabilityByLiveSeats" : {
+      "2" : 0.3344897997452555,
+      "3" : 0.33302679046817635,
+      "4" : 0.33230515804779226,
+      "5" : 1.7390085513279305E-4,
+      "6" : 9.263720614359442E-7
+    },
+    "headsUpContinuationProbability" : 0.3344897997452555,
+    "reachedHeadsUpHistories" : 1873,
+    "flopsPerSixHandDeal" : 9880,
+    "flopSeed" : 711,
+    "examples" : [ {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.16631226108603983,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "4h", "Ks" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 3.7004413360234256,
+          "BTN" : -2.2004413360234256,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.8933921781364568,
+          "BTN" : 0.10660782186354323
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      } ],
+      "reachProbability" : 0.16623190623684567,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "5d", "Js", "Qc" ],
+      "flopProbability" : 1.0121383571939201E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 8.333090080299925,
+          "BTN" : -6.833090080299925,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.8888764143743552,
+          "BTN" : 0.11112358562564484
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 6.832024091266937E-4,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "7s", "Js" ],
+      "flopProbability" : 1.012137652301499E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -3.9990683558207607,
+          "BTN" : 5.4990683558207625,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.2564580330348328,
+          "BTN" : 0.7435419669651673
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 4.795988138840036E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 18.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "6s", "Jd", "Kc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 3.816513890176484,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -3.3165138901764832
+        },
+        "shares" : {
+          "CO" : 0.6927845346041343,
+          "BB" : 0.30721546539586575
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 2.2515181607704672E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "3d", "4h" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 1.7639572945383497,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -1.2639572945383493
+        },
+        "shares" : {
+          "CO" : 0.7329165068520538,
+          "BB" : 0.26708349314794627
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.3076453926145028E-4,
+      "firstToAct" : "HJ",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2s", "3c", "As" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 3.1654573439964233,
+          "CO" : 0.0,
+          "BTN" : -1.6654573439964235,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "HJ" : 0.8220609791995231,
+          "BTN" : 0.17793902080047685
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "reachProbability" : 1.1545153503460309E-4,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 2.5,
+      "remainingStackBb" : 99.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3h", "5d", "8s" ],
+      "flopProbability" : 1.0073078620155035E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 0.06836044603779157,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 0.43163955396220843
+        },
+        "shares" : {
+          "CO" : 0.4273441784151166,
+          "BB" : 0.5726558215848834
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 8.709088891477506E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "9h", "Qc" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -1.0186969413842824,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 1.518696941384282
+        },
+        "shares" : {
+          "HJ" : 0.3048158551716489,
+          "BB" : 0.6951841448283511
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 7.525142221021087E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "7c", "Jc", "Jd" ],
+      "flopProbability" : 1.0121447385378166E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -4.899176154377471,
+          "CO" : -1.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 6.3991761543774714
+        },
+        "shares" : {
+          "HJ" : 0.2102986587498733,
+          "BB" : 0.7897013412501267
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "check"
+      } ],
+      "reachProbability" : 4.3612487873970154E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 2.5,
+      "remainingStackBb" : 99.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2d", "3c", "4h" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.2626418640903809,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 0.2373581359096193
+        },
+        "shares" : {
+          "HJ" : 0.5050567456361523,
+          "BB" : 0.49494325436384773
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 2.270666865281294E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 18.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "5d", "Td" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 3.288346186310388,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -2.7883461863103864
+        },
+        "shares" : {
+          "CO" : 0.6642349289897507,
+          "BB" : 0.3357650710102494
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 2.007265343372572E-5,
+      "firstToAct" : "HJ",
+      "secondToAct" : "BTN",
+      "potBb" : 19.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2d", "7c", "Jd" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 7.806023902654946,
+          "CO" : 0.0,
+          "BTN" : -6.306023902654946,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "HJ" : 0.8618473796233306,
+          "BTN" : 0.13815262037666942
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.5103801239799974E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 19.0,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "6s", "Jh" ],
+      "flopProbability" : 1.0121430809123133E-4,
+      "flopPosteriorJointDeals" : 8,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -2.6072245564710625,
+          "BTN" : 0.0,
+          "SB" : -1.0,
+          "BB" : 3.6072245564710617
+        },
+        "shares" : {
+          "CO" : 0.33646186544889145,
+          "BB" : 0.6635381345511085
+        },
+        "runouts" : 5328
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      } ],
+      "reachProbability" : 1.3583029902333644E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 18.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "3h", "4h" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 8.226968362396928,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : -7.726968362396927
+        },
+        "shares" : {
+          "HJ" : 0.9311874790484825,
+          "BB" : 0.06881252095151746
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 1.1957779763478307E-5,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 7.0,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "5s", "6d", "Ks" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 2.959956176376683,
+          "BTN" : 0.0,
+          "SB" : -1.0,
+          "BB" : -1.9599561763766833
+        },
+        "shares" : {
+          "CO" : 0.8514223109109548,
+          "BB" : 0.14857768908904526
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      } ],
+      "reachProbability" : 6.586714272286373E-6,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2d", "3c", "4h" ],
+      "flopProbability" : 1.0121457489878542E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.21143292554343907,
+          "CO" : 0.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 0.28856707445656093
+        },
+        "shares" : {
+          "HJ" : 0.4940666039297599,
+          "BB" : 0.5059333960702401
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      } ],
+      "reachProbability" : 6.428319422241109E-6,
+      "firstToAct" : "BB",
+      "secondToAct" : "CO",
+      "potBb" : 6.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2h", "9c", "Qd" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : -0.9602014770540901,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 1.46020147705409
+        },
+        "shares" : {
+          "CO" : 0.31381515737629384,
+          "BB" : 0.6861848426237062
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:9.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 1.3275842703014547E-6,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 21.5,
+      "remainingStackBb" : 91.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2c", "Ad", "Tc" ],
+      "flopProbability" : 1.0121457489878541E-4,
+      "flopPosteriorJointDeals" : 12,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 10.207941239028237,
+          "BTN" : -6.707941239028239,
+          "SB" : -0.5,
+          "BB" : -3.0
+        },
+        "shares" : {
+          "CO" : 0.8933926157687553,
+          "BTN" : 0.10660738423124472
+        },
+        "runouts" : 7992
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "fold"
+      }, {
+        "seat" : "CO",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "BTN",
+        "action" : "call"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 8.823288818981977E-7,
+      "firstToAct" : "CO",
+      "secondToAct" : "BTN",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "3c", "Jc", "Td" ],
+      "flopProbability" : 1.0121373764955897E-4,
+      "flopPosteriorJointDeals" : 6,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : 0.0,
+          "CO" : 2.1121731591648443,
+          "BTN" : -0.6121731591648443,
+          "SB" : -0.5,
+          "BB" : -1.0
+        },
+        "shares" : {
+          "CO" : 0.6816230878886459,
+          "BTN" : 0.3183769121113541
+        },
+        "runouts" : 3996
+      }
+    }, {
+      "history" : [ {
+        "seat" : "UTG",
+        "action" : "fold"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "call"
+      }, {
+        "seat" : "BTN",
+        "action" : "fold"
+      }, {
+        "seat" : "SB",
+        "action" : "fold"
+      }, {
+        "seat" : "BB",
+        "action" : "raise:3.0"
+      }, {
+        "seat" : "HJ",
+        "action" : "call"
+      }, {
+        "seat" : "CO",
+        "action" : "fold"
+      } ],
+      "reachProbability" : 7.163497009858927E-7,
+      "firstToAct" : "BB",
+      "secondToAct" : "HJ",
+      "potBb" : 7.5,
+      "remainingStackBb" : 97.0,
+      "posteriorJointDeals" : 12,
+      "sampledFlop" : [ "2d", "Kd", "Ks" ],
+      "flopProbability" : 1.0121435604505235E-4,
+      "flopPosteriorJointDeals" : 4,
+      "exactFlopCheckdown" : {
+        "utilitiesBb" : {
+          "UTG" : 0.0,
+          "HJ" : -1.102471768060975,
+          "CO" : -1.0,
+          "BTN" : 0.0,
+          "SB" : -0.5,
+          "BB" : 2.6024717680609752
+        },
+        "shares" : {
+          "HJ" : 0.25300376425853666,
+          "BB" : 0.7469962357414633
+        },
+        "runouts" : 2664
+      }
+    } ]
+  },
+  "targetMenuSearch" : null
+}

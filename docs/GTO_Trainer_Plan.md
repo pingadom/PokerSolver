@@ -205,3 +205,7 @@ Once the 6-max cash curriculum is credible, extend the same versioned game/pack 
 
 1. Use **100bb 6-max cash, chip EV** as the reference format. The first solver benchmark uses no rake; define a realistic rake/cap model, open/raise sizes and whether limps are in scope before publishing broader cash solutions. Different stakes or rake rules require different packs.
 2. Keep saved progress anonymous in this browser for the first vertical slice. Decide whether accounts and cross-device history belong in the next product phase after the training loop works locally.
+
+## Current source-content gate
+
+The [all-flop material feasibility study](sixmax-material-continuation-feasibility.md) rules out useful frozen-source menus for the staged 3bb/9bb policy and both BTN-weight variants even when every physical flop is available, solve costs are free and all unexamined history mass is credited. The staged control's optimistic coverage is 20.04%, below the unchanged 25% gate. The open-only control remains not ruled out at 66.66%. Prioritize declared range/continuation improvements and re-audit fresh policies before spending on further re-raise connected solves. This result does not rule out retrained connected policies or establish convergence; final quality, retained content and publication checks remain mandatory.
