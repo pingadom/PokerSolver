@@ -1,0 +1,140 @@
+{
+  "continuationModel": "MANDATORY_CHECKDOWN",
+  "id": "six-seat-correlated-three-open-checkdown",
+  "rake": {
+    "capBb": 0.0,
+    "fraction": 0.0,
+    "noFlopNoDrop": true
+  },
+  "ranges": [
+    [
+      {
+        "first": {
+          "rank": "FOUR",
+          "suit": "CLUBS"
+        },
+        "second": {
+          "rank": "FOUR",
+          "suit": "DIAMONDS"
+        },
+        "weight": 1.0
+      }
+    ],
+    [
+      {
+        "first": {
+          "rank": "KING",
+          "suit": "DIAMONDS"
+        },
+        "second": {
+          "rank": "NINE",
+          "suit": "DIAMONDS"
+        },
+        "weight": 1.0
+      },
+      {
+        "first": {
+          "rank": "ACE",
+          "suit": "HEARTS"
+        },
+        "second": {
+          "rank": "JACK",
+          "suit": "HEARTS"
+        },
+        "weight": 1.0
+      }
+    ],
+    [
+      {
+        "first": {
+          "rank": "QUEEN",
+          "suit": "HEARTS"
+        },
+        "second": {
+          "rank": "TEN",
+          "suit": "HEARTS"
+        },
+        "weight": 1.0
+      },
+      {
+        "first": {
+          "rank": "ACE",
+          "suit": "HEARTS"
+        },
+        "second": {
+          "rank": "KING",
+          "suit": "HEARTS"
+        },
+        "weight": 1.0
+      }
+    ],
+    [
+      {
+        "first": {
+          "rank": "JACK",
+          "suit": "SPADES"
+        },
+        "second": {
+          "rank": "TEN",
+          "suit": "SPADES"
+        },
+        "weight": 1.0
+      },
+      {
+        "first": {
+          "rank": "EIGHT",
+          "suit": "SPADES"
+        },
+        "second": {
+          "rank": "EIGHT",
+          "suit": "HEARTS"
+        },
+        "weight": 1.0
+      }
+    ],
+    [
+      {
+        "first": {
+          "rank": "SIX",
+          "suit": "CLUBS"
+        },
+        "second": {
+          "rank": "FIVE",
+          "suit": "CLUBS"
+        },
+        "weight": 1.0
+      }
+    ],
+    [
+      {
+        "first": {
+          "rank": "ACE",
+          "suit": "CLUBS"
+        },
+        "second": {
+          "rank": "JACK",
+          "suit": "CLUBS"
+        },
+        "weight": 1.0
+      },
+      {
+        "first": {
+          "rank": "SEVEN",
+          "suit": "DIAMONDS"
+        },
+        "second": {
+          "rank": "SEVEN",
+          "suit": "HEARTS"
+        },
+        "weight": 1.0
+      }
+    ]
+  ],
+  "rules": {
+    "raiseToBb": [
+      3.0
+    ],
+    "smallBlindBb": 0.5,
+    "stackBb": 100.0
+  }
+}
