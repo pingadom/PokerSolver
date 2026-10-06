@@ -1,5 +1,7 @@
 package com.pokerlab.solver;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pokerlab.solver.PreflopAllInSpot.Seat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,9 +43,26 @@ public final class SixMaxPreflopBetting {
         }
     }
 
-    public record Rules(double stackBb, double smallBlindBb, List<Double> raiseToBb) {
+    public enum RaiseSchedule {
+        GLOBAL_TARGETS,
+        NEXT_TARGET
+    }
+
+    @JsonSerialize(using = SixMaxPreflopRulesJson.Serializer.class)
+    @JsonDeserialize(using = SixMaxPreflopRulesJson.Deserializer.class)
+    public record Rules(
+            double stackBb,
+            double smallBlindBb,
+            List<Double> raiseToBb,
+            RaiseSchedule raiseSchedule) {
         public Rules {
             raiseToBb = List.copyOf(Objects.requireNonNull(raiseToBb, "raiseToBb"));
+            Objects.requireNonNull(raiseSchedule, "raiseSchedule");
+        }
+
+        /** Historical callers retain the global target menu and its serialized identity. */
+        public Rules(double stackBb, double smallBlindBb, List<Double> raiseToBb) {
+            this(stackBb, smallBlindBb, raiseToBb, RaiseSchedule.GLOBAL_TARGETS);
         }
 
         public static Rules reference100Bb() {
@@ -162,11 +181,17 @@ public final class SixMaxPreflopBetting {
             throw new IllegalArgumentException("Invalid stack or small blind");
         List<Long> targets = new ArrayList<>();
         long previous = UNITS_PER_BB;
+        long previousRaise = UNITS_PER_BB;
         for (double targetBb : rules.raiseToBb()) {
             long target = toUnits(targetBb);
             if (target <= previous || target > stack)
                 throw new IllegalArgumentException("Raise targets must increase up to the stack");
+            if (rules.raiseSchedule() == RaiseSchedule.NEXT_TARGET
+                    && target - previous < previousRaise)
+                throw new IllegalArgumentException(
+                        "Each next target must make a full minimum raise");
             targets.add(target);
+            previousRaise = target - previous;
             previous = target;
         }
         if (targets.isEmpty())
@@ -212,8 +237,10 @@ public final class SixMaxPreflopBetting {
             legal.add(new Move(seat, Kind.CHECK, fromUnits(committed)));
         }
         for (long target : raiseTargets) {
-            if (target > state.currentBet && target - state.currentBet >= state.lastFullRaise)
+            if (target <= state.currentBet) continue;
+            if (target - state.currentBet >= state.lastFullRaise)
                 legal.add(new Move(seat, Kind.RAISE_TO, fromUnits(target)));
+            if (rules.raiseSchedule() == RaiseSchedule.NEXT_TARGET) break;
         }
         return List.copyOf(legal);
     }

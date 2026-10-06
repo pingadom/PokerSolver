@@ -54,9 +54,12 @@ public record SixMaxPreflopResearchSpot(
     }
 
     public String contentHash() {
+        String version =
+                rules.raiseSchedule() == SixMaxPreflopBetting.RaiseSchedule.NEXT_TARGET
+                        ? "six-max-preflop-spot/v2"
+                        : "six-max-preflop-spot/v1";
         return MultiwayCallSpot.sha256(
-                "six-max-preflop-spot/v1|EXACT_RANGE_PRODUCT|"
-                        + MultiwayPackJson.writeFullRoundSpot(this));
+                version + "|EXACT_RANGE_PRODUCT|" + MultiwayPackJson.writeFullRoundSpot(this));
     }
 
     private static List<WeightedCombo> canonicalRange(List<WeightedCombo> range) {
