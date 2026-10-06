@@ -1,0 +1,63 @@
+{
+  "schemaVersion" : "six-max-preflop-range-weight-sensitivity/v1",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "comparisons" : [ {
+    "interpretation" : "Range-weight model sensitivity at a matched finite solver budget, not same-game stability, convergence or trainer admission. Physical support, exact payoffs, betting rules, rake and continuation are held fixed; each policy is validated in its own prior-weight game. Joint-deal total variation measures changed physical chance probabilities, including blockers. Policy total variation compares matching private information-set action rows. Reach weights use the symmetric mean of both games' own-policy decision encounter masses. Encounter mass is expected decision count, not hand probability. Uniform means and maxima include unreachable rows; double underflow is numerical zero. Different-game NashConv scores cannot establish policy improvement or a causal convergence-rate claim.",
+    "baselinePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "variantPackHash" : "5c219cf0488a8d82a5ba01640576e116d3bce647ae92c48c7757673290bd2336",
+    "baselineSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+    "variantSpotHash" : "2e36ae62f08f87f787378ac2f931d7fb77dbcedb6555efafece3a7c0fef61824",
+    "solverVersion" : "multi-player-alternating-cfr-plus/v1",
+    "iterations" : 500,
+    "weightChanges" : [ {
+      "seat" : "BB",
+      "combo" : "7d 7h",
+      "baselineWeight" : 1.0,
+      "variantWeight" : 0.5
+    } ],
+    "jointDeals" : 12,
+    "jointDealTotalVariation" : 0.1666666666666667,
+    "baselineNashConvBb" : 0.0018644720549709061,
+    "variantNashConvBb" : 0.0017065463260718195,
+    "policyDifference" : {
+      "informationSets" : 9161,
+      "reachedByEitherPolicy" : 9161,
+      "baselineExpectedDecisionEncounters" : 7.344705123686109,
+      "variantExpectedDecisionEncounters" : 7.4399507127084785,
+      "uniformMeanTotalVariation" : 0.022002172926757668,
+      "maximumTotalVariation" : 0.9999875853347415,
+      "maximumDifferenceInformationSet" : "1:Ah Jh:|UTG:call|HJ:call|CO:call|BTN:fold|SB:raise:3.0|BB:raise:9.0|UTG:call",
+      "reachWeightedTotalVariation" : 0.14080329949137046,
+      "visitedStates" : 138793
+    }
+  }, {
+    "interpretation" : "Range-weight model sensitivity at a matched finite solver budget, not same-game stability, convergence or trainer admission. Physical support, exact payoffs, betting rules, rake and continuation are held fixed; each policy is validated in its own prior-weight game. Joint-deal total variation measures changed physical chance probabilities, including blockers. Policy total variation compares matching private information-set action rows. Reach weights use the symmetric mean of both games' own-policy decision encounter masses. Encounter mass is expected decision count, not hand probability. Uniform means and maxima include unreachable rows; double underflow is numerical zero. Different-game NashConv scores cannot establish policy improvement or a causal convergence-rate claim.",
+    "baselinePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "variantPackHash" : "6f637a6f14db37760b3a28d6a07657d1c53849d58ad07ecff11a4a2869caf794",
+    "baselineSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+    "variantSpotHash" : "78337067f997974185d402c0869562e8313a9230fdfd66019f57042e886ec0c4",
+    "solverVersion" : "multi-player-alternating-cfr-plus/v1",
+    "iterations" : 500,
+    "weightChanges" : [ {
+      "seat" : "BB",
+      "combo" : "7d 7h",
+      "baselineWeight" : 1.0,
+      "variantWeight" : 2.0
+    } ],
+    "jointDeals" : 12,
+    "jointDealTotalVariation" : 0.1666666666666667,
+    "baselineNashConvBb" : 0.0018644720549709061,
+    "variantNashConvBb" : 4.780870711307692E-4,
+    "policyDifference" : {
+      "informationSets" : 9161,
+      "reachedByEitherPolicy" : 9161,
+      "baselineExpectedDecisionEncounters" : 7.344705123686109,
+      "variantExpectedDecisionEncounters" : 7.221891055343307,
+      "uniformMeanTotalVariation" : 0.03073710783558667,
+      "maximumTotalVariation" : 0.9989812646225911,
+      "maximumDifferenceInformationSet" : "1:Ah Jh:|UTG:fold|HJ:call|CO:call|BTN:fold|SB:fold|BB:raise:3.0",
+      "reachWeightedTotalVariation" : 0.0738012851222563,
+      "visitedStates" : 138793
+    }
+  } ]
+}

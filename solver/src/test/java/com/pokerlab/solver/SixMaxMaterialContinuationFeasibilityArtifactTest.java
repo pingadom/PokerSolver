@@ -15,7 +15,9 @@ class SixMaxMaterialContinuationFeasibilityArtifactTest {
         "three-nine,INFEASIBLE_UNDER_FIXED_POLICY,0.000009561631689740277",
         "staged-three-nine,INFEASIBLE_UNDER_FIXED_POLICY,0.2003511339891511",
         "staged-button-weak-half,INFEASIBLE_UNDER_FIXED_POLICY,0.0003314839089403609",
-        "staged-button-weak-double,INFEASIBLE_UNDER_FIXED_POLICY,0.000008519580189753689"
+        "staged-button-weak-double,INFEASIBLE_UNDER_FIXED_POLICY,0.000008519580189753689",
+        "staged-bb-pair-half,INFEASIBLE_UNDER_FIXED_POLICY,0.000008577430211126771",
+        "staged-bb-pair-double,INFEASIBLE_UNDER_FIXED_POLICY,0.00036352323921584086"
     })
     void savedBoundsBindSourcesAndReplayEveryBoard(String model, String status, double fraction)
             throws Exception {

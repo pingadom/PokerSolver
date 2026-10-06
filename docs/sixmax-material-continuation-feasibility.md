@@ -24,7 +24,7 @@ The bound concerns selected **public history** coverage, not the probability of 
 
 ## Saved evidence
 
-All five reports bind the full canonical source-pack hash and spot hash. They use twenty candidate histories, a maximum of four selected histories and the unchanged default content settings. Each source retains twelve private worlds. These are synthetic, mandatory-checkdown preflop policies trained for 500 CFR+ iterations; changing that continuation model or retraining changes the question being audited.
+All seven reports bind the full canonical source-pack hash and spot hash. They use twenty candidate histories, a maximum of four selected histories and the unchanged default content settings. Each source retains twelve private worlds. These are synthetic, mandatory-checkdown preflop policies trained for 500 CFR+ iterations; changing that continuation model or retraining changes the question being audited.
 
 | Source | Optimistic heads-up coverage | Result |
 | --- | ---: | --- |
@@ -33,10 +33,25 @@ All five reports bind the full canonical source-pack hash and spot hash. They us
 | [Staged 3bb open, 9bb re-raise](data/sixmax-staged-three-nine-material-feasibility.json) | 20.03511340% | Infeasible under fixed policy |
 | [Staged, half BTN `Js Ts` weight](data/sixmax-staged-button-weak-half-material-feasibility.json) | 0.03314839% | Infeasible under fixed policy |
 | [Staged, double BTN `Js Ts` weight](data/sixmax-staged-button-weak-double-material-feasibility.json) | 0.00085196% | Infeasible under fixed policy |
+| [Staged, half BB `7d 7h` weight](data/sixmax-staged-bb-pair-half-material-feasibility.json) | 0.00085774% | Infeasible under fixed policy |
+| [Staged, double BB `7d 7h` weight](data/sixmax-staged-bb-pair-double-material-feasibility.json) | 0.03635232% | Infeasible under fixed policy |
 
 The staged control's only eligible examined histories are ranks 3 and 7, both BB/CO. Each has 8,296 optimistic material flops. Their combined mass is 0.0958855304; all unexamined histories add only 0.0000058205. The minimum-compatible example `2c 8h Jh` keeps four root worlds: its cards block the folded BTN `88` and HJ `Ah Jh` alternatives. It does **not** retain uncertainty at every folded seat on that board. Even granting these boards zero solve cost and allowing repeated active pairs, the bound misses the 25% target.
 
 The open-only result agrees with its previously passing one-history search and two independent connected trials. It does not imply that all of its potentially material histories fit the connected budget or that it is ready for general cash training. The failed results only rule out content menus under the **unchanged source policies**. Connected feedback can alter preflop incentives and reach; a new policy needs a fresh bound and final-policy coverage/quality checks.
+
+## Fresh BB prior controls
+
+After establishing the bound, two new 500-iteration solves changed only BB `7d 7h` from weight 1 to 0.5 or 2. BB `Ac Jc` and every other combo stayed at weight 1. These declared bidirectional probes reuse all 684 exact physical showdown-share entries from the staged control, recompute priors and every betting utility, and train fresh policies. No source strategy or connected checkpoint is transferred. The input spots, fresh packs, payoff-reuse provenance and all-board reports are saved under `sixmax-staged-bb-pair-{half,double}-*`; generated time is `2026-10-06T19:50:00Z`.
+
+| BB pair weight | BB pair prior | Own-game NashConv (bb) | Heads-up mass | Reach-weighted policy TV from control |
+| --- | ---: | ---: | ---: | ---: |
+| 0.5 | 1/3 | 0.0017065463 | 0.6665092597 | 0.1408032995 |
+| 2 | 2/3 | 0.0004780871 | 0.3344897997 | 0.0738012851 |
+
+Both priors move joint private probabilities by 1/6 total variation. The [matched-budget comparison](data/sixmax-staged-bb-pair-sensitivity.json) checks identical rules, continuation, physical support and every payoff value; it compares all 9,161 information sets and visits 138,793 deal/public states. These scores describe different prior-weight games and do not show improved convergence or equilibrium sensitivity.
+
+The half-weight source has three examined histories with material flops (including a CO/BTN history), but all lie below the absolute history floor. Its upper bound therefore consists entirely of the generously credited tail. The double-weight source has one eligible BB/CO history at 0.0001154515 reach, still far short of useful coverage. Neither proceeds to another sampled-seed search or connected solve. Raising heads-up mass, changing a single prior, or finding a second player pair is insufficient on its own. These are synthetic diagnostics, not recommended cash ranges; the next source study needs a declared range/continuation rationale rather than more blind weight tuning.
 
 ## Use and validation
 
@@ -51,4 +66,4 @@ mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxMaterial
 
 The CLI strictly reloads one source of at most 16 MiB, rejects normalized-path and hard-link output aliases, finishes validation before writing, and atomically replaces its report. It never modifies or trains the source. The schema is `six-max-material-continuation-feasibility/v1`, with publication status `VALIDATION_ONLY`.
 
-Analytic tests count exactly 7,140 material flops in a four-world fixture, check inclusive thresholds, demonstrate dominant-hand removal through board conditioning, prove the history-slot/floor accounting, credit the entire tail, and distinguish zero reach from underflow. Invalid policies, empirical chance, applied rake, excessive private support, immutable reports, repeatability and file guards are tested. Saved-artifact tests recompute all five all-flop bounds and source hashes without retraining. The next solver work should improve useful source hand coverage and continuation assumptions before broader re-raise connected studies; full ranges, multiway postflop betting, realistic rake and production admission remain separate research gates.
+Analytic tests count exactly 7,140 material flops in a four-world fixture, check inclusive thresholds, demonstrate dominant-hand removal through board conditioning, prove the history-slot/floor accounting, credit the entire tail, and distinguish zero reach from underflow. Invalid policies, empirical chance, applied rake, excessive private support, immutable reports, repeatability and file guards are tested. Saved-artifact tests recompute all seven all-flop bounds and source hashes without retraining. Additional BB-control tests bind the declared input spots, changed weights, exact payoffs, fresh policy budgets and both sensitivity reports. The next solver work should improve useful source hand coverage and continuation assumptions before broader re-raise connected studies; full ranges, multiway postflop betting, realistic rake and production admission remain separate research gates.
