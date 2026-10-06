@@ -42,7 +42,9 @@ public final class SixMaxAlternatingContinuationStudyMain {
             SixMaxPrivateSupportAudit.Report sourcePrivateSupport,
             SixMaxPrivateSupportAudit.Report retainedPrivateSupport,
             SixMaxReachedContinuationStudy.SelectionAudit selectionAudit,
-            SixMaxPrivateRangeCorrelationAudit.Report sourcePrivateCorrelation) {
+            SixMaxPrivateRangeCorrelationAudit.Report sourcePrivateCorrelation,
+            SixMaxRetainedContinuationCoverage.Report sourceContentCoverage,
+            SixMaxRetainedContinuationCoverage.Report retainedContentCoverage) {
         public Artifact {
             selectedHistories = List.copyOf(selectedHistories);
         }
@@ -135,6 +137,11 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         selectionSettings);
         var cost = budget.validate(plan.game());
         var sourcePrivateSupport = SixMaxPrivateSupportAudit.assess(plan.game(), source.solution());
+        var contentSettings = SixMaxRetainedContinuationCoverage.Settings.researchDefault();
+        var sourceContentCoverage =
+                SixMaxRetainedContinuationCoverage.assess(
+                        plan.game(), source.solution(), contentSettings);
+        SixMaxRetainedContinuationCoverage.Report retainedContentCoverage = null;
         SixMaxPrivateSupportAudit.Report retainedPrivateSupport = null;
         InitialTraining training = null;
         String resumedHash = null;
@@ -223,10 +230,13 @@ public final class SixMaxAlternatingContinuationStudyMain {
             rounds = result.report();
             retainedPrivateSupport =
                     SixMaxPrivateSupportAudit.assess(game, result.retainedPolicy());
+            retainedContentCoverage =
+                    SixMaxRetainedContinuationCoverage.assess(
+                            game, result.retainedPolicy(), contentSettings);
         }
         var artifact =
                 new Artifact(
-                        "six-max-alternating-continuation-study/v4",
+                        "six-max-alternating-continuation-study/v5",
                         "VALIDATION_ONLY",
                         planOnly ? "PLANNED" : "COMPLETED",
                         resume == null ? "FRESH" : "RESUMED",
@@ -247,7 +257,9 @@ public final class SixMaxAlternatingContinuationStudyMain {
                         sourcePrivateSupport,
                         retainedPrivateSupport,
                         plan.selectionAudit(),
-                        SixMaxPrivateRangeCorrelationAudit.assess(plan.game().source()));
+                        SixMaxPrivateRangeCorrelationAudit.assess(plan.game().source()),
+                        sourceContentCoverage,
+                        retainedContentCoverage);
         var output = reportPath.toAbsolutePath().normalize();
         Files.createDirectories(output.getParent());
         new ObjectMapper()

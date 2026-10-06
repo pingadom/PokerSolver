@@ -48,7 +48,9 @@ class SixMaxAlternatingContinuationStudyMainTest {
         args[16] = "0.05";
         SixMaxAlternatingContinuationStudyMain.main(args);
         var artifact = read(report);
-        assertEquals("six-max-alternating-continuation-study/v4", artifact.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v5", artifact.schemaVersion());
+        assertNotNull(artifact.sourceContentCoverage());
+        assertNull(artifact.retainedContentCoverage());
         assertEquals(
                 SixMaxReachedContinuationStudy.SelectionSettings.diverse(.05),
                 artifact.selectionAudit().settings());
@@ -141,7 +143,14 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertNotNull(fresh.initialTraining());
         assertNull(fresh.resumedSolutionHash());
         assertEquals(1, fresh.rounds().acceptedRounds());
-        assertEquals("six-max-alternating-continuation-study/v4", fresh.schemaVersion());
+        assertEquals("six-max-alternating-continuation-study/v5", fresh.schemaVersion());
+        assertNotNull(fresh.sourceContentCoverage());
+        assertNotNull(fresh.retainedContentCoverage());
+        assertEquals(
+                fresh.rounds().retainedAudit().solutionHash(),
+                fresh.retainedContentCoverage().solutionHash());
+        // Quality acceptance preserves the candidate even when content has too few active hands.
+        assertFalse(fresh.retainedContentCoverage().criteriaMet());
         assertNotNull(fresh.sourcePrivateSupport());
         assertNotNull(fresh.sourcePrivateCorrelation());
         assertEquals(15, fresh.sourcePrivateCorrelation().pairs().size());
@@ -178,6 +187,7 @@ class SixMaxAlternatingContinuationStudyMainTest {
         assertEquals(fresh.rounds().retainedAudit(), result.rounds().retainedAudit());
         assertArrayEquals(checkpointBytes, Files.readAllBytes(checkpoint));
         assertEquals(fresh.retainedPrivateSupport(), result.retainedPrivateSupport());
+        assertEquals(fresh.retainedContentCoverage(), result.retainedContentCoverage());
         assertArrayEquals(sourceBytes, Files.readAllBytes(source));
         resumed[10] = "712";
         assertThrows(
