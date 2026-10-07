@@ -294,7 +294,10 @@ public final class SixMaxRankTexturePayoffTable {
             throw new IllegalArgumentException("Artifact input cap exceeded");
         if (!input.toString().endsWith(".gz")) return Files.readAllBytes(input);
         byte[] bytes;
-        try (var zip = new java.util.zip.GZIPInputStream(Files.newInputStream(input))) {
+        // GZIPInputStream validates its header in the constructor, which can throw before the
+        // wrapper enters try-with-resources. Own the raw stream separately even on that path.
+        try (var raw = Files.newInputStream(input);
+                var zip = new java.util.zip.GZIPInputStream(raw)) {
             bytes = zip.readNBytes(limit + 1);
         }
         if (bytes.length > limit)

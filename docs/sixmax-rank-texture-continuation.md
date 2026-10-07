@@ -36,6 +36,8 @@ Fresh exhaustive CFR+ solves explicitly select `NONE` or `FIXED_UTILITY` pruning
 
 Read-only assessment rebuilds the full policy, independently computes each seat's information-set best response, checks zero-sum settlement and source checkdown recovery, and recomputes physical-board feasibility under the new preflop policy. Report scope is explicitly `PARENT_INFORMATION_SET_BEST_RESPONSES_ONLY`; this release does **not** certify every reached rank-signal subgame separately.
 
+The subsequent [reached conditional audit](sixmax-rank-texture-conditional-audit.md) supplies separately versioned diagnostics and independent parent-game unilateral witnesses for all 7,092 reached history/signal cases in each saved policy. The earlier study reports retain their original scope. The new audit finds large gaps in rare decisions despite the small parent score; it does not admit these policies as trainer content.
+
 ## Saved results
 
 Both budgets use the same game hash `bb3cf0231e9cb367a84ee805df551e041b46f270876ccba891485babffd66e53` and the same six histories/sizing.
