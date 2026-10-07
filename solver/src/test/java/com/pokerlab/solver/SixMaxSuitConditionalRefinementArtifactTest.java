@@ -145,5 +145,111 @@ class SixMaxSuitConditionalRefinementArtifactTest {
             assertEquals(
                     report.before().summary().largestConditionalGapBb(),
                     report.after().summary().largestConditionalGapBb());
+        if (mode.equals("balanced")) {
+            // Reuse the opaque, fully replayed derivative: no second expensive parent re-audit.
+            var screen =
+                    SixMaxSuitDecisionStability.replay(
+                            Path.of(
+                                    "../docs/data/sixmax-staged-suit-decision-stability-500.json.gz"),
+                            source,
+                            parent,
+                            table,
+                            predecessor,
+                            result);
+            assertFalse(screen.trainerAdmission());
+            assertEquals(32, screen.branches().size());
+            var pre = SixMaxPreflopContinuationFeedback.preflopPolicy(artifact.solution());
+            for (var branch : screen.branches()) {
+                assertTrue(table.observations().get(branch.observation()).physical());
+                assertEquals(
+                        List.of(500, 1000),
+                        branch.references().stream()
+                                .map(SixMaxSuitDecisionStability.Reference::iterations)
+                                .toList());
+                var transition =
+                        new SixMaxPolicyFlopTransition(game.sourceGame(), pre, branch.history());
+                var posterior =
+                        SixMaxFlopConditionalDiagnostics.posterior(
+                                game.core(), transition, branch.observation());
+                for (var decision :
+                        SixMaxOneBetDecisionValues.assess(
+                                game.core(), posterior.roots(), artifact.solution())) {
+                    if (decision.roots().isEmpty()) continue;
+                    var independentlyCalculated =
+                            analyticValues(game.core(), decision, artifact.solution());
+                    independentlyCalculated.forEach(
+                            (action, ev) ->
+                                    assertEquals(
+                                            ev,
+                                            decision.row().values().actionEvBb().get(action),
+                                            1e-10));
+                }
+                for (var question : branch.questions()) {
+                    if (question.material()) assertEquals(2, question.references().size());
+                    if (question.stable()) {
+                        assertTrue(question.material());
+                        assertTrue(question.failures().isEmpty());
+                        assertTrue(question.primary().values().decisionRegretBb() <= .01);
+                        assertTrue(
+                                question.references().stream()
+                                        .allMatch(
+                                                r ->
+                                                        r.posteriorTotalVariation() != null
+                                                                && r.posteriorTotalVariation()
+                                                                        <= .01
+                                                                && r.maximumActionEvDriftBb() <= .01
+                                                                && r
+                                                                                .primaryMixRegretUnderReferenceBb()
+                                                                        <= .01
+                                                                && r
+                                                                                .referenceMixRegretUnderPrimaryBb()
+                                                                        <= .01));
+                    }
+                }
+            }
+        }
+    }
+
+    /** Closed-form pot/share accounting, independent of terminal traversal and pure-plan search. */
+    static java.util.Map<String, Double> analyticValues(
+            SixMaxOneBetFlopGame game,
+            SixMaxOneBetDecisionValues.Decision decision,
+            CfrSolution policy) {
+        var first = decision.roots().getFirst().state();
+        var coverage =
+                game.coverage().stream()
+                        .filter(c -> c.history().equals(first.preflop().publicHistory()))
+                        .findFirst()
+                        .orElseThrow();
+        double pot = coverage.potBb(), bet = coverage.betBb();
+        int actor = decision.row().actor().ordinal();
+        int mask = (1 << coverage.firstToAct().ordinal()) | (1 << coverage.secondToAct().ordinal());
+        String prefix = decision.row().actions();
+        double check = 0, wager = 0, possibleFutureCall = 0;
+        for (var root : decision.roots()) {
+            var state = root.state();
+            double share =
+                    game.payoffView()
+                            .share(state.preflop().dealIndex(), mask, actor, state.signal());
+            double call = (pot + 2 * bet) * share - bet;
+            if (prefix.equals("b") || prefix.equals("kb")) {
+                wager += root.probability() * call;
+                continue;
+            }
+            var afterBet = game.afterAction(state, "b");
+            double fold = MultiPlayerStrategyEvaluator.probability(game, policy, afterBet, "f");
+            wager += root.probability() * (fold * pot + (1 - fold) * call);
+            if (prefix.equals("k")) check += root.probability() * pot * share;
+            else {
+                var afterCheck = game.afterAction(state, "k");
+                double responseCheck =
+                        MultiPlayerStrategyEvaluator.probability(game, policy, afterCheck, "k");
+                check += root.probability() * responseCheck * pot * share;
+                possibleFutureCall += root.probability() * (1 - responseCheck) * call;
+            }
+        }
+        return prefix.equals("b") || prefix.equals("kb")
+                ? java.util.Map.of("f", 0.0, "c", wager)
+                : java.util.Map.of("b", wager, "k", check + Math.max(0, possibleFutureCall));
     }
 }
