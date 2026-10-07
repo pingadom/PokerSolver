@@ -68,7 +68,7 @@ Dedicated tests force a known all-tie continuation in which both seats wrongly f
 
 For each saved budget, tests enumerate every pure own-information-set plan for all six seats in the five largest-gap cases. They directly evaluate each plan rather than reuse the best-response selector. The checks include active seats with multiple private hands. This catches illegal hidden-world conditioning or ignored player-prefix overrides. Enumeration is bounded at 256 plans per seat per case.
 
-Failure-path testing also found and fixed a Windows file-handle leak in the shared gzip artifact loader. `GZIPInputStream` can throw while constructing its header reader, before its own try-with-resources variable exists. The loader now owns the raw input stream as a separate resource, so a malformed header releases the file immediately. A regression test rejects empty/truncated/invalid headers and atomically replaces the file after each failure. This was our resource-management bug, not an upstream library defect.
+Failure-path testing also found and fixed a Windows file-handle leak in the shared gzip artifact loader and the older six-texture checkpoint reader. `GZIPInputStream` can throw while constructing its header reader, before its own try-with-resources variable exists. Both loaders now own the raw input stream as a separate resource, so a malformed header releases the file immediately. Regression tests reject empty/truncated/invalid headers and atomically replace the file after each failure. This was our resource-management bug, not an upstream library defect.
 
 ## Reproduction
 

@@ -9,6 +9,23 @@ import org.junit.jupiter.api.io.TempDir;
 
 class SixMaxRankTextureArtifactIoTest {
     @Test
+    void olderTextureCheckpointsAlsoReleaseMalformedHeaderStreams(@TempDir Path temp)
+            throws Exception {
+        var source = SixMaxTextureFlopGameTest.source();
+        var table = SixMaxTextureFlopGameTest.table(source);
+        var path = temp.resolve("coarse.json.gz");
+        for (byte[] malformed : new byte[][] {new byte[0], {31}, {31, -117}, {'{', '}'}}) {
+            Files.write(path, malformed);
+            assertThrows(
+                    java.io.IOException.class, () -> SixMaxTextureStudy.read(path, source, table));
+            SixMaxRankTexturePayoffTable.writeBytes(path, new byte[] {1, 2, 3}, 100);
+            assertArrayEquals(
+                    new byte[] {1, 2, 3}, SixMaxRankTexturePayoffTable.readBytes(path, 100));
+            Files.delete(path);
+        }
+    }
+
+    @Test
     void malformedGzipCanBeReplacedImmediatelyAfterConstructorFailure(@TempDir Path temp)
             throws Exception {
         var path = temp.resolve("broken.json.gz");

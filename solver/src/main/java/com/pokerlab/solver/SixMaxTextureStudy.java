@@ -271,7 +271,9 @@ public final class SixMaxTextureStudy {
             throw new IllegalArgumentException("Checkpoint exceeds 16 MiB");
         byte[] bytes;
         if (input.toString().endsWith(".gz")) {
-            try (var stream = new java.util.zip.GZIPInputStream(Files.newInputStream(input))) {
+            // Own the raw stream even if gzip header validation fails in the constructor.
+            try (var raw = Files.newInputStream(input);
+                    var stream = new java.util.zip.GZIPInputStream(raw)) {
                 bytes = stream.readNBytes(16 * 1024 * 1024 + 1);
             }
             if (bytes.length > 16 * 1024 * 1024)
