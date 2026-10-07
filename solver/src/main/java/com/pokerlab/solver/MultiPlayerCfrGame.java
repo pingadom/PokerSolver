@@ -27,9 +27,10 @@ public interface MultiPlayerCfrGame<S> {
     List<ChanceOutcome<S>> chanceOutcomes(S state);
 
     /**
-     * Optional exact best-response shortcut. Present only when this player never acts again and
-     * every descendant terminal has this same literal utility, under every action and chance
-     * outcome. Empty by default. This is not an estimate, baseline or policy-dependent value.
+     * Optional exact best-response / opt-in CFR shortcut. Present only when this player never acts
+     * again and every descendant terminal has this same literal utility, under every action and
+     * chance outcome. Empty by default. This is not an estimate, baseline or policy-dependent
+     * value.
      */
     default OptionalDouble inactivePlayerUtility(S state, int player) {
         return OptionalDouble.empty();

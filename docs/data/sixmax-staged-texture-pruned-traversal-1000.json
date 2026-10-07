@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "six-max-texture-traversal-observation/v1",
+  "publicationStatus": "VALIDATION_ONLY",
+  "gameHash": "5c2e67e05ad9c33eebb7a1f4c8839747937ab6dfbd3feffa0f245696c4f81048",
+  "solutionHash": "4bf62fb01ff00fda24bfdbefec33e14d6d63e6dbc8acaedef131b18209e4ae42",
+  "algorithm": "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "iterations": 1000,
+  "players": 6,
+  "completeTreeStates": 142681,
+  "visitedNodes": 516810000,
+  "terminalNodes": 244452000,
+  "sampledChanceNodes": 0,
+  "baselineCorrections": 0,
+  "inactiveUtilityPrunedNodes": 28800000,
+  "referenceVisitedNodes": 856086000,
+  "referenceWorkDerivation": "players * iterations * completeTreeStates for exhaustive unpruned traversal",
+  "endToEndSeconds": 248.0667746,
+  "timingContext": "Single local run from frozen classes; includes menu selection, solving, quality/content audits and export; concurrent Maven tests; not a paired wall-time benchmark"
+}
