@@ -4,8 +4,6 @@ import com.pokerlab.solver.PreflopAllInSpot.Seat;
 import com.pokerlab.solver.SixMaxPreflopResearchTrainer.PublicAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalDouble;
@@ -132,12 +130,6 @@ public final class SixMaxRankTextureConditionalAudit {
         }
     }
 
-    private record Posterior(
-            double signalProbability,
-            List<ChanceOutcome<SixMaxRankTextureFlopGame.State>> roots,
-            Map<String, Double> firstMarginal,
-            Map<String, Double> secondMarginal) {}
-
     private SixMaxRankTextureConditionalAudit() {}
 
     public static Report assess(
@@ -146,108 +138,40 @@ public final class SixMaxRankTextureConditionalAudit {
             SixMaxRankTextureStudy.Checkpoint cp)
             throws Exception {
         var game = SixMaxRankTextureStudy.rebuild(source, table, cp);
-        var policy = cp.solution();
-        var preflop = SixMaxPreflopContinuationFeedback.preflopPolicy(policy);
-        var responses = new ArrayList<Map<String, String>>();
-        for (int player = 0; player < 6; player++) responses.add(new LinkedHashMap<>());
-        double[] weighted = new double[6];
-        var histories = new ArrayList<HistoryAudit>();
-        int audited = 0, zero = 0, unsupported = 0, above = 0, diverse = 0;
-        double largest = 0, diverseLargest = 0;
-        for (var selection : game.selections()) {
-            if (!SixMaxTextureConditionalAudit.hasReach(
-                    game.sourceGame(), preflop, selection.history())) {
-                zero++;
-                histories.add(
-                        new HistoryAudit(
-                                selection.history(),
-                                "ZERO_POLICY_REACH",
-                                null,
-                                null,
-                                0,
-                                0,
-                                List.of()));
-                continue;
-            }
-            var transition =
-                    new SixMaxPolicyFlopTransition(game.sourceGame(), preflop, selection.history());
-            requireNormal(transition.reachProbability());
-            for (var deal : transition.deals()) requireNormal(deal.probability());
-            var signals = new ArrayList<SignalAudit>();
-            double probabilitySum = 0;
-            for (int signal = 0; signal < table.signals().size(); signal++) {
-                var posterior = posterior(game, transition, signal);
-                double probability = posterior.signalProbability();
-                probabilitySum += probability;
-                if (posterior.roots().isEmpty()) {
-                    unsupported++;
-                    signals.add(
-                            new SignalAudit(
-                                    table.signals().get(signal),
-                                    "NO_REACHED_PRIVATE_SUPPORT",
-                                    0,
-                                    0,
-                                    Map.of(),
-                                    Map.of(),
-                                    0,
-                                    0,
-                                    null));
-                    continue;
-                }
-                var response =
-                        MultiPlayerInformationSetBestResponse.assess(
-                                new ConditionalGame(game, posterior.roots()), policy);
-                double weight = transition.reachProbability() * probability;
-                requireNormal(weight);
-                for (int player = 0; player < 6; player++) {
-                    weighted[player] += weight * response.deviationGainsBb().get(player);
-                    for (var action : response.responseActions().get(player).entrySet()) {
-                        String key = player + ":" + action.getKey();
-                        // No preflop action may change, and cases must have disjoint information
-                        // sets.
-                        if (!key.contains(":postflop:rank-texture:")
-                                || responses.get(player).putIfAbsent(key, action.getValue())
-                                        != null)
-                            throw new IllegalStateException(
-                                    "Conditional responses overlap or change preflop");
-                    }
-                }
-                var quality = SixMaxConnectedPreflopAudit.Quality.of(response);
-                int first = material(posterior.firstMarginal());
-                int second = material(posterior.secondMarginal());
-                audited++;
-                if (quality.nashConvBb() > GAP_THRESHOLD_BB) above++;
-                largest = Math.max(largest, quality.nashConvBb());
-                if (first >= 2 && second >= 2) {
-                    diverse++;
-                    diverseLargest = Math.max(diverseLargest, quality.nashConvBb());
-                }
-                signals.add(
-                        new SignalAudit(
-                                table.signals().get(signal),
-                                "AUDITED",
-                                probability,
-                                posterior.roots().size(),
-                                posterior.firstMarginal(),
-                                posterior.secondMarginal(),
-                                first,
-                                second,
-                                quality));
-            }
-            if (Math.abs(probabilitySum - 1) > 1e-12)
-                throw new IllegalStateException(
-                        "Conditional signals do not partition reached chance");
-            histories.add(
-                    new HistoryAudit(
-                            selection.history(),
-                            "AUDITED",
-                            transition.firstToAct(),
-                            transition.secondToAct(),
-                            transition.reachProbability(),
-                            probabilitySum,
-                            signals));
-        }
-        var witness = embed(game, policy, weighted, responses);
+        var diagnostics = SixMaxFlopConditionalDiagnostics.assess(game.core(), cp.solution());
+        var histories =
+                diagnostics.histories().stream()
+                        .map(
+                                h ->
+                                        new HistoryAudit(
+                                                h.history(),
+                                                h.status(),
+                                                h.firstToAct(),
+                                                h.secondToAct(),
+                                                h.historyProbability(),
+                                                h.signalProbabilitiesSum(),
+                                                h.signals().stream()
+                                                        .map(
+                                                                s ->
+                                                                        new SignalAudit(
+                                                                                table.signals()
+                                                                                        .get(
+                                                                                                s
+                                                                                                        .observation()),
+                                                                                s.status(),
+                                                                                s
+                                                                                        .signalProbabilityGivenHistory(),
+                                                                                s
+                                                                                        .posteriorPrivateDeals(),
+                                                                                s.firstMarginal(),
+                                                                                s.secondMarginal(),
+                                                                                s
+                                                                                        .firstCombosAtFivePercent(),
+                                                                                s
+                                                                                        .secondCombosAtFivePercent(),
+                                                                                s.quality()))
+                                                        .toList()))
+                        .toList();
         return new Report(
                 SCHEMA,
                 "VALIDATION_ONLY",
@@ -260,133 +184,13 @@ public final class SixMaxRankTextureConditionalAudit {
                 cp.solutionHash(),
                 cp.algorithm(),
                 cp.chanceTraversal(),
-                policy.iterations(),
+                cp.solution().iterations(),
                 cp.completeTreeStates(),
                 GAP_THRESHOLD_BB,
                 MARGINAL_THRESHOLD,
                 histories,
-                new Summary(audited, zero, unsupported, above, diverse, largest, diverseLargest),
-                witness);
-    }
-
-    private static ParentWitness embed(
-            SixMaxRankTextureFlopGame game,
-            CfrSolution policy,
-            double[] weighted,
-            List<Map<String, String>> responses)
-            throws Exception {
-        var parent = MultiPlayerInformationSetBestResponse.assess(game, policy);
-        var weightedGains = new ArrayList<Double>();
-        var utilities = new ArrayList<Double>();
-        var gains = new ArrayList<Double>();
-        var errors = new ArrayList<Double>();
-        var counts = new ArrayList<Integer>();
-        var hashes = new ArrayList<String>();
-        double total = 0;
-        for (int player = 0; player < 6; player++) {
-            var response = responses.get(player);
-            var rows = new LinkedHashMap<>(policy.strategy());
-            for (var action : response.entrySet()) {
-                var original = rows.get(action.getKey());
-                if (original == null || !original.containsKey(action.getValue()))
-                    throw new IllegalStateException(
-                            "Conditional response has a foreign or illegal action");
-                var pure = new LinkedHashMap<String, Double>();
-                original.forEach(
-                        (key, value) -> pure.put(key, key.equals(action.getValue()) ? 1.0 : 0.0));
-                rows.put(action.getKey(), pure);
-            }
-            double value =
-                    response.isEmpty()
-                            ? parent.profileUtilitiesBb().get(player)
-                            : MultiPlayerStrategyEvaluator.utilities(
-                                    game, new CfrSolution(policy.iterations(), rows))[player];
-            double gain = value - parent.profileUtilitiesBb().get(player);
-            double error = gain - weighted[player];
-            if (Math.abs(error) > 1e-9
-                    || gain < -1e-9
-                    || gain > parent.deviationGainsBb().get(player) + 1e-9)
-                throw new IllegalStateException(
-                        "Embedded local responses disagree with parent bounds");
-            weightedGains.add(weighted[player]);
-            total += weighted[player];
-            utilities.add(value);
-            gains.add(gain);
-            errors.add(error);
-            counts.add(response.size());
-            hashes.add(
-                    java.util.HexFormat.of()
-                            .formatHex(
-                                    java.security.MessageDigest.getInstance("SHA-256")
-                                            .digest(
-                                                    SixMaxTexturePayoffTable.mapper()
-                                                            .writeValueAsBytes(response))));
-        }
-        return new ParentWitness(
-                SixMaxConnectedPreflopAudit.Quality.of(parent),
-                weightedGains,
-                total,
-                utilities,
-                gains,
-                errors,
-                counts,
-                hashes);
-    }
-
-    private static Posterior posterior(
-            SixMaxRankTextureFlopGame game, SixMaxPolicyFlopTransition transition, int signal) {
-        var table = game.payoffTable();
-        var roots = game.chanceOutcomes(game.initialState());
-        var states = new ArrayList<ChanceOutcome<SixMaxRankTextureFlopGame.State>>();
-        var first = new LinkedHashMap<String, Double>();
-        var second = new LinkedHashMap<String, Double>();
-        double probability = 0;
-        for (var posterior : transition.deals()) {
-            var keys = posterior.hands().stream().map(WeightedCombo::key).toList();
-            int deal = -1;
-            for (int i = 0; i < table.deals().size(); i++)
-                if (table.deals().get(i).hands().equals(keys)) {
-                    deal = i;
-                    break;
-                }
-            if (deal < 0)
-                throw new IllegalArgumentException("Conditional table private support differs");
-            long flops = table.deals().get(deal).flopCounts().get(signal);
-            if (flops == 0) continue;
-            double mass =
-                    posterior.probability() * flops / SixMaxPolicyFlopTransition.FLOPS_PER_DEAL;
-            requireNormal(mass);
-            var state = roots.get(deal).state();
-            for (var action : transition.history())
-                state = game.afterAction(state, action.action());
-            states.add(
-                    new ChanceOutcome<>(
-                            new SixMaxRankTextureFlopGame.State(state.preflop(), signal, ""),
-                            mass));
-            probability += mass;
-            first.merge(keys.get(transition.firstToAct().ordinal()), mass, Double::sum);
-            second.merge(keys.get(transition.secondToAct().ordinal()), mass, Double::sum);
-        }
-        if (probability == 0) return new Posterior(0, List.of(), Map.of(), Map.of());
-        requireNormal(probability);
-        double normalizer = probability;
-        var normalized =
-                states.stream()
-                        .map(s -> new ChanceOutcome<>(s.state(), s.probability() / normalizer))
-                        .toList();
-        first.replaceAll((key, value) -> value / normalizer);
-        second.replaceAll((key, value) -> value / normalizer);
-        return new Posterior(probability, normalized, first, second);
-    }
-
-    private static void requireNormal(double probability) {
-        if (!Double.isFinite(probability) || probability < Double.MIN_NORMAL)
-            throw new IllegalArgumentException(
-                    "Conditional reach underflow requires a log-space audit");
-    }
-
-    private static int material(Map<String, Double> marginal) {
-        return (int) marginal.values().stream().filter(mass -> mass >= MARGINAL_THRESHOLD).count();
+                diagnostics.summary(),
+                diagnostics.parentWitness());
     }
 
     public static void write(Path output, Report report) throws Exception {
@@ -417,7 +221,7 @@ public final class SixMaxRankTextureConditionalAudit {
     }
 
     static record ConditionalGame(
-            SixMaxRankTextureFlopGame parent,
+            MultiPlayerCfrGame<SixMaxRankTextureFlopGame.State> parent,
             List<ChanceOutcome<SixMaxRankTextureFlopGame.State>> roots)
             implements MultiPlayerCfrGame<SixMaxRankTextureFlopGame.State> {
         ConditionalGame {

@@ -33,6 +33,40 @@ class HandEvaluatorTest {
     }
 
     @Test
+    void threeOfAKindPreservesBothKickersInFiveAndSevenCardResults() {
+        var strong = cards("2c", "2d", "2h", "Ac", "Kd");
+        var weak = cards("2c", "2d", "2h", "Ac", "6c");
+        var first = HandEvaluator.evaluateFive(strong);
+        var second = HandEvaluator.evaluateFive(weak);
+        assertEquals(List.of(2, 14, 13), first.rank().tiebreakers());
+        assertEquals(List.of(2, 14, 6), second.rank().tiebreakers());
+        assertTrue(
+                first.compareTo(second) > 0, "Second kicker must break equal trips/first kicker");
+        var sevenStrong = cards("2c", "2d", "3h", "Ac", "2h", "Kd", "9d");
+        var sevenWeak = cards("2c", "2d", "3h", "Ac", "2h", "6c", "5c");
+        assertEquals(
+                List.of(2, 14, 13), HandEvaluator.evaluateBest(sevenStrong).rank().tiebreakers());
+        assertEquals(List.of(2, 14, 6), HandEvaluator.evaluateBest(sevenWeak).rank().tiebreakers());
+        assertTrue(
+                HandEvaluator.evaluateBest(sevenStrong)
+                                .compareTo(HandEvaluator.evaluateBest(sevenWeak))
+                        > 0);
+        assertEquals(
+                Integer.signum(
+                        Integer.compare(
+                                HandEvaluator.evaluateBestScore(sevenStrong.toArray(Card[]::new)),
+                                HandEvaluator.evaluateBestScore(sevenWeak.toArray(Card[]::new)))),
+                Integer.signum(
+                        HandEvaluator.evaluateBest(sevenStrong)
+                                .compareTo(HandEvaluator.evaluateBest(sevenWeak))));
+        var reordered = new java.util.ArrayList<>(sevenStrong);
+        java.util.Collections.reverse(reordered);
+        assertEquals(
+                HandEvaluator.evaluateBest(sevenStrong).rank(),
+                HandEvaluator.evaluateBest(reordered).rank());
+    }
+
+    @Test
     void evaluatesBestFiveFromSevenCards() {
         EvaluatedHand best =
                 HandEvaluator.evaluateBest(cards("As", "Ks", "Qs", "Js", "Ts", "2d", "3c"));

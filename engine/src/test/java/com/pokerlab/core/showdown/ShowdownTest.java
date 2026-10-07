@@ -10,6 +10,16 @@ import org.junit.jupiter.api.Test;
 class ShowdownTest {
 
     @Test
+    void sharedTripsUseBothKickersAndStillAllowRealTies() {
+        var board = cards("2c", "2d", "3h", "Ac", "2h");
+        var strong = cards("Kd", "9d");
+        var weak = cards("6c", "5c");
+        assertEquals(Winner.HERO, Showdown.compare(strong, weak, board).winner());
+        assertEquals(Winner.VILLAIN, Showdown.compare(weak, strong, board).winner());
+        assertEquals(Winner.TIE, Showdown.compare(strong, cards("Kh", "8d"), board).winner());
+    }
+
+    @Test
     void heroPairOfAcesBeatsVillainPairOfQueens() {
         ShowdownResult result =
                 Showdown.compare(
