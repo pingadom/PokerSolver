@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "six-max-rank-texture-traversal-observation/v1",
+  "publicationStatus": "VALIDATION_ONLY",
+  "observation": "FRESH_EXHAUSTIVE_SOLVE_COUNTERS_NO_WALL_TIME_BENCHMARK",
+  "model": "BOARD_RANKS_SIX_TEXTURES_ONE_BET_THEN_CHECKDOWN/v1",
+  "sourcePackHash": "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+  "sourceSpotHash": "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+  "payoffTableHash": "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+  "gameHash": "bb3cf0231e9cb367a84ee805df551e041b46f270876ccba891485babffd66e53",
+  "solutionHash": "728817c550dd9d173918918ddee27479f96080b271e4f0eca371d586f8de0bc7",
+  "algorithm": "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "chanceTraversal": "EXHAUSTIVE",
+  "iterations": 100,
+  "completeTreeStates": 888205,
+  "informationSets": 65771,
+  "visitedNodes": 200785800,
+  "terminalNodes": 107281200,
+  "inactiveUtilityPrunedNodes": 2880000,
+  "sampledChanceNodes": 0,
+  "baselineCorrections": 0,
+  "referenceUnprunedVisitedNodes": 532923000
+}
