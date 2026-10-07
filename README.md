@@ -37,6 +37,8 @@ The [bounded suit-refinement model](docs/sixmax-suit-refinement.md) now reveals 
 
 [Targeted conditional refinement](docs/sixmax-suit-conditional-refinement.md) now freezes preflop ranges and re-solves weak spots with explicit fresh budgets. A balanced 64-case derivative reduces the worst local gap from 6.60 to 1.28bb and improves the full-game gap by about 5.7%, while replay checks all 7,806 cases, unchanged strategy rows and predecessor lineage. It remains validation evidence; wider physical-board coverage and a retained trainer quality screen are still required.
 
+[Physical-hand decision stability](docs/sixmax-suit-decision-stability.md) now calculates own-card action EVs with optimal hero continuation, checks fresh 500/1000-budget references and detects changes in the private-hand posterior after public actions. The first screen retains 23 of 32 physical board/history cases; 127 of 148 material decisions pass. Saved evidence replays every solve and EV, but limited physical coverage still prevents trainer admission.
+
 Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
 ## Quick start
