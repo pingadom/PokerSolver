@@ -121,4 +121,53 @@ final class SixMaxConditionalPayoffEnumeration {
     private static List<Long> longs(long[] values) {
         return Arrays.stream(values).boxed().toList();
     }
+
+    /**
+     * Exact named-flop refinement. Production supplies all 37 remaining cards; tests may use fewer.
+     */
+    static Result fixedFlop(List<WeightedCombo> dealt, List<Card> flop, List<Card> remaining) {
+        if (dealt.size() != 6 || flop.size() != 3 || remaining.size() < 2 || remaining.size() > 37)
+            throw new IllegalArgumentException("Invalid bounded fixed-flop enumeration");
+        var unique = new HashSet<Card>();
+        for (var hand : dealt)
+            if (!unique.add(hand.first()) || !unique.add(hand.second()))
+                throw new IllegalArgumentException("Overlapping private cards");
+        for (var card : flop)
+            if (!unique.add(card)) throw new IllegalArgumentException("Blocked or duplicate flop");
+        for (var card : remaining)
+            if (!unique.add(card))
+                throw new IllegalArgumentException("Blocked or duplicate runout card");
+        long[] wins = new long[64], ties = new long[64];
+        int[] scores = new int[6];
+        Card[][] hands = new Card[6][7];
+        for (int seat = 0; seat < 6; seat++) {
+            hands[seat][0] = dealt.get(seat).first();
+            hands[seat][1] = dealt.get(seat).second();
+            for (int c = 0; c < 3; c++) hands[seat][c + 2] = flop.get(c);
+        }
+        long runouts = 0;
+        for (int a = 0; a < remaining.size() - 1; a++)
+            for (int b = a + 1; b < remaining.size(); b++) {
+                for (int seat = 0; seat < 6; seat++) {
+                    hands[seat][5] = remaining.get(a);
+                    hands[seat][6] = remaining.get(b);
+                    scores[seat] = HandEvaluator.evaluateBestScore(hands[seat]);
+                }
+                for (int first = 0; first < 6; first++)
+                    for (int second = first + 1; second < 6; second++) {
+                        int mask = (1 << first) | (1 << second);
+                        int comparison = Integer.compare(scores[first], scores[second]);
+                        if (comparison > 0) wins[mask]++;
+                        else if (comparison == 0) ties[mask]++;
+                    }
+                runouts++;
+            }
+        if (runouts != (long) remaining.size() * (remaining.size() - 1) / 2)
+            throw new IllegalStateException("Fixed-flop runout count differs");
+        var pairs = new ArrayList<Pair>();
+        for (int mask = 0; mask < 64; mask++)
+            if (Integer.bitCount(mask) == 2)
+                pairs.add(new Pair(mask, List.of(wins[mask]), List.of(ties[mask])));
+        return new Result(List.of(1L), List.copyOf(pairs));
+    }
 }

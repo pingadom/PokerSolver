@@ -1,58 +1,36 @@
 package com.pokerlab.solver;
 
-import com.pokerlab.solver.PreflopAllInSpot.Seat;
-import com.pokerlab.solver.SixMaxPreflopResearchTrainer.PublicAction;
+import com.pokerlab.solver.SixMaxRankTextureFlopGame.Coverage;
+import com.pokerlab.solver.SixMaxRankTextureFlopGame.Selection;
+import com.pokerlab.solver.SixMaxRankTextureFlopGame.State;
 import java.util.List;
 import java.util.OptionalDouble;
 
 /**
- * Coarse public-signal experiment: six-seat preflop, actual board ranks and coarse suit
- * multiplicity, one heads-up betting round and exact integrated turn/river checkdown. Players see
- * their hand, board ranks and texture, not actual suits or rank-to-suit association. Only declared
- * histories expand; unselected and multiway pots retain source checkdown.
+ * Separately declared partial suit observation; state/selection shapes reuse the one-bet engine.
  */
-public final class SixMaxRankTextureFlopGame
-        implements MultiPlayerCfrGame<SixMaxRankTextureFlopGame.State> {
-    public static final int MAX_SELECTED_HISTORIES = 6;
-    public static final int MAX_COMPLETE_STATES = 1_000_000;
-
-    public record State(SixMaxPreflopCheckdownGame.State preflop, Integer signal, String actions) {}
-
-    public record Selection(List<PublicAction> history, double potFraction) {
-        public Selection {
-            history = List.copyOf(history);
-            if (!Double.isFinite(potFraction) || potFraction <= 0 || potFraction > 2)
-                throw new IllegalArgumentException("Flop bet fraction must be in (0,2]");
-        }
-    }
-
-    public record Coverage(
-            String history,
-            Seat firstToAct,
-            Seat secondToAct,
-            double potBb,
-            double betBb,
-            int privateDeals,
-            int dealSignalPairs,
-            long physicalFlopsPerDeal) {}
-
-    private final SixMaxRankTexturePayoffTable.Artifact table;
+public final class SixMaxSuitRefinementFlopGame implements MultiPlayerCfrGame<State> {
+    private final SixMaxSuitRefinementPayoffTable.Artifact table;
     private final SixMaxOneBetFlopGame core;
 
-    public SixMaxRankTextureFlopGame(
+    public SixMaxSuitRefinementFlopGame(
             SixMaxPreflopSolutionPack source,
-            SixMaxRankTexturePayoffTable.Artifact table,
-            List<Selection> selections) {
-        SixMaxRankTexturePayoffTable.validate(table, source);
+            SixMaxRankTexturePayoffTable.Artifact parent,
+            SixMaxSuitRefinementPayoffTable.Artifact table,
+            List<Selection> selections)
+            throws Exception {
+        SixMaxSuitRefinementPayoffTable.validate(table, source, parent);
         this.table = table;
-        core = new SixMaxOneBetFlopGame(source, SixMaxFlopPayoffView.rank(table), selections);
+        core =
+                new SixMaxOneBetFlopGame(
+                        source, SixMaxSuitRefinementPayoffTable.view(table), selections);
     }
 
     public SixMaxPreflopCheckdownGame sourceGame() {
         return core.sourceGame();
     }
 
-    SixMaxRankTexturePayoffTable.Artifact payoffTable() {
+    SixMaxSuitRefinementPayoffTable.Artifact payoffTable() {
         return table;
     }
 

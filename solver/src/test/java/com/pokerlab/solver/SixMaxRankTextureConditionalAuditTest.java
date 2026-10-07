@@ -239,32 +239,45 @@ class SixMaxRankTextureConditionalAuditTest {
             CfrSolution policy,
             SixMaxRankTextureConditionalAudit.HistoryAudit history,
             SixMaxRankTextureConditionalAudit.SignalAudit signal) {
+        bruteCheck(
+                game,
+                game.sourceGame(),
+                SixMaxFlopPayoffView.rank(game.payoffTable()),
+                policy,
+                history.history(),
+                game.payoffTable().signals().indexOf(signal.signal()),
+                signal.signalProbabilityGivenHistory(),
+                signal.quality());
+    }
+
+    static void bruteCheck(
+            MultiPlayerCfrGame<SixMaxRankTextureFlopGame.State> game,
+            SixMaxPreflopCheckdownGame source,
+            SixMaxFlopPayoffView view,
+            CfrSolution policy,
+            List<SixMaxPreflopResearchTrainer.PublicAction> history,
+            int index,
+            double expectedProbability,
+            SixMaxConnectedPreflopAudit.Quality quality) {
         var transition =
                 new SixMaxPolicyFlopTransition(
-                        game.sourceGame(),
-                        SixMaxPreflopContinuationFeedback.preflopPolicy(policy),
-                        history.history());
-        int index = game.payoffTable().signals().indexOf(signal.signal());
+                        source, SixMaxPreflopContinuationFeedback.preflopPolicy(policy), history);
         var roots = new ArrayList<ChanceOutcome<SixMaxRankTextureFlopGame.State>>();
         double sum = 0;
         for (var deal : transition.deals()) {
             var keys = deal.hands().stream().map(WeightedCombo::key).toList();
             int world = -1;
-            for (int i = 0; i < game.payoffTable().deals().size(); i++)
-                if (game.payoffTable().deals().get(i).hands().equals(keys)) world = i;
-            double mass =
-                    deal.probability()
-                            * game.payoffTable().deals().get(world).flopCounts().get(index)
-                            / 9880;
+            for (int i = 0; i < view.dealCount(); i++) if (view.hands(i).equals(keys)) world = i;
+            double mass = deal.probability() * view.counts(world).get(index) / 9880;
             if (mass == 0) continue;
             var state = game.chanceOutcomes(game.initialState()).get(world).state();
-            for (var action : history.history()) state = game.afterAction(state, action.action());
+            for (var action : history) state = game.afterAction(state, action.action());
             roots.add(
                     new ChanceOutcome<>(
                             new SixMaxRankTextureFlopGame.State(state.preflop(), index, ""), mass));
             sum += mass;
         }
-        assertEquals(signal.signalProbabilityGivenHistory(), sum, 1e-15);
+        assertEquals(expectedProbability, sum, 1e-15);
         double normalizer = sum;
         var local =
                 new SixMaxRankTextureConditionalAudit.ConditionalGame(
@@ -306,8 +319,8 @@ class SixMaxRankTextureConditionalAuditTest {
                                 MultiPlayerStrategyEvaluator.utilities(
                                         local, new CfrSolution(1, rows))[player]);
             }
-            assertEquals(signal.quality().profileUtilitiesBb().get(player), profile[player], 1e-10);
-            assertEquals(signal.quality().bestResponseUtilitiesBb().get(player), best, 1e-10);
+            assertEquals(quality.profileUtilitiesBb().get(player), profile[player], 1e-10);
+            assertEquals(quality.bestResponseUtilitiesBb().get(player), best, 1e-10);
         }
     }
 
