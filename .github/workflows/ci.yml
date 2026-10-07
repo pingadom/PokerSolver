@@ -11,7 +11,9 @@ concurrency:
 jobs:
   backend:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Exact solver evidence replay finished successfully at the former 25-minute cutoff.
+    # Leave headroom for runner variation and artifact upload without dropping checks.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v6

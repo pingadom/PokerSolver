@@ -1,0 +1,1576 @@
+{
+  "algorithm" : "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "chanceTraversal" : "EXHAUSTIVE",
+  "checkdownBaselineInRankTextureGame" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09949410735921421, 1.601027687672184, 0.9307604419978911, -0.4442645516401008, -0.363111749633932 ],
+    "deviationGainsBb" : [ 1.1039635932752713E-5, 4.521331880033286E-4, 1.1628047228880383, 0.5923158642732121, 1.947201030667034E-4, 0.06812745566671924 ],
+    "nashConvBb" : 1.8239059357549725,
+    "profileUtilitiesBb" : [ -1.1039635932752713E-5, 0.09904197417121088, 0.4382229647841459, 0.33844457772467895, -0.4444592717431675, -0.43123920530065124 ]
+  },
+  "checkdownRecoveryErrorBb" : [ 0.0, 0.0, -1.1102230246251565E-16, 1.1102230246251565E-16, -1.2212453270876722E-15, -1.6653345369377348E-15 ],
+  "completeTreeStates" : 888205,
+  "coverage" : [ {
+    "betBb" : 1.25,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:fold|SB:fold|BB:check",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 2.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 3.75,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:raise:3.0|SB:fold|BB:fold|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 7.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  }, {
+    "betBb" : 9.75,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:call|BTN:raise:3.0|SB:fold|BB:fold|CO:raise:9.0|BTN:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 19.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  }, {
+    "betBb" : 3.25,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 6.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 9.25,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "BB",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:raise:9.0|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 18.5,
+    "privateDeals" : 12,
+    "secondToAct" : "CO"
+  }, {
+    "betBb" : 9.75,
+    "dealSignalPairs" : 13878,
+    "firstToAct" : "CO",
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:raise:9.0|SB:fold|BB:fold|CO:call",
+    "physicalFlopsPerDeal" : 9880,
+    "potBb" : 19.5,
+    "privateDeals" : 12,
+    "secondToAct" : "BTN"
+  } ],
+  "gameHash" : "bb3cf0231e9cb367a84ee805df551e041b46f270876ccba891485babffd66e53",
+  "iterations" : 100,
+  "jointlySolvedInRankTextureGame" : {
+    "bestResponseUtilitiesBb" : [ 0.0, 0.09616591377858759, 0.5412799045395879, 0.3765450300519721, -0.4805876870577448, -0.5036637703813682 ],
+    "deviationGainsBb" : [ 2.737558379905871E-4, 0.009264580772049238, 0.006430963636565479, 0.006734855857150057, 0.0032510781352048657, 0.003784156691835072 ],
+    "nashConvBb" : 0.0297393909307953,
+    "profileUtilitiesBb" : [ -2.737558379905871E-4, 0.08690133300653835, 0.5348489409030224, 0.36981017419482204, -0.48383876519294966, -0.5074479270732033 ]
+  },
+  "jointlySolvedPhysicalFlopFeasibility" : {
+    "boardsEnumeratedPerHistory" : 22100,
+    "headsUpProbability" : 0.658492108016238,
+    "histories" : [ {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "Jc", "Jh" ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.343065139873403,
+      "reachRank" : 1,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.29701706938419264,
+      "reachRank" : 2,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.005020290144681881,
+      "reachRank" : 3,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.004626060609654049,
+      "reachRank" : 4,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.002671416688439854,
+      "reachRank" : 5,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.002648528718956613,
+      "reachRank" : 6,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.0019287257085399314,
+      "reachRank" : 7,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 3.654540114899764E-4,
+      "reachRank" : 8,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 3.0358049626985883E-4,
+      "reachRank" : 9,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.4307020807516467E-4,
+      "reachRank" : 10,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.2817096105873887E-4,
+      "reachRank" : 11,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.0009843504439736E-4,
+      "reachRank" : 12,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "SB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.989330239953298E-5,
+      "reachRank" : 13,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.6212373284756864E-5,
+      "reachRank" : 14,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 2.600552651251663E-5,
+      "reachRank" : 15,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.4778620727662225E-5,
+      "reachRank" : 16,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.0793881862604278E-5,
+      "reachRank" : 17,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "SB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9929543758616488E-5,
+      "reachRank" : 18,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9726125406872038E-5,
+      "reachRank" : 19,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.967295811749833E-5,
+      "reachRank" : 20,
+      "secondToAct" : "HJ"
+    } ],
+    "numericMargin" : 1.0E-12,
+    "numericReachUnresolved" : false,
+    "optimisticHeadsUpFraction" : 0.9834091693990092,
+    "optimisticSelectedHistoryProbability" : 0.6475671770000513,
+    "policyValidationStates" : 138793,
+    "reachedHeadsUpHistories" : 1873,
+    "rootPrivateDeals" : 12,
+    "settings" : {
+      "candidateLimit" : 20,
+      "coverage" : {
+        "minimumComboMass" : 0.05,
+        "minimumHeadsUpFraction" : 0.25,
+        "minimumHistoryProbability" : 1.0E-4,
+        "minimumMaterialCombosPerActiveSeat" : 2
+      },
+      "maximumHistories" : 4
+    },
+    "status" : "NOT_RULED_OUT",
+    "unexaminedHistoryProbability" : 1.8749044436172646E-4
+  },
+  "jointlySolvedReach" : {
+    "headsUpProbability" : 0.658492108016238,
+    "selectedHeadsUpFraction" : 0.9947704724855642,
+    "selectedHistoryProbability" : 0.6550485054193282
+  },
+  "maximumPreflopActionFrequencyChange" : 0.9849558397376527,
+  "model" : "BOARD_RANKS_SIX_TEXTURES_ONE_BET_THEN_CHECKDOWN/v1",
+  "payoffTableHash" : "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+  "postflopInformationSets" : 56610,
+  "preflopInformationSets" : 9161,
+  "publicSignals" : 1182,
+  "publicationStatus" : "VALIDATION_ONLY",
+  "qualityScope" : "PARENT_INFORMATION_SET_BEST_RESPONSES_ONLY",
+  "schemaVersion" : "six-max-rank-texture-study/v1",
+  "selections" : [ {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "CO"
+    }, {
+      "action" : "call",
+      "seat" : "BTN"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "check",
+      "seat" : "BB"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "fold",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "raise:9.0",
+      "seat" : "BB"
+    }, {
+      "action" : "call",
+      "seat" : "CO"
+    } ],
+    "potFraction" : 0.5
+  }, {
+    "history" : [ {
+      "action" : "fold",
+      "seat" : "UTG"
+    }, {
+      "action" : "fold",
+      "seat" : "HJ"
+    }, {
+      "action" : "raise:3.0",
+      "seat" : "CO"
+    }, {
+      "action" : "fold",
+      "seat" : "BTN"
+    }, {
+      "action" : "fold",
+      "seat" : "SB"
+    }, {
+      "action" : "call",
+      "seat" : "BB"
+    } ],
+    "potFraction" : 0.5
+  } ],
+  "solutionHash" : "728817c550dd9d173918918ddee27479f96080b271e4f0eca371d586f8de0bc7",
+  "sourceIterations" : 500,
+  "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+  "sourcePhysicalFlopFeasibility" : {
+    "boardsEnumeratedPerHistory" : 22100,
+    "headsUpProbability" : 0.4786164617572327,
+    "histories" : [ {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.14681305060475722,
+      "reachRank" : 1,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.11397006095304354,
+      "reachRank" : 2,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 0.09522754602919581,
+      "reachRank" : 3,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.07231232636519526,
+      "reachRank" : 4,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.024691037737879753,
+      "reachRank" : 5,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 0.024559192856035698,
+      "reachRank" : 6,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : true,
+      "exampleFlop" : [ "2c", "8h", "Jh" ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : 4,
+      "optimisticMaterialFlops" : 8296,
+      "probability" : 6.579843695065483E-4,
+      "reachRank" : 7,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9285896370799366E-4,
+      "reachRank" : 8,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 9.76103201685039E-5,
+      "reachRank" : 9,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.9567402374387208E-5,
+      "reachRank" : 10,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.8212622934238312E-5,
+      "reachRank" : 11,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.8093439523357574E-5,
+      "reachRank" : 12,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.1395795240263418E-5,
+      "reachRank" : 13,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "fold",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.457856057087566E-6,
+      "reachRank" : 14,
+      "secondToAct" : "HJ"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.216415286513668E-6,
+      "reachRank" : 15,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.352041147491199E-6,
+      "reachRank" : 16,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 2.5334902879833358E-6,
+      "reachRank" : 17,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "CO",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 1.0412059703640267E-6,
+      "reachRank" : 18,
+      "secondToAct" : "BTN"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "BB",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 6.509942587736754E-7,
+      "reachRank" : 19,
+      "secondToAct" : "CO"
+    }, {
+      "eligibleForUpperBound" : false,
+      "exampleFlop" : [ ],
+      "firstToAct" : "HJ",
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "call",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      } ],
+      "minimumCompatibleCounterfactualDeals" : null,
+      "optimisticMaterialFlops" : 0,
+      "probability" : 4.5183442742234694E-7,
+      "reachRank" : 20,
+      "secondToAct" : "CO"
+    } ],
+    "numericMargin" : 1.0E-12,
+    "numericReachUnresolved" : false,
+    "optimisticHeadsUpFraction" : 0.2003511339891511,
+    "optimisticSelectedHistoryProbability" : 0.09589135085893676,
+    "policyValidationStates" : 138793,
+    "reachedHeadsUpHistories" : 1873,
+    "rootPrivateDeals" : 12,
+    "settings" : {
+      "candidateLimit" : 20,
+      "coverage" : {
+        "minimumComboMass" : 0.05,
+        "minimumHeadsUpFraction" : 0.25,
+        "minimumHistoryProbability" : 1.0E-4,
+        "minimumMaterialCombosPerActiveSeat" : 2
+      },
+      "maximumHistories" : 4
+    },
+    "status" : "INFEASIBLE_UNDER_FIXED_POLICY",
+    "unexaminedHistoryProbability" : 5.820460234395863E-6
+  },
+  "sourceReach" : {
+    "headsUpProbability" : 0.4786164617572327,
+    "selectedHeadsUpFraction" : 0.9978202855637371,
+    "selectedHistoryProbability" : 0.4775732145461074
+  },
+  "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6"
+}
