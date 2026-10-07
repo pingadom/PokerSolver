@@ -1,6 +1,6 @@
 # PokerLab GTO Trainer — implementation plan
 
-**Status:** implementation underway, 6 October 2026. Product direction confirmed: **6-max cash preflop first**, then turn, river, partial-hand and full-hand practice, with more game formats later. PokerLab will generate its own strategy data. Planning assumption: 100bb effective stacks and chip EV. Start solver validation without rake; realistic cash packs will specify rake, blinds and allowed bet sizes before solving.
+**Status:** implementation underway, 7 October 2026. Product direction confirmed: **6-max cash preflop first**, then turn, river, partial-hand and full-hand practice, with more game formats later. PokerLab will generate its own strategy data. Planning assumption: 100bb effective stacks and chip EV. Start solver validation without rake; realistic cash packs will specify rake, blinds and allowed bet sizes before solving.
 
 The immediate, user-confirmed scope is the [focused solver demo](GTO_Demo_Scope_Review.md): one explainable preflop all-in spot with two active players at a six-seat table and a playable ten-decision trainer. The broader milestones below are a roadmap, not work required to finish that demo.
 
@@ -207,6 +207,8 @@ Once the 6-max cash curriculum is credible, extend the same versioned game/pack 
 2. Keep saved progress anonymous in this browser for the first vertical slice. Decide whether accounts and cross-device history belong in the next product phase after the training loop works locally.
 
 ## Current source-content gate
+
+The [bounded physical-suit study](sixmax-suit-refinement.md) now completes the declared observation milestone: fifteen whole rank/texture groups reveal all three actual flop cards, every refined pair payoff is independently enumerated, and fresh complete 100/500-iteration policies replay all 7,806 conditional cases plus physical-board witnesses. The 500-iteration own-model parent gap is 0.00135959bb, while a rare physical decision still has a 6.59684bb conditional gap. Next, improve important and rare local decisions, measure stable quality and construct a retained material physical-board menu before trainer admission. Most public groups still hide actual suits; broader observation coverage and credible ranges remain necessary. The old coarse artifacts retain their separate identities and scopes.
 
 The [fixed-utility pruning and exact-board witness follow-up](sixmax-pruning-and-board-witnesses.md) reduces the broad texture solve's node visits by 39.63% while retaining the complete same-game policy within rounding. Exact named flops expose large conditional share differences and separately quantify visible blockers' effect on the reached private-world posterior. This confirms that more texture iterations alone cannot fix missing board information. Named witnesses are diagnostics, not a full-deck error bound or new admission rule.
 

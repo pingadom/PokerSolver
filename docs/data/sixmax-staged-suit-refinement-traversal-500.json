@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "six-max-suit-refinement-traversal/v1",
+  "publicationStatus": "VALIDATION_ONLY",
+  "model": "DECLARED_PHYSICAL_FLOPS_OTHERWISE_RANK_TEXTURE_ONE_BET/v1",
+  "sourcePackHash": "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+  "sourceSpotHash": "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+  "parentRankTableHash": "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+  "payoffTableHash": "152c0c523036238d2b783b473b353a17c4219c2d0c04bd8f555df30cd675c390",
+  "gameHash": "19c76977afa8005adcfc1714bb2bcd24c0089f6df0f7cecf2a468e158fe0af15",
+  "solutionHash": "b72b4aa36698eb274dfc9bef6ee2549c8e6952bcc85633fff43bb68569719c38",
+  "algorithm": "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "chanceTraversal": "EXHAUSTIVE",
+  "iterations": 500,
+  "statistics": {
+    "visitedNodes": 1051179000,
+    "terminalNodes": 562656000,
+    "sampledChanceNodes": 0,
+    "baselineCorrections": 0
+  },
+  "inactiveUtilityPrunedNodes": 14400000,
+  "note": "Observed counters from fresh exhaustive solving; not a wall-time benchmark or replayed training state."
+}

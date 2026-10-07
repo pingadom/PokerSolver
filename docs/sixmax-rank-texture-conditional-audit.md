@@ -84,3 +84,5 @@ mvn -q -pl solver -am test '-Dtest=SixMaxRankTextureConditional*Test,SixMaxRankT
 `replay` strictly deserializes the bounded saved report, rebuilds the bound complete policy and recomputes every case and parent witness. Any changed summary, posterior, quality value, response hash or metadata is rejected. It does not write a policy, resume training, launch a page-triggered solve or expose hidden hands through the trainer API.
 
 For an interview: explain why a small aggregate best-response score can conceal bad rare decisions, derive the joint action/card posterior, and describe the independent pure-plan and full-game witnesses that validate the result. The remaining solver milestones are bounded actual-suit observation, better local quality across important decisions, physical-board content selection, then broader ranges, multiway betting, rake and later streets.
+
+The subsequent [bounded physical-suit model](sixmax-suit-refinement.md) implements that observation refinement as a separate game, with fresh policies, integrated conditional diagnostics and independent physical-board witnesses. This report remains the unchanged coarse-game evidence.
