@@ -35,6 +35,8 @@ The [reached-decision audit](docs/sixmax-rank-texture-conditional-audit.md) chec
 
 The [bounded suit-refinement model](docs/sixmax-suit-refinement.md) now reveals actual flop cards in fifteen declared groups, trains fresh complete policies and replays 7,806 conditional cases. Every refined pair payoff is independently enumerated, while physical-board witnesses confirm that the declared groups preserve actual suits and folded blockers. Large rare-decision gaps remain, so these policies stay offline validation evidence.
 
+[Targeted conditional refinement](docs/sixmax-suit-conditional-refinement.md) now freezes preflop ranges and re-solves weak spots with explicit fresh budgets. A balanced 64-case derivative reduces the worst local gap from 6.60 to 1.28bb and improves the full-game gap by about 5.7%, while replay checks all 7,806 cases, unchanged strategy rows and predecessor lineage. It remains validation evidence; wider physical-board coverage and a retained trainer quality screen are still required.
+
 Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
 ## Quick start
