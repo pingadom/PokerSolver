@@ -31,6 +31,8 @@ The separate `solver` Maven module implements PokerLab's own CFR/CFR+ solvers, e
 
 The latest [rank-aware six-seat continuation study](docs/sixmax-rank-texture-continuation.md) jointly trains preflop and a bounded heads-up flop bet round across 1,182 public rank/texture signals. Exact conditional payoffs, complete saved policies and independent physical-board audits measure both own-model quality and remaining suit information error. [Fixed-utility pruning](docs/sixmax-pruning-and-board-witnesses.md) reduces redundant folded-player traversal. These offline experiments remain validation-only and do not qualify as general poker lessons.
 
+The [reached-decision audit](docs/sixmax-rank-texture-conditional-audit.md) checks every selected history/signal case and verifies local unilateral gains through direct full-game policy evaluation. Saved replay and independent pure-plan enumeration expose rare-decision gaps that the aggregate solver score can conceal.
+
 Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
 ## Quick start
