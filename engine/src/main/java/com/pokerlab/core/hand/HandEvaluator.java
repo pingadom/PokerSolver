@@ -274,10 +274,9 @@ public final class HandEvaluator {
                             tiebreaker(score, 1),
                             tiebreaker(score, 2),
                             tiebreaker(score, 3));
-            case TWO_PAIR ->
+            case TWO_PAIR, THREE_OF_A_KIND ->
                     List.of(tiebreaker(score, 0), tiebreaker(score, 1), tiebreaker(score, 2));
-            case THREE_OF_A_KIND, FULL_HOUSE, FOUR_OF_A_KIND ->
-                    List.of(tiebreaker(score, 0), tiebreaker(score, 1));
+            case FULL_HOUSE, FOUR_OF_A_KIND -> List.of(tiebreaker(score, 0), tiebreaker(score, 1));
             case STRAIGHT, STRAIGHT_FLUSH, ROYAL_FLUSH -> List.of(tiebreaker(score, 0));
         };
     }
