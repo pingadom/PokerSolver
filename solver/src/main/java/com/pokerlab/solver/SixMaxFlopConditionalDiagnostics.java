@@ -50,7 +50,7 @@ public final class SixMaxFlopConditionalDiagnostics {
         }
     }
 
-    private record Posterior(
+    record Posterior(
             double signalProbability,
             List<ChanceOutcome<SixMaxRankTextureFlopGame.State>> roots,
             Map<String, Double> firstMarginal,
@@ -240,7 +240,7 @@ public final class SixMaxFlopConditionalDiagnostics {
                 hashes);
     }
 
-    private static Posterior posterior(
+    static Posterior posterior(
             SixMaxOneBetFlopGame game, SixMaxPolicyFlopTransition transition, int signal) {
         var view = game.payoffView();
         var roots = game.chanceOutcomes(game.initialState());

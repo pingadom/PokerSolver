@@ -7,6 +7,10 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>solver</artifactId>
+  <properties>
+    <!-- Bound solver replay heaps instead of relying on machine-sized JVM ergonomics. -->
+    <argLine>-Xmx2g</argLine>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.pokerlab</groupId>
