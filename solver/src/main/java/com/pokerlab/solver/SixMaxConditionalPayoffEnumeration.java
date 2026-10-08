@@ -126,17 +126,7 @@ final class SixMaxConditionalPayoffEnumeration {
      * Exact named-flop refinement. Production supplies all 37 remaining cards; tests may use fewer.
      */
     static Result fixedFlop(List<WeightedCombo> dealt, List<Card> flop, List<Card> remaining) {
-        if (dealt.size() != 6 || flop.size() != 3 || remaining.size() < 2 || remaining.size() > 37)
-            throw new IllegalArgumentException("Invalid bounded fixed-flop enumeration");
-        var unique = new HashSet<Card>();
-        for (var hand : dealt)
-            if (!unique.add(hand.first()) || !unique.add(hand.second()))
-                throw new IllegalArgumentException("Overlapping private cards");
-        for (var card : flop)
-            if (!unique.add(card)) throw new IllegalArgumentException("Blocked or duplicate flop");
-        for (var card : remaining)
-            if (!unique.add(card))
-                throw new IllegalArgumentException("Blocked or duplicate runout card");
+        requireFixedFlop(dealt, flop, remaining);
         long[] wins = new long[64], ties = new long[64];
         int[] scores = new int[6];
         Card[][] hands = new Card[6][7];
@@ -169,5 +159,52 @@ final class SixMaxConditionalPayoffEnumeration {
             if (Integer.bitCount(mask) == 2)
                 pairs.add(new Pair(mask, List.of(wins[mask]), List.of(ties[mask])));
         return new Result(List.of(1L), List.copyOf(pairs));
+    }
+
+    /** Evaluate only the active pair, while still removing every folded player's actual cards. */
+    static Pair fixedFlopPair(
+            List<WeightedCombo> dealt, List<Card> flop, List<Card> remaining, int mask) {
+        requireFixedFlop(dealt, flop, remaining);
+        if ((mask & ~63) != 0 || Integer.bitCount(mask) != 2)
+            throw new IllegalArgumentException("Two active seats required");
+        int first = Integer.numberOfTrailingZeros(mask);
+        int second = Integer.numberOfTrailingZeros(mask ^ Integer.lowestOneBit(mask));
+        Card[][] hands = new Card[2][7];
+        for (int i = 0; i < 2; i++) {
+            var hand = dealt.get(i == 0 ? first : second);
+            hands[i][0] = hand.first();
+            hands[i][1] = hand.second();
+            for (int c = 0; c < 3; c++) hands[i][c + 2] = flop.get(c);
+        }
+        long wins = 0, ties = 0;
+        for (int a = 0; a < remaining.size() - 1; a++)
+            for (int b = a + 1; b < remaining.size(); b++) {
+                for (var hand : hands) {
+                    hand[5] = remaining.get(a);
+                    hand[6] = remaining.get(b);
+                }
+                int comparison =
+                        Integer.compare(
+                                HandEvaluator.evaluateBestScore(hands[0]),
+                                HandEvaluator.evaluateBestScore(hands[1]));
+                if (comparison > 0) wins++;
+                if (comparison == 0) ties++;
+            }
+        return new Pair(mask, List.of(wins), List.of(ties));
+    }
+
+    private static void requireFixedFlop(
+            List<WeightedCombo> dealt, List<Card> flop, List<Card> remaining) {
+        if (dealt.size() != 6 || flop.size() != 3 || remaining.size() < 2 || remaining.size() > 37)
+            throw new IllegalArgumentException("Invalid bounded fixed-flop enumeration");
+        var unique = new HashSet<Card>();
+        for (var hand : dealt)
+            if (!unique.add(hand.first()) || !unique.add(hand.second()))
+                throw new IllegalArgumentException("Overlapping private cards");
+        for (var card : flop)
+            if (!unique.add(card)) throw new IllegalArgumentException("Blocked or duplicate flop");
+        for (var card : remaining)
+            if (!unique.add(card))
+                throw new IllegalArgumentException("Blocked or duplicate runout card");
     }
 }

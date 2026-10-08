@@ -1,0 +1,24 @@
+{
+  "algorithm" : "CFR_PLUS_FIXED_UTILITY_PRUNING",
+  "binding" : {
+    "completeTreeStates" : 915457,
+    "gameHash" : "0b7e6a7093c2780997f21b961ac0f73677b8828a17a3cbdc009616c0c105bdb6",
+    "model" : "PUBLIC_HISTORY_FLOP_WHITELIST_OTHERWISE_RANK_TEXTURE_ONE_BET/v1",
+    "parentRankTableHash" : "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+    "payoffTableHash" : "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+    "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6"
+  },
+  "chanceTraversal" : "EXHAUSTIVE",
+  "freshIterations" : 100,
+  "inactiveUtilityPrunedNodes" : 2880000,
+  "initialRegretRows" : 0,
+  "publicationStatus" : "VALIDATION_ONLY",
+  "solutionHash" : "40034e30922109dc6510597632dcb3eda68b7162bd07aae97fc640ded9ffaaab",
+  "traversal" : {
+    "baselineCorrections" : 0,
+    "sampledChanceNodes" : 0,
+    "terminalNodes" : 110309200,
+    "visitedNodes" : 206236200
+  }
+}
