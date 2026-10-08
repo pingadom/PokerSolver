@@ -93,7 +93,9 @@ public final class SixMaxFlopConditionalDiagnostics {
             for (var deal : transition.deals()) requireNormal(deal.probability());
             var signals = new ArrayList<Case>();
             double probabilitySum = 0;
-            for (int signal = 0; signal < view.counts(0).size(); signal++) {
+            for (int signal = 0;
+                    signal < view.counts(game.historyKey(selection.history()), 0).size();
+                    signal++) {
                 var posterior = posterior(game, transition, signal);
                 double probability = posterior.signalProbability();
                 probabilitySum += probability;
@@ -258,7 +260,7 @@ public final class SixMaxFlopConditionalDiagnostics {
                 }
             if (deal < 0)
                 throw new IllegalArgumentException("Conditional table private support differs");
-            long flops = view.counts(deal).get(signal);
+            long flops = view.counts(game.historyKey(transition.history()), deal).get(signal);
             if (flops == 0) continue;
             double mass =
                     posterior.probability() * flops / SixMaxPolicyFlopTransition.FLOPS_PER_DEAL;

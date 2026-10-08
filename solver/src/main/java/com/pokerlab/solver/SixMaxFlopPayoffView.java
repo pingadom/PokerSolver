@@ -12,9 +12,18 @@ interface SixMaxFlopPayoffView {
 
     List<Long> counts(int deal);
 
+    /** Existing partitions are history independent; new partitions must declare their history. */
+    default List<Long> counts(String publicHistory, int deal) {
+        return counts(deal);
+    }
+
     String key(int observation);
 
     double share(int deal, int mask, int player, int observation);
+
+    default double share(String publicHistory, int deal, int mask, int player, int observation) {
+        return share(deal, mask, player, observation);
+    }
 
     static SixMaxFlopPayoffView rank(SixMaxRankTexturePayoffTable.Artifact table) {
         return new SixMaxFlopPayoffView() {

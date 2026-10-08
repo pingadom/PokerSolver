@@ -32,6 +32,7 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
     private final SixMaxFlopPayoffView view;
     private final List<Selection> selections;
     private final Map<String, Continuation> continuations;
+    private final Map<List<PublicAction>, String> historyKeys;
     private final long completeStates;
 
     SixMaxOneBetFlopGame(
@@ -47,6 +48,7 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
         if (selections.isEmpty() || selections.size() > MAX_SELECTED_HISTORIES)
             throw new IllegalArgumentException("Select one to six heads-up histories");
         var prepared = new LinkedHashMap<String, Continuation>();
+        var keys = new LinkedHashMap<List<PublicAction>, String>();
         var roots = base.chanceOutcomes(base.initialState());
         if (roots.size() != view.dealCount())
             throw new IllegalArgumentException("Private support differs");
@@ -59,6 +61,7 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
         long states = 1L + (long) base.treeSummary().totalStates() * roots.size();
         for (var selection : selections) {
             var state = replay(roots.getFirst().state(), selection.history());
+            keys.put(selection.history(), state.publicHistory());
             var betting = base.publicBettingState(state);
             if (betting.status() != SixMaxPreflopBetting.Status.POSTFLOP_CONTINUATION_REQUIRED
                     || betting.liveSeats().size() != 2)
@@ -89,11 +92,16 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
                             new Continuation(first, second, betting.potBb(), bet, committed))
                     != null) throw new IllegalArgumentException("Duplicate selected history");
             for (int d = 0; d < view.dealCount(); d++)
-                states += 9 * view.counts(d).stream().filter(n -> n > 0).count();
+                states +=
+                        9
+                                * view.counts(state.publicHistory(), d).stream()
+                                        .filter(n -> n > 0)
+                                        .count();
         }
         if (states > MAX_COMPLETE_STATES)
             throw new IllegalArgumentException("Texture complete-state cap exceeded");
         continuations = Map.copyOf(prepared);
+        historyKeys = Map.copyOf(keys);
         completeStates = states;
     }
 
@@ -103,6 +111,12 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
 
     SixMaxFlopPayoffView payoffView() {
         return view;
+    }
+
+    String historyKey(List<PublicAction> history) {
+        var key = historyKeys.get(history);
+        if (key == null) throw new IllegalArgumentException("Unknown selected history");
+        return key;
     }
 
     public List<Selection> selections() {
@@ -121,7 +135,11 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
                             var c = entry.getValue();
                             int count = 0;
                             for (int d = 0; d < view.dealCount(); d++)
-                                count += (int) view.counts(d).stream().filter(n -> n > 0).count();
+                                count +=
+                                        (int)
+                                                view.counts(entry.getKey(), d).stream()
+                                                        .filter(n -> n > 0)
+                                                        .count();
                             return new Coverage(
                                     entry.getKey(),
                                     c.first(),
@@ -186,8 +204,10 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
             continuation(state);
             if (!base.isTerminal(state.preflop())
                     || state.signal() < 0
-                    || state.signal() >= view.counts(0).size()
-                    || view.counts(state.preflop().dealIndex()).get(state.signal()) == 0
+                    || state.signal() >= view.counts(state.preflop().publicHistory(), 0).size()
+                    || view.counts(state.preflop().publicHistory(), state.preflop().dealIndex())
+                                    .get(state.signal())
+                            == 0
                     || !PREFIXES.contains(state.actions()))
                 throw new IllegalArgumentException("Invalid texture betting state");
         }
@@ -257,7 +277,7 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
                                             new State(root.state(), null, ""), root.probability()))
                     .toList();
         var result = new ArrayList<ChanceOutcome<State>>();
-        var counts = view.counts(state.preflop().dealIndex());
+        var counts = view.counts(state.preflop().publicHistory(), state.preflop().dealIndex());
         for (int t = 0; t < counts.size(); t++)
             if (counts.get(t) > 0)
                 result.add(
@@ -283,6 +303,7 @@ final class SixMaxOneBetFlopGame implements MultiPlayerCfrGame<SixMaxRankTexture
                 result[seat.ordinal()] +=
                         (c.pot() + (called ? 2 * c.bet() : 0))
                                         * view.share(
+                                                state.preflop().publicHistory(),
                                                 state.preflop().dealIndex(),
                                                 mask,
                                                 seat.ordinal(),
