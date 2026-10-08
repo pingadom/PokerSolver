@@ -31,6 +31,8 @@ Illegal boards have zero count in the blocked world. Off-policy worlds remain su
 
 Before evaluating hands, sizing counts all counterfactual world/observation supports. Limits are six histories, twelve worlds, 600 history/board revelations, 2,000 shared observations, one million complete states, 8MiB uncompressed table, and 128KiB menu. Policy and report limits are 64MiB and 32MiB, with at most 1,000 fresh iterations. JSON/gzip bounds apply to decompressed bytes. Unsupported requests fail rather than relaxing the limits.
 
+The [refinement follow-up](sixmax-history-physical-refinement.md#next-solver-work) establishes a capacity ceiling: 600 literal history/board revelations can cover at most `600 / 9,880 = 6.072874%` of all heads-up reach. This optimistic bound already falls short of the unchanged 25% retained-content target. The selector rejects impossible requests before policy checks and enumeration; a broader observation/runtime design is necessary to meet that target.
+
 ## Menu selection
 
 The selection tool freezes the prior whole-group suit model's 500-iteration preflop policy. It independently enumerates every world/flop and controls all original rank counts before selecting boards. Each candidate needs history reach at least 0.0001 and at least two combos with probability at least 5% for each active player, conditioned on that history and physical board.
