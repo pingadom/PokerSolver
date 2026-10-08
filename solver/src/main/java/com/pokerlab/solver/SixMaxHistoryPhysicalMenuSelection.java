@@ -43,6 +43,8 @@ public final class SixMaxHistoryPhysicalMenuSelection {
             Objects.requireNonNull(menu, "menu");
             Objects.requireNonNull(sizing, "sizing");
             if (selectedMaterialWholeGameReach > allHeadsUpProbability + 1e-12
+                    || selectedMaterialAllHeadsUpFraction
+                            > maximumPhysicalHeadsUpFraction(menu.revelations().size()) + 1e-12
                     || selectedMaterialAllHeadsUpFraction < requestedAllHeadsUpFraction
                     || Math.abs(
                                     selectedMaterialWholeGameReach / allHeadsUpProbability
@@ -63,6 +65,29 @@ public final class SixMaxHistoryPhysicalMenuSelection {
 
     private SixMaxHistoryPhysicalMenuSelection() {}
 
+    /**
+     * Each hidden world removes twelve cards, leaving C(40,3)=9880 equiprobable flops. A literal
+     * history/board revelation has conditional probability at most 1/9880; selected history reach
+     * is at most all heads-up reach. This optimistic bound ignores blocked cards, materiality,
+     * solve quality and stability, which can only reduce retention.
+     */
+    public static double maximumPhysicalHeadsUpFraction(int revelations) {
+        if (revelations < 1 || revelations > SixMaxHistoryPhysicalPayoffTable.MAX_REVELATIONS)
+            throw new IllegalArgumentException("History revelation count exceeds model cap");
+        return revelations / 9880.0;
+    }
+
+    static void validateCoverageRequest(double requestedFraction) {
+        if (!Double.isFinite(requestedFraction) || requestedFraction <= 0 || requestedFraction > 1)
+            throw new IllegalArgumentException("Positive coverage fraction required");
+        double ceiling =
+                maximumPhysicalHeadsUpFraction(SixMaxHistoryPhysicalPayoffTable.MAX_REVELATIONS);
+        if (requestedFraction > ceiling + 1e-12)
+            throw new IllegalArgumentException(
+                    "Requested heads-up coverage exceeds revelation cap: optimistic upper bound "
+                            + ceiling);
+    }
+
     public static Evidence select(
             SixMaxPreflopSolutionPack source,
             SixMaxRankTexturePayoffTable.Artifact parent,
@@ -70,8 +95,7 @@ public final class SixMaxHistoryPhysicalMenuSelection {
             List<Selection> selections,
             double requestedFraction)
             throws Exception {
-        if (!Double.isFinite(requestedFraction) || requestedFraction <= 0 || requestedFraction > 1)
-            throw new IllegalArgumentException("Positive coverage fraction required");
+        validateCoverageRequest(requestedFraction);
         // Constructing the coarse game checks that every selected history is a valid HU leaf.
         var base = new SixMaxRankTextureFlopGame(source, parent, selections);
         var pre = SixMaxPreflopContinuationFeedback.preflopPolicy(reference);

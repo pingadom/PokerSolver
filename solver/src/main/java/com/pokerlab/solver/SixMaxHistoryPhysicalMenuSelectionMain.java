@@ -33,6 +33,7 @@ public final class SixMaxHistoryPhysicalMenuSelectionMain {
                         || Files.exists(paths.get(5))))
             throw new IllegalArgumentException(
                     "Selection requires a valid fraction and new outputs");
+        if (select) SixMaxHistoryPhysicalMenuSelection.validateCoverageRequest(fraction);
         var source = SixMaxTexturePayoffTableMain.source(paths.get(0));
         var parent = SixMaxRankTexturePayoffTable.read(paths.get(1), source);
         var priorTable = SixMaxSuitRefinementPayoffTable.read(paths.get(2), source, parent);

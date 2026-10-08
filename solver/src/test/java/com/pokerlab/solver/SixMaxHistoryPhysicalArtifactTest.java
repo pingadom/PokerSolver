@@ -113,6 +113,66 @@ class SixMaxHistoryPhysicalArtifactTest {
     }
 
     @Test
+    void impossibleCoverageRequestsFailBeforePolicyOrBoardEnumeration(@TempDir Path temp)
+            throws Exception {
+        // Deliberately incomplete policy: the coverage impossibility must be diagnosed first.
+        var failure =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () ->
+                                SixMaxHistoryPhysicalMenuSelection.select(
+                                        source,
+                                        parent,
+                                        new CfrSolution(1, Map.of()),
+                                        reference.selections(),
+                                        .25));
+        assertTrue(failure.getMessage().contains("coverage exceeds revelation cap"));
+        assertTrue(failure.getMessage().contains("0.06072874493927125"));
+        var cli =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () ->
+                                SixMaxHistoryPhysicalMenuSelectionMain.main(
+                                        new String[] {
+                                            "select",
+                                            temp.resolve("source.json").toString(),
+                                            temp.resolve("rank.json").toString(),
+                                            temp.resolve("suit.json").toString(),
+                                            temp.resolve("cp.json").toString(),
+                                            temp.resolve("menu.json").toString(),
+                                            temp.resolve("evidence.json").toString(),
+                                            ".25"
+                                        }));
+        assertTrue(cli.getMessage().contains("coverage exceeds revelation cap"));
+        assertFalse(Files.exists(temp.resolve("menu.json")));
+        assertFalse(Files.exists(temp.resolve("evidence.json")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMenuSelection.maximumPhysicalHeadsUpFraction(0));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMenuSelection.maximumPhysicalHeadsUpFraction(601));
+        // A forged evidence claim above the menu's own optimistic ceiling is rejected on read.
+        var evidence =
+                SixMaxHistoryPhysicalMenuSelection.replay(
+                        Path.of(PREFIX + "-menu-selection.json"),
+                        source,
+                        parent,
+                        reference.solution());
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        SixMaxTexturePayoffTable.mapper().valueToTree(evidence);
+        tree.put("selectedMaterialAllHeadsUpFraction", .25);
+        tree.put("selectedMaterialWholeGameReach", .25 * evidence.allHeadsUpProbability());
+        assertThrows(
+                Exception.class,
+                () ->
+                        SixMaxTexturePayoffTable.mapper()
+                                .treeToValue(
+                                        tree, SixMaxHistoryPhysicalMenuSelection.Evidence.class));
+    }
+
+    @Test
     void independentFullDeckClassificationControlsAllHistoryWorldCountsAndExhaustedFallbacks()
             throws Exception {
         var t = table.artifact();

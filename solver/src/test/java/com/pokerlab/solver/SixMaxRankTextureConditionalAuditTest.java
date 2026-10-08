@@ -268,10 +268,13 @@ class SixMaxRankTextureConditionalAuditTest {
             var keys = deal.hands().stream().map(WeightedCombo::key).toList();
             int world = -1;
             for (int i = 0; i < view.dealCount(); i++) if (view.hands(i).equals(keys)) world = i;
-            double mass = deal.probability() * view.counts(world).get(index) / 9880;
-            if (mass == 0) continue;
             var state = game.chanceOutcomes(game.initialState()).get(world).state();
             for (var action : history) state = game.afterAction(state, action.action());
+            double mass =
+                    deal.probability()
+                            * view.counts(state.preflop().publicHistory(), world).get(index)
+                            / 9880;
+            if (mass == 0) continue;
             roots.add(
                     new ChanceOutcome<>(
                             new SixMaxRankTextureFlopGame.State(state.preflop(), index, ""), mass));

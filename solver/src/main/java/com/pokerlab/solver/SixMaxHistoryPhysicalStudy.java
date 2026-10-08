@@ -306,6 +306,53 @@ public final class SixMaxHistoryPhysicalStudy {
         return game;
     }
 
+    /** Full diagnostics can only be reused after actual assessment or read-only replay. */
+    public static final class Validated {
+        private final SixMaxHistoryPhysicalFlopGame game;
+        private final Checkpoint checkpoint;
+        private final Report report;
+
+        private Validated(
+                SixMaxHistoryPhysicalFlopGame game, Checkpoint checkpoint, Report report) {
+            this.game = game;
+            this.checkpoint = checkpoint;
+            this.report = report;
+        }
+
+        SixMaxOneBetFlopGame core() {
+            return game.core();
+        }
+
+        public Checkpoint checkpoint() {
+            return checkpoint;
+        }
+
+        public Report report() {
+            return report;
+        }
+    }
+
+    public static Validated validate(
+            SixMaxPreflopSolutionPack source,
+            SixMaxRankTexturePayoffTable.Artifact parent,
+            SixMaxHistoryPhysicalPayoffTable.Verified table,
+            Checkpoint cp)
+            throws Exception {
+        var report = assess(source, parent, table, cp);
+        return new Validated(new SixMaxHistoryPhysicalFlopGame(source, parent, table), cp, report);
+    }
+
+    public static Validated replayValidated(
+            Path path,
+            SixMaxPreflopSolutionPack source,
+            SixMaxRankTexturePayoffTable.Artifact parent,
+            SixMaxHistoryPhysicalPayoffTable.Verified table,
+            Checkpoint cp)
+            throws Exception {
+        var report = replay(path, source, parent, table, cp);
+        return new Validated(new SixMaxHistoryPhysicalFlopGame(source, parent, table), cp, report);
+    }
+
     public static Report assess(
             SixMaxPreflopSolutionPack source,
             SixMaxRankTexturePayoffTable.Artifact parent,

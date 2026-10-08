@@ -41,6 +41,10 @@ The [bounded suit-refinement model](docs/sixmax-suit-refinement.md) now reveals 
 
 [History-specific physical flop observations](docs/sixmax-history-physical-observations.md) expand the backend's fixed board menu within the existing compute caps. Public-history/card whitelists split exact physical payoffs from rank aggregates, preserve folded blockers and bind a separate model identity. The first menu reveals 530 flops in 915,457 states; fresh policies, complete parent/conditional reports and independent board/EV controls separate increased reached coverage from trainer-quality decisions. Selection currently concentrates on BB versus a CO open, and all evidence remains validation-only.
 
+[History-specific conditional refinement and decision stability](docs/sixmax-history-physical-refinement.md) now freeze that model's preflop policy, re-solve selected physical posteriors and preserve every other strategy row. The broader 64-case candidate correctly fails its local gate and exports no policy. A separately declared accurate-case derivative passes complete parent checks, and fresh 500/1,000-budget references retain 28 of 32 screened cases with 143 of 151 material decisions passing. That bounded sample covers only 0.132% of all heads-up reach; it remains research evidence with trainer admission disabled.
+
+The literal-board model also has a proved capacity limit: its 600 history/board revelations can cover at most 6.073% of heads-up flops before quality filtering. Coverage requests above that limit now fail before input loading or enumeration. Meeting the unchanged 25% retained-content target requires a broader declared observation/runtime design alongside local solver improvements.
+
 Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
 ## Quick start
