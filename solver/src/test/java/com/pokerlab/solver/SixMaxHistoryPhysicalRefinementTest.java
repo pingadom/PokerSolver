@@ -13,6 +13,7 @@ import org.junit.jupiter.api.io.TempDir;
 class SixMaxHistoryPhysicalRefinementTest {
     private static SixMaxHistoryPhysicalStudy.Validated predecessor;
     private static SixMaxHistoryPhysicalConditionalRefinement.Result accepted;
+    private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
 
     @BeforeAll
     static void fixture() throws Exception {
@@ -101,11 +102,143 @@ class SixMaxHistoryPhysicalRefinementTest {
         accepted =
                 SixMaxHistoryPhysicalConditionalRefinement.refine(
                         predecessor, settings(List.of(500, 1000)), b -> {});
+        maxmin =
+                SixMaxHistoryPhysicalMaxmin.refine(
+                        predecessor, new SixMaxHistoryPhysicalMaxmin.Settings(3, .001), b -> {});
+    }
+
+    @Test
+    void maxminRepairsSyntheticFoldMistakesWithSeparateWorkAndFrozenSupport() {
+        assertTrue(maxmin.report().accepted(), maxmin.report().rejectionReasons().toString());
+        var a = maxmin.artifact().orElseThrow();
+        assertFalse(a.trainerAdmission());
+        assertEquals(SixMaxHistoryPhysicalMaxmin.ALGORITHM, a.algorithm());
+        assertEquals(1, a.solution().iterations());
+        assertEquals(
+                predecessor.checkpoint().solution().strategy().keySet(),
+                a.solution().strategy().keySet());
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.preflopPolicy(
+                        predecessor.checkpoint().solution()),
+                SixMaxPreflopContinuationFeedback.preflopPolicy(a.solution()));
+        assertEquals(3, maxmin.report().branches().size());
+        for (var b : maxmin.report().branches()) {
+            assertEquals(6.5, b.before().nashConvBb(), 1e-12);
+            assertTrue(b.after().nashConvBb() <= 1e-9);
+            assertTrue(b.solve().profileNodeVisits() > 0);
+            assertTrue(b.solve().matrixSolution().pivots() <= FiniteMatrixMaxmin.MAX_PIVOTS);
+        }
+        for (var row : predecessor.checkpoint().solution().strategy().entrySet())
+            if (!row.getKey().contains("board:"))
+                assertEquals(row.getValue(), a.solution().strategy().get(row.getKey()));
+    }
+
+    @Test
+    void maxminReplayRejectsMatrixWorkMixtureAndPolicyTampering(@TempDir Path dir)
+            throws Exception {
+        var policy = dir.resolve("maxmin-policy.json.gz");
+        var report = dir.resolve("maxmin-report.json.gz");
+        SixMaxHistoryPhysicalMaxmin.write(policy, report, maxmin);
+        assertEquals(
+                maxmin.report(),
+                SixMaxHistoryPhysicalMaxmin.replay(policy, report, predecessor).report());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMaxmin.write(policy, report, maxmin));
+        var bad = dir.resolve("bad.json");
+        var mapper = SixMaxTexturePayoffTable.mapper();
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        mapper.valueToTree(maxmin.report());
+        tree.put("predecessorReportHash", "0".repeat(64));
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMaxmin.replay(policy, bad, predecessor));
+        for (String field : List.of("matrixHash", "profileNodeVisits")) {
+            tree =
+                    (com.fasterxml.jackson.databind.node.ObjectNode)
+                            mapper.valueToTree(maxmin.report());
+            var solve =
+                    (com.fasterxml.jackson.databind.node.ObjectNode)
+                            tree.path("branches").get(0).path("solve");
+            if (field.equals("matrixHash")) solve.put(field, "0".repeat(64));
+            else solve.put(field, -1);
+            Files.writeString(bad, tree.toString());
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> SixMaxHistoryPhysicalMaxmin.replay(policy, bad, predecessor));
+        }
+        tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        mapper.valueToTree(maxmin.artifact().orElseThrow());
+        tree.put("solutionHash", "0".repeat(64));
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMaxmin.replay(bad, report, predecessor));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SixMaxHistoryPhysicalMaxmin.Settings(65, .001));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SixMaxHistoryPhysicalMaxmin.Settings(1, Double.NaN));
+    }
+
+    @Test
+    void maxminCliRejectsOutputAliasesAndExistingFilesBeforeInputLoading(@TempDir Path dir)
+            throws Exception {
+        String[] args = {
+            "refine",
+            "missing-source",
+            "missing-rank",
+            "missing-table",
+            "missing-cp",
+            "missing-study",
+            dir.resolve("policy").toString(),
+            dir.resolve("report").toString(),
+            "3",
+            ".001"
+        };
+        Files.writeString(Path.of(args[6]), "preserve");
+        assertThrows(
+                IllegalArgumentException.class, () -> SixMaxHistoryPhysicalMaxminMain.main(args));
+        assertEquals("preserve", Files.readString(Path.of(args[6])));
+        args[6] = args[7];
+        assertThrows(
+                IllegalArgumentException.class, () -> SixMaxHistoryPhysicalMaxminMain.main(args));
+        assertFalse(Files.exists(Path.of(args[7])));
     }
 
     static SixMaxSuitConditionalRefinement.Settings settings(List<Integer> budgets) {
         return new SixMaxSuitConditionalRefinement.Settings(
                 SixMaxSuitConditionalRefinement.Priority.BALANCED_GAP_AND_REACH, 3, budgets, .001);
+    }
+
+    @Test
+    void maxminEmptySelectionExportsOnlyDiagnosticsAndCannotBeScreened(@TempDir Path dir)
+            throws Exception {
+        var empty =
+                SixMaxHistoryPhysicalMaxmin.refine(
+                        accepted, new SixMaxHistoryPhysicalMaxmin.Settings(3, .001), b -> {});
+        assertFalse(empty.report().accepted());
+        assertEquals(List.of("NO_MATERIAL_CASES_ABOVE_TARGET"), empty.report().rejectionReasons());
+        var policy = dir.resolve("policy.json.gz");
+        var report = dir.resolve("report.json.gz");
+        SixMaxHistoryPhysicalMaxmin.write(policy, report, empty);
+        assertFalse(Files.exists(policy));
+        assertEquals(
+                empty.report(),
+                SixMaxHistoryPhysicalMaxmin.replay(policy, report, accepted).report());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalMaxminDecisionStability.screen(
+                                empty, SixMaxSuitDecisionStability.Settings.standard(), b -> {}));
+        Files.writeString(policy, "{}");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMaxmin.replay(policy, report, accepted));
     }
 
     @Test
