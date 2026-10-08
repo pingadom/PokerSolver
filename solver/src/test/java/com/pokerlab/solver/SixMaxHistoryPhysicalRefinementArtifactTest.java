@@ -13,6 +13,8 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
     private static SixMaxHistoryPhysicalStudy.Validated predecessor;
     private static SixMaxHistoryPhysicalConditionalRefinement.Result accepted, rejected;
     private static SixMaxHistoryPhysicalDecisionStability.Report screen;
+    private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
+    private static SixMaxHistoryPhysicalMaxminDecisionStability.Report maxminScreen;
 
     @BeforeAll
     static void load() throws Exception {
@@ -42,6 +44,175 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
         screen =
                 SixMaxHistoryPhysicalDecisionStability.replay(
                         Path.of(PREFIX + "-accurate-64-decisions.json.gz"), accepted);
+        // Reuse the fully replayed CFR predecessor; do not repeat payoff/study reconstruction.
+        maxmin =
+                SixMaxHistoryPhysicalMaxmin.replay(
+                        Path.of(PREFIX + "-maxmin-policy.json.gz"),
+                        Path.of(PREFIX + "-maxmin-refinement.json.gz"),
+                        accepted);
+        maxminScreen =
+                SixMaxHistoryPhysicalMaxminDecisionStability.replay(
+                        Path.of(PREFIX + "-maxmin-decisions.json.gz"), maxmin);
+    }
+
+    @Test
+    void ownedMaxminRepairsEveryRemainingWeakPhysicalCaseAndPreservesCfrImprovements() {
+        var r = maxmin.report();
+        var a = maxmin.artifact().orElseThrow();
+        assertTrue(r.accepted(), r.rejectionReasons().toString());
+        assertFalse(r.trainerAdmission());
+        assertEquals(SixMaxHistoryPhysicalMaxmin.CFR_PREDECESSOR, r.predecessorKind());
+        assertEquals(500, a.solution().iterations());
+        assertEquals(20, r.branches().size());
+        assertEquals(144, r.replacedInformationSets());
+        assertEquals(69843, r.preservedInformationSets());
+        assertEquals(
+                286,
+                r.branches().stream().mapToInt(b -> b.solve().matrixSolution().pivots()).sum());
+        assertEquals(
+                104960, r.branches().stream().mapToLong(b -> b.solve().profileNodeVisits()).sum());
+        assertEquals(
+                .001368808948992867, r.after().parentWitness().parentQuality().nashConvBb(), 1e-14);
+        assertTrue(
+                r.after().parentWitness().parentQuality().nashConvBb()
+                        < r.before().parentWitness().parentQuality().nashConvBb());
+        var original = accepted.artifact().orElseThrow().solution();
+        assertEquals(original.strategy().keySet(), a.solution().strategy().keySet());
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.preflopPolicy(original),
+                SixMaxPreflopContinuationFeedback.preflopPolicy(a.solution()));
+        for (var row : original.strategy().entrySet())
+            if (r.branches().stream()
+                    .noneMatch(b -> row.getKey().contains(":" + b.observationKey() + ":")))
+                assertEquals(row.getValue(), a.solution().strategy().get(row.getKey()));
+        long physical = 0;
+        for (var h : r.after().histories())
+            for (var s : h.signals())
+                if (s.observationKey().startsWith("board:") && s.quality() != null) {
+                    physical++;
+                    assertTrue(s.quality().nashConvBb() <= .001);
+                }
+        assertEquals(530, physical);
+        for (var b : r.branches()) {
+            assertTrue(b.before().nashConvBb() > .001);
+            assertTrue(b.after().nashConvBb() <= 1e-9);
+            assertEquals(16, b.solve().firstPlans());
+            assertEquals(16, b.solve().secondPlans());
+        }
+    }
+
+    @Test
+    void allMaxminRepairsAgreeWithIndependentPurePlanResponsesBeforeAndAfter() {
+        var game = maxmin.core();
+        for (var b : maxmin.report().branches()) {
+            SixMaxRankTextureConditionalAuditTest.bruteCheck(
+                    game,
+                    game.sourceGame(),
+                    game.payoffView(),
+                    accepted.artifact().orElseThrow().solution(),
+                    b.history(),
+                    b.observation(),
+                    b.observationProbabilityGivenHistory(),
+                    b.before());
+            SixMaxRankTextureConditionalAuditTest.bruteCheck(
+                    game,
+                    game.sourceGame(),
+                    game.payoffView(),
+                    maxmin.artifact().orElseThrow().solution(),
+                    b.history(),
+                    b.observation(),
+                    b.observationProbabilityGivenHistory(),
+                    b.after());
+        }
+    }
+
+    @Test
+    void maxminScreenKeepsIndependentReferenceBudgetsAndVerifiesEveryPrimaryActionEv() {
+        var game = maxmin.core();
+        var policy = maxmin.artifact().orElseThrow().solution();
+        assertFalse(maxminScreen.trainerAdmission());
+        assertEquals(530, maxminScreen.eligibilityCounts().get("ELIGIBLE"));
+        assertEquals(32, maxminScreen.branches().size());
+        // Unscreened cases receive no retained credit even though every physical root is accurate.
+        double retained = 0;
+        for (var b : maxminScreen.branches()) {
+            assertEquals(
+                    List.of(500, 1000),
+                    b.references().stream()
+                            .map(SixMaxSuitDecisionStability.Reference::iterations)
+                            .toList());
+            var transition =
+                    new SixMaxPolicyFlopTransition(
+                            game.sourceGame(),
+                            SixMaxPreflopContinuationFeedback.preflopPolicy(policy),
+                            b.history());
+            var posterior =
+                    SixMaxFlopConditionalDiagnostics.posterior(game, transition, b.observation());
+            for (var decision :
+                    SixMaxOneBetDecisionValues.assess(game, posterior.roots(), policy)) {
+                var question =
+                        b.questions().stream()
+                                .filter(
+                                        q ->
+                                                q.primary()
+                                                        .informationSet()
+                                                        .equals(decision.row().informationSet()))
+                                .findFirst()
+                                .orElseThrow();
+                assertEquals(decision.row(), question.primary());
+                if (!decision.roots().isEmpty())
+                    SixMaxSuitConditionalRefinementArtifactTest.analyticValues(
+                                    game, decision, policy)
+                            .forEach(
+                                    (action, ev) ->
+                                            assertEquals(
+                                                    ev,
+                                                    question.primary()
+                                                            .values()
+                                                            .actionEvBb()
+                                                            .get(action),
+                                                    1e-10));
+            }
+            if (b.retained()) {
+                retained += b.historyProbability() * b.observationProbabilityGivenHistory();
+                assertEquals(
+                        2,
+                        b.questions().stream()
+                                .filter(SixMaxSuitDecisionStability.Question::material)
+                                .map(q -> q.primary().actor())
+                                .distinct()
+                                .count());
+                assertTrue(
+                        b.questions().stream()
+                                .filter(SixMaxSuitDecisionStability.Question::material)
+                                .allMatch(SixMaxSuitDecisionStability.Question::stable));
+            }
+        }
+        assertEquals(
+                retained / maxminScreen.allHeadsUpReach(),
+                maxminScreen.retainedAllHeadsUpFraction(),
+                1e-14);
+    }
+
+    @Test
+    void maxminCannotBeReplayedAgainstTheRawJointPolicyOrAForgedDecisionLineage(@TempDir Path dir)
+            throws Exception {
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalMaxmin.replay(
+                                Path.of(PREFIX + "-maxmin-policy.json.gz"),
+                                Path.of(PREFIX + "-maxmin-refinement.json.gz"),
+                                predecessor));
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        SixMaxTexturePayoffTable.mapper().valueToTree(maxminScreen);
+        tree.put("derivedArtifactHash", "0".repeat(64));
+        var bad = dir.resolve("bad.json");
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalMaxminDecisionStability.replay(bad, maxmin));
     }
 
     @Test

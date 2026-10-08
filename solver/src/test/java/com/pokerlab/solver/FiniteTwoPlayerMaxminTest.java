@@ -202,7 +202,7 @@ class FiniteTwoPlayerMaxminTest {
             }
 
             public int currentPlayer(List<Integer> s) {
-                return s.size() == 1 ? -1 : s.size() - 2;
+                return s.getFirst() == -1 ? -1 : s.size() - 1;
             }
 
             public List<String> legalActions(List<Integer> s) {
@@ -220,25 +220,14 @@ class FiniteTwoPlayerMaxminTest {
 
             public List<ChanceOutcome<List<Integer>>> chanceOutcomes(List<Integer> s) {
                 return List.of(
-                        new ChanceOutcome<>(List.of(0, 0).subList(0, 1), probability),
+                        new ChanceOutcome<>(List.of(0), probability),
                         new ChanceOutcome<>(List.of(1), 1 - probability));
             }
         }
-        // Root chance ends at one-element world states; mark chance by world -1, not length.
-        var chance =
-                new ChanceGame(.75) {
-                    public int currentPlayer(List<Integer> s) {
-                        return s.getFirst() == -1 ? -1 : s.size() - 1;
-                    }
-                };
+        var chance = new ChanceGame(.75);
         var solved = FiniteTwoPlayerMaxmin.solve(chance);
         assertEquals(1, solved.audit().matrixSolution().lowerValue(), 1e-12);
-        var bad =
-                new ChanceGame(2) {
-                    public int currentPlayer(List<Integer> s) {
-                        return s.getFirst() == -1 ? -1 : s.size() - 1;
-                    }
-                };
+        var bad = new ChanceGame(2);
         assertThrows(IllegalArgumentException.class, () -> FiniteTwoPlayerMaxmin.solve(bad));
     }
 }
