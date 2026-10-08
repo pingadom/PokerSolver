@@ -2,6 +2,8 @@
 
 PokerLab can now derive and replay a targeted postflop policy in the [history-specific physical observation model](sixmax-history-physical-observations.md), then check the action EVs each player would see in a trainer. The saved accurate-board derivative passes its research quality gate; 28 of 32 screened board/history cases pass every material decision check. This is still a bounded research sample, with `trainerAdmission = false`.
 
+The subsequent [owned bounded maxmin stage](sixmax-owned-maxmin.md) preserves this accepted derivative and repairs all twenty remaining weak physical roots, with separate optimization lineage. The results below describe the earlier CFR-only artifacts and remain reproducible. Broader support is planned in the [physical-capacity design](sixmax-broader-physical-capacity-design.md).
+
 ## Frozen policy, fresh local work
 
 The predecessor is the separately trained 500-iteration policy for the fixed 530-board menu. Its model, twelve legal hidden worlds, six selected heads-up histories, 100bb stacks, no rake, 3bb open/9bb re-raise rules and one half-pot flop bet remain unchanged. Turn and river are integrated into exact showdown shares. Aggregate fallback observations and unselected/multiway checkdown branches retain their existing semantics.
