@@ -1,0 +1,1753 @@
+{
+  "algorithm" : "FROZEN_REACH_PER_COUNTERFACTUAL_STATE_GREEDY/v1",
+  "allHeadsUpProbability" : 0.6663853938436812,
+  "frozenPreflopPolicyHash" : "b6584162768c9196a064c246a63e292e9a06756a7872f66d230a82ab459a1c82",
+  "menu" : {
+    "revelations" : [ {
+      "board" : [ "2c", "2d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "2d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "2h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "2h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "2s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "2s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2c", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "2h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "2h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "2s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "2s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2d", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "2s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "2s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2h", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "2s", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3c", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "3h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "3h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3d", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "3s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "3s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3h", "8s", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "4h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "4h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "4s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "4s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "5s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6h", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "6s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "7c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "7c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "7s", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "7s", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8c", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8c", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8d", "8h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8d", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "8s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8h", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "9c" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "9h" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "9s" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Ad" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "As" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Jd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "3s", "8s", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "4h", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "4h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "4s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "4s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5d", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5d", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5h", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "5s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6d", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6d", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6h", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "6s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "7c", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "7c", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "7s", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "7s", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8c", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8c", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8d", "8h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8d", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "8s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "9c", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "9h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "9s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Ad", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "As", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jd", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8h", "Jh", "Td" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "9c", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "9h", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "9s", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Ad", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "As", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jd", "Jh" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Kc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Ks" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Qc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Qd" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Qs" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Tc" ],
+      "history" : 5
+    }, {
+      "board" : [ "8s", "Jh", "Td" ],
+      "history" : 5
+    } ],
+    "selections" : [ {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      } ],
+      "potFraction" : 0.5
+    }, {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "potFraction" : 0.5
+    }, {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "check",
+        "seat" : "BB"
+      } ],
+      "potFraction" : 0.5
+    }, {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "fold",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "potFraction" : 0.5
+    }, {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "BB"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      } ],
+      "potFraction" : 0.5
+    }, {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      }, {
+        "action" : "call",
+        "seat" : "BB"
+      } ],
+      "potFraction" : 0.5
+    } ]
+  },
+  "menuHash" : "bcd0e5dfe555c6af5f6b61c7b63a7af82bbda3e98a6de86fc8fb2e28c14780f9",
+  "parentRankTableHash" : "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+  "publicationStatus" : "VALIDATION_ONLY",
+  "requestedAllHeadsUpFraction" : 0.025,
+  "selectedMaterialAllHeadsUpFraction" : 0.025037902261829007,
+  "selectedMaterialWholeGameReach" : 0.01668489235976852,
+  "sizing" : {
+    "completeTreeStates" : 915457,
+    "histories" : 6,
+    "observations" : 1712,
+    "privateWorlds" : 12
+  },
+  "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b"
+}

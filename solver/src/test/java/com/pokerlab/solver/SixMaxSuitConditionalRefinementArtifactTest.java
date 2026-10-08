@@ -230,7 +230,12 @@ class SixMaxSuitConditionalRefinementArtifactTest {
             var state = root.state();
             double share =
                     game.payoffView()
-                            .share(state.preflop().dealIndex(), mask, actor, state.signal());
+                            .share(
+                                    state.preflop().publicHistory(),
+                                    state.preflop().dealIndex(),
+                                    mask,
+                                    actor,
+                                    state.signal());
             double call = (pot + 2 * bet) * share - bet;
             if (prefix.equals("b") || prefix.equals("kb")) {
                 wager += root.probability() * call;
