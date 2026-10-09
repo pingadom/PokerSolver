@@ -1,5 +1,7 @@
 # Owned sequence-form solver and physical-board integration
 
+The separately identified [affine sequence-form path](sixmax-affine-sequence-form.md) now eliminates dependent flow variables before using the same owned LP. It supports larger synthetic betting controls within unchanged limits and preserves this original full-flow algorithm and every saved replay below.
+
 PokerLab now solves bounded two-player perfect-recall games without enumerating complete pure plans. The production implementation owns the sequence reduction, two-phase revised simplex, basis factorization, behavioral conversion and validation. No LP library is added to the application. The saved physical-board derivative passes its full policy gate and independent action-EV screen; it remains `VALIDATION_ONLY`, with `trainerAdmission = false`.
 
 ## Why this matters
