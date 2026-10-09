@@ -1,0 +1,78 @@
+{
+  "binding" : {
+    "beliefs" : "FULL_JOINT_FIXED_SOURCE_POLICY_ACTION_CONDITIONED/v1",
+    "completeTreeStates" : 73,
+    "historyReach" : 6.611382850751813E-4,
+    "model" : "TWO_ACTIVE_PREFLOP_FIXED_SOURCE_BELIEFS_MANDATORY_CHECKDOWN/v1",
+    "posteriorHash" : "72c3fd22f6ecc04179fd87f833dab40b5d08963c22c147d4812e84fc6f48daf5",
+    "posteriorJointDeals" : 12,
+    "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "sourcePayoffHash" : "3efd22d3e0f5c74e8c666095a138ba55ed3d32363f8115bff20f2df25cd61f27",
+    "sourcePolicyHash" : "6b632d2a252f1118e5efe4c12dd1a6f4324387fd6f177c19f078e182236f8246",
+    "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6",
+    "specification" : {
+      "history" : [ {
+        "action" : "fold",
+        "seat" : "UTG"
+      }, {
+        "action" : "fold",
+        "seat" : "HJ"
+      }, {
+        "action" : "call",
+        "seat" : "CO"
+      }, {
+        "action" : "call",
+        "seat" : "BTN"
+      }, {
+        "action" : "call",
+        "seat" : "SB"
+      }, {
+        "action" : "raise:3.0",
+        "seat" : "BB"
+      }, {
+        "action" : "raise:9.0",
+        "seat" : "CO"
+      }, {
+        "action" : "fold",
+        "seat" : "BTN"
+      }, {
+        "action" : "fold",
+        "seat" : "SB"
+      } ],
+      "rules" : {
+        "raiseSchedule" : "NEXT_TARGET",
+        "raiseToBb" : [ 3.0, 9.0, 22.0 ],
+        "smallBlindBb" : 0.5,
+        "stackBb" : 100.0
+      }
+    }
+  },
+  "publicationStatus" : "VALIDATION_ONLY",
+  "reportHash" : "6f8e4f9c15a6b677400bffc7e424aef58869ea06017cc3d779f059b96c09d232",
+  "schemaVersion" : "pokerlab-heads-up-preflop-conditional-policy/v1",
+  "solution" : {
+    "iterations" : 1,
+    "strategy" : {
+      "2:conditional-preflop:Ah Kh:|BB:raise:22.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "2:conditional-preflop:Qh Th:|BB:raise:22.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "5:conditional-preflop:7d 7h:" : {
+        "call" : 0.0,
+        "fold" : 0.0,
+        "raise:22.0" : 1.0
+      },
+      "5:conditional-preflop:Ac Jc:" : {
+        "call" : 1.0,
+        "fold" : 0.0,
+        "raise:22.0" : 0.0
+      }
+    }
+  },
+  "solutionHash" : "2870fbca968b245b9f622cd1e26e72e3a8f73a6920723c628d425fa68ff269c7",
+  "trainerAdmission" : false
+}

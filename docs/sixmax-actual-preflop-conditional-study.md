@@ -67,3 +67,18 @@ mvn -q -pl solver -am test '-Dtest=SixMaxHeadsUpPreflop*Test' '-Dsurefire.failIf
 ```
 
 The next useful expansion is a separately identified continuation model that keeps action feedback stable on a wider raise ladder, followed by defensible range provenance and explicit rake. General six-player solving, broader retained physical-board coverage and connected postflop practice remain separate gates. This milestone establishes a reproducible actual-card conditional solver-to-trainer path, not a completion percentage for those larger goals.
+
+## Additional offline drill: limp–re-raise
+
+A separately screened public prefix is now saved as `heads-up-preflop-limp-reraise-{specification,policy,report}.json`. UTG and HJ fold; CO, BTN and SB call; BB raises to 3bb; CO re-raises to 9bb; BTN and SB fold. BB faces 6bb to call into a 14bb pot. The table preserves each folded caller's 1bb contribution. If BB raises to 22bb, CO faces 13bb to call into 33bb.
+
+The new prefix has source-policy reach `0.0006611382850751814`. It is rare but passes the unchanged `0.0001` history-reach requirement. It retains all twelve correlated physical worlds, with a new posterior/snapshot identity. Its remaining 73-state unrestricted game uses the 3/9/22bb ladder and the same mandatory-checkdown boundary. All four material decisions (two own hands for each of CO and BB) pass every existing gate at both fresh reference budgets; maximum action-EV drift is `0.00005502bb`. This supplies a third deterministic **offline validation-only** trainer scenario, not a recommendation to limp–re-raise in cash games or general trainer admission.
+
+Use the existing replay and practice commands with the new prefix:
+
+```text
+java -cp <solver-runtime-classpath> com.pokerlab.solver.SixMaxHeadsUpPreflopStudyMain replay docs/data/sixmax-staged-three-nine-source-pack.json docs/data/heads-up-preflop-limp-reraise-policy.json docs/data/heads-up-preflop-limp-reraise-report.json
+java -cp <solver-runtime-classpath> com.pokerlab.solver.SixMaxHeadsUpPreflopTrainerMain session docs/data/sixmax-staged-three-nine-source-pack.json docs/data/heads-up-preflop-limp-reraise-policy.json docs/data/heads-up-preflop-limp-reraise-report.json 711
+```
+
+JUnit replays the complete study, independently enumerates every candidate/reference action continuation, checks the actual pot/contribution/action display for both active players, and verifies deterministic ten-question grading and cross-study rejection. No API or website pack is registered.
