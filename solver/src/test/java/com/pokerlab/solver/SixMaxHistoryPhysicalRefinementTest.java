@@ -14,6 +14,11 @@ class SixMaxHistoryPhysicalRefinementTest {
     private static SixMaxHistoryPhysicalStudy.Validated predecessor;
     private static SixMaxHistoryPhysicalConditionalRefinement.Result accepted;
     private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
+    private static SixMaxPreflopSolutionPack storageSource;
+    private static SixMaxRankTexturePayoffTable.Artifact storageParent;
+    private static SixMaxHistoryPhysicalPayoffTable.Verified storageOriginal;
+    private static SixMaxHistoryPhysicalCompactStorage.Verified compact;
+    private static SixMaxHistoryPhysicalStorageAudit.Result storageAudit;
 
     @BeforeAll
     static void fixture() throws Exception {
@@ -99,12 +104,225 @@ class SixMaxHistoryPhysicalRefinementTest {
                         new CfrSolution(1, mistakes),
                         MultiPlayerCfrSolver.InactivePruning.NONE);
         predecessor = SixMaxHistoryPhysicalStudy.validate(source, parent, table, cp);
+        storageSource = source;
+        storageParent = parent;
+        storageOriginal = table;
+        compact = SixMaxHistoryPhysicalCompactStorage.project(table);
+        storageAudit =
+                SixMaxHistoryPhysicalStorageAudit.assess(
+                        source, parent, table, predecessor, compact);
         accepted =
                 SixMaxHistoryPhysicalConditionalRefinement.refine(
                         predecessor, settings(List.of(500, 1000)), b -> {});
         maxmin =
                 SixMaxHistoryPhysicalMaxmin.refine(
                         predecessor, new SixMaxHistoryPhysicalMaxmin.Settings(3, .001), b -> {});
+    }
+
+    @Test
+    void compactStoragePreservesExactSyntheticVectorsChanceOrderAndBothSolverAlgorithms()
+            throws Exception {
+        assertEquals(
+                storageOriginal.artifact(),
+                SixMaxHistoryPhysicalCompactStorage.restore(compact.artifact()));
+        assertFalse(storageAudit.report().trainerAdmission());
+        assertEquals(predecessor.checkpoint().binding(), storageAudit.report().binding());
+        assertEquals(3, storageAudit.report().localControls().size());
+        for (var control : storageAudit.report().localControls()) {
+            assertEquals(8, control.freshCfrIterations());
+            assertTrue(control.freshCfrTraversal().visitedNodes() > 0);
+            assertEquals(0, control.freshCfrTraversal().sampledChanceNodes());
+        }
+        assertEquals(
+                predecessor.checkpoint().solution().strategy().size(),
+                storageAudit.report().informationSets());
+        assertEquals(
+                predecessor.core().completeTreeStates(),
+                compact.core(storageSource, storageParent).completeTreeStates());
+    }
+
+    @Test
+    void compactStorageRequiresExactReplayAndCannotOverwriteOutputs(@TempDir Path dir)
+            throws Exception {
+        Path payoff = dir.resolve("compact.json.gz"), audit = dir.resolve("audit.json");
+        SixMaxHistoryPhysicalCompactStorage.write(payoff, compact);
+        SixMaxHistoryPhysicalStorageAudit.write(audit, storageAudit);
+        assertEquals(
+                compact.hash(),
+                SixMaxHistoryPhysicalCompactStorage.replay(payoff, storageOriginal).hash());
+        assertEquals(
+                storageAudit.report(),
+                SixMaxHistoryPhysicalStorageAudit.replay(
+                                audit,
+                                storageSource,
+                                storageParent,
+                                storageOriginal,
+                                predecessor,
+                                compact)
+                        .report());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalCompactStorage.write(payoff, compact));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalStorageAudit.write(audit, storageAudit));
+    }
+
+    @Test
+    void validLookingPayoutTamperingCannotGrantCompactVerification(@TempDir Path dir)
+            throws Exception {
+        var node = SixMaxTexturePayoffTable.mapper().valueToTree(compact.artifact());
+        var wins =
+                (com.fasterxml.jackson.databind.node.ArrayNode)
+                        node.at("/histories/0/deals/0/firstWins");
+        int nonzero = 0;
+        while (compact.artifact().histories().getFirst().deals().getFirst().counts().get(nonzero)
+                == 0) nonzero++;
+        // Syntactically valid payout that breaks exact original provenance.
+        var ties =
+                (com.fasterxml.jackson.databind.node.ArrayNode)
+                        node.at("/histories/0/deals/0/ties");
+        ties.set(
+                nonzero,
+                com.fasterxml.jackson.databind.node.LongNode.valueOf(
+                        ties.get(nonzero).asLong() - 1));
+        wins.set(nonzero, com.fasterxml.jackson.databind.node.LongNode.valueOf(1));
+        Path path = dir.resolve("forged.json");
+        Files.writeString(path, SixMaxTextureStudy.json(node));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalCompactStorage.replay(path, storageOriginal));
+    }
+
+    @Test
+    void compactReaderRejectsIdentitySupportAndByteLimitTampering(@TempDir Path dir)
+            throws Exception {
+        for (String pointer : List.of("/trainerAdmission", "/originalPayoffHash", "/encoding")) {
+            var node =
+                    (com.fasterxml.jackson.databind.node.ObjectNode)
+                            SixMaxTexturePayoffTable.mapper().valueToTree(compact.artifact());
+            if (pointer.equals("/trainerAdmission")) node.put("trainerAdmission", true);
+            else
+                node.put(
+                        pointer.substring(1),
+                        pointer.equals("/encoding") ? "OTHER" : "0".repeat(64));
+            Path path = dir.resolve(pointer.substring(1) + ".json");
+            Files.writeString(path, SixMaxTextureStudy.json(node));
+            assertThrows(
+                    Exception.class,
+                    () -> SixMaxHistoryPhysicalCompactStorage.replay(path, storageOriginal));
+        }
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new SixMaxHistoryPhysicalCompactStorage.History(
+                                "h",
+                                3,
+                                List.of(1, 0),
+                                compact.artifact().histories().getFirst().deals()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new SixMaxHistoryPhysicalCompactStorage.Deal(
+                                List.of("a", "b", "c", "d", "e", "f"),
+                                List.of(9880L),
+                                List.of(Long.MAX_VALUE),
+                                List.of(0L)));
+        Path huge = dir.resolve("huge.json.gz");
+        try (var gzip = new java.util.zip.GZIPOutputStream(Files.newOutputStream(huge))) {
+            gzip.write(new byte[SixMaxHistoryPhysicalCompactStorage.MAX_BYTES + 1]);
+        }
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalCompactStorage.replay(huge, storageOriginal));
+    }
+
+    @Test
+    void auditReconstructsCountersInsteadOfTrustingSavedClaims(@TempDir Path dir) throws Exception {
+        var node =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        SixMaxTexturePayoffTable.mapper().valueToTree(storageAudit.report());
+        node.put("comparedCounts", storageAudit.report().comparedCounts() + 1);
+        Path path = dir.resolve("audit.json");
+        Files.writeString(path, SixMaxTextureStudy.json(node));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalStorageAudit.replay(
+                                path,
+                                storageSource,
+                                storageParent,
+                                storageOriginal,
+                                predecessor,
+                                compact));
+    }
+
+    @Test
+    void compactViewIsImmutableAndRejectsAbsentOrWrongPlayerQueries() throws Exception {
+        var game = compact.core(storageSource, storageParent);
+        var h = storageOriginal.artifact().histories().getFirst();
+        var view = game.payoffView();
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> view.counts(h.publicHistory(), 0).set(0, 0L));
+        assertThrows(IllegalArgumentException.class, () -> view.counts(0));
+        assertThrows(IllegalArgumentException.class, () -> view.counts("unknown", 0));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> view.share(h.publicHistory(), 0, h.activeMask(), -1, 0));
+        assertThrows(
+                IllegalArgumentException.class, () -> view.share(h.publicHistory(), 0, 63, 0, 0));
+        assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> view.key(compact.artifact().observations().size()));
+        for (int o = 0; o < h.deals().getFirst().flopCounts().size(); o++) {
+            if (h.deals().getFirst().flopCounts().get(o) != 0) continue;
+            int absent = o;
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () ->
+                            view.share(
+                                    h.publicHistory(),
+                                    0,
+                                    h.activeMask(),
+                                    Integer.numberOfTrailingZeros(h.activeMask()),
+                                    absent));
+        }
+    }
+
+    @Test
+    void storageCliChecksAliasesAndExistingOutputsBeforeInputLoading(@TempDir Path dir)
+            throws Exception {
+        var inputs =
+                new ArrayList<String>(
+                        List.of(
+                                "project",
+                                dir.resolve("source").toString(),
+                                dir.resolve("rank").toString(),
+                                dir.resolve("table").toString(),
+                                dir.resolve("cp").toString(),
+                                dir.resolve("study").toString(),
+                                dir.resolve("compact").toString(),
+                                dir.resolve("audit").toString()));
+        inputs.set(7, dir.resolve("other/../source").toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalStorageMain.main(inputs.toArray(String[]::new)));
+        Path source = dir.resolve("source");
+        Files.writeString(source, "protected");
+        Path alias = dir.resolve("linked");
+        Files.createLink(alias, source);
+        inputs.set(7, alias.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalStorageMain.main(inputs.toArray(String[]::new)));
+        inputs.set(7, dir.resolve("audit").toString());
+        Files.writeString(dir.resolve("compact"), "protected output");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalStorageMain.main(inputs.toArray(String[]::new)));
+        assertEquals("protected output", Files.readString(dir.resolve("compact")));
+        assertEquals("protected", Files.readString(source));
     }
 
     @Test

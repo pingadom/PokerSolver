@@ -15,6 +15,9 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
     private static SixMaxHistoryPhysicalDecisionStability.Report screen;
     private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
     private static SixMaxHistoryPhysicalMaxminDecisionStability.Report maxminScreen;
+    private static SixMaxHistoryPhysicalCompactStorage.Verified compact;
+    private static SixMaxHistoryPhysicalStorageAudit.Result storageAudit;
+    private static SixMaxHistoryPhysicalPayoffTable.Verified storageOriginal;
 
     @BeforeAll
     static void load() throws Exception {
@@ -31,6 +34,18 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
         predecessor =
                 SixMaxHistoryPhysicalStudy.replayValidated(
                         Path.of(PREFIX + "-study-500.json.gz"), source, parent, table, cp);
+        storageOriginal = table;
+        compact =
+                SixMaxHistoryPhysicalCompactStorage.replay(
+                        Path.of(PREFIX + "-compact-payoffs.json.gz"), table);
+        storageAudit =
+                SixMaxHistoryPhysicalStorageAudit.replay(
+                        Path.of(PREFIX + "-storage-audit.json"),
+                        source,
+                        parent,
+                        table,
+                        predecessor,
+                        compact);
         rejected =
                 SixMaxHistoryPhysicalConditionalRefinement.replay(
                         Path.of(PREFIX + "-all-64-policy.json.gz"),
@@ -53,6 +68,48 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
         maxminScreen =
                 SixMaxHistoryPhysicalMaxminDecisionStability.replay(
                         Path.of(PREFIX + "-maxmin-decisions.json.gz"), maxmin);
+    }
+
+    @Test
+    void savedCompactArtifactRestoresEveryVectorWithoutChangingThePublicGame() throws Exception {
+        assertEquals(
+                storageOriginal.artifact(),
+                SixMaxHistoryPhysicalCompactStorage.restore(compact.artifact()));
+        var r = storageAudit.report();
+        assertFalse(r.trainerAdmission());
+        assertEquals(predecessor.checkpoint().binding(), r.binding());
+        assertEquals(915457, r.binding().completeTreeStates());
+        assertEquals(69987, r.informationSets());
+        assertEquals(123264, r.comparedCounts());
+        assertEquals(172592, r.comparedActiveShares());
+        assertEquals(
+                SixMaxHistoryPhysicalConditionalRefinement.hash(
+                        predecessor.report().jointlySolvedDiagnostics()),
+                r.diagnosticsHash());
+        assertEquals(20, r.localControls().size());
+        assertEquals(
+                20,
+                r.localControls().stream()
+                        .map(SixMaxHistoryPhysicalStorageAudit.Control::observationKey)
+                        .distinct()
+                        .count());
+        assertTrue(r.localControls().stream().allMatch(c -> c.freshCfrIterations() == 8));
+    }
+
+    @Test
+    void compactPayloadCountersAreReconstructedFromActualSupportAndAreNotHeapClaims()
+            throws Exception {
+        var layout = compact.layout();
+        assertEquals(List.of(1182, 1182, 1182, 1182, 1182, 1709), layout.historyWidths());
+        assertEquals(91428, layout.localEntries());
+        assertEquals(86296, layout.positiveEntries());
+        assertEquals(2958336, layout.densePrimitiveVectorBytes());
+        assertEquals(1138224, layout.lookupPrimitiveArrayBytes());
+        assertTrue(layout.retainedEncodedBytes() < layout.canonicalJsonBytes());
+        assertEquals(
+                SixMaxTexturePayoffTable.mapper().writeValueAsBytes(compact.artifact()).length,
+                layout.canonicalJsonBytes());
+        assertEquals(layout, storageAudit.report().layout());
     }
 
     @Test

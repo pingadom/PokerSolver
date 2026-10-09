@@ -1,0 +1,335 @@
+{
+  "binding" : {
+    "completeTreeStates" : 915457,
+    "gameHash" : "0b7e6a7093c2780997f21b961ac0f73677b8828a17a3cbdc009616c0c105bdb6",
+    "model" : "PUBLIC_HISTORY_FLOP_WHITELIST_OTHERWISE_RANK_TEXTURE_ONE_BET/v1",
+    "parentRankTableHash" : "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+    "payoffTableHash" : "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+    "sourcePackHash" : "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "sourceSpotHash" : "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6"
+  },
+  "checkpointHash" : "ecdcc6ed529bf0bf93864468a00c34ac0cb39b244d8d2079e781f6272822c726",
+  "compactHash" : "af9cb5a70a50861c5874191768858836fef1782f327dd4457695f717b2675ce8",
+  "comparedActiveShares" : 172592,
+  "comparedCounts" : 123264,
+  "diagnosticsHash" : "2f02b4cd3df5c75f9e50a146654fd25c707b2fa4d194c1e105487c53e8ae88e5",
+  "informationSets" : 69987,
+  "layout" : {
+    "canonicalJsonBytes" : 1091015,
+    "deals" : 12,
+    "densePrimitiveVectorBytes" : 2958336,
+    "globalWidth" : 1712,
+    "histories" : 6,
+    "historyWidths" : [ 1182, 1182, 1182, 1182, 1182, 1709 ],
+    "localEntries" : 91428,
+    "lookupPrimitiveArrayBytes" : 1138224,
+    "positiveEntries" : 86296,
+    "rectangularEntries" : 123264,
+    "retainedEncodedBytes" : 217751
+  },
+  "localControls" : [ {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "23ba183f4e7ac0e63e8c0652826d9a574acfed9ce21d6de74f0846e468effad6",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "b71a7dfafa1118afd40767ae7c6f51e0e44a87e142a9810b9ef4acbeee038f2a",
+    "maxminStrategyHash" : "677a6d65c471e1557eab8aa3034cdbebe887fc927dc4a9a807cb38b9a3e30082",
+    "observation" : 427,
+    "observationKey" : "board:2s8sAs",
+    "posteriorHash" : "b033cd6ef3f349aa6018aaa7fe6c85ea34e749d6c178e7374111af11ebe0bfb5"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "3eac12cd5b35cc5d638a8d294ff0832d87162d5ea7b3d52385a727f138f95fed",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "e3b3a351a43c805e7abe48119ab18e5a0a86e4d4a05d67cf6b5be59afde8656f",
+    "maxminStrategyHash" : "7a2d44fa851280d19fac5b582368ad2532272c3d195e5d2b68559ca018dde9ac",
+    "observation" : 429,
+    "observationKey" : "board:2c8sAs",
+    "posteriorHash" : "baaa80499c47843624e56bd96c1eb6ffdc29e535c9c6568e33d6ee810bf8a304"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "f1b088aba66856897aeca9afd83cb788fe05b4714e0f12120dc1131499843995",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "9a25413a158884687a129ff543c8250807bb23a7f02ecf4856c79460e2eaeb19",
+    "maxminStrategyHash" : "94570d149bd32f84eeb3ccf1b02399e44864c305aaf22c83254a3612a212fad3",
+    "observation" : 430,
+    "observationKey" : "board:2d8hAd",
+    "posteriorHash" : "87a4f62a90c6e124389688333c9ab192b5c19a10beb863271d6113d292709210"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "caca54310fc6538ddfa4e4422506be071a708c4d2f3844742426b9838be76358",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "f1d63a339dc5b4b1819bd34a98560e41931de81a24b0330e8965cbddc05f9794",
+    "maxminStrategyHash" : "96e729fe228e4028225b30cbe7a5e20bdbe018576ae593246f0ecf8e7ac51c8e",
+    "observation" : 431,
+    "observationKey" : "board:2d8sAd",
+    "posteriorHash" : "dc35cd958b5d0df861f7cf7dc486ab82ee873427c5ddb3147dcd28b21c607ab8"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "d819a781d3f470b552514f5c17f4fb1980f5c119f874fa8c686770c7e3fc894e",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "4d6f12d9238b32102fe0c005a61b443f00933867d32631ec98ca634d6931f2db",
+    "maxminStrategyHash" : "46153ec98a69f5e14074498dbe9472aa33ff9a8be906eef0f010c194e04179cf",
+    "observation" : 435,
+    "observationKey" : "board:2h8sAs",
+    "posteriorHash" : "0c39d00e0ac40e04db4975154ef81a7f7ec711a29404f262d9d3a1d3ff8fc4bc"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "ca163cb3741b0140a74cf1088343691e1ecf2e973faba87f6272770050c8d035",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "07f0be4d94cfb73c0069faed8e0344ef2581b8ded01fabf8299224a66ec79c4c",
+    "maxminStrategyHash" : "88347f86b666ac1b995e4445693b7b564917d3a7053ed3332bdf5e8afa18c5b3",
+    "observation" : 436,
+    "observationKey" : "board:2s8hAs",
+    "posteriorHash" : "1bf4410b74d31090ba2b2ea6bd6070abca7d0bb41308dbb9f31c78f167c8b01e"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "3bfadc0f4bc4ed5bbd2c2ff19c42a86acac8b39d70ca8572a819826b07f7695a",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "afd41dc3c219b9784a0404c32ebc82d7c96a5ea033c676bc95e7d2772c5ebcb1",
+    "maxminStrategyHash" : "2c00fef05e5104fb01c0faa684064b3a8b60a120c89e733f23b84ace74d2bb9c",
+    "observation" : 441,
+    "observationKey" : "board:2c8sAd",
+    "posteriorHash" : "a8b9dfdaa93ccb58e8e7a874b25339216a1567af1361f5f867b66b6c4d067cb3"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "1e41eb6cf90ec5a9fe730442dd2afc1467fc3a096522cd9ffeaf354a320f7e75",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "c69a91ac42f59a283cfc343fb6a1af20f1cdbc36fafe0bee9a84d16c31b6dd02",
+    "maxminStrategyHash" : "4843fd7fa32d5c3d595924a2b962317b40b48becb232d72e1b593b42939534c1",
+    "observation" : 442,
+    "observationKey" : "board:2d8hAs",
+    "posteriorHash" : "757be5abd14aff480fbce34f932b3cf662ac6c9b96d30ad7242d3f03822e2bbb"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "f1a9e0ad70574f64b12d93aa650d67f0ce63c9da891ce3406ef3a98c27c53b13",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "ea9085e7dc1ff1229fe71c4fd47b0c24668bbe1d0212f7ad0571538ba6f037dc",
+    "maxminStrategyHash" : "0ce90767ed9270f1bb17f1d74fe9c36208201ce265e6502216973495c9e92661",
+    "observation" : 443,
+    "observationKey" : "board:2h8sAd",
+    "posteriorHash" : "5f509a70c25f6b696388827143b76e804e75532870e50974c7f68283a86aa5c5"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "b265856aa065c9a3b989072b4d53820394e26edad661ff5404bce577cf1867ef",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "f39b0caf0e6674af5cd3768e02c99c43934176e325358cd024f7781adba1ba85",
+    "maxminStrategyHash" : "f20c6b608a0dd48e07f2bd4a1c33a2b64f56b415119a59301fd2d71c25e5de3a",
+    "observation" : 444,
+    "observationKey" : "board:2s8hAd",
+    "posteriorHash" : "ed498f361941b0ff41b9e9db0170a2e0d67d9ebc013a2a10999513ed933c2660"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "f44f105737d5094e20b8c4d7c6bffcf0705ff3a319768e527440960a69a3b52b",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "ebf1246ae0fb1daa6ea73bb8a14b281c1d219f94d738d77f13cfa2c43a7dbae6",
+    "maxminStrategyHash" : "6c03a9f9c7d0b1c970f86f2ddd837c9dd9f8b147719bb650e0a29122dab6f9f2",
+    "observation" : 860,
+    "observationKey" : "board:3s8sAs",
+    "posteriorHash" : "57f6ae4e819aa036d35dbdcdc6e0a46d3734a55f7ec0a078be718b6ecc13e05d"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "f179fc41b6444e28dc4440ab8cbc8bc012d2d5518ee259bf7e0efa1133b4038d",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "4de6eee1769246444a72b05b3e32c53eda7400f6ee239b141cdf17cf2c9e1925",
+    "maxminStrategyHash" : "c081bd6297d336fb6ad1ecccbb2b6c1db42e65056b83f3bd61646978737e4b62",
+    "observation" : 862,
+    "observationKey" : "board:3c8sAs",
+    "posteriorHash" : "be9d1fe6fda4cf70cbe6f750cf86787c4ad80408b588bc82246cb4bdd420ce18"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "3f59077645d6924db6eed62c79198ccf33a2b738aef5742c14b622236c2aad52",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "4197eb700cbbfe77bbe2b0ffd19c306a9abd95e90b81976c2ea49d9ad9873b9f",
+    "maxminStrategyHash" : "c7959698fdea1a00a97ee52182b6e5ce72eb6763df4ec09727cae35906ae4742",
+    "observation" : 863,
+    "observationKey" : "board:3d8hAd",
+    "posteriorHash" : "ad992bd8ce8237fda3ff06bc411a4b374eadc58e0b7a20a8aaac9539eed7b283"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "e891ef3ba97d9fc7df59c6776234dc5ab6fb61b9eef1e1eba053402cb54f0489",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "57b1f9467bf34fc173434e0a34d6b6989ab155cddca0a7df07ffc0b6ca2500d9",
+    "maxminStrategyHash" : "b0756457505fa31d90efcb7adde4eb6faf6b32db252472eee52c1ea206729f0b",
+    "observation" : 864,
+    "observationKey" : "board:3d8sAd",
+    "posteriorHash" : "77b5b9276ecf0bf5a5d826a682c398b6bdb3e15cfd6e3068e539774e0a7c3ff3"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "99cb7d1b6fe26a2ad4894bc518e5391ba0f943a9a24e8f81645cc91fa8ed2c83",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "e2769b5a4c5889ce572870bcfe5accf98800bb8d89d1a04cfd404c095d0839f7",
+    "maxminStrategyHash" : "1d33fb03bca73a582203c5803c6831704d11f7e9a4942c3d849e32c5e31b8a1c",
+    "observation" : 868,
+    "observationKey" : "board:3h8sAs",
+    "posteriorHash" : "07ebd74b27c7ee7705e5bd61b3d8452ef65ed24f936a609685ae1b260692d7de"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "33eaa831fe70c351d63f70ad9d1b9226d5d04b3f9379c2d011cdb4d2894608b2",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "1c3ffe9c402ac23616d6023cba325b64d3b5801bcc6ee0132b65686833d6b146",
+    "maxminStrategyHash" : "23e239aa6528c2190c798a67e4e4d30573521842ab338652a0db926249bce404",
+    "observation" : 869,
+    "observationKey" : "board:3s8hAs",
+    "posteriorHash" : "f3ff79cd584c8480ac04dc91ff5979ed840a1ceb74d6deb87101ad67d38d5857"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "b28921b9153e0052ff2e217185cb15de0ad3bd97dd6c6185b2ebcb016b1988a6",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "8e6ad0763f4a72a84f497c5b542a4b861fdd23cec81f708131709ad6cdec8bd8",
+    "maxminStrategyHash" : "5682bc3798afe1afaf350d888a43bf50f89c45561bdcf4041332cdecf1c7df15",
+    "observation" : 874,
+    "observationKey" : "board:3c8sAd",
+    "posteriorHash" : "05aebdf5902a79d7987734413c7a107a352ca5b893b9aca26736828ca62deb2b"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "aecc6427614242acc6ce7f2a18d664bcc1da4f46c39ce33f403a48b72a8a4d25",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "64b236dad623049aa64be6d368807349a04ea24877c5ace5ecfe22a9f211e3d0",
+    "maxminStrategyHash" : "91e269375270979d30bb4688cfe1affdedc2071198c974b33294f95cf424f53b",
+    "observation" : 875,
+    "observationKey" : "board:3d8hAs",
+    "posteriorHash" : "49f41d42d0d5e31b772884eb3a770947e8b6872953d09aa6f14def92f7eb93ed"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "bbb6d3ec16150a9cf90634eb9c68f65493f50f582a3fec8344c618d3ba52f148",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "2e6fe601e7a2c75e32575a382b08f4946acc62630ef454464fbc49cbf1705add",
+    "maxminStrategyHash" : "221f26fcefe0e02be26db22bb2626a7c9fd417b8f5dad0b43ed26fb4e6d2b9d3",
+    "observation" : 876,
+    "observationKey" : "board:3h8sAd",
+    "posteriorHash" : "e0e0770ee1e5b7e781d75c467ce12762e3226a84ba1358a80400e4fb7173afcb"
+  }, {
+    "freshCfrIterations" : 8,
+    "freshCfrSolutionHash" : "4cfe51edabddfd4b0c8b1bdce1bacc67402d93c242751b67b71db19826c73ac4",
+    "freshCfrTraversal" : {
+      "baselineCorrections" : 0,
+      "sampledChanceNodes" : 0,
+      "terminalNodes" : 1440,
+      "visitedNodes" : 2640
+    },
+    "history" : "|UTG:fold|HJ:fold|CO:raise:3.0|BTN:fold|SB:fold|BB:call",
+    "maxminAuditHash" : "2033a04012edf8814e127abc12e2105864a74471aa00c8e90ab8557ef03d6c34",
+    "maxminStrategyHash" : "5e886f95f7693a73be2d2c23082d02ab08afcb179a85a0e55777e592a20dd1a1",
+    "observation" : 877,
+    "observationKey" : "board:3s8hAd",
+    "posteriorHash" : "8911f73974bd4e5a5d4eebeaf865d6975b701162c31a867c8f5da744a2545e15"
+  } ],
+  "publicationStatus" : "VALIDATION_ONLY",
+  "schemaVersion" : "six-max-history-physical-storage-audit/v1",
+  "studyHash" : "667e655a5928ac7a4d5520aff824973b09570427cb209e1b9a8b4b2e00af59a4",
+  "trainerAdmission" : false
+}
