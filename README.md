@@ -104,6 +104,8 @@ pnpm build
 
 Docker enables disposable PostgreSQL/Redis Testcontainers suites. A dedicated native PostgreSQL database can run the same lifecycle contract using `TEST_DATABASE_URL`; see the development guide. CI additionally builds all images and completes a two-worker LocalStack simulation with Redis both available and stopped.
 
+Backend CI uses two solver groups and one service group, then checks every test class against the exact checkout before accepting the combined JUnit evidence. See [backend CI](docs/backend-ci.md) for assignment, completeness checks and local reproduction; normal local Maven verification is unchanged.
+
 The inherited evaluator is covered by category/tiebreaker tests and an exhaustive check over all 2,598,960 five-card hands. Distributed tests exercise duplicate submission, races, out-of-order completion, failure and retry. [Build progress](docs/build-progress.md) records acceptance evidence and limitations.
 
 To regenerate the solver's validation-only pack, first install the engine and solver modules locally, then run the offline generator from `solver`:

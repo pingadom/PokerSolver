@@ -11,19 +11,47 @@ concurrency:
 jobs:
   backend:
     runs-on: ubuntu-latest
-    # Exact solver evidence replay finished successfully at the former 25-minute cutoff.
-    # Leave headroom for runner variation and artifact upload without dropping checks.
+    # Preserve all checks and per-job bounds as complete solver evidence grows.
+    # The final evidence job independently checks disjoint, complete class coverage.
     timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [solver-0, solver-1, services]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v6
         with: { distribution: temurin, java-version: "21", cache: maven }
-      - run: mvn -B spotless:check verify
+      - name: Build dependencies and check all formatting
+        run: mvn -B spotless:check install -DskipTests
+      - name: Verify assigned backend tests
+        run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
         if: always()
         with:
+          name: junit-results-${{ matrix.group }}
+          path: |
+            **/target/surefire-reports/*
+            backend-ci-manifest-${{ matrix.group }}.json
+  backend-evidence:
+    needs: backend
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: junit-results-*
+          path: .ci-evidence
+          merge-multiple: false
+      - name: Require complete backend test evidence
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_backend_ci.py'
+          python3 scripts/backend-ci.py verify .ci-evidence
+      - uses: actions/upload-artifact@v7
+        with:
           name: junit-results
-          path: "**/target/surefire-reports/*"
+          path: .ci-evidence/**
   frontend:
     runs-on: ubuntu-latest
     timeout-minutes: 10
