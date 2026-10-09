@@ -1,6 +1,6 @@
 # Broader physical-board capacity: design and admission gates
 
-This is the next model design, not an implemented increase to the current solver's limits. The current history-specific model remains capped at 600 literal history/board revelations, 2,000 observations, one million complete states, 8MiB payoff tables, 64MiB policies and 32MiB reports. Its artifact identities and trainer admission rules remain unchanged. AWS deployment remains paused.
+This is the next model design, not an implemented increase to the current solver's limits. The [compact 530-board compatibility prototype](sixmax-compact-physical-storage.md) now supplies exact restoration, primitive payoff lookup, full diagnostic/solver controls and an isolated resource benchmark. The current history-specific model remains capped at 600 literal history/board revelations, 2,000 observations, one million complete states, 8MiB payoff tables, 64MiB policies and 32MiB reports. Its game identity and trainer admission rules remain unchanged. AWS deployment remains paused.
 
 ## Why accuracy is no longer the only blocker
 
@@ -17,7 +17,7 @@ The current global observation palette is reused across all selected histories a
 1. Keep the original rank/texture observations as each history's fallback support.
 2. Assign each literal revelation a stable `(public-history, physical-board)` identity. Index it only in that history's support. Store nonzero `(world, observation)` counts and exact active-pair payouts; absent entries mean zero chance, never an estimated payoff.
 3. Subtract literal counts and payouts from the corresponding history/world rank complement. Reject negative counts or payouts. Summing the literals and complements must exactly recover every original rank-table marginal.
-4. Enumerate only supported chance outcomes, in a declared canonical order. The complete-state count must count actual supported states rather than a rectangular upper approximation. Reports must distinguish supported, reached and material cases.
+4. Enumerate only supported chance outcomes, in a declared canonical order. The existing game already does this: zero storage slots are not legal states. A broader format must preserve that distinction and count actual supported states. Reports must distinguish supported, reached and material cases.
 5. Bind source, full private-world support, parent table, per-history support, exact payouts and chance order into a **new model identity**. Do not reuse old namespaces, checkpoint schemas or solution hashes.
 
 Information sets must still contain only the acting player's cards, public history and revealed observation. Sparse indexes must not expose the underlying joint world. There is no automatic suit canonicalization: the present ranges are not invariant under arbitrary suit permutations. Any later symmetry compression needs a proved source-range/private-world automorphism and a replayable mapping.
@@ -49,10 +49,10 @@ Persist only exact generated or exactly replayed payoff tables. A raw JSON recor
 
 ## Implementation sequence
 
-1. **Sparse support prototype and conservation tests.** Begin with the present 530-board menu. Demonstrate identical literal/fallback counts, payouts, hidden-world posteriors and utilities; record supported-state and byte savings. Preserve the existing model as a compatibility control.
+1. **Sparse support prototype and conservation tests — implemented.** The present 530-board compatibility format exactly restores all original vectors and reproduces every conditional/parent diagnostic, twenty local maxmin/CFR+ controls, chance order and policy support. Primitive storage and encoded-byte measurements are separate from whole-heap observations. There are no legal-state savings. Preserve this control when implementing the broader model.
 2. **Capacity sweep.** Try declared menus at 1,024, 2,048, 4,096 and then 8,192 revelations only where preceding benchmarks fit. Persist the actual selection and counter evidence, not extrapolated quality or coverage. Keep public-history/seat-pair coverage visible.
 3. **Fresh joint studies in the new game.** Rebuild complete information-set support and train fresh policies. A transferred strategy can be a named initialization experiment, not a newly trained checkpoint or admission certificate.
 4. **Local quality and action-EV evidence.** Repair eligible bounded games with the owned solver; use independently solved references, fixed-question-posterior EV comparisons, cross-mixture regret and posterior-distance checks. All retained cases need actual evidence. A sampled screen grants credit only to its passing sample.
 5. **Trainer admission and API integration.** Require the existing parent/local/materiality/stability and 25% retained-coverage gates, measured over all heads-up reach. Build an opaque admitted pack and verify hidden-card boundaries, deterministic question replay and grade EVs before connecting it to the table UI.
 
-The first achievable deliverable is the sparse 530-board compatibility prototype with measured resource savings. Broader ranges, rake, multiple flop bet sizes, turn/river decisions and true multiway equilibrium remain separate model milestones.
+The next deliverable is a separately identified broader-support experiment with declared budgets and measured resource costs. Storage compatibility does not meet the 25% retained-content gate. Broader ranges, rake, multiple flop bet sizes, turn/river decisions and true multiway equilibrium remain separate model milestones.
