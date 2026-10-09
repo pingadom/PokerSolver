@@ -1,0 +1,269 @@
+{
+  "binding": {
+    "completeTreeStates": 915457,
+    "gameHash": "0b7e6a7093c2780997f21b961ac0f73677b8828a17a3cbdc009616c0c105bdb6",
+    "model": "PUBLIC_HISTORY_FLOP_WHITELIST_OTHERWISE_RANK_TEXTURE_ONE_BET/v1",
+    "parentRankTableHash": "702409adf91e20bed38facb3328889fcb308bf2724589816a5281d1723705bd3",
+    "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+    "sourcePackHash": "598d774ab5bf2b90845375dfcd8652b346d046c4d06d71c4f1e896785061000b",
+    "sourceSpotHash": "501de44ba6d9b2e1897b141834876a80e42f894db2183c02674d9c4c79ddf8a6"
+  },
+  "compactHash": "af9cb5a70a50861c5874191768858836fef1782f327dd4457695f717b2675ce8",
+  "files": {
+    "compact": {
+      "actualExpandedBytes": 1497484,
+      "actualFileBytes": 237145,
+      "canonicalJsonBytes": 1091015,
+      "canonicalPythonGzipLevel9Bytes": 214214
+    },
+    "original": {
+      "actualExpandedBytes": 1746732,
+      "actualFileBytes": 243042,
+      "canonicalJsonBytes": 1250205,
+      "canonicalPythonGzipLevel9Bytes": 213514
+    }
+  },
+  "interpretation": "Advisory-GC retained objects on one host; not peak heap, allocation rate, a CI performance gate or broader capacity. Timing is affected by concurrent work; no speedup claim.",
+  "layout": {
+    "canonicalJsonBytes": 1091015,
+    "deals": 12,
+    "densePrimitiveVectorBytes": 2958336,
+    "globalWidth": 1712,
+    "histories": 6,
+    "historyWidths": [
+      1182,
+      1182,
+      1182,
+      1182,
+      1182,
+      1709
+    ],
+    "localEntries": 91428,
+    "lookupPrimitiveArrayBytes": 1138224,
+    "positiveEntries": 86296,
+    "rectangularEntries": 123264
+  },
+  "measurements": [
+    {
+      "advisoryGcRetainedHeapBytes": 41281288,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 21921339400,
+      "maximumHeapBytes": 2147483648,
+      "mode": "baseline",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [],
+      "utilitiesBb": []
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 41316928,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 20387492100,
+      "maximumHeapBytes": 2147483648,
+      "mode": "baseline",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [],
+      "utilitiesBb": []
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 41280712,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 19124328600,
+      "maximumHeapBytes": 2147483648,
+      "mode": "baseline",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [],
+      "utilitiesBb": []
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 59485416,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 24392225900,
+      "maximumHeapBytes": 2147483648,
+      "mode": "original",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        622808200,
+        606140500,
+        670155300,
+        639504600,
+        696826000
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 59613848,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 22686787100,
+      "maximumHeapBytes": 2147483648,
+      "mode": "original",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        582293500,
+        557897100,
+        562674500,
+        556748200,
+        548072000
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 59484776,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 24828951300,
+      "maximumHeapBytes": 2147483648,
+      "mode": "original",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        583212900,
+        542394000,
+        544265600,
+        537313200,
+        543127700
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 57189032,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 26094191500,
+      "maximumHeapBytes": 2147483648,
+      "mode": "compact",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        696553900,
+        676190500,
+        707099300,
+        733728200,
+        698292300
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 57300056,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 26276356700,
+      "maximumHeapBytes": 2147483648,
+      "mode": "compact",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        748959000,
+        687502400,
+        726108600,
+        803038600,
+        877848400
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    },
+    {
+      "advisoryGcRetainedHeapBytes": 57323408,
+      "completeStates": 915457,
+      "javaRuntime": "21.0.3+9-LTS",
+      "loadAndExactPayoffReplayNanos": 26744426700,
+      "maximumHeapBytes": 2147483648,
+      "mode": "compact",
+      "os": "Windows 10",
+      "payoffTableHash": "8a32a8159abbe92f8df53d49f702fe22caf0c6d058105a0c636dd02e197e9e13",
+      "solutionHash": "3227533eb3011640af7155dda87cfcd80911fea39ecb535878548bf4ce871298",
+      "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+      "twoWarmupsFiveEvaluatorNanos": [
+        638777000,
+        697589700,
+        653514600,
+        647258000,
+        646673100
+      ],
+      "utilitiesBb": [
+        -1.1039635932752713e-05,
+        0.09904197417121088,
+        0.5373421272550472,
+        0.35875079508153573,
+        -0.4830933819553603,
+        -0.512030474916222
+      ]
+    }
+  ],
+  "medianAboveBaselineBytes": {
+    "compact": 16018768,
+    "original": 18204128
+  },
+  "medianEvaluatorNanos": {
+    "compact": 697589700,
+    "original": 562674500
+  },
+  "medianRetainedHeapBytes": {
+    "baseline": 41281288,
+    "compact": 57300056,
+    "original": 59485416
+  },
+  "observedRetainedEncodedCacheBytes": 217751,
+  "originalMinusCompactMedianHeapBytes": 2185360,
+  "status": "OBSERVATIONAL_RESOURCE_MEASUREMENT_NOT_ADMISSION",
+  "trainerAdmission": false
+}
