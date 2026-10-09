@@ -14,7 +14,7 @@ For each actor, it enumerates every pure information-set plan in deterministic k
 
 Mixed pure plans convert to behavioral rows by conditioning their mass on **every earlier action taken by that player**. An unconditional average is wrong at later own decision nodes because it includes plans that chose another earlier action. Zero own-prefix mass receives a uniform, unreachable row. The resulting complete behavioral strategy must independently pass information-set best responses in the original game, including fixed seats, with NashConv at most 1e-9bb. This second check validates the conversion, not just the matrix LP.
 
-The hard bounds are 64 plans per actor, 1,000 expanded tree nodes, depth 32, 4,096,000 profile node visits, 10,000 pivots and payoff magnitude at most 1,000,000. Each limit fails closed. Plan counts grow exponentially with private combos and decisions; a broader game needs a separately validated sequence-form method rather than a raised normal-form cap.
+The hard bounds are 64 plans per actor, 1,000 expanded tree nodes, depth 32, 4,096,000 profile node visits, 10,000 pivots and payoff magnitude at most 1,000,000. Each limit fails closed. Plan counts grow exponentially with private combos and decisions. The separately identified [owned sequence-form backend](sixmax-owned-sequence-form.md) now avoids that enumeration under its own snapshot/sequence/LP budgets. This normal-form implementation keeps its original bounds and remains an independent small-game control.
 
 ## Frozen-policy integration and lineage
 
@@ -74,4 +74,4 @@ Tests cover matching pennies, rock-paper-scissors, dominance, negative constants
 
 `docs/data/finite-maxmin-independent-controls.json.gz` contains 120 literal matrix controls and two original-payoff LP certificates generated independently with SciPy HiGHS. CI recomputes their original-matrix bounds and compares the owned Java solver; it does not require SciPy. `scripts/generate-maxmin-controls.py` reproduces the research oracle with locally installed NumPy/SciPy and a new output path. These are mathematical test matrices, not external poker strategy data. No production dependency or library defect was introduced or identified.
 
-The next model milestone is the [sparse physical-capacity prototype](sixmax-broader-physical-capacity-design.md). The current 600-revelation cap makes 25% retained coverage impossible even with perfect local policies; improving convergence does not remove that constraint.
+The [compact physical-storage control](sixmax-compact-physical-storage.md) and [owned sequence-form backend](sixmax-owned-sequence-form.md) are now implemented. The next model milestone is a [separately identified broader-support experiment](sixmax-broader-physical-capacity-design.md) with measured budgets and actual retained coverage. The current 600-revelation cap makes 25% retained coverage impossible even with perfect local policies; improving convergence does not remove that constraint.
