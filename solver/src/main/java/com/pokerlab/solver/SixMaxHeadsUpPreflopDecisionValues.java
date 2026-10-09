@@ -47,7 +47,7 @@ public final class SixMaxHeadsUpPreflopDecisionValues {
 
     private SixMaxHeadsUpPreflopDecisionValues() {}
 
-    static List<Decision> assess(SixMaxHeadsUpPreflopGame game, CfrSolution policy) {
+    static List<Decision> assess(SixMaxHeadsUpDecisionGame game, CfrSolution policy) {
         var groups = new TreeMap<String, List<ChanceOutcome<State>>>();
         var representatives = new TreeMap<String, State>();
         var totals = new TreeMap<String, Double>();
@@ -98,7 +98,7 @@ public final class SixMaxHeadsUpPreflopDecisionValues {
     }
 
     private static void collect(
-            SixMaxHeadsUpPreflopGame game,
+            SixMaxHeadsUpDecisionGame game,
             CfrSolution policy,
             State state,
             double weight,
@@ -146,7 +146,7 @@ public final class SixMaxHeadsUpPreflopDecisionValues {
      * actions.
      */
     static Values values(
-            SixMaxHeadsUpPreflopGame game, List<ChanceOutcome<State>> roots, CfrSolution policy) {
+            SixMaxHeadsUpDecisionGame game, List<ChanceOutcome<State>> roots, CfrSolution policy) {
         if (roots.isEmpty() || roots.size() > 64)
             throw new IllegalArgumentException("Bounded nonempty question posterior required");
         var first = roots.getFirst().state();
@@ -219,7 +219,7 @@ public final class SixMaxHeadsUpPreflopDecisionValues {
         return mass.values().stream().mapToDouble(Math::abs).sum() / 2;
     }
 
-    private record Conditional(SixMaxHeadsUpPreflopGame source, List<ChanceOutcome<State>> roots)
+    private record Conditional(SixMaxHeadsUpDecisionGame source, List<ChanceOutcome<State>> roots)
             implements MultiPlayerCfrGame<State> {
         public int playerCount() {
             return source.playerCount();

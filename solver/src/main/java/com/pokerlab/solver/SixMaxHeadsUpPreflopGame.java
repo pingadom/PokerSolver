@@ -9,8 +9,7 @@ import java.util.*;
  * policy to condition the full joint deal, including folded cards. Non-all-in calls explicitly
  * check down; this is not a general cash-game continuation model.
  */
-public final class SixMaxHeadsUpPreflopGame
-        implements MultiPlayerCfrGame<SixMaxHeadsUpPreflopGame.State> {
+public final class SixMaxHeadsUpPreflopGame implements SixMaxHeadsUpDecisionGame {
     public static final String MODEL =
             "TWO_ACTIVE_PREFLOP_FIXED_SOURCE_BELIEFS_MANDATORY_CHECKDOWN/v1";
     public static final String BELIEFS = "FULL_JOINT_FIXED_SOURCE_POLICY_ACTION_CONDITIONED/v1";

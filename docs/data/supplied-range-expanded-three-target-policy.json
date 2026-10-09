@@ -1,0 +1,78 @@
+{
+  "binding" : {
+    "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+    "budget" : {
+      "completeTreeStates" : 244,
+      "enumeratedBoards" : 17766216,
+      "handEvaluations" : 35532432,
+      "informationSets" : {
+        "BTN" : 3,
+        "BB" : 6
+      },
+      "jointDeals" : 27,
+      "publicStates" : 9,
+      "sequences" : {
+        "BTN" : 10,
+        "BB" : 16
+      }
+    },
+    "inputHash" : "ee92bf6453389e615d8511ecfa29901a84bf89f4bdc3fed2f2743e1ab1648035",
+    "jointPriorHash" : "f0ad9f3692b615c649764912bb36a8211b78267b8d895c5f812bcfeecb0f4075",
+    "model" : "TWO_ACTIVE_SUPPLIED_JOINT_PREFLOP_MANDATORY_CHECKDOWN/v1",
+    "payoffAlgorithm" : "EXACT_TWO_ACTIVE_SIX_DEALT_BOARD_ENUMERATION/v1",
+    "payoffHash" : "b66ffb8042905986ccceb9fb23071405387f3028b21f051cbdfdb6fb15ad2a9b",
+    "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY"
+  },
+  "publicationStatus" : "SUPPLIED_RANGE_RESEARCH_ONLY",
+  "reportHash" : "d080c2f380faf269bb0e8938da03d3e538dbb7d798c94147b6ee577d19c4bc60",
+  "schemaVersion" : "pokerlab-supplied-joint-preflop-policy/v1",
+  "solution" : {
+    "iterations" : 1,
+    "strategy" : {
+      "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0" : {
+        "call" : 0.9999999999999999,
+        "fold" : 0.0,
+        "raise:22.0" : 1.1102230246251565E-16
+      },
+      "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0" : {
+        "call" : 0.0,
+        "fold" : 0.0,
+        "raise:22.0" : 1.0
+      },
+      "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0" : {
+        "call" : 0.0,
+        "fold" : 0.0,
+        "raise:22.0" : 1.0
+      },
+      "5:supplied-conditional-preflop:7d 7h:" : {
+        "call" : 1.0,
+        "fold" : 0.0,
+        "raise:9.0" : 0.0
+      },
+      "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0" : {
+        "call" : 0.5,
+        "fold" : 0.5
+      },
+      "5:supplied-conditional-preflop:9d 9h:" : {
+        "call" : 0.0,
+        "fold" : 0.0,
+        "raise:9.0" : 1.0
+      },
+      "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "5:supplied-conditional-preflop:Ac Jc:" : {
+        "call" : 1.0,
+        "fold" : 0.0,
+        "raise:9.0" : 0.0
+      },
+      "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : {
+        "call" : 0.5,
+        "fold" : 0.5
+      }
+    }
+  },
+  "solutionHash" : "9fb36df3757a5cea72e3cac49d9c1bc9cf947375fb015f1e3d32cb0a3d4ed0f1",
+  "trainerAdmission" : false
+}
