@@ -53,7 +53,7 @@ The [bounded suit-refinement model](docs/sixmax-suit-refinement.md) now reveals 
 
 A third [offline conditional trainer scenario](docs/sixmax-actual-preflop-conditional-study.md) now covers BB facing a CO limp–re-raise, with folded callers' chips represented in the six-seat table. All four material decisions pass independent feedback screening.
 
-[Supplied joint-range preflop research](docs/sixmax-supplied-joint-preflop.md) now supports larger explicitly declared conditional hand sets without traversing the full six-seat source tree. Two 18-world examples cover BTN/BB defense and CO facing a BTN 3-bet, preserve all folded blockers, pass all ten material feedback checks and supply offline ten-question drills. Supplied beliefs and unavailable source-history reach remain explicit; a separate unstable example exports diagnostics only.
+[Supplied joint-range preflop research](docs/sixmax-supplied-joint-preflop.md) now supports larger explicitly declared conditional hand sets without traversing the full six-seat source tree. Two 18-world examples and a deeper 27-world 3/9/22bb example cover BTN/BB defense and CO facing a BTN 3-bet, preserve all folded blockers, pass all 17 material feedback checks and supply offline ten-question drills. Supplied beliefs and unavailable source-history reach remain explicit; a separate unstable example exports diagnostics only.
 
 The [explicit behavioral-floor solver](docs/sixmax-behavior-floor-solver.md) adds a separately identified owned LP solve, independent floor-aware CFR+ and replayable diagnostics for richer actual-card preflop menus. Original-game quality and all-action feedback remain separate gates; the five-target menu is still blocked from training.
 
