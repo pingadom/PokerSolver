@@ -121,8 +121,7 @@ public final class SixMaxHistoryPhysicalCompactStorage {
             long positiveEntries,
             long densePrimitiveVectorBytes,
             long lookupPrimitiveArrayBytes,
-            int canonicalJsonBytes,
-            int retainedEncodedBytes) {
+            int canonicalJsonBytes) {
         public Layout {
             historyWidths = List.copyOf(historyWidths);
         }
@@ -176,8 +175,7 @@ public final class SixMaxHistoryPhysicalCompactStorage {
                                     + (long) artifact.histories().size()
                                             * artifact.observations().size()
                                             * Integer.BYTES,
-                            canonical.length,
-                            encoded.length);
+                            canonical.length);
         }
 
         public Artifact artifact() throws Exception {
@@ -196,6 +194,11 @@ public final class SixMaxHistoryPhysicalCompactStorage {
 
         public Layout layout() {
             return layout;
+        }
+
+        /** JVM compression observation; deliberately excluded from deterministic audit layout. */
+        public int retainedEncodedBytes() {
+            return encoded.length;
         }
 
         public MultiPlayerCfrGame<SixMaxRankTextureFlopGame.State> game(

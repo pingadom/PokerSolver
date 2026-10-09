@@ -43,6 +43,8 @@ For this fixture, the complete audit reproduces:
 
 Primitive payload counters exclude encoded bytes, object headers, maps, strings, source packs, policies and temporary allocations. They are not whole-heap measurements. Compression can make repeated zeros cheap on disk, so smaller numeric vectors do not imply a smaller gzip file. The separate resource experiment records actual file sizes and advisory-GC heap observations without granting admission.
 
+Compressed-cache length is a runtime observation, exposed by `Verified.retainedEncodedBytes()` and the benchmark. It is deliberately excluded from the deterministic compatibility audit: a JVM compression implementation can change bytes without changing the underlying canonical artifact, payoffs or strategies. Exact replay binds the canonical hash and complete game evidence, while resource observations describe the host where they were measured.
+
 The original game already skipped zero-chance outcomes during legal-state enumeration and traversal. Removing zero storage slots therefore saves no legal states and grants no extra coverage. Three removed rank fallback indexes in the sixth history were fully replaced by literal observations; their absence is not a missing physical board.
 
 ## Reproduce projection and audit replay

@@ -85,6 +85,11 @@ public final class SixMaxHistoryPhysicalStorageBenchmarkMain {
         result.put("os", System.getProperty("os.name"));
         result.put("maximumHeapBytes", Runtime.getRuntime().maxMemory());
         result.put("advisoryGcRetainedHeapBytes", liveHeap);
+        result.put(
+                "retainedEncodedCacheBytes",
+                retained.table() instanceof SixMaxHistoryPhysicalCompactStorage.Verified compact
+                        ? compact.retainedEncodedBytes()
+                        : 0);
         result.put("loadAndExactPayoffReplayNanos", loadNanos);
         result.put("payoffTableHash", retained.checkpoint().binding().payoffTableHash());
         result.put("solutionHash", retained.checkpoint().solutionHash());

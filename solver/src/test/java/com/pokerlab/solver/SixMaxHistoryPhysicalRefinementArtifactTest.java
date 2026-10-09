@@ -105,7 +105,7 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
         assertEquals(86296, layout.positiveEntries());
         assertEquals(2958336, layout.densePrimitiveVectorBytes());
         assertEquals(1138224, layout.lookupPrimitiveArrayBytes());
-        assertTrue(layout.retainedEncodedBytes() < layout.canonicalJsonBytes());
+        assertTrue(compact.retainedEncodedBytes() < layout.canonicalJsonBytes());
         assertEquals(
                 SixMaxTexturePayoffTable.mapper().writeValueAsBytes(compact.artifact()).length,
                 layout.canonicalJsonBytes());

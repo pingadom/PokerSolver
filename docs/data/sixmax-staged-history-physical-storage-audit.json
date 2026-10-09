@@ -24,8 +24,7 @@
     "localEntries" : 91428,
     "lookupPrimitiveArrayBytes" : 1138224,
     "positiveEntries" : 86296,
-    "rectangularEntries" : 123264,
-    "retainedEncodedBytes" : 217751
+    "rectangularEntries" : 123264
   },
   "localControls" : [ {
     "freshCfrIterations" : 8,
