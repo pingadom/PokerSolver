@@ -91,7 +91,7 @@ public final class FiniteTwoPlayerSequenceForm {
         }
     }
 
-    private record Node(
+    record Node(
             int actor,
             String key,
             List<String> actions,
@@ -100,8 +100,7 @@ public final class FiniteTwoPlayerSequenceForm {
             List<Double> utilities) {}
 
     /** Does not call the input game again after snapshot validation. */
-    private record Snapshot(int playerCount, Node initialState)
-            implements MultiPlayerCfrGame<Node> {
+    record Snapshot(int playerCount, Node initialState) implements MultiPlayerCfrGame<Node> {
         public boolean isTerminal(Node node) {
             return node.actor() == -2;
         }
@@ -241,7 +240,7 @@ public final class FiniteTwoPlayerSequenceForm {
         }
     }
 
-    private record Flow(
+    record Flow(
             int actor,
             List<InformationSet> infos,
             Map<OwnAction, Integer> indices,
@@ -383,7 +382,12 @@ public final class FiniteTwoPlayerSequenceForm {
             Flow flow,
             BoundedLinearProgram.Result solved,
             Map<String, Map<String, Double>> strategy) {
-        var point = List.copyOf(solved.point().subList(0, flow.sequences().size()));
+        return behavior(flow, solved.point(), strategy);
+    }
+
+    static FlowAudit behavior(
+            Flow flow, List<Double> realization, Map<String, Map<String, Double>> strategy) {
+        var point = List.copyOf(realization.subList(0, flow.sequences().size()));
         double residual = Math.abs(point.getFirst() - 1);
         for (double p : point)
             if (!Double.isFinite(p) || p < 0 || p > 1 + TOLERANCE)
@@ -420,7 +424,19 @@ public final class FiniteTwoPlayerSequenceForm {
 
     private FiniteTwoPlayerSequenceForm() {}
 
-    public static <S> Result solve(MultiPlayerCfrGame<S> game) throws Exception {
+    /** Owned checked topology shared by the two solvers; no arrays escape the solver package. */
+    record Checked(
+            Snapshot snapshot,
+            int treeNodes,
+            int firstActor,
+            int secondActor,
+            List<InformationSet> infos,
+            Flow firstFlow,
+            Flow secondFlow,
+            double[][] payoff,
+            double constantSum) {}
+
+    static <S> Checked checked(MultiPlayerCfrGame<S> game) {
         Objects.requireNonNull(game, "game");
         int players = game.playerCount();
         if (players < 2 || players > 6)
@@ -439,6 +455,19 @@ public final class FiniteTwoPlayerSequenceForm {
         var reference = new double[players + 1];
         reference[0] = Double.NaN;
         accumulate(snapshot.initialState(), 1, null, null, f, s, payoff, reference);
+        return new Checked(
+                snapshot, builder.nodes, first, second, infos, f, s, payoff, reference[0]);
+    }
+
+    public static <S> Result solve(MultiPlayerCfrGame<S> game) throws Exception {
+        var checked = checked(game);
+        var snapshot = checked.snapshot();
+        int first = checked.firstActor(), second = checked.secondActor();
+        var infos = checked.infos();
+        var f = checked.firstFlow();
+        var s = checked.secondFlow();
+        var payoff = checked.payoff();
+        double[] reference = {checked.constantSum()};
         var row = optimize(payoff, f, s, true);
         var column = optimize(payoff, s, f, false);
         double lower = row.certificate().primalValue(), upper = -column.certificate().primalValue();
@@ -484,7 +513,7 @@ public final class FiniteTwoPlayerSequenceForm {
                         ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(snapshot),
                         reductionHash,
-                        builder.nodes,
+                        checked.treeNodes(),
                         first,
                         second,
                         reference[0],
