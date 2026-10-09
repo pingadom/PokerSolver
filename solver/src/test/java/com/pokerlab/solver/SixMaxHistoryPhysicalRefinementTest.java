@@ -15,6 +15,7 @@ class SixMaxHistoryPhysicalRefinementTest {
     private static SixMaxHistoryPhysicalConditionalRefinement.Result accepted;
     private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
     private static SixMaxHistoryPhysicalSequenceForm.Result sequenceForm;
+    private static SixMaxHistoryPhysicalAffineSequenceForm.Result affineSequenceForm;
     private static SixMaxPreflopSolutionPack storageSource;
     private static SixMaxRankTexturePayoffTable.Artifact storageParent;
     private static SixMaxHistoryPhysicalPayoffTable.Verified storageOriginal;
@@ -122,6 +123,11 @@ class SixMaxHistoryPhysicalRefinementTest {
                 SixMaxHistoryPhysicalSequenceForm.refine(
                         predecessor,
                         new SixMaxHistoryPhysicalSequenceForm.Settings(3, .001),
+                        b -> {});
+        affineSequenceForm =
+                SixMaxHistoryPhysicalAffineSequenceForm.refine(
+                        predecessor,
+                        new SixMaxHistoryPhysicalAffineSequenceForm.Settings(3, .001),
                         b -> {});
     }
 
@@ -283,6 +289,199 @@ class SixMaxHistoryPhysicalRefinementTest {
                 IllegalArgumentException.class,
                 () ->
                         SixMaxHistoryPhysicalSequenceFormDecisionStabilityMain.main(
+                                screen.toArray(String[]::new)));
+    }
+
+    @Test
+    void affineSequenceFormRepairsFoldMistakesAndPreservesEveryFrozenRow() {
+        var r = affineSequenceForm.report();
+        assertTrue(r.accepted(), r.rejectionReasons().toString());
+        var a = affineSequenceForm.artifact().orElseThrow();
+        assertFalse(a.trainerAdmission());
+        assertEquals(FiniteTwoPlayerAffineSequenceForm.ALGORITHM, a.algorithm());
+        var original = predecessor.checkpoint().solution();
+        assertEquals(original.iterations(), a.solution().iterations());
+        assertEquals(original.strategy().keySet(), a.solution().strategy().keySet());
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.preflopPolicy(original),
+                SixMaxPreflopContinuationFeedback.preflopPolicy(a.solution()));
+        assertEquals(3, r.branches().size());
+        for (var b : r.branches()) {
+            assertEquals(6.5, b.before().nashConvBb(), 1e-12);
+            assertTrue(b.after().nashConvBb() < 1e-8);
+            assertTrue(b.solve().firstLp().work().basisFactorizations() > 0);
+            assertTrue(b.solve().secondLp().absoluteDualityGap() < 1e-8);
+        }
+        for (var row : original.strategy().entrySet())
+            if (!row.getKey().contains("board:"))
+                assertEquals(row.getValue(), a.solution().strategy().get(row.getKey()));
+    }
+
+    @Test
+    void affineSequenceFormReplaysOriginalFlowsWorkAndLineageRatherThanTrustingSavedCertificates(
+            @TempDir Path dir) throws Exception {
+        var policy = dir.resolve("policy.json.gz");
+        var report = dir.resolve("report.json.gz");
+        SixMaxHistoryPhysicalAffineSequenceForm.write(policy, report, affineSequenceForm);
+        assertEquals(
+                affineSequenceForm.report(),
+                SixMaxHistoryPhysicalAffineSequenceForm.replay(policy, report, predecessor)
+                        .report());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalAffineSequenceForm.write(
+                                policy, report, affineSequenceForm));
+        var mapper = SixMaxTexturePayoffTable.mapper();
+        var bad = dir.resolve("bad.json");
+        for (String field :
+                List.of(
+                        "snapshotHash",
+                        "affineReductionHash",
+                        "work",
+                        "flow",
+                        "predecessor",
+                        "policy",
+                        "projection",
+                        "constant",
+                        "dimensions",
+                        "reductionWork")) {
+            var tree =
+                    (com.fasterxml.jackson.databind.node.ObjectNode)
+                            mapper.valueToTree(affineSequenceForm.report());
+            var solve =
+                    (com.fasterxml.jackson.databind.node.ObjectNode)
+                            tree.path("branches").get(0).path("solve");
+            switch (field) {
+                case "snapshotHash", "affineReductionHash" -> solve.put(field, "0".repeat(64));
+                case "projection" ->
+                        ((com.fasterxml.jackson.databind.node.ArrayNode)
+                                        solve.path("firstProjection").path("offset"))
+                                .set(0, mapper.valueToTree(0));
+                case "constant" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode)
+                                        solve.path("projectedPayoff"))
+                                .put("constant", 123.0);
+                case "dimensions" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) solve.path("firstLp"))
+                                .put("variables", 0);
+                case "reductionWork" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode)
+                                        solve.path("reductionWork"))
+                                .put("chargedUnits", 0);
+                case "work" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode)
+                                        solve.path("firstLp").path("work"))
+                                .put("arithmeticWork", 0);
+                case "flow" ->
+                        ((com.fasterxml.jackson.databind.node.ArrayNode)
+                                        solve.path("firstFlow").path("realization"))
+                                .set(0, mapper.valueToTree(.5));
+                case "predecessor" -> tree.put("predecessorReportHash", "0".repeat(64));
+                case "policy" -> tree.put("candidateSolutionHash", "0".repeat(64));
+                default -> throw new AssertionError();
+            }
+            Files.writeString(bad, tree.toString());
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> SixMaxHistoryPhysicalAffineSequenceForm.replay(policy, bad, predecessor));
+        }
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        mapper.valueToTree(affineSequenceForm.artifact().orElseThrow());
+        tree.put("trainerAdmission", true);
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                Exception.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceForm.replay(bad, report, predecessor));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SixMaxHistoryPhysicalAffineSequenceForm.Settings(65, .001));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SixMaxHistoryPhysicalAffineSequenceForm.Settings(1, Double.NaN));
+    }
+
+    @Test
+    void affineSequenceFormEmptySelectionExportsOnlyDiagnosticsAndCannotBeScreened(
+            @TempDir Path dir) throws Exception {
+        var empty =
+                SixMaxHistoryPhysicalAffineSequenceForm.refine(
+                        accepted,
+                        new SixMaxHistoryPhysicalAffineSequenceForm.Settings(3, .001),
+                        b -> {});
+        assertEquals(List.of("NO_MATERIAL_CASES_ABOVE_TARGET"), empty.report().rejectionReasons());
+        assertFalse(empty.report().accepted());
+        assertTrue(empty.artifact().isEmpty());
+        var policy = dir.resolve("policy.json.gz");
+        var report = dir.resolve("report.json.gz");
+        SixMaxHistoryPhysicalAffineSequenceForm.write(policy, report, empty);
+        assertFalse(Files.exists(policy));
+        assertEquals(
+                empty.report(),
+                SixMaxHistoryPhysicalAffineSequenceForm.replay(policy, report, accepted).report());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalAffineSequenceFormDecisionStability.screen(
+                                empty, SixMaxSuitDecisionStability.Settings.standard(), b -> {}));
+        Files.writeString(policy, "{}");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceForm.replay(policy, report, accepted));
+    }
+
+    @Test
+    void affineSequenceFormClisRejectAliasesHardlinksAndExistingOutputsBeforeLoading(
+            @TempDir Path dir) throws Exception {
+        String[] args = {
+            "refine",
+            dir.resolve("source").toString(),
+            dir.resolve("rank").toString(),
+            dir.resolve("table").toString(),
+            dir.resolve("cp").toString(),
+            dir.resolve("study").toString(),
+            dir.resolve("policy").toString(),
+            dir.resolve("report").toString(),
+            "3",
+            ".001"
+        };
+        Files.writeString(Path.of(args[6]), "preserve");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceFormMain.main(args));
+        assertEquals("preserve", Files.readString(Path.of(args[6])));
+        args[6] = args[7];
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceFormMain.main(args));
+        assertFalse(Files.exists(Path.of(args[7])));
+        var source = Path.of(args[1]);
+        Files.writeString(source, "protected");
+        var hardlink = dir.resolve("hardlink");
+        Files.createLink(hardlink, source);
+        args[6] = hardlink.toString();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceFormMain.main(args));
+        assertEquals("protected", Files.readString(source));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalAffineSequenceFormMain.main(new String[0]));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalAffineSequenceFormDecisionStabilityMain.main(
+                                new String[0]));
+        var screen = new ArrayList<>(List.of("screen"));
+        screen.addAll(Arrays.asList(args).subList(1, 6));
+        screen.add(dir.resolve("missing-policy").toString());
+        screen.add(dir.resolve("missing-report").toString());
+        screen.add(source.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        SixMaxHistoryPhysicalAffineSequenceFormDecisionStabilityMain.main(
                                 screen.toArray(String[]::new)));
     }
 
@@ -836,5 +1035,19 @@ class SixMaxHistoryPhysicalRefinementTest {
                         SixMaxHistoryPhysicalDecisionStabilityMain.main(
                                 screen.toArray(String[]::new)));
         assertEquals("existing screen", Files.readString(Path.of(paths.get(7))));
+    }
+
+    @AfterAll
+    static void releaseFixture() {
+        predecessor = null;
+        accepted = null;
+        maxmin = null;
+        sequenceForm = null;
+        affineSequenceForm = null;
+        storageSource = null;
+        storageParent = null;
+        storageOriginal = null;
+        compact = null;
+        storageAudit = null;
     }
 }

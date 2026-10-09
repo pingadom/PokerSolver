@@ -1,5 +1,7 @@
 # Broader physical-board capacity: design and admission gates
 
+The [affine local solver](sixmax-affine-sequence-form.md) now reduces dependent flow variables under the same tree/sequence/LP limits. Larger synthetic betting controls pass, and a separate physical derivative preserves the existing repaired policy quality and decision coverage. This removes a measured local-solve bottleneck without changing observation capacity, legal states or retained-content gates. A broader public model still needs its own identity and complete evidence budgets.
+
 This is the next model design, not an implemented increase to the current solver's limits. The [compact 530-board compatibility prototype](sixmax-compact-physical-storage.md) now supplies exact restoration, primitive payoff lookup, full diagnostic/solver controls and an isolated resource benchmark. The current history-specific model remains capped at 600 literal history/board revelations, 2,000 observations, one million complete states, 8MiB payoff tables, 64MiB policies and 32MiB reports. Its game identity and trainer admission rules remain unchanged. AWS deployment remains paused.
 
 ## Why accuracy is no longer the only blocker

@@ -26,7 +26,7 @@ class BoundedLinearProgramTest {
             String physicalPayoffHash,
             List<Problem> problems) {}
 
-    private static void check(Problem problem, double[][] a, double[] b) throws Exception {
+    static void check(Problem problem, double[][] a, double[] b) throws Exception {
         var solved = BoundedLinearProgram.solve(a, b, problem.cost());
         assertEquals(
                 problem.expectedMaximum(),
