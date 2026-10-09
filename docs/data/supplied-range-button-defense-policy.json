@@ -1,0 +1,58 @@
+{
+  "binding" : {
+    "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+    "budget" : {
+      "completeTreeStates" : 109,
+      "enumeratedBoards" : 11844144,
+      "handEvaluations" : 23688288,
+      "informationSets" : {
+        "BTN" : 3,
+        "BB" : 2
+      },
+      "jointDeals" : 18,
+      "publicStates" : 6,
+      "sequences" : {
+        "BTN" : 7,
+        "BB" : 7
+      }
+    },
+    "inputHash" : "f0cd5ac6bb4eaacf2015197cbaa25d48b8beaa01c52240086b9a0423a97964b9",
+    "jointPriorHash" : "df1b12637d9ed0d50fbe8b66cdb0e5ed28ff51cef810f202b86aeb9b79a139bc",
+    "model" : "TWO_ACTIVE_SUPPLIED_JOINT_PREFLOP_MANDATORY_CHECKDOWN/v1",
+    "payoffAlgorithm" : "EXACT_TWO_ACTIVE_SIX_DEALT_BOARD_ENUMERATION/v1",
+    "payoffHash" : "1663e0de6edb1110a543ac9d170e60c69a116de6e9dc5c3a30f48213388c442b",
+    "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY"
+  },
+  "publicationStatus" : "SUPPLIED_RANGE_RESEARCH_ONLY",
+  "reportHash" : "cc1ffc9ee4255c4e7e04a0ba774ef691f8714cf38a3109a83a71b0333ec4080d",
+  "schemaVersion" : "pokerlab-supplied-joint-preflop-policy/v1",
+  "solution" : {
+    "iterations" : 1,
+    "strategy" : {
+      "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0" : {
+        "call" : 1.0,
+        "fold" : 0.0
+      },
+      "5:supplied-conditional-preflop:7d 7h:" : {
+        "call" : 1.0,
+        "fold" : 0.0,
+        "raise:9.0" : 0.0
+      },
+      "5:supplied-conditional-preflop:Ac Jc:" : {
+        "call" : 0.0,
+        "fold" : 0.0,
+        "raise:9.0" : 1.0
+      }
+    }
+  },
+  "solutionHash" : "308262f81cd70adca9e63c5c3e2696e839a631149888a0c898cc5bf6073e12fe",
+  "trainerAdmission" : false
+}
