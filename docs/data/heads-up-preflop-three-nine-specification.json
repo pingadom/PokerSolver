@@ -1,0 +1,33 @@
+{
+  "history": [
+    {
+      "seat": "UTG",
+      "action": "fold"
+    },
+    {
+      "seat": "HJ",
+      "action": "fold"
+    },
+    {
+      "seat": "CO",
+      "action": "raise:3.0"
+    },
+    {
+      "seat": "BTN",
+      "action": "fold"
+    },
+    {
+      "seat": "SB",
+      "action": "fold"
+    }
+  ],
+  "rules": {
+    "stackBb": 100.0,
+    "smallBlindBb": 0.5,
+    "raiseToBb": [
+      3.0,
+      9.0
+    ],
+    "raiseSchedule": "NEXT_TARGET"
+  }
+}
