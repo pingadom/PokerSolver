@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "pokerlab-supplied-joint-preflop-input/v1",
+  "specification": {
+    "rules": {
+      "stackBb": 100.0,
+      "smallBlindBb": 0.5,
+      "raiseToBb": [
+        3.0,
+        9.0,
+        22.0
+      ],
+      "raiseSchedule": "NEXT_TARGET"
+    },
+    "history": [
+      {
+        "seat": "UTG",
+        "action": "fold"
+      },
+      {
+        "seat": "HJ",
+        "action": "fold"
+      },
+      {
+        "seat": "CO",
+        "action": "raise:3.0"
+      },
+      {
+        "seat": "BTN",
+        "action": "raise:9.0"
+      },
+      {
+        "seat": "SB",
+        "action": "fold"
+      },
+      {
+        "seat": "BB",
+        "action": "fold"
+      }
+    ]
+  },
+  "worlds": [
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "7d 7h",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "7d 7h",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "7d 7h",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "Ac Jc",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "Ac Jc",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "Ac Jc",
+        "Ah Kh",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "7d 7h",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "7d 7h",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "7d 7h",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "Ac Jc",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "Ac Jc",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "Ac Jc",
+        "Qh Th",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "7d 7h",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "7d 7h",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "7d 7h",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "6h 8c",
+        "Ac Jc",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "8h Ts",
+        "Ac Jc",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    },
+    {
+      "dealtCombos": [
+        "4c 4d",
+        "2d 3d",
+        "Ac Jc",
+        "Js 9s",
+        "5c 6c",
+        "8d 8s"
+      ],
+      "weight": 1.0
+    }
+  ]
+}
