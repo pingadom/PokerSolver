@@ -15,6 +15,8 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
     private static SixMaxHistoryPhysicalDecisionStability.Report screen;
     private static SixMaxHistoryPhysicalMaxmin.Result maxmin;
     private static SixMaxHistoryPhysicalMaxminDecisionStability.Report maxminScreen;
+    private static SixMaxHistoryPhysicalSequenceForm.Result sequenceForm;
+    private static SixMaxHistoryPhysicalSequenceFormDecisionStability.Report sequenceScreen;
     private static SixMaxHistoryPhysicalCompactStorage.Verified compact;
     private static SixMaxHistoryPhysicalStorageAudit.Result storageAudit;
     private static SixMaxHistoryPhysicalPayoffTable.Verified storageOriginal;
@@ -68,6 +70,183 @@ class SixMaxHistoryPhysicalRefinementArtifactTest {
         maxminScreen =
                 SixMaxHistoryPhysicalMaxminDecisionStability.replay(
                         Path.of(PREFIX + "-maxmin-decisions.json.gz"), maxmin);
+        sequenceForm =
+                SixMaxHistoryPhysicalSequenceForm.replay(
+                        Path.of(PREFIX + "-sequence-form-policy.json.gz"),
+                        Path.of(PREFIX + "-sequence-form-refinement.json.gz"),
+                        accepted);
+        sequenceScreen =
+                SixMaxHistoryPhysicalSequenceFormDecisionStability.replay(
+                        Path.of(PREFIX + "-sequence-form-decisions.json.gz"), sequenceForm);
+    }
+
+    @Test
+    void savedSequenceFormRepairsAllTwentyCasesAndAgreesWithTheIndependentNormalFormControl() {
+        var r = sequenceForm.report();
+        var a = sequenceForm.artifact().orElseThrow();
+        assertTrue(r.accepted(), r.rejectionReasons().toString());
+        assertFalse(r.trainerAdmission());
+        assertEquals(SixMaxHistoryPhysicalSequenceForm.CFR_PREDECESSOR, r.predecessorKind());
+        assertEquals(20, r.branches().size());
+        assertEquals(144, r.replacedInformationSets());
+        assertEquals(69843, r.preservedInformationSets());
+        assertEquals(500, a.solution().iterations());
+        assertEquals(69987, a.solution().strategy().size());
+        assertEquals(
+                838,
+                r.branches().stream()
+                        .mapToInt(
+                                b ->
+                                        b.solve().firstLp().work().pivots()
+                                                + b.solve().secondLp().work().pivots())
+                        .sum());
+        assertEquals(
+                .001368808948992756, r.after().parentWitness().parentQuality().nashConvBb(), 1e-14);
+        assertEquals(
+                530,
+                r.after().histories().stream()
+                        .flatMap(h -> h.signals().stream())
+                        .filter(
+                                s ->
+                                        s.observationKey().startsWith("board:")
+                                                && s.quality() != null
+                                                && s.quality().nashConvBb() <= .001)
+                        .count());
+        var original = accepted.artifact().orElseThrow().solution();
+        assertEquals(original.strategy().keySet(), a.solution().strategy().keySet());
+        assertEquals(
+                SixMaxPreflopContinuationFeedback.preflopPolicy(original),
+                SixMaxPreflopContinuationFeedback.preflopPolicy(a.solution()));
+        for (var row : original.strategy().entrySet())
+            if (r.branches().stream()
+                    .noneMatch(b -> row.getKey().contains(":" + b.observationKey() + ":")))
+                assertEquals(row.getValue(), a.solution().strategy().get(row.getKey()));
+        for (var b : r.branches()) {
+            var control =
+                    maxmin.report().branches().stream()
+                            .filter(
+                                    c ->
+                                            c.history().equals(b.history())
+                                                    && c.observation() == b.observation())
+                            .findFirst()
+                            .orElseThrow();
+            assertEquals(9, b.solve().firstFlow().sequences().size());
+            assertEquals(9, b.solve().secondFlow().sequences().size());
+            assertEquals(
+                    control.solve().matrixSolution().lowerValue(), b.solve().lowerValue(), 1e-8);
+            assertEquals(
+                    control.solve().matrixSolution().upperValue(), b.solve().upperValue(), 1e-8);
+            assertTrue(b.after().nashConvBb() < 1e-8);
+            SixMaxRankTextureConditionalAuditTest.bruteCheck(
+                    sequenceForm.core(),
+                    sequenceForm.core().sourceGame(),
+                    sequenceForm.core().payoffView(),
+                    a.solution(),
+                    b.history(),
+                    b.observation(),
+                    b.observationProbabilityGivenHistory(),
+                    b.after());
+        }
+    }
+
+    @Test
+    void
+            sequenceFormIndependentScreenStillChecksOffPathActionEvsAndGivesNoUnexaminedCoverageCredit() {
+        var screen = sequenceScreen;
+        var game = sequenceForm.core();
+        var policy = sequenceForm.artifact().orElseThrow().solution();
+        assertFalse(screen.trainerAdmission());
+        assertEquals(530, screen.eligibilityCounts().get("ELIGIBLE"));
+        assertEquals(32, screen.branches().size());
+        assertEquals(
+                28,
+                screen.branches().stream()
+                        .filter(SixMaxSuitDecisionStability.Branch::retained)
+                        .count());
+        assertEquals(
+                151,
+                screen.branches().stream()
+                        .flatMap(b -> b.questions().stream())
+                        .filter(SixMaxSuitDecisionStability.Question::material)
+                        .count());
+        assertEquals(
+                143,
+                screen.branches().stream()
+                        .flatMap(b -> b.questions().stream())
+                        .filter(q -> q.material() && q.stable())
+                        .count());
+        assertEquals(.0013181994341322318, screen.retainedAllHeadsUpFraction(), 1e-14);
+        assertTrue(screen.retainedAllHeadsUpFraction() < .25);
+        double retained = 0;
+        for (var b : screen.branches()) {
+            assertEquals(
+                    List.of(500, 1000),
+                    b.references().stream()
+                            .map(SixMaxSuitDecisionStability.Reference::iterations)
+                            .toList());
+            var transition =
+                    new SixMaxPolicyFlopTransition(
+                            game.sourceGame(),
+                            SixMaxPreflopContinuationFeedback.preflopPolicy(policy),
+                            b.history());
+            var posterior =
+                    SixMaxFlopConditionalDiagnostics.posterior(game, transition, b.observation());
+            for (var decision :
+                    SixMaxOneBetDecisionValues.assess(game, posterior.roots(), policy)) {
+                var q =
+                        b.questions().stream()
+                                .filter(
+                                        question ->
+                                                question.primary()
+                                                        .informationSet()
+                                                        .equals(decision.row().informationSet()))
+                                .findFirst()
+                                .orElseThrow();
+                assertEquals(decision.row(), q.primary());
+                if (!decision.roots().isEmpty())
+                    SixMaxSuitConditionalRefinementArtifactTest.analyticValues(
+                                    game, decision, policy)
+                            .forEach(
+                                    (action, ev) ->
+                                            assertEquals(
+                                                    ev,
+                                                    q.primary().values().actionEvBb().get(action),
+                                                    1e-10));
+            }
+            if (b.retained())
+                retained += b.historyProbability() * b.observationProbabilityGivenHistory();
+        }
+        assertEquals(
+                retained / screen.allHeadsUpReach(), screen.retainedAllHeadsUpFraction(), 1e-14);
+    }
+
+    @Test
+    void sequenceFormCannotBeRelabeledAsTheRawStudyOrAnotherAlgorithmAndScreenLineageIsReplayed(
+            @TempDir Path dir) throws Exception {
+        var policy = Path.of(PREFIX + "-sequence-form-policy.json.gz");
+        var report = Path.of(PREFIX + "-sequence-form-refinement.json.gz");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalSequenceForm.replay(policy, report, predecessor));
+        assertThrows(
+                Exception.class,
+                () -> SixMaxHistoryPhysicalMaxmin.replay(policy, report, accepted));
+        var mapper = SixMaxTexturePayoffTable.mapper();
+        var tree =
+                (com.fasterxml.jackson.databind.node.ObjectNode) mapper.valueToTree(sequenceScreen);
+        tree.put("derivedArtifactHash", "0".repeat(64));
+        var bad = dir.resolve("bad.json");
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalSequenceFormDecisionStability.replay(bad, sequenceForm));
+        tree = (com.fasterxml.jackson.databind.node.ObjectNode) mapper.valueToTree(sequenceScreen);
+        tree.put("retainedPhysicalReach", 0);
+        tree.put("retainedAllHeadsUpFraction", 0);
+        Files.writeString(bad, tree.toString());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxHistoryPhysicalSequenceFormDecisionStability.replay(bad, sequenceForm));
     }
 
     @Test
