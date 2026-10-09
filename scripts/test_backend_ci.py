@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import subprocess
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('backend_ci', Path(__file__).with_name('backend-ci.py'))
@@ -119,6 +120,29 @@ class BackendEvidenceTest(unittest.TestCase):
             '<testcase name="one"/>', '<testcase name="one"><skipped message="disabled"/></testcase>'), encoding='utf-8')
         with self.assertRaisesRegex(ValueError, 'Unexpected skipped test'):
             self.verify()
+
+    def test_failed_maven_leaves_an_incomplete_manifest_and_propagates_failure(self):
+        with patch.object(ci.subprocess, 'run', return_value=subprocess.CompletedProcess(['mvn'], 9)):
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(subprocess.CalledProcessError) as failure:
+                ci.run('solver-0', 'mvn')
+        self.assertEqual(9, failure.exception.returncode)
+        planned = json.loads((self.root / 'backend-ci-manifest-solver-0.json').read_text(encoding='utf-8'))
+        self.assertIs(planned['completed'], False)
+
+    def test_stale_reports_and_existing_manifests_are_rejected_before_maven(self):
+        report = self.root / 'solver/target/surefire-reports/TEST-old.xml'
+        report.parent.mkdir(parents=True)
+        report.write_text('old evidence', encoding='utf-8')
+        with patch.object(ci.subprocess, 'run') as execute:
+            with self.assertRaisesRegex(ValueError, 'stale JUnit reports'):
+                ci.run('solver-0', 'mvn')
+            execute.assert_not_called()
+        report.unlink()
+        (self.root / 'backend-ci-manifest-solver-0.json').write_text('old manifest', encoding='utf-8')
+        with patch.object(ci.subprocess, 'run') as execute:
+            with self.assertRaisesRegex(ValueError, 'existing manifest'):
+                ci.run('solver-0', 'mvn')
+            execute.assert_not_called()
 
 
 if __name__ == '__main__':

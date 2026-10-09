@@ -30,6 +30,7 @@ jobs:
         if: always()
         with:
           name: junit-results-${{ matrix.group }}
+          if-no-files-found: error
           path: |
             **/target/surefire-reports/*
             backend-ci-manifest-${{ matrix.group }}.json
@@ -52,6 +53,8 @@ jobs:
         with:
           name: junit-results
           path: .ci-evidence/**
+          include-hidden-files: true
+          if-no-files-found: error
   frontend:
     runs-on: ubuntu-latest
     timeout-minutes: 10

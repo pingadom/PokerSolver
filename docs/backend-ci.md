@@ -11,7 +11,7 @@ Each job saves its exact checkout commit, source inventory hash, assigned classe
 - Positive test counts, complete per-case accounting and matching failure/error/skip counts.
 - Zero failures and errors. The existing PostgreSQL lifecycle tests may skip only for the explicit missing `TEST_DATABASE_URL` condition; other skipped checks reject.
 
-Missing groups/classes, wrong commits, duplicate/unassigned suites, inconsistent counters and new unassigned sources/modules fail the evidence check. Seven independent Python controls exercise these failure cases before real evidence is accepted. The combined `junit-results` artifact contains all original group XML/manifests plus `backend-ci-summary.json`. Its totals come from actual reports; expected historical totals are not substituted for evidence. All matrix jobs and the final evidence check must succeed before a solver PR is merged.
+Missing groups/classes, wrong commits, duplicate/unassigned suites, inconsistent counters and new unassigned sources/modules fail the evidence check. Nine independent Python controls exercise these failure cases, failed Maven execution and stale local evidence before real evidence is accepted. The combined `junit-results` artifact contains all original group XML/manifests plus `backend-ci-summary.json`. Its upload explicitly includes the downloaded evidence directory and fails if files are missing. Totals come from actual reports; expected historical totals are not substituted for evidence. All matrix jobs and the final evidence check must succeed before a solver PR is merged.
 
 Inspect assignments without running or modifying tests:
 
