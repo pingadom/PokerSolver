@@ -80,7 +80,7 @@ def augmented(flow, rhs, floor):
 
 def verify(case):
     E, e, F, f, A = problem(case["root"])
-    for expected in case["ownedControls"]:
+    for expected in case["ownedControls"] + case["slackControls"]:
         floor = expected["minimumActionProbability"]
         EF, ee = augmented(E, e, floor)
         FF, ff = augmented(F, f, floor)

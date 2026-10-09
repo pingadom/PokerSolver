@@ -37,7 +37,7 @@ The optional independent HiGHS oracle reconstructs original full-flow programs d
 | 0.001 | 0.789687700619478bb | 0.004099548061572bb |
 | 0.0001 | 0.789117076324427bb | 0.000409946612888bb |
 
-The owned implementation currently rejects this game at `0.00001` and `0.000001` because its LP cannot certify the numerical result. The rejection is preserved; no shared tolerance was loosened. This is an owned solver numerical limitation, not an identified upstream library bug.
+The first integer-projection floor representation rejects this game at `0.00001` and `0.000001` because its LP cannot certify the numerical result. The rejection is preserved; no shared tolerance was loosened. This limitation belongs to that representation, not an identified upstream library bug. The separately identified excess-mass follow-up below certifies both smaller floors.
 
 The saved `heads-up-preflop-five-target-floor-report.json` uses epsilon `0.0001`. Its constrained gap is zero to rounding and its original-game gap passes the unchanged `0.001bb` threshold. It still fails the full feedback screen:
 
@@ -49,6 +49,29 @@ The saved `heads-up-preflop-five-target-floor-report.json` uses epsilon `0.0001`
 Three of five material questions pass the action-EV drift component at each budget, but **zero of five passes every required gate at both budgets**. Original-game reference quality also fails. All ten information sets are reported, including the five nonmaterial rows, which receive no stable credit. The screen retains the original material reach, hand diversity, `0.001bb` global quality, `0.01bb` action EV/cross-mixture regret and `0.01` posterior-distance gates.
 
 Action feedback keeps its existing meaning: unrestricted optimal hero continuation against a fixed opponent, from the current decision with already committed chips treated as sunk. Every reference's alternative action is evaluated on the same candidate question posterior. These EVs are explicitly separate from the floor-constrained best-response certificate.
+
+## Nonnegative excess-mass follow-up
+
+`FiniteTwoPlayerSlackFloor` preserves the first representation and uses its own algorithm identity, `BOUNDED_BEHAVIOR_FLOOR_SLACK_SEQUENCE_FORM_OWNED_LP/v1`. For every information set, all but one child has a free nonnegative excess mass `z`; the last child is dependent:
+
+```text
+q_free = epsilon*q_parent + z_free
+q_last = (1-(k-1)*epsilon)*q_parent - sum(z_free)
+sum(z_free) <= (1-k*epsilon)*q_parent
+```
+
+There is one explicit inequality per original information set. Nonnegative free masses encode the other action bounds implicitly. A topological own-action traversal constructs an **epsilon-dependent double-valued** affine projection; it does not relabel this as the earlier exact integer projection. Every original conservation coefficient is independently checked to `1e-12`. Projection, original flow and reduced payoff identities are recorded separately. Reconstruction follows the same local excess-mass recurrence, checks every relative behavioral floor and conservation row, and compares the result with the affine realization. The shared LP, numerical tolerances and work/dimension caps remain unchanged.
+
+Both smaller floors now pass owned LP bounds, complete original-flow/relative-floor checks and independent constrained information-set best responses:
+
+| Minimum action probability | CO constrained value | Unrestricted original-game gap |
+| ---: | ---: | ---: |
+| 0.00001 | 0.789061245659269bb | 0.000040994579356bb |
+| 0.000001 | 0.789055674932289bb | 0.000004099457116bb |
+
+The optional original full-flow/slack HiGHS oracle agrees at all five floors. JUnit independently enumerates every extreme floored intent plan for each actual-card solution, checks nested own-action and hidden-chance games, verifies action-reordering identity, and solves a 32-private-type control within the original bounds. This new library solver returns its own opaque result and cannot manufacture the existing trainer's accepted study handle.
+
+The saved diagnostic report above intentionally continues to replay the first representation and its original fixed reference budgets. Mathematical certification of the smaller-floor solutions does not imply a completed independent feedback screen or trainer admission for them.
 
 ## Replay and verification
 
