@@ -114,18 +114,37 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
 
     public static final class Result {
         private final Audit audit;
+        private final Context context;
 
-        private Result(Audit audit) {
+        private Result(Audit audit, Context context) {
             this.audit = audit;
+            this.context = context;
         }
 
         public Audit audit() {
             return audit;
         }
+
+        // Owned solve provenance for additional controls; never accepted from caller-built audits.
+        Context context() {
+            return context;
+        }
     }
 
-    private record Root(
+    record Root(
             Node node, double chanceWeight, int opponentSequence, List<OwnAction> opponentPast) {}
+
+    record Context(
+            Checked checked,
+            List<Root> roots,
+            FiniteTwoPlayerAffineSequenceForm.Result baseline,
+            Flow opponent,
+            SequenceFormAffineProjection.Projection projection,
+            Face scaled) {
+        Context {
+            roots = List.copyOf(roots);
+        }
+    }
 
     private FiniteTwoPlayerConditionalActionIntervals() {}
 
@@ -418,7 +437,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                                 work.limit(),
                                 lpBudget.solves,
                                 lpBudget.pivots,
-                                lpBudget.work)));
+                                lpBudget.work)),
+                new Context(checked, roots, baseline, opponent, op, scaled));
     }
 
     private static Node forced(Root root, Question q) {
@@ -514,7 +534,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return value;
     }
 
-    private static Witness witness(
+    static Witness witness(
             Checked checked,
             List<Root> roots,
             Question q,
