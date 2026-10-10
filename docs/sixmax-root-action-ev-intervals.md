@@ -38,7 +38,7 @@ Every witness reconstructs the original opponent flow, converts it to behavior, 
 
 The new compiler retains the existing 8-million-unit limit. All interval LPs share at most 10,000 pivots and four billion arithmetic units. The complete decision wrapper shares those interval budgets across every move and enumerates physical payoffs once. Baseline affine solves retain their separately declared original compiler and LP budgets. Existing tree, sequence, information-set, dimension and byte limits still apply. Work/numerical failures return no result handle.
 
-**Only questions before every player action are supported.** Later posteriors depend on opponent realization, so this linear reduction cannot be reused for them. Missing, illegal, inactive, later and excessive-plan requests fail. Mandatory postflop checkdown, supplied conditional beliefs and unavailable source-history reach remain explicit. This adds no six-player Nash guarantee, realistic cash range provenance, rake or physical postflop coverage.
+**This compiler supports only questions before every player action.** Later posteriors depend on opponent realization, so this linear reduction cannot be reused for them. The separate [conditional interval compiler](sixmax-conditional-action-ev-intervals.md) now handles later questions with certified positive full-face reach and a linear-fractional reduction. Missing, illegal, inactive, later and excessive-plan requests still fail in the root-only compiler. Mandatory postflop checkdown, supplied conditional beliefs and unavailable source-history reach remain explicit. This adds no six-player Nash guarantee, realistic cash range provenance, rake or physical postflop coverage.
 
 ## Offline commands and independent verification
 
@@ -62,4 +62,4 @@ python scripts/check-supplied-root-intervals.py \
   <new-oracle-summary.json>
 ```
 
-Next design and validate an admission policy for ambiguity-aware feedback, with separate treatment of EV intervals and robust action quality. Later decisions need an explicit action-conditioned posterior design. Existing admission rules remain unchanged until that work is complete; broader useful scenarios and eventual full cash-poker scope remain on the roadmap. AWS deployment is still paused.
+Next design and validate an admission policy for ambiguity-aware feedback, with separate treatment of EV intervals and robust action quality. Later posterior handling is now implemented separately as described above. Existing admission rules remain unchanged until feedback qualification is complete; broader useful scenarios and eventual full cash-poker scope remain on the roadmap. AWS deployment is still paused.
