@@ -183,8 +183,7 @@ public final class SixMaxSuppliedConditionalDecisionIntervals {
                                 compiler, compilerLimit, solves, pivots, arithmetic)));
     }
 
-    private static State find(
-            SixMaxSuppliedRangePreflopGame game, State state, String informationSet) {
+    static State find(SixMaxSuppliedRangePreflopGame game, State state, String informationSet) {
         if (game.isTerminal(state)) return null;
         if (game.currentPlayer(state) == -1) {
             for (var outcome : game.chanceOutcomes(state)) {
