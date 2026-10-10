@@ -101,7 +101,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
 
     private record Root(Node node, double probability) {}
 
-    private record Face(double[][] matrix, double[] rhs, int opponentVariables) {}
+    record Face(double[][] matrix, double[] rhs, int opponentVariables) {}
 
     private FiniteTwoPlayerRootActionIntervals() {}
 
@@ -338,7 +338,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
                 && probability > 0) roots.add(new Root(node, probability));
     }
 
-    private static void collectContinuations(
+    static void collectContinuations(
             Node node,
             int hero,
             Map<String, List<String>> infos,
@@ -348,7 +348,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
         for (var child : node.children()) collectContinuations(child, hero, infos, budget);
     }
 
-    private static void enumerate(
+    static void enumerate(
             List<Map.Entry<String, List<String>>> infos,
             int index,
             TreeMap<String, String> choice,
@@ -365,7 +365,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
         choice.remove(info.getKey());
     }
 
-    private static void orientedPayoff(
+    static void orientedPayoff(
             Node node,
             Flow hero,
             Flow opponent,
@@ -390,7 +390,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
         }
     }
 
-    private static void planPayoff(
+    static void planPayoff(
             Node node,
             int hero,
             Flow opponent,
@@ -415,7 +415,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
             }
     }
 
-    private static Face face(
+    static Face face(
             FiniteTwoPlayerAffineSequenceForm.ProjectedPayoffAudit payoff,
             FiniteTwoPlayerAffineSequenceForm.ProjectionAudit hero,
             FiniteTwoPlayerAffineSequenceForm.ProjectionAudit opponent,
@@ -499,7 +499,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
         return value;
     }
 
-    private static double maximumUtility(Node node, int hero) {
+    static double maximumUtility(Node node, int hero) {
         if (node.actor() == -2) return Math.abs(node.utilities().get(hero));
         return node.children().stream()
                 .mapToDouble(child -> maximumUtility(child, hero))
@@ -507,14 +507,14 @@ public final class FiniteTwoPlayerRootActionIntervals {
                 .orElseThrow();
     }
 
-    private static void requireClose(double expected, double actual, String detail) {
+    static void requireClose(double expected, double actual, String detail) {
         if (!Double.isFinite(expected)
                 || !Double.isFinite(actual)
                 || Math.abs(expected - actual) > TOLERANCE)
             throw new IllegalStateException(detail + " failed");
     }
 
-    private static final class LpBudget {
+    static final class LpBudget {
         final int pivotLimit;
         final long workLimit;
         int solves, pivots;
