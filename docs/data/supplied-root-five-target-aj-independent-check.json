@@ -1,0 +1,76 @@
+{
+  "scope": "OPTIONAL_INDEPENDENT_LITERAL_NORMAL_FORM_NUMERICAL_ORACLE_NO_ADMISSION",
+  "reportBytesSha256": "302afeb9e944c9d1c726951a84519b3ef90a027a8474fbf4f4cd189aba90e4c9",
+  "sourceInputHash": "92e17af3796cb7e188b266d8fdfd996c634e2acb8e86eaa16561b06054eadb18",
+  "buttonCompletePlans": 729,
+  "blindCompletePlans": 5832,
+  "heroContinuationPlans": 6,
+  "securitySlackBb": 1e-08,
+  "lowerEvBb": 0.1955340277314056,
+  "upperEvBb": 0.728954145812905,
+  "callEvBb": 1.2739411560683491,
+  "lowerSecurityValueBb": 0.2633447421970913,
+  "allUpperControls": [
+    {
+      "plan": 0,
+      "optimalContinuationEvBb": 0.1955340277314056,
+      "securityValueBb": 0.2633447421970913
+    },
+    {
+      "plan": 1,
+      "optimalContinuationEvBb": 0.19553666520991678,
+      "securityValueBb": 0.26334474219709125
+    },
+    {
+      "plan": 2,
+      "optimalContinuationEvBb": 0.1955366652099168,
+      "securityValueBb": 0.26334474219709125
+    },
+    {
+      "plan": 3,
+      "optimalContinuationEvBb": 0.1955340277314056,
+      "securityValueBb": 0.2633447421970913
+    },
+    {
+      "plan": 4,
+      "optimalContinuationEvBb": 0.19553666520991678,
+      "securityValueBb": 0.26334474219709125
+    },
+    {
+      "plan": 5,
+      "optimalContinuationEvBb": 0.728954145812905,
+      "securityValueBb": 0.26334474219709125
+    }
+  ],
+  "ownedWitnessChecks": [
+    {
+      "securityValueBb": 0.2633447421970892,
+      "conditionalEvBb": 0.19553402773142853
+    },
+    {
+      "securityValueBb": 0.26334474219708986,
+      "conditionalEvBb": 0.19553402773130124
+    },
+    {
+      "securityValueBb": 0.26334474219708986,
+      "conditionalEvBb": 0.19553402773130124
+    },
+    {
+      "securityValueBb": 0.2633447421970898,
+      "conditionalEvBb": 0.19553666521007684
+    },
+    {
+      "securityValueBb": 0.2633447421970898,
+      "conditionalEvBb": 0.19553666521007684
+    },
+    {
+      "securityValueBb": 0.2633447421970896,
+      "conditionalEvBb": 0.19553666521008076
+    },
+    {
+      "securityValueBb": 0.26334474219709003,
+      "conditionalEvBb": 0.7289541458133819
+    }
+  ],
+  "comparisonToleranceBb": 2e-08
+}
