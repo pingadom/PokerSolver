@@ -1,0 +1,108 @@
+{
+  "scope": "OPTIONAL_INDEPENDENT_LITERAL_CONDITIONAL_NORMAL_FORM_ORACLE_NO_ADMISSION",
+  "reportBytesSha256": "1b9b56985ea2e6cd5cd0884acbb4abf9ac3a3d6df0cdb09772986ef070c3f0bf",
+  "sourceInputHash": "92e17af3796cb7e188b266d8fdfd996c634e2acb8e86eaa16561b06054eadb18",
+  "buttonCompletePlans": 729,
+  "blindCompletePlans": 5832,
+  "securitySlackBb": 1e-08,
+  "minimumQuestionChanceOpponentMass": 0.22222203735735516,
+  "maximumQuestionChanceOpponentMass": 0.22222223099956337,
+  "moves": [
+    {
+      "action": "fold",
+      "lowerEvBb": 0.0,
+      "upperEvBb": 0.0
+    },
+    {
+      "action": "call",
+      "lowerEvBb": 9.112156463485075,
+      "upperEvBb": 9.112156583600541
+    },
+    {
+      "action": "raise:50.0",
+      "lowerEvBb": 8.628929683792302,
+      "upperEvBb": 9.11215658360054
+    }
+  ],
+  "ownedWitnessChecks": [
+    {
+      "action": "fold",
+      "conditionalEvBb": 0.0,
+      "globalButtonSecurityValueBb": 0.26334474219708986,
+      "questionChanceOpponentMass": 0.22222203735733717
+    },
+    {
+      "action": "fold",
+      "conditionalEvBb": 0.0,
+      "globalButtonSecurityValueBb": 0.2633447421970899,
+      "questionChanceOpponentMass": 0.22222223099956429
+    },
+    {
+      "action": "fold",
+      "conditionalEvBb": 0.0,
+      "globalButtonSecurityValueBb": 0.26334474219709153,
+      "questionChanceOpponentMass": 0.222222128748549
+    },
+    {
+      "action": "fold",
+      "conditionalEvBb": 0.0,
+      "globalButtonSecurityValueBb": 0.26334474219709175,
+      "questionChanceOpponentMass": 0.2222221287485495
+    },
+    {
+      "action": "call",
+      "conditionalEvBb": 9.112156463485071,
+      "globalButtonSecurityValueBb": 0.26334474219708986,
+      "questionChanceOpponentMass": 0.22222203735733717
+    },
+    {
+      "action": "call",
+      "conditionalEvBb": 9.11215658360055,
+      "globalButtonSecurityValueBb": 0.2633447421970899,
+      "questionChanceOpponentMass": 0.22222223099956429
+    },
+    {
+      "action": "call",
+      "conditionalEvBb": 9.11215646348508,
+      "globalButtonSecurityValueBb": 0.2633447421970914,
+      "questionChanceOpponentMass": 0.22222203735738116
+    },
+    {
+      "action": "call",
+      "conditionalEvBb": 9.11215658360053,
+      "globalButtonSecurityValueBb": 0.26334474219709186,
+      "questionChanceOpponentMass": 0.22222223099956215
+    },
+    {
+      "action": "raise:50.0",
+      "conditionalEvBb": 9.112156463485075,
+      "globalButtonSecurityValueBb": 0.26334474219708986,
+      "questionChanceOpponentMass": 0.22222203735733717
+    },
+    {
+      "action": "raise:50.0",
+      "conditionalEvBb": 9.112156583600552,
+      "globalButtonSecurityValueBb": 0.2633447421970899,
+      "questionChanceOpponentMass": 0.22222223099956429
+    },
+    {
+      "action": "raise:50.0",
+      "conditionalEvBb": 8.628929683792311,
+      "globalButtonSecurityValueBb": 0.2633447421970918,
+      "questionChanceOpponentMass": 0.222222037357366
+    },
+    {
+      "action": "raise:50.0",
+      "conditionalEvBb": 9.112156583600534,
+      "globalButtonSecurityValueBb": 0.26334474219709186,
+      "questionChanceOpponentMass": 0.22222223099956215
+    },
+    {
+      "action": "raise:50.0",
+      "conditionalEvBb": 9.112156583600534,
+      "globalButtonSecurityValueBb": 0.26334474219709186,
+      "questionChanceOpponentMass": 0.22222223099956215
+    }
+  ],
+  "comparisonToleranceBb": 2e-08
+}
