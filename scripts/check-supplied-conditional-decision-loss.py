@@ -40,7 +40,11 @@ def check(path):
             raw = source.read(8 * 1024 * 1024 + 1)
         if len(raw) > 8 * 1024 * 1024:
             raise ValueError('Expanded oracle input exceeds byte cap')
-    report = json.loads(raw)
+    return check_report(json.loads(raw), raw)
+
+
+def check_report(report, raw):
+    """Also usable by a separately identified format adapter; raw binds the original artifact."""
     request = report['request']
     expected_history = [dict(seat=s, action=a) for s, a in [
         ('UTG', 'fold'), ('HJ', 'fold'), ('CO', 'fold'), ('BTN', 'raise:3.0'), ('SB', 'fold')]]

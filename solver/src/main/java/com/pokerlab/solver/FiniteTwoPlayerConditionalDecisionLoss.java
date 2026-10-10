@@ -8,6 +8,8 @@ import java.util.*;
 /** Joint extrema of decision loss on one owned, positive-reach numerical security face. */
 public final class FiniteTwoPlayerConditionalDecisionLoss {
     public static final String ALGORITHM = "JOINT_CONDITIONAL_DECISION_LOSS_OWNED_LP/v1";
+    public static final String CONDITIONED_ALGORITHM =
+            "CONDITIONED_JOINT_CONDITIONAL_DECISION_LOSS_OWNED_LP/v2";
     public static final String SCOPE =
             "JOINT_OTHER_ACTION_MAX_MINUS_SELECTED_ACTION_MAX_CLAMPED_ZERO/v1";
     private static final double TOLERANCE = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -73,9 +75,15 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
 
     public static final class Result {
         private final Audit audit;
+        private final double upperObjectiveShift;
 
-        private Result(Audit audit) {
+        private Result(Audit audit, double upperObjectiveShift) {
             this.audit = audit;
+            this.upperObjectiveShift = upperObjectiveShift;
+        }
+
+        double upperObjectiveShift() {
+            return upperObjectiveShift;
         }
 
         public Audit audit() {
@@ -121,6 +129,27 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
             int pivotLimit,
             long arithmeticLimit)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                false);
+    }
+
+    static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned)
+            throws Exception {
         Objects.requireNonNull(question);
         // Validate limits before consulting callbacks; no controls may enlarge old caps.
         new SequenceFormAffineProjection.Budget(compilerLimit);
@@ -158,7 +187,8 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
                             minimumReach,
                             compilerLimit - compiler,
                             pivotLimit - pivots,
-                            arithmeticLimit - arithmetic);
+                            arithmeticLimit - arithmetic,
+                            conditioned);
             owned.add(result);
             var work = result.audit().work();
             compiler += work.compilerUnits();
@@ -171,7 +201,8 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
         var shared = first.audit();
         for (var result : owned) {
             var audit = result.audit();
-            if (!shared.baseline().equals(audit.baseline())
+            if (context.upperObjectiveShift() != result.context().upperObjectiveShift()
+                    || !shared.baseline().equals(audit.baseline())
                     || !shared.denominator().equals(audit.denominator())
                     || !shared.securityFaceHash().equals(audit.securityFaceHash())
                     || !shared.scaledFaceHash().equals(audit.scaledFaceHash())
@@ -314,7 +345,7 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
         }
         return new Result(
                 new Audit(
-                        ALGORITHM,
+                        conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,
@@ -328,7 +359,8 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
                                 compilerLimit,
                                 solves + lp.solves,
                                 pivots + lp.pivots,
-                                arithmetic + lp.work)));
+                                arithmetic + lp.work)),
+                context.upperObjectiveShift());
     }
 
     private static void checkInside(Witness witness, double lower, double upper) {

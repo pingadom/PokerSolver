@@ -1,0 +1,257 @@
+{
+  "scope": "OPTIONAL_INDEPENDENT_LITERAL_INTERVAL_FEEDBACK_ORACLE_NO_TRAINER_ADMISSION",
+  "reportBytesSha256": "9d34e7a09fc266386d79f9a9657e8474109db063fd1e2225a4b204b95ee2e161",
+  "sourceInputHash": "92e17af3796cb7e188b266d8fdfd996c634e2acb8e86eaa16561b06054eadb18",
+  "buttonCompletePlans": 729,
+  "blindCompletePlans": 5832,
+  "securitySlackBb": 0.0001,
+  "minimumQuestionChanceOpponentMass": 0.22037357357357182,
+  "maximumQuestionChanceOpponentMass": 0.2223099956326269,
+  "moves": [
+    {
+      "action": "fold",
+      "lowerLossBb": 9.111776826067798,
+      "upperLossBb": 9.112980813330331,
+      "lowerControlObjectives": [
+        9.111776826067798
+      ],
+      "upperControlObjectives": [
+        9.11298081333033,
+        9.11298081333033,
+        9.112980813330331
+      ]
+    },
+    {
+      "action": "call",
+      "lowerLossBb": 0,
+      "upperLossBb": 0.00044999999999936757,
+      "lowerControlObjectives": [
+        0.0
+      ],
+      "upperControlObjectives": [
+        -9.1117768260678,
+        0.00044999999999936757,
+        0.00044999999999936757
+      ]
+    },
+    {
+      "action": "raise:50.0",
+      "lowerLossBb": 0,
+      "upperLossBb": 0.4845576434477177,
+      "lowerControlObjectives": [
+        0.0,
+        0.0
+      ],
+      "upperControlObjectives": [
+        -8.627219182620083,
+        0.4845576434477177
+      ]
+    }
+  ],
+  "ownedWitnessChecks": [
+    {
+      "action": "fold",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.111776826067802,
+        "raise:50.0": 9.111776826067803
+      },
+      "actualDecisionLossBb": 9.111776826067803,
+      "plannedGapBb": 9.111776826067803,
+      "questionChanceOpponentMass": 0.22037357357359003
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112980813330314,
+        "raise:50.0": 9.112980813330315
+      },
+      "actualDecisionLossBb": 9.112980813330315,
+      "plannedGapBb": 9.112980813330314,
+      "questionChanceOpponentMass": 0.22230999563262524
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112980813330317,
+        "raise:50.0": 9.112980813330319
+      },
+      "actualDecisionLossBb": 9.112980813330319,
+      "plannedGapBb": 9.112980813330314,
+      "questionChanceOpponentMass": 0.22230999563262577
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 2,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112980813330326,
+        "raise:50.0": 9.112980813330323
+      },
+      "actualDecisionLossBb": 9.112980813330326,
+      "plannedGapBb": 9.112980813330323,
+      "questionChanceOpponentMass": 0.22230999563262657
+    },
+    {
+      "action": "call",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112347684335619,
+        "raise:50.0": 9.112347684335619
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": 0,
+      "questionChanceOpponentMass": 0.22128748538012583
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.111776826067803,
+        "raise:50.0": 9.111776826067803
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": -9.111776826067803,
+      "questionChanceOpponentMass": 0.22037357357359005
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156501136765,
+        "raise:50.0": 9.11260650113676
+      },
+      "actualDecisionLossBb": 0.0004499999999953985,
+      "plannedGapBb": 0.0004499999999818087,
+      "questionChanceOpponentMass": 0.2222222222222222
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 2,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156501136765,
+        "raise:50.0": 9.11260650113676
+      },
+      "actualDecisionLossBb": 0.0004499999999953985,
+      "plannedGapBb": 0.0004499999999964376,
+      "questionChanceOpponentMass": 0.2222222222222222
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112347684335619,
+        "raise:50.0": 9.11234768433562
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": 1.7379572729267404e-14,
+      "questionChanceOpponentMass": 0.2212874853801251
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "lower",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112347684335615,
+        "raise:50.0": 9.112347684335619
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": 0,
+      "questionChanceOpponentMass": 0.22128748538012655
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.111776826067802,
+        "raise:50.0": 8.627219182620099
+      },
+      "actualDecisionLossBb": 0.4845576434477028,
+      "plannedGapBb": -8.627219182620099,
+      "questionChanceOpponentMass": 0.22037357357358933
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.111776826067803,
+        "raise:50.0": 8.627219182620099
+      },
+      "actualDecisionLossBb": 0.4845576434477046,
+      "plannedGapBb": 0.48455764344770486,
+      "questionChanceOpponentMass": 0.2203735735735894
+    }
+  ],
+  "comparisonToleranceBb": 2e-08,
+  "storedReportBytesSha256": "9d34e7a09fc266386d79f9a9657e8474109db063fd1e2225a4b204b95ee2e161",
+  "upperObjectiveShift": -51.0,
+  "actionIntervalChecks": [
+    {
+      "action": "fold",
+      "lowerEvBb": 0.0,
+      "upperEvBb": -0.0,
+      "upperControlEvsBb": [
+        -0.0
+      ],
+      "classification": "OUTSIDE_LIMIT"
+    },
+    {
+      "action": "call",
+      "lowerEvBb": 9.1117768260678,
+      "upperEvBb": 9.11298081333033,
+      "upperControlEvsBb": [
+        9.11298081333033
+      ],
+      "classification": "WITHIN_LIMIT"
+    },
+    {
+      "action": "raise:50.0",
+      "lowerEvBb": 8.627219182620083,
+      "upperEvBb": 9.112980813330331,
+      "upperControlEvsBb": [
+        9.11298081333033,
+        9.112980813330331
+      ],
+      "classification": "STRATEGY_DEPENDENT"
+    }
+  ],
+  "recordedReferenceConsistencyChecks": [
+    {
+      "iterations": 500,
+      "insideDeclaredFace": true,
+      "boundsChecked": true,
+      "requiredSecuritySlackBb": 2.9809054688134662e-05
+    },
+    {
+      "iterations": 1000,
+      "insideDeclaredFace": true,
+      "boundsChecked": true,
+      "requiredSecuritySlackBb": 7.459708490864525e-06
+    }
+  ],
+  "referencePolicyVerification": "FULL_POLICIES_REGENERATED_BY_JAVA_PHYSICAL_REPLAY_NOT_THIS_ORACLE"
+}

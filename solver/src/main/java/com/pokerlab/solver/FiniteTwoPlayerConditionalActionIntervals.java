@@ -13,6 +13,8 @@ import java.util.*;
  */
 public final class FiniteTwoPlayerConditionalActionIntervals {
     public static final String ALGORITHM = "POSITIVE_REACH_CONDITIONAL_SECURITY_FACE_OWNED_LP/v1";
+    public static final String CONDITIONED_ALGORITHM =
+            "POSITIVE_REACH_UPPER_OBJECTIVE_SHIFT_OWNED_LP/v2";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -140,7 +142,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             FiniteTwoPlayerAffineSequenceForm.Result baseline,
             Flow opponent,
             SequenceFormAffineProjection.Projection projection,
-            Face scaled) {
+            Face scaled,
+            double upperObjectiveShift) {
         Context {
             roots = List.copyOf(roots);
         }
@@ -177,6 +180,27 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             long compilerLimit,
             int pivotLimit,
             long arithmeticLimit)
+            throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                false);
+    }
+
+    static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned)
             throws Exception {
         Objects.requireNonNull(question);
         if (!Double.isFinite(securitySlack)
@@ -319,6 +343,11 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 denominator.constant() + maxLp.certificate().primalValue(),
                 maxWitness.questionReach(),
                 "Independent maximum reach");
+        // dPrime=1 on the already certified scaled face. Shift the objective, not the face.
+        double upperShift =
+                conditioned
+                        ? -maximumUtility(checked.snapshot().initialState(), hero.actor()) - 1
+                        : 0;
         var upperWitnesses = new ArrayList<Witness>();
         double upper = Double.NEGATIVE_INFINITY;
         int upperPlan = -1;
@@ -327,6 +356,12 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             double[] cost = new double[n + 1];
             for (int j = 0; j < op.variables(); j++) cost[j] = plan.cost().get(j);
             cost[n] = plan.constant();
+            if (conditioned) {
+                budget.charge(op.variables() + 1L);
+                for (int j = 0; j < op.variables(); j++)
+                    cost[j] += upperShift * denominator.cost().get(j);
+                cost[n] += upperShift * denominator.constant();
+            }
             var solved = lpBudget.solve(scaled.matrix(), scaled.rhs(), cost);
             var witness =
                     witness(
@@ -343,7 +378,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                             denominator,
                             plans,
                             budget);
-            double value = solved.certificate().primalValue();
+            double value = solved.certificate().primalValue() - upperShift;
             requireClose(value, scaledValue(plan, solved.point(), n), "Scaled upper objective");
             if (witness.conditionalHeroBestResponse() + TOLERANCE < value)
                 throw new Rejected(
@@ -354,7 +389,10 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 upperPlan = i;
             }
         }
-        double shift = maximumUtility(checked.snapshot().initialState(), hero.actor()) + 1;
+        double shift =
+                conditioned
+                        ? -upperShift
+                        : maximumUtility(checked.snapshot().initialState(), hero.actor()) + 1;
         int rows = scaled.rhs().length + plans.size(), columns = n + 2;
         budget.charge((long) rows * columns + rows + columns);
         double[][] matrix = new double[rows][columns];
@@ -407,7 +445,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         var work = budget.audit();
         return new Result(
                 new Audit(
-                        ALGORITHM,
+                        conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,
@@ -438,7 +476,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                                 lpBudget.solves,
                                 lpBudget.pivots,
                                 lpBudget.work)),
-                new Context(checked, roots, baseline, opponent, op, scaled));
+                new Context(checked, roots, baseline, opponent, op, scaled, upperShift));
     }
 
     private static Node forced(Root root, Question q) {

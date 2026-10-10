@@ -72,6 +72,8 @@ Nine analytic tests cover common EV movement, negative signed gaps, both actor o
 
 ## Next milestone
 
+The next backend step is now implemented as [selected-question interval feedback qualification](sixmax-interval-feedback-qualification.md). It uses separately identified objective conditioning, explicit fresh-reference inclusion and interval containment, while retaining this v1 report and the rejected old scalar study. Public trainer admission remains off; saved question/grade/review integration comes next.
+
 Design a separately identified ambiguity-aware feedback qualification using robust **decision loss**, with explicit checks that fresh reference policies lie inside its declared security face. Preserve material-decision, posterior, source-provenance and reference-quality requirements. Keep the old scalar-EV stability rule and its rejected five-target studies intact; any new feedback format needs its own identity and replay evidence before serving questions.
 
 This work adds solver diagnostics, not trainer content. Mandatory postflop checkdown, synthetic supplied ranges and no rake remain model limits. Broader realistic ranges, strategic postflop coverage and multiway equilibrium are separate milestones. AWS deployment remains paused. No upstream library defect was found in this batch.
