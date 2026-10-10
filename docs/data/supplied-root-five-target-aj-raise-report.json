@@ -1,0 +1,2086 @@
+{
+  "binding" : {
+    "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+    "budget" : {
+      "completeTreeStates" : 406,
+      "enumeratedBoards" : 17766216,
+      "handEvaluations" : 35532432,
+      "informationSets" : {
+        "BTN" : 6,
+        "BB" : 9
+      },
+      "jointDeals" : 27,
+      "publicStates" : 15,
+      "sequences" : {
+        "BTN" : 19,
+        "BB" : 25
+      }
+    },
+    "inputHash" : "92e17af3796cb7e188b266d8fdfd996c634e2acb8e86eaa16561b06054eadb18",
+    "jointPriorHash" : "f0ad9f3692b615c649764912bb36a8211b78267b8d895c5f812bcfeecb0f4075",
+    "model" : "TWO_ACTIVE_SUPPLIED_JOINT_PREFLOP_MANDATORY_CHECKDOWN/v1",
+    "payoffAlgorithm" : "EXACT_TWO_ACTIVE_SIX_DEALT_BOARD_ENUMERATION/v1",
+    "payoffHash" : "b66ffb8042905986ccceb9fb23071405387f3028b21f051cbdfdb6fb15ad2a9b",
+    "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY"
+  },
+  "diagnostic" : {
+    "algorithm" : "ROOT_ACTION_APPROXIMATE_SECURITY_FACE_OWNED_LP/v1",
+    "baseline" : {
+      "affineReductionHash" : "4cad077937e6a952a82e05aa31c553d06d865b42cb755ec7f88c6e84a240feb8",
+      "algorithm" : "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_OWNED_LP/v1",
+      "behavioralPolicyHash" : "cad6ae4ba6044e74ee76df3e63c0efe377a5b51b2e664901598760f47a25ebcb",
+      "behavioralQuality" : {
+        "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.2633447521970969, -0.49999999999999967, 0.2366552478029087 ],
+        "deviationGainsBb" : [ 0.0, 0.0, 0.0, 2.831068712794149E-15, 0.0, 2.7755575615628914E-15 ],
+        "nashConvBb" : 5.6066262743570405E-15,
+        "profileUtilitiesBb" : [ 0.0, 0.0, 0.0, 0.2633447521970941, -0.49999999999999967, 0.23665524780290592 ],
+        "responseActions" : [ { }, { }, { }, {
+          "supplied-conditional-preflop:9s Js:|BB:raise:9.0" : "call",
+          "supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "raise:100.0",
+          "supplied-conditional-preflop:Ah Kh:|BB:raise:9.0" : "raise:22.0",
+          "supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "raise:100.0",
+          "supplied-conditional-preflop:Qh Th:|BB:raise:9.0" : "raise:22.0",
+          "supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "raise:100.0"
+        }, { }, {
+          "supplied-conditional-preflop:7d 7h:" : "call",
+          "supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0" : "call",
+          "supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call",
+          "supplied-conditional-preflop:9d 9h:" : "raise:9.0",
+          "supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0" : "call",
+          "supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call",
+          "supplied-conditional-preflop:Ac Jc:" : "call",
+          "supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "raise:50.0",
+          "supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call"
+        } ]
+      },
+      "constantSum" : 0.5,
+      "firstActor" : 3,
+      "firstFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 0.9999999999999998, 2.220446049250313E-16, 0.0, 0.0, 2.220446049250313E-16, 0.0, 0.0, 1.0, 0.02448798662261648, 0.9755120133773835, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "firstLp" : {
+        "absoluteDualityGap" : 2.220446049250313E-16,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 21,
+        "dualValue" : -1.3936310354439005,
+        "maximumDualViolation" : 4.440892098500626E-16,
+        "maximumPrimalViolation" : 4.440892098500626E-16,
+        "primalValue" : -1.3936310354439003,
+        "problemHash" : "0efb696584225d3259cc3e708777b00c3fae8ab6d91de7df1f88f3a50f273975",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 183876,
+          "basisFactorizations" : 14,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 4,
+          "phaseTwoPivots" : 7
+        }
+      },
+      "firstProjection" : {
+        "independentSequences" : [ 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17 ],
+        "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ] ],
+        "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 ],
+        "originalFlowHash" : "1bad6a871432ba1571c3bd225ba55f37356cf9f4065c715f9fbfb0d8f38ed14c",
+        "projectionHash" : "82ba966e80cae1581a5184a757bfc907d9a7d68c0f6cc241871b3779f02b3bf7",
+        "rhs" : [ 1, 1, 1, 1, 1, 1 ],
+        "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1 ] ]
+      },
+      "informationSets" : [ {
+        "actions" : [ "fold", "call", "raise:22.0" ],
+        "actor" : 3,
+        "depth" : 2,
+        "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "actor" : 3,
+        "depth" : 4,
+        "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "ownHistory" : [ {
+          "action" : "raise:22.0",
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        } ]
+      }, {
+        "actions" : [ "fold", "call", "raise:22.0" ],
+        "actor" : 3,
+        "depth" : 2,
+        "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "actor" : 3,
+        "depth" : 4,
+        "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "ownHistory" : [ {
+          "action" : "raise:22.0",
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        } ]
+      }, {
+        "actions" : [ "fold", "call", "raise:22.0" ],
+        "actor" : 3,
+        "depth" : 2,
+        "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "actor" : 3,
+        "depth" : 4,
+        "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "ownHistory" : [ {
+          "action" : "raise:22.0",
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        } ]
+      }, {
+        "actions" : [ "fold", "call", "raise:9.0" ],
+        "actor" : 5,
+        "depth" : 1,
+        "key" : "5:supplied-conditional-preflop:7d 7h:",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "actor" : 5,
+        "depth" : 3,
+        "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:7d 7h:"
+        } ]
+      }, {
+        "actions" : [ "fold", "call" ],
+        "actor" : 5,
+        "depth" : 5,
+        "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:7d 7h:"
+        }, {
+          "action" : "raise:50.0",
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+        } ]
+      }, {
+        "actions" : [ "fold", "call", "raise:9.0" ],
+        "actor" : 5,
+        "depth" : 1,
+        "key" : "5:supplied-conditional-preflop:9d 9h:",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "actor" : 5,
+        "depth" : 3,
+        "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:9d 9h:"
+        } ]
+      }, {
+        "actions" : [ "fold", "call" ],
+        "actor" : 5,
+        "depth" : 5,
+        "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:9d 9h:"
+        }, {
+          "action" : "raise:50.0",
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+        } ]
+      }, {
+        "actions" : [ "fold", "call", "raise:9.0" ],
+        "actor" : 5,
+        "depth" : 1,
+        "key" : "5:supplied-conditional-preflop:Ac Jc:",
+        "ownHistory" : [ ]
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "actor" : 5,
+        "depth" : 3,
+        "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:Ac Jc:"
+        } ]
+      }, {
+        "actions" : [ "fold", "call" ],
+        "actor" : 5,
+        "depth" : 5,
+        "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "ownHistory" : [ {
+          "action" : "raise:9.0",
+          "key" : "5:supplied-conditional-preflop:Ac Jc:"
+        }, {
+          "action" : "raise:50.0",
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+        } ]
+      } ],
+      "lowerValue" : 0.2633447521970913,
+      "originalReductionHash" : "17759a14dfc7077b91363c62a8b408e2d33ce64be352049ef0077c882d5cb9ef",
+      "projectedPayoff" : {
+        "constant" : 1.6569757876409916,
+        "firstCost" : [ 1.5470093772359856, 2.3876427597187835, -4.7863239560973465, 1.3118916262191118, -6.02743890426639, -4.4879162788519515, -12.360772237599722, -2.4658880653032704, -0.17654626061058742, 0.8231184400775051, -6.50987959394392, 0.4522628791634651 ],
+        "matrix" : [ [ 1.8387959765883748, 1.8387959765883748, 0.44990708769948595, 1.149719895333931, -4.105648467856069, -0.6150815682979431, -0.6150815682979431, -2.003970457186832, -0.7595314612858477, -6.559526012742387, -2.770723785526417, -2.770723785526417, -4.159612674415306, -2.4367393709498977, -8.71516822997086 ], [ 1.341339877889586, 1.341339877889586, 0.44990708769948595, 1.149719895333931, -4.105648467856069, -0.8861200381668223, -0.8861200381668223, -2.003970457186832, -0.7595314612858477, -6.559526012742387, -2.842862599441547, -2.842862599441547, -4.159612674415306, -2.4367393709498977, -8.71516822997086 ], [ 3.9499070876994855, 3.9499070876994855, 3.9499070876994855, 3.9499070876994855, -4.105648467856069, 1.4960295428131678, 1.4960295428131678, 1.4960295428131678, 1.4960295428131678, -6.559526012742387, -0.6596126744153064, -0.6596126744153064, -0.6596126744153064, -0.6596126744153064, -8.71516822997086 ], [ 0.7369999329063663, 0.7369999329063663, 0.7369999329063663, 0.7369999329063663, -4.105648467856069, -0.4868791418499026, -0.4868791418499026, -0.4868791418499026, -0.4868791418499026, -6.559526012742387, -1.5620124172755754, -1.5620124172755754, -1.5620124172755754, -1.5620124172755754, -8.71516822997086 ], [ 0.5905615326302467, 0.5905615326302467, -0.7983273562586423, 0.1785250162443148, -5.353882911814197, 0.4527772965272968, 0.4527772965272968, -0.9361115923615921, 0.07132132132132175, -5.4916671479171475, 4.984100075108846, 4.984100075108846, 3.5952111862199576, 3.5969390443074647, -0.9603443693355977 ], [ 0.2082791856183674, 0.2082791856183674, -0.7983273562586423, 0.1785250162443148, -5.353882911814197, 0.0832082082082085, 0.0832082082082085, -0.9361115923615921, 0.07132132132132175, -5.4916671479171475, 4.196428885025376, 4.196428885025376, 3.5952111862199576, 3.5969390443074647, -0.9603443693355977 ], [ 2.7016726437413574, 2.7016726437413574, 2.7016726437413574, 2.7016726437413574, -5.353882911814197, 2.563888407638408, 2.563888407638408, 2.563888407638408, 2.563888407638408, -5.4916671479171475, 7.095211186219958, 7.095211186219958, 7.095211186219958, 7.095211186219958, -0.9603443693355977 ], [ 0.11443911297712464, 0.11443911297712464, 0.11443911297712464, 0.11443911297712464, -5.353882911814197, 0.04571879571879621, 0.04571879571879621, 0.04571879571879621, 0.04571879571879621, -5.4916671479171475, 2.3057301566073494, 2.3057301566073494, 2.3057301566073494, 2.3057301566073494, -0.9603443693355977 ], [ 1.1452928974858798, 1.1452928974858798, -0.24359599140300914, 0.6101364522417152, -4.799151546958564, 0.4074605138201632, 0.4074605138201632, -0.9814283750687257, 0.03606237816764154, -5.536983930624281, -1.3762071506954556, -1.3762071506954556, -2.7650960395843445, -1.3517289219043613, -7.3206515951399 ], [ 0.7118258609486678, 0.7118258609486678, -0.24359599140300914, 0.6101364522417152, -4.799151546958564, 0.0420727745289151, 0.0420727745289151, -0.9814283750687257, 0.03606237816764154, -5.536983930624281, -1.577017075555088, -1.577017075555088, -2.7650960395843445, -1.3517289219043613, -7.3206515951399 ], [ 3.2564040085969905, 3.2564040085969905, 3.2564040085969905, 3.2564040085969905, -4.799151546958564, 2.518571624931274, 2.518571624931274, 2.518571624931274, 2.518571624931274, -5.536983930624281, 0.7349039604156553, 0.7349039604156553, 0.7349039604156553, 0.7349039604156553, -7.3206515951399 ], [ 0.39111311041135566, 0.39111311041135566, 0.39111311041135566, 0.39111311041135566, -4.799151546958564, 0.02311690908182154, 0.02311690908182154, 0.02311690908182154, 0.02311690908182154, -5.536983930624281, -0.8664928986566423, -0.8664928986566423, -0.8664928986566423, -0.8664928986566423, -7.3206515951399 ] ],
+        "originalPayoffHash" : "889248c878a0c26409ebd7d551da40ddaa248ddaedf94f4b378d87a5839ef9c8",
+        "reducedPayoffHash" : "6f09a73a7f5ef68f5ddd9a07c09660e73861e22b500d335519d6a3c238c4547f",
+        "secondCost" : [ -2.074650406704501, -2.410551183212003, 0.5920162599621656, -1.9383813638199605, 14.25868292662883, 1.254843757950483, 0.811004267875613, 3.92151042461715, 0.6521477617968844, 17.588177091283814, 0.6628308611130265, 0.23818380909024328, 3.3294975277796928, 0.19152924854679432, 16.996164194446358 ]
+      },
+      "reductionWork" : {
+        "chargedUnits" : 16110,
+        "limit" : 8000000
+      },
+      "secondActor" : 5,
+      "secondFlow" : {
+        "actor" : 5,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "5:supplied-conditional-preflop:7d 7h:",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8 ],
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+          "parentSequence" : 6
+        }, {
+          "childSequences" : [ 9, 10, 11 ],
+          "key" : "5:supplied-conditional-preflop:9d 9h:",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 12, 13, 14 ],
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0",
+          "parentSequence" : 11
+        }, {
+          "childSequences" : [ 15, 16 ],
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+          "parentSequence" : 14
+        }, {
+          "childSequences" : [ 17, 18, 19 ],
+          "key" : "5:supplied-conditional-preflop:Ac Jc:",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 20, 21, 22 ],
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0",
+          "parentSequence" : 19
+        }, {
+          "childSequences" : [ 23, 24 ],
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+          "parentSequence" : 22
+        } ],
+        "maximumResidual" : 2.220446049250313E-16,
+        "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.999999999999999, 9.992007221626409E-16, 0.0, 9.992007221626409E-16, 0.0, 1.0000000000000002, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "5:supplied-conditional-preflop:7d 7h:"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "5:supplied-conditional-preflop:7d 7h:"
+        }, {
+          "action" : "raise:9.0",
+          "index" : 3,
+          "key" : "5:supplied-conditional-preflop:7d 7h:"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "raise:50.0",
+          "index" : 6,
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "5:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        }, {
+          "action" : "fold",
+          "index" : 9,
+          "key" : "5:supplied-conditional-preflop:9d 9h:"
+        }, {
+          "action" : "call",
+          "index" : 10,
+          "key" : "5:supplied-conditional-preflop:9d 9h:"
+        }, {
+          "action" : "raise:9.0",
+          "index" : 11,
+          "key" : "5:supplied-conditional-preflop:9d 9h:"
+        }, {
+          "action" : "fold",
+          "index" : 12,
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "call",
+          "index" : 13,
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "raise:50.0",
+          "index" : 14,
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "fold",
+          "index" : 15,
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        }, {
+          "action" : "call",
+          "index" : 16,
+          "key" : "5:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        }, {
+          "action" : "fold",
+          "index" : 17,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:"
+        }, {
+          "action" : "call",
+          "index" : 18,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:"
+        }, {
+          "action" : "raise:9.0",
+          "index" : 19,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:"
+        }, {
+          "action" : "fold",
+          "index" : 20,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "call",
+          "index" : 21,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "raise:50.0",
+          "index" : 22,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+        }, {
+          "action" : "fold",
+          "index" : 23,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        }, {
+          "action" : "call",
+          "index" : 24,
+          "key" : "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+        } ]
+      },
+      "secondLp" : {
+        "absoluteDualityGap" : 0.0,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 21,
+        "dualValue" : 1.3936310354439,
+        "maximumDualViolation" : 2.220446049250313E-16,
+        "maximumPrimalViolation" : 2.220446049250313E-16,
+        "primalValue" : 1.3936310354439,
+        "problemHash" : "c05b6603c08afa2d839851906486c59206ff972981f2a6c3eea1424e456bcf4a",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 303408,
+          "basisFactorizations" : 23,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 6,
+          "phaseTwoPivots" : 14
+        }
+      },
+      "secondProjection" : {
+        "independentSequences" : [ 1, 2, 4, 5, 7, 9, 10, 12, 13, 15, 17, 18, 20, 21, 23 ],
+        "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 ] ],
+        "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1 ],
+        "originalFlowHash" : "b14338e38f9d5c59604ae756e622f26e950a857185f350b2a6ba8b620bf2c3c8",
+        "projectionHash" : "37eac57bcb8dfb06cf3214ad9df017e94ce36ad2348927623c3b2a8510a569c2",
+        "rhs" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+        "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1 ] ]
+      },
+      "snapshotHash" : "6848394484eee25c52655a3970a11e415fadaa27b46a28b0bcad9db7a9a5c567",
+      "treeNodes" : 406,
+      "upperValue" : 0.2633447521970915
+    },
+    "globalHeroUpperValue" : 0.2366552478029087,
+    "heroProjection" : {
+      "independentSequences" : [ 1, 2, 4, 5, 7, 9, 10, 12, 13, 15, 17, 18, 20, 21, 23 ],
+      "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 ] ],
+      "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1 ],
+      "originalFlowHash" : "b14338e38f9d5c59604ae756e622f26e950a857185f350b2a6ba8b620bf2c3c8",
+      "projectionHash" : "37eac57bcb8dfb06cf3214ad9df017e94ce36ad2348927623c3b2a8510a569c2",
+      "rhs" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+      "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1 ] ]
+    },
+    "lowerUtility" : -0.8044659722685665,
+    "lowerWitness" : {
+      "behavioralPolicyHash" : "8c77caa8b958b1ef9f97697c9b0bea778193a30344d3874697f9f75e23280673",
+      "certificate" : {
+        "absoluteDualityGap" : 5.684341886080801E-13,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 28,
+        "dualValue" : -50.195534027732,
+        "maximumDualViolation" : 7.655710579555616E-14,
+        "maximumPrimalViolation" : 5.079270337660091E-15,
+        "primalValue" : -50.19553402773143,
+        "problemHash" : "c7fb0fbd31f0abe99d41dcdefa3333833dc0f5566d42ab6208f48bc784c78ddb",
+        "variables" : 22,
+        "work" : {
+          "arithmeticWork" : 1887306,
+          "basisFactorizations" : 65,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 62,
+          "phaseTwoPivots" : 0
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044659722685726,
+      "dual" : [ -0.0, 112.44923301678872, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 112.44923301678877, -1.7208456881689926E-14, 0.0, 112.44923301678872, 0.0, 0.0, 2.0483614804334138E-14, 15.453158064427168, 2.7533531010703882E-14, 0.0, 0.0, 0.0, 0.0, 112.44923301678872, 7.105427357601002E-15, 3.552713678800501E-15, -0.0, 0.9999999999999931, 8.881784197001252E-16, 7.105427357601002E-15 ],
+      "globalHeroBestResponse" : 0.2366552578029104,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 1.1102230246251565E-15,
+        "realization" : [ 1.0, 0.0, 0.9999999999999996, 4.440892098500626E-16, 0.0, 0.0, 4.440892098500626E-16, 0.0, 0.0, 1.0, 0.0, 0.9999999999999991, 8.881784197001252E-16, 0.0, 1.6637837704622857E-6, 0.9999983362162296, 0.01544727416011799, 0.9845510620561126, 0.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 0.9999999999999996, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9999999999999991, 0.0, 1.6637837704622857E-6, 0.01544727416011799, 0.9845510620561126, 0.28054966764720013, 0.23884794663730716, 0.0, 0.0, 0.0, 0.0, 0.35946904277897246, 0.7812364554589735, 0.0, 50.19553402773143 ]
+    },
+    "opponentProjection" : {
+      "independentSequences" : [ 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17 ],
+      "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ] ],
+      "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 ],
+      "originalFlowHash" : "1bad6a871432ba1571c3bd225ba55f37356cf9f4065c715f9fbfb0d8f38ed14c",
+      "projectionHash" : "82ba966e80cae1581a5184a757bfc907d9a7d68c0f6cc241871b3779f02b3bf7",
+      "rhs" : [ 1, 1, 1, 1, 1, 1 ],
+      "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1 ] ]
+    },
+    "orientedPayoff" : {
+      "constant" : -1.1569757876409936,
+      "firstCost" : [ 2.074650406704501, 2.410551183212003, -0.5920162599621657, 1.9383813638199607, -14.258682926628829, -1.2548437579504819, -0.8110042678756119, -3.9215104246171486, -0.6521477617968835, -17.588177091283814, -0.6628308611130254, -0.23818380909024242, -3.329497527779692, -0.1915292485467932, -16.996164194446358 ],
+      "matrix" : [ [ -1.8387959765883746, -1.3413398778895858, -3.9499070876994855, -0.736999932906366, -0.5905615326302461, -0.20827918561836703, -2.7016726437413574, -0.11443911297712465, -1.1452928974858803, -0.7118258609486683, -3.2564040085969914, -0.39111311041135616 ], [ -1.8387959765883746, -1.3413398778895858, -3.9499070876994855, -0.736999932906366, -0.5905615326302461, -0.20827918561836703, -2.7016726437413574, -0.11443911297712465, -1.1452928974858803, -0.7118258609486683, -3.2564040085969914, -0.39111311041135616 ], [ -0.44990708769948573, -0.44990708769948573, -3.9499070876994855, -0.736999932906366, 0.7983273562586427, 0.7983273562586427, -2.7016726437413574, -0.11443911297712465, 0.24359599140300858, 0.24359599140300858, -3.2564040085969914, -0.39111311041135616 ], [ -1.1497198953339307, -1.1497198953339307, -3.9499070876994855, -0.736999932906366, -0.17852501624431455, -0.17852501624431455, -2.7016726437413574, -0.11443911297712465, -0.6101364522417155, -0.6101364522417155, -3.2564040085969914, -0.39111311041135616 ], [ 4.10564846785607, 4.10564846785607, 4.10564846785607, 4.10564846785607, 5.353882911814198, 5.353882911814198, 5.353882911814198, 5.353882911814198, 4.799151546958564, 4.799151546958564, 4.799151546958564, 4.799151546958564 ], [ 0.615081568297942, 0.8861200381668213, -1.4960295428131691, 0.4868791418499019, -0.4527772965272968, -0.0832082082082085, -2.563888407638408, -0.04571879571879621, -0.4074605138201632, -0.04207277452891517, -2.5185716249312744, -0.02311690908182129 ], [ 0.615081568297942, 0.8861200381668213, -1.4960295428131691, 0.4868791418499019, -0.4527772965272968, -0.0832082082082085, -2.563888407638408, -0.04571879571879621, -0.4074605138201632, -0.04207277452891517, -2.5185716249312744, -0.02311690908182129 ], [ 2.003970457186831, 2.003970457186831, -1.4960295428131691, 0.4868791418499019, 0.936111592361592, 0.936111592361592, -2.563888407638408, -0.04571879571879621, 0.9814283750687256, 0.9814283750687256, -2.5185716249312744, -0.02311690908182129 ], [ 0.7595314612858468, 0.7595314612858468, -1.4960295428131691, 0.4868791418499019, -0.07132132132132175, -0.07132132132132175, -2.563888407638408, -0.04571879571879621, -0.03606237816764157, -0.03606237816764157, -2.5185716249312744, -0.02311690908182129 ], [ 6.559526012742387, 6.559526012742387, 6.559526012742387, 6.559526012742387, 5.4916671479171475, 5.4916671479171475, 5.4916671479171475, 5.4916671479171475, 5.536983930624281, 5.536983930624281, 5.536983930624281, 5.536983930624281 ], [ 2.770723785526417, 2.842862599441547, 0.6596126744153059, 1.5620124172755752, -4.984100075108847, -4.196428885025376, -7.095211186219958, -2.3057301566073494, 1.376207150695455, 1.5770170755550876, -0.7349039604156562, 0.8664928986566416 ], [ 2.770723785526417, 2.842862599441547, 0.6596126744153059, 1.5620124172755752, -4.984100075108847, -4.196428885025376, -7.095211186219958, -2.3057301566073494, 1.376207150695455, 1.5770170755550876, -0.7349039604156562, 0.8664928986566416 ], [ 4.159612674415306, 4.159612674415306, 0.6596126744153059, 1.5620124172755752, -3.5952111862199576, -3.5952111862199576, -7.095211186219958, -2.3057301566073494, 2.7650960395843436, 2.7650960395843436, -0.7349039604156562, 0.8664928986566416 ], [ 2.4367393709498972, 2.4367393709498972, 0.6596126744153059, 1.5620124172755752, -3.596939044307465, -3.596939044307465, -7.095211186219958, -2.3057301566073494, 1.351728921904361, 1.351728921904361, -0.7349039604156562, 0.8664928986566416 ], [ 8.71516822997086, 8.71516822997086, 8.71516822997086, 8.71516822997086, 0.9603443693355977, 0.9603443693355977, 0.9603443693355977, 0.9603443693355977, 7.320651595139899, 7.320651595139899, 7.320651595139899, 7.320651595139899 ] ],
+      "originalPayoffHash" : "9cdf58d560d141446a5e1fc261674d3c99d4b37a27749d03a6cd8173322db9bc",
+      "reducedPayoffHash" : "bb5b3d01c1c17a8a0c7102de4328048b8ebea163519c7b8f71e466f58a717fb7",
+      "secondCost" : [ -1.5470093772359848, -2.387642759718782, 4.786323956097349, -1.311891626219111, 6.02743890426639, 4.4879162788519515, 12.360772237599722, 2.4658880653032704, 0.17654626061058853, -0.8231184400775041, 6.509879593943922, -0.4522628791634642 ]
+    },
+    "plans" : [ {
+      "constant" : -9.0,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "fold",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "fold"
+      },
+      "cost" : [ 4.166666666666666, 3.9502502249212776, 0.0, 0.0, 4.166666666666666, 1.8036530964162545, 0.0, 0.0, 4.166666666666666, 3.564236892087769, 0.0, 0.0 ]
+    }, {
+      "constant" : -9.0,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "fold",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call"
+      },
+      "cost" : [ 4.166666666666666, 3.9502502249212776, 0.0, 0.0, 4.166666666666666, 1.8036530964162545, 0.0, 0.0, 4.166666666666666, 3.564236892087769, 0.0, 0.0 ]
+    }, {
+      "constant" : 0.41390483769869624,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "call",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "fold"
+      },
+      "cost" : [ -1.0019532437295595, -1.2183696854749484, 0.0, 0.0, 4.161483092404145, 1.7984695221537328, 0.0, 0.0, -0.07343468637328199, -0.6758644609521796, 0.0, 0.0 ]
+    }, {
+      "constant" : 0.41390483769869624,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "call",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call"
+      },
+      "cost" : [ -1.0019532437295595, -1.2183696854749484, 0.0, 0.0, 4.161483092404145, 1.7984695221537328, 0.0, 0.0, -0.07343468637328199, -0.6758644609521796, 0.0, 0.0 ]
+    }, {
+      "constant" : -49.99999999999999,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "raise:50.0",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "fold"
+      },
+      "cost" : [ 17.833333333333332, 17.61691689158794, 24.166666666666664, 21.459467438085856, 17.833333333333332, 15.47031976308292, 24.166666666666664, 9.79822357782884, 17.833333333333332, 17.230903558754434, 24.166666666666664, 19.36247608944977 ]
+    }, {
+      "constant" : 0.9884925833390774,
+      "continuation" : {
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "raise:50.0",
+        "5:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call"
+      },
+      "cost" : [ -8.31217135657925, -8.52858779832464, -1.9788380232459168, -4.686037251826725, 14.952300225326537, 12.589286655076126, 21.28563355865987, 6.917190469822047, -4.1286214520863656, -4.7310512266652625, 2.2047118812469684, -2.5994786959699248 ]
+    } ],
+    "question" : {
+      "action" : "raise:9.0",
+      "hero" : 5,
+      "informationSet" : "5:supplied-conditional-preflop:Ac Jc:"
+    },
+    "questionChanceMass" : 0.3333333333333333,
+    "scope" : "ROOT_CHANCE_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1",
+    "securityFaceHash" : "08b3f14071466b911c84d38b055bcc528babe18d0fdc46f052b0e4927e92cd0c",
+    "securitySlack" : 1.0E-8,
+    "trainerAdmission" : false,
+    "upperPlan" : 5,
+    "upperUtility" : -0.2710458541866183,
+    "upperWitnesses" : [ {
+      "behavioralPolicyHash" : "033eef9a6a6d416bececad7e7e7d327d0dee6c4da9097ab61cc519828170e74a",
+      "certificate" : {
+        "absoluteDualityGap" : 1.0724754417879012E-12,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : 3.9502561550403925,
+        "maximumDualViolation" : 4.547473508864641E-13,
+        "maximumPrimalViolation" : 3.1086244689504383E-15,
+        "primalValue" : 3.950256155041465,
+        "problemHash" : "aea548c22e9f5e19fa97d838a87c2add03f8d063cec126a3207f981852aab2af",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 268795,
+          "basisFactorizations" : 18,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 1
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044659722686984,
+      "dual" : [ -0.0, 593.0119542619361, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 593.0119542619357, -2.842170943040401E-14, 0.0, 593.0119542619361, 0.0, 6.394884621840902E-14, 0.0, 79.01878958834573, 0.0, 0.0, -5.684341886080802E-14, 5.684341886080802E-14, 0.0, 593.0119542619361 ],
+      "globalHeroBestResponse" : 0.2366552578029099,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 0.9999999999999998, 2.220446049250313E-16, 0.0, 0.0, 2.220446049250313E-16, 0.0, 0.0, 1.0, 0.02594286672877276, 0.89392171380721, 0.08013541946401725, 0.0, 1.6637839649336073E-6, 0.9999983362160351, 0.0, 0.0, 0.9999983362160351 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 0.9999999999999998, 0.0, 0.0, 0.0, 0.0, 0.02594286672877276, 0.89392171380721, 0.0, 1.6637839649336073E-6, 0.0, 0.0, 0.2805496676471794, 0.6162717120103428, 0.0, 0.0, 0.0, 0.0, 0.35946904277901787, 0.0, 0.0 ]
+    }, {
+      "behavioralPolicyHash" : "033eef9a6a6d416bececad7e7e7d327d0dee6c4da9097ab61cc519828170e74a",
+      "certificate" : {
+        "absoluteDualityGap" : 1.0724754417879012E-12,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : 3.9502561550403925,
+        "maximumDualViolation" : 4.547473508864641E-13,
+        "maximumPrimalViolation" : 3.1086244689504383E-15,
+        "primalValue" : 3.950256155041465,
+        "problemHash" : "aea548c22e9f5e19fa97d838a87c2add03f8d063cec126a3207f981852aab2af",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 268795,
+          "basisFactorizations" : 18,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 1
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044659722686984,
+      "dual" : [ -0.0, 593.0119542619361, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 593.0119542619357, -2.842170943040401E-14, 0.0, 593.0119542619361, 0.0, 6.394884621840902E-14, 0.0, 79.01878958834573, 0.0, 0.0, -5.684341886080802E-14, 5.684341886080802E-14, 0.0, 593.0119542619361 ],
+      "globalHeroBestResponse" : 0.2366552578029099,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 0.9999999999999998, 2.220446049250313E-16, 0.0, 0.0, 2.220446049250313E-16, 0.0, 0.0, 1.0, 0.02594286672877276, 0.89392171380721, 0.08013541946401725, 0.0, 1.6637839649336073E-6, 0.9999983362160351, 0.0, 0.0, 0.9999983362160351 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 0.9999999999999998, 0.0, 0.0, 0.0, 0.0, 0.02594286672877276, 0.89392171380721, 0.0, 1.6637839649336073E-6, 0.0, 0.0, 0.2805496676471794, 0.6162717120103428, 0.0, 0.0, 0.0, 0.0, 0.35946904277901787, 0.0, 0.0 ]
+    }, {
+      "behavioralPolicyHash" : "fb1751f330351081838e9964328325d8be741a37c892d233cb14011e28c51fae",
+      "certificate" : {
+        "absoluteDualityGap" : 3.1530333899354446E-13,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : -1.2183681724889368,
+        "maximumDualViolation" : 8.526512829121202E-14,
+        "maximumPrimalViolation" : 1.7763568394002505E-15,
+        "primalValue" : -1.2183681724886215,
+        "problemHash" : "12f5692007be7a5d5c085ff177cabd3825b5fc675c3f503100ad7666abac2d29",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 253813,
+          "basisFactorizations" : 17,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 0
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044633347899239,
+      "dual" : [ -0.0, 151.29861495845407, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 151.29861495845392, -7.105427357601002E-15, 0.0, 151.29861495845407, 0.0, 1.9984014443252818E-14, 0.0, 17.934306666178358, 0.0, 1.4210854715202004E-14, 1.4210854715202004E-14, 0.0, 0.0, 151.29861495845407 ],
+      "globalHeroBestResponse" : 0.23665525780290997,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.412632565013567E-7, 0.9999991587367435, 0.02594290989217036, 0.8939192932243133, 0.0801369556202598, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 1.0, 0.0, 0.0, 0.0, 8.412632565013567E-7, 0.02594290989217036, 0.8939192932243133, 0.0, 0.0, 0.0, 0.0, 0.2805498118052976, 0.6162727373550412, 0.0, 0.0, 0.0, 0.0, 0.35946816361942463, 0.0, 0.0 ]
+    }, {
+      "behavioralPolicyHash" : "fb1751f330351081838e9964328325d8be741a37c892d233cb14011e28c51fae",
+      "certificate" : {
+        "absoluteDualityGap" : 3.1530333899354446E-13,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : -1.2183681724889368,
+        "maximumDualViolation" : 8.526512829121202E-14,
+        "maximumPrimalViolation" : 1.7763568394002505E-15,
+        "primalValue" : -1.2183681724886215,
+        "problemHash" : "12f5692007be7a5d5c085ff177cabd3825b5fc675c3f503100ad7666abac2d29",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 253813,
+          "basisFactorizations" : 17,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 0
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044633347899239,
+      "dual" : [ -0.0, 151.29861495845407, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 151.29861495845392, -7.105427357601002E-15, 0.0, 151.29861495845407, 0.0, 1.9984014443252818E-14, 0.0, 17.934306666178358, 0.0, 1.4210854715202004E-14, 1.4210854715202004E-14, 0.0, 0.0, 151.29861495845407 ],
+      "globalHeroBestResponse" : 0.23665525780290997,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.412632565013567E-7, 0.9999991587367435, 0.02594290989217036, 0.8939192932243133, 0.0801369556202598, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 1.0, 0.0, 0.0, 0.0, 8.412632565013567E-7, 0.02594290989217036, 0.8939192932243133, 0.0, 0.0, 0.0, 0.0, 0.2805498118052976, 0.6162727373550412, 0.0, 0.0, 0.0, 0.0, 0.35946816361942463, 0.0, 0.0 ]
+    }, {
+      "behavioralPolicyHash" : "d4885c2ec79bea8be57ed1e366787b7d349e209a2ae106c659124a75634ab126",
+      "certificate" : {
+        "absoluteDualityGap" : 2.2737367544323206E-13,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : 46.99757250297273,
+        "maximumDualViolation" : 8.881784197001252E-14,
+        "maximumPrimalViolation" : 3.3306690738754696E-15,
+        "primalValue" : 46.99757250297296,
+        "problemHash" : "a973622bd2ab3316449d840ee9da0c4226d295172f596538ef1e8549a84bc244",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 418615,
+          "basisFactorizations" : 28,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 11
+        }
+      },
+      "conditionalHeroBestResponse" : -0.8044633347899206,
+      "dual" : [ -0.0, 464.8829077629202, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 459.1770001779718, 1.7366959973492726, 0.0, 464.8829077629202, 0.0, 0.0, 0.0, 56.56204410102317, 12.845652255682111, 0.0, 0.0, 0.0, 9.614515312876932, 464.8829077629202 ],
+      "globalHeroBestResponse" : 0.2366552578029099,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.412632590548696E-7, 0.999999158736741, 0.015307933575013031, 0.9846912251617277, 2.220446049250313E-16, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 1.0, 0.0, 0.0, 0.0, 8.412632590548696E-7, 0.015307933575013031, 0.9846912251617277, 0.0, 0.0, 0.0, 1.0, 0.2805498118052975, 0.24350399215244817, 0.0, 0.0, 0.0, 0.0, 0.3594681636194233, 0.7326547207457061, 0.0 ]
+    }, {
+      "behavioralPolicyHash" : "e032552ae5070cf5d015acd5eec1d97e7bdef43b5492d20f849a98d0b42c3308",
+      "certificate" : {
+        "absoluteDualityGap" : 9.618972285352356E-13,
+        "algorithm" : "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1",
+        "constraints" : 22,
+        "dualValue" : -1.2595384375266576,
+        "maximumDualViolation" : 3.907985046680551E-14,
+        "maximumPrimalViolation" : 6.938893903907228E-16,
+        "primalValue" : -1.2595384375256957,
+        "problemHash" : "ed2ae660d8e9a5b5353cc4348556217dcebe60d70a43d76825c2355ce9a00c2f",
+        "variables" : 21,
+        "work" : {
+          "arithmeticWork" : 268795,
+          "basisFactorizations" : 18,
+          "blandFallback" : false,
+          "cleanupPivots" : 0,
+          "phaseOnePivots" : 14,
+          "phaseTwoPivots" : 1
+        }
+      },
+      "conditionalHeroBestResponse" : -0.2710458541866174,
+      "dual" : [ -0.0, 464.88290776292195, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 459.1770001779736, -2.842170943040401E-14, 0.0, 464.8829077629219, 0.0, 0.0, 0.0, 54.65409423763097, 0.0, 0.0, 6.656323246555303, 0.0, 0.0, 464.88290776292195 ],
+      "globalHeroBestResponse" : 0.2366552578029098,
+      "opponentFlow" : {
+        "actor" : 3,
+        "conservation" : [ {
+          "childSequences" : [ 1, 2, 3 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 4, 5, 6 ],
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 3
+        }, {
+          "childSequences" : [ 7, 8, 9 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 10, 11, 12 ],
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 9
+        }, {
+          "childSequences" : [ 13, 14, 15 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+          "parentSequence" : 0
+        }, {
+          "childSequences" : [ 16, 17, 18 ],
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+          "parentSequence" : 15
+        } ],
+        "maximumResidual" : 0.0,
+        "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.412632545029552E-7, 0.9999991587367455, 0.024487978069394466, 0.9755111806673507, 3.3306690738754696E-16, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+        "sequences" : [ {
+          "action" : "",
+          "index" : 0,
+          "key" : ""
+        }, {
+          "action" : "fold",
+          "index" : 1,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 2,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 3,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 4,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 5,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 6,
+          "key" : "3:supplied-conditional-preflop:9s Js:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 7,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 8,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 9,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 10,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 11,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 12,
+          "key" : "3:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "fold",
+          "index" : 13,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "call",
+          "index" : 14,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "raise:22.0",
+          "index" : 15,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+        }, {
+          "action" : "fold",
+          "index" : 16,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "call",
+          "index" : 17,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        }, {
+          "action" : "raise:100.0",
+          "index" : 18,
+          "key" : "3:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+        } ]
+      },
+      "point" : [ 0.0, 1.0, 0.0, 0.0, 0.0, 8.412632545029552E-7, 0.024487978069394466, 0.9755111806673507, 0.0, 0.0, 0.0, 0.0, 0.28054981180529764, 0.6108661836340332, 0.0, 0.0, 0.0, 0.0, 0.18166233675165516, 0.0, 0.0 ]
+    } ],
+    "work" : {
+      "compilerLimit" : 8000000,
+      "compilerUnits" : 22134,
+      "intervalLpArithmeticWork" : 3619932,
+      "intervalLpPivots" : 160,
+      "intervalLpSolves" : 7
+    }
+  },
+  "evScope" : "OPTIMAL_HERO_CONTINUATION_FIXED_OPPONENT_INCREMENTAL_DECISION_EV/v1",
+  "heroCommittedBb" : 1.0,
+  "lowerEvBb" : 0.19553402773143347,
+  "payoffs" : [ {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 378820,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 273518,
+      "ties" : 5670
+    },
+    "dealIndex" : 0,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 302724,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 334605,
+      "ties" : 20679
+    },
+    "dealIndex" : 1,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 237345,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 402467,
+      "ties" : 18196
+    },
+    "dealIndex" : 2,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 342053,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 311926,
+      "ties" : 4029
+    },
+    "dealIndex" : 3,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 336896,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 317317,
+      "ties" : 3795
+    },
+    "dealIndex" : 4,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 449803,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 182075,
+      "ties" : 26130
+    },
+    "dealIndex" : 5,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 367865,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 284400,
+      "ties" : 5743
+    },
+    "dealIndex" : 6,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 344307,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 309941,
+      "ties" : 3760
+    },
+    "dealIndex" : 7,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 289221,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 365528,
+      "ties" : 3259
+    },
+    "dealIndex" : 8,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 374453,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 278888,
+      "ties" : 4667
+    },
+    "dealIndex" : 9,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 295999,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 345416,
+      "ties" : 16593
+    },
+    "dealIndex" : 10,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 234054,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 407421,
+      "ties" : 16533
+    },
+    "dealIndex" : 11,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 332883,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 321713,
+      "ties" : 3412
+    },
+    "dealIndex" : 12,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 329094,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 325571,
+      "ties" : 3343
+    },
+    "dealIndex" : 13,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 456345,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 174717,
+      "ties" : 26946
+    },
+    "dealIndex" : 14,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 355647,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 297489,
+      "ties" : 4872
+    },
+    "dealIndex" : 15,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 335938,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 318531,
+      "ties" : 3539
+    },
+    "dealIndex" : 16,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 281533,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 372794,
+      "ties" : 3681
+    },
+    "dealIndex" : 17,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 357502,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 296495,
+      "ties" : 4011
+    },
+    "dealIndex" : 18,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 275712,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 367414,
+      "ties" : 14882
+    },
+    "dealIndex" : 19,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 213911,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 430443,
+      "ties" : 13654
+    },
+    "dealIndex" : 20,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 327242,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 327876,
+      "ties" : 2890
+    },
+    "dealIndex" : 21,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 324140,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 330997,
+      "ties" : 2871
+    },
+    "dealIndex" : 22,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 451682,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 181756,
+      "ties" : 24570
+    },
+    "dealIndex" : 23,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 325629,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 328280,
+      "ties" : 4099
+    },
+    "dealIndex" : 24,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 305771,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 349330,
+      "ties" : 2907
+    },
+    "dealIndex" : 25,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "counts" : {
+      "boards" : 658008,
+      "firstSeat" : 3,
+      "firstWins" : 257255,
+      "handEvaluations" : 1316016,
+      "secondSeat" : 5,
+      "secondWins" : 397573,
+      "ties" : 3180
+    },
+    "dealIndex" : 26,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  } ],
+  "prior" : [ {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 0,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 1,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 2,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 3,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 4,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 5,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 6,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 7,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 8,
+    "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 9,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 10,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 11,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 12,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 13,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 14,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 15,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 16,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 17,
+    "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 18,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 19,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 20,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 21,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 22,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 23,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 24,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 25,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ]
+  }, {
+    "conditionalProbability" : 0.037037037037037035,
+    "dealIndex" : 26,
+    "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ]
+  } ],
+  "publicationStatus" : "APPROXIMATE_SECURITY_FACE_DIAGNOSTIC_ONLY",
+  "request" : {
+    "input" : {
+      "schemaVersion" : "pokerlab-supplied-joint-preflop-input/v1",
+      "specification" : {
+        "history" : [ {
+          "action" : "fold",
+          "seat" : "UTG"
+        }, {
+          "action" : "fold",
+          "seat" : "HJ"
+        }, {
+          "action" : "fold",
+          "seat" : "CO"
+        }, {
+          "action" : "raise:3.0",
+          "seat" : "BTN"
+        }, {
+          "action" : "fold",
+          "seat" : "SB"
+        } ],
+        "rules" : {
+          "raiseSchedule" : "NEXT_TARGET",
+          "raiseToBb" : [ 3.0, 9.0, 22.0, 50.0, 100.0 ],
+          "smallBlindBb" : 0.5,
+          "stackBb" : 100.0
+        }
+      },
+      "worlds" : [ {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "9s Js", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "8h Ts", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      } ]
+    },
+    "question" : {
+      "action" : "raise:9.0",
+      "hero" : 5,
+      "informationSet" : "5:supplied-conditional-preflop:Ac Jc:"
+    },
+    "schemaVersion" : "pokerlab-supplied-root-action-interval-request/v1",
+    "securitySlack" : 1.0E-8
+  },
+  "schemaVersion" : "pokerlab-supplied-root-action-interval-report/v1",
+  "trainerAdmission" : false,
+  "upperEvBb" : 0.7289541458133817
+}
