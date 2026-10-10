@@ -1,0 +1,210 @@
+{
+  "scope": "OPTIONAL_INDEPENDENT_LITERAL_JOINT_LOSS_NORMAL_FORM_ORACLE_NO_ADMISSION",
+  "reportBytesSha256": "37384cb933166150badb684f497edefd9978333c72323ca850321911d0c0610e",
+  "sourceInputHash": "92e17af3796cb7e188b266d8fdfd996c634e2acb8e86eaa16561b06054eadb18",
+  "buttonCompletePlans": 729,
+  "blindCompletePlans": 5832,
+  "securitySlackBb": 1e-08,
+  "minimumQuestionChanceOpponentMass": 0.22222203735735516,
+  "maximumQuestionChanceOpponentMass": 0.22222223099956337,
+  "moves": [
+    {
+      "action": "fold",
+      "lowerLossBb": 9.112156463485077,
+      "upperLossBb": 9.112156583600543,
+      "lowerControlObjectives": [
+        9.112156463485077
+      ],
+      "upperControlObjectives": [
+        9.112156583600543,
+        9.11215658360054,
+        9.11215658360054
+      ]
+    },
+    {
+      "action": "call",
+      "lowerLossBb": 0,
+      "upperLossBb": 4.49999995044692e-08,
+      "lowerControlObjectives": [
+        0.0
+      ],
+      "upperControlObjectives": [
+        -9.112156463485073,
+        4.49999995044692e-08,
+        4.49999995044692e-08
+      ]
+    },
+    {
+      "action": "raise:50.0",
+      "lowerLossBb": 0,
+      "upperLossBb": 0.48322677969277367,
+      "lowerControlObjectives": [
+        0.0,
+        0.0
+      ],
+      "upperControlObjectives": [
+        -8.628929683792302,
+        0.48322677969277367
+      ]
+    }
+  ],
+  "ownedWitnessChecks": [
+    {
+      "action": "fold",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.11215646348508,
+        "raise:50.0": 9.112156463485084
+      },
+      "actualDecisionLossBb": 9.112156463485084,
+      "plannedGapBb": 9.112156463485084,
+      "questionChanceOpponentMass": 0.2222220373573798
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156583600536,
+        "raise:50.0": 9.112156583600537
+      },
+      "actualDecisionLossBb": 9.112156583600537,
+      "plannedGapBb": 9.112156583600536,
+      "questionChanceOpponentMass": 0.2222222309995629
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156583600528,
+        "raise:50.0": 9.112156583600532
+      },
+      "actualDecisionLossBb": 9.112156583600532,
+      "plannedGapBb": 9.112156583600521,
+      "questionChanceOpponentMass": 0.2222222309995621
+    },
+    {
+      "action": "fold",
+      "kind": "upper",
+      "control": 2,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156583600528,
+        "raise:50.0": 9.11215658360053
+      },
+      "actualDecisionLossBb": 9.11215658360053,
+      "plannedGapBb": 9.11215658360053,
+      "questionChanceOpponentMass": 0.22222223099956215
+    },
+    {
+      "action": "call",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156520174672,
+        "raise:50.0": 9.112156520174677
+      },
+      "actualDecisionLossBb": 5.329070518200751e-15,
+      "plannedGapBb": 3.965579534130774e-15,
+      "questionChanceOpponentMass": 0.22222212874854855
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156463485077,
+        "raise:50.0": 9.112156463485082
+      },
+      "actualDecisionLossBb": 5.329070518200751e-15,
+      "plannedGapBb": -9.112156463485077,
+      "questionChanceOpponentMass": 0.22222203735738066
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156501136766,
+        "raise:50.0": 9.112156546136761
+      },
+      "actualDecisionLossBb": 4.49999948415325e-08,
+      "plannedGapBb": 4.499999405917222e-08,
+      "questionChanceOpponentMass": 0.22222222222222218
+    },
+    {
+      "action": "call",
+      "kind": "upper",
+      "control": 2,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156501136765,
+        "raise:50.0": 9.112156546136761
+      },
+      "actualDecisionLossBb": 4.499999661788934e-08,
+      "plannedGapBb": 4.4999996307373835e-08,
+      "questionChanceOpponentMass": 0.2222222222222222
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "lower",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156520174672,
+        "raise:50.0": 9.112156520174675
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": 1.264613945923582e-14,
+      "questionChanceOpponentMass": 0.22222212874855052
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "lower",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156520174672,
+        "raise:50.0": 9.112156520174672
+      },
+      "actualDecisionLossBb": 0,
+      "plannedGapBb": 0,
+      "questionChanceOpponentMass": 0.22222212874854846
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "upper",
+      "control": 0,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.112156463485078,
+        "raise:50.0": 8.628929683792315
+      },
+      "actualDecisionLossBb": 0.48322677969276384,
+      "plannedGapBb": -8.628929683792315,
+      "questionChanceOpponentMass": 0.2222220373573678
+    },
+    {
+      "action": "raise:50.0",
+      "kind": "upper",
+      "control": 1,
+      "conditionalEvsBb": {
+        "fold": 0.0,
+        "call": 9.11215646348508,
+        "raise:50.0": 8.628929683792313
+      },
+      "actualDecisionLossBb": 0.4832267796927674,
+      "plannedGapBb": 0.483226779692767,
+      "questionChanceOpponentMass": 0.222222037357365
+    }
+  ],
+  "comparisonToleranceBb": 2e-08
+}
