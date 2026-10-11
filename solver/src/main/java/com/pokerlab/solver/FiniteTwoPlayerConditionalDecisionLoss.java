@@ -10,6 +10,8 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
     public static final String ALGORITHM = "JOINT_CONDITIONAL_DECISION_LOSS_OWNED_LP/v1";
     public static final String CONDITIONED_ALGORITHM =
             "CONDITIONED_JOINT_CONDITIONAL_DECISION_LOSS_OWNED_LP/v2";
+    public static final String L1_CONDITIONED_ALGORITHM =
+            "CONDITIONED_STABLE_L1_JOINT_CONDITIONAL_DECISION_LOSS_OWNED_LP/v3";
     public static final String SCOPE =
             "JOINT_OTHER_ACTION_MAX_MINUS_SELECTED_ACTION_MAX_CLAMPED_ZERO/v1";
     private static final double TOLERANCE = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -150,10 +152,34 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
             long arithmeticLimit,
             boolean conditioned)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                false);
+    }
+
+    static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            boolean ascendingL1JointRows)
+            throws Exception {
         Objects.requireNonNull(question);
         // Validate limits before consulting callbacks; no controls may enlarge old caps.
         new SequenceFormAffineProjection.Budget(compilerLimit);
-        if (pivotLimit < 0
+        if (ascendingL1JointRows && !conditioned
+                || pivotLimit < 0
                 || pivotLimit > BoundedLinearProgram.MAX_PIVOTS
                 || arithmeticLimit < 0
                 || arithmeticLimit > BoundedLinearProgram.MAX_ARITHMETIC_WORK
@@ -212,7 +238,9 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
                 throw new IllegalStateException("Owned action controls do not share one face");
         }
         var budget = new SequenceFormAffineProjection.Budget(compilerLimit - compiler);
-        var lp = new LpBudget(pivotLimit - pivots, arithmeticLimit - arithmetic);
+        var lp =
+                new LpBudget(
+                        pivotLimit - pivots, arithmeticLimit - arithmetic, ascendingL1JointRows);
         var actions = new ArrayList<Action>();
         for (int i = 0; i < owned.size(); i++)
             actions.add(new Action(info.actions().get(i), owned.get(i).audit()));
@@ -345,7 +373,9 @@ public final class FiniteTwoPlayerConditionalDecisionLoss {
         }
         return new Result(
                 new Audit(
-                        conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
+                        ascendingL1JointRows
+                                ? L1_CONDITIONED_ALGORITHM
+                                : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,

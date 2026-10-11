@@ -9,6 +9,8 @@ import java.util.*;
  */
 public final class BoundedLinearProgram {
     public static final String ALGORITHM = "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1";
+    public static final String ASCENDING_L1_ALGORITHM =
+            "OWNED_STABLE_ASCENDING_L1_ROWS_ORIGINAL_CERTIFICATE/v2";
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
     public static final int MAX_PIVOTS = 10_000;
@@ -103,6 +105,122 @@ public final class BoundedLinearProgram {
         var problem = copy(matrix, rhs, cost);
         String hash = SixMaxHistoryPhysicalConditionalRefinement.hash(problem);
         return new Engine(problem, pivots, work).solve(hash);
+    }
+
+    /** Explicit representation, never an automatic retry of a rejected original-order solve. */
+    public static Result solveAscendingL1Rows(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveAscendingL1Rows(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveAscendingL1Rows(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
+            throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
+        dimensions(matrix, rhs, cost);
+        int m = rhs.length, n = cost.length;
+        var budget = new RowBudget(work);
+        // Reserve copying, coefficient/metric validation, reindexing, hashing and the ORIGINAL
+        // certificate's arithmetic before doing that work. Comparisons are charged separately.
+        budget.charge(32L * m * n + 48L * m + 16L * n);
+        var original = copy(matrix, rhs, cost);
+        var metric = new double[m];
+        var order = new ArrayList<Integer>(m);
+        for (int i = 0; i < m; i++) {
+            order.add(i);
+            for (double value : original.matrix()[i]) metric[i] += Math.abs(value);
+            finite(metric[i]);
+        }
+        order.sort(
+                (a, b) -> {
+                    budget.charge(8);
+                    int compared = Double.compare(metric[a], metric[b]);
+                    return compared == 0 ? Integer.compare(a, b) : compared;
+                });
+        var sorted = new double[m][];
+        var bounds = new double[m];
+        for (int i = 0; i < m; i++) {
+            sorted[i] = original.matrix()[order.get(i)].clone();
+            bounds[i] = original.rhs()[order.get(i)];
+        }
+        var ordered = new Problem(sorted, bounds, original.cost().clone());
+        var solved =
+                new Engine(ordered, pivots, work - budget.used)
+                        .solve(SixMaxHistoryPhysicalConditionalRefinement.hash(ordered));
+        budget.charge(solved.certificate().work().arithmeticWork());
+        var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
+        var dual = new double[m];
+        for (int i = 0; i < m; i++) dual[order.get(i)] = solved.dual().get(i);
+        double primalViolation = 0, dualViolation = 0;
+        for (int j = 0; j < n; j++) {
+            primalViolation = Math.max(primalViolation, -point[j]);
+            double column = 0;
+            for (int i = 0; i < m; i++) column += original.matrix()[i][j] * dual[i];
+            dualViolation = Math.max(dualViolation, original.cost()[j] - finite(column));
+        }
+        for (int i = 0; i < m; i++) {
+            primalViolation =
+                    Math.max(primalViolation, dot(original.matrix()[i], point) - original.rhs()[i]);
+            dualViolation = Math.max(dualViolation, -dual[i]);
+        }
+        double value = dot(original.cost(), point), upper = dot(original.rhs(), dual);
+        double gap = Math.abs(finite(upper - value));
+        if (finite(primalViolation) > CERTIFICATE_TOLERANCE
+                || finite(dualViolation) > CERTIFICATE_TOLERANCE
+                || gap > CERTIFICATE_TOLERANCE)
+            throw reject(Failure.NUMERICAL_FAILURE, "Original row-mapped LP certificate failed");
+        var previous = solved.certificate().work();
+        return new Result(
+                point,
+                dual,
+                new Certificate(
+                        ASCENDING_L1_ALGORITHM,
+                        SixMaxHistoryPhysicalConditionalRefinement.hash(original),
+                        n,
+                        m,
+                        value,
+                        upper,
+                        primalViolation,
+                        dualViolation,
+                        gap,
+                        new Work(
+                                previous.phaseOnePivots(),
+                                previous.cleanupPivots(),
+                                previous.phaseTwoPivots(),
+                                previous.basisFactorizations(),
+                                budget.used,
+                                previous.blandFallback())));
+    }
+
+    private static final class RowBudget {
+        final long limit;
+        long used;
+
+        RowBudget(long limit) {
+            this.limit = limit;
+        }
+
+        void charge(long amount) {
+            if (amount < 0 || amount > limit - used)
+                throw reject(Failure.WORK_LIMIT, "LP row-order work budget exceeded");
+            used += amount;
+        }
+    }
+
+    private static void dimensions(double[][] matrix, double[] rhs, double[] cost) {
+        if (matrix == null
+                || rhs == null
+                || cost == null
+                || cost.length < 1
+                || cost.length > MAX_VARIABLES
+                || rhs.length < 1
+                || rhs.length > MAX_CONSTRAINTS
+                || matrix.length != rhs.length)
+            throw reject(Failure.INVALID_INPUT, "Bounded LP dimensions required");
+        for (double[] row : matrix)
+            if (row == null || row.length != cost.length)
+                throw reject(Failure.INVALID_INPUT, "Ragged LP matrix");
     }
 
     private static Problem copy(double[][] matrix, double[] rhs, double[] cost) {
