@@ -1,0 +1,21 @@
+{
+  "collectionHash" : "227fd33b33ce8ed8be46af3d0d4515e4c7b017c3468ec6f9a025bf96d67070b2",
+  "schemaVersion" : "pokerlab-supplied-interval-collection-manifest/v1",
+  "sources" : [ {
+    "reportFile" : "supplied-root-five-target-77-l1-interval-feedback-report.json.gz",
+    "reportHash" : "ee44745900b245dcdad36e6820b27553dff54c7370ec3dc8093fdf60415de014",
+    "requestFile" : "supplied-root-five-target-77-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-root-five-target-99-l1-interval-feedback-report.json.gz",
+    "reportHash" : "959a0c07629234002d9249045caee0f9974e1468b8e6cfe04b374d5089e21039",
+    "requestFile" : "supplied-root-five-target-99-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-root-five-target-aj-l1-interval-feedback-report.json.gz",
+    "reportHash" : "213da44dd7dcad0f073a4e4ee9bbd34434d6cbd7254bf775933da4b57339f643",
+    "requestFile" : "supplied-root-five-target-aj-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-conditional-five-target-99-interval-feedback-report.json",
+    "reportHash" : "5fb55653ae5f53d0110cea8507be9a37a6af2fe5cc596f433aaab0838b6b0aa9",
+    "requestFile" : "supplied-conditional-five-target-99-interval-feedback-request.json"
+  } ]
+}
