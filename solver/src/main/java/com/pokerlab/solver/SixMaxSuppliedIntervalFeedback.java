@@ -1,6 +1,7 @@
 package com.pokerlab.solver;
 
 import com.pokerlab.solver.PreflopAllInSpot.Seat;
+import com.pokerlab.solver.SixMaxPreflopResearchTrainer.PublicAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
@@ -134,13 +135,32 @@ public final class SixMaxSuppliedIntervalFeedback {
         }
     }
 
+    // Derived from the owned physical game, never from caller-created reports or parsed info keys.
+    record QuestionContext(
+            Seat hero,
+            String heroCards,
+            List<PublicAction> history,
+            SixMaxPreflopPublicTable.Snapshot table,
+            List<String> legalActions) {
+        QuestionContext {
+            history = List.copyOf(history);
+            legalActions = List.copyOf(legalActions);
+        }
+    }
+
     public static final class Result {
         private final Report report;
         private final QualifiedFeedback feedback;
+        private final QuestionContext context;
 
-        private Result(Report report) throws Exception {
+        private Result(Report report, QuestionContext context) throws Exception {
             this.report = report;
+            this.context = context;
             feedback = report.qualifiedForIntervalFeedback() ? new QualifiedFeedback(report) : null;
+        }
+
+        QuestionContext questionContext() {
+            return context;
         }
 
         public Report report() {
@@ -315,6 +335,33 @@ public final class SixMaxSuppliedIntervalFeedback {
                             losses,
                             refFailures));
         }
+        var history =
+                game.publicBettingState(state).history().stream()
+                        .filter(
+                                m ->
+                                        m.kind() != SixMaxPreflopBetting.Kind.POST_SMALL_BLIND
+                                                && m.kind()
+                                                        != SixMaxPreflopBetting.Kind.POST_BIG_BLIND)
+                        .map(m -> new PublicAction(m.seat(), SixMaxHeadsUpPreflopGame.encode(m)))
+                        .toList();
+        var table =
+                SixMaxPreflopPublicTable.replay(request.input().specification().rules(), history);
+        var legal = game.legalActions(state);
+        var hero = Seat.values()[request.hero()];
+        var cards = game.dealtHands(state).get(request.hero()).key();
+        if (table.actingSeat() != hero
+                || selected.primary().actor() != hero
+                || !selected.primary().ownHand().equals(cards)
+                || !(request.hero() + ":" + game.informationSet(state))
+                        .equals(request.informationSet())
+                || !legal.equals(moves.stream().map(Move::action).toList())
+                || table.players().stream()
+                                .filter(p -> p.seat() == hero)
+                                .findFirst()
+                                .orElseThrow()
+                                .committedBb()
+                        != committed)
+            throw new IllegalStateException("Owned interval question context differs");
         return new Result(
                 new Report(
                         REPORT_SCHEMA,
@@ -333,7 +380,8 @@ public final class SixMaxSuppliedIntervalFeedback {
                         references,
                         moves,
                         failures.isEmpty(),
-                        List.copyOf(failures)));
+                        List.copyOf(failures)),
+                new QuestionContext(hero, cards, history, table, legal));
     }
 
     public static Request readRequest(Path path) throws Exception {

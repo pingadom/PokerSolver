@@ -1,0 +1,12 @@
+# Explicit local research overlay. Qualification replays once before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_INTERVAL_REQUEST_PATH: /opt/pokerlab/interval-request.json
+      TRAINER_INTERVAL_REPORT_PATH: /opt/pokerlab/interval-report.json
+      TRAINER_INTERVAL_REPORT_HASH: 5fb55653ae5f53d0110cea8507be9a37a6af2fe5cc596f433aaab0838b6b0aa9
+    volumes:
+      - ./docs/data/supplied-conditional-five-target-99-interval-feedback-request.json:/opt/pokerlab/interval-request.json:ro
+      - ./docs/data/supplied-conditional-five-target-99-interval-feedback-report.json:/opt/pokerlab/interval-report.json:ro

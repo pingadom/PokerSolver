@@ -87,6 +87,9 @@ jobs:
       - run: docker compose config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-interval.yml config --quiet
+      - name: Verify interval smoke readiness retries
+        run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_trainer.py'
       - run: docker compose up --build -d --scale worker=2
       - name: Wait for API readiness
         run: |
@@ -97,6 +100,8 @@ jobs:
           exit 1
       - run: ./scripts/smoke.sh
       - run: curl --fail http://localhost:18080/v3/api-docs && curl --fail http://localhost:8080/
+      - name: Interval drill is absent without opt-in
+        run: python3 scripts/smoke-interval-trainer.py --disabled
       - name: Redis outage remains correct
         run: |
           docker compose stop redis
@@ -226,6 +231,10 @@ jobs:
           assert graded['question']['packHash'] == metadata['packHash']
           assert graded['feedback']['evLossBb'] >= 0
           PY
+      - name: Pinned interval overlay replays qualification and serves cached grades
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-interval.yml up -d --no-deps api
+          python3 scripts/smoke-interval-trainer.py
       - name: Service logs
         if: always()
         run: docker compose logs --no-color > compose.log

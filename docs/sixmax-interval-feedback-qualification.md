@@ -2,7 +2,7 @@
 
 PokerLab can now qualify one later preflop question for **interval-based feedback** while retaining the rejected result of the old scalar-EV study. A move is judged by its worst and best decision loss against the same opponent strategy and action-conditioned posterior. A wide interval is reported as strategy-dependent; it is not assigned a single supposedly precise EV.
 
-This is a backend research format: `SELECTED_QUESTION_INTERVAL_FEEDBACK_RESEARCH_ONLY`, with `trainerAdmission=false`. It supplies an opaque qualified result for a future question/grade/review integration. It does not register a new public trainer pack, certify the whole study, or solve a six-player cash equilibrium. Exactly two players are active at a six-seat table.
+This is a backend research format: `SELECTED_QUESTION_INTERVAL_FEEDBACK_RESEARCH_ONLY`, with `trainerAdmission=false`. It supplies an opaque qualified result for the separate [offline question/grade/review drill](sixmax-interval-trainer.md). It does not register a new public trainer pack, certify the whole study, or solve a six-player cash equilibrium. Exactly two players are active at a six-seat table.
 
 ## Saved question
 
@@ -80,6 +80,6 @@ Analytic tests cover both hero orientations, original extrema, raw objective rec
 
 ## Next milestone
 
-Build a separately identified saved-question and grade/review path using the qualified capability. Feedback must show an EV and loss **range**, the declared loss limit and strategy-dependent alternatives, together with the six-seat table state. It must preserve explicit supplied-belief provenance and avoid presenting this selected question as whole-pack admission.
+The separately identified [interval drill](sixmax-interval-trainer.md) now supplies a saved question, range-based grades, explicit attempt counts and exact review replay using the qualified capability. A default-disabled research API physically replays an operator-pinned qualification once at startup and then serves cached question/grade/review routes. Next connect the table/action-button UI, preserving supplied-belief provenance and one-question coverage.
 
 Synthetic supplied priors, unavailable source-policy history reach, mandatory postflop checkdown and no rake remain model limits. Broader realistic ranges, strategic postflop and multiway equilibrium are separate work. AWS deployment remains paused.

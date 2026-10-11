@@ -39,6 +39,10 @@ pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
   trainer:
+    interval-research-enabled: ${TRAINER_INTERVAL_RESEARCH_ENABLED:false}
+    interval-request-path: ${TRAINER_INTERVAL_REQUEST_PATH:}
+    interval-report-path: ${TRAINER_INTERVAL_REPORT_PATH:}
+    interval-report-hash: ${TRAINER_INTERVAL_REPORT_HASH:}
     research-enabled: ${TRAINER_RESEARCH_ENABLED:false}
     research-pack-path: ${TRAINER_RESEARCH_PACK_PATH:}
     multiway-research-enabled: ${TRAINER_MULTIWAY_RESEARCH_ENABLED:false}

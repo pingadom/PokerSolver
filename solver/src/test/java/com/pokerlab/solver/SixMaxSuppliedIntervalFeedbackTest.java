@@ -136,6 +136,8 @@ class SixMaxSuppliedIntervalFeedbackTest {
         assertFalse(other.report().legacySelectedDecision().material());
         assertTrue(other.report().rejectionReasons().contains("NON_MATERIAL_SELECTED_DECISION"));
         assertTrue(other.qualifiedFeedback().isEmpty());
+        assertThrows(
+                IllegalArgumentException.class, () -> new SixMaxSuppliedIntervalTrainer(other));
     }
 
     @Test
@@ -144,6 +146,8 @@ class SixMaxSuppliedIntervalFeedbackTest {
         var narrow = SixMaxSuppliedIntervalFeedback.solve(game, limits(1e-8, .01));
         assertFalse(narrow.report().qualifiedForIntervalFeedback());
         assertTrue(narrow.qualifiedFeedback().isEmpty());
+        assertThrows(
+                IllegalArgumentException.class, () -> new SixMaxSuppliedIntervalTrainer(narrow));
         for (var ref : narrow.report().referenceChecks()) {
             assertFalse(ref.insideDeclaredFace());
             assertFalse(ref.boundsChecked());
