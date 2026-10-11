@@ -1,0 +1,9 @@
+# Explicit local research opt-in. Replays all four pinned sources before serving cached decisions.
+services:
+  api:
+    environment:
+      TRAINER_INTERVAL_COLLECTION_ENABLED: "true"
+      TRAINER_INTERVAL_COLLECTION_MANIFEST_PATH: /opt/pokerlab/interval-collection/supplied-four-question-interval-collection-manifest.json
+      TRAINER_INTERVAL_COLLECTION_HASH: 227fd33b33ce8ed8be46af3d0d4515e4c7b017c3468ec6f9a025bf96d67070b2
+    volumes:
+      - ./docs/data:/opt/pokerlab/interval-collection:ro
