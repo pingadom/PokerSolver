@@ -531,6 +531,7 @@ export default function App() {
               </p>
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
               <p><a className="solver-demo-link" href="#sixmax-preflop">Six-seat opens and raises research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#interval-preflop">Pocket nines: play the interval research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#multiway">Six-seat call/fold research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
