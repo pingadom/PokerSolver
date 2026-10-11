@@ -90,8 +90,18 @@ python scripts/smoke-interval-trainer.py
 
 This overlay enables the interval drill independently of the existing scalar trainer overlay. CI checks default-disabled routes first, then restarts the actual API with the interval overlay and compares the entire question, all three grades and review with the checked-in drill. It also checks stale hashes, illegal actions, submitted EVs and oversized reviews over real HTTP. Docker execution is verified on the Linux CI runner.
 
-## Next integration
+## Table UI and replayable attempts
 
-Connect the table/action-button UI to the separate interval protocol, presenting EV/loss ranges and uncertainty without replacing the existing scalar trainer contracts. A broader collection needs independently qualified questions and an identity binding its ordered reports and selection settings. Random street/full-hand practice needs that additional coverage first.
+Open `#interval-preflop` from the solver section after explicitly enabling the API above. The page pins the currently loaded canonical report in `#interval-preflop?report=<hash>`. A stale link, changed hash or inconsistent response blocks practice and offers an explicit current-report reset. A default-disabled server shows an unavailable state; the UI does not substitute fixture answers or enable server settings.
+
+Six public seats show stacks, contributions, folds and last moves. Only hero's cards are revealed. Choose Fold, Call or Raise to 50 bb using the buttons beneath hero (or keyboard 1–3 when focus is outside another control). After grading, every button shows its EV and jointly computed loss range. Feedback beneath the controls distinguishes within-limit, outside-limit and strategy-dependent moves. Ranges are rounded outwards with useful precision; expanding the explanation exposes the exact returned endpoints. No midpoint EV, scalar score or policy frequency is invented.
+
+“Try another move” retries this **same question**. The page retains at most 100 explicit attempts in memory and prevents pending or repeated clicks from adding duplicates. “Review attempts” sends only the report pin and action list; the returned canonical question, grades, order and separate counts must agree with the observed attempts before export becomes available. “Download replayable review” saves that server-returned JSON in the offline CLI's existing review schema. Reloading or explicitly resetting the drill clears the in-memory attempts. Account persistence is not implemented.
+
+Frontend tests use the actual checked-in physically replayed drill, cover all three verdicts, public-seat privacy, finite/ordered ranges, stale/malformed responses, zero and 100 attempts, asynchronous cancellation, keyboard guards and JSON download. Existing scalar trainer pages and admission gates remain independent.
+
+## Next coverage
+
+A broader collection needs independently qualified questions and an identity binding its ordered reports and selection settings. Random street/full-hand practice needs that additional coverage first.
 
 Supplied synthetic priors, exactly two active players, mandatory postflop checkdown, unavailable source-policy history reach and no rake remain limitations. Strategic postflop, broader preflop coverage and multiway equilibrium remain separate work. AWS deployment remains paused.
