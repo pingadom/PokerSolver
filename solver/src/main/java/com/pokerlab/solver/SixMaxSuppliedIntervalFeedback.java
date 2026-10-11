@@ -10,6 +10,8 @@ import java.util.*;
 public final class SixMaxSuppliedIntervalFeedback {
     public static final String REQUEST_SCHEMA = "pokerlab-supplied-interval-feedback-request/v1";
     public static final String REPORT_SCHEMA = "pokerlab-supplied-interval-feedback-report/v1";
+    public static final String L1_REQUEST_SCHEMA = "pokerlab-supplied-interval-feedback-request/v2";
+    public static final String L1_REPORT_SCHEMA = "pokerlab-supplied-interval-feedback-report/v2";
     public static final String STATUS = "SELECTED_QUESTION_INTERVAL_FEEDBACK_RESEARCH_ONLY";
     public static final int MAX_BYTES = SixMaxSuppliedConditionalDecisionLoss.MAX_BYTES;
     private static final double TOLERANCE = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -29,7 +31,7 @@ public final class SixMaxSuppliedIntervalFeedback {
             double minimumReach,
             double maximumLossBb) {
         public Request {
-            if (!REQUEST_SCHEMA.equals(schemaVersion)
+            if ((!REQUEST_SCHEMA.equals(schemaVersion) && !L1_REQUEST_SCHEMA.equals(schemaVersion))
                     || !Double.isFinite(maximumLossBb)
                     || maximumLossBb <= 0
                     || maximumLossBb > SixMaxSuitDecisionStability.DECISION_TOLERANCE_BB)
@@ -91,12 +93,17 @@ public final class SixMaxSuppliedIntervalFeedback {
             boolean qualifiedForIntervalFeedback,
             List<String> rejectionReasons) {
         public Report {
-            if (!REPORT_SCHEMA.equals(schemaVersion)
+            boolean l1 = request != null && L1_REQUEST_SCHEMA.equals(request.schemaVersion());
+            if (!(l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA).equals(schemaVersion)
                     || !STATUS.equals(publicationStatus)
                     || trainerAdmission
                     || request == null
                     || binding == null
                     || diagnostic == null
+                    || !(l1
+                                    ? FiniteTwoPlayerConditionedDecisionLoss.L1_REPRESENTATION
+                                    : FiniteTwoPlayerConditionedDecisionLoss.REPRESENTATION)
+                            .equals(diagnostic.representation())
                     || primaryQuality == null
                     || legacySelectedDecision == null
                     || qualifiedForIntervalFeedback != rejectionReasons.isEmpty())
@@ -204,13 +211,22 @@ public final class SixMaxSuppliedIntervalFeedback {
             throw new IllegalArgumentException("Interval feedback question does not exist");
         double committed =
                 game.publicBettingState(state).committedBb(Seat.values()[request.hero()]);
+        var target =
+                new FiniteTwoPlayerConditionalDecisionLoss.Question(
+                        request.hero(), request.informationSet());
+        boolean l1 = L1_REQUEST_SCHEMA.equals(request.schemaVersion());
         var diagnostic =
-                FiniteTwoPlayerConditionedDecisionLoss.solve(
-                                game,
-                                new FiniteTwoPlayerConditionalDecisionLoss.Question(
-                                        request.hero(), request.informationSet()),
-                                request.securitySlack(),
-                                request.minimumReach())
+                (l1
+                                ? FiniteTwoPlayerConditionedDecisionLoss.solveAscendingL1JointRows(
+                                        game,
+                                        target,
+                                        request.securitySlack(),
+                                        request.minimumReach())
+                                : FiniteTwoPlayerConditionedDecisionLoss.solve(
+                                        game,
+                                        target,
+                                        request.securitySlack(),
+                                        request.minimumReach()))
                         .audit();
         var joint = diagnostic.joint();
         var primary = FiniteTwoPlayerAffineSequenceForm.solve(game);
@@ -364,7 +380,7 @@ public final class SixMaxSuppliedIntervalFeedback {
             throw new IllegalStateException("Owned interval question context differs");
         return new Result(
                 new Report(
-                        REPORT_SCHEMA,
+                        l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA,
                         STATUS,
                         false,
                         request,
