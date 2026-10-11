@@ -1,6 +1,6 @@
 # Four qualified preflop questions
 
-The backend now has four distinct interval questions: three BB responses to a BTN open, followed by the original BB99 re-raise decision. The collection has its own ordered identity, offline review format and opt-in HTTP API. The existing single-question API and browser drill remain compatible; browser navigation through this collection is the next frontend step.
+The backend has four distinct interval questions: three BB responses to a BTN open, followed by the original BB99 re-raise decision. The collection has its own ordered identity, offline review format and opt-in HTTP API. The [collection browser](interval-collection-browser.md) adds navigation, coverage tracking and replayable session export. The existing single-question API and browser drill remain compatible.
 
 This remains a research trainer with **two active players at a six-seat table**, supplied conditional joint priors, no rake and mandatory postflop checkdown. Source-policy history reach is unavailable, and `trainerAdmission=false` throughout. It does not solve a six-player cash equilibrium.
 
@@ -91,4 +91,4 @@ python scripts/check-supplied-l1-root-feedback.py \
   --output <new-independent-check.json>
 ```
 
-Next: connect the browser to this API with real question progress/navigation. More private hands, active players, postflop betting, rake and source-policy reach need further models and qualification evidence.
+More private hands, active players, postflop betting, rake and source-policy reach need further models and qualification evidence.

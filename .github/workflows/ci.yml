@@ -66,6 +66,8 @@ jobs:
         with: { node-version: "24" }
       - name: Keep interval UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-conditional-five-target-99-interval-drill.json src/test-data/interval-drill.json
+      - name: Keep collection UI fixture identical to physically replayed evidence
+        run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - run: npm install --global pnpm@11.25.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint && pnpm typecheck && pnpm test && pnpm build
