@@ -80,6 +80,6 @@ Analytic tests cover both hero orientations, original extrema, raw objective rec
 
 ## Next milestone
 
-The separately identified [offline interval drill](sixmax-interval-trainer.md) now supplies a saved question, range-based grades, explicit attempt counts and exact review replay using the qualified capability. Next build a trusted opt-in runtime registration boundary and then HTTP/UI integration, preserving supplied-belief provenance and one-question coverage.
+The separately identified [interval drill](sixmax-interval-trainer.md) now supplies a saved question, range-based grades, explicit attempt counts and exact review replay using the qualified capability. A default-disabled research API physically replays an operator-pinned qualification once at startup and then serves cached question/grade/review routes. Next connect the table/action-button UI, preserving supplied-belief provenance and one-question coverage.
 
 Synthetic supplied priors, unavailable source-policy history reach, mandatory postflop checkdown and no rake remain model limits. Broader realistic ranges, strategic postflop and multiway equilibrium are separate work. AWS deployment remains paused.
