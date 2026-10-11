@@ -69,7 +69,7 @@ function research(value: Record<string, unknown>) {
   identity(value);
   ensure(value.selection === intervalSelection && value.model === intervalModel &&
     value.beliefs === intervalBeliefs && value.sourceHistoryReachStatus === intervalReach);
-  ensure(finite(value.maximumLossBb, 0));
+  ensure(finite(value.maximumLossBb, Number.MIN_VALUE) && value.maximumLossBb <= 0.01);
 }
 /** Stable equality keeps replay comparisons independent of JSON property order. */
 export function intervalEqual(left: unknown, right: unknown): boolean {
@@ -91,7 +91,8 @@ export function parseIntervalQuestion(value: unknown, metadata: IntervalMetadata
   ensure(typeof q.informationSet === "string" && q.informationSet.length > 0 &&
     seats.includes(q.hero as MultiwaySeat) && typeof q.heroCards === "string" &&
     /^[2-9TJQKA][cdhs] [2-9TJQKA][cdhs]$/.test(q.heroCards) && q.heroCards.slice(0, 2) !== q.heroCards.slice(3));
-  ensure(finite(q.securitySlackBb, 0) && finite(q.minimumReach, Number.MIN_VALUE) && q.minimumReach <= 1);
+  ensure(finite(q.securitySlackBb, 1e-8) && q.securitySlackBb <= 1e-4 &&
+    finite(q.minimumReach, 0.0001) && q.minimumReach <= 1);
   ensure(Array.isArray(q.legalActions) && q.legalActions.length > 0 && q.legalActions.every(action) &&
     new Set(q.legalActions).size === q.legalActions.length);
   ensure(Array.isArray(q.history) && q.history.length > 0);

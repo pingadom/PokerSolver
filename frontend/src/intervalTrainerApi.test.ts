@@ -25,6 +25,8 @@ it.each([
   ["source reach", (m: IntervalMetadata) => { m.sourceHistoryReachStatus = "AVAILABLE"; }],
   ["attempt cap", (m: IntervalMetadata) => { m.maximumAttempts = 1000; }],
   ["nonfinite limit", (m: IntervalMetadata) => { m.maximumLossBb = NaN; }],
+  ["zero limit", (m: IntervalMetadata) => { m.maximumLossBb = 0; }],
+  ["unsupported loss limit", (m: IntervalMetadata) => { m.maximumLossBb = 0.02; }],
 ] as const)("rejects unsupported metadata: %s", (_name, mutate) => {
   const m = structuredClone(metadata); mutate(m);
   expect(() => parseIntervalMetadata(m)).toThrow(IntervalProtocolError);
@@ -46,6 +48,9 @@ it.each([
   ["over stack", (v: IntervalQuestion) => { v.legalActions.push("raise:101"); }],
   ["negative raise", (v: IntervalQuestion) => { v.legalActions.push("raise:-1"); }],
   ["loss limit", (v: IntervalQuestion) => { v.maximumLossBb = 1; }],
+  ["too narrow slack", (v: IntervalQuestion) => { v.securitySlackBb = 0; }],
+  ["too wide slack", (v: IntervalQuestion) => { v.securitySlackBb = 0.001; }],
+  ["unsupported reach floor", (v: IntervalQuestion) => { v.minimumReach = 0.00001; }],
 ] as const)("rejects inconsistent public question: %s", (_name, mutate) => {
   const v = structuredClone(q); mutate(v);
   expect(() => parseIntervalQuestion(v, metadata)).toThrow(IntervalProtocolError);
