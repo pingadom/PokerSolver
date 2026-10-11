@@ -1,0 +1,40 @@
+.interval-page .trainer-title-row h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.interval-page .preflop-play { max-width: 1060px; margin-inline: auto; }
+.interval-prompt { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; font-weight: 700; }
+.interval-prompt span { color: var(--muted, #adb5c5); font-size: .8rem; font-weight: 400; }
+.interval-page .poker-action-value strong { font-size: .83rem; overflow-wrap: anywhere; }
+.interval-page .poker-action-value small { overflow-wrap: anywhere; }
+.interval-controls { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .8rem; }
+.interval-feedback h2, .interval-review h2 { font-size: 1.1rem; margin: 0 0 .6rem; }
+.interval-feedback dd { margin: .3rem 0 1rem; overflow-wrap: anywhere; font-size: .85rem; }
+.interval-feedback details, .interval-context { margin-top: 1rem; }
+.interval-review { border-top: 1px solid #394458; margin-top: 1rem; padding-top: 1rem; }
+.interval-review ol { max-height: 200px; overflow-y: auto; padding-left: 1.5rem; }
+.interval-review li { margin: .5rem 0; font-size: .85rem; }
+.interval-context { padding: .6rem; font-size: .85rem; }
+.interval-context code { overflow-wrap: anywhere; }
+@media (min-width: 901px) and (max-height: 820px) {
+  .interval-page .poker-table { height: 270px; }
+  .interval-page .poker-table-center { top: 42%; }
+  .interval-page .poker-table-center > strong { font-size: 19px; line-height: 1.1; }
+  .interval-page .poker-call { font-size: 10px; line-height: 1.1; }
+  .interval-page .poker-hero-controls { margin-top: 8px; padding-top: 6px; }
+  .interval-page .interval-prompt { margin: 3px 0 8px; }
+}
+@media (max-width: 600px) {
+  .interval-page .trainer-intro { display: none; }
+  .interval-page .preflop-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .interval-page .poker-action-value strong { font-size: .74rem; }
+  .interval-page .poker-action-value small { font-size: .7rem; }
+  .interval-controls > button { flex: 1 1 140px; }
+}
+@media (max-width: 380px) {
+  .interval-page .poker-table-center { width: 38%; }
+  .interval-page .poker-table-center > strong { font-size: 18px; white-space: nowrap; }
+  .interval-page .preflop-actions { grid-template-columns: 1fr; }
+  .interval-page .poker-hero-controls .poker-action.graded {
+    display: grid; grid-template-columns: 66px minmax(0, 1fr); align-items: center; gap: 8px;
+  }
+  .interval-page .poker-action-value { text-align: left; }
+  .interval-page .poker-action-value strong, .interval-page .poker-action-value small { font-size: 11px; }
+}
