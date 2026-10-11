@@ -12,6 +12,10 @@ public final class SixMaxSuppliedIntervalFeedback {
     public static final String REPORT_SCHEMA = "pokerlab-supplied-interval-feedback-report/v1";
     public static final String L1_REQUEST_SCHEMA = "pokerlab-supplied-interval-feedback-request/v2";
     public static final String L1_REPORT_SCHEMA = "pokerlab-supplied-interval-feedback-report/v2";
+    public static final String EXTENDED_REQUEST_SCHEMA =
+            "pokerlab-supplied-interval-feedback-request/v3";
+    public static final String EXTENDED_REPORT_SCHEMA =
+            "pokerlab-supplied-interval-feedback-report/v3";
     public static final String STATUS = "SELECTED_QUESTION_INTERVAL_FEEDBACK_RESEARCH_ONLY";
     public static final int MAX_BYTES = SixMaxSuppliedConditionalDecisionLoss.MAX_BYTES;
     private static final double TOLERANCE = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -31,7 +35,9 @@ public final class SixMaxSuppliedIntervalFeedback {
             double minimumReach,
             double maximumLossBb) {
         public Request {
-            if ((!REQUEST_SCHEMA.equals(schemaVersion) && !L1_REQUEST_SCHEMA.equals(schemaVersion))
+            if ((!REQUEST_SCHEMA.equals(schemaVersion)
+                            && !L1_REQUEST_SCHEMA.equals(schemaVersion)
+                            && !EXTENDED_REQUEST_SCHEMA.equals(schemaVersion))
                     || !Double.isFinite(maximumLossBb)
                     || maximumLossBb <= 0
                     || maximumLossBb > SixMaxSuitDecisionStability.DECISION_TOLERANCE_BB)
@@ -93,8 +99,13 @@ public final class SixMaxSuppliedIntervalFeedback {
             boolean qualifiedForIntervalFeedback,
             List<String> rejectionReasons) {
         public Report {
-            boolean l1 = request != null && L1_REQUEST_SCHEMA.equals(request.schemaVersion());
-            if (!(l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA).equals(schemaVersion)
+            boolean extended =
+                    request != null && EXTENDED_REQUEST_SCHEMA.equals(request.schemaVersion());
+            boolean l1 =
+                    request != null
+                            && (L1_REQUEST_SCHEMA.equals(request.schemaVersion()) || extended);
+            if (!(extended ? EXTENDED_REPORT_SCHEMA : l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA)
+                            .equals(schemaVersion)
                     || !STATUS.equals(publicationStatus)
                     || trainerAdmission
                     || request == null
@@ -106,7 +117,11 @@ public final class SixMaxSuppliedIntervalFeedback {
                             .equals(diagnostic.representation())
                     || primaryQuality == null
                     || legacySelectedDecision == null
-                    || qualifiedForIntervalFeedback != rejectionReasons.isEmpty())
+                    || qualifiedForIntervalFeedback != rejectionReasons.isEmpty()
+                    || !referenceChecks.stream()
+                            .map(ReferenceCheck::iterations)
+                            .toList()
+                            .equals(referenceBudget(request).iterations))
                 throw new IllegalArgumentException("Invalid interval feedback identity");
             prior = List.copyOf(prior);
             payoffs = List.copyOf(payoffs);
@@ -181,6 +196,12 @@ public final class SixMaxSuppliedIntervalFeedback {
 
     private SixMaxSuppliedIntervalFeedback() {}
 
+    private static SixMaxHeadsUpDecisionScreen.ReferenceBudget referenceBudget(Request request) {
+        return EXTENDED_REQUEST_SCHEMA.equals(request.schemaVersion())
+                ? SixMaxHeadsUpDecisionScreen.ReferenceBudget.EXTENDED
+                : SixMaxHeadsUpDecisionScreen.ReferenceBudget.BASELINE;
+    }
+
     public static Classification classify(double lower, double upper, double maximumLossBb) {
         if (!Double.isFinite(lower)
                 || !Double.isFinite(upper)
@@ -214,7 +235,8 @@ public final class SixMaxSuppliedIntervalFeedback {
         var target =
                 new FiniteTwoPlayerConditionalDecisionLoss.Question(
                         request.hero(), request.informationSet());
-        boolean l1 = L1_REQUEST_SCHEMA.equals(request.schemaVersion());
+        boolean extended = EXTENDED_REQUEST_SCHEMA.equals(request.schemaVersion());
+        boolean l1 = L1_REQUEST_SCHEMA.equals(request.schemaVersion()) || extended;
         var diagnostic =
                 (l1
                                 ? FiniteTwoPlayerConditionedDecisionLoss.solveAscendingL1JointRows(
@@ -235,7 +257,8 @@ public final class SixMaxSuppliedIntervalFeedback {
         var policy = new CfrSolution(1, primary.strategy());
         var quality = MultiPlayerInformationSetBestResponse.assess(game, policy);
         // Preserve the complete existing scalar screen as evidence; do not rewrite its failures.
-        var legacy = SixMaxHeadsUpDecisionScreen.assess(game, policy);
+        var budgets = referenceBudget(request);
+        var legacy = SixMaxHeadsUpDecisionScreen.assess(game, policy, budgets);
         var selected =
                 legacy.decisions().stream()
                         .filter(d -> d.primary().informationSet().equals(request.informationSet()))
@@ -255,7 +278,7 @@ public final class SixMaxSuppliedIntervalFeedback {
             for (String failure : comparison.failures())
                 if (!failure.equals("ACTION_EV_DRIFT"))
                     failures.add(comparison.iterations() + ":" + failure);
-        if (selected.comparisons().size() != SixMaxHeadsUpPreflopStudy.REFERENCE_BUDGETS.size())
+        if (selected.comparisons().size() != budgets.iterations.size())
             failures.add("MISSING_LEGACY_REFERENCE_CHECKS");
         var moves = new ArrayList<Move>();
         for (int i = 0; i < joint.moves().size(); i++) {
@@ -275,7 +298,7 @@ public final class SixMaxSuppliedIntervalFeedback {
         if (moves.stream().noneMatch(m -> m.classification() == Classification.OUTSIDE_LIMIT))
             failures.add("NO_ROBUST_MOVE_OUTSIDE_LIMIT");
         var references = new ArrayList<ReferenceCheck>();
-        for (int budget : SixMaxHeadsUpPreflopStudy.REFERENCE_BUDGETS) {
+        for (int budget : budgets.iterations) {
             var solver =
                     new MultiPlayerCfrSolver<>(
                             game,
@@ -380,7 +403,7 @@ public final class SixMaxSuppliedIntervalFeedback {
             throw new IllegalStateException("Owned interval question context differs");
         return new Result(
                 new Report(
-                        l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA,
+                        extended ? EXTENDED_REPORT_SCHEMA : l1 ? L1_REPORT_SCHEMA : REPORT_SCHEMA,
                         STATUS,
                         false,
                         request,

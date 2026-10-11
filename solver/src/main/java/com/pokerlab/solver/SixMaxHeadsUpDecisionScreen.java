@@ -19,17 +19,31 @@ final class SixMaxHeadsUpDecisionScreen {
         }
     }
 
-    private static final List<Integer> REFERENCE_BUDGETS =
-            SixMaxHeadsUpPreflopStudy.REFERENCE_BUDGETS;
+    enum ReferenceBudget {
+        BASELINE(SixMaxHeadsUpPreflopStudy.REFERENCE_BUDGETS),
+        EXTENDED(List.of(2000, 4000));
+
+        final List<Integer> iterations;
+
+        ReferenceBudget(List<Integer> iterations) {
+            this.iterations = List.copyOf(iterations);
+        }
+    }
 
     private SixMaxHeadsUpDecisionScreen() {}
 
     static Screen assess(SixMaxHeadsUpDecisionGame game, CfrSolution policy) {
+        return assess(game, policy, ReferenceBudget.BASELINE);
+    }
+
+    static Screen assess(
+            SixMaxHeadsUpDecisionGame game, CfrSolution policy, ReferenceBudget budgetSet) {
+        var budgets = Objects.requireNonNull(budgetSet).iterations;
         var primary = SixMaxHeadsUpPreflopDecisionValues.assess(game, policy);
         var references = new ArrayList<Reference>();
         var comparisons = new TreeMap<String, List<Comparison>>();
         primary.forEach(d -> comparisons.put(d.row().informationSet(), new ArrayList<>()));
-        for (int budget : REFERENCE_BUDGETS) {
+        for (int budget : budgets) {
             var solver =
                     new MultiPlayerCfrSolver<>(
                             game,
@@ -109,7 +123,7 @@ final class SixMaxHeadsUpDecisionScreen {
             var checked = comparisons.get(d.row().informationSet());
             boolean pass =
                     significant
-                            && checked.size() == REFERENCE_BUDGETS.size()
+                            && checked.size() == budgets.size()
                             && checked.stream().allMatch(c -> c.failures().isEmpty())
                             && d.row().values().decisionRegretBb()
                                     <= SixMaxSuitDecisionStability.DECISION_TOLERANCE_BB;

@@ -1,0 +1,33 @@
+{
+  "collectionHash" : "776fcc01e70027b5584dbe3232d19e1670bbd8e8e087879ae020c510dccc6a00",
+  "schemaVersion" : "pokerlab-supplied-interval-collection-manifest/v1",
+  "sources" : [ {
+    "reportFile" : "supplied-root-five-target-77-l1-interval-feedback-report.json.gz",
+    "reportHash" : "ee44745900b245dcdad36e6820b27553dff54c7370ec3dc8093fdf60415de014",
+    "requestFile" : "supplied-root-five-target-77-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-root-five-target-99-l1-interval-feedback-report.json.gz",
+    "reportHash" : "959a0c07629234002d9249045caee0f9974e1468b8e6cfe04b374d5089e21039",
+    "requestFile" : "supplied-root-five-target-99-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-root-five-target-aj-l1-interval-feedback-report.json.gz",
+    "reportHash" : "213da44dd7dcad0f073a4e4ee9bbd34434d6cbd7254bf775933da4b57339f643",
+    "requestFile" : "supplied-root-five-target-aj-l1-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-conditional-five-target-99-interval-feedback-report.json",
+    "reportHash" : "5fb55653ae5f53d0110cea8507be9a37a6af2fe5cc596f433aaab0838b6b0aa9",
+    "requestFile" : "supplied-conditional-five-target-99-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-button-five-target-js-extended-interval-feedback-report.json.gz",
+    "reportHash" : "c15ea9d415769d49e06cd41574fbd06687960da467a2ce8cd1f4dcb26f13caac",
+    "requestFile" : "supplied-button-five-target-js-extended-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-button-five-target-aks-extended-interval-feedback-report.json.gz",
+    "reportHash" : "8e676523c5b303f2266cb031d6e571645bacbff8f9aef39f1e5152284d674bc4",
+    "requestFile" : "supplied-button-five-target-aks-extended-interval-feedback-request.json"
+  }, {
+    "reportFile" : "supplied-button-five-target-qts-extended-interval-feedback-report.json.gz",
+    "reportHash" : "7763a3cd507c4e172f1d24f366031421706daced1f9338cd926a20243336e782",
+    "requestFile" : "supplied-button-five-target-qts-extended-interval-feedback-request.json"
+  } ]
+}
