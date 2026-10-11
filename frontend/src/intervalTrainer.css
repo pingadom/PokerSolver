@@ -28,3 +28,13 @@
   .interval-page .poker-action-value small { font-size: .7rem; }
   .interval-controls > button { flex: 1 1 140px; }
 }
+@media (max-width: 380px) {
+  .interval-page .poker-table-center { width: 38%; }
+  .interval-page .poker-table-center > strong { font-size: 18px; white-space: nowrap; }
+  .interval-page .preflop-actions { grid-template-columns: 1fr; }
+  .interval-page .poker-hero-controls .poker-action.graded {
+    display: grid; grid-template-columns: 66px minmax(0, 1fr); align-items: center; gap: 8px;
+  }
+  .interval-page .poker-action-value { text-align: left; }
+  .interval-page .poker-action-value strong, .interval-page .poker-action-value small { font-size: 11px; }
+}
