@@ -27,21 +27,24 @@ def call(path='', body=None, expected_status=200):
         return result
 
 
+def wait_for_metadata(timeout=180):
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            return call()
+        except (urllib.error.URLError, TimeoutError, ConnectionError, AssertionError):
+            if time.monotonic() >= deadline:
+                raise
+            time.sleep(2)
+
+
 def run(disabled):
     if disabled:
         for path, body in [('', None), ('/question', None), ('/grade', {}), ('/review', {})]:
             call(path, body, 404)
         print('Interval routes are absent without explicit opt-in')
         return
-    deadline = time.monotonic() + 180
-    while True:
-        try:
-            metadata = call()
-            break
-        except (urllib.error.URLError, TimeoutError, AssertionError):
-            if time.monotonic() >= deadline:
-                raise
-            time.sleep(2)
+    metadata = wait_for_metadata()
     assert metadata['reportHash'] == PIN
     assert metadata['availableQuestions'] == 1 and metadata['activePlayers'] == 2
     assert metadata['trainerAdmission'] is False

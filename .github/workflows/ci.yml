@@ -88,6 +88,8 @@ jobs:
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-interval.yml config --quiet
+      - name: Verify interval smoke readiness retries
+        run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_trainer.py'
       - run: docker compose up --build -d --scale worker=2
       - name: Wait for API readiness
         run: |
