@@ -1,0 +1,9 @@
+# Separate local research opt-in; preserves the original four-question overlay and pin.
+services:
+  api:
+    environment:
+      TRAINER_INTERVAL_COLLECTION_ENABLED: "true"
+      TRAINER_INTERVAL_COLLECTION_MANIFEST_PATH: /opt/pokerlab/interval-collection/supplied-seven-question-interval-collection-manifest.json
+      TRAINER_INTERVAL_COLLECTION_HASH: 776fcc01e70027b5584dbe3232d19e1670bbd8e8e087879ae020c510dccc6a00
+    volumes:
+      - ./docs/data:/opt/pokerlab/interval-collection:ro

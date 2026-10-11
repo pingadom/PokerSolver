@@ -1,4 +1,4 @@
-"""Check default-disabled collection routes or the real four-question Compose API."""
+"""Check default-disabled routes or the pinned four/seven-question Compose API."""
 
 import argparse
 import json
@@ -38,7 +38,7 @@ def wait_for_metadata(timeout=180):
             time.sleep(2)
 
 
-def run(disabled):
+def run(disabled, seven=False):
     if disabled:
         for path, body in [('', None), ('/questions/0?collectionHash=' + PIN, None),
                            ('/grade', {}), ('/review', {})]:
@@ -46,12 +46,15 @@ def run(disabled):
         print('Collection routes are absent without explicit opt-in')
         return
     metadata = wait_for_metadata()
-    assert metadata['collectionHash'] == PIN and metadata['availableQuestions'] == 4
+    assert metadata['collectionHash'] == PIN and metadata['availableQuestions'] == (7 if seven else 4)
     assert metadata['activePlayers'] == 2 and metadata['maximumAttempts'] == 100
     assert metadata['trainerAdmission'] is False
     assert metadata['selection'] == 'ORDERED_DISTINCT_QUALIFIED_INTERVAL_QUESTIONS/v1'
-    fixture = Path(__file__).resolve().parents[1] / 'docs/data/supplied-four-question-interval-collection-review.json'
+    fixture = Path(__file__).resolve().parents[1] / ('docs/data/supplied-seven-question-interval-collection-review.json' if seven else 'docs/data/supplied-four-question-interval-collection-review.json')
     expected = json.loads(fixture.read_text(encoding='utf-8'))
+    if seven:
+        assert [q['decision']['hero'] for q in expected['questions']] == ['BB'] * 4 + ['BTN'] * 3
+        assert call('/questions/0?collectionHash=227fd33b33ce8ed8be46af3d0d4515e4c7b017c3468ec6f9a025bf96d67070b2', expected_status=400)['code'] == 'INVALID_REQUEST'
     for question in expected['questions']:
         assert call('/questions/' + str(question['index']) + '?collectionHash=' + PIN) == question
         assert len(question['decision']['table']['players']) == 6
@@ -71,13 +74,16 @@ def run(disabled):
                  dict(collectionHash=PIN, **choices[0], evLossBb=0)]:
         assert call('/grade', body, 400)['code'] == 'INVALID_REQUEST'
     assert call('/review', dict(collectionHash=PIN, choices=[choices[0]] * 101), 400)['code'] == 'INVALID_REQUEST'
-    print('Four pinned physical replays, distinct questions, all verdicts, canonical review and invalid requests passed')
+    print(('Seven' if seven else 'Four') + ' pinned physical replays, distinct questions, all verdicts, canonical review and invalid requests passed')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--disabled', action='store_true')
+    parser.add_argument('--seven', action='store_true')
     parser.add_argument('--base-url', default='http://localhost:18080')
     args = parser.parse_args()
     BASE = args.base_url.rstrip('/') + '/api/v1/trainer/research/interval-collection'
-    run(args.disabled)
+    if args.seven:
+        PIN = '776fcc01e70027b5584dbe3232d19e1670bbd8e8e087879ae020c510dccc6a00'
+    run(args.disabled, args.seven)
