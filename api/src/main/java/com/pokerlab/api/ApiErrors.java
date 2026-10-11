@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -26,6 +27,7 @@ public class ApiErrors {
 
     @ExceptionHandler({
         IllegalArgumentException.class,
+        MissingServletRequestParameterException.class,
         MethodArgumentTypeMismatchException.class,
         HttpMessageNotReadableException.class
     })

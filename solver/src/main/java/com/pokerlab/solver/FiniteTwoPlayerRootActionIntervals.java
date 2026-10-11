@@ -517,19 +517,28 @@ public final class FiniteTwoPlayerRootActionIntervals {
     static final class LpBudget {
         final int pivotLimit;
         final long workLimit;
+        final boolean ascendingL1Rows;
         int solves, pivots;
         long work;
 
         LpBudget(int pivotLimit, long workLimit) {
+            this(pivotLimit, workLimit, false);
+        }
+
+        LpBudget(int pivotLimit, long workLimit, boolean ascendingL1Rows) {
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
+            this.ascendingL1Rows = ascendingL1Rows;
         }
 
         BoundedLinearProgram.Result solve(double[][] matrix, double[] rhs, double[] cost)
                 throws Exception {
             var result =
-                    BoundedLinearProgram.solve(
-                            matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                    ascendingL1Rows
+                            ? BoundedLinearProgram.solveAscendingL1Rows(
+                                    matrix, rhs, cost, pivotLimit - pivots, workLimit - work)
+                            : BoundedLinearProgram.solve(
+                                    matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
             solves++;
             pivots += result.certificate().work().pivots();
             work += result.certificate().work().arithmeticWork();

@@ -67,6 +67,8 @@ The [explicit behavioral-floor solver](docs/sixmax-behavior-floor-solver.md) add
 
 The literal-board model also has a proved capacity limit: its 600 history/board revelations can cover at most 6.073% of heads-up flops before quality filtering. Coverage requests above that limit fail before input loading or enumeration. The [compact 530-board storage prototype](docs/sixmax-compact-physical-storage.md) now exactly restores all counts/payouts and reproduces full parent/conditional diagnostics and twenty local maxmin/CFR+ controls with primitive lookup arrays. The [broader physical-capacity design](docs/sixmax-broader-physical-capacity-design.md) keeps the unchanged 25% retained-content target and requires a separately identified broader model with measured state, memory and evidence budgets. Compact storage leaves legal states and coverage unchanged.
 
+The [four-question interval collection](docs/sixmax-l1-interval-collection.md) adds qualified BB decisions with 77, 99 and suited AJ. An explicitly selected L1 row representation certifies the original LP constraints and preserves old reports and work caps. The ordered collection binds every source, physically replays all four reports at startup, and supports cached navigation, grading and canonical reviews through a separate default-disabled API. Independent full-plan checks cover 83 fresh LPs and 72 joint witnesses. Browser collection navigation is the next frontend step; general trainer admission remains off.
+
 Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
 
 ## Quick start

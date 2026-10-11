@@ -4,18 +4,24 @@ package com.pokerlab.solver;
 public final class FiniteTwoPlayerConditionedDecisionLoss {
     public static final String REPRESENTATION =
             "UPPER_OBJECTIVE_MINUS_MAX_ABSOLUTE_TERMINAL_UTILITY_PLUS_ONE/v1";
+    public static final String L1_REPRESENTATION =
+            "UPPER_OBJECTIVE_SHIFT_STABLE_ASCENDING_L1_JOINT_ROWS_ORIGINAL_CERTIFICATES/v2";
 
     public record Audit(
             String representation,
             double upperObjectiveShift,
             FiniteTwoPlayerConditionalDecisionLoss.Audit joint) {
         public Audit {
-            if (!REPRESENTATION.equals(representation)
+            boolean l1 = L1_REPRESENTATION.equals(representation);
+            if ((!REPRESENTATION.equals(representation) && !l1)
                     || !Double.isFinite(upperObjectiveShift)
                     || upperObjectiveShift > -1
                     || joint == null
-                    || !FiniteTwoPlayerConditionalDecisionLoss.CONDITIONED_ALGORITHM.equals(
-                            joint.algorithm())
+                    || !(l1
+                                    ? FiniteTwoPlayerConditionalDecisionLoss
+                                            .L1_CONDITIONED_ALGORITHM
+                                    : FiniteTwoPlayerConditionalDecisionLoss.CONDITIONED_ALGORITHM)
+                            .equals(joint.algorithm())
                     || joint.actions().stream()
                             .anyMatch(
                                     a ->
@@ -65,6 +71,44 @@ public final class FiniteTwoPlayerConditionedDecisionLoss {
             int pivotLimit,
             long arithmeticLimit)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                false);
+    }
+
+    public static <S> Result solveAscendingL1JointRows(
+            MultiPlayerCfrGame<S> game,
+            FiniteTwoPlayerConditionalDecisionLoss.Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                BoundedLinearProgram.MAX_PIVOTS,
+                BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                true);
+    }
+
+    static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            FiniteTwoPlayerConditionalDecisionLoss.Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean ascendingL1JointRows)
+            throws Exception {
         var owned =
                 FiniteTwoPlayerConditionalDecisionLoss.solve(
                         game,
@@ -74,7 +118,12 @@ public final class FiniteTwoPlayerConditionedDecisionLoss {
                         compilerLimit,
                         pivotLimit,
                         arithmeticLimit,
-                        true);
-        return new Result(new Audit(REPRESENTATION, owned.upperObjectiveShift(), owned.audit()));
+                        true,
+                        ascendingL1JointRows);
+        return new Result(
+                new Audit(
+                        ascendingL1JointRows ? L1_REPRESENTATION : REPRESENTATION,
+                        owned.upperObjectiveShift(),
+                        owned.audit()));
     }
 }

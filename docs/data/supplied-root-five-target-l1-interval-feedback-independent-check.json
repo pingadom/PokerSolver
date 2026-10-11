@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "pokerlab-independent-l1-root-feedback-check/v1",
+  "oracle": "LITERAL_COMPLETE_PLANS_SCIPY_HIGHS_FRESH_EXTREMA_AND_WITNESSES/v1",
+  "numpyVersion": "2.5.3",
+  "scipyVersion": "1.18.0",
+  "sourceFixtureBytesSha256": "9d34e7a09fc266386d79f9a9657e8474109db063fd1e2225a4b204b95ee2e161",
+  "scriptBytesSha256": "4dfeb87752d95380fc6359d2e6fd4e780ce9fa816f2b49ddce181ecd4e13cd8f",
+  "trainerAdmission": false,
+  "sourceHistoryReachAvailable": false,
+  "independentLowerValue": 0.2633447521970914,
+  "independentUpperValue": 0.2633447521970914,
+  "freshLpSolves": 83,
+  "cachedEndpointCases": 0,
+  "rows": [
+    {
+      "storedBytesSha256": "f90c01c923d89fc00eead77af934d929e5593d1749fae0082281c5b1fb0680d9",
+      "expandedBytesSha256": "ee50f04bb91f6587b7eed6ec1c6c1ce39c351718eac1865864344c6fdb90e758",
+      "informationSet": "5:supplied-conditional-preflop:7d 7h:",
+      "endpoints": {
+        "fold": {
+          "lowerEv": -1.0000000000000004,
+          "upperEv": -1.0000000000000004,
+          "lowerLoss": 1.0077023295225052,
+          "upperLoss": 1.0077023295225052
+        },
+        "call": {
+          "lowerEv": 0.007702329522504785,
+          "upperEv": 0.007702329522504785,
+          "lowerLoss": 0.0,
+          "upperLoss": 0
+        },
+        "raise:9.0": {
+          "lowerEv": -0.8344012977496607,
+          "upperEv": -0.8288715053109789,
+          "lowerLoss": 0.8365738348334838,
+          "upperLoss": 0.8421036272721655
+        }
+      },
+      "checkedJointWitnesses": 24,
+      "recordedReferenceRowsChecked": 2
+    },
+    {
+      "storedBytesSha256": "cb1132042345701b5098340c7be8ba27487f2e391412df3b9303e426ab2186ce",
+      "expandedBytesSha256": "7c2e01add525664d3ce22c70c6ec9009b640b884e96ae27a3f712e30def3024e",
+      "informationSet": "5:supplied-conditional-preflop:9d 9h:",
+      "endpoints": {
+        "fold": {
+          "lowerEv": -1.0000000000000004,
+          "upperEv": -1.0000000000000004,
+          "lowerLoss": 1.428322257817872,
+          "upperLoss": 1.4286222578178722
+        },
+        "call": {
+          "lowerEv": 0.3315184702246107,
+          "upperEv": 0.3315184702246107,
+          "lowerLoss": 0.09680378759326125,
+          "upperLoss": 0.09710378759326127
+        },
+        "raise:9.0": {
+          "lowerEv": 0.42832225781787187,
+          "upperEv": 0.4286222578178719,
+          "lowerLoss": 0.0,
+          "upperLoss": 0
+        }
+      },
+      "checkedJointWitnesses": 24,
+      "recordedReferenceRowsChecked": 2
+    },
+    {
+      "storedBytesSha256": "1bd274e4e2297176588594b186fdd2cdb07cee9369208c796d651407b62fdfc9",
+      "expandedBytesSha256": "9a532d904360d84130d68cd69e0321f1cb9f421e6ddf2294228842aa8c135c49",
+      "informationSet": "5:supplied-conditional-preflop:Ac Jc:",
+      "endpoints": {
+        "fold": {
+          "lowerEv": -1.0000000000000004,
+          "upperEv": -1.0000000000000004,
+          "lowerLoss": 1.2739411560683493,
+          "upperLoss": 1.2739411560683496
+        },
+        "call": {
+          "lowerEv": 0.2739411560683491,
+          "upperEv": 0.2739411560683491,
+          "lowerLoss": 0.0,
+          "upperLoss": 0
+        },
+        "raise:9.0": {
+          "lowerEv": -0.8157097710779319,
+          "upperEv": -0.22456221223993522,
+          "lowerLoss": 0.4985033683082843,
+          "upperLoss": 1.089650927146281
+        }
+      },
+      "checkedJointWitnesses": 24,
+      "recordedReferenceRowsChecked": 2
+    }
+  ],
+  "limitations": [
+    "Uses saved integer showdown counts; Java replay regenerates physical boards",
+    "Checks recorded reference rows; Java replay regenerates CFR reference policies",
+    "Two active players, supplied priors, no rake, mandatory postflop checkdown"
+  ]
+}

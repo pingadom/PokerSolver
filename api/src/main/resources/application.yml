@@ -39,6 +39,9 @@ pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
   trainer:
+    interval-collection-enabled: ${TRAINER_INTERVAL_COLLECTION_ENABLED:false}
+    interval-collection-manifest-path: ${TRAINER_INTERVAL_COLLECTION_MANIFEST_PATH:}
+    interval-collection-hash: ${TRAINER_INTERVAL_COLLECTION_HASH:}
     interval-research-enabled: ${TRAINER_INTERVAL_RESEARCH_ENABLED:false}
     interval-request-path: ${TRAINER_INTERVAL_REQUEST_PATH:}
     interval-report-path: ${TRAINER_INTERVAL_REPORT_PATH:}
