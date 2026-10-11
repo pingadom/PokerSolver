@@ -151,6 +151,18 @@ it("rejects edited canonical review feedback and offers no download", async () =
   expect(await screen.findByRole("alert")).toHaveTextContent("inconsistent data");
   expect(screen.queryByRole("button", { name: "Download replayable review" })).not.toBeInTheDocument();
 });
+it("rejects changed ranges under an unchanged report pin before saving another attempt", async () => {
+  let count = 0;
+  mockApi({ grade: (f) => {
+    if (++count > 1) f.alternatives[0].upperEvBb = 1;
+    return response(f);
+  } });
+  open(); fireEvent.click(await screen.findByRole("button", { name: "Call" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Try another move" }));
+  fireEvent.click(call());
+  expect(await screen.findByRole("alert")).toHaveTextContent("inconsistent data");
+  expect(screen.queryByRole("button", { name: "Review 2 attempts" })).not.toBeInTheDocument();
+});
 it("shows an honest default-disabled state without fallback questions", async () => {
   mockApi({ metadataStatus: 404 }); open();
   expect(await screen.findByRole("alert")).toHaveTextContent("not enabled");

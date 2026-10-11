@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import PokerTable, { type TableMove } from "./PokerTable";
 import { actionLabel, type PreflopAction } from "./sixMaxPreflopApi";
 import {
-  IntervalProtocolError, IntervalRequestError, intervalRequest, parseIntervalFeedback,
+  IntervalProtocolError, IntervalRequestError, intervalEqual, intervalRequest, parseIntervalFeedback,
   parseIntervalMetadata, parseIntervalQuestion, parseIntervalReview,
   type IntervalAttempt, type IntervalFeedback, type IntervalMetadata, type IntervalMove,
   type IntervalQuestion, type IntervalReview,
@@ -86,6 +86,8 @@ export default function IntervalPreflopPage() {
       const graded = parseIntervalFeedback(await intervalRequest("/grade", controller.signal,
         { reportHash: question.reportHash, action }), question, action);
       if (controller.signal.aborted) return;
+      if (saved.current.length && !intervalEqual(saved.current[0].feedback.alternatives, graded.alternatives))
+        throw new IntervalProtocolError();
       const next = [...saved.current, { index: saved.current.length, action, feedback: graded }];
       saved.current = next; setAttempts(next); setFeedback(graded);
     } catch (cause) {
