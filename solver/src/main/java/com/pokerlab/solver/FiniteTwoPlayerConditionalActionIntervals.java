@@ -623,7 +623,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return root.node().children().get(root.node().actions().indexOf(q.action()));
     }
 
-    private static void collect(
+    static void collect(
             Node node,
             Question q,
             Flow opponent,
@@ -653,7 +653,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         }
     }
 
-    private static Linear project(
+    static Linear project(
             double[] coefficients,
             FiniteTwoPlayerAffineSequenceForm.ProjectionAudit projection,
             SequenceFormAffineProjection.Budget budget) {
@@ -839,7 +839,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return actor == checked.firstActor() ? checked.firstFlow() : checked.secondFlow();
     }
 
-    private static ReachWitness reachWitness(
+    static ReachWitness reachWitness(
             Checked checked,
             List<Root> roots,
             Question question,

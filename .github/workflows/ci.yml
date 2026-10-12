@@ -24,9 +24,11 @@ jobs:
         with: { distribution: temurin, java-version: "21", cache: maven }
       - name: Build dependencies and check all formatting
         run: mvn -B spotless:check install -DskipTests
-      - name: Independently verify saved reach failure and corruption controls
+      - name: Independently verify saved reach certificates and corruption controls
         if: matrix.group == 'services'
-        run: python3 -m unittest discover -s scripts -p 'test_check_supplied_zero_reach.py'
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_check_supplied_zero_reach.py'
+          python3 -m unittest discover -s scripts -p 'test_check_supplied_reach_bounds.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
