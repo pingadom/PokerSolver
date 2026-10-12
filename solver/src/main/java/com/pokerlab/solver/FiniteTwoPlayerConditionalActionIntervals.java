@@ -27,14 +27,109 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
 
     public static final class Rejected extends IllegalArgumentException {
         private final Failure reason;
+        private final ReachFailureAudit reachFailure;
 
         private Rejected(Failure reason, String detail) {
+            this(reason, detail, null);
+        }
+
+        private Rejected(Failure reason, String detail, ReachFailureAudit reachFailure) {
             super(detail);
             this.reason = reason;
+            this.reachFailure = reachFailure;
         }
 
         public Failure reason() {
             return reason;
+        }
+
+        public Optional<ReachFailureAudit> reachFailure() {
+            return Optional.ofNullable(reachFailure);
+        }
+    }
+
+    public static final String REACH_FAILURE_ALGORITHM =
+            "FULL_SECURITY_FACE_MINIMUM_REACH_REJECTION_OWNED_LP/v1";
+
+    public enum ReachFailureStatus {
+        WITNESS_BELOW_REQUIRED_FLOOR,
+        CONSERVATIVE_BOUND_BELOW_REQUIRED_FLOOR
+    }
+
+    /** Unnormalized masses remain meaningful even when question reach is exactly zero. */
+    public record ReachMass(
+            int rootIndex,
+            String stateHash,
+            int opponentSequence,
+            double chanceWeight,
+            double originalRealizationWeight,
+            double behavioralWeight) {}
+
+    public record ReachWitness(
+            BoundedLinearProgram.Certificate certificate,
+            List<Double> point,
+            List<Double> dual,
+            List<Double> opponentVariables,
+            FlowAudit opponentFlow,
+            String behavioralPolicyHash,
+            double questionReach,
+            List<ReachMass> masses,
+            double globalHeroBestResponse) {
+        public ReachWitness {
+            point = List.copyOf(point);
+            dual = List.copyOf(dual);
+            opponentVariables = List.copyOf(opponentVariables);
+            masses = List.copyOf(masses);
+        }
+    }
+
+    /** Diagnostic evidence only: no posterior, conditional EV, or admission at zero reach. */
+    public record ReachFailureAudit(
+            String algorithm,
+            boolean trainerAdmission,
+            ReachFailureStatus status,
+            Question question,
+            List<OwnAction> fixedHeroPast,
+            FiniteTwoPlayerAffineSequenceForm.Audit baseline,
+            double securitySlack,
+            double requiredMinimumReach,
+            double globalHeroUpperValue,
+            FiniteTwoPlayerAffineSequenceForm.ProjectionAudit heroProjection,
+            FiniteTwoPlayerAffineSequenceForm.ProjectionAudit opponentProjection,
+            FiniteTwoPlayerAffineSequenceForm.ProjectedPayoffAudit orientedPayoff,
+            String securityFaceHash,
+            Linear denominator,
+            double certifiedReachLowerBound,
+            ReachWitness minimumReachWitness,
+            Work work) {
+        public ReachFailureAudit {
+            if (!REACH_FAILURE_ALGORITHM.equals(algorithm)
+                    || trainerAdmission
+                    || status == null
+                    || question == null
+                    || baseline == null
+                    || heroProjection == null
+                    || opponentProjection == null
+                    || orientedPayoff == null
+                    || denominator == null
+                    || minimumReachWitness == null
+                    || work == null
+                    || !Double.isFinite(securitySlack)
+                    || securitySlack < DEFAULT_SECURITY_SLACK
+                    || securitySlack > 1e-4
+                    || !Double.isFinite(requiredMinimumReach)
+                    || requiredMinimumReach < .0001
+                    || requiredMinimumReach > 1
+                    || !Double.isFinite(globalHeroUpperValue)
+                    || !Double.isFinite(certifiedReachLowerBound)
+                    || certifiedReachLowerBound >= requiredMinimumReach
+                    || status
+                            != (minimumReachWitness.questionReach()
+                                            < requiredMinimumReach - TOLERANCE
+                                    ? ReachFailureStatus.WITNESS_BELOW_REQUIRED_FLOOR
+                                    : ReachFailureStatus.CONSERVATIVE_BOUND_BELOW_REQUIRED_FLOOR))
+                throw new IllegalArgumentException("Invalid reach rejection identity");
+            fixedHeroPast = List.copyOf(fixedHeroPast);
         }
     }
 
@@ -297,10 +392,55 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         var minLp = lpBudget.solve(face.matrix(), face.rhs(), reachCost);
         // Use the original LP dual upper bound on max(-d), with conservative numerical padding.
         double reachLower = denominator.constant() - minLp.certificate().dualValue() - TOLERANCE;
-        if (!Double.isFinite(reachLower) || reachLower < minimumReach)
+        if (!Double.isFinite(reachLower))
+            throw new Rejected(Failure.NUMERICAL_FAILURE, "Non-finite certified question reach");
+        if (reachLower < minimumReach) {
+            var counterexample =
+                    reachWitness(
+                            checked,
+                            roots,
+                            question,
+                            baseline,
+                            opponent,
+                            op,
+                            minLp,
+                            globalUpper + securitySlack,
+                            denominator,
+                            budget);
+            requireClose(
+                    denominator.constant() - minLp.certificate().primalValue(),
+                    counterexample.questionReach(),
+                    "Independent rejected minimum reach");
+            var work = budget.audit();
             throw new Rejected(
                     Failure.INSUFFICIENT_REACH,
-                    "Full security face question reach is not certified above the declared floor");
+                    "Full security face question reach is not certified above the declared floor",
+                    new ReachFailureAudit(
+                            REACH_FAILURE_ALGORITHM,
+                            false,
+                            counterexample.questionReach() < minimumReach - TOLERANCE
+                                    ? ReachFailureStatus.WITNESS_BELOW_REQUIRED_FLOOR
+                                    : ReachFailureStatus.CONSERVATIVE_BOUND_BELOW_REQUIRED_FLOOR,
+                            question,
+                            info.ownHistory(),
+                            baseline.audit(),
+                            securitySlack,
+                            minimumReach,
+                            globalUpper,
+                            hp.audit(),
+                            op.audit(),
+                            payoff,
+                            SixMaxHistoryPhysicalConditionalRefinement.hash(face),
+                            denominator,
+                            reachLower,
+                            counterexample,
+                            new Work(
+                                    work.chargedUnits(),
+                                    work.limit(),
+                                    lpBudget.solves,
+                                    lpBudget.pivots,
+                                    lpBudget.work)));
+        }
         for (int j = 0; j < reachCost.length; j++) reachCost[j] = -reachCost[j];
         var maxLp = lpBudget.solve(face.matrix(), face.rhs(), reachCost);
         double reachUpper = denominator.constant() + maxLp.certificate().dualValue() + TOLERANCE;
@@ -697,5 +837,76 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
 
     private static Flow checkedFlow(Checked checked, int actor) {
         return actor == checked.firstActor() ? checked.firstFlow() : checked.secondFlow();
+    }
+
+    private static ReachWitness reachWitness(
+            Checked checked,
+            List<Root> roots,
+            Question question,
+            FiniteTwoPlayerAffineSequenceForm.Result baseline,
+            Flow opponent,
+            SequenceFormAffineProjection.Projection projection,
+            BoundedLinearProgram.Result solved,
+            double upper,
+            Linear denominator,
+            SequenceFormAffineProjection.Budget budget)
+            throws Exception {
+        double[] variables = new double[projection.variables()];
+        for (int j = 0; j < variables.length; j++) variables[j] = solved.point().get(j);
+        budget.charge((long) opponent.sequences().size() * (variables.length + 1) + roots.size());
+        var realization =
+                Arrays.stream(projection.reconstruct(variables))
+                        .map(
+                                v -> {
+                                    if (!Double.isFinite(v) || v < -TOLERANCE)
+                                        throw new Rejected(
+                                                Failure.NUMERICAL_FAILURE,
+                                                "Invalid rejected opponent flow");
+                                    return Math.max(0, v);
+                                })
+                        .boxed()
+                        .toList();
+        var strategy = new LinkedHashMap<>(baseline.strategy());
+        var flow = behavior(opponent, realization, strategy);
+        var policy = new CfrSolution(1, strategy);
+        double global =
+                MultiPlayerInformationSetBestResponse.assess(checked.snapshot(), policy)
+                        .bestResponseUtilitiesBb()
+                        .get(question.hero());
+        if (!Double.isFinite(global) || global > upper + TOLERANCE)
+            throw new Rejected(
+                    Failure.NUMERICAL_FAILURE, "Rejected reach witness violates global security");
+        var masses = new ArrayList<ReachMass>();
+        double reach = 0;
+        for (int i = 0; i < roots.size(); i++) {
+            var root = roots.get(i);
+            double actual = root.chanceWeight();
+            for (var action : root.opponentPast())
+                actual *= policy.strategy().get(action.key()).get(action.action());
+            double linear = root.chanceWeight() * realization.get(root.opponentSequence());
+            requireClose(linear, actual, "Rejected original and behavioral world mass");
+            reach += actual;
+            masses.add(
+                    new ReachMass(
+                            i,
+                            SixMaxHistoryPhysicalConditionalRefinement.hash(root.node()),
+                            root.opponentSequence(),
+                            root.chanceWeight(),
+                            linear,
+                            actual));
+        }
+        if (!Double.isFinite(reach) || reach < 0 || reach > 1 + TOLERANCE)
+            throw new Rejected(Failure.NUMERICAL_FAILURE, "Invalid rejected question mass");
+        requireClose(value(denominator, variables), reach, "Rejected behavioral question reach");
+        return new ReachWitness(
+                solved.certificate(),
+                solved.point(),
+                solved.dual(),
+                Arrays.stream(variables).boxed().toList(),
+                flow,
+                SixMaxConnectedPostflopAudit.solutionHash(policy),
+                reach,
+                masses,
+                global);
     }
 }
