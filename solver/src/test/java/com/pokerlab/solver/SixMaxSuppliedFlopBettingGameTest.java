@@ -393,13 +393,52 @@ class SixMaxSuppliedFlopBettingGameTest {
                 Exception.class, () -> SixMaxSuppliedFlopBettingStudy.replay(REQUEST, changed));
         tree = SixMaxTexturePayoffTable.mapper().valueToTree(result.report());
         var handoffs = (com.fasterxml.jackson.databind.node.ArrayNode) tree.get("handoffs");
-        ((com.fasterxml.jackson.databind.node.ObjectNode)
-                        handoffs.get(0).get("worlds").get(0).get("counts"))
-                .put("firstWins", 0);
+        var counts =
+                (com.fasterxml.jackson.databind.node.ObjectNode)
+                        handoffs.get(0).get("worlds").get(0).get("counts");
+        counts.put("firstWins", counts.get("firstWins").asLong() + 1);
+        counts.put("secondWins", counts.get("secondWins").asLong() - 1);
+        var altered =
+                SixMaxTexturePayoffTable.mapper()
+                        .treeToValue(handoffs, SixMaxSuppliedFlopHandoff.Audit[].class);
+        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.get("binding"))
+                .put("handoffsHash", SixMaxHeadsUpPreflopGame.hash(altered));
         var wrong = folder.resolve("wrong-counts.json");
         Files.writeString(wrong, tree.toString());
-        assertThrows(Exception.class, () -> SixMaxSuppliedFlopBettingStudy.replay(REQUEST, wrong));
+        var rejected =
+                assertThrows(
+                        Exception.class,
+                        () -> SixMaxSuppliedFlopBettingStudy.replay(REQUEST, wrong));
+        assertTrue(rejected.getMessage().contains("Physical connected flop replay differs"));
         assertThrows(
                 Exception.class, () -> SixMaxSuppliedFlopBettingStudy.replay(REQUEST, REQUEST));
+    }
+
+    @Test
+    void recordedIndependentReceiptBindsExactSourceRequestAndStoredReportBytes() throws Exception {
+        var receipt =
+                SixMaxTexturePayoffTable.mapper()
+                        .readTree(
+                                Files.readAllBytes(
+                                        Path.of(
+                                                "../docs/data/supplied-four-button-hand-connected-flop-independent-check.json")));
+        var digest = java.security.MessageDigest.getInstance("SHA-256");
+        for (var binding :
+                Map.of(
+                                "checkerSourceSha256",
+                                Path.of("../scripts/check-supplied-connected-flop.py"),
+                                "requestStoredBytesSha256",
+                                REQUEST,
+                                "reportStoredBytesSha256",
+                                SAVED)
+                        .entrySet()) {
+            var hash =
+                    HexFormat.of().formatHex(digest.digest(Files.readAllBytes(binding.getValue())));
+            assertEquals(hash, receipt.get(binding.getKey()).asText());
+        }
+        assertEquals(0, receipt.get("freshLpSolves").asInt());
+        assertFalse(receipt.get("originalLpCertificatesIndependentlyChecked").asBoolean());
+        assertEquals(1, receipt.get("reachedFlopQualityChecks").asInt());
+        assertEquals(3, receipt.get("suppressedTinyReachPosteriors").asInt());
     }
 }
