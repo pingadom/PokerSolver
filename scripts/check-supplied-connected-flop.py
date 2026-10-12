@@ -208,7 +208,7 @@ def compare_quality(actual, expected):
     close(actual['nashConvBb'], expected[3], 'Independent literal best-response gap differs')
 
 
-def check(request_path, report_path):
+def check(request_path, report_path, *, include_context=False):
     request, request_bytes, _ = read(request_path)
     report, report_bytes, report_expanded = read(report_path)
     parent, parent_bytes, _ = read(PARENT)
@@ -409,7 +409,7 @@ def check(request_path, report_path):
             compare_quality(local['conditionalBestResponse'], quality(conditional, policy))
             reached_quality_checks += 1
 
-    return dict(schemaVersion='pokerlab-independent-connected-flop-check/v1', trainerAdmission=False,
+    receipt = dict(schemaVersion='pokerlab-independent-connected-flop-check/v1', trainerAdmission=False,
                 freshLpSolves=0, originalLpCertificatesIndependentlyChecked=False,
                 method='LITERAL_BEST_OF_21_CARD_RANKING_AND_INFORMATION_SET_PURE_BEST_RESPONSE',
                 originalPreflopCounts='BYTE_PINNED_PRIOR_PHYSICAL_ARTIFACT_JAVA_REPLAY_REGENERATES',
@@ -421,6 +421,9 @@ def check(request_path, report_path):
                 reportStoredBytesSha256=hashlib.sha256(report_bytes).hexdigest(),
                 reportExpandedBytesSha256=hashlib.sha256(report_expanded).hexdigest(),
                 pinnedSourceStoredBytesSha256=PARENT_BYTES)
+    if include_context:
+        return receipt, dict(root=root, selected=selected, prior=hands)
+    return receipt
 
 
 def main():

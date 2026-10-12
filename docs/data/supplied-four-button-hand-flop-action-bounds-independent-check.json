@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-independent-flop-action-bounds/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "physicalPayoffAndProjectionsIndependentlyChecked": true,
+  "originalEndpointCertificatesChecked": 27,
+  "fullParentBehavioralSecurityChecked": true,
+  "conditionalResponsesChecked": true,
+  "decisionsChecked": 3,
+  "actionsChecked": 6,
+  "freshReferencesChecked": 2,
+  "checkerSourceSha256": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e",
+  "physicalHelperSourceSha256": "56da73ff28a077fa11f9de6304f1fc6284330da94f4b0fdca8fd4270de0f16ab",
+  "requestStoredBytesSha256": "f84bfc728dc01b4e9f7341b3de91df1a95ad6c7ba6795523611e90f36483a187",
+  "reportStoredBytesSha256": "b55df9ff934aaf9dc09659268c0b8909f81914d7dc8bb9e58e3b535bbe3ea013",
+  "reportExpandedBytesSha256": "0641a89b0e0ccc8a39a9d38f27229fce3d05adcd6fd4d47da729fb23c5acdd86",
+  "pinnedParentStoredBytesSha256": "9f02bd48287ed22d64c397d3b2b504a514f0fd4da89ab59808c69fac7d307319"
+}

@@ -518,6 +518,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
         final int pivotLimit;
         final long workLimit;
         final boolean ascendingL1Rows;
+        final boolean resolvableCosts;
         int solves, pivots;
         long work;
 
@@ -526,19 +527,35 @@ public final class FiniteTwoPlayerRootActionIntervals {
         }
 
         LpBudget(int pivotLimit, long workLimit, boolean ascendingL1Rows) {
+            this(pivotLimit, workLimit, ascendingL1Rows, false);
+        }
+
+        LpBudget(int pivotLimit, long workLimit, boolean ascendingL1Rows, boolean resolvableCosts) {
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
             this.ascendingL1Rows = ascendingL1Rows;
+            this.resolvableCosts = resolvableCosts;
         }
 
         BoundedLinearProgram.Result solve(double[][] matrix, double[] rhs, double[] cost)
                 throws Exception {
             var result =
-                    ascendingL1Rows
-                            ? BoundedLinearProgram.solveAscendingL1Rows(
+                    resolvableCosts
+                            ? BoundedLinearProgram.solveResolvableCosts(
                                     matrix, rhs, cost, pivotLimit - pivots, workLimit - work)
-                            : BoundedLinearProgram.solve(
-                                    matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                            : ascendingL1Rows
+                                    ? BoundedLinearProgram.solveAscendingL1Rows(
+                                            matrix,
+                                            rhs,
+                                            cost,
+                                            pivotLimit - pivots,
+                                            workLimit - work)
+                                    : BoundedLinearProgram.solve(
+                                            matrix,
+                                            rhs,
+                                            cost,
+                                            pivotLimit - pivots,
+                                            workLimit - work);
             solves++;
             pivots += result.certificate().work().pivots();
             work += result.certificate().work().arithmeticWork();

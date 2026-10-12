@@ -11,6 +11,8 @@ public final class BoundedLinearProgram {
     public static final String ALGORITHM = "OWNED_TWO_PHASE_ORIGINAL_BASIS_LU_LARGEST_BLAND/v1";
     public static final String ASCENDING_L1_ALGORITHM =
             "OWNED_STABLE_ASCENDING_L1_ROWS_ORIGINAL_CERTIFICATE/v2";
+    public static final String RESOLVABLE_COST_ALGORITHM =
+            "OWNED_ASCENDING_L1_RESOLVABLE_COST_EXACT_RATIO_ORIGINAL_CERTIFICATE/v3";
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
     public static final int MAX_PIVOTS = 10_000;
@@ -116,6 +118,29 @@ public final class BoundedLinearProgram {
     static Result solveAscendingL1Rows(
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, false);
+    }
+
+    /** Explicit phase-II rule; never retries or changes the default solver's certificates. */
+    public static Result solveResolvableCosts(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveResolvableCosts(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveResolvableCosts(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, true);
+    }
+
+    private static Result solveRows(
+            double[][] matrix,
+            double[] rhs,
+            double[] cost,
+            int pivots,
+            long work,
+            boolean resolvableCosts)
+            throws Exception {
         if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
             throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
         dimensions(matrix, rhs, cost);
@@ -146,7 +171,7 @@ public final class BoundedLinearProgram {
         }
         var ordered = new Problem(sorted, bounds, original.cost().clone());
         var solved =
-                new Engine(ordered, pivots, work - budget.used)
+                new Engine(ordered, pivots, work - budget.used, resolvableCosts)
                         .solve(SixMaxHistoryPhysicalConditionalRefinement.hash(ordered));
         budget.charge(solved.certificate().work().arithmeticWork());
         var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
@@ -175,7 +200,7 @@ public final class BoundedLinearProgram {
                 point,
                 dual,
                 new Certificate(
-                        ASCENDING_L1_ALGORITHM,
+                        resolvableCosts ? RESOLVABLE_COST_ALGORITHM : ASCENDING_L1_ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(original),
                         n,
                         m,
@@ -269,6 +294,7 @@ public final class BoundedLinearProgram {
 
     private static final class Engine {
         final Problem problem;
+        final boolean resolvableCosts;
         final int n, m, total, pivotLimit;
         final long workLimit;
         final double[][] source;
@@ -279,7 +305,12 @@ public final class BoundedLinearProgram {
         boolean fallback;
 
         Engine(Problem problem, int pivotLimit, long workLimit) {
+            this(problem, pivotLimit, workLimit, false);
+        }
+
+        Engine(Problem problem, int pivotLimit, long workLimit, boolean resolvableCosts) {
             this.problem = problem;
+            this.resolvableCosts = resolvableCosts;
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
             n = problem.cost().length;
@@ -355,6 +386,8 @@ public final class BoundedLinearProgram {
                 for (int b : basis) used[b] = true;
                 int end = excludeArtificial ? n + m : total;
                 charge((long) m * end);
+                boolean refined = resolvableCosts && excludeArtificial;
+                if (refined) charge(4L * end + 4L * m);
                 int entering = -1;
                 double best = EPS;
                 boolean unresolvedPositive = false;
@@ -375,7 +408,7 @@ public final class BoundedLinearProgram {
                     double roundoff =
                             finite(8.0 * m * Math.ulp(Math.max(objectiveScale, finite(magnitude))));
                     if (reduced > roundoff && reduced <= EPS) unresolvedPositive = true;
-                    if (reduced > EPS
+                    if (reduced > (refined ? roundoff : EPS)
                             && (entering == -1 || largest && reduced > best + PIVOT_EPS)) {
                         entering = j;
                         best = reduced;
@@ -394,7 +427,10 @@ public final class BoundedLinearProgram {
                 for (int i = 0; i < m; i++)
                     if (direction[i] > EPS) {
                         double candidate = finite(Math.max(0, basic[i]) / direction[i]);
-                        double tolerance = PIVOT_EPS * Math.max(1, Math.abs(candidate));
+                        // On the explicit path only exact ratio ties use Bland's index. A near
+                        // tie must not choose a larger step and repeatedly revisit a basis.
+                        double tolerance =
+                                refined ? 0 : PIVOT_EPS * Math.max(1, Math.abs(candidate));
                         if (leaving == -1
                                 || candidate < ratio - tolerance
                                 || Math.abs(candidate - ratio) <= tolerance

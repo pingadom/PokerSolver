@@ -15,6 +15,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
     public static final String ALGORITHM = "POSITIVE_REACH_CONDITIONAL_SECURITY_FACE_OWNED_LP/v1";
     public static final String CONDITIONED_ALGORITHM =
             "POSITIVE_REACH_UPPER_OBJECTIVE_SHIFT_OWNED_LP/v2";
+    public static final String PHYSICAL_FLOP_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_RESOLVABLE_ENDPOINTS/v3";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -297,6 +299,55 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             long arithmeticLimit,
             boolean conditioned)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                0);
+    }
+
+    // Only an owned connected game determines the physical measurement event; no caller scale.
+    static Result solvePhysicalFlop(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
+            throw new IllegalArgumentException("Physical flop question required");
+        double mass = game.handoffs().getFirst().physicalFlopMass();
+        if (!(mass > 0)
+                || !Double.isFinite(mass)
+                || game.handoffs().stream().anyMatch(h -> h.physicalFlopMass() != mass))
+            throw new IllegalArgumentException("Inconsistent owned physical flop support");
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                BoundedLinearProgram.MAX_PIVOTS,
+                BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                true,
+                mass);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass)
+            throws Exception {
         Objects.requireNonNull(question);
         if (!Double.isFinite(securitySlack)
                 || securitySlack < DEFAULT_SECURITY_SLACK
@@ -339,6 +390,21 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 budget);
         if (roots.isEmpty())
             throw new IllegalArgumentException("Conditional question has no chance support");
+        if (physicalFlopMass > 0) {
+            // Scale measurement only. The original snapshot, payoff matrix and complete opponent
+            // security face below retain physical chance, all worlds and all original actions.
+            budget.charge(4L * roots.size());
+            for (int i = 0; i < roots.size(); i++) {
+                var root = roots.get(i);
+                roots.set(
+                        i,
+                        new Root(
+                                root.node(),
+                                root.chanceWeight() / physicalFlopMass,
+                                root.opponentSequence(),
+                                root.opponentPast()));
+            }
+        }
         var continuations = new TreeMap<String, List<String>>();
         for (var root : roots)
             collectContinuations(forced(root, question), question.hero(), continuations, budget);
@@ -351,7 +417,10 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         budget.charge(count * checked.treeNodes());
         var choices = new ArrayList<Map<String, String>>();
         enumerate(new ArrayList<>(continuations.entrySet()), 0, new TreeMap<>(), choices);
-        var baseline = FiniteTwoPlayerAffineSequenceForm.solve(checked.snapshot());
+        var baseline =
+                physicalFlopMass > 0
+                        ? FiniteTwoPlayerAffineSequenceForm.solveAscendingL1Rows(checked.snapshot())
+                        : FiniteTwoPlayerAffineSequenceForm.solve(checked.snapshot());
         double globalUpper =
                 first
                         ? baseline.audit().upperValue()
@@ -385,7 +454,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             var linear = project(coefficients, op.audit(), budget);
             plans.add(new Plan(choice, linear.constant(), linear.cost()));
         }
-        var lpBudget = new LpBudget(pivotLimit, arithmeticLimit);
+        var lpBudget =
+                new LpBudget(
+                        pivotLimit, arithmeticLimit, physicalFlopMass > 0, physicalFlopMass > 0);
         int n = face.matrix()[0].length;
         double[] reachCost = new double[n];
         for (int j = 0; j < op.variables(); j++) reachCost[j] = -denominator.cost().get(j);
@@ -585,7 +656,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         var work = budget.audit();
         return new Result(
                 new Audit(
-                        conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
+                        physicalFlopMass > 0
+                                ? PHYSICAL_FLOP_ALGORITHM
+                                : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,

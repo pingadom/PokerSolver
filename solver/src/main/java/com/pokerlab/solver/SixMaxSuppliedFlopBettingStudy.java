@@ -192,7 +192,7 @@ public final class SixMaxSuppliedFlopBettingStudy {
                         local));
     }
 
-    private static LocalAudit localAudit(
+    static LocalAudit localAudit(
             SixMaxSuppliedFlopBettingGame game,
             SixMaxSuppliedFlopHandoff.Audit handoff,
             CfrSolution policy) {
