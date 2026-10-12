@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "pokerlab-independent-reach-bounds-check/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "originalLpCertificatesChecked": 2,
+  "checkedPhysicalWorlds": 24,
+  "literalOpponentPlansChecked": 54,
+  "exactGameValueRational": "315337/607392",
+  "exactHeroPolicyParameters": [
+    "3961134/8981491",
+    "644698344133760727600/9838462437035599630081",
+    "1373422625856558816120/9838462437035599630081"
+  ],
+  "independentlyCheckedReachLower": -1e-08,
+  "independentlyCheckedReachUpper": 3.943803676895701e-05,
+  "sourceScriptBytesSha256": "84f6b4e0d4aaf7032aadab3581ee08bfda6a6fc6715852f55e49cf424f7e32d8",
+  "requestStoredBytesSha256": "af1ab05646c2eee0bbfcce22eb2d12df0de056be51e9b263d84dc3006db4b86d",
+  "reportStoredBytesSha256": "dd73681551f5489052a7934cbd86a8704e25208a3226f2ec0a1d5c13c6948ead",
+  "reportExpandedBytesSha256": "8cf098e4a86ea44fb83976dbe1e6f9a158e747c169f26c0bb3a7c6288c94870e",
+  "limitations": [
+    "Saved integer board counts and projections; Java physical replay regenerates both",
+    "One supplied-belief model; no conditional EV or trainer admission"
+  ]
+}
