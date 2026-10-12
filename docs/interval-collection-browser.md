@@ -1,4 +1,6 @@
-# Four-question browser trainer
+# Interval collection browser trainer
+
+The [seven-question collection](sixmax-button-interval-feedback.md) adds three BTN responses to the original four BB questions. Its separate overlay and pin preserve the original collection. The browser validates the configured inventory and displays the acting hero at either position.
 
 Open `#interval-collection` from the solver section. The collection API must be explicitly enabled with the existing [collection overlay](sixmax-l1-interval-collection.md#separate-http-opt-in); the original `#interval-preflop?report=<hash>` route remains independent.
 
