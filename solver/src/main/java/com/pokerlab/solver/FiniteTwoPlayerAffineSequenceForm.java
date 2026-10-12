@@ -70,6 +70,8 @@ public final class FiniteTwoPlayerAffineSequenceForm {
 
     public static final String ALGORITHM =
             "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_OWNED_LP/v1";
+    public static final String ASCENDING_ROWS_ALGORITHM =
+            "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_ASCENDING_L1_ORIGINAL_CERTIFICATES/v1";
 
     public record Audit(
             String algorithm,
@@ -124,6 +126,16 @@ public final class FiniteTwoPlayerAffineSequenceForm {
     }
 
     static <S> Result solve(MultiPlayerCfrGame<S> game, long workLimit) throws Exception {
+        return solve(game, workLimit, false);
+    }
+
+    /** Explicit alternative row representation; never a fallback after a failed solve. */
+    public static <S> Result solveAscendingL1Rows(MultiPlayerCfrGame<S> game) throws Exception {
+        return solve(game, SequenceFormAffineProjection.MAX_REDUCTION_WORK, true);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game, long workLimit, boolean ascendingRows) throws Exception {
         var budget = new SequenceFormAffineProjection.Budget(workLimit);
         var checked = FiniteTwoPlayerSequenceForm.checked(game);
         var f = checked.firstFlow();
@@ -131,8 +143,10 @@ public final class FiniteTwoPlayerAffineSequenceForm {
         var fp = SequenceFormAffineProjection.build(f.sequences(), f.conservation(), budget);
         var sp = SequenceFormAffineProjection.build(s.sequences(), s.conservation(), budget);
         var payoff = SequenceFormAffineProjection.reduce(checked.payoff(), fp, sp, budget);
-        var row = SequenceFormAffineProjection.optimize(payoff, fp, sp, true, budget);
-        var column = SequenceFormAffineProjection.optimize(payoff, sp, fp, false, budget);
+        var row =
+                SequenceFormAffineProjection.optimize(payoff, fp, sp, true, budget, ascendingRows);
+        var column =
+                SequenceFormAffineProjection.optimize(payoff, sp, fp, false, budget, ascendingRows);
         double lower = payoff.constant() + row.certificate().primalValue(),
                 upper = payoff.constant() - column.certificate().primalValue();
         final double tolerance = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -196,7 +210,7 @@ public final class FiniteTwoPlayerAffineSequenceForm {
                                 budget.audit()));
         var audit =
                 new Audit(
-                        ALGORITHM,
+                        ascendingRows ? ASCENDING_ROWS_ALGORITHM : ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(checked.snapshot()),
                         originalHash,
                         affineHash,

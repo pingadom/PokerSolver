@@ -301,6 +301,17 @@ final class SequenceFormAffineProjection {
             boolean row,
             Budget budget)
             throws Exception {
+        return optimize(payoff, own, other, row, budget, false);
+    }
+
+    static BoundedLinearProgram.Result optimize(
+            ProjectedPayoffAudit payoff,
+            Projection own,
+            Projection other,
+            boolean row,
+            Budget budget,
+            boolean ascendingRows)
+            throws Exception {
         // x=x0+Tz, y=y0+Uw; payoff=c0+a.z+b.w+z'Dw, Pz<=p, Qw<=q.
         // Row max: a.z-q.lambda, -D'z-Q'lambda<=b. Add c0 to its optimum.
         // Column max: -b.w-p.mu, Dw-P'mu<=-a. Subtract its optimum from c0.
@@ -326,7 +337,9 @@ final class SequenceFormAffineProjection {
             for (int j = 0; j < primal; j++) matrix[inequalities + i][j] = own.matrix[i][j];
             rhs[inequalities + i] = own.rhs[i];
         }
-        return BoundedLinearProgram.solve(matrix, rhs, cost);
+        return ascendingRows
+                ? BoundedLinearProgram.solveAscendingL1Rows(matrix, rhs, cost)
+                : BoundedLinearProgram.solve(matrix, rhs, cost);
     }
 
     static List<Double> realization(
