@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "pokerlab-independent-zero-reach-check/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "originalLpCertificatesChecked": 1,
+  "checkedPhysicalWorlds": 24,
+  "checkedSelectedMasses": 6,
+  "independentMinimumReach": 0,
+  "literalHeroBestResponseRational": "315337/607392",
+  "literalHeroBestResponseBb": 0.5191655471260734,
+  "sourceScriptBytesSha256": "b6ca880edfd65475aa04f9cda31818def7341f00e42e709786f8e8e0b222dedf",
+  "requestStoredBytesSha256": "6c12740d2397c371f9ce8ec895b6343cc2f38f8f032dca614c8de33a6fc27dd0",
+  "reportStoredBytesSha256": "742967314f52bdf3df761961ded83a1b12f690573d59ff150e2d8fd0f3658544",
+  "reportExpandedBytesSha256": "becc47776829cbd3d0d3337b0d3f5085f8a8dda35078cf692d90cc770e7bd631",
+  "limitations": [
+    "Saved integer board counts and projection; Java physical replay regenerates both",
+    "One explicit supplied-belief counterexample; no conditional EV or trainer admission"
+  ]
+}
