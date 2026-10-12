@@ -63,4 +63,26 @@ python -m unittest discover -s scripts -p 'test_check_supplied_flop_feedback.py'
 
 Java controls cover robust/ambiguous qualification, tightened loss limits, unknown hands/actors/histories, a genuinely outside-face policy, private constructors and immutable evidence, exact cached grades, review caps, altered context, wrong startup pins, rehashed report tampering, exclusive output and complete physical startup replay. Python corruption controls separately target physics, reach units, full-parent quality, action values, face status, grades, counts, indices and bounded parsing.
 
-Next: expose this cached owned drill through an explicitly enabled, operator-pinned API, then place board, six seats, action bounds and immediate feedback together in the existing table UI. Broader numerical conditioning, later histories, partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
+## Opt-in API
+
+The separate `/api/v1/trainer/research/flop-interval` protocol is absent by default. Enabling `pokerlab.trainer.flop-interval-research-enabled` requires operator-configured request/report paths and the exact report hash. Configuration invokes the owned loader once before application readiness. HTTP requests never choose input files or start a solve.
+
+| Method and route | Behavior |
+| --- | --- |
+| `GET /api/v1/trainer/research/flop-interval` | Model/chance/belief provenance, EV and reach units, report pin, one available question, two active players and attempt limit |
+| `GET .../question` | Cached owned question with board and six-seat public context |
+| `POST .../grade` | `{ "reportHash": "...", "action": "check" }`; returns canonical interval feedback |
+| `POST .../review` | `{ "reportHash": "...", "actions": ["check", "bet"] }`; reconstructs the complete review |
+
+All successful responses use `Cache-Control: no-store`. Stale pins, illegal actions, extra context/payoff/grade fields and malformed or over-100-attempt reviews return an invalid-request error. Responses never serialize the embedded solver report, private opponent cards, physical prior or LP witnesses. Metadata retains `UNAVAILABLE_NO_SOURCE_POLICY`; the small supplied model is not presented as a general cash strategy chart.
+
+The [local Compose overlay](../docker-compose.trainer-flop-interval.yml) explicitly opts in with read-only fixture mounts and the canonical report pin:
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.trainer-flop-interval.yml up --build -d
+python scripts/smoke-flop-interval-trainer.py
+```
+
+The API slice tests perform real pinned physical startup, compare both grades and the entire saved review, reject client-supplied facts, and verify default-disabled routes and missing settings. Compose CI independently checks default absence, then restarts with the real overlay and compares live question, grades and review to the saved fixture. Readiness controls distinguish temporary startup transport failures from an incorrect successful report pin.
+
+Next: place board, six seats, action bounds and immediate feedback together in the existing table UI. The flop view must use absolute terminal-profit labels and conservative separate-endpoint loss explanations; the older preflop view's incremental EV and joint-loss wording does not apply. Broader numerical conditioning, later histories, partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
