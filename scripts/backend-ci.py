@@ -11,8 +11,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = ('engine', 'solver', 'shared', 'api', 'worker')
-GROUPS = ('solver-0', 'solver-1', 'services')
-SCHEMA = 'pokerlab-backend-ci-manifest/v1'
+SOLVER_SHARDS = 3
+GROUPS = tuple(f'solver-{bucket}' for bucket in range(SOLVER_SHARDS)) + ('services',)
+SCHEMA = 'pokerlab-backend-ci-manifest/v2'
 
 
 def inventory():
@@ -46,7 +47,7 @@ def selected(group, sources):
         return [name for name, module in sources.items() if module != 'solver']
     bucket = int(group[-1])
     return [name for name, module in sources.items() if module == 'solver'
-            and int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % 2 == bucket]
+            and int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % SOLVER_SHARDS == bucket]
 
 
 def manifest(group):

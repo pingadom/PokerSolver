@@ -30,7 +30,7 @@ class BackendEvidenceTest(unittest.TestCase):
         for module in ci.MODULES:
             directory = self.root / module / 'src/test/java'
             directory.mkdir(parents=True)
-            # Exercise all four default Surefire naming patterns and both hash buckets.
+            # Exercise all four default Surefire naming patterns and all hash buckets.
             names = ['TestStart', 'ExampleTest', 'ExampleTests', 'ExampleTestCase', 'FixtureTest'] if module == 'solver' else ['ExampleTest']
             for name in names:
                 (directory / f'{name}.java').write_text(f'package example.{module}; class {name} {{}}', encoding='utf-8')
@@ -51,6 +51,7 @@ class BackendEvidenceTest(unittest.TestCase):
             return ci.verify(self.folder)
 
     def test_complete_partition_accounts_for_all_modules_and_default_name_patterns(self):
+        self.assertEqual(('solver-0', 'solver-1', 'solver-2', 'services'), ci.GROUPS)
         assigned = [ci.selected(group, self.sources) for group in ci.GROUPS]
         self.assertTrue(all(assigned))
         self.assertEqual(len(self.sources), len(set().union(*map(set, assigned))))
@@ -59,6 +60,12 @@ class BackendEvidenceTest(unittest.TestCase):
         self.assertEqual(9, summary['tests'])
         self.assertEqual(9, summary['classes'])
         self.assertEqual(0, summary['failures'] + summary['errors'])
+
+    def test_missing_third_solver_shard_never_passes(self):
+        third = self.folder / 'junit-results-solver-2'
+        third.rename(self.folder / 'missing-solver-2')
+        with self.assertRaisesRegex(ValueError, 'Missing evidence group: solver-2'):
+            self.verify()
 
     def test_missing_group_or_class_never_passes(self):
         report = next(self.folder.rglob('TEST-*.xml'))
