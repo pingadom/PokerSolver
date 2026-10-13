@@ -14,16 +14,23 @@ export type TablePlayer = {
 };
 const seats: MultiwaySeat[] = ["UTG", "HJ", "CO", "BTN", "SB", "BB"];
 
-export default function PokerTable({ players, heroSeat, heroCombo, potBb, toCallBb, selectedMove, children }: {
+export default function PokerTable({ players, heroSeat, heroCombo, potBb, toCallBb, selectedMove, children, board }: {
   players: TablePlayer[]; heroSeat: MultiwaySeat; heroCombo: string;
   potBb: number; toCallBb: number; selectedMove?: { kind: TableMove; label: string };
   children?: ReactNode;
+  board?: string[];
 }) {
   const heroIndex = seats.indexOf(heroSeat);
   return <div className="poker-table-stage">
     <div className="poker-table" aria-label="Six-seat action table">
       <div className="poker-felt" aria-hidden="true" />
       <div className="poker-table-center">
+        {board && <div className="poker-board poker-cards" aria-label="Flop board">
+          {board.map((card) => <span key={card} aria-label={card}
+            className={card.endsWith("h") || card.endsWith("d") ? "red" : ""}>
+            {card.slice(0, -1)}{({ s: "♠", h: "♥", d: "♦", c: "♣" } as Record<string, string>)[card.slice(-1)]}
+          </span>)}
+        </div>}
         <strong><small>Pot</small> {potBb} bb</strong>
         <span className="poker-call">{toCallBb > 0 ? `${toCallBb} bb to call` : "No bet to call"}</span>
       </div>

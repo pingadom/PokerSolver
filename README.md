@@ -20,7 +20,7 @@ flowchart LR
 
 ## Features
 
-The [initial physical-flop interval drill](docs/supplied-flop-feedback.md) now qualifies one BB77 question from PokerLab's owned connected solver, checks fresh policies against the complete security face, and serves cached six-seat questions, EV/loss-range grades and exact reviews through a separate opt-in API. Ambiguous questions remain rejected. Its local Compose overlay performs pinned physical replay at startup; the table UI integration is next.
+The [initial physical-flop interval drill](docs/supplied-flop-feedback.md) now qualifies one BB77 question from PokerLab's owned connected solver, checks fresh policies against the complete security face, and serves cached six-seat questions, EV/loss-range grades and exact reviews through a separate opt-in API. Its `#interval-flop` table UI shows the board, all seats, action ranges and immediate feedback, with replayable review downloads. Ambiguous questions remain rejected; the local Compose overlay performs pinned physical replay at startup.
 
 - 2–9 players with exact hole cards, 0–5 known community cards and up to 100 million trials.
 - Seeded batches, correct multiway tie splitting, per-player wins/ties/losses/equity.
