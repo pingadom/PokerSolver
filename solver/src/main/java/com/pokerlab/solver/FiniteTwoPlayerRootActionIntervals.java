@@ -515,47 +515,68 @@ public final class FiniteTwoPlayerRootActionIntervals {
     }
 
     static final class LpBudget {
+        private enum Representation {
+            ORIGINAL,
+            ASCENDING_L1,
+            RESOLVABLE_COSTS,
+            EXACT_POWER_TWO
+        }
+
         final int pivotLimit;
         final long workLimit;
-        final boolean ascendingL1Rows;
-        final boolean resolvableCosts;
+        final Representation representation;
         int solves, pivots;
         long work;
 
         LpBudget(int pivotLimit, long workLimit) {
-            this(pivotLimit, workLimit, false);
+            this(pivotLimit, workLimit, Representation.ORIGINAL);
         }
 
         LpBudget(int pivotLimit, long workLimit, boolean ascendingL1Rows) {
-            this(pivotLimit, workLimit, ascendingL1Rows, false);
+            this(
+                    pivotLimit,
+                    workLimit,
+                    ascendingL1Rows ? Representation.ASCENDING_L1 : Representation.ORIGINAL);
         }
 
         LpBudget(int pivotLimit, long workLimit, boolean ascendingL1Rows, boolean resolvableCosts) {
+            this(
+                    pivotLimit,
+                    workLimit,
+                    resolvableCosts
+                            ? Representation.RESOLVABLE_COSTS
+                            : ascendingL1Rows
+                                    ? Representation.ASCENDING_L1
+                                    : Representation.ORIGINAL);
+        }
+
+        static LpBudget exactPowerOfTwoRows(int pivotLimit, long workLimit) {
+            return new LpBudget(pivotLimit, workLimit, Representation.EXACT_POWER_TWO);
+        }
+
+        private LpBudget(int pivotLimit, long workLimit, Representation representation) {
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
-            this.ascendingL1Rows = ascendingL1Rows;
-            this.resolvableCosts = resolvableCosts;
+            this.representation = representation;
         }
 
         BoundedLinearProgram.Result solve(double[][] matrix, double[] rhs, double[] cost)
                 throws Exception {
             var result =
-                    resolvableCosts
-                            ? BoundedLinearProgram.solveResolvableCosts(
-                                    matrix, rhs, cost, pivotLimit - pivots, workLimit - work)
-                            : ascendingL1Rows
-                                    ? BoundedLinearProgram.solveAscendingL1Rows(
-                                            matrix,
-                                            rhs,
-                                            cost,
-                                            pivotLimit - pivots,
-                                            workLimit - work)
-                                    : BoundedLinearProgram.solve(
-                                            matrix,
-                                            rhs,
-                                            cost,
-                                            pivotLimit - pivots,
-                                            workLimit - work);
+                    switch (representation) {
+                        case ORIGINAL ->
+                                BoundedLinearProgram.solve(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                        case ASCENDING_L1 ->
+                                BoundedLinearProgram.solveAscendingL1Rows(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                        case RESOLVABLE_COSTS ->
+                                BoundedLinearProgram.solveResolvableCosts(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                        case EXACT_POWER_TWO ->
+                                BoundedLinearProgram.solveExactPowerOfTwoRows(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                    };
             solves++;
             pivots += result.certificate().work().pivots();
             work += result.certificate().work().arithmeticWork();

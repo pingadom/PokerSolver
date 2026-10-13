@@ -25,9 +25,24 @@ The production test checks the returned certificates on the original matrices; i
 not rely on the oracle solver at runtime. A further 292 independent LPs under four row
 representations cover ordinary optima, row permutations and positive scaling.
 
-This method is deliberately not an automatic fallback. No current action-bound path calls
-it, so the existing six-action report and trainer drill remain exactly reproducible. The
-next later-decision milestone must select this mode before optimization, version the
-request/report and demonstrate full physical replay, fresh full-parent reference inclusion,
-actual and counterfactual path reach, and all legal action bounds. A successful individual
-LP certificate alone is not trainer admission.
+This method is deliberately not an automatic fallback. The existing initial action-bound
+path never calls it, so the six-action report and trainer drill remain exactly reproducible.
+A later-decision report must select this mode before optimization, version the request and
+report, and demonstrate full physical replay, fresh full-parent reference inclusion, actual
+and counterfactual path reach, and all legal action bounds. A successful individual LP
+certificate alone is not trainer admission.
+
+## Later conditional interval integration
+
+The interval engine now has a separate `solvePhysicalFlopExactPowerOfTwo` entry point. It
+selects exact row scaling for every LP in one physical question before solving, reports a
+distinct `v4` audit identity, and retains the same full-parent security face, physical-event
+measurement, reach floor, original certificate tolerance and cumulative work caps. Its
+existing `v3` entry point and initial-flop report remain unchanged.
+
+An owned-game regression reaches the BB pocket-sevens state by traversing the preflop
+handoff, BB check and BTN bet. It certifies the fold/call action bounds and verifies that
+every LP witness uses the new representation. A second regression traverses the BTN
+facing an initial BB bet and requires an insufficient-full-face-reach rejection; numerical
+success does not make that question suitable for teaching. These are solver diagnostics,
+not a versioned later-decision report or a new playable trainer question.
