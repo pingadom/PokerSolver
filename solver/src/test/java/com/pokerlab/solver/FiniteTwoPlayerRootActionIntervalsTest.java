@@ -8,6 +8,27 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 class FiniteTwoPlayerRootActionIntervalsTest {
+    @Test
+    void explicitExactRowModeChargesASharedBudgetAcrossSolves() throws Exception {
+        double[][] a = {{1}};
+        double[] b = {1}, c = {1};
+        var once = BoundedLinearProgram.solveExactPowerOfTwoRows(a, b, c);
+        long work = once.certificate().work().arithmeticWork();
+        var budget =
+                FiniteTwoPlayerRootActionIntervals.LpBudget.exactPowerOfTwoRows(
+                        BoundedLinearProgram.MAX_PIVOTS, work);
+        var first = budget.solve(a, b, c);
+        assertEquals(
+                BoundedLinearProgram.EXACT_POWER_TWO_ALGORITHM, first.certificate().algorithm());
+        assertEquals(1, budget.solves);
+        assertEquals(work, budget.work);
+        assertEquals(
+                BoundedLinearProgram.Failure.WORK_LIMIT,
+                assertThrows(BoundedLinearProgram.Rejected.class, () -> budget.solve(a, b, c))
+                        .reason());
+        assertEquals(1, budget.solves);
+    }
+
     static Node terminal(int hero, double value) {
         var u = new ArrayList<>(List.of(-1.0, -1.0, -1.0, -1.0, -1.0, -1.0));
         u.set(hero, value);

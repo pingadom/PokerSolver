@@ -153,6 +153,116 @@ class SixMaxSuppliedFlopActionBoundsTest {
     }
 
     @Test
+    void explicitExactRowsBoundLaterBigBlindFoldAndCallWithoutChangingInitialReport()
+            throws Exception {
+        var handoff = game.handoffs().getFirst();
+        var keys = new TreeSet<String>();
+        for (var world : handoff.worlds()) {
+            if (!world.sixDealtCombos().get(5).equals("7d 7h")) continue;
+            var state =
+                    new SixMaxSuppliedFlopBettingGame.State(
+                            world.originalDealIndex(),
+                            handoff.publicHistory(),
+                            SixMaxSuppliedFlopBettingGame.Phase.FLOP,
+                            "");
+            assertEquals(List.of("check", "bet"), game.legalActions(state));
+            state = game.afterAction(state, "check");
+            assertEquals(3, game.currentPlayer(state));
+            state = game.afterAction(state, "bet");
+            assertEquals(5, game.currentPlayer(state));
+            assertEquals(List.of("fold", "call"), game.legalActions(state));
+            keys.add(game.currentPlayer(state) + ":" + game.informationSet(state));
+        }
+        assertEquals(1, keys.size());
+        String key = keys.first();
+        var fold =
+                FiniteTwoPlayerConditionalActionIntervals.solvePhysicalFlopExactPowerOfTwo(
+                        game,
+                        new FiniteTwoPlayerConditionalActionIntervals.Question(5, key, "fold"),
+                        1e-8,
+                        .0001);
+        var call =
+                FiniteTwoPlayerConditionalActionIntervals.solvePhysicalFlopExactPowerOfTwo(
+                        game,
+                        new FiniteTwoPlayerConditionalActionIntervals.Question(5, key, "call"),
+                        1e-8,
+                        .0001);
+        for (var result : List.of(fold, call)) {
+            var audit = result.audit();
+            assertEquals(
+                    FiniteTwoPlayerConditionalActionIntervals
+                            .PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM,
+                    audit.algorithm());
+            assertFalse(audit.trainerAdmission());
+            assertTrue(audit.fixedHeroPast().stream().anyMatch(a -> a.action().equals("check")));
+            assertTrue(audit.certifiedReachLowerBound() > .0001);
+            var witnesses = new ArrayList<FiniteTwoPlayerConditionalActionIntervals.Witness>();
+            witnesses.add(audit.minimumReachWitness());
+            witnesses.add(audit.maximumReachWitness());
+            witnesses.add(audit.lowerWitness());
+            witnesses.addAll(audit.upperWitnesses());
+            for (var witness : witnesses)
+                assertEquals(
+                        BoundedLinearProgram.EXACT_POWER_TWO_ALGORITHM,
+                        witness.certificate().algorithm());
+            assertTrue(audit.lowerUtility() <= audit.upperUtility());
+            assertTrue(
+                    audit.work().intervalLpArithmeticWork()
+                            <= BoundedLinearProgram.MAX_ARITHMETIC_WORK);
+        }
+        double bestLower = Math.max(fold.audit().lowerUtility(), call.audit().lowerUtility());
+        double bestUpper = Math.max(fold.audit().upperUtility(), call.audit().upperUtility());
+        assertTrue(bestUpper - fold.audit().lowerUtility() < .01);
+        assertTrue(bestLower - call.audit().upperUtility() > .4);
+        assertEquals(SixMaxSuppliedFlopActionBounds.SCHEMA, result.report().schemaVersion());
+    }
+
+    @Test
+    void exactRowsCannotAdmitAQuestionWithGenuineInsufficientFullFaceReach() throws Exception {
+        var handoff = game.handoffs().getFirst();
+        var keys = new TreeSet<String>();
+        for (var world : handoff.worlds()) {
+            if (!world.sixDealtCombos().get(3).equals("9s Js")) continue;
+            var state =
+                    new SixMaxSuppliedFlopBettingGame.State(
+                            world.originalDealIndex(),
+                            handoff.publicHistory(),
+                            SixMaxSuppliedFlopBettingGame.Phase.FLOP,
+                            "");
+            state = game.afterAction(state, "bet");
+            assertEquals(3, game.currentPlayer(state));
+            assertEquals(List.of("fold", "call"), game.legalActions(state));
+            keys.add(game.currentPlayer(state) + ":" + game.informationSet(state));
+        }
+        assertEquals(1, keys.size());
+        for (String action : List.of("fold", "call")) {
+            var rejected =
+                    assertThrows(
+                            FiniteTwoPlayerConditionalActionIntervals.Rejected.class,
+                            () ->
+                                    FiniteTwoPlayerConditionalActionIntervals
+                                            .solvePhysicalFlopExactPowerOfTwo(
+                                                    game,
+                                                    new FiniteTwoPlayerConditionalActionIntervals
+                                                            .Question(3, keys.first(), action),
+                                                    1e-8,
+                                                    .0001));
+            assertEquals(
+                    FiniteTwoPlayerConditionalActionIntervals.Failure.INSUFFICIENT_REACH,
+                    rejected.reason());
+            assertTrue(rejected.reachFailure().isPresent());
+            assertFalse(rejected.reachFailure().orElseThrow().trainerAdmission());
+            assertEquals(
+                    BoundedLinearProgram.EXACT_POWER_TWO_ALGORITHM,
+                    rejected.reachFailure()
+                            .orElseThrow()
+                            .minimumReachWitness()
+                            .certificate()
+                            .algorithm());
+        }
+    }
+
+    @Test
     void savedPhysicalReplayMatchesAndAlteredBoundsAreRejected(@TempDir Path folder)
             throws Exception {
         var saved =

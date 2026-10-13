@@ -17,6 +17,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "POSITIVE_REACH_UPPER_OBJECTIVE_SHIFT_OWNED_LP/v2";
     public static final String PHYSICAL_FLOP_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_RESOLVABLE_ENDPOINTS/v3";
+    public static final String PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_EXACT_POWER_TWO_ENDPOINTS/v4";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -318,13 +320,7 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             double securitySlack,
             double minimumReach)
             throws Exception {
-        if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
-            throw new IllegalArgumentException("Physical flop question required");
-        double mass = game.handoffs().getFirst().physicalFlopMass();
-        if (!(mass > 0)
-                || !Double.isFinite(mass)
-                || game.handoffs().stream().anyMatch(h -> h.physicalFlopMass() != mass))
-            throw new IllegalArgumentException("Inconsistent owned physical flop support");
+        double mass = physicalFlopMass(game, question);
         return solve(
                 game,
                 question,
@@ -337,6 +333,38 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 mass);
     }
 
+    /** The caller selects this separate LP representation before starting the complete solve. */
+    static Result solvePhysicalFlopExactPowerOfTwo(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        double mass = physicalFlopMass(game, question);
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                BoundedLinearProgram.MAX_PIVOTS,
+                BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                true,
+                mass,
+                true);
+    }
+
+    private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
+        if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
+            throw new IllegalArgumentException("Physical flop question required");
+        double mass = game.handoffs().getFirst().physicalFlopMass();
+        if (!(mass > 0)
+                || !Double.isFinite(mass)
+                || game.handoffs().stream().anyMatch(h -> h.physicalFlopMass() != mass))
+            throw new IllegalArgumentException("Inconsistent owned physical flop support");
+        return mass;
+    }
+
     private static <S> Result solve(
             MultiPlayerCfrGame<S> game,
             Question question,
@@ -347,6 +375,31 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             long arithmeticLimit,
             boolean conditioned,
             double physicalFlopMass)
+            throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows)
             throws Exception {
         Objects.requireNonNull(question);
         if (!Double.isFinite(securitySlack)
@@ -455,8 +508,13 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             plans.add(new Plan(choice, linear.constant(), linear.cost()));
         }
         var lpBudget =
-                new LpBudget(
-                        pivotLimit, arithmeticLimit, physicalFlopMass > 0, physicalFlopMass > 0);
+                exactPowerOfTwoRows
+                        ? LpBudget.exactPowerOfTwoRows(pivotLimit, arithmeticLimit)
+                        : new LpBudget(
+                                pivotLimit,
+                                arithmeticLimit,
+                                physicalFlopMass > 0,
+                                physicalFlopMass > 0);
         int n = face.matrix()[0].length;
         double[] reachCost = new double[n];
         for (int j = 0; j < op.variables(); j++) reachCost[j] = -denominator.cost().get(j);
@@ -657,7 +715,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return new Result(
                 new Audit(
                         physicalFlopMass > 0
-                                ? PHYSICAL_FLOP_ALGORITHM
+                                ? exactPowerOfTwoRows
+                                        ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
+                                        : PHYSICAL_FLOP_ALGORITHM
                                 : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
