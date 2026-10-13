@@ -45,6 +45,91 @@ class SixMaxSuppliedFlopBettingGameTest {
     }
 
     @Test
+    void publicTableContextFollowsOwnedActionsAndIsIdenticalAcrossHiddenWorlds() {
+        var publicViews = new HashMap<String, SixMaxSuppliedFlopBettingGame.PublicFlopState>();
+        var paths =
+                List.of(
+                        List.<String>of(),
+                        List.of("check"),
+                        List.of("bet"),
+                        List.of("check", "bet"));
+        for (var handoff : game.handoffs())
+            for (var world : handoff.worlds())
+                for (var path : paths) {
+                    var state =
+                            new State(
+                                    world.originalDealIndex(),
+                                    handoff.publicHistory(),
+                                    Phase.FLOP,
+                                    "");
+                    for (String action : path) state = game.afterAction(state, action);
+                    var view = game.publicFlopState(state);
+                    String key = handoff.publicHistory() + ":" + String.join("|", path);
+                    var prior = publicViews.putIfAbsent(key, view);
+                    if (prior != null) assertEquals(prior, view);
+                    assertEquals(handoff.flop(), view.board());
+                    assertEquals(handoff.completePreflopHistory(), view.preflopHistory());
+                    assertEquals(path, view.flopHistory().stream().map(m -> m.action()).toList());
+                    assertEquals(game.legalActions(state), view.legalActions());
+                    assertEquals(Seat.values()[game.currentPlayer(state)], view.actingSeat());
+                    assertEquals(6, view.players().size());
+                    assertEquals(
+                            view.potBb(),
+                            view.players().stream().mapToDouble(p -> p.committedBb()).sum());
+                    for (var player : view.players()) {
+                        int i = player.seat().ordinal();
+                        assertEquals(
+                                handoff.committedBb().get(i) + handoff.remainingStackBb().get(i),
+                                player.committedBb() + player.remainingStackBb());
+                        assertTrue(player.remainingStackBb() >= 0);
+                    }
+                }
+        assertEquals(4 * game.handoffs().size(), publicViews.size());
+        var start = flop(boundary("call"));
+        var initial = game.publicFlopState(start);
+        assertEquals(Seat.BB, initial.actingSeat());
+        assertEquals(6.5, initial.potBb());
+        assertEquals(0, initial.toCallBb());
+        assertEquals(3.25, initial.betSizeBb());
+        var facing =
+                game.publicFlopState(game.afterAction(game.afterAction(start, "check"), "bet"));
+        assertEquals(Seat.BB, facing.actingSeat());
+        assertEquals(9.75, facing.potBb());
+        assertEquals(3.25, facing.toCallBb());
+        assertEquals(List.of("fold", "call"), facing.legalActions());
+        assertEquals(6.25, facing.players().get(3).committedBb());
+        assertEquals(93.75, facing.players().get(3).remainingStackBb());
+        assertEquals(3, facing.players().get(5).committedBb());
+        assertEquals(97, facing.players().get(5).remainingStackBb());
+        assertEquals(Seat.BB, facing.flopHistory().getFirst().seat());
+        assertEquals(0, facing.flopHistory().getFirst().amountBb());
+        assertEquals(Seat.BTN, facing.flopHistory().getLast().seat());
+        assertEquals(3.25, facing.flopHistory().getLast().amountBb());
+    }
+
+    @Test
+    void publicTableViewsAreImmutableAndRequireOwnedActiveFlopDecisions() {
+        var start = flop(boundary("call"));
+        var view = game.publicFlopState(start);
+        assertThrows(UnsupportedOperationException.class, () -> view.board().clear());
+        assertThrows(UnsupportedOperationException.class, () -> view.players().clear());
+        assertThrows(UnsupportedOperationException.class, () -> view.flopHistory().clear());
+        assertThrows(UnsupportedOperationException.class, () -> view.preflopHistory().clear());
+        assertThrows(UnsupportedOperationException.class, () -> view.legalActions().clear());
+        assertThrows(
+                IllegalArgumentException.class, () -> game.publicFlopState(game.initialState()));
+        assertThrows(IllegalArgumentException.class, () -> game.publicFlopState(boundary("call")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        game.publicFlopState(
+                                game.afterAction(game.afterAction(start, "bet"), "fold")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> game.publicFlopState(new State(999, start.preflopHistory(), Phase.FLOP, "")));
+    }
+
+    @Test
     void originalPhysicalSourceAndPriorAreUnchangedAndOnlyTwoPlayersAct() throws Exception {
         var saved =
                 SixMaxTexturePayoffTable.mapper()

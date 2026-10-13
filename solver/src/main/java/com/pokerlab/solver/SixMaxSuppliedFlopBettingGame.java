@@ -22,6 +22,32 @@ public final class SixMaxSuppliedFlopBettingGame
     public record State(
             int originalDealIndex, String preflopHistory, Phase phase, String flopHistory) {}
 
+    public record PublicPlayer(
+            Seat seat, String status, double committedBb, double remainingStackBb) {}
+
+    public record PublicFlopMove(Seat seat, String action, double amountBb) {}
+
+    /** Public table context derived from owned edges; no dealt opponent cards or world index. */
+    public record PublicFlopState(
+            Seat actingSeat,
+            List<String> board,
+            String publicPreflopHistory,
+            List<SixMaxPreflopBetting.Move> preflopHistory,
+            List<PublicFlopMove> flopHistory,
+            double potBb,
+            double toCallBb,
+            double betSizeBb,
+            List<PublicPlayer> players,
+            List<String> legalActions) {
+        public PublicFlopState {
+            board = List.copyOf(board);
+            preflopHistory = List.copyOf(preflopHistory);
+            flopHistory = List.copyOf(flopHistory);
+            players = List.copyOf(players);
+            legalActions = List.copyOf(legalActions);
+        }
+    }
+
     public record Budget(
             SixMaxSuppliedRangePreflopGame.Budget sourceBudget,
             int nonAllInBoundaries,
@@ -480,6 +506,97 @@ public final class SixMaxSuppliedFlopBettingGame
 
     public SixMaxSuppliedRangePreflopGame source() {
         return source;
+    }
+
+    public PublicFlopState publicFlopState(State state) {
+        if (node(state).actor() < 0 || state.phase() != Phase.FLOP)
+            throw new IllegalArgumentException("An owned nonterminal flop decision is required");
+        var handoff =
+                handoffs.stream()
+                        .filter(h -> h.publicHistory().equals(state.preflopHistory()))
+                        .findFirst()
+                        .orElseThrow();
+        var boundary =
+                source.publicBettingState(
+                        new SixMaxHeadsUpPreflopGame.State(
+                                state.originalDealIndex(), state.preflopHistory()));
+        var initial = new State(state.originalDealIndex(), state.preflopHistory(), Phase.FLOP, "");
+        var path = publicFlopPath(initial, state, 3);
+        if (path == null) throw new IllegalArgumentException("Owned flop path required");
+        double amount = bet(boundary, binding.betPotFraction());
+        double[] committed =
+                Arrays.stream(Seat.values()).mapToDouble(boundary::committedBb).toArray();
+        double[] remaining =
+                Arrays.stream(Seat.values()).mapToDouble(boundary::remainingStackBb).toArray();
+        var folded = new boolean[6];
+        for (var seat : Seat.values())
+            folded[seat.ordinal()] = !boundary.liveSeats().contains(seat);
+        var moves = new ArrayList<PublicFlopMove>();
+        var cursor = initial;
+        for (String action : path) {
+            int actor = currentPlayer(cursor);
+            double paid =
+                    switch (action) {
+                        case "check", "fold" -> 0;
+                        case "bet" -> amount;
+                        case "call" -> publicToCall(committed, folded, actor);
+                        default -> throw new IllegalStateException("Unsupported owned flop move");
+                    };
+            committed[actor] += paid;
+            remaining[actor] -= paid;
+            if (action.equals("fold")) folded[actor] = true;
+            moves.add(new PublicFlopMove(Seat.values()[actor], action, paid));
+            cursor = afterAction(cursor, action);
+        }
+        if (!cursor.equals(state))
+            throw new IllegalStateException("Owned public flop path differs");
+        int actor = currentPlayer(state);
+        var players = new ArrayList<PublicPlayer>();
+        for (var seat : Seat.values()) {
+            int i = seat.ordinal();
+            players.add(
+                    new PublicPlayer(
+                            seat,
+                            folded[i]
+                                    ? "FOLDED"
+                                    : i == actor
+                                            ? "ACTING"
+                                            : remaining[i] == 0 ? "ALL_IN" : "ACTIVE",
+                            committed[i],
+                            remaining[i]));
+        }
+        return new PublicFlopState(
+                Seat.values()[actor],
+                handoff.flop(),
+                handoff.publicHistory(),
+                handoff.completePreflopHistory(),
+                moves,
+                Arrays.stream(committed).sum(),
+                publicToCall(committed, folded, actor),
+                amount,
+                players,
+                legalActions(state));
+    }
+
+    private List<String> publicFlopPath(State from, State target, int remaining) {
+        if (from.equals(target)) return List.of();
+        if (remaining == 0 || node(from).actor() < 0) return null;
+        for (String action : legalActions(from)) {
+            var suffix = publicFlopPath(afterAction(from, action), target, remaining - 1);
+            if (suffix == null) continue;
+            var path = new ArrayList<String>();
+            path.add(action);
+            path.addAll(suffix);
+            return List.copyOf(path);
+        }
+        return null;
+    }
+
+    private static double publicToCall(double[] committed, boolean[] folded, int actor) {
+        double highest = committed[actor];
+        for (int i = 0; i < committed.length; i++)
+            if (!folded[i]) highest = Math.max(highest, committed[i]);
+        return highest - committed[actor];
     }
 
     public int playerCount() {
