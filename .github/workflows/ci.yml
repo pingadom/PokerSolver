@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [solver-0, solver-1, services]
+        group: [solver-0, solver-1, solver-2, services]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v6
