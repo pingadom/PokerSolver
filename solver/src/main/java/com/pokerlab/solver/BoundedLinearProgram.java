@@ -13,6 +13,8 @@ public final class BoundedLinearProgram {
             "OWNED_STABLE_ASCENDING_L1_ROWS_ORIGINAL_CERTIFICATE/v2";
     public static final String RESOLVABLE_COST_ALGORITHM =
             "OWNED_ASCENDING_L1_RESOLVABLE_COST_EXACT_RATIO_ORIGINAL_CERTIFICATE/v3";
+    public static final String EXACT_POWER_TWO_ALGORITHM =
+            "OWNED_EXACT_POWER_TWO_L1_RHS_RESOLVABLE_COST_ORIGINAL_CERTIFICATE/v1";
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
     public static final int MAX_PIVOTS = 10_000;
@@ -131,6 +133,99 @@ public final class BoundedLinearProgram {
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
         return solveRows(matrix, rhs, cost, pivots, work, true);
+    }
+
+    /**
+     * Explicit row representation for problems whose ordinary resolvable-cost representation cannot
+     * certify an optimum. This never retries a failed solve or changes its work limits. Each
+     * positive power-of-two row factor must preserve every original coefficient exactly; the
+     * returned dual and certificate are then checked against the original problem.
+     */
+    public static Result solveExactPowerOfTwoRows(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveExactPowerOfTwoRows(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveExactPowerOfTwoRows(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
+            throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
+        dimensions(matrix, rhs, cost);
+        int m = rhs.length, n = cost.length;
+        var budget = new RowBudget(work);
+        // Include original copying/hash/certificate, scaling and inverse mapping. The nested
+        // ordered solve charges its own work to the same remaining budget.
+        budget.charge(64L * m * n + 64L * m + 16L * n);
+        var original = copy(matrix, rhs, cost);
+        var scaled = new double[m][n];
+        var bounds = new double[m];
+        var factors = new double[m];
+        for (int i = 0; i < m; i++) {
+            double metric = Math.abs(original.rhs()[i]);
+            for (double coefficient : original.matrix()[i])
+                metric = finite(metric + Math.abs(coefficient));
+            factors[i] = metric == 0 ? 1 : Math.scalb(1.0, -Math.getExponent(metric));
+            for (int j = 0; j < n; j++)
+                scaled[i][j] = exactPowerOfTwoScale(original.matrix()[i][j], factors[i]);
+            bounds[i] = exactPowerOfTwoScale(original.rhs()[i], factors[i]);
+        }
+        var solved = solveRows(scaled, bounds, original.cost(), pivots, work - budget.used, true);
+        budget.charge(solved.certificate().work().arithmeticWork());
+        var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
+        var dual = new double[m];
+        double primalViolation = 0, dualViolation = 0;
+        for (int i = 0; i < m; i++) {
+            dual[i] = finite(solved.dual().get(i) * factors[i]);
+            primalViolation =
+                    Math.max(primalViolation, dot(original.matrix()[i], point) - original.rhs()[i]);
+            dualViolation = Math.max(dualViolation, -dual[i]);
+        }
+        for (int j = 0; j < n; j++) {
+            primalViolation = Math.max(primalViolation, -point[j]);
+            double column = 0;
+            for (int i = 0; i < m; i++) column += original.matrix()[i][j] * dual[i];
+            dualViolation = Math.max(dualViolation, original.cost()[j] - finite(column));
+        }
+        double value = dot(original.cost(), point), upper = dot(original.rhs(), dual);
+        double gap = Math.abs(finite(upper - value));
+        if (finite(primalViolation) > CERTIFICATE_TOLERANCE
+                || finite(dualViolation) > CERTIFICATE_TOLERANCE
+                || gap > CERTIFICATE_TOLERANCE)
+            throw reject(Failure.NUMERICAL_FAILURE, "Original scaled LP certificate failed");
+        var previous = solved.certificate().work();
+        return new Result(
+                point,
+                dual,
+                new Certificate(
+                        EXACT_POWER_TWO_ALGORITHM,
+                        SixMaxHistoryPhysicalConditionalRefinement.hash(original),
+                        n,
+                        m,
+                        value,
+                        upper,
+                        primalViolation,
+                        dualViolation,
+                        gap,
+                        new Work(
+                                previous.phaseOnePivots(),
+                                previous.cleanupPivots(),
+                                previous.phaseTwoPivots(),
+                                previous.basisFactorizations(),
+                                budget.used,
+                                previous.blandFallback())));
+    }
+
+    static double exactPowerOfTwoScale(double value, double factor) {
+        if (!(factor > 0)
+                || !Double.isFinite(factor)
+                || factor != Math.scalb(1.0, Math.getExponent(factor)))
+            throw reject(Failure.NUMERICAL_FAILURE, "Invalid exact LP row scale");
+        double scaled = finite(value * factor);
+        double restored = finite(scaled / factor);
+        if (Double.doubleToRawLongBits(restored) != Double.doubleToRawLongBits(value))
+            throw reject(Failure.NUMERICAL_FAILURE, "LP row scaling lost an original coefficient");
+        return scaled;
     }
 
     private static Result solveRows(
