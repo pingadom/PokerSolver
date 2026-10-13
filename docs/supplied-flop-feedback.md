@@ -123,4 +123,40 @@ python scripts/check-later-bb-flop-feedback.py docs/data/supplied-four-button-ha
 python -m unittest discover -s scripts -p 'test_check_later_bb_flop_feedback.py'
 ```
 
-Next, build a separately replayable question/grade/review pack from this qualified capability, then add a cached opt-in API and table integration. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
+## Later BB trainer backend
+
+`SixMaxLaterFlopTrainer` consumes only the private capability returned by an owned later-decision solve or complete replay. Its separate `pokerlab-later-bb-flop-drill/v1` protocol caches one fold/call question, with hero cards, the owned public table and betting history, the report pin, model/chance/belief provenance, EV and reach units, security slack, reach floor and educational loss limit. Public questions contain no opponent hole cards, physical prior, reference strategies or LP witnesses.
+
+Grading requires the exact cached question and a legal fold/call action. Feedback includes the selected move and both certified alternatives. Reviews reconstruct zero to 100 explicit attempts and compare every question field, grade, index and count on replay. Counts describe retries at one selected question; they are not a measure of general poker accuracy or curriculum coverage. The [saved drill](data/supplied-four-button-hand-later-bb-flop-drill.json) contains one fold and one call. Plain/gzip artifacts have stored and expanded 256 KiB bounds and exclusive output creation.
+
+`SixMaxLaterFlopTrainerLoader` requires operator-configured request/report paths and exact Java report pin `4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea`. It checks the pin before expensive work, performs complete owned physical replay, requires qualification, and checks the owned pin again. Before/after file snapshots include resolved paths, file identities, modification times, sizes and stored-byte hashes. Changed startup files fail closed. Matching a caller-rehashed edited report never bypasses physical replay.
+
+```text
+com.pokerlab.solver.SixMaxLaterFlopTrainerMain create <later-request> <later-report> <new-drill.json[.gz]> fold call
+com.pokerlab.solver.SixMaxLaterFlopTrainerMain replay <later-request> <later-report> <drill.json[.gz]>
+```
+
+The [independent drill checker](../scripts/check-later-bb-flop-drill.py) first runs the complete fixed-case report checker, including the eight original endpoint certificates and all three policies. It then checks the exact question, legal actions, every feedback field and repeated-attempt counts. Its [receipt](data/supplied-four-button-hand-later-bb-flop-drill-independent-check.json) binds the drill bytes, checker source and full report-check receipt. Twenty-five additional corruption controls target question/provenance/context, selected and alternative ranges, action order, indices, pins, hidden data and counts. The existing report, original report receipt and initial check/bet artifacts retain their exact bytes.
+
+```sh
+python scripts/check-later-bb-flop-drill.py docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz docs/data/supplied-four-button-hand-later-bb-flop-drill.json --output <new-receipt.json>
+python -m unittest discover -s scripts -p 'test_check_later_bb_flop_drill.py'
+```
+
+The separate `/api/v1/trainer/research/later-flop-interval` API is absent by default. Enabling `pokerlab.trainer.later-flop-interval-research-enabled` requires the request path, report path and report hash settings. Startup completes physical replay before the bean becomes ready. HTTP requests use immutable cached evidence and cannot select files or launch solver work.
+
+| Method and route | Behavior |
+| --- | --- |
+| `GET /api/v1/trainer/research/later-flop-interval` | Report pin, research status, model/chance/belief provenance, units and attempt limit |
+| `GET .../question` | Owned BB fold/call question with six seats, board and public betting history |
+| `POST .../grade` | `{ "reportHash": "...", "action": "fold" }`; returns exact cached interval feedback |
+| `POST .../review` | `{ "reportHash": "...", "actions": ["fold", "call"] }`; rebuilds the canonical review |
+
+All successful responses use `Cache-Control: no-store`. Stale pins, unknown actions, additional context/EV/grade fields and malformed or over-100-attempt reviews fail validation. API tests use real pinned physical startup, compare the complete saved review and both grades, and verify disabled routes. Compose CI checks default absence, starts the read-only pinned overlay, then compares live metadata, question, both grades and review against the saved artifact.
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.trainer-later-flop-interval.yml up --build -d
+python scripts/smoke-later-flop-interval-trainer.py
+```
+
+The initial check/bet API and table UI remain independently versioned. Next, connect the later fold/call API to the table UI, then consider an explicitly selected collection containing both independently qualified decisions. These intervals do not establish a coherent full-hand policy. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.

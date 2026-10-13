@@ -132,6 +132,7 @@ class SixMaxLaterFlopFeedbackTest {
         var rejected = SixMaxLaterFlopFeedback.solve(request(1e-9));
         assertFalse(rejected.report().qualifiedForOfflineDrill());
         assertTrue(rejected.qualifiedFeedback().isEmpty());
+        assertThrows(IllegalArgumentException.class, () -> new SixMaxLaterFlopTrainer(rejected));
         assertTrue(rejected.report().rejectionReasons().contains("NO_ROBUST_MOVE_WITHIN_LIMIT"));
         assertEquals(
                 SixMaxSuppliedIntervalFeedback.Classification.STRATEGY_DEPENDENT,
@@ -280,6 +281,151 @@ class SixMaxLaterFlopFeedbackTest {
         assertEquals(
                 sha(Path.of("../scripts/check-supplied-connected-flop.py")),
                 receipt.get("physicalHelperSourceSha256").asText());
+    }
+
+    @Test
+    void cachedLaterQuestionGradesOnlyItsOwnedMovesAndExposesPublicHistory() {
+        var trainer = new SixMaxLaterFlopTrainer(result);
+        var q = trainer.question();
+        assertEquals("BB", q.hero());
+        assertEquals("7d 7h", q.heroCards());
+        assertEquals(result.report().context(), q.context());
+        assertEquals(SixMaxSuppliedFlopBettingGame.MODEL, q.model());
+        assertEquals(SixMaxSuppliedFlopBettingGame.CHANCE, q.chanceModel());
+        assertEquals(SixMaxSuppliedRangePreflopGame.BELIEFS, q.beliefs());
+        assertEquals("UNAVAILABLE_NO_SOURCE_POLICY", q.sourceHistoryReachStatus());
+        for (String action : q.context().legalActions()) {
+            var feedback = trainer.grade(q, action);
+            assertEquals(result.report().moves(), feedback.alternatives());
+            assertEquals(action, feedback.selected().action());
+            assertFalse(feedback.trainerAdmission());
+        }
+        for (String action : List.of("check", "bet", "CALL", "", "raise:100"))
+            assertThrows(IllegalArgumentException.class, () -> trainer.grade(q, action));
+        assertThrows(IllegalArgumentException.class, () -> trainer.grade(q, null));
+        assertThrows(IllegalArgumentException.class, () -> trainer.grade(null, "fold"));
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> trainer.grade(q, "fold").alternatives().clear());
+    }
+
+    @Test
+    void exactLaterReviewsRejectAlteredGradesCountsContextAndAttemptOrder(@TempDir Path dir)
+            throws Exception {
+        var trainer = new SixMaxLaterFlopTrainer(result);
+        var q = trainer.question();
+        var review = trainer.review(q, List.of("fold", "call"));
+        assertEquals(new SixMaxLaterFlopTrainer.Counts(1, 1, 0), review.counts());
+        assertEquals(review, trainer.replay(review));
+        assertEquals(
+                review,
+                trainer.replay(
+                        Path.of(
+                                "../docs/data/supplied-four-button-hand-later-bb-flop-drill.json")));
+        assertEquals(0, trainer.review(q, List.of()).attempts().size());
+        assertEquals(
+                100, trainer.review(q, Collections.nCopies(100, "fold")).counts().withinLimit());
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> trainer.review(q, Collections.nCopies(101, "fold")));
+        assertThrows(IllegalArgumentException.class, () -> trainer.review(q, null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> trainer.review(q, Arrays.asList("fold", null)));
+        assertThrows(UnsupportedOperationException.class, () -> review.attempts().clear());
+        var mapper = SixMaxTexturePayoffTable.mapper();
+        for (String field : List.of("grade", "counts", "context", "pin", "index", "order")) {
+            var tree = mapper.valueToTree(review);
+            switch (field) {
+                case "grade" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode)
+                                        tree.at("/attempts/0/feedback/selected"))
+                                .put("upperLossBb", .5);
+                case "counts" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.get("counts"))
+                                .put("withinLimit", 2);
+                case "context" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode)
+                                        tree.at("/question/context"))
+                                .put("toCallBb", 0);
+                case "pin" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.get("question"))
+                                .put("reportHash", "0".repeat(64));
+                case "index" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.at("/attempts/0"))
+                                .put("index", 1);
+                case "order" ->
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.at("/attempts/0"))
+                                .put("action", "call");
+            }
+            var changed = mapper.treeToValue(tree, SixMaxLaterFlopTrainer.Review.class);
+            assertThrows(IllegalArgumentException.class, () -> trainer.replay(changed), field);
+        }
+        for (String name : List.of("review.json", "review.json.gz")) {
+            var path = dir.resolve(name);
+            trainer.write(path, review);
+            assertEquals(review, trainer.replay(path));
+            assertThrows(FileAlreadyExistsException.class, () -> trainer.write(path, review));
+        }
+        var oversized = dir.resolve("oversized.json");
+        Files.writeString(oversized, " ".repeat(SixMaxLaterFlopTrainer.MAX_BYTES + 1));
+        assertThrows(IllegalArgumentException.class, () -> SixMaxLaterFlopTrainer.read(oversized));
+    }
+
+    @Test
+    void laterStartupRequiresExactPinAndPhysicalReplayEvenAfterRehashingTampering(@TempDir Path dir)
+            throws Exception {
+        var input =
+                Path.of(
+                        "../docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json");
+        var saved =
+                Path.of(
+                        "../docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz");
+        var pin = result.qualifiedFeedback().orElseThrow().reportHash();
+        var trainer = SixMaxLaterFlopTrainerLoader.load(input, saved, pin);
+        assertEquals(new SixMaxLaterFlopTrainer(result).question(), trainer.question());
+        for (String wrong : List.of("bad", "0".repeat(64)))
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> SixMaxLaterFlopTrainerLoader.load(input, saved, wrong));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> SixMaxLaterFlopTrainerLoader.load(saved, saved, pin));
+        var tree = SixMaxTexturePayoffTable.mapper().valueToTree(result.report());
+        ((com.fasterxml.jackson.databind.node.ObjectNode) tree.get("context")).put("toCallBb", 0);
+        var changed = dir.resolve("changed.json");
+        Files.writeString(changed, tree.toString());
+        var report = SixMaxLaterFlopFeedback.readReport(changed);
+        var changedPin = SixMaxHeadsUpPreflopGame.hash(report);
+        var failure =
+                assertThrows(
+                        IllegalArgumentException.class,
+                        () -> SixMaxLaterFlopTrainerLoader.load(input, changed, changedPin));
+        assertTrue(failure.getMessage().contains("Physical later feedback replay differs"));
+    }
+
+    @Test
+    void independentLaterDrillReceiptBindsExactQuestionGradesAndCheckerBytes() throws Exception {
+        var receipt =
+                SixMaxTexturePayoffTable.mapper()
+                        .readTree(
+                                Files.readAllBytes(
+                                        Path.of(
+                                                "../docs/data/supplied-four-button-hand-later-bb-flop-drill-independent-check.json")));
+        assertEquals(2, receipt.get("attemptsChecked").asInt());
+        assertEquals(8, receipt.get("originalEndpointCertificatesChecked").asInt());
+        assertEquals(3, receipt.get("policiesChecked").asInt());
+        assertEquals(0, receipt.get("freshLpSolves").asInt());
+        assertFalse(receipt.get("trainerAdmission").asBoolean());
+        assertEquals(
+                result.qualifiedFeedback().orElseThrow().reportHash(),
+                receipt.get("reportHash").asText());
+        assertEquals(
+                sha(Path.of("../scripts/check-later-bb-flop-drill.py")),
+                receipt.get("checkerSourceSha256").asText());
+        assertEquals(
+                sha(Path.of("../docs/data/supplied-four-button-hand-later-bb-flop-drill.json")),
+                receipt.get("drillStoredBytesSha256").asText());
     }
 
     private static String sha(Path path) throws Exception {

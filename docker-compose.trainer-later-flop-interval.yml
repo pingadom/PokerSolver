@@ -1,0 +1,12 @@
+# Local research opt-in. Full physical replay completes once before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_LATER_FLOP_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_LATER_FLOP_INTERVAL_REQUEST_PATH: /opt/pokerlab/later-flop-interval-request.json
+      TRAINER_LATER_FLOP_INTERVAL_REPORT_PATH: /opt/pokerlab/later-flop-interval-report.json.gz
+      TRAINER_LATER_FLOP_INTERVAL_REPORT_HASH: 4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea
+    volumes:
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/later-flop-interval-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/later-flop-interval-report.json.gz:ro
