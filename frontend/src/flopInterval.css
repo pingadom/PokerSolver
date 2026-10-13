@@ -29,6 +29,7 @@
   .flop-interval-page .poker-call { font-size: 9px; }
 }
 @media (max-width: 380px) {
+  .later-flop-interval-page .poker-player.position-5 { top: 60%; }
   .flop-interval-page .poker-hero-controls .poker-action.graded { display: flex; }
   .flop-interval-page .poker-action-value { text-align: center; }
 }

@@ -22,7 +22,7 @@ flowchart LR
 
 The [initial physical-flop interval drill](docs/supplied-flop-feedback.md) now qualifies one BB77 question from PokerLab's owned connected solver, checks fresh policies against the complete security face, and serves cached six-seat questions, EV/loss-range grades and exact reviews through a separate opt-in API. Its `#interval-flop` table UI shows the board, all seats, action ranges and immediate feedback, with replayable review downloads. Ambiguous questions remain rejected; the local Compose overlay performs pinned physical replay at startup.
 
-The [later BB flop trainer backend](docs/supplied-flop-feedback.md#later-bb-trainer-backend) now serves a separate pinned fold/call question after BB checks and BTN bets. It performs complete physical replay once at startup, then caches interval grades and exact reviews. An independent checker verifies the report and every saved attempt. Its opt-in Compose overlay keeps the initial check/bet protocol separate; table UI integration is next.
+The [later BB flop trainer](docs/supplied-flop-feedback.md#later-bb-table-ui) now serves a separate pinned fold/call question after BB checks and BTN bets. It performs complete physical replay once at startup, then caches interval grades and exact reviews. An independent checker verifies the report and every saved attempt. Its `#interval-flop-response` table shows the completed bet, amount to call, both action ranges and immediate feedback. The initial check/bet protocol remains separate.
 
 - 2–9 players with exact hole cards, 0–5 known community cards and up to 100 million trials.
 - Seeded batches, correct multiway tie splitting, per-player wins/ties/losses/equity.

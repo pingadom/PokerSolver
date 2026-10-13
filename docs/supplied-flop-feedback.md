@@ -159,4 +159,12 @@ docker compose -f docker-compose.yml -f docker-compose.trainer-later-flop-interv
 python scripts/smoke-later-flop-interval-trainer.py
 ```
 
-The initial check/bet API and table UI remain independently versioned. Next, connect the later fold/call API to the table UI, then consider an explicitly selected collection containing both independently qualified decisions. These intervals do not establish a coherent full-hand policy. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
+## Later BB table UI
+
+The separate `#interval-flop-response` route uses the later fold/call API. The table shows BTN's completed bet in red, BB's preceding check in yellow, BB to act in blue, the physical board, pot, six seats, commitments, remaining stacks and amount to call. Fold is grey and call green. Choosing either move reveals both certified EV/loss ranges directly on the buttons, with feedback, retry and review controls immediately below hero. Retrying retains revealed ranges; review downloads contain the complete canonical server result. The solver section links to both independently versioned flop drills.
+
+The browser validates exact later-protocol fields and provenance, replays the public preflop contributions and the BB-check/BTN-bet path to check the displayed pot/contributions/amount to call, and rejects hidden fields, contradictory ranges, stale pins and edited reviews. The initial check/bet parser is unchanged; both parsers reject the other's protocol. Cancelled requests and duplicate click/keyboard actions cannot add attempts. The attempt limit remains 100, and disabled servers show no substitute question.
+
+The frontend fixture must be byte-identical to the physically replayed offline drill. Tests cover both actions and colors, public history, complete review export, empty and capped reviews, stale/disabled states, corruption controls and request cancellation. Live browser verification uses the actual pinned Java startup and compares the downloaded two-attempt review to the complete saved artifact. At 1366×768, players, action ranges, retry controls and feedback fit together. Phone checks at 390px and 320px retain readable cards and controls without horizontal overflow; longer feedback/reviews can scroll vertically.
+
+Next consider an explicitly selected collection containing both independently qualified flop decisions. These intervals do not establish a coherent full-hand policy. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
