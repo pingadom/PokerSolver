@@ -9,8 +9,10 @@ import MultiwayPage from "./MultiwayPage";
 import SixMaxPreflopPage from "./SixMaxPreflopPage";
 import IntervalPreflopPage from "./IntervalPreflopPage";
 import IntervalCollectionPage from "./IntervalCollectionPage";
+import FlopIntervalPage from "./FlopIntervalPage";
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#interval-flop")) return "interval-flop";
   if (window.location.hash.startsWith("#interval-collection")) return "interval-collection";
   if (window.location.hash.startsWith("#interval-preflop")) return "interval-preflop";
   if (window.location.hash.startsWith("#sixmax-preflop")) return "sixmax-preflop";
@@ -35,6 +37,7 @@ export default function FrontendRoot() {
   if (route === "sixmax-preflop") return <SixMaxPreflopPage />;
   if (route === "interval-preflop") return <IntervalPreflopPage />;
   if (route === "interval-collection") return <IntervalCollectionPage />;
+  if (route === "interval-flop") return <FlopIntervalPage />;
   if (route === "flop-hand") return <FlopHandPage />;
   if (route === "turn-river-hand") return <TurnRiverHandPage />;
   if (route === "turn-river") return <TurnRiverPage />;

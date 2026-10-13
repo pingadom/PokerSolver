@@ -533,6 +533,7 @@ export default function App() {
               <p><a className="solver-demo-link" href="#sixmax-preflop">Six-seat opens and raises research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-collection">Preflop practice: seven qualified decisions ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-preflop">Pocket nines: single-question interval drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#interval-flop">Pocket sevens: verified flop decision ↗</a></p>
               <p><a className="solver-demo-link" href="#multiway">Six-seat call/fold research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#turn-river">Turn and river research drill ↗</a></p>
