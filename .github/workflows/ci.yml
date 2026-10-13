@@ -31,6 +31,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_supplied_reach_bounds.py'
           python3 -m unittest discover -s scripts -p 'test_check_supplied_connected_flop.py'
           python3 -m unittest discover -s scripts -p 'test_check_supplied_flop_action_bounds.py'
+          python3 -m unittest discover -s scripts -p 'test_check_supplied_flop_feedback.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -101,6 +102,7 @@ jobs:
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-interval.yml config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-flop-interval.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-interval-collection.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-interval-collection.yml -f docker-compose.trainer-interval-collection-seven.yml config --quiet
       - name: Verify interval smoke readiness retries
@@ -119,6 +121,8 @@ jobs:
         run: python3 scripts/smoke-interval-trainer.py --disabled
       - name: Interval collection is absent without opt-in
         run: python3 scripts/smoke-interval-collection.py --disabled
+      - name: Physical flop interval drill is absent without opt-in
+        run: python3 scripts/smoke-flop-interval-trainer.py --disabled
       - name: Redis outage remains correct
         run: |
           docker compose stop redis
@@ -260,6 +264,10 @@ jobs:
         run: |
           docker compose -f docker-compose.yml -f docker-compose.trainer-interval-collection-seven.yml up -d --no-deps api
           python3 scripts/smoke-interval-collection.py --seven
+      - name: Pinned physical flop overlay replays qualification and serves cached ranges
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-flop-interval.yml up -d --no-deps api
+          python3 scripts/smoke-flop-interval-trainer.py
       - name: Service logs
         if: always()
         run: docker compose logs --no-color > compose.log
