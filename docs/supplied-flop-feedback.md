@@ -101,4 +101,26 @@ The checked-in frontend test fixture must remain byte-identical to the physicall
 
 After BB checks and BTN bets 3.25 bb in the saved hand, the view reports BB to act, a 9.75 bb pot and 3.25 bb to call. BTN has committed 6.25 bb with 93.75 bb behind; BB has committed 3 bb with 97 bb behind. Tests compare all four active decision paths across every compatible hidden world at every handoff, check chip conservation, and reject foreign, preflop, chance and terminal states. Public collections are immutable.
 
-The later interval solver and this table context are foundations for a separately qualified fold/call drill. That next report still needs full-path actual and counterfactual reach, fresh full-parent reference inclusion, physical replay and independent evidence checks before a new pack or API question is created. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
+## Later BB fold/call qualification
+
+The separate `SixMaxLaterFlopFeedback` request/report qualifies BB holding 7d 7h after BB checks and BTN bets on 2s 8s Ts. The request selects the exact power-of-two interval algorithm before solving and names the public preflop handoff and flop actions. The owned game derives the information set and table context. The complete original parent game, private worlds, physical chance and initial-flop report remain unchanged.
+
+The saved later decision has fold loss `[0, 0.00000002]` bb and call loss approximately `[0.448282, 0.451560]` bb. These are conservative separate-endpoint bounds on absolute final profit. At the explicit 0.01 bb educational limit, fold is robust within the limit and call is robust outside it. A tighter limit can reject the question. This is one supplied-belief research model, with no rake and one flop bet followed by exact checkdown.
+
+Qualification computes actual reach along BB's preflop call, flop check and BTN's bet. Counterfactual reach cancels BB's own past while retaining BTN's bet. The primary policy and fresh independent 2,000/4,000-iteration policies must pass complete-parent and reached-flop quality, actual and counterfactual question reach, original-face inclusion, action-value/loss comparisons and selected-decision regret. An outside-face policy records unchecked bounds with a null violation and explicit failures. Parsed report booleans cannot create the private qualified capability.
+
+The [request](data/supplied-four-button-hand-later-bb-flop-feedback-request.json), [report](data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz) and [independent receipt](data/supplied-four-button-hand-later-bb-flop-feedback-independent-check.json) are separate from the initial drill. The Java CLI can solve or completely replay the later report:
+
+```text
+com.pokerlab.solver.SixMaxLaterFlopFeedbackMain solve <later-request> <new-later-report>
+com.pokerlab.solver.SixMaxLaterFlopFeedbackMain replay <later-request> <later-report>
+```
+
+The [stdlib checker](../scripts/check-later-bb-flop-feedback.py) supports this fixed saved case. It rebuilds the literal physical tree and original LP matrices, checks all eight endpoint certificates, maps their points into behavioral witnesses, recomputes full-parent security, posteriors and both path-reach measures, and verifies all three policies' action values and qualification. It runs no optimizer. The receipt binds checker/helper sources and stored request/report bytes; Java's canonical report hash still requires owned physical replay.
+
+```sh
+python scripts/check-later-bb-flop-feedback.py docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz --output <new-receipt.json>
+python -m unittest discover -s scripts -p 'test_check_later_bb_flop_feedback.py'
+```
+
+Next, build a separately replayable question/grade/review pack from this qualified capability, then add a cached opt-in API and table integration. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
