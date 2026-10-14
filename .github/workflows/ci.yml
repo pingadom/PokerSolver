@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [solver-0, solver-1, solver-2, services]
+        group: [solver-0, solver-1, solver-2, solver-3, services]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v6
@@ -33,6 +33,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_supplied_flop_action_bounds.py'
           python3 -m unittest discover -s scripts -p 'test_check_supplied_flop_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_later_bb_flop_feedback.py'
+          python3 -m unittest discover -s scripts -p 'test_check_btn_flop_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_later_bb_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_flop_interval_collection.py'
       - name: Verify assigned backend tests

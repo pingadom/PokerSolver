@@ -11,9 +11,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = ('engine', 'solver', 'shared', 'api', 'worker')
-SOLVER_SHARDS = 3
+SOLVER_SHARDS = 4
 GROUPS = tuple(f'solver-{bucket}' for bucket in range(SOLVER_SHARDS)) + ('services',)
-SCHEMA = 'pokerlab-backend-ci-manifest/v2'
+SCHEMA = 'pokerlab-backend-ci-manifest/v3'
 
 
 def inventory():

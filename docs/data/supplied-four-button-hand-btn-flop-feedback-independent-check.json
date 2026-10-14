@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "pokerlab-independent-btn-after-check-flop-feedback/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "originalEndpointCertificatesChecked": 8,
+  "actionsChecked": 2,
+  "policiesChecked": 3,
+  "freshCfrRuns": 0,
+  "declaredFreshReferenceIterations": 240000,
+  "fullParentAndFullPathReachChecked": true,
+  "literalPublicContextChecked": true,
+  "reportHash": "c95a6ce29095416967306a49496a7636d30cd9f9a4b648fca832a9db5d8545e7",
+  "checkerSourceSha256": "401ff3863f391d0b72cd65a7e557d7a4c680732c360a61d87eb307fa8791d85b",
+  "boundsHelperSourceSha256": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e",
+  "physicalHelperSourceSha256": "56da73ff28a077fa11f9de6304f1fc6284330da94f4b0fdca8fd4270de0f16ab",
+  "requestStoredBytesSha256": "08f351e58d513e66f9b4c1ca957fcbece5dfd288bd6be82b1e8d87af291ecaf2",
+  "reportStoredBytesSha256": "4963cb315ec2b19df901ed41e74f1469d9b0623cad31cd78a337e35c6f249baa",
+  "reportExpandedBytesSha256": "be59de7a0b3a36bd9038991ce9f66135299537e0569ec5bd9ae7bb783e6be3b5"
+}
