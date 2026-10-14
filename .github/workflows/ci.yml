@@ -78,6 +78,8 @@ jobs:
         run: cmp ../docs/data/supplied-conditional-five-target-99-interval-drill.json src/test-data/interval-drill.json
       - name: Keep flop interval UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-button-hand-flop-drill.json src/test-data/flop-interval-drill.json
+      - name: Keep later flop UI fixture identical to physically replayed evidence
+        run: cmp ../docs/data/supplied-four-button-hand-later-bb-flop-drill.json src/test-data/later-flop-interval-drill.json
       - name: Keep collection UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence
