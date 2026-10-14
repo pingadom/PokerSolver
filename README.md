@@ -192,3 +192,5 @@ Terraform provisions a restricted demonstration environment and uses Secrets Man
 The release supports exact hands. Authentication, player ranges, cancellation, live push updates, automatic scaling and S3 exports are not implemented. Keep the unauthenticated API on loopback or behind the documented restricted ingress.
 
 The original CLI remains available with `mvn -pl engine exec:java`.
+
+The [BTN-after-check solver qualification](docs/btn-flop-qualification.md) extends owned physical feedback to the other active player, with separately budgeted fresh 80k/160k references, original numerical gates and independent endpoint/policy checks. Its trainer integration is next; the existing BB collection and protocols are unchanged.

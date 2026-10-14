@@ -31,7 +31,7 @@ class BackendEvidenceTest(unittest.TestCase):
             directory = self.root / module / 'src/test/java'
             directory.mkdir(parents=True)
             # Exercise all four default Surefire naming patterns and all hash buckets.
-            names = ['TestStart', 'ExampleTest', 'ExampleTests', 'ExampleTestCase', 'FixtureTest'] if module == 'solver' else ['ExampleTest']
+            names = ['TestStart', 'ExampleTest', 'ExampleTests', 'ExampleTestCase', 'FixtureTest', 'Partition1Test', 'Partition6Test'] if module == 'solver' else ['ExampleTest']
             for name in names:
                 (directory / f'{name}.java').write_text(f'package example.{module}; class {name} {{}}', encoding='utf-8')
         self.sources = ci.inventory()
@@ -51,21 +51,27 @@ class BackendEvidenceTest(unittest.TestCase):
             return ci.verify(self.folder)
 
     def test_complete_partition_accounts_for_all_modules_and_default_name_patterns(self):
-        self.assertEqual(('solver-0', 'solver-1', 'solver-2', 'services'), ci.GROUPS)
+        self.assertEqual(('solver-0', 'solver-1', 'solver-2', 'solver-3', 'services'), ci.GROUPS)
         assigned = [ci.selected(group, self.sources) for group in ci.GROUPS]
         self.assertTrue(all(assigned))
         self.assertEqual(len(self.sources), len(set().union(*map(set, assigned))))
         self.assertEqual(len(self.sources), sum(map(len, assigned)))
         summary = self.verify()
-        self.assertEqual(9, summary['tests'])
-        self.assertEqual(9, summary['classes'])
+        self.assertEqual(11, summary['tests'])
+        self.assertEqual(11, summary['classes'])
         self.assertEqual(0, summary['failures'] + summary['errors'])
 
-    def test_missing_third_solver_shard_never_passes(self):
-        third = self.folder / 'junit-results-solver-2'
-        third.rename(self.folder / 'missing-solver-2')
-        with self.assertRaisesRegex(ValueError, 'Missing evidence group: solver-2'):
-            self.verify()
+    def test_missing_additional_solver_shards_never_pass(self):
+        for bucket in (2, 3):
+            with self.subTest(bucket=bucket):
+                original = self.folder / f'junit-results-solver-{bucket}'
+                missing = self.folder / f'missing-solver-{bucket}'
+                original.rename(missing)
+                try:
+                    with self.assertRaisesRegex(ValueError, f'Missing evidence group: solver-{bucket}'):
+                        self.verify()
+                finally:
+                    missing.rename(original)
 
     def test_missing_group_or_class_never_passes(self):
         report = next(self.folder.rglob('TEST-*.xml'))
@@ -79,7 +85,7 @@ class BackendEvidenceTest(unittest.TestCase):
     def test_old_commit_unfinished_or_changed_class_assignment_never_passes(self):
         path = self.folder / 'junit-results-services/backend-ci-manifest-services.json'
         original = json.loads(path.read_text(encoding='utf-8'))
-        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory')]:
+        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v2')]:
             changed = {**original, key: value}
             path.write_text(json.dumps(changed), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'Incomplete or foreign manifest'):
