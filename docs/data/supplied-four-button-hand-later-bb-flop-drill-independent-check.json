@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "pokerlab-independent-later-bb-flop-drill/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "originalEndpointCertificatesChecked": 8,
+  "policiesChecked": 3,
+  "reportHash": "4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea",
+  "attemptsChecked": 2,
+  "checkerSourceSha256": "c71d04ae5f31edda05415599040b4c37ae0346512310e72665e84b0dab8acbfb",
+  "feedbackReceipt": {
+    "schemaVersion": "pokerlab-independent-later-bb-flop-feedback/v1",
+    "trainerAdmission": false,
+    "freshLpSolves": 0,
+    "originalEndpointCertificatesChecked": 8,
+    "actionsChecked": 2,
+    "policiesChecked": 3,
+    "fullParentAndFullPathReachChecked": true,
+    "literalPublicContextChecked": true,
+    "reportHash": "4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea",
+    "checkerSourceSha256": "3b0cb42bd263456c929fd750a27f539515f551cb11cf940cf6d507ff9e0b9a04",
+    "boundsHelperSourceSha256": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e",
+    "physicalHelperSourceSha256": "56da73ff28a077fa11f9de6304f1fc6284330da94f4b0fdca8fd4270de0f16ab",
+    "requestStoredBytesSha256": "6c6334cff6517a1683bf1d3189ed4fda7ad244fbfcdd9d00576430066652615c",
+    "reportStoredBytesSha256": "112b90d7fb78b9c5004fabb6147f2467612af001b68bed2b862af29628aa45af",
+    "reportExpandedBytesSha256": "92dc41df44a24ee285a48107189b1f23900cc0370bbb35c6fa654caaf5998a43"
+  },
+  "drillStoredBytesSha256": "91a35fbea28dedac3bdd75dbc89f3fbc4baf4697003882bd721c9ad89c1b4194"
+}
