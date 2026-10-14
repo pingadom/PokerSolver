@@ -24,6 +24,8 @@ The [initial physical-flop interval drill](docs/supplied-flop-feedback.md) now q
 
 The [later BB flop trainer](docs/supplied-flop-feedback.md#later-bb-table-ui) now serves a separate pinned fold/call question after BB checks and BTN bets. It performs complete physical replay once at startup, then caches interval grades and exact reviews. An independent checker verifies the report and every saved attempt. Its `#interval-flop-response` table shows the completed bet, amount to call, both action ranges and immediate feedback. The initial check/bet protocol remains separate.
 
+The [combined flop practice collection](docs/flop-interval-collection.md) now presents both independently qualified contexts in one pinned session. It preserves the initial check/bet and later fold/call protocols, remembers each question's feedback, counts distinct contexts separately from retries, and exports an exact mixed review. Both sources physically replay once at startup; the browser and HTTP requests use cached evidence. These two decisions from the same supplied hand do not establish broader range coverage or a full-hand strategy.
+
 - 2–9 players with exact hole cards, 0–5 known community cards and up to 100 million trials.
 - Seeded batches, correct multiway tie splitting, per-player wins/ties/losses/equity.
 - Durable submission/outbox, retry, visibility renewal, dead-letter handling and idempotent finalisation.
