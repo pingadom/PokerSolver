@@ -11,8 +11,10 @@ import IntervalPreflopPage from "./IntervalPreflopPage";
 import IntervalCollectionPage from "./IntervalCollectionPage";
 import FlopIntervalPage from "./FlopIntervalPage";
 import LaterFlopIntervalPage from "./LaterFlopIntervalPage";
+import FlopCollectionPage from "./FlopCollectionPage";
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#interval-flop-collection")) return "interval-flop-collection";
   if (window.location.hash.startsWith("#interval-flop-response")) return "interval-flop-response";
   if (window.location.hash.startsWith("#interval-flop")) return "interval-flop";
   if (window.location.hash.startsWith("#interval-collection")) return "interval-collection";
@@ -41,6 +43,7 @@ export default function FrontendRoot() {
   if (route === "interval-collection") return <IntervalCollectionPage />;
   if (route === "interval-flop") return <FlopIntervalPage />;
   if (route === "interval-flop-response") return <LaterFlopIntervalPage />;
+  if (route === "interval-flop-collection") return <FlopCollectionPage />;
   if (route === "flop-hand") return <FlopHandPage />;
   if (route === "turn-river-hand") return <TurnRiverHandPage />;
   if (route === "turn-river") return <TurnRiverPage />;

@@ -7,9 +7,9 @@ export const laterFlopActionLabel = (action: LaterFlopAction, question: LaterFlo
 export const laterFlopClassificationLabel = (move: LaterFlopIntervalMove) => move.classification === "WITHIN_LIMIT" ? "Within limit"
   : move.classification === "OUTSIDE_LIMIT" ? "Outside limit" : "Strategy-dependent";
 
-export default function LaterFlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children }: {
+export default function LaterFlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children, prompt }: {
   question: LaterFlopIntervalQuestion; feedback: LaterFlopIntervalFeedback | null; knownMoves?: LaterFlopIntervalMove[];
-  attemptCount: number; busy: boolean; submit: (action: LaterFlopAction) => void; controls: ReactNode; children?: ReactNode;
+  attemptCount: number; busy: boolean; submit: (action: LaterFlopAction) => void; controls: ReactNode; children?: ReactNode; prompt?: string;
 }) {
   const c = question.context;
   return <>
@@ -21,7 +21,7 @@ export default function LaterFlopIntervalDecisionTable({ question, feedback, kno
         folded: player.status === "FOLDED", allIn: false, move: player.status === "FOLDED" ? "fold" : player.seat === "BTN" ? "raise" : "check",
         moveLabel: player.status === "FOLDED" ? "Folded preflop" : player.seat === "BTN" ? `Bet ${c.betSizeBb} bb` : "Checked",
       }))}>
-      <p className="interval-prompt">{feedback ? "Your move and its supported ranges" : `${question.hero} · Your flop decision`}
+      <p className="interval-prompt">{prompt ?? (feedback ? "Your move and its supported ranges" : `${question.hero} · Your flop decision`)}
         <span>{c.toCallBb} bb to call · {attemptCount} / 100 attempts · Loss limit {question.maximumLossBb} bb</span></p>
       <div className="trainer-actions preflop-actions flop-interval-actions">
         {c.legalActions.map((action, index) => {

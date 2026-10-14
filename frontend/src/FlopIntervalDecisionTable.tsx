@@ -4,12 +4,12 @@ import type { FlopAction, FlopIntervalQuestion, FlopIntervalFeedback, FlopInterv
 import { intervalRange } from "./intervalTrainerFormatting";
 
 export const flopActionLabel = (action: FlopAction, question: FlopIntervalQuestion) => action === "check" ? "Check" : `Bet ${question.context.betSizeBb} bb`;
-export const flopClassificationLabel = (move: FlopIntervalMove) => move.classification === "WITHIN_LIMIT" ? "Within limit"
+export const flopClassificationLabel = (move: Pick<FlopIntervalMove, "classification">) => move.classification === "WITHIN_LIMIT" ? "Within limit"
   : move.classification === "OUTSIDE_LIMIT" ? "Outside limit" : "Strategy-dependent";
 
-export default function FlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children }: {
+export default function FlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children, prompt }: {
   question: FlopIntervalQuestion; feedback: FlopIntervalFeedback | null; knownMoves?: FlopIntervalMove[];
-  attemptCount: number; busy: boolean; submit: (action: FlopAction) => void; controls: ReactNode; children?: ReactNode;
+  attemptCount: number; busy: boolean; submit: (action: FlopAction) => void; controls: ReactNode; children?: ReactNode; prompt?: string;
 }) {
   const c = question.context;
   return <>
@@ -21,7 +21,7 @@ export default function FlopIntervalDecisionTable({ question, feedback, knownMov
         folded: player.status === "FOLDED", allIn: false, move: player.status === "FOLDED" ? "fold" : "waiting",
         moveLabel: player.status === "FOLDED" ? "Folded preflop" : "Waiting on flop",
       }))}>
-      <p className="interval-prompt">{feedback ? "Your move and its supported ranges" : `${c.hero} · Your flop decision`}
+      <p className="interval-prompt">{prompt ?? (feedback ? "Your move and its supported ranges" : `${c.hero} · Your flop decision`)}
         <span>No bet to call · {attemptCount} / 100 attempts · Loss limit {question.maximumLossBb} bb</span></p>
       <div className="trainer-actions preflop-actions flop-interval-actions">
         {c.legalActions.map((action, index) => {

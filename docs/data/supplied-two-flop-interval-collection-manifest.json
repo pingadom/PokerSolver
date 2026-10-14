@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-flop-interval-collection-manifest/v1",
+  "collectionHash": "fb77bda6bf843e8a2e4ec49c91070e608b240e50e770674601413351ad099436",
+  "sources": [
+    {
+      "kind": "INITIAL_CHECK_BET",
+      "requestFile": "supplied-four-button-hand-flop-feedback-request.json",
+      "reportFile": "supplied-four-button-hand-flop-feedback-report.json.gz",
+      "reportHash": "49b1be1e91bb0ae7cae6a3171f4e15e516fc0a52be80efabc6d281e8ec5863d8"
+    },
+    {
+      "kind": "BB_FACING_BET",
+      "requestFile": "supplied-four-button-hand-later-bb-flop-feedback-request.json",
+      "reportFile": "supplied-four-button-hand-later-bb-flop-feedback-report.json.gz",
+      "reportHash": "4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea"
+    }
+  ]
+}
