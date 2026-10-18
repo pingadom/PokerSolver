@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "pokerlab-independent-four-hand-btn-flop/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "declaredSharedFreshReferenceIterations": 240000,
+  "originalEndpointCertificatesChecked": 32,
+  "actionsChecked": 8,
+  "contextsChecked": 4,
+  "uniquePoliciesChecked": 3,
+  "policyContextChecks": 12,
+  "reportHash": "9686d76c4a9d3b1a0875f7fcaed3edecf4491e0c24698892b516f91a69c89cd1",
+  "fullParentAndFullPathReachChecked": true,
+  "literalPublicContextChecked": true,
+  "checkerSourceSha256": "2bae74cf78944b4da0c7a291eef68d13119b4d69caa7480e8351e7ca6eb651e3",
+  "boundsHelperSourceSha256": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e",
+  "physicalHelperSourceSha256": "56da73ff28a077fa11f9de6304f1fc6284330da94f4b0fdca8fd4270de0f16ab",
+  "requestStoredBytesSha256": "c2d7c13b2804ce9d057128b2bd5c821f46f3b812530b66d62180a9666bc0663e",
+  "reportStoredBytesSha256": "575230d8ee13dea19e15194e05a8f31b5b1c6ad8dd1c938a5e16e477bd60c0ac",
+  "reportExpandedBytesSha256": "b8a89874b262c4654ca59d6da63d5331b9df2d08ba59aa728b77861f21802143"
+}

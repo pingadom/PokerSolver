@@ -267,3 +267,7 @@ The [all-flop material feasibility study](sixmax-material-continuation-feasibili
 ## BTN after-check qualification milestone
 
 The next [owned BTN feedback path](btn-flop-qualification.md) qualifies check/bet with 9s Js on 2s 8s Ts after BB checks. It uses the original complete connected physical model and a separately declared fresh CFR+ 80k/160k reference budget. Complete physical replay and independent original-certificate/full-path policy checks precede any capability. The old BB reports, 2k/4k tier and two-context collection remain unchanged. Next: cached typed BTN drill/API, then an explicitly versioned collection with the BTN context; no current claim of wider ranges, rake, full-hand policy or multiplayer equilibrium. AWS remains paused.
+
+## Four-hand BTN solver milestone
+
+The [explicit compensated-direction LP path](refined-lp-directions.md) addresses reproduced false-positive pivot directions while keeping old modes and original certificate/work limits. A separate four-hand report owns all eight endpoints and shares two fresh 80k/160k full-game references across twelve context checks. Typed cached BTN drill/API and a separately versioned collection remain the next integration goal. Broader ranges, rake, street betting and genuinely multiplayer equilibrium remain separate work.

@@ -156,7 +156,7 @@ public final class SixMaxBtnFlopFeedback {
         }
     }
 
-    private record OwnedQuestion(
+    record OwnedQuestion(
             SixMaxSuppliedFlopHandoff.Audit handoff,
             List<State> states,
             List<SixMaxSuppliedFlopHandoff.World> worlds,
@@ -165,7 +165,26 @@ public final class SixMaxBtnFlopFeedback {
 
     private SixMaxBtnFlopFeedback() {}
 
+    private record AssessmentQuestion(
+            int hero, String heroCards, String publicPreflopHistory, List<String> flopActions) {}
+
     private static OwnedQuestion question(SixMaxSuppliedFlopBettingGame game, Request request) {
+        return question(
+                game,
+                new AssessmentQuestion(
+                        request.hero(),
+                        request.heroCards(),
+                        request.publicPreflopHistory(),
+                        request.flopActions()));
+    }
+
+    static OwnedQuestion question(
+            SixMaxSuppliedFlopBettingGame game, String heroCards, String history) {
+        return question(game, new AssessmentQuestion(3, heroCards, history, List.of("check")));
+    }
+
+    private static OwnedQuestion question(
+            SixMaxSuppliedFlopBettingGame game, AssessmentQuestion request) {
         var handoff =
                 game.handoffs().stream()
                         .filter(h -> h.publicHistory().equals(request.publicPreflopHistory()))
@@ -315,6 +334,35 @@ public final class SixMaxBtnFlopFeedback {
     static Check assess(
             SixMaxSuppliedFlopBettingGame game,
             Request request,
+            List<SixMaxSuppliedFlopActionBounds.Action> actions,
+            CfrSolution policy) {
+        return assess(
+                game,
+                new AssessmentQuestion(
+                        request.hero(),
+                        request.heroCards(),
+                        request.publicPreflopHistory(),
+                        request.flopActions()),
+                actions,
+                policy);
+    }
+
+    static Check assess(
+            SixMaxSuppliedFlopBettingGame game,
+            String heroCards,
+            String history,
+            List<SixMaxSuppliedFlopActionBounds.Action> actions,
+            CfrSolution policy) {
+        return assess(
+                game,
+                new AssessmentQuestion(3, heroCards, history, List.of("check")),
+                actions,
+                policy);
+    }
+
+    private static Check assess(
+            SixMaxSuppliedFlopBettingGame game,
+            AssessmentQuestion request,
             List<SixMaxSuppliedFlopActionBounds.Action> actions,
             CfrSolution policy) {
         var question = question(game, request);

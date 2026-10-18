@@ -15,6 +15,9 @@ public final class BoundedLinearProgram {
             "OWNED_ASCENDING_L1_RESOLVABLE_COST_EXACT_RATIO_ORIGINAL_CERTIFICATE/v3";
     public static final String EXACT_POWER_TWO_ALGORITHM =
             "OWNED_EXACT_POWER_TWO_L1_RHS_RESOLVABLE_COST_ORIGINAL_CERTIFICATE/v1";
+    public static final String REFINED_DIRECTION_ALGORITHM =
+            "OWNED_EXACT_POWER_TWO_RESOLVABLE_COST_COMPENSATED_DIRECTION_ORIGINAL_CERTIFICATE/v2";
+    public static final int DIRECTION_REFINEMENT_PASSES = 2;
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
     public static final int MAX_PIVOTS = 10_000;
@@ -149,6 +152,29 @@ public final class BoundedLinearProgram {
     static Result solveExactPowerOfTwoRows(
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
+        return solveExactPowerOfTwoRows(matrix, rhs, cost, pivots, work, false);
+    }
+
+    /** Fixed compensated phase-II direction evaluation, selected before any optimization. */
+    public static Result solveRefinedDirections(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveRefinedDirections(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveRefinedDirections(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        return solveExactPowerOfTwoRows(matrix, rhs, cost, pivots, work, true);
+    }
+
+    private static Result solveExactPowerOfTwoRows(
+            double[][] matrix,
+            double[] rhs,
+            double[] cost,
+            int pivots,
+            long work,
+            boolean refinedDirections)
+            throws Exception {
         if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
             throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
         dimensions(matrix, rhs, cost);
@@ -170,7 +196,15 @@ public final class BoundedLinearProgram {
                 scaled[i][j] = exactPowerOfTwoScale(original.matrix()[i][j], factors[i]);
             bounds[i] = exactPowerOfTwoScale(original.rhs()[i], factors[i]);
         }
-        var solved = solveRows(scaled, bounds, original.cost(), pivots, work - budget.used, true);
+        var solved =
+                solveRows(
+                        scaled,
+                        bounds,
+                        original.cost(),
+                        pivots,
+                        work - budget.used,
+                        true,
+                        refinedDirections);
         budget.charge(solved.certificate().work().arithmeticWork());
         var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
         var dual = new double[m];
@@ -198,7 +232,7 @@ public final class BoundedLinearProgram {
                 point,
                 dual,
                 new Certificate(
-                        EXACT_POWER_TWO_ALGORITHM,
+                        refinedDirections ? REFINED_DIRECTION_ALGORITHM : EXACT_POWER_TWO_ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(original),
                         n,
                         m,
@@ -236,6 +270,18 @@ public final class BoundedLinearProgram {
             long work,
             boolean resolvableCosts)
             throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, resolvableCosts, false);
+    }
+
+    private static Result solveRows(
+            double[][] matrix,
+            double[] rhs,
+            double[] cost,
+            int pivots,
+            long work,
+            boolean resolvableCosts,
+            boolean refinedDirections)
+            throws Exception {
         if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
             throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
         dimensions(matrix, rhs, cost);
@@ -266,7 +312,7 @@ public final class BoundedLinearProgram {
         }
         var ordered = new Problem(sorted, bounds, original.cost().clone());
         var solved =
-                new Engine(ordered, pivots, work - budget.used, resolvableCosts)
+                new Engine(ordered, pivots, work - budget.used, resolvableCosts, refinedDirections)
                         .solve(SixMaxHistoryPhysicalConditionalRefinement.hash(ordered));
         budget.charge(solved.certificate().work().arithmeticWork());
         var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
@@ -295,7 +341,11 @@ public final class BoundedLinearProgram {
                 point,
                 dual,
                 new Certificate(
-                        resolvableCosts ? RESOLVABLE_COST_ALGORITHM : ASCENDING_L1_ALGORITHM,
+                        refinedDirections
+                                ? REFINED_DIRECTION_ALGORITHM
+                                : resolvableCosts
+                                        ? RESOLVABLE_COST_ALGORITHM
+                                        : ASCENDING_L1_ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(original),
                         n,
                         m,
@@ -389,7 +439,7 @@ public final class BoundedLinearProgram {
 
     private static final class Engine {
         final Problem problem;
-        final boolean resolvableCosts;
+        final boolean resolvableCosts, refinedDirections;
         final int n, m, total, pivotLimit;
         final long workLimit;
         final double[][] source;
@@ -404,6 +454,16 @@ public final class BoundedLinearProgram {
         }
 
         Engine(Problem problem, int pivotLimit, long workLimit, boolean resolvableCosts) {
+            this(problem, pivotLimit, workLimit, resolvableCosts, false);
+        }
+
+        Engine(
+                Problem problem,
+                int pivotLimit,
+                long workLimit,
+                boolean resolvableCosts,
+                boolean refinedDirections) {
+            this.refinedDirections = refinedDirections;
             this.problem = problem;
             this.resolvableCosts = resolvableCosts;
             this.pivotLimit = pivotLimit;
@@ -516,7 +576,10 @@ public final class BoundedLinearProgram {
                                 Failure.NUMERICAL_FAILURE, "Unresolved positive LP reduced cost");
                     return dot(costs(objective), basic);
                 }
-                var direction = lu.solve(column(entering));
+                var direction =
+                        refinedDirections && excludeArtificial
+                                ? lu.refinedDirection(column(entering))
+                                : lu.solve(column(entering));
                 int leaving = -1;
                 double ratio = Double.POSITIVE_INFINITY;
                 for (int i = 0; i < m; i++)
@@ -656,6 +719,37 @@ public final class BoundedLinearProgram {
                     for (int j = k + 1; j < m; j++) row[j] -= factor * pivot[j];
                 }
             }
+        }
+
+        /**
+         * Fixed original-basis correction passes; every pass is charged before its arithmetic.
+         * Final primal/dual certificates still use the copied ORIGINAL inequalities.
+         */
+        double[] refinedDirection(double[] rhs) {
+            var x = solve(rhs);
+            int m = rows.length;
+            for (int pass = 0; pass < DIRECTION_REFINEMENT_PASSES; pass++) {
+                engine.charge(20L * m * m);
+                var residual = new double[m];
+                for (int i = 0; i < m; i++) {
+                    double sum = 0, error = 0;
+                    for (int j = 0; j < m; j++) {
+                        double a = engine.source[i][engine.basis[j]];
+                        double p = a * x[j];
+                        double next = sum + p;
+                        error +=
+                                Math.fma(a, x[j], -p)
+                                        + (Math.abs(sum) >= Math.abs(p)
+                                                ? (sum - next) + p
+                                                : (p - next) + sum);
+                        sum = next;
+                    }
+                    residual[i] = finite((rhs[i] - sum) - error);
+                }
+                var correction = solve(residual);
+                for (int j = 0; j < m; j++) x[j] = finite(x[j] + correction[j]);
+            }
+            return x;
         }
 
         double[] solve(double[] rhs) {

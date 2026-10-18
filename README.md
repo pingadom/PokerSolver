@@ -194,3 +194,5 @@ The release supports exact hands. Authentication, player ranges, cancellation, l
 The original CLI remains available with `mvn -pl engine exec:java`.
 
 The [BTN-after-check solver qualification](docs/btn-flop-qualification.md) extends owned physical feedback to the other active player, with separately budgeted fresh 80k/160k references, original numerical gates and independent endpoint/policy checks. Its trainer integration is next; the existing BB collection and protocols are unchanged.
+
+The [versioned numerical pivot correction](docs/refined-lp-directions.md) adds a fixed compensated-direction LP mode and a separate four-hand BTN qualification with one explicitly shared fresh-reference budget. The original solver modes and report protocols remain replayable.

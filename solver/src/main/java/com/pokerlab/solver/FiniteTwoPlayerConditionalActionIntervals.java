@@ -17,6 +17,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "POSITIVE_REACH_UPPER_OBJECTIVE_SHIFT_OWNED_LP/v2";
     public static final String PHYSICAL_FLOP_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_RESOLVABLE_ENDPOINTS/v3";
+    public static final String PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_REFINED_DIRECTION_ENDPOINTS/v5";
     public static final String PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_EXACT_POWER_TWO_ENDPOINTS/v4";
     public static final String SCOPE =
@@ -354,6 +356,28 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 true);
     }
 
+    /** Explicit separate mode; never retries a rejected v4 solve. */
+    static Result solvePhysicalFlopRefinedDirections(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        double mass = physicalFlopMass(game, question);
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                BoundedLinearProgram.MAX_PIVOTS,
+                BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                true,
+                mass,
+                true,
+                true);
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");
@@ -400,6 +424,33 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             boolean conditioned,
             double physicalFlopMass,
             boolean exactPowerOfTwoRows)
+            throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                exactPowerOfTwoRows,
+                false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows,
+            boolean refinedDirections)
             throws Exception {
         Objects.requireNonNull(question);
         if (!Double.isFinite(securitySlack)
@@ -508,13 +559,15 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             plans.add(new Plan(choice, linear.constant(), linear.cost()));
         }
         var lpBudget =
-                exactPowerOfTwoRows
-                        ? LpBudget.exactPowerOfTwoRows(pivotLimit, arithmeticLimit)
-                        : new LpBudget(
-                                pivotLimit,
-                                arithmeticLimit,
-                                physicalFlopMass > 0,
-                                physicalFlopMass > 0);
+                refinedDirections
+                        ? LpBudget.refinedDirections(pivotLimit, arithmeticLimit)
+                        : exactPowerOfTwoRows
+                                ? LpBudget.exactPowerOfTwoRows(pivotLimit, arithmeticLimit)
+                                : new LpBudget(
+                                        pivotLimit,
+                                        arithmeticLimit,
+                                        physicalFlopMass > 0,
+                                        physicalFlopMass > 0);
         int n = face.matrix()[0].length;
         double[] reachCost = new double[n];
         for (int j = 0; j < op.variables(); j++) reachCost[j] = -denominator.cost().get(j);
@@ -715,9 +768,11 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return new Result(
                 new Audit(
                         physicalFlopMass > 0
-                                ? exactPowerOfTwoRows
-                                        ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
-                                        : PHYSICAL_FLOP_ALGORITHM
+                                ? refinedDirections
+                                        ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
+                                        : exactPowerOfTwoRows
+                                                ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
+                                                : PHYSICAL_FLOP_ALGORITHM
                                 : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
