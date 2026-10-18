@@ -1,0 +1,12 @@
+# Local opt-in: complete four-hand source replay before API readiness (up to 15 minutes).
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_BTN_FLOP_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_BTN_FLOP_INTERVAL_REQUEST_PATH: /opt/pokerlab/btn-flop/request.json
+      TRAINER_BTN_FLOP_INTERVAL_REPORT_PATH: /opt/pokerlab/btn-flop/report.json.gz
+      TRAINER_BTN_FLOP_INTERVAL_REPORT_HASH: 9686d76c4a9d3b1a0875f7fcaed3edecf4491e0c24698892b516f91a69c89cd1
+    volumes:
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/btn-flop/request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/btn-flop/report.json.gz:ro

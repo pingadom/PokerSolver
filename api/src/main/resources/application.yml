@@ -39,6 +39,10 @@ pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
   trainer:
+    btn-flop-interval-research-enabled: ${TRAINER_BTN_FLOP_INTERVAL_RESEARCH_ENABLED:false}
+    btn-flop-interval-request-path: ${TRAINER_BTN_FLOP_INTERVAL_REQUEST_PATH:}
+    btn-flop-interval-report-path: ${TRAINER_BTN_FLOP_INTERVAL_REPORT_PATH:}
+    btn-flop-interval-report-hash: ${TRAINER_BTN_FLOP_INTERVAL_REPORT_HASH:}
     flop-interval-collection-enabled: ${TRAINER_FLOP_INTERVAL_COLLECTION_ENABLED:false}
     flop-interval-collection-manifest-path: ${TRAINER_FLOP_INTERVAL_COLLECTION_MANIFEST_PATH:}
     flop-interval-collection-hash: ${TRAINER_FLOP_INTERVAL_COLLECTION_HASH:}
