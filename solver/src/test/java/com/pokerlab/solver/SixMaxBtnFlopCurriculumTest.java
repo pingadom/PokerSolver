@@ -2,6 +2,7 @@ package com.pokerlab.solver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.lang.reflect.Modifier;
 import java.nio.file.*;
 import java.util.*;
@@ -320,5 +321,222 @@ class SixMaxBtnFlopCurriculumTest {
                 .formatHex(
                         java.security.MessageDigest.getInstance("SHA-256")
                                 .digest(Files.readAllBytes(path)));
+    }
+
+    static SixMaxBtnFlopTrainer trainer() {
+        // Reuse THIS test class's genuinely owned complete replay, never parsed report authority.
+        return new SixMaxBtnFlopTrainer(owned);
+    }
+
+    static List<SixMaxBtnFlopTrainer.Choice> mixedChoices() {
+        var choices = new ArrayList<SixMaxBtnFlopTrainer.Choice>();
+        for (String action : List.of("check", "bet"))
+            for (int i = 0; i < 4; i++) choices.add(new SixMaxBtnFlopTrainer.Choice(i, action));
+        return choices;
+    }
+
+    @Test
+    void cachedTrainerInventoryGradesAndPublicPrivacyFollowAllFourOwnedContexts() throws Exception {
+        var trainer = trainer();
+        assertEquals(4, trainer.questions().size());
+        assertEquals(
+                SixMaxBtnFlopCurriculum.HANDS,
+                trainer.questions().stream()
+                        .map(SixMaxBtnFlopTrainer.Question::heroCards)
+                        .toList());
+        for (int i = 0; i < 4; i++) {
+            var q = trainer.question(i);
+            var source = owned.report().decisions().get(i);
+            assertEquals(source.context(), q.context());
+            assertEquals("BTN", q.hero());
+            assertEquals(i, q.questionIndex());
+            assertEquals(trainer.reportHash(), q.reportHash());
+            assertFalse(q.trainerAdmission());
+            for (String action : List.of("check", "bet")) {
+                var grade = trainer.grade(q, action);
+                assertEquals(source.moves(), grade.alternatives());
+                assertEquals(
+                        source.moves().stream()
+                                .filter(m -> m.action().equals(action))
+                                .findFirst()
+                                .orElseThrow(),
+                        grade.selected());
+                assertEquals(i, grade.questionIndex());
+            }
+            var json = SixMaxTextureStudy.json(q);
+            for (String hidden :
+                    List.of(
+                            "opponentCards",
+                            "worlds",
+                            "strategy",
+                            "candidate",
+                            "lowerWitness",
+                            "projectedPayoff")) assertFalse(json.contains("\"" + hidden + "\""));
+        }
+        assertThrows(UnsupportedOperationException.class, () -> trainer.questions().clear());
+        assertEquals(
+                List.of(SixMaxBtnFlopCurriculum.Result.class),
+                Arrays.asList(SixMaxBtnFlopTrainer.class.getConstructors()[0].getParameterTypes()));
+        assertThrows(IllegalArgumentException.class, () -> trainer.question(-1));
+        assertThrows(IllegalArgumentException.class, () -> trainer.question(4));
+        assertThrows(IllegalArgumentException.class, () -> trainer.grade(null, "bet"));
+        for (String action : Arrays.asList(null, "fold", "BET", "call"))
+            assertThrows(
+                    IllegalArgumentException.class,
+                    () -> trainer.grade(trainer.question(0), action));
+    }
+
+    @Test
+    void mixedTrainerReviewMatchesOwnedFixtureAndHundredAttemptsFitProtocol(@TempDir Path dir)
+            throws Exception {
+        var trainer = trainer();
+        var review = trainer.review(mixedChoices());
+        assertEquals(new SixMaxBtnFlopTrainer.Counts(4, 4, 4, 0), review.counts());
+        assertEquals(
+                review,
+                trainer.replay(
+                        Path.of("../docs/data/supplied-four-button-hand-btn-flop-drill.json")));
+        assertEquals(
+                new SixMaxBtnFlopTrainer.Counts(0, 0, 0, 0), trainer.review(List.of()).counts());
+        var hundred =
+                trainer.review(Collections.nCopies(100, new SixMaxBtnFlopTrainer.Choice(3, "bet")));
+        assertEquals(new SixMaxBtnFlopTrainer.Counts(1, 100, 0, 0), hundred.counts());
+        for (String name : List.of("hundred.json", "hundred.json.gz")) {
+            var path = dir.resolve(name);
+            trainer.write(path, hundred);
+            assertEquals(hundred, trainer.replay(path));
+            assertTrue(Files.size(path) <= SixMaxBtnFlopTrainer.MAX_BYTES);
+            assertThrows(FileAlreadyExistsException.class, () -> trainer.write(path, hundred));
+        }
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        trainer.review(
+                                Collections.nCopies(
+                                        101, new SixMaxBtnFlopTrainer.Choice(0, "bet"))));
+        assertThrows(IllegalArgumentException.class, () -> trainer.review(null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> trainer.review(Arrays.asList((SixMaxBtnFlopTrainer.Choice) null)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> trainer.review(List.of(new SixMaxBtnFlopTrainer.Choice(4, "bet"))));
+    }
+
+    @Test
+    void exactTrainerReplayRejectsEveryQuestionAndGradeMutation() throws Exception {
+        var trainer = trainer();
+        var mapper = SixMaxTexturePayoffTable.mapper();
+        var original = mapper.valueToTree(trainer.review(mixedChoices()));
+        for (int i = 0; i < 4; i++) {
+            for (String field :
+                    List.of(
+                            "reportHash",
+                            "heroCards",
+                            "informationSet",
+                            "model",
+                            "chanceModel",
+                            "beliefs",
+                            "sourceHistoryReachStatus",
+                            "evScope",
+                            "reachUnits",
+                            "selection")) {
+                var tree = original.deepCopy();
+                var questionPointer = "/questions/" + i;
+                ((ObjectNode) tree.at(questionPointer)).put(field, "edited");
+                assertThrows(
+                        Exception.class,
+                        () ->
+                                trainer.replay(
+                                        mapper.treeToValue(
+                                                tree, SixMaxBtnFlopTrainer.Review.class)),
+                        field);
+                assertThrows(
+                        Exception.class,
+                        () ->
+                                trainer.grade(
+                                        mapper.treeToValue(
+                                                tree.at(questionPointer),
+                                                SixMaxBtnFlopTrainer.Question.class),
+                                        "bet"));
+            }
+            for (String pointer :
+                    List.of(
+                            "/questions/" + i + "/context",
+                            "/attempts/" + i + "/feedback/selected",
+                            "/attempts/" + i + "/feedback/alternatives/1")) {
+                var tree = original.deepCopy();
+                ((ObjectNode) tree.at(pointer))
+                        .put(pointer.contains("context") ? "potBb" : "upperEvBb", 100);
+                assertThrows(
+                        Exception.class,
+                        () ->
+                                trainer.replay(
+                                        mapper.treeToValue(
+                                                tree, SixMaxBtnFlopTrainer.Review.class)));
+            }
+        }
+        for (String kind :
+                List.of(
+                        "pin",
+                        "index",
+                        "question-index",
+                        "feedback-index",
+                        "grade-pin",
+                        "counts",
+                        "order",
+                        "admission")) {
+            var tree = original.deepCopy();
+            switch (kind) {
+                case "pin" -> ((ObjectNode) tree).put("reportHash", "0".repeat(64));
+                case "index" -> ((ObjectNode) tree.at("/attempts/0")).put("index", 1);
+                case "question-index" ->
+                        ((ObjectNode) tree.at("/questions/0")).put("questionIndex", 1);
+                case "feedback-index" ->
+                        ((ObjectNode) tree.at("/attempts/0/feedback")).put("questionIndex", 1);
+                case "grade-pin" ->
+                        ((ObjectNode) tree.at("/attempts/0/feedback"))
+                                .put("reportHash", "0".repeat(64));
+                case "counts" ->
+                        ((ObjectNode) tree.get("counts")).put("distinctQuestionsAttempted", 8);
+                case "admission" ->
+                        ((ObjectNode) tree.at("/questions/0")).put("trainerAdmission", true);
+                case "order" -> {
+                    var a = (com.fasterxml.jackson.databind.node.ArrayNode) tree.get("attempts");
+                    var first = a.get(0);
+                    a.set(0, a.get(1));
+                    a.set(1, first);
+                }
+            }
+            assertThrows(
+                    Exception.class,
+                    () ->
+                            trainer.replay(
+                                    mapper.treeToValue(tree, SixMaxBtnFlopTrainer.Review.class)),
+                    kind);
+        }
+    }
+
+    @Test
+    void trainerReviewReaderRejectsDuplicatesUnknownFieldsCoercionAndCompressedOverflow(
+            @TempDir Path dir) throws Exception {
+        var json = SixMaxTextureStudy.json(trainer().review(List.of()));
+        var path = dir.resolve("review.json");
+        for (String bad :
+                List.of(
+                        json + " {}",
+                        json.replace("\"questionIndex\" : 0", "\"questionIndex\" : 0.5"),
+                        json.replaceFirst("\\{", "{\"hidden\":0,"),
+                        json.replaceFirst("\\{", "{\"reportHash\":\"duplicate\","))) {
+            Files.writeString(path, bad);
+            assertThrows(Exception.class, () -> SixMaxBtnFlopTrainer.read(path));
+        }
+        Files.writeString(path, " ".repeat(SixMaxBtnFlopTrainer.MAX_BYTES + 1));
+        assertThrows(IllegalArgumentException.class, () -> SixMaxBtnFlopTrainer.read(path));
+        var zipPath = dir.resolve("large.json.gz");
+        try (var zip = new java.util.zip.GZIPOutputStream(Files.newOutputStream(zipPath))) {
+            zip.write(Files.readAllBytes(path));
+        }
+        assertThrows(IllegalArgumentException.class, () -> SixMaxBtnFlopTrainer.read(zipPath));
     }
 }
