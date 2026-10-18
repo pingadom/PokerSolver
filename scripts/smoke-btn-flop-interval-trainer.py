@@ -47,6 +47,20 @@ def run(disabled):
     assert metadata['reportHash'] == PIN and metadata['availableQuestions'] == 4
     assert metadata['activePlayers'] == 2 and metadata['maximumAttempts'] == 100 and metadata['trainerAdmission'] is False
     assert metadata['sourceHistoryReachStatus'] == 'UNAVAILABLE_NO_SOURCE_POLICY'
+    docs_url = BASE.removesuffix('/api/v1/trainer/research/btn-flop-interval') + '/v3/api-docs'
+    with urllib.request.urlopen(docs_url, timeout=20) as response:
+        docs = json.load(response)
+    schemas = docs['components']['schemas']
+    prefix = '/api/v1/trainer/research/btn-flop-interval'
+    for route, name, fields in [('grade', 'BtnFlopIntervalGradeRequest', {'reportHash', 'questionIndex', 'action'}),
+                                ('review', 'BtnFlopIntervalReviewRequest', {'reportHash', 'choices'})]:
+        request = docs['paths'][prefix + '/' + route]['post']['requestBody']
+        assert request['required'] is True
+        assert request['content']['application/json']['schema']['$ref'] == '#/components/schemas/' + name
+        assert set(schemas[name]['properties']) == fields
+    assert schemas['BtnFlopIntervalGradeRequest']['properties']['questionIndex']['type'] == 'integer'
+    assert set(schemas['BtnFlopIntervalChoice']['properties']) == {'questionIndex', 'action'}
+    assert schemas['BtnFlopIntervalReviewRequest']['properties']['choices']['items']['$ref'] == '#/components/schemas/BtnFlopIntervalChoice'
     expected = json.loads((Path(__file__).resolve().parents[1] / 'docs/data/supplied-four-button-hand-btn-flop-drill.json').read_bytes())
     for q in expected['questions']:
         assert call('/questions/' + str(q['questionIndex']) + '?reportHash=' + PIN) == q
@@ -63,7 +77,7 @@ def run(disabled):
                  dict(reportHash=PIN, questionIndex=0, action='call'), dict(reportHash=PIN, **choices[0], evLossBb=0)]:
         assert call('/grade', body, 400)['code'] == 'INVALID_REQUEST'
     assert call('/review', dict(reportHash=PIN, choices=[choices[0]] * 101), 400)['code'] == 'INVALID_REQUEST'
-    print('Complete pinned BTN replay, four questions, eight grades, mixed review, caps and rejections passed')
+    print('Complete pinned BTN replay, four questions, eight grades, mixed review, typed OpenAPI, caps and rejections passed')
 
 
 if __name__ == '__main__':

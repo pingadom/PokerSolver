@@ -26,7 +26,7 @@ Base: `/api/v1/trainer/research/btn-flop-interval`.
 | `POST /grade` with `{ "reportHash": "...", "questionIndex": 0, "action": "check" }` | Selected move and both certified alternatives |
 | `POST /review` with `{ "reportHash": "...", "choices": [{ "questionIndex": 0, "action": "check" }] }` | Ordered replayable mixed review |
 
-Success responses use `Cache-Control: no-store`. Choice bodies are bounded to 32 KiB, reject duplicate/unknown fields, scalar coercion and trailing JSON, and validate required pins, indices, menus and nested choices. Stale pins and invalid input return `400 INVALID_REQUEST`.
+Generated OpenAPI uses explicit, uniquely named JSON request schemas despite the strict parser. The live smoke checks those schemas. Success responses use `Cache-Control: no-store`. Choice bodies are bounded to 32 KiB, reject duplicate/unknown fields, scalar coercion and trailing JSON, and validate required pins, indices, menus and nested choices. Stale pins and invalid input return `400 INVALID_REQUEST`.
 
 Questions expose BTN's hand and public seats, stacks, board and action history. They contain no opponent hole cards, hidden worlds, strategies, private payoff matrices or LP witnesses. EV and loss intervals are returned in feedback after a choice. Public `trainerAdmission` stays false: qualification for this research drill does not claim reviewed general poker training content.
 

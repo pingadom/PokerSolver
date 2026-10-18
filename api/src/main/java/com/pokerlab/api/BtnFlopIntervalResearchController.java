@@ -7,6 +7,8 @@ import com.pokerlab.solver.SixMaxSuppliedFlopActionBounds;
 import com.pokerlab.solver.SixMaxSuppliedFlopBettingGame;
 import com.pokerlab.solver.SixMaxSuppliedFlopFeedback;
 import com.pokerlab.solver.SixMaxSuppliedRangePreflopGame;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.validation.constraints.*;
@@ -38,15 +40,18 @@ public class BtnFlopIntervalResearchController {
             int activePlayers,
             int maximumAttempts) {}
 
+    @Schema(name = "BtnFlopIntervalGradeRequest")
     public record GradeRequest(
             @NotBlank @Pattern(regexp = "[0-9a-f]{64}") String reportHash,
             @NotNull @Min(0) @Max(SixMaxBtnFlopTrainer.QUESTION_COUNT - 1) Integer questionIndex,
             @NotBlank @Size(max = 32) String action) {}
 
+    @Schema(name = "BtnFlopIntervalChoice")
     public record SubmittedChoice(
             @NotNull @Min(0) @Max(SixMaxBtnFlopTrainer.QUESTION_COUNT - 1) Integer questionIndex,
             @NotBlank @Size(max = 32) String action) {}
 
+    @Schema(name = "BtnFlopIntervalReviewRequest")
     public record ReviewRequest(
             @NotBlank @Pattern(regexp = "[0-9a-f]{64}") String reportHash,
             @NotNull @Size(max = SixMaxBtnFlopTrainer.MAX_ATTEMPTS)
@@ -95,6 +100,12 @@ public class BtnFlopIntervalResearchController {
     }
 
     @PostMapping(value = "/grade", consumes = "application/json")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content =
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = GradeRequest.class)))
     public ResponseEntity<SixMaxBtnFlopTrainer.Feedback> grade(@RequestBody byte[] body) {
         var request = parse(body, GradeRequest.class);
         requireReport(request.reportHash());
@@ -103,6 +114,12 @@ public class BtnFlopIntervalResearchController {
     }
 
     @PostMapping(value = "/review", consumes = "application/json")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content =
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ReviewRequest.class)))
     public ResponseEntity<SixMaxBtnFlopTrainer.Review> review(@RequestBody byte[] body) {
         var request = parse(body, ReviewRequest.class);
         requireReport(request.reportHash());
