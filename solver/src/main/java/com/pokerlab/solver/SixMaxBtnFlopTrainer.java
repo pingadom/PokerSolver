@@ -212,12 +212,22 @@ public final class SixMaxBtnFlopTrainer {
                 .readValue(SixMaxRankTexturePayoffTable.readBytes(path, MAX_BYTES), Review.class);
     }
 
-    public void write(Path path, Review review) throws Exception {
-        replay(review);
-        path = path.toAbsolutePath().normalize();
+    /** Canonical offline document from cached choices; never serialize client-supplied grades. */
+    public String reviewJson(List<Choice> choices) throws Exception {
+        return new String(document(review(choices)), StandardCharsets.UTF_8);
+    }
+
+    private static byte[] document(Review review) throws Exception {
         byte[] bytes = SixMaxTextureStudy.json(review).getBytes(StandardCharsets.UTF_8);
         if (bytes.length > MAX_BYTES)
             throw new IllegalArgumentException("Expanded BTN drill exceeds byte cap");
+        return bytes;
+    }
+
+    public void write(Path path, Review review) throws Exception {
+        replay(review);
+        path = path.toAbsolutePath().normalize();
+        byte[] bytes = document(review);
         if (path.toString().endsWith(".gz")) {
             var buffer = new java.io.ByteArrayOutputStream();
             try (var zip = new java.util.zip.GZIPOutputStream(buffer)) {

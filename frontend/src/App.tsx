@@ -535,6 +535,7 @@ export default function App() {
               <p><a className="solver-demo-link" href="#interval-preflop">Pocket nines: single-question interval drill ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-flop">Pocket sevens: verified flop decision ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-flop-response">Pocket sevens: facing a flop bet ↗</a></p>
+              <p><a className="solver-demo-link" href="#interval-btn-flop">Play the button: four qualified hands ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-flop-collection">Flop practice: two qualified decisions ↗</a></p>
               <p><a className="solver-demo-link" href="#multiway">Six-seat call/fold research drill ↗</a></p>
               <p><a className="solver-demo-link" href="#river">River research drill ↗</a></p>

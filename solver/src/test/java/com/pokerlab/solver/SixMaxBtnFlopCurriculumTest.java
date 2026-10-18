@@ -391,6 +391,17 @@ class SixMaxBtnFlopCurriculumTest {
             throws Exception {
         var trainer = trainer();
         var review = trainer.review(mixedChoices());
+        assertEquals(
+                Files.readString(
+                        Path.of("../docs/data/supplied-four-button-hand-btn-flop-drill.json")),
+                trainer.reviewJson(mixedChoices()));
+        assertTrue(
+                trainer.reviewJson(
+                                        Collections.nCopies(
+                                                100, new SixMaxBtnFlopTrainer.Choice(3, "bet")))
+                                .getBytes(java.nio.charset.StandardCharsets.UTF_8)
+                                .length
+                        <= SixMaxBtnFlopTrainer.MAX_BYTES);
         assertEquals(new SixMaxBtnFlopTrainer.Counts(4, 4, 4, 0), review.counts());
         assertEquals(
                 review,

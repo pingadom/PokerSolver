@@ -231,4 +231,53 @@ class BtnFlopIntervalResearchControllerTest {
                 mapper.writeValueAsString(
                         Map.of("reportHash", "0".repeat(64), "choices", List.of(choice))));
     }
+
+    @Test
+    void canonicalExportExactlyMatchesOwnedDocumentBytesAndUsesTheSameStrictChoices()
+            throws Exception {
+        var choices = new ArrayList<Map<String, Object>>();
+        for (String action : List.of("check", "bet"))
+            for (int i = 0; i < 4; i++) choices.add(choice(i, action));
+        var body = mapper.writeValueAsString(Map.of("reportHash", PIN, "choices", choices));
+        var bytes =
+                mvc.perform(
+                                post(BASE + "/review/export")
+                                        .contentType("application/json")
+                                        .content(body))
+                        .andExpect(status().isOk())
+                        .andExpect(header().string("Cache-Control", "no-store"))
+                        .andExpect(
+                                header().string(
+                                                "Content-Disposition",
+                                                "attachment; filename=\"pokerlab-btn-flop-review-9686d76c4a9d.json\""))
+                        .andReturn()
+                        .getResponse()
+                        .getContentAsByteArray();
+        assertArrayEquals(
+                java.nio.file.Files.readAllBytes(
+                        IntervalResearchControllerTest.fixture(
+                                "supplied-four-button-hand-btn-flop-drill.json")),
+                bytes);
+        for (String bad :
+                List.of(
+                        "null",
+                        "{}",
+                        body + " {}",
+                        body.substring(0, body.length() - 1) + ",\"grades\":[]}"))
+            invalid("/review/export", bad);
+        invalid(
+                "/review/export",
+                mapper.writeValueAsString(
+                        Map.of("reportHash", "0".repeat(64), "choices", choices)));
+        invalid(
+                "/review/export",
+                mapper.writeValueAsString(
+                        Map.of(
+                                "reportHash",
+                                PIN,
+                                "choices",
+                                Collections.nCopies(101, choice(0, "check")))));
+        var empty = postJson("/review/export", Map.of("reportHash", PIN, "choices", List.of()));
+        assertEquals(0, mapper.readTree(empty).get("attempts").size());
+    }
 }

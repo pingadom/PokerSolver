@@ -1,0 +1,13 @@
+.btn-hand-navigation { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.btn-hand-navigation .trainer-button { flex: 1; min-width: 100px; padding: 7px 10px; font-size: .8rem; }
+.btn-hand-navigation [aria-current="step"] { border-color: #76b5ff; background: #173752; color: #e6f2ff; }
+.btn-flop-interval-page .collection-navigation { gap: 6px; }
+@media (min-width: 901px) and (max-height: 820px) {
+ .btn-hand-navigation { margin-top: 5px; }
+ .btn-hand-navigation .trainer-button { padding: 4px 8px; }
+ .btn-flop-interval-page .poker-table { height: 235px; }
+}
+@media (max-width: 600px) {
+ .btn-hand-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ .btn-hand-navigation .trainer-button { min-width: 0; }
+}
