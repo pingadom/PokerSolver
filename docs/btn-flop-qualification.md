@@ -54,3 +54,5 @@ python -m unittest discover -s scripts -p 'test_check_btn_flop_feedback.py'
 ```
 
 Stored and expanded request/report inputs retain the 8 MiB cap, strict JSON reader and distinct paths. Output is exclusive and supports plain JSON or gzip. The [backend CI evidence](backend-ci.md) uses four disjoint solver groups and one service group to retain complete coverage under the existing 35-minute per-job bound. No tests, numerical gates or replay work are removed to make this longer qualification fit.
+
+A separate [four-hand BTN qualification and versioned numerical correction](refined-lp-directions.md) expands the offline evidence. This single-hand v4 request/report and its 80k/160k budget remain unchanged. The new v5 report shares two fresh runs across four explicitly selected contexts.

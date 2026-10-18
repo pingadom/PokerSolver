@@ -519,7 +519,8 @@ public final class FiniteTwoPlayerRootActionIntervals {
             ORIGINAL,
             ASCENDING_L1,
             RESOLVABLE_COSTS,
-            EXACT_POWER_TWO
+            EXACT_POWER_TWO,
+            REFINED_DIRECTIONS
         }
 
         final int pivotLimit;
@@ -554,6 +555,10 @@ public final class FiniteTwoPlayerRootActionIntervals {
             return new LpBudget(pivotLimit, workLimit, Representation.EXACT_POWER_TWO);
         }
 
+        static LpBudget refinedDirections(int pivotLimit, long workLimit) {
+            return new LpBudget(pivotLimit, workLimit, Representation.REFINED_DIRECTIONS);
+        }
+
         private LpBudget(int pivotLimit, long workLimit, Representation representation) {
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
@@ -572,6 +577,9 @@ public final class FiniteTwoPlayerRootActionIntervals {
                                         matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
                         case RESOLVABLE_COSTS ->
                                 BoundedLinearProgram.solveResolvableCosts(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
+                        case REFINED_DIRECTIONS ->
+                                BoundedLinearProgram.solveRefinedDirections(
                                         matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
                         case EXACT_POWER_TWO ->
                                 BoundedLinearProgram.solveExactPowerOfTwoRows(
