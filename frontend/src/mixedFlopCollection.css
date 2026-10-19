@@ -1,0 +1,6 @@
+.mixed-context-navigation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin-top: 6px; }
+.mixed-context-navigation .trainer-button { min-width: 0; padding: 5px 7px; font-size: .76rem; }
+.mixed-context-navigation [aria-current="step"] { border-color: #76b5ff; background: #173752; color: #e6f2ff; }
+@media (max-width: 600px) {
+  .mixed-context-navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

@@ -90,6 +90,8 @@ jobs:
         run: cmp ../docs/data/supplied-four-button-hand-btn-flop-drill.json src/test-data/btn-flop-interval-drill.json
       - name: Keep mixed flop UI fixture identical to physically replayed sources
         run: cmp ../docs/data/supplied-two-flop-interval-collection-review.json src/test-data/flop-collection-review.json
+      - name: Check six-question mixed flop fixture bytes
+        run: cmp ../docs/data/supplied-six-question-flop-collection-review.json src/test-data/mixed-flop-collection-review.json
       - name: Keep collection UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence

@@ -71,6 +71,16 @@ python scripts/smoke-mixed-flop-interval-collection.py
 
 All seven manifest/source mounts are read-only. The smoke allows 900 seconds for the combined startup replay. A dedicated 25-minute CI job checks default route absence, performs full production startup and exercises all six questions/twelve grades, exact export, request schemas and negative controls. The existing Compose job and every old wait/work limit remain unchanged. API transport tests use a mocked immutable cache to isolate parsing/delegation; genuine owned construction is tested in the solver and the production startup smoke, without manufacturing qualification capabilities.
 
-## Next integration
+## Six-question table UI
 
-Adapt the table UI to the new typed six-question inventory, with saved feedback per question and clear BB/BTN actor changes. The current BB and BTN pages continue to use their own original protocols.
+Open `#interval-mixed-flop` after enabling the overlay. A shareable link binds the collection pin and collection question index, for example `#interval-mixed-flop?collection=1694d51922de3619a3523b9ed07dbe6375a742c882632e18eafc3f7fe7c6cb2b&question=2` for BTN with 9s Js. All six questions load and pass the original source validators and shared public-context checks before any table is playable. An unavailable or stale source produces an explicit error rather than demo content.
+
+The table switches the blue hero, red opponent, private cards and action menu for each context. Six direct tabs, previous/next controls, keyboard action shortcuts and feedback sit beside the table controls. Action EV/loss ranges appear after answering and remain visible when retrying that same decision. Grades stay attached to their own question; navigation preserves them in the current in-memory session. Reloading or changing the URL starts a new session. These are independently graded decisions, not a connected full-hand policy.
+
+The session permits 100 total attempts across all six contexts. Pending clicks and keyboard repeats cannot duplicate a request; navigation waits for the request, and route changes abort loading, grading, review or export. The review counts question coverage separately from retries. Its download posts only collection-index choices and original report pins, validates all returned questions, grades and counts against the captured session, then saves the server's original UTF-8 JSON. The twelve-choice reference session downloads as exactly 40,731 bytes, SHA-256 `0914137826345fb96293a87ba252801d85ee8386197e32f34182a146d7e6b40f`.
+
+Frontend tests use a byte copy of the physically replayed saved review; CI compares the fixture with the owned artifact. Parser and page tests cover all twelve legal moves, both index spaces, actor/card/menu changes, retained feedback, the global attempt cap, stale/disabled/inconsistent data, forged review/export responses and aborted late responses. Live browser checks cover desktop 1366×768 and mobile 390/320 widths. The original BB, BTN and v1 collection pages retain their source protocols.
+
+## Next model milestone
+
+This completes table integration within the existing one-bet, two-active-player supplied-belief model. Before expanding lessons, measure broader hand/board coverage with explicit solver budgets and the same independent qualification gates. Richer betting, range provenance, rake and genuinely multiplayer postflop equilibrium remain separate work. AWS deployment remains paused.
