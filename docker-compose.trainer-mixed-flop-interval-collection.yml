@@ -1,0 +1,16 @@
+# Local opt-in: all three physical source qualifications replay before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_MIXED_FLOP_INTERVAL_COLLECTION_ENABLED: "true"
+      TRAINER_MIXED_FLOP_INTERVAL_COLLECTION_MANIFEST_PATH: /opt/pokerlab/mixed-flop-collection/supplied-six-question-flop-collection-manifest.json
+      TRAINER_MIXED_FLOP_INTERVAL_COLLECTION_HASH: 1694d51922de3619a3523b9ed07dbe6375a742c882632e18eafc3f7fe7c6cb2b
+    volumes:
+      - ./docs/data/supplied-six-question-flop-collection-manifest.json:/opt/pokerlab/mixed-flop-collection/supplied-six-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-request.json:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-report.json.gz:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-btn-curriculum-request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/mixed-flop-collection/supplied-four-button-hand-btn-curriculum-report.json.gz:ro
