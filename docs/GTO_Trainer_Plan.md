@@ -279,3 +279,7 @@ The [separately versioned BB/BTN collection](mixed-flop-interval-collection.md) 
 ## Refined paired-board parent milestone
 
 The [separately selected parent correction](refined-parent-solver.md) resolves a captured zero-direction pivot bug without changing old solver modes, budgets or reports. Exact rational regression evidence, all 292 LP oracle controls, a complete owned paired-board parent solve and independent physical-tree/original-certificate checks cover this slice. The separate request/report and CLI remain research-only. Next qualify individual new-board decisions with the existing complete-face reach, independent reference and educational regret gates; a parent certificate alone does not create trainer content. AWS remains paused.
+
+## Refined conditional decision milestone
+
+The [explicit v6 conditional study](refined-conditional-solver.md) now binds the corrected parent and ascending refined endpoint representation before solving. One paired-board BTN facing-bet decision has complete fold/call bounds, public table context, original LP witnesses and full physical replay. An independent checker verifies the parent plus eight endpoint certificates, path posteriors, best responses and cumulative work. Existing modes and evidence remain unchanged; zero-reach questions still reject. The next gate is fresh independent reference inclusion and educational qualification for that decision, followed by a typed trainer source only if all gates pass.
