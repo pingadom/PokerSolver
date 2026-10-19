@@ -39,6 +39,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_btn_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_later_bb_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_flop_interval_collection.py'
+          python3 -m unittest discover -s scripts -p 'test_check_mixed_flop_interval_collection.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -310,5 +311,36 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: compose-log, path: compose.log }
+      - if: always()
+        run: docker compose down -v
+  mixed-flop-collection-smoke:
+    runs-on: ubuntu-latest
+    # Independent three-source qualification; preserve the existing Compose budget.
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-mixed-flop-interval-collection.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_mixed_flop_collection.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Mixed flop collection is absent without opt-in
+        run: python3 scripts/smoke-mixed-flop-interval-collection.py --disabled
+      - name: Replay all three sources and exercise the six-question production API
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-mixed-flop-interval-collection.yml up -d --no-deps api
+          python3 scripts/smoke-mixed-flop-interval-collection.py
+      - name: Mixed collection service logs
+        if: always()
+        run: docker compose logs --no-color > mixed-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: mixed-compose-log, path: mixed-compose.log }
       - if: always()
         run: docker compose down -v
