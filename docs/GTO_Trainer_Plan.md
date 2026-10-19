@@ -287,3 +287,7 @@ The [explicit v6 conditional study](refined-conditional-solver.md) now binds the
 ## Refined paired-board qualification and trainer
 
 The [new qualification and cached backend](refined-flop-trainer.md) passes the complete primary/fresh-reference gates for BTN As Qs facing a bet on the paired board. Its fixed 80k/160k tier uses literal inactive-payoff validation and opt-in pruning while preserving the ordinary reference policies. Complete replay, private qualified provenance, file identity/byte pins, independent physical/reference checks and a default-disabled cached grade/review API now cover this source. Next add its BTN fold/call protocol to a separately versioned mixed collection and table UI. Existing questions, numerical gates and public admission remain unchanged.
+
+## Refined basis endpoint milestone
+
+The [separate v7 endpoint mode](refined-basis-solver.md) combines compensated basis/dual refinement with strict computed-ratio ordering. It resolves three captured endpoint numerical failures and supplies complete independently checked studies for all four paired-board BTN hands under unchanged original limits. Older algorithms, the original parent and existing trainer evidence retain their identities. Next qualify the new hands with fresh references and per-question face/reach/regret gates before expanding a typed trainer source.
