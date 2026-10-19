@@ -96,6 +96,15 @@ public final class SixMaxRefinedParentStudy {
         var game =
                 new SixMaxSuppliedFlopBettingGame(
                         input.input(), input.flop(), input.betPotFraction());
+        return solve(request, game);
+    }
+
+    static Result solve(Request request, SixMaxSuppliedFlopBettingGame game) throws Exception {
+        var input = request.connected();
+        if (!input.input().equals(game.source().input())
+                || !input.flop().equals(game.binding().flop())
+                || input.betPotFraction() != game.binding().betPotFraction())
+            throw new IllegalArgumentException("Refined parent game identity differs");
         var solved = FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(game);
         return new Result(
                 new Report(
