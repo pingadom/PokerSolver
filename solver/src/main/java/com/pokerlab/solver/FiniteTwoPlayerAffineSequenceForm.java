@@ -73,6 +73,9 @@ public final class FiniteTwoPlayerAffineSequenceForm {
     public static final String ASCENDING_ROWS_ALGORITHM =
             "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_ASCENDING_L1_ORIGINAL_CERTIFICATES/v1";
 
+    public static final String ASCENDING_REFINED_DIRECTIONS_ALGORITHM =
+            "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_ASCENDING_L1_REFINED_DIRECTIONS_ORIGINAL_CERTIFICATES/v2";
+
     public record Audit(
             String algorithm,
             String snapshotHash,
@@ -100,14 +103,40 @@ public final class FiniteTwoPlayerAffineSequenceForm {
         }
     }
 
+    /** Serializable evidence only; constructing a witness does not grant a solved handle. */
+    public record LpWitness(
+            List<Double> point, List<Double> dual, BoundedLinearProgram.Certificate certificate) {
+        public LpWitness {
+            point = List.copyOf(point);
+            dual = List.copyOf(dual);
+            Objects.requireNonNull(certificate);
+        }
+    }
+
     /** Audit JSON or caller-supplied projections cannot manufacture a solved strategy handle. */
     public static final class Result {
         private final Map<String, Map<String, Double>> strategy;
         private final Audit audit;
+        private final LpWitness firstLpWitness, secondLpWitness;
 
-        private Result(CfrSolution policy, Audit audit) {
+        private Result(
+                CfrSolution policy,
+                Audit audit,
+                BoundedLinearProgram.Result firstLp,
+                BoundedLinearProgram.Result secondLp) {
             strategy = policy.strategy();
             this.audit = audit;
+            firstLpWitness = new LpWitness(firstLp.point(), firstLp.dual(), firstLp.certificate());
+            secondLpWitness =
+                    new LpWitness(secondLp.point(), secondLp.dual(), secondLp.certificate());
+        }
+
+        public LpWitness firstLpWitness() {
+            return firstLpWitness;
+        }
+
+        public LpWitness secondLpWitness() {
+            return secondLpWitness;
         }
 
         public Map<String, Map<String, Double>> strategy() {
@@ -134,8 +163,29 @@ public final class FiniteTwoPlayerAffineSequenceForm {
         return solve(game, SequenceFormAffineProjection.MAX_REDUCTION_WORK, true);
     }
 
+    /** Separately selected parent mode; preserves original modes, limits and rejection behavior. */
+    public static <S> Result solveAscendingRefinedDirections(MultiPlayerCfrGame<S> game)
+            throws Exception {
+        return solveAscendingRefinedDirections(
+                game, SequenceFormAffineProjection.MAX_REDUCTION_WORK);
+    }
+
+    static <S> Result solveAscendingRefinedDirections(MultiPlayerCfrGame<S> game, long workLimit)
+            throws Exception {
+        return solve(game, workLimit, true, true);
+    }
+
     private static <S> Result solve(
             MultiPlayerCfrGame<S> game, long workLimit, boolean ascendingRows) throws Exception {
+        return solve(game, workLimit, ascendingRows, false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            long workLimit,
+            boolean ascendingRows,
+            boolean refinedDirections)
+            throws Exception {
         var budget = new SequenceFormAffineProjection.Budget(workLimit);
         var checked = FiniteTwoPlayerSequenceForm.checked(game);
         var f = checked.firstFlow();
@@ -144,9 +194,11 @@ public final class FiniteTwoPlayerAffineSequenceForm {
         var sp = SequenceFormAffineProjection.build(s.sequences(), s.conservation(), budget);
         var payoff = SequenceFormAffineProjection.reduce(checked.payoff(), fp, sp, budget);
         var row =
-                SequenceFormAffineProjection.optimize(payoff, fp, sp, true, budget, ascendingRows);
+                SequenceFormAffineProjection.optimize(
+                        payoff, fp, sp, true, budget, ascendingRows, refinedDirections);
         var column =
-                SequenceFormAffineProjection.optimize(payoff, sp, fp, false, budget, ascendingRows);
+                SequenceFormAffineProjection.optimize(
+                        payoff, sp, fp, false, budget, ascendingRows, refinedDirections);
         double lower = payoff.constant() + row.certificate().primalValue(),
                 upper = payoff.constant() - column.certificate().primalValue();
         final double tolerance = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
@@ -210,7 +262,9 @@ public final class FiniteTwoPlayerAffineSequenceForm {
                                 budget.audit()));
         var audit =
                 new Audit(
-                        ascendingRows ? ASCENDING_ROWS_ALGORITHM : ALGORITHM,
+                        refinedDirections
+                                ? ASCENDING_REFINED_DIRECTIONS_ALGORITHM
+                                : ascendingRows ? ASCENDING_ROWS_ALGORITHM : ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(checked.snapshot()),
                         originalHash,
                         affineHash,
@@ -231,6 +285,6 @@ public final class FiniteTwoPlayerAffineSequenceForm {
                         upper,
                         SixMaxConnectedPostflopAudit.solutionHash(policy),
                         quality);
-        return new Result(policy, audit);
+        return new Result(policy, audit, row, column);
     }
 }

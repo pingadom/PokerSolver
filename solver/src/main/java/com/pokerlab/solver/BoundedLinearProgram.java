@@ -17,6 +17,8 @@ public final class BoundedLinearProgram {
             "OWNED_EXACT_POWER_TWO_L1_RHS_RESOLVABLE_COST_ORIGINAL_CERTIFICATE/v1";
     public static final String REFINED_DIRECTION_ALGORITHM =
             "OWNED_EXACT_POWER_TWO_RESOLVABLE_COST_COMPENSATED_DIRECTION_ORIGINAL_CERTIFICATE/v2";
+    public static final String ASCENDING_REFINED_DIRECTION_ALGORITHM =
+            "OWNED_ASCENDING_L1_COMPENSATED_PHASE_TWO_DIRECTION_ORIGINAL_CERTIFICATE/v4";
     public static final int DIRECTION_REFINEMENT_PASSES = 2;
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
@@ -124,6 +126,20 @@ public final class BoundedLinearProgram {
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
         return solveRows(matrix, rhs, cost, pivots, work, false);
+    }
+
+    /**
+     * Fixed direction refinement with the original ascending-row pivot rules; no automatic retry.
+     */
+    public static Result solveAscendingRefinedDirections(
+            double[][] matrix, double[] rhs, double[] cost) throws Exception {
+        return solveAscendingRefinedDirections(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveAscendingRefinedDirections(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, false, true);
     }
 
     /** Explicit phase-II rule; never retries or changes the default solver's certificates. */
@@ -342,7 +358,9 @@ public final class BoundedLinearProgram {
                 dual,
                 new Certificate(
                         refinedDirections
-                                ? REFINED_DIRECTION_ALGORITHM
+                                ? (resolvableCosts
+                                        ? REFINED_DIRECTION_ALGORITHM
+                                        : ASCENDING_REFINED_DIRECTION_ALGORITHM)
                                 : resolvableCosts
                                         ? RESOLVABLE_COST_ALGORITHM
                                         : ASCENDING_L1_ALGORITHM,
