@@ -1,0 +1,12 @@
+# Local research opt-in. Full physical replay completes once before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_REFINED_FLOP_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_REFINED_FLOP_INTERVAL_REQUEST_PATH: /opt/pokerlab/refined-flop-interval-request.json
+      TRAINER_REFINED_FLOP_INTERVAL_REPORT_PATH: /opt/pokerlab/refined-flop-interval-report.json.gz
+      TRAINER_REFINED_FLOP_INTERVAL_REPORT_HASH: 1a5254e971afcc76a3e5b1eba7c1c61f90afd8de17684842846c63da0afe6173
+    volumes:
+      - ./docs/data/supplied-paired-btn-facing-bet-feedback-request.json:/opt/pokerlab/refined-flop-interval-request.json:ro
+      - ./docs/data/supplied-paired-btn-facing-bet-feedback-report.json.gz:/opt/pokerlab/refined-flop-interval-report.json.gz:ro
