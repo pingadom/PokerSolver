@@ -65,7 +65,7 @@ export default function PokerTable({ players, heroSeat, heroCombo, potBb, toCall
     <div className="poker-legend" aria-label="Table colour key">
       <span className="hero">Blue: you</span><span className="villain">Red: opponents</span>
       <span className="check">Yellow: check</span><span className="call">Green: call</span>
-      <span className="raise">Red: raise / all-in</span><span className="fold">Grey: fold</span>
+      <span className="raise">Red: bet / raise / all-in</span><span className="fold">Grey: fold</span>
     </div>
   </div>;
 }

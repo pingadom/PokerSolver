@@ -24,7 +24,7 @@ class BtnFlopIntervalResearchDisabledTest {
         for (String path : new String[] {"", "/questions/0"})
             mvc.perform(get(BtnFlopIntervalResearchControllerTest.BASE + path))
                     .andExpect(status().isNotFound());
-        for (String path : new String[] {"/grade", "/review"})
+        for (String path : new String[] {"/grade", "/review", "/review/export"})
             mvc.perform(
                             post(BtnFlopIntervalResearchControllerTest.BASE + path)
                                     .contentType("application/json")

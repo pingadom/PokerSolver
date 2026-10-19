@@ -133,6 +133,40 @@ public class BtnFlopIntervalResearchController {
                                 .toList()));
     }
 
+    @PostMapping(
+            value = "/review/export",
+            consumes = "application/json",
+            produces = "application/json")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content =
+                    @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ReviewRequest.class)))
+    public ResponseEntity<String> export(@RequestBody byte[] body) throws Exception {
+        var request = parse(body, ReviewRequest.class);
+        requireReport(request.reportHash());
+        var text =
+                trainer.reviewJson(
+                        request.choices().stream()
+                                .map(
+                                        c ->
+                                                new SixMaxBtnFlopTrainer.Choice(
+                                                        c.questionIndex(), c.action()))
+                                .toList());
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore())
+                .contentType(
+                        new org.springframework.http.MediaType(
+                                "application", "json", java.nio.charset.StandardCharsets.UTF_8))
+                .header(
+                        "Content-Disposition",
+                        "attachment; filename=\"pokerlab-btn-flop-review-"
+                                + trainer.reportHash().substring(0, 12)
+                                + ".json\"")
+                .body(text);
+    }
+
     private <T> T parse(byte[] bytes, Class<T> type) {
         if (bytes.length > 32 * 1024)
             throw new IllegalArgumentException("BTN choice request exceeds byte cap");

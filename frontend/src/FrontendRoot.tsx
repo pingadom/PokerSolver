@@ -11,9 +11,11 @@ import IntervalPreflopPage from "./IntervalPreflopPage";
 import IntervalCollectionPage from "./IntervalCollectionPage";
 import FlopIntervalPage from "./FlopIntervalPage";
 import LaterFlopIntervalPage from "./LaterFlopIntervalPage";
+import BtnFlopIntervalPage from "./BtnFlopIntervalPage";
 import FlopCollectionPage from "./FlopCollectionPage";
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#interval-btn-flop")) return "interval-btn-flop";
   if (window.location.hash.startsWith("#interval-flop-collection")) return "interval-flop-collection";
   if (window.location.hash.startsWith("#interval-flop-response")) return "interval-flop-response";
   if (window.location.hash.startsWith("#interval-flop")) return "interval-flop";
@@ -36,6 +38,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "interval-btn-flop") return <BtnFlopIntervalPage />;
   if (route === "trainer") return <TrainerPage />;
   if (route === "multiway") return <MultiwayPage />;
   if (route === "sixmax-preflop") return <SixMaxPreflopPage />;
