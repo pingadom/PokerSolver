@@ -1,4 +1,4 @@
-"""Exact rational controls for the two recorded floating-point pivot errors."""
+"""Exact rational controls for the recorded conditional and parent pivot errors."""
 import copy
 import gzip
 import importlib.util
@@ -11,12 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('pivot_exact_check', ROOT / 'scripts/check-lp-pivot-regressions.py')
 checker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(checker)
-FILES = [ROOT / f'solver/src/test/resources/lp-btn-pivot-{label}.json.gz' for label in ('ak', 'qt')]
+FILES = [ROOT / f'solver/src/test/resources/lp-btn-pivot-{label}.json.gz' for label in ('ak', 'qt')] + [ROOT / 'solver/src/test/resources/lp-parent-pivot-paired.json.gz']
 
 
 class PivotRegressionTest(unittest.TestCase):
     def test_both_previous_bases_are_full_rank_but_chosen_exact_direction_is_zero(self):
-        for path, size in zip(FILES, (85, 86), strict=True):
+        for path, size in zip(FILES, (85, 86, 81), strict=True):
             with self.subTest(path=path):
                 result = checker.check(path)
                 self.assertEqual(size, result['priorBasisExactRank'])
