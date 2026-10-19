@@ -283,3 +283,7 @@ The [separately selected parent correction](refined-parent-solver.md) resolves a
 ## Refined conditional decision milestone
 
 The [explicit v6 conditional study](refined-conditional-solver.md) now binds the corrected parent and ascending refined endpoint representation before solving. One paired-board BTN facing-bet decision has complete fold/call bounds, public table context, original LP witnesses and full physical replay. An independent checker verifies the parent plus eight endpoint certificates, path posteriors, best responses and cumulative work. Existing modes and evidence remain unchanged; zero-reach questions still reject. The next gate is fresh independent reference inclusion and educational qualification for that decision, followed by a typed trainer source only if all gates pass.
+
+## Refined paired-board qualification and trainer
+
+The [new qualification and cached backend](refined-flop-trainer.md) passes the complete primary/fresh-reference gates for BTN As Qs facing a bet on the paired board. Its fixed 80k/160k tier uses literal inactive-payoff validation and opt-in pruning while preserving the ordinary reference policies. Complete replay, private qualified provenance, file identity/byte pins, independent physical/reference checks and a default-disabled cached grade/review API now cover this source. Next add its BTN fold/call protocol to a separately versioned mixed collection and table UI. Existing questions, numerical gates and public admission remain unchanged.

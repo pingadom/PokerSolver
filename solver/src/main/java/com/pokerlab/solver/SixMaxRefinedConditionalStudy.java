@@ -146,6 +146,15 @@ public final class SixMaxRefinedConditionalStudy {
         var game =
                 new SixMaxSuppliedFlopBettingGame(
                         connected.input(), connected.flop(), connected.betPotFraction());
+        return solve(request, game);
+    }
+
+    static Result solve(Request request, SixMaxSuppliedFlopBettingGame game) throws Exception {
+        var connected = request.parent().connected();
+        if (!connected.input().equals(game.source().input())
+                || !connected.flop().equals(game.binding().flop())
+                || connected.betPotFraction() != game.binding().betPotFraction())
+            throw new IllegalArgumentException("Refined conditional game identity differs");
         var question = question(game, request);
         var parent = SixMaxRefinedParentStudy.solve(request.parent(), game).report();
         var owned = new ArrayList<FiniteTwoPlayerConditionalActionIntervals.Result>();
