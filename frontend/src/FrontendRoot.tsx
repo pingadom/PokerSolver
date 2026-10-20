@@ -18,7 +18,10 @@ import MixedFlopCollectionPage from "./MixedFlopCollectionPage";
 
 import ExpandedFlopCollectionPage from "./ExpandedFlopCollectionPage";
 
+import QualifiedFlopCollectionPage from "./QualifiedFlopCollectionPage";
+
 function currentRoute() {
+  if (window.location.hash.startsWith("#interval-qualified-flop")) return "interval-qualified-flop";
   if (window.location.hash.startsWith("#interval-expanded-flop")) return "interval-expanded-flop";
   if (window.location.hash.startsWith("#interval-mixed-flop")) return "interval-mixed-flop";
   if (window.location.hash.startsWith("#interval-btn-flop")) return "interval-btn-flop";
@@ -44,6 +47,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "interval-qualified-flop") return <QualifiedFlopCollectionPage />;
   if (route === "interval-expanded-flop") return <ExpandedFlopCollectionPage />;
   if (route === "interval-mixed-flop") return <MixedFlopCollectionPage />;
   if (route === "interval-btn-flop") return <BtnFlopIntervalPage />;

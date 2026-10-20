@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [eleven-question flop collection](docs/qualified-flop-collection.md) combines the original ten contexts with the qualified weak-hand folding scenario through a separately versioned API, replayable review and table UI.
+
 The [qualified weak-hand backend trainer](docs/qualified-weak-hand-flop-trainer.md) adds a separately pinned BTN 2c3c fold/call decision, fresh reference qualification, cached grading/review and a default-off API. The existing ten-question website collection retains its original sources.
 
 The [explicit resolvable/refined endpoint mode](docs/resolvable-refined-endpoints.md) now solves a new weak-hand fold decision with independently regenerated physical counts and 298 exact-fraction LP controls. It remains a research result pending fresh trainer qualification.

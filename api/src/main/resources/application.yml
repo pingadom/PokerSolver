@@ -47,6 +47,9 @@ pokerlab:
     btn-flop-interval-request-path: ${TRAINER_BTN_FLOP_INTERVAL_REQUEST_PATH:}
     btn-flop-interval-report-path: ${TRAINER_BTN_FLOP_INTERVAL_REPORT_PATH:}
     btn-flop-interval-report-hash: ${TRAINER_BTN_FLOP_INTERVAL_REPORT_HASH:}
+    qualified-flop-collection-enabled: ${TRAINER_QUALIFIED_FLOP_COLLECTION_ENABLED:false}
+    qualified-flop-collection-manifest-path: ${TRAINER_QUALIFIED_FLOP_COLLECTION_MANIFEST_PATH:}
+    qualified-flop-collection-hash: ${TRAINER_QUALIFIED_FLOP_COLLECTION_HASH:}
     expanded-flop-interval-collection-enabled: ${TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_ENABLED:false}
     expanded-flop-interval-collection-manifest-path: ${TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_MANIFEST_PATH:}
     expanded-flop-interval-collection-hash: ${TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_HASH:}

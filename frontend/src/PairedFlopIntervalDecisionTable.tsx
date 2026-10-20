@@ -3,12 +3,12 @@ import PokerTable from "./PokerTable";
 import type { PairedFlopAction, PairedFlopIntervalQuestion, PairedFlopIntervalFeedback, PairedFlopIntervalMove } from "./pairedFlopIntervalApi";
 import { intervalRange } from "./intervalTrainerFormatting";
 
-export const pairedFlopActionLabel = (action: PairedFlopAction, question: PairedFlopIntervalQuestion) => action === "fold" ? "Fold" : `Call ${question.context.toCallBb} bb`;
+export const pairedFlopActionLabel = (action: PairedFlopAction, question: Pick<PairedFlopIntervalQuestion, "context">) => action === "fold" ? "Fold" : `Call ${question.context.toCallBb} bb`;
 export const pairedFlopClassificationLabel = (move: Pick<PairedFlopIntervalMove, "classification">) => move.classification === "WITHIN_LIMIT" ? "Within limit"
   : move.classification === "OUTSIDE_LIMIT" ? "Outside limit" : "Strategy-dependent";
 
 export default function PairedFlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children, prompt }: {
-  question: PairedFlopIntervalQuestion; feedback: PairedFlopIntervalFeedback | null; knownMoves?: PairedFlopIntervalMove[];
+  question: Omit<PairedFlopIntervalQuestion, "questionIndex">; feedback: Pick<PairedFlopIntervalFeedback, "selected" | "alternatives"> | null; knownMoves?: PairedFlopIntervalMove[];
   attemptCount: number; busy: boolean; submit: (action: PairedFlopAction) => void; controls: ReactNode; children?: ReactNode; prompt?: string;
 }) {
   const c = question.context;

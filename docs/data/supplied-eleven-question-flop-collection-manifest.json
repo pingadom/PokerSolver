@@ -1,0 +1,16 @@
+{
+  "collectionHash" : "57abbb5f5bbc10b2227739299c1eec0f0092a7a136dc80e63c0830865cb7fd87",
+  "legacyCollectionHash" : "11db67eb188fe4fadf8b370f45ecfc0f29ed5412ae78d69eff514dcecc962122",
+  "legacyInputHash" : "8bdf69abb95ad2154bf5d007568c031d787a06e29045c63931e1684e1a002a76",
+  "legacyManifestFile" : "supplied-ten-question-flop-collection-manifest.json",
+  "schemaVersion" : "pokerlab-flop-interval-collection-manifest/v4",
+  "startupBudget" : {
+    "freshIterations" : 732000,
+    "freshReferenceRuns" : 10,
+    "sourceReplays" : 5
+  },
+  "weakInputHash" : "ad38e633f247e0746498cf719c48b13e15e50981ad5aea4125630280f547c5c4",
+  "weakReportFile" : "supplied-weak-hand-qualified-flop-report.json.gz",
+  "weakReportHash" : "5dbd0cdeba8a74e6da32dae0bddeb69381a90ba4f72220ab4a9bf92bcc667c56",
+  "weakRequestFile" : "supplied-weak-hand-qualified-flop-request.json"
+}

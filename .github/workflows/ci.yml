@@ -51,6 +51,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_flop_interval_collection.py'
           python3 -m unittest discover -s scripts -p 'test_check_mixed_flop_interval_collection.py'
           python3 -m unittest discover -s scripts -p 'test_check_expanded_flop_interval_collection.py'
+          python3 -m unittest discover -s scripts -p 'test_check_qualified_flop_collection.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -105,6 +106,10 @@ jobs:
         run: cmp ../docs/data/supplied-six-question-flop-collection-review.json src/test-data/mixed-flop-collection-review.json
       - name: Check ten-question two-board fixture bytes
         run: cmp ../docs/data/supplied-ten-question-flop-collection-review.json src/test-data/expanded-flop-collection-review.json
+      - name: Check eleven-question and weak-hand UI fixture bytes
+        run: |
+          cmp ../docs/data/supplied-eleven-question-flop-collection-review.json src/test-data/qualified-flop-collection-review.json
+          cmp ../docs/data/supplied-weak-hand-qualified-flop-drill.json src/test-data/weak-hand-flop-drill.json
       - name: Keep collection UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence
@@ -479,5 +484,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: weak-hand-compose-log, path: weak-hand-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  qualified-flop-collection-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-qualified-flop-collection.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_qualified_flop_collection.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Qualified collection source is absent without opt-in
+        run: python3 scripts/smoke-qualified-flop-collection.py --disabled
+      - name: Five-source physical qualification, eleven cached questions and canonical review
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-qualified-flop-collection.yml up -d --no-deps api
+          python3 scripts/smoke-qualified-flop-collection.py
+      - name: Qualified collection service logs
+        if: always()
+        run: docker compose logs --no-color > qualified-collection-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: qualified-collection-compose-log, path: qualified-collection-compose.log }
       - if: always()
         run: docker compose down -v

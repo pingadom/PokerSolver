@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "pokerlab-qualified-flop-collection-generation-budget/v1",
+  "purpose": "Compose existing immutable qualified sources; regenerate no source reports or card worlds",
+  "sourceHead": "5873f107695f3bf8ee119470ad8ab6b4d50f65f9",
+  "collectionHash": "57abbb5f5bbc10b2227739299c1eec0f0092a7a136dc80e63c0830865cb7fd87",
+  "manifestSha256": "6094973cab4e23142d7eb96569350aaee06d6dec13ecd89eba9d5b815e66b87c",
+  "maximumGenerationInvocations": 1,
+  "sourceReplaysPerInvocation": 5,
+  "freshReferenceRunsPerInvocation": 10,
+  "freshIterationsPerInvocation": 732000,
+  "explicitReviewChoices": 22,
+  "maximumReviewAttempts": 100,
+  "allOriginalSourceCapsAndTolerancesPreserved": true,
+  "automaticNumericalRetries": 0
+}
