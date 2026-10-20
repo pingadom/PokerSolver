@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "pokerlab-resolvable-refined-study-budget/v1",
+  "scope": "ONE_EXPLICIT_V8_RESEARCH_STUDY_NOT_TRAINER_QUALIFICATION",
+  "trainerAdmission": false,
+  "sourceHead": "3813ba171fec96ef762041c95f6b679dbe63be25",
+  "requestSha256": "04bff4409db206d7b7ed07ed337c9052b215ddeec5b50895c052cda128fb6636",
+  "priorRejectedRequestSha256": "ce582c8991545de2ffc70ea9cc9e417e30e66399956216410f65546a5d0d3e62",
+  "maximumStudies": 1,
+  "maximumParentSolves": 3,
+  "maximumEndpointActions": 2,
+  "maximumEndpointCertificates": 8,
+  "maximumCompilerUnits": 40000000,
+  "maximumLpPivots": 80000,
+  "maximumLpArithmeticWork": 32000000000,
+  "maximumLossBb": 0.01,
+  "freshReferenceRuns": 0,
+  "onRejection": "Preserve rejection; no automatic retry or alternate hand",
+  "fixtureSha256": {
+    "solver/src/test/resources/bounded-lp-oracle-controls.json.gz": "410b804f9e097f71f53fd59c50137a6a5f4312da5a74dea83a6956bb115d3e70",
+    "solver/src/test/resources/lp-refined-basis-endpoints.json.gz": "fe3cea1ae6ea499fbeac3442decbae0f1b3af8ea97a8771423840c3c398eda06",
+    "solver/src/test/resources/lp-resolvable-refined-weak-hand.json.gz": "2c188703da98f8b1b0f32395ec6b927b6695b3f0af9fb79cb247d4d6c4b1ffa6",
+    "solver/src/test/resources/lp-resolvable-refined-weak-hand-oracle.json": "ea28e8df18618e06c9e48ccdad14fef8c10e00d2523ce129da1718fc9161a61b"
+  },
+  "lpRegressionBudget": {
+    "maximumCases": 298,
+    "maximumPivotsPerCase": 10000,
+    "maximumArithmeticWorkPerCase": 4000000000,
+    "maximumAggregatePivots": 2980000,
+    "maximumAggregateArithmeticWork": 1192000000000,
+    "oracleControls": 292,
+    "capturedOldEndpoints": 3,
+    "nearRatioCases": 1,
+    "weakHandCases": 1,
+    "smallPricingCases": 1
+  }
+}

@@ -21,6 +21,8 @@ public final class BoundedLinearProgram {
             "OWNED_ASCENDING_L1_COMPENSATED_PHASE_TWO_DIRECTION_ORIGINAL_CERTIFICATE/v4";
     public static final String ASCENDING_REFINED_BASIS_ALGORITHM =
             "OWNED_ASCENDING_L1_COMPENSATED_BASIS_DUAL_DIRECTION_STRICT_RATIOS_ORIGINAL_CERTIFICATE/v5";
+    public static final String RESOLVABLE_REFINED_BASIS_ALGORITHM =
+            "OWNED_ASCENDING_L1_RESOLVABLE_COST_COMPENSATED_BASIS_DUAL_DIRECTION_ORIGINAL_CERTIFICATE/v6";
     public static final int DIRECTION_REFINEMENT_PASSES = 2;
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
@@ -154,6 +156,18 @@ public final class BoundedLinearProgram {
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
         return solveRows(matrix, rhs, cost, pivots, work, false, true, true);
+    }
+
+    /** Explicit resolvable pricing with fixed basis/dual/direction refinement; no retry. */
+    public static Result solveResolvableRefinedBasis(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveResolvableRefinedBasis(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveResolvableRefinedBasis(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, true, true, true);
     }
 
     /** Explicit phase-II rule; never retries or changes the default solver's certificates. */
@@ -392,7 +406,9 @@ public final class BoundedLinearProgram {
                 dual,
                 new Certificate(
                         refinedBasis
-                                ? ASCENDING_REFINED_BASIS_ALGORITHM
+                                ? (resolvableCosts
+                                        ? RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                        : ASCENDING_REFINED_BASIS_ALGORITHM)
                                 : refinedDirections
                                         ? (resolvableCosts
                                                 ? REFINED_DIRECTION_ALGORITHM

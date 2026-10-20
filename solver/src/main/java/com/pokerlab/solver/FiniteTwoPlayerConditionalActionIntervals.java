@@ -23,6 +23,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "OWNED_PHYSICAL_FLOP_CONDITIONAL_REACH_EXACT_POWER_TWO_ENDPOINTS/v4";
     public static final String PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_ASCENDING_REFINED_PARENT_AND_ENDPOINTS/v6";
+    public static final String PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_ASCENDING_PARENT_RESOLVABLE_REFINED_BASIS_ENDPOINTS/v8";
     public static final String PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_ASCENDING_PARENT_REFINED_BASIS_ENDPOINTS/v7";
     public static final String SCOPE =
@@ -382,6 +384,39 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 true);
     }
 
+    /** Explicit v8 endpoints; the ascending refined parent remains unchanged. */
+    static Result solvePhysicalFlopResolvableRefinedBasis(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        try {
+            return solve(
+                    game,
+                    question,
+                    securitySlack,
+                    minimumReach,
+                    FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                    BoundedLinearProgram.MAX_PIVOTS,
+                    BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                    true,
+                    physicalFlopMass(game, question),
+                    false,
+                    false,
+                    true,
+                    true,
+                    true);
+        } catch (IllegalStateException failure) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Resolvable refined endpoint witness failed: " + failure.getMessage());
+            rejected.initCause(failure);
+            throw rejected;
+        }
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");
@@ -560,6 +595,41 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             boolean ascendingRefined,
             boolean refinedBasis)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                exactPowerOfTwoRows,
+                refinedDirections,
+                ascendingRefined,
+                refinedBasis,
+                false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows,
+            boolean refinedDirections,
+            boolean ascendingRefined,
+            boolean refinedBasis,
+            boolean resolvableRefinedBasis)
+            throws Exception {
+        if (resolvableRefinedBasis && !refinedBasis)
+            throw new IllegalArgumentException("Invalid resolvable refined basis mode");
         if (refinedBasis && !ascendingRefined)
             throw new IllegalArgumentException("Invalid refined basis mode");
         Objects.requireNonNull(question);
@@ -679,20 +749,24 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             plans.add(new Plan(choice, linear.constant(), linear.cost()));
         }
         var lpBudget =
-                refinedBasis
-                        ? LpBudget.ascendingRefinedBasis(pivotLimit, arithmeticLimit)
-                        : ascendingRefined
-                                ? LpBudget.ascendingRefinedDirections(pivotLimit, arithmeticLimit)
-                                : refinedDirections
-                                        ? LpBudget.refinedDirections(pivotLimit, arithmeticLimit)
-                                        : exactPowerOfTwoRows
-                                                ? LpBudget.exactPowerOfTwoRows(
+                resolvableRefinedBasis
+                        ? LpBudget.resolvableRefinedBasis(pivotLimit, arithmeticLimit)
+                        : refinedBasis
+                                ? LpBudget.ascendingRefinedBasis(pivotLimit, arithmeticLimit)
+                                : ascendingRefined
+                                        ? LpBudget.ascendingRefinedDirections(
+                                                pivotLimit, arithmeticLimit)
+                                        : refinedDirections
+                                                ? LpBudget.refinedDirections(
                                                         pivotLimit, arithmeticLimit)
-                                                : new LpBudget(
-                                                        pivotLimit,
-                                                        arithmeticLimit,
-                                                        physicalFlopMass > 0,
-                                                        physicalFlopMass > 0);
+                                                : exactPowerOfTwoRows
+                                                        ? LpBudget.exactPowerOfTwoRows(
+                                                                pivotLimit, arithmeticLimit)
+                                                        : new LpBudget(
+                                                                pivotLimit,
+                                                                arithmeticLimit,
+                                                                physicalFlopMass > 0,
+                                                                physicalFlopMass > 0);
         int n = face.matrix()[0].length;
         double[] reachCost = new double[n];
         for (int j = 0; j < op.variables(); j++) reachCost[j] = -denominator.cost().get(j);
@@ -893,15 +967,17 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         return new Result(
                 new Audit(
                         physicalFlopMass > 0
-                                ? refinedBasis
-                                        ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
-                                        : ascendingRefined
-                                                ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
-                                                : refinedDirections
-                                                        ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
-                                                        : exactPowerOfTwoRows
-                                                                ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
-                                                                : PHYSICAL_FLOP_ALGORITHM
+                                ? resolvableRefinedBasis
+                                        ? PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                        : refinedBasis
+                                                ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
+                                                : ascendingRefined
+                                                        ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
+                                                        : refinedDirections
+                                                                ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
+                                                                : exactPowerOfTwoRows
+                                                                        ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
+                                                                        : PHYSICAL_FLOP_ALGORITHM
                                 : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
