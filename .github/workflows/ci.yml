@@ -40,6 +40,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_refined_basis_conditional_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_resolvable_refined_lp.py'
           python3 -m unittest discover -s scripts -p 'test_check_weak_hand_resolvable_study.py'
+          python3 -m unittest discover -s scripts -p 'test_check_weak_hand_flop_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_paired_flop_curriculum.py'
           python3 -m unittest discover -s scripts -p 'test_check_paired_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_flop_feedback.py'
@@ -448,5 +449,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: paired-compose-log, path: paired-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  weak-hand-flop-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-weak-hand-flop-interval.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_weak_hand_flop_interval.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Weak-hand source is absent without opt-in
+        run: python3 scripts/smoke-weak-hand-flop-interval-trainer.py --disabled
+      - name: Fresh physical qualification and cached fold/call grades
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-weak-hand-flop-interval.yml up -d --no-deps api
+          python3 scripts/smoke-weak-hand-flop-interval-trainer.py
+      - name: Weak-hand service logs
+        if: always()
+        run: docker compose logs --no-color > weak-hand-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: weak-hand-compose-log, path: weak-hand-compose.log }
       - if: always()
         run: docker compose down -v

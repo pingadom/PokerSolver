@@ -1,0 +1,30 @@
+{
+  "scope": "ONE_SEPARATE_PREDECLARED_WEAK_HAND_QUALIFICATION_STUDY_NOT_THE_PRIOR_ZERO_REFERENCE_LP_STUDY",
+  "trainerAdmission": false,
+  "sourceHead": "5380544ac4829e78098de5b5793d130f23c9ca7b",
+  "maximumStudies": 1,
+  "requestSha256": "cc258b207d20b89ca53d2b64b4b3fbb05f74b32ae76feaea4d7b8b671e964d3f",
+  "sourceConditionalRequestSha256": "04bff4409db206d7b7ed07ed337c9052b215ddeec5b50895c052cda128fb6636",
+  "sourceConditionalReportSha256": "acb0992ee3464295fda59f179f6c8c38290eda9fce140ef86804ec719be5df3a",
+  "maximumParentSolves": 3,
+  "maximumEndpointActions": 2,
+  "maximumEndpointCertificates": 8,
+  "maximumCompilerUnits": 40000000,
+  "maximumLpPivots": 80000,
+  "maximumLpArithmeticWork": 32000000000,
+  "freshReferenceRuns": 2,
+  "referenceIterations": [
+    80000,
+    160000
+  ],
+  "maximumTotalReferenceIterations": 240000,
+  "maximumReferenceVisitedNodes": 9600960000,
+  "maximumLossBb": 0.01,
+  "unchangedGateSourceSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "onRejection": "Preserve failures; no alternate hand, mode, seed, retry or relaxed gate",
+  "inputSnapshot": {
+    ".local/pr182-qualification-research/request.json": "cc258b207d20b89ca53d2b64b4b3fbb05f74b32ae76feaea4d7b8b671e964d3f",
+    "docs/data/supplied-weak-hand-resolvable-conditional-request.json": "04bff4409db206d7b7ed07ed337c9052b215ddeec5b50895c052cda128fb6636",
+    "docs/data/supplied-weak-hand-resolvable-conditional-report.json.gz": "acb0992ee3464295fda59f179f6c8c38290eda9fce140ef86804ec719be5df3a"
+  }
+}
