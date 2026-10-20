@@ -291,3 +291,7 @@ The [new qualification and cached backend](refined-flop-trainer.md) passes the c
 ## Refined basis endpoint milestone
 
 The [separate v7 endpoint mode](refined-basis-solver.md) combines compensated basis/dual refinement with strict computed-ratio ordering. It resolves three captured endpoint numerical failures and supplies complete independently checked studies for all four paired-board BTN hands under unchanged original limits. Older algorithms, the original parent and existing trainer evidence retain their identities. Next qualify the new hands with fresh references and per-question face/reach/regret gates before expanding a typed trainer source.
+
+## Four-hand paired-board backend milestone
+
+The [paired curriculum and cached trainer](paired-four-hand-trainer.md) now owns all four v7 studies, trains each fresh 80k/160k reference once and applies every face/reach/quality/regret/educational gate to all four decisions. Its complete aggregate work includes all twelve parent solves, eight action calculations and 32 endpoint certificates. Pinned physical startup replay, typed fold/call grades, exact reviews, strict opt-in API and independent corruption checks cover the new source. Next compose a separate ten-question collection and then integrate its changed boards, actors and action menus into the table UI. Keep the original six-question collection and single paired-board source unchanged; do not count the same AsQs context twice. Wider ranges, rake, richer streets and multiway equilibrium remain distinct work. AWS stays paused.
