@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "pokerlab-independent-resolvable-refined-lp-check/v1",
+  "trainerAdmission": false,
+  "scope": "EXACT_ORIGINAL_BINARY64_LP_WITNESSES_ONLY",
+  "casesChecked": 298,
+  "originalOracleCases": 292,
+  "priorCapturedEndpoints": 3,
+  "nearRatioCases": 1,
+  "weakHandCases": 1,
+  "smallPricingCases": 1,
+  "independentWeakHandOracleChecked": true,
+  "aggregateArithmeticWork": 4518710512,
+  "aggregatePivots": 5451,
+  "maximumPrimalViolation": 6.520837582826114e-15,
+  "maximumDualViolation": 4.179690852219296e-10,
+  "absoluteDualityGap": 8.153791714221776e-11,
+  "evidenceSha256": "83498b5e4dcbf22fefb1373044beb3caaabe522e6d10553c7a548c36b9aa6612",
+  "budgetSha256": "8629afc81d6e05e97d69a6c838817f8debae156cf3a5e137591e5fa15a486dca",
+  "checkerSha256": "84795dabca56dd86a4870b23efd8d5731d4b4b17d3399fbfa818f7ee9d18f080"
+}

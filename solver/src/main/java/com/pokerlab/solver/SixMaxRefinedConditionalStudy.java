@@ -9,6 +9,8 @@ public final class SixMaxRefinedConditionalStudy {
     public static final String REQUEST_SCHEMA = "pokerlab-refined-flop-conditional-request/v1";
     public static final String REPORT_SCHEMA = "pokerlab-refined-flop-conditional-report/v1";
     public static final String BASIS_REPORT_SCHEMA = "pokerlab-refined-flop-conditional-report/v2";
+    public static final String RESOLVABLE_BASIS_REPORT_SCHEMA =
+            "pokerlab-refined-flop-conditional-report/v3";
     public static final String STATUS = "REFINED_FLOP_CONDITIONAL_INTERVAL_RESEARCH_ONLY";
     public static final int MAX_BYTES = SixMaxRefinedParentStudy.MAX_BYTES;
 
@@ -28,7 +30,9 @@ public final class SixMaxRefinedConditionalStudy {
                                     FiniteTwoPlayerConditionalActionIntervals
                                             .PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM,
                                     FiniteTwoPlayerConditionalActionIntervals
-                                            .PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM)
+                                            .PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM,
+                                    FiniteTwoPlayerConditionalActionIntervals
+                                            .PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM)
                             .contains(intervalAlgorithm)
                     || (hero != 3 && hero != 5)
                     || heroCards == null
@@ -151,8 +155,16 @@ public final class SixMaxRefinedConditionalStudy {
                 .equals(request.intervalAlgorithm());
     }
 
+    private static boolean resolvableBasis(Request request) {
+        return FiniteTwoPlayerConditionalActionIntervals
+                .PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                .equals(request.intervalAlgorithm());
+    }
+
     private static String schema(Request request) {
-        return basis(request) ? BASIS_REPORT_SCHEMA : REPORT_SCHEMA;
+        return resolvableBasis(request)
+                ? RESOLVABLE_BASIS_REPORT_SCHEMA
+                : basis(request) ? BASIS_REPORT_SCHEMA : REPORT_SCHEMA;
     }
 
     public static Result solve(Request request) throws Exception {
@@ -177,21 +189,33 @@ public final class SixMaxRefinedConditionalStudy {
         var upper = new ArrayList<Double>();
         for (var action : question.context().legalActions()) {
             var result =
-                    basis(request)
+                    resolvableBasis(request)
                             ? FiniteTwoPlayerConditionalActionIntervals
-                                    .solvePhysicalFlopRefinedBasis(
+                                    .solvePhysicalFlopResolvableRefinedBasis(
                                             game,
                                             new FiniteTwoPlayerConditionalActionIntervals.Question(
                                                     request.hero(), question.key(), action),
                                             SixMaxSuppliedFlopActionBounds.SECURITY_SLACK,
                                             SixMaxSuppliedFlopActionBounds.CONDITIONAL_REACH_FLOOR)
-                            : FiniteTwoPlayerConditionalActionIntervals
-                                    .solvePhysicalFlopAscendingRefined(
-                                            game,
-                                            new FiniteTwoPlayerConditionalActionIntervals.Question(
-                                                    request.hero(), question.key(), action),
-                                            SixMaxSuppliedFlopActionBounds.SECURITY_SLACK,
-                                            SixMaxSuppliedFlopActionBounds.CONDITIONAL_REACH_FLOOR);
+                            : basis(request)
+                                    ? FiniteTwoPlayerConditionalActionIntervals
+                                            .solvePhysicalFlopRefinedBasis(
+                                                    game,
+                                                    new FiniteTwoPlayerConditionalActionIntervals
+                                                            .Question(
+                                                            request.hero(), question.key(), action),
+                                                    SixMaxSuppliedFlopActionBounds.SECURITY_SLACK,
+                                                    SixMaxSuppliedFlopActionBounds
+                                                            .CONDITIONAL_REACH_FLOOR)
+                                    : FiniteTwoPlayerConditionalActionIntervals
+                                            .solvePhysicalFlopAscendingRefined(
+                                                    game,
+                                                    new FiniteTwoPlayerConditionalActionIntervals
+                                                            .Question(
+                                                            request.hero(), question.key(), action),
+                                                    SixMaxSuppliedFlopActionBounds.SECURITY_SLACK,
+                                                    SixMaxSuppliedFlopActionBounds
+                                                            .CONDITIONAL_REACH_FLOOR);
             double shift = result.context().upperObjectiveShift();
             double lo =
                     -shift

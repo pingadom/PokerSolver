@@ -38,6 +38,8 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_refined_parent_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_conditional_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_basis_conditional_study.py'
+          python3 -m unittest discover -s scripts -p 'test_check_resolvable_refined_lp.py'
+          python3 -m unittest discover -s scripts -p 'test_check_weak_hand_resolvable_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_paired_flop_curriculum.py'
           python3 -m unittest discover -s scripts -p 'test_check_paired_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_flop_feedback.py'
