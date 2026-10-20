@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [qualified weak-hand backend trainer](docs/qualified-weak-hand-flop-trainer.md) adds a separately pinned BTN 2c3c fold/call decision, fresh reference qualification, cached grading/review and a default-off API. The existing ten-question website collection retains its original sources.
+
 The [explicit resolvable/refined endpoint mode](docs/resolvable-refined-endpoints.md) now solves a new weak-hand fold decision with independently regenerated physical counts and 298 exact-fraction LP controls. It remains a research result pending fresh trainer qualification.
 
 A distributed Texas Hold’em simulation platform: submit exact hands, split millions of Monte Carlo trials into reproducible batches, process them with independent workers, and inspect equity and progress in a React workspace.

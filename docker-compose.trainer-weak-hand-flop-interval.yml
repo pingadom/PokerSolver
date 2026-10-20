@@ -1,0 +1,12 @@
+# Local research opt-in. Full physical replay completes once before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_WEAK_HAND_FLOP_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_WEAK_HAND_FLOP_INTERVAL_REQUEST_PATH: /opt/pokerlab/weak-hand-flop-interval-request.json
+      TRAINER_WEAK_HAND_FLOP_INTERVAL_REPORT_PATH: /opt/pokerlab/weak-hand-flop-interval-report.json.gz
+      TRAINER_WEAK_HAND_FLOP_INTERVAL_REPORT_HASH: 5dbd0cdeba8a74e6da32dae0bddeb69381a90ba4f72220ab4a9bf92bcc667c56
+    volumes:
+      - ./docs/data/supplied-weak-hand-qualified-flop-request.json:/opt/pokerlab/weak-hand-flop-interval-request.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-report.json.gz:/opt/pokerlab/weak-hand-flop-interval-report.json.gz:ro
