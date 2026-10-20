@@ -1,0 +1,12 @@
+# Local opt-in: complete four-hand source replay before API readiness (up to 15 minutes).
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_PAIRED_FLOP_INTERVAL_RESEARCH_ENABLED: "true"
+      TRAINER_PAIRED_FLOP_INTERVAL_REQUEST_PATH: /opt/pokerlab/paired-flop/request.json
+      TRAINER_PAIRED_FLOP_INTERVAL_REPORT_PATH: /opt/pokerlab/paired-flop/report.json.gz
+      TRAINER_PAIRED_FLOP_INTERVAL_REPORT_HASH: c0e778afe5530740ee8d4dad3b9f9716a05fc45d8c1d141880d99212af99f61e
+    volumes:
+      - ./docs/data/supplied-paired-four-hand-curriculum-request.json:/opt/pokerlab/paired-flop/request.json:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-report.json.gz:/opt/pokerlab/paired-flop/report.json.gz:ro
