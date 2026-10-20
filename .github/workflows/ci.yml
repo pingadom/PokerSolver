@@ -37,6 +37,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_lp_pivot_regressions.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_parent_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_conditional_study.py'
+          python3 -m unittest discover -s scripts -p 'test_check_refined_basis_conditional_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_flop_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_refined_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_btn_flop_curriculum.py'

@@ -1,3 +1,4 @@
+import { Profiler } from "react";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import FrontendRoot from "./FrontendRoot";
@@ -98,4 +99,15 @@ it("cancels an export on hash change and ignores its late completion",async()=>{
  fireEvent.click(button("Review 0 attempts"));await screen.findByRole("region",{name:"BTN practice review"});fireEvent.click(button("Download replayable review"));expect(button("Next question")).toBeDisabled();
  act(()=>{window.history.replaceState(null,"",`#interval-btn-flop?question=1`);window.dispatchEvent(new HashChangeEvent("hashchange"));});await screen.findByRole("button",{name:"Check"});expect(signal?.aborted).toBe(true);
  await act(async()=>finish(await response(JSON.stringify(btnFlopFixtureReview([])))));expect(create).not.toHaveBeenCalled();expect(screen.getByLabelText("Your cards")).toHaveTextContent("A♥K♥");
+});
+
+it("enables the first keyboard decision in the same commit as its action buttons",async()=>{
+ const fetch=mockApi();let sent=false;
+ window.history.replaceState(null,"","#interval-btn-flop");
+ render(<Profiler id="keyboard-ready" onRender={()=>{
+  const ready=screen.queryByRole("button",{name:"Bet 3.25 bb"}) as HTMLButtonElement|null;
+  if(!sent&&ready&&!ready.disabled){sent=true;window.dispatchEvent(new KeyboardEvent("keydown",{key:"2"}));}
+ }}><FrontendRoot/></Profiler>);
+ await screen.findByRole("heading",{name:"Within limit"});
+ expect(sent).toBe(true);expect(fetch.mock.calls.filter(([u])=>String(u).endsWith("/grade"))).toHaveLength(1);
 });

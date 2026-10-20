@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import BtnFlopIntervalDecisionTable, { btnFlopActionLabel as intervalActionLabel, btnFlopClassificationLabel as classificationLabel } from "./BtnFlopIntervalDecisionTable";
 import { intervalEqual } from "./intervalTrainerApi";
 import { intervalRange } from "./intervalTrainerFormatting";
@@ -126,7 +126,8 @@ export default function BtnFlopIntervalPage() {
     // replaceState does not emit hashchange: moving between questions preserves the session.
     window.history.replaceState(null, "", locationFor(metadata.reportHash, next));
   }
-  useEffect(() => {
+  // Install the current shortcut callback in the same commit as its visible controls.
+  useLayoutEffect(() => {
     const key = (event: KeyboardEvent) => {
       if (event.repeat || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey ||
         (event.target instanceof HTMLElement && (event.target.isContentEditable || event.target.closest("input, textarea, select, button, a, summary")))) return;

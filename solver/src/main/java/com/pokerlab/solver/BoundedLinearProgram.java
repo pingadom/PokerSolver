@@ -19,6 +19,8 @@ public final class BoundedLinearProgram {
             "OWNED_EXACT_POWER_TWO_RESOLVABLE_COST_COMPENSATED_DIRECTION_ORIGINAL_CERTIFICATE/v2";
     public static final String ASCENDING_REFINED_DIRECTION_ALGORITHM =
             "OWNED_ASCENDING_L1_COMPENSATED_PHASE_TWO_DIRECTION_ORIGINAL_CERTIFICATE/v4";
+    public static final String ASCENDING_REFINED_BASIS_ALGORITHM =
+            "OWNED_ASCENDING_L1_COMPENSATED_BASIS_DUAL_DIRECTION_STRICT_RATIOS_ORIGINAL_CERTIFICATE/v5";
     public static final int DIRECTION_REFINEMENT_PASSES = 2;
     public static final int MAX_VARIABLES = 512;
     public static final int MAX_CONSTRAINTS = 512;
@@ -140,6 +142,18 @@ public final class BoundedLinearProgram {
             double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
             throws Exception {
         return solveRows(matrix, rhs, cost, pivots, work, false, true);
+    }
+
+    /** Explicit basis/dual refinement and strict computed phase-II ratios; no fallback. */
+    public static Result solveAscendingRefinedBasis(double[][] matrix, double[] rhs, double[] cost)
+            throws Exception {
+        return solveAscendingRefinedBasis(matrix, rhs, cost, MAX_PIVOTS, MAX_ARITHMETIC_WORK);
+    }
+
+    static Result solveAscendingRefinedBasis(
+            double[][] matrix, double[] rhs, double[] cost, int pivots, long work)
+            throws Exception {
+        return solveRows(matrix, rhs, cost, pivots, work, false, true, true);
     }
 
     /** Explicit phase-II rule; never retries or changes the default solver's certificates. */
@@ -298,6 +312,20 @@ public final class BoundedLinearProgram {
             boolean resolvableCosts,
             boolean refinedDirections)
             throws Exception {
+        return solveRows(
+                matrix, rhs, cost, pivots, work, resolvableCosts, refinedDirections, false);
+    }
+
+    private static Result solveRows(
+            double[][] matrix,
+            double[] rhs,
+            double[] cost,
+            int pivots,
+            long work,
+            boolean resolvableCosts,
+            boolean refinedDirections,
+            boolean refinedBasis)
+            throws Exception {
         if (pivots < 0 || pivots > MAX_PIVOTS || work < 0 || work > MAX_ARITHMETIC_WORK)
             throw reject(Failure.INVALID_INPUT, "Invalid bounded LP work limits");
         dimensions(matrix, rhs, cost);
@@ -328,7 +356,13 @@ public final class BoundedLinearProgram {
         }
         var ordered = new Problem(sorted, bounds, original.cost().clone());
         var solved =
-                new Engine(ordered, pivots, work - budget.used, resolvableCosts, refinedDirections)
+                new Engine(
+                                ordered,
+                                pivots,
+                                work - budget.used,
+                                resolvableCosts,
+                                refinedDirections,
+                                refinedBasis)
                         .solve(SixMaxHistoryPhysicalConditionalRefinement.hash(ordered));
         budget.charge(solved.certificate().work().arithmeticWork());
         var point = solved.point().stream().mapToDouble(Double::doubleValue).toArray();
@@ -357,13 +391,15 @@ public final class BoundedLinearProgram {
                 point,
                 dual,
                 new Certificate(
-                        refinedDirections
-                                ? (resolvableCosts
-                                        ? REFINED_DIRECTION_ALGORITHM
-                                        : ASCENDING_REFINED_DIRECTION_ALGORITHM)
-                                : resolvableCosts
-                                        ? RESOLVABLE_COST_ALGORITHM
-                                        : ASCENDING_L1_ALGORITHM,
+                        refinedBasis
+                                ? ASCENDING_REFINED_BASIS_ALGORITHM
+                                : refinedDirections
+                                        ? (resolvableCosts
+                                                ? REFINED_DIRECTION_ALGORITHM
+                                                : ASCENDING_REFINED_DIRECTION_ALGORITHM)
+                                        : resolvableCosts
+                                                ? RESOLVABLE_COST_ALGORITHM
+                                                : ASCENDING_L1_ALGORITHM,
                         SixMaxHistoryPhysicalConditionalRefinement.hash(original),
                         n,
                         m,
@@ -457,7 +493,7 @@ public final class BoundedLinearProgram {
 
     private static final class Engine {
         final Problem problem;
-        final boolean resolvableCosts, refinedDirections;
+        final boolean resolvableCosts, refinedDirections, refinedBasis;
         final int n, m, total, pivotLimit;
         final long workLimit;
         final double[][] source;
@@ -481,6 +517,17 @@ public final class BoundedLinearProgram {
                 long workLimit,
                 boolean resolvableCosts,
                 boolean refinedDirections) {
+            this(problem, pivotLimit, workLimit, resolvableCosts, refinedDirections, false);
+        }
+
+        Engine(
+                Problem problem,
+                int pivotLimit,
+                long workLimit,
+                boolean resolvableCosts,
+                boolean refinedDirections,
+                boolean refinedBasis) {
+            this.refinedBasis = refinedBasis;
             this.refinedDirections = refinedDirections;
             this.problem = problem;
             this.resolvableCosts = resolvableCosts;
@@ -550,8 +597,11 @@ public final class BoundedLinearProgram {
                     fallback = true;
                 }
                 var lu = new Lu(this);
-                var basic = lu.solve(rhs);
-                var dual = lu.transpose(costs(objective));
+                var basic = refinedBasis ? lu.refinedDirection(rhs) : lu.solve(rhs);
+                var dual =
+                        refinedBasis
+                                ? lu.refinedTranspose(costs(objective))
+                                : lu.transpose(costs(objective));
                 for (double value : basic)
                     if (value < -CERTIFICATE_TOLERANCE)
                         throw reject(Failure.NUMERICAL_FAILURE, "LP lost primal feasibility");
@@ -606,7 +656,9 @@ public final class BoundedLinearProgram {
                         // On the explicit path only exact ratio ties use Bland's index. A near
                         // tie must not choose a larger step and repeatedly revisit a basis.
                         double tolerance =
-                                refined ? 0 : PIVOT_EPS * Math.max(1, Math.abs(candidate));
+                                (refined || refinedBasis && excludeArtificial)
+                                        ? 0
+                                        : PIVOT_EPS * Math.max(1, Math.abs(candidate));
                         if (leaving == -1
                                 || candidate < ratio - tolerance
                                 || Math.abs(candidate - ratio) <= tolerance
@@ -651,7 +703,7 @@ public final class BoundedLinearProgram {
             System.arraycopy(problem.cost(), 0, phaseTwoCost, 0, n);
             optimize(phaseTwoCost, true);
             var lu = new Lu(this);
-            var basic = lu.solve(rhs);
+            var basic = refinedBasis ? lu.refinedDirection(rhs) : lu.solve(rhs);
             var transformedDual = lu.transpose(costs(phaseTwoCost));
             var point = new double[n];
             var dual = new double[m];
@@ -783,6 +835,31 @@ public final class BoundedLinearProgram {
                 double value = x[i];
                 for (int j = i + 1; j < m; j++) value -= rows[i][j] * x[j];
                 x[i] = finite(value / rows[i][i]);
+            }
+            return x;
+        }
+
+        double[] refinedTranspose(double[] rhs) {
+            var x = transpose(rhs);
+            int m = rows.length;
+            for (int pass = 0; pass < DIRECTION_REFINEMENT_PASSES; pass++) {
+                engine.charge(20L * m * m);
+                var residual = new double[m];
+                for (int i = 0; i < m; i++) {
+                    double sum = 0, error = 0;
+                    for (int j = 0; j < m; j++) {
+                        double a = engine.source[j][engine.basis[i]], p = a * x[j], next = sum + p;
+                        error +=
+                                Math.fma(a, x[j], -p)
+                                        + (Math.abs(sum) >= Math.abs(p)
+                                                ? (sum - next) + p
+                                                : (p - next) + sum);
+                        sum = next;
+                    }
+                    residual[i] = finite((rhs[i] - sum) - error);
+                }
+                var correction = transpose(residual);
+                for (int i = 0; i < m; i++) x[i] = finite(x[i] + correction[i]);
             }
             return x;
         }
