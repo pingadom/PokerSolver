@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "pokerlab-flop-interval-collection-manifest/v3",
+  "collectionHash": "11db67eb188fe4fadf8b370f45ecfc0f29ed5412ae78d69eff514dcecc962122",
+  "sources": [
+    {
+      "kind": "INITIAL_CHECK_BET",
+      "requestFile": "supplied-four-button-hand-flop-feedback-request.json",
+      "reportFile": "supplied-four-button-hand-flop-feedback-report.json.gz",
+      "reportHash": "49b1be1e91bb0ae7cae6a3171f4e15e516fc0a52be80efabc6d281e8ec5863d8"
+    },
+    {
+      "kind": "BB_FACING_BET",
+      "requestFile": "supplied-four-button-hand-later-bb-flop-feedback-request.json",
+      "reportFile": "supplied-four-button-hand-later-bb-flop-feedback-report.json.gz",
+      "reportHash": "4526ff928e05bc0e962d78661a19b82cb127d5e058f7a25bb8fd1e393c51f7ea"
+    },
+    {
+      "kind": "BTN_AFTER_CHECK",
+      "requestFile": "supplied-four-button-hand-btn-curriculum-request.json",
+      "reportFile": "supplied-four-button-hand-btn-curriculum-report.json.gz",
+      "reportHash": "9686d76c4a9d3b1a0875f7fcaed3edecf4491e0c24698892b516f91a69c89cd1"
+    },
+    {
+      "kind": "PAIRED_BTN_FACING_BET",
+      "requestFile": "supplied-paired-four-hand-curriculum-request.json",
+      "reportFile": "supplied-paired-four-hand-curriculum-report.json.gz",
+      "reportHash": "c0e778afe5530740ee8d4dad3b9f9716a05fc45d8c1d141880d99212af99f61e"
+    }
+  ],
+  "startupBudget": {
+    "sourceReplays": 4,
+    "freshReferenceRuns": 8,
+    "freshIterations": 492000
+  }
+}

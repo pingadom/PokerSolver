@@ -31,7 +31,7 @@ class BackendEvidenceTest(unittest.TestCase):
             directory = self.root / module / 'src/test/java'
             directory.mkdir(parents=True)
             # Exercise all four default Surefire naming patterns and all hash buckets.
-            names = ['TestStart', 'ExampleTest', 'ExampleTests', 'ExampleTestCase', 'FixtureTest', 'Partition1Test', 'Partition6Test'] if module == 'solver' else ['ExampleTest']
+            names = ['TestStart', 'ExampleTest', 'ExampleTests', 'ExampleTestCase', 'FixtureTest', 'Partition1Test', 'Partition6Test'] + [f'Coverage{i}Test' for i in range(64)] if module == 'solver' else ['ExampleTest']
             for name in names:
                 (directory / f'{name}.java').write_text(f'package example.{module}; class {name} {{}}', encoding='utf-8')
         self.sources = ci.inventory()
@@ -51,18 +51,18 @@ class BackendEvidenceTest(unittest.TestCase):
             return ci.verify(self.folder)
 
     def test_complete_partition_accounts_for_all_modules_and_default_name_patterns(self):
-        self.assertEqual(('solver-0', 'solver-1', 'solver-2', 'solver-3', 'services'), ci.GROUPS)
+        self.assertEqual(tuple(f'solver-{i}' for i in range(8)) + ('services-0', 'services-1'), ci.GROUPS)
         assigned = [ci.selected(group, self.sources) for group in ci.GROUPS]
         self.assertTrue(all(assigned))
         self.assertEqual(len(self.sources), len(set().union(*map(set, assigned))))
         self.assertEqual(len(self.sources), sum(map(len, assigned)))
         summary = self.verify()
-        self.assertEqual(11, summary['tests'])
-        self.assertEqual(11, summary['classes'])
+        self.assertEqual(len(self.sources), summary['tests'])
+        self.assertEqual(len(self.sources), summary['classes'])
         self.assertEqual(0, summary['failures'] + summary['errors'])
 
     def test_missing_additional_solver_shards_never_pass(self):
-        for bucket in (2, 3):
+        for bucket in range(2, 8):
             with self.subTest(bucket=bucket):
                 original = self.folder / f'junit-results-solver-{bucket}'
                 missing = self.folder / f'missing-solver-{bucket}'
@@ -72,6 +72,30 @@ class BackendEvidenceTest(unittest.TestCase):
                         self.verify()
                 finally:
                     missing.rename(original)
+
+    def test_both_service_shards_are_required(self):
+        for bucket in (0, 1):
+            original = self.folder / f'junit-results-services-{bucket}'
+            missing = self.folder / f'missing-services-{bucket}'
+            original.rename(missing)
+            try:
+                with self.assertRaisesRegex(ValueError, f'Missing evidence group: services-{bucket}'):
+                    self.verify()
+            finally:
+                missing.rename(original)
+
+    def test_service_maven_selection_is_explicit_and_module_gaps_do_not_skip_assignments(self):
+        with patch.object(ci.subprocess, 'run', return_value=subprocess.CompletedProcess(['mvn'], 0)) as execute:
+            with contextlib.redirect_stdout(io.StringIO()):
+                ci.run('services-0', 'mvn')
+        command = execute.call_args.args[0]
+        self.assertIn('engine,shared,api,worker', command)
+        self.assertIn('-Dtest=' + ','.join(ci.selected('services-0', self.sources)), command)
+        self.assertIn('-Dsurefire.failIfNoSpecifiedTests=false', command)
+        report = next((self.folder / 'junit-results-services-0').rglob('TEST-*.xml'))
+        report.unlink()
+        with self.assertRaisesRegex(ValueError, 'Missing test-class evidence'):
+            self.verify()
 
     def test_missing_group_or_class_never_passes(self):
         report = next(self.folder.rglob('TEST-*.xml'))
@@ -83,9 +107,9 @@ class BackendEvidenceTest(unittest.TestCase):
             self.verify()
 
     def test_old_commit_unfinished_or_changed_class_assignment_never_passes(self):
-        path = self.folder / 'junit-results-services/backend-ci-manifest-services.json'
+        path = self.folder / 'junit-results-services-0/backend-ci-manifest-services-0.json'
         original = json.loads(path.read_text(encoding='utf-8'))
-        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v2')]:
+        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v3')]:
             changed = {**original, key: value}
             path.write_text(json.dumps(changed), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'Incomplete or foreign manifest'):

@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [solver-0, solver-1, solver-2, solver-3, services]
+        group: [solver-0, solver-1, solver-2, solver-3, solver-4, solver-5, solver-6, solver-7, services-0, services-1]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v6
@@ -25,7 +25,7 @@ jobs:
       - name: Build dependencies and check all formatting
         run: mvn -B spotless:check install -DskipTests
       - name: Independently verify saved solver evidence and corruption controls
-        if: matrix.group == 'services'
+        if: matrix.group == 'services-0'
         run: |
           python3 -m unittest discover -s scripts -p 'test_check_supplied_zero_reach.py'
           python3 -m unittest discover -s scripts -p 'test_check_supplied_reach_bounds.py'
@@ -47,6 +47,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_later_bb_flop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_flop_interval_collection.py'
           python3 -m unittest discover -s scripts -p 'test_check_mixed_flop_interval_collection.py'
+          python3 -m unittest discover -s scripts -p 'test_check_expanded_flop_interval_collection.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -99,6 +100,8 @@ jobs:
         run: cmp ../docs/data/supplied-two-flop-interval-collection-review.json src/test-data/flop-collection-review.json
       - name: Check six-question mixed flop fixture bytes
         run: cmp ../docs/data/supplied-six-question-flop-collection-review.json src/test-data/mixed-flop-collection-review.json
+      - name: Check ten-question two-board fixture bytes
+        run: cmp ../docs/data/supplied-ten-question-flop-collection-review.json src/test-data/expanded-flop-collection-review.json
       - name: Keep collection UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence
@@ -351,6 +354,38 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: mixed-compose-log, path: mixed-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  expanded-flop-collection-smoke:
+    runs-on: ubuntu-latest
+    # Independent four-source qualification; preserve the existing Compose budget.
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-expanded-flop-interval-collection.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_expanded_flop_collection.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Mixed flop collection is absent without opt-in
+        run: python3 scripts/smoke-expanded-flop-interval-collection.py --disabled
+      - name: Replay all four sources and exercise the ten-question production API
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-expanded-flop-interval-collection.yml up -d --no-deps api
+          python3 scripts/smoke-expanded-flop-interval-collection.py
+      - name: Mixed collection service logs
+        if: always()
+        run: docker compose logs --no-color > expanded-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: expanded-compose-log, path: expanded-compose.log }
       - if: always()
         run: docker compose down -v
 
