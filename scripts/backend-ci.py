@@ -11,9 +11,10 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = ('engine', 'solver', 'shared', 'api', 'worker')
-SOLVER_SHARDS = 4
-GROUPS = tuple(f'solver-{bucket}' for bucket in range(SOLVER_SHARDS)) + ('services',)
-SCHEMA = 'pokerlab-backend-ci-manifest/v3'
+SOLVER_SHARDS = 8
+SERVICES_SHARDS = 2
+GROUPS = tuple(f'solver-{bucket}' for bucket in range(SOLVER_SHARDS)) + tuple(f'services-{bucket}' for bucket in range(SERVICES_SHARDS))
+SCHEMA = 'pokerlab-backend-ci-manifest/v4'
 
 
 def inventory():
@@ -43,11 +44,11 @@ def inventory():
 def selected(group, sources):
     if group not in GROUPS:
         raise ValueError(f'Unknown test group: {group}')
-    if group == 'services':
-        return [name for name, module in sources.items() if module != 'solver']
-    bucket = int(group[-1])
-    return [name for name, module in sources.items() if module == 'solver'
-            and int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % SOLVER_SHARDS == bucket]
+    service = group.startswith('services-')
+    bucket = int(group.rsplit('-', 1)[1])
+    modulus = SERVICES_SHARDS if service else SOLVER_SHARDS
+    return [name for name, module in sources.items() if (module != 'solver') == service
+            and int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % modulus == bucket]
 
 
 def manifest(group):
@@ -71,9 +72,12 @@ def run(group, maven):
         if list((ROOT / module / 'target/surefire-reports').glob('TEST-*.xml')):
             raise ValueError('Use a clean checkout: stale JUnit reports exist')
     path.write_text(json.dumps(planned, indent=2) + '\n', encoding='utf-8')
-    command = [maven, '-B', '-pl', 'engine,shared,api,worker' if group == 'services' else 'solver', 'verify']
-    if group != 'services':
-        command.append('-Dtest=' + ','.join(planned['selectedClasses']))
+    command = [maven, '-B', '-pl', 'engine,shared,api,worker' if group.startswith('services-') else 'solver', 'verify']
+    command.append('-Dtest=' + ','.join(planned['selectedClasses']))
+    if group.startswith('services-'):
+        # Reactor modules may have no class in this shard. The aggregate verifier still
+        # requires every assigned class and every module across both disjoint shards.
+        command.append('-Dsurefire.failIfNoSpecifiedTests=false')
     print(f"Verifying {group}: {len(planned['selectedClasses'])} test classes", flush=True)
     result = subprocess.run(command, cwd=ROOT, check=False)
     planned['completed'] = result.returncode == 0
@@ -132,7 +136,7 @@ def verify(folder):
     if actual_directories != {f'junit-results-{group}' for group in GROUPS}:
         raise ValueError('Unexpected evidence directories')
     summary = {key: sum(suite[key] for suite in suites) for key in ('tests', 'failures', 'errors', 'skipped')}
-    summary.update(schemaVersion='pokerlab-backend-ci-evidence/v1', commit=manifest('services')['commit'],
+    summary.update(schemaVersion='pokerlab-backend-ci-evidence/v1', commit=manifest('services-0')['commit'],
                    suites=len(suites), classes=len(sources), modules=list(MODULES),
                    passed=summary['tests'] - summary['skipped'],
                    skipSuites=[suite for suite in suites if suite['skipped']])

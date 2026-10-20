@@ -1,0 +1,18 @@
+# Local opt-in: all four physical source qualifications replay before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_ENABLED: "true"
+      TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_MANIFEST_PATH: /opt/pokerlab/expanded-flop-collection/supplied-ten-question-flop-collection-manifest.json
+      TRAINER_EXPANDED_FLOP_INTERVAL_COLLECTION_HASH: 11db67eb188fe4fadf8b370f45ecfc0f29ed5412ae78d69eff514dcecc962122
+    volumes:
+      - ./docs/data/supplied-ten-question-flop-collection-manifest.json:/opt/pokerlab/expanded-flop-collection/supplied-ten-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-request.json:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-report.json.gz:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-btn-curriculum-request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/expanded-flop-collection/supplied-four-button-hand-btn-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-request.json:/opt/pokerlab/expanded-flop-collection/supplied-paired-four-hand-curriculum-request.json:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-report.json.gz:/opt/pokerlab/expanded-flop-collection/supplied-paired-four-hand-curriculum-report.json.gz:ro
