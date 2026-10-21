@@ -1,0 +1,21 @@
+# Local opt-in: all five physical source qualifications replay before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_QUALIFIED_FLOP_COLLECTION_ENABLED: "true"
+      TRAINER_QUALIFIED_FLOP_COLLECTION_MANIFEST_PATH: /opt/pokerlab/qualified-flop-collection/supplied-eleven-question-flop-collection-manifest.json
+      TRAINER_QUALIFIED_FLOP_COLLECTION_HASH: 57abbb5f5bbc10b2227739299c1eec0f0092a7a136dc80e63c0830865cb7fd87
+    volumes:
+      - ./docs/data/supplied-ten-question-flop-collection-manifest.json:/opt/pokerlab/qualified-flop-collection/supplied-ten-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-request.json:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-report.json.gz:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-btn-curriculum-request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/qualified-flop-collection/supplied-four-button-hand-btn-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-request.json:/opt/pokerlab/qualified-flop-collection/supplied-paired-four-hand-curriculum-request.json:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-report.json.gz:/opt/pokerlab/qualified-flop-collection/supplied-paired-four-hand-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-eleven-question-flop-collection-manifest.json:/opt/pokerlab/qualified-flop-collection/supplied-eleven-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-request.json:/opt/pokerlab/qualified-flop-collection/supplied-weak-hand-qualified-flop-request.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-report.json.gz:/opt/pokerlab/qualified-flop-collection/supplied-weak-hand-qualified-flop-report.json.gz:ro
