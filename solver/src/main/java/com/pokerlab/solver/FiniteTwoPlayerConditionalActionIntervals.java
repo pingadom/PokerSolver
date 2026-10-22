@@ -27,6 +27,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "OWNED_PHYSICAL_FLOP_ASCENDING_PARENT_RESOLVABLE_REFINED_BASIS_ENDPOINTS/v8";
     public static final String PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_ASCENDING_PARENT_REFINED_BASIS_ENDPOINTS/v7";
+    public static final String PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_RESOLVABLE_BASIS_CERTIFIED_NEGATIVE_REACH_ENDPOINTS/v9";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -62,6 +64,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
 
     public static final String REACH_FAILURE_ALGORITHM =
             "FULL_SECURITY_FACE_MINIMUM_REACH_REJECTION_OWNED_LP/v1";
+
+    public static final String CERTIFIED_REACH_FAILURE_ALGORITHM =
+            "FULL_SECURITY_FACE_MINIMUM_REACH_CHILD_SUM_ORIGINAL_FLOW_SECURITY_CHECKS/v2";
 
     public enum ReachFailureStatus {
         WITNESS_BELOW_REQUIRED_FLOOR,
@@ -115,7 +120,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             ReachWitness minimumReachWitness,
             Work work) {
         public ReachFailureAudit {
-            if (!REACH_FAILURE_ALGORITHM.equals(algorithm)
+            if (!(REACH_FAILURE_ALGORITHM.equals(algorithm)
+                            || CERTIFIED_REACH_FAILURE_ALGORITHM.equals(algorithm))
                     || trainerAdmission
                     || status == null
                     || question == null
@@ -417,6 +423,40 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         }
     }
 
+    /** Explicit v9: v8 positive endpoints, separately checked negative reach conversion. */
+    static Result solvePhysicalFlopCertifiedReach(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        try {
+            return solve(
+                    game,
+                    question,
+                    securitySlack,
+                    minimumReach,
+                    FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                    BoundedLinearProgram.MAX_PIVOTS,
+                    BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                    true,
+                    physicalFlopMass(game, question),
+                    false,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true);
+        } catch (IllegalStateException failure) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Certified negative reach witness failed: " + failure.getMessage());
+            rejected.initCause(failure);
+            throw rejected;
+        }
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");
@@ -628,6 +668,44 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             boolean refinedBasis,
             boolean resolvableRefinedBasis)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                exactPowerOfTwoRows,
+                refinedDirections,
+                ascendingRefined,
+                refinedBasis,
+                resolvableRefinedBasis,
+                false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows,
+            boolean refinedDirections,
+            boolean ascendingRefined,
+            boolean refinedBasis,
+            boolean resolvableRefinedBasis,
+            boolean certifiedNegativeReach)
+            throws Exception {
+        if (certifiedNegativeReach && !resolvableRefinedBasis)
+            throw new IllegalArgumentException(
+                    "Certified negative reach requires explicit v9 mode");
         if (resolvableRefinedBasis && !refinedBasis)
             throw new IllegalArgumentException("Invalid resolvable refined basis mode");
         if (refinedBasis && !ascendingRefined)
@@ -787,7 +865,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                             minLp,
                             globalUpper + securitySlack,
                             denominator,
-                            budget);
+                            budget,
+                            certifiedNegativeReach);
             requireClose(
                     denominator.constant() - minLp.certificate().primalValue(),
                     counterexample.questionReach(),
@@ -797,7 +876,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                     Failure.INSUFFICIENT_REACH,
                     "Full security face question reach is not certified above the declared floor",
                     new ReachFailureAudit(
-                            REACH_FAILURE_ALGORITHM,
+                            certifiedNegativeReach
+                                    ? CERTIFIED_REACH_FAILURE_ALGORITHM
+                                    : REACH_FAILURE_ALGORITHM,
                             false,
                             counterexample.questionReach() < minimumReach - TOLERANCE
                                     ? ReachFailureStatus.WITNESS_BELOW_REQUIRED_FLOOR
@@ -968,7 +1049,9 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                 new Audit(
                         physicalFlopMass > 0
                                 ? resolvableRefinedBasis
-                                        ? PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                        ? certifiedNegativeReach
+                                                ? PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                                : PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
                                         : refinedBasis
                                                 ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
                                                 : ascendingRefined
@@ -1244,11 +1327,39 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             Linear denominator,
             SequenceFormAffineProjection.Budget budget)
             throws Exception {
+        return reachWitness(
+                checked,
+                roots,
+                question,
+                baseline,
+                opponent,
+                projection,
+                solved,
+                upper,
+                denominator,
+                budget,
+                false);
+    }
+
+    private static ReachWitness reachWitness(
+            Checked checked,
+            List<Root> roots,
+            Question question,
+            FiniteTwoPlayerAffineSequenceForm.Result baseline,
+            Flow opponent,
+            SequenceFormAffineProjection.Projection projection,
+            BoundedLinearProgram.Result solved,
+            double upper,
+            Linear denominator,
+            SequenceFormAffineProjection.Budget budget,
+            boolean certifiedNegativeReach)
+            throws Exception {
         double[] variables = new double[projection.variables()];
         for (int j = 0; j < variables.length; j++) variables[j] = solved.point().get(j);
         budget.charge((long) opponent.sequences().size() * (variables.length + 1) + roots.size());
+        var original = Arrays.stream(projection.reconstruct(variables)).boxed().toList();
         var realization =
-                Arrays.stream(projection.reconstruct(variables))
+                original.stream()
                         .map(
                                 v -> {
                                     if (!Double.isFinite(v) || v < -TOLERANCE)
@@ -1257,10 +1368,12 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                                                 "Invalid rejected opponent flow");
                                     return Math.max(0, v);
                                 })
-                        .boxed()
                         .toList();
         var strategy = new LinkedHashMap<>(baseline.strategy());
-        var flow = behavior(opponent, realization, strategy);
+        var flow =
+                certifiedNegativeReach
+                        ? NegativeReachBehavior.reconstruct(opponent, original, strategy, budget)
+                        : behavior(opponent, realization, strategy);
         var policy = new CfrSolution(1, strategy);
         double global =
                 MultiPlayerInformationSetBestResponse.assess(checked.snapshot(), policy)

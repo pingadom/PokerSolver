@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "pokerlab-certified-reach-coverage-generation-budget/v1",
+  "scope": "NEGATIVE_REACH_DIAGNOSIS_NOT_TRAINER_QUALIFICATION",
+  "base": "f45e442274b0ce25e2ea82cfab92567b8cf42490",
+  "requestSha256": "7e1f4c389426615841e26e189d05d9c4dc9d7d015111e8a8f8ce3ce7d9bcee95",
+  "capturedLpSha256": "7d0e232b3741c9be2f605caaa321590f4cdbbdd85dea08209025b2647f0fdf9f",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 8,
+  "maximumActionComputations": 16,
+  "maximumParentSolves": 24,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumReportExpandedBytes": 8388608,
+  "allOriginalNumericAndCompilerCapsPreserved": true,
+  "failedInternalWorkCountersAvailable": false,
+  "noPositiveReachPosteriorConversionChanges": true
+}
