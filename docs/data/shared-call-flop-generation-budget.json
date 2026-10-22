@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "pokerlab-shared-call-flop-generation-budget/v1",
+  "scope": "ONE_PHYSICAL_GAME_THREE_QUESTIONS_TWO_FRESH_SHARED_REFERENCES",
+  "trainerAdmission": false,
+  "base": "5f304ece08c33ae1b6ca329f4c11c0881ee42ea0",
+  "requestSha256": "015ed5937b6ca782a907f9c8a08973f927348c7851b031a9f76093db36ffcdaf",
+  "controlCoverageReportSha256": "fa5aaab231398deb1f1be7361682750f7479d18ef295f914f3eb6ce8cd1cdd42",
+  "controlReferenceReportSha256": "b30c4d6a2464f9ac05cf50b3df48dfcd8aeef2d3d6eb50a5596425f41ea692f0",
+  "unchangedGateSourceSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "physicalGameBuilds": 1,
+  "plannedConditionalStudies": 3,
+  "maximumActionComputations": 6,
+  "maximumParentSolves": 9,
+  "maximumEndpointCertificates": 24,
+  "maximumCompilerUnits": 120000000,
+  "maximumLpPivots": 240000,
+  "maximumLpArithmeticWork": 96000000000,
+  "freshReferenceRuns": 2,
+  "referenceIterations": [
+    80000,
+    160000
+  ],
+  "maximumTotalReferenceIterations": 240000,
+  "maximumReferenceVisitedNodes": 635040000,
+  "selectedPolicyAssessments": 9,
+  "maximumReportExpandedBytes": 8388608,
+  "automaticRetries": 0,
+  "allOriginalNumericAndCompilerCapsPreserved": true,
+  "sharing": "Two new policies assessed at all three questions; not six independent reference runs.",
+  "onRejection": "Preserve failure. No replacement hand, seed, algorithm, threshold or retry."
+}

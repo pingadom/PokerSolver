@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "pokerlab-independent-shared-call-flop-check/v1",
+  "trainerAdmission": false,
+  "qualifiedForOfflineDrill": true,
+  "reportHash": "55902ac40959215482cbf3d0b623da7d64313847f7c58c14a81f867d76f22e90",
+  "questionsChecked": 3,
+  "physicalReconstructions": 1,
+  "endpointCertificatesChecked": 24,
+  "selectedPolicyAssessments": 9,
+  "sharedReferencePolicies": 2,
+  "declaredFreshReferenceIterations": 240000,
+  "referenceVisitedNodes": 635040000,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "compilerUnits": 3110346,
+  "intervalLpPivots": 1133,
+  "intervalLpArithmeticWork": 1706547705,
+  "classifications": [
+    [
+      "OUTSIDE_LIMIT",
+      "WITHIN_LIMIT"
+    ],
+    [
+      "OUTSIDE_LIMIT",
+      "WITHIN_LIMIT"
+    ],
+    [
+      "OUTSIDE_LIMIT",
+      "WITHIN_LIMIT"
+    ]
+  ],
+  "sourceRequestSha256": "015ed5937b6ca782a907f9c8a08973f927348c7851b031a9f76093db36ffcdaf",
+  "sourceReportStoredSha256": "d5218bccd622f6087a80fb4e5ce4b3f8e252d9da7cdafbe747eb4e192c774725",
+  "sourceReportExpandedSha256": "b3a78608335553ac54b1f57bc3395afd069b14fdcc8f97ea2219e79df465364d",
+  "generationBudgetSha256": "bc03dbacfc1131d0b0e271d69e4cfc8a6d57dc86bdd15b5e2db8cfa8b3846b5e",
+  "checkerSha256": "0d023311ab5320213df66c2b6127289430a046376a1ab4dd6ad1dd90742efa3f",
+  "endpointHelperSha256": "0218b6d4aae6aaf4dc300bfb456475d86fb52f3d4dfe2bedefa960e8fbaa7b34",
+  "parentCheck": {
+    "originalLpCertificatesIndependentlyChecked": 2,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fullBoardHandEvaluations": 31584384,
+    "fixedRunoutsRegenerated": 15984,
+    "literalTreeStates": 1321,
+    "policyInformationSets": 73,
+    "nashConvBb": 1.2212453270876722e-15,
+    "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+  }
+}
