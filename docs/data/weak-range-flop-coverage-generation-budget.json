@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "pokerlab-weak-range-coverage-generation-budget/v1",
+  "scope": "INTERVAL_DISCOVERY_ONLY_NOT_QUALIFICATION",
+  "base": "a027cab2e1722b1b2bfbcc5fab332478f93b526d",
+  "requestSha256": "bdbcd876bffb9b5baefd3e3d9a00a9ab53d1870cd8a36948d8efbae6814774d5",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 8,
+  "maximumActionComputations": 16,
+  "maximumParentSolves": 24,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumReportExpandedBytes": 8388608,
+  "allOriginalNumericAndCompilerCapsPreserved": true,
+  "failedInternalWorkCountersAvailable": false,
+  "failedCaseOutcomeDoesNotProvePokerInfeasibility": true
+}

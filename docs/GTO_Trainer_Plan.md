@@ -300,4 +300,22 @@ The [paired curriculum and cached trainer](paired-four-hand-trainer.md) now owns
 
 The [v3 collection](ten-question-flop-collection.md) composes four owned sources under a board/context-bound identity. Its loader checks all nine input snapshots and replays four physical qualifications before exposing cached grading. Eight fresh reference runs reserve 492,000 iterations, in addition to each source's original work limits. The strict default-disabled API, offline replay, independent four-source checker and table UI cover all twenty legal moves, ten distinct contexts and one global 100-attempt review cap. The older v2 same-board collection remains unchanged.
 
-Next prioritize qualified action variety and credible range coverage. The paired-board examples all prefer call and the original BTN-after-check examples all prefer bet, so ten contexts must not be described as a balanced strategy curriculum. The separately captured weak-hand LP candidate still needs a new production algorithm/endpoint version, exact regression checks, fresh physical parent/source proof and fresh reference qualification before any new trainer admission. Full multiplayer betting, rake and connected streets remain later work. AWS stays paused.
+The following milestones complete the weak-hand solver correction, qualification and separate collection integration proposed here. The original ten contexts remain unchanged and must not be described as a balanced strategy curriculum.
+
+## Qualified weak source and eleven-question collection
+
+The [explicit resolvable/refined endpoint mode](resolvable-refined-endpoints.md) and [qualified weak-hand backend](qualified-weak-hand-flop-trainer.md) now support BTN 2c3c folding against a bet under separately supplied joint ranges. Exact physical counts, original certificates, fresh 80k/160k references and all original feedback gates precede the private grading capability. The [v4 collection](qualified-flop-collection.md) adds this as an independently identified eleventh question, with pinned source-specific beliefs, complete five-source replay and the table UI. Its eleven independent contexts include within-limit fold: 2, check: 1, call: 4 and bet: 4 decisions; they are not a connected full-hand strategy.
+
+The [cached CFR traversal](cached-cfr-traversal.md) now reduces fresh-reference tree-walking overhead while preserving full policies, each producer's original pruning mode, work inventories and report pins. Six bounded local comparison pairs measured about 3x faster hot traversal; this is not a whole-startup or general multiplayer speed claim. Complete original source replay remains mandatory.
+
+## Current coverage and next numerical milestone
+
+The [weak-range coverage study](weak-range-flop-coverage.md) attempts eight declared contexts in one physical game: four BTN hands after a check and facing a bet. All four facing-bet cases have complete separated interval evidence, including the unchanged weak-fold control. All four after-check cases fail strict behavioral-ratio reconstruction and remain explicit numerical rejections. No new fresh-reference qualification or website questions follow from the survey.
+
+The immediate goals are:
+
+1. Capture the common after-check numerical reconstruction failure and verify its original LP/realization evidence. Correct it only through a separately versioned, independently checked method; preserve the existing reach, global-security and posterior gates.
+2. Complete fresh-reference qualification for useful range-specific interval candidates. Add a typed trainer source only for decisions that meet every existing face, quality, reach, regret and educational gate.
+3. Integrate qualified content with explicit range/model identities. Then resume broader preflop continuation coverage; require separate validation for richer streets, realistic rake and multiway play.
+
+Keep the current eleven-question trainer stable during that work. AWS deployment remains paused. A general six-active-player 100bb cash solution, realistic opening/defence charts and coherent full-hand play are still broader goals, not descriptions of the current bounded research model.

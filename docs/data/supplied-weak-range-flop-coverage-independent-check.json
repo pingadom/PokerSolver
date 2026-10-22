@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "pokerlab-independent-weak-range-coverage/v1",
+  "trainerAdmission": false,
+  "scope": "FIXED_INTERVAL_DISCOVERY_NOT_FRESH_REFERENCE_QUALIFICATION",
+  "freshCfrRuns": 0,
+  "freshLpSolves": 0,
+  "plannedCases": 8,
+  "completedCasesChecked": 4,
+  "endpointCertificatesChecked": 32,
+  "capturedNumericalRejections": 4,
+  "numericalRejectionsIndependentlyCertified": false,
+  "numericalRejectionsRequireProductionReplay": true,
+  "successfulCaseLpArithmeticWork": 2869673505,
+  "successfulCaseLpPivots": 2214,
+  "successfulCaseCompilerUnits": 10028928,
+  "failedInternalWorkCountersAvailable": false,
+  "withinLimitMoves": [
+    {
+      "hand": "2c 3c",
+      "action": "fold"
+    },
+    {
+      "hand": "Ah Kh",
+      "action": "call"
+    },
+    {
+      "hand": "As Qs",
+      "action": "call"
+    },
+    {
+      "hand": "Qh Th",
+      "action": "call"
+    }
+  ],
+  "parentCheck": {
+    "originalLpCertificatesIndependentlyChecked": 2,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fullBoardHandEvaluations": 31584384,
+    "fixedRunoutsRegenerated": 15984,
+    "literalTreeStates": 1321,
+    "policyInformationSets": 73,
+    "nashConvBb": 1.2212453270876722e-15,
+    "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+  },
+  "requestSha256": "bdbcd876bffb9b5baefd3e3d9a00a9ab53d1870cd8a36948d8efbae6814774d5",
+  "reportStoredSha256": "fa5aaab231398deb1f1be7361682750f7479d18ef295f914f3eb6ce8cd1cdd42",
+  "reportExpandedSha256": "ca62571c19098f8390d6c3da6fa990d11c326cd27e0ab5f591196fcd9e1c9adb",
+  "checkerSha256": "0218b6d4aae6aaf4dc300bfb456475d86fb52f3d4dfe2bedefa960e8fbaa7b34",
+  "helperSha256": "0a53bd7de0c6bc17e1a0ea6ed905e083baa8bffc2b6783c7e12f102460bcbd8f",
+  "budgetSha256": "b9f6887054680f1589aacfaaafe1cd22cf022f848aa3294c4d208b02aa77d535"
+}
