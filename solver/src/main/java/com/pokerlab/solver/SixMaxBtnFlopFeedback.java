@@ -305,9 +305,14 @@ public final class SixMaxBtnFlopFeedback {
         var primary = assess(game, request, actions, parent.candidate());
         primary.failures().forEach(f -> failures.add("PRIMARY:" + f));
         var references = new ArrayList<Reference>();
+        var traversal = new CachedTwoPlayerCfrGame(game);
         for (int iterations : request.referenceBudget().iterations()) {
             var policy =
-                    new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(iterations);
+                    new MultiPlayerCfrSolver<>(
+                                    traversal,
+                                    CfrSolver.Variant.CFR_PLUS,
+                                    MultiPlayerCfrSolver.InactivePruning.NONE)
+                            .solve(iterations);
             var check = assess(game, request, actions, policy);
             references.add(new Reference(policy, check));
             check.failures().forEach(f -> failures.add(iterations + ":" + f));

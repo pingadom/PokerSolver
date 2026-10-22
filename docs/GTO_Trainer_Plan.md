@@ -308,6 +308,8 @@ The [explicit resolvable/refined endpoint mode](resolvable-refined-endpoints.md)
 
 The [cached CFR traversal](cached-cfr-traversal.md) now reduces fresh-reference tree-walking overhead while preserving full policies, each producer's original pruning mode, work inventories and report pins. Six bounded local comparison pairs measured about 3x faster hot traversal; this is not a whole-startup or general multiplayer speed claim. Complete original source replay remains mandatory.
 
+The original single-question BTN feedback path now uses the same immutable traversal cache with unchanged `NONE` pruning. A separate complete 80k/160k reference comparison reproduces its original report exactly; this closes an uncached legacy path without changing any saved lesson or weakening replay.
+
 ## Current coverage and next numerical milestone
 
 The [weak-range coverage study](weak-range-flop-coverage.md) attempts eight declared contexts in one physical game: four BTN hands after a check and facing a bet. All four facing-bet cases have complete separated interval evidence, including the unchanged weak-fold control. All four after-check cases fail strict behavioral-ratio reconstruction and remain explicit numerical rejections. No new fresh-reference qualification or website questions follow from the survey.

@@ -12,11 +12,14 @@ Only after these checks does construction copy the graph. Each node carries a pr
 
 The public `SixMaxOwnedFlopReferences` State interface continues to delegate to its original game, including foreign-state rejection. Only its private training path uses the cache. The older BTN curriculum shares a cache across its reference runs; it constructs a new CFR solver for each run.
 
+The original single-question `SixMaxBtnFlopFeedback` producer also builds one cache before its reference loop. Each 80k/160k run still starts a separate solver with explicit `NONE` pruning. Its interval construction and independent policy assessment continue to use the original physical game.
+
 ## Numerical and work contracts
 
 | Producer | Reference traversal mode |
 |---|---|
 | Original unpaired BTN curriculum | Exhaustive CFR+, `NONE` pruning |
+| Original single-question BTN feedback | Exhaustive CFR+, `NONE` pruning |
 | Paired and weak-hand owned references | Exhaustive CFR+, `FIXED_UTILITY` pruning |
 
 Caching preserves action/chance order, probability and terminal-utility bits, information-set keys, six alternating player passes, regret clipping and averaging order. It preserves the respective pruning modes, iteration budgets, algorithm identities and published traversal statistics. It does not change the generic multiplayer/sampled solver, LP solver, endpoint tolerances, qualification thresholds, admission rules or saved source reports.
@@ -38,3 +41,5 @@ Before any diagnostic run it creates `<new-result.json>.budget.json`, recording 
 The benchmark refuses existing output/budget paths and verifies its three input hashes again before writing a result. Timings cover solver creation and CFR traversal, excluding game/cache construction. Run it without competing CPU-heavy jobs. This is a small machine-specific hot-loop experiment, not a robust throughput estimate, an allocation profile, whole-application startup timing or evidence for general six-active-player GTO.
 
 For an interview: “I reduced overhead in repeated CFR traversals using a privately owned immutable graph. I preserved floating-point operation order and checked whole policies and work counts exactly, then replayed the original qualification pipeline. I measured traversal separately from startup so I could state the benefit without overstating what the benchmark proves.”
+
+The legacy single-question follow-up used a separate fixed diagnostic: three alternating-order pairs at 1,000 iterations, six fresh solves, with exact whole-policy/work equality and no inactive pruning. All three measured hot-loop ratios were 2.926–2.987 on the local JVM; cache construction took about 0.058 seconds. These include cold/JIT effects and are not a whole-producer or universal speed estimate. A separate isolated full-producer comparison then trained fresh 80k/160k references and reproduced the entire original report, hash `c95a6ce29095416967306a49496a7636d30cd9f9a4b648fca832a9db5d8545e7`, exactly. The production patch matches that validated candidate. No source reports, iteration budgets, pruning modes, algorithms or thresholds were changed. The existing full physical replay test remains the integration gate; this is an optimization of our traversal adapter, not an upstream library fix.

@@ -6,6 +6,8 @@ The [weak-range coverage study](docs/weak-range-flop-coverage.md) now surveys al
 
 The [cached CFR reference traversal](docs/cached-cfr-traversal.md) reduces repeated tree-walking overhead while preserving each producer's pruning mode, policies, published work counts and qualification gates. A bounded diagnostic main checks exact policy/work equality before reporting traversal timings.
 
+The original single-question BTN producer now uses that cache too, with its original `NONE` pruning and fresh solver per reference. A complete 80k/160k comparison reproduces its original report exactly.
+
 The [eleven-question flop collection](docs/qualified-flop-collection.md) combines the original ten contexts with the qualified weak-hand folding scenario through a separately versioned API, replayable review and table UI.
 
 The [qualified weak-hand backend trainer](docs/qualified-weak-hand-flop-trainer.md) adds a separately pinned BTN 2c3c fold/call decision, fresh reference qualification, cached grading/review and a default-off API. The existing ten-question website collection retains its original sources.
