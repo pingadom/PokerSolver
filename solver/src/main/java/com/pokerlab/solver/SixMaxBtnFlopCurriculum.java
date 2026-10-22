@@ -176,11 +176,13 @@ public final class SixMaxBtnFlopCurriculum {
         var intervals = new ArrayList<OwnedIntervals>();
         // Every declared context and endpoint is owned before spending the shared CFR budget.
         for (String hand : request.heroHands()) intervals.add(intervals(game, request, hand));
+        var traversal = new CachedTwoPlayerCfrGame(game);
         var references = new ArrayList<CfrSolution>();
         for (int iterations : request.referenceBudget().iterations()) {
             // New solver for EACH run; no checkpoint, imported strategy or previous regret table.
             references.add(
-                    new MultiPlayerCfrSolver<>(game, CfrSolver.Variant.CFR_PLUS).solve(iterations));
+                    new MultiPlayerCfrSolver<>(traversal, CfrSolver.Variant.CFR_PLUS)
+                            .solve(iterations));
         }
         var decisions = new ArrayList<Decision>();
         for (int i = 0; i < intervals.size(); i++) {

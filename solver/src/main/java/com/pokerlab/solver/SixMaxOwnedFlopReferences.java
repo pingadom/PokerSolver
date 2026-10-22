@@ -29,17 +29,13 @@ public final class SixMaxOwnedFlopReferences implements MultiPlayerCfrGame<State
     private final SixMaxSuppliedFlopBettingGame game;
     private final Map<Integer, Double> constants;
     private final int nodes;
+    private final CachedTwoPlayerCfrGame traversal;
 
     SixMaxOwnedFlopReferences(SixMaxSuppliedFlopBettingGame game) {
         this.game = Objects.requireNonNull(game);
-        var checked = FiniteTwoPlayerSequenceForm.checked(game);
-        nodes = checked.treeNodes();
-        var fixed = new TreeMap<Integer, Double>();
-        for (int actor = 0; actor < game.playerCount(); actor++) {
-            if (actor == checked.firstActor() || actor == checked.secondActor()) continue;
-            fixed.put(actor, validate(checked.snapshot().initialState(), actor));
-        }
-        constants = Collections.unmodifiableMap(fixed);
+        traversal = new CachedTwoPlayerCfrGame(game);
+        nodes = traversal.validatedTreeNodes();
+        constants = traversal.inactiveUtilities();
     }
 
     /** No estimate, range assumption or tolerance may establish this pruning guarantee. */
@@ -70,7 +66,7 @@ public final class SixMaxOwnedFlopReferences implements MultiPlayerCfrGame<State
             throw new IllegalArgumentException("Invalid reference iteration bound");
         var solver =
                 new MultiPlayerCfrSolver<>(
-                        this,
+                        traversal,
                         CfrSolver.Variant.CFR_PLUS,
                         MultiPlayerCfrSolver.InactivePruning.FIXED_UTILITY);
         var policy = solver.solve(iterations);
