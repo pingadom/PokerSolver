@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [certified negative-reach mode](docs/certified-negative-reach.md) now explains four previously numerical after-check failures with original-LP witnesses of zero reach. It preserves the four positive interval results and the existing trainer, with separately versioned replay and independent physical/security checks.
+
 The [weak-range coverage study](docs/weak-range-flop-coverage.md) now surveys all four BTN holdings after check and facing bet, retaining four complete interval solutions and four explicit numerical rejections. It adds ordered offline discovery and inspection; fresh-reference qualification remains required before new trainer content.
 
 The [cached CFR reference traversal](docs/cached-cfr-traversal.md) reduces repeated tree-walking overhead while preserving each producer's pruning mode, policies, published work counts and qualification gates. A bounded diagnostic main checks exact policy/work equality before reporting traversal timings.

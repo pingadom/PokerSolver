@@ -1,0 +1,1871 @@
+{
+  "baseline" : {
+    "affineReductionHash" : "404673dc26825518bddbc535b237663bc7412a75957563c3b0c119284561c24d",
+    "algorithm" : "BOUNDED_PERFECT_RECALL_AFFINE_SEQUENCE_FORM_ASCENDING_L1_REFINED_DIRECTIONS_ORIGINAL_CERTIFICATES/v2",
+    "behavioralPolicyHash" : "007bfe96280366d20842e541005a2a6dd0dd4306bae5ca6db4cf7a6613d8d146",
+    "behavioralQuality" : {
+      "bestResponseUtilitiesBb" : [ 0.0, 0.0, 0.0, -0.041505238791422885, -0.4999999999999998, 0.5415052387914239 ],
+      "deviationGainsBb" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 7.771561172376096E-16 ],
+      "nashConvBb" : 7.771561172376096E-16,
+      "profileUtilitiesBb" : [ 0.0, 0.0, 0.0, -0.041505238791422885, -0.4999999999999998, 0.5415052387914231 ],
+      "responseActions" : [ { }, { }, { }, {
+        "supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0" : "fold",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0" : "fold",
+        "supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check" : "bet",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:bet" : "call",
+        "supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:check" : "bet",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:bet" : "call",
+        "supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:check" : "bet",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:bet" : "call",
+        "supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:check" : "bet",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check" : "check",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet" : "fold",
+        "supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check" : "check"
+      }, { }, {
+        "supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:" : "call",
+        "supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0" : "call",
+        "supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call",
+        "supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:" : "raise:9.0",
+        "supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0" : "raise:50.0",
+        "supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:" : "call",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0" : "raise:50.0",
+        "supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0" : "call",
+        "supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:" : "bet",
+        "supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet" : "fold",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet" : "fold",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:" : "bet",
+        "supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet" : "fold",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet" : "call",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:" : "check",
+        "supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet" : "fold"
+      } ]
+    },
+    "constantSum" : 0.5,
+    "firstActor" : 3,
+    "firstFlow" : {
+      "actor" : 3,
+      "conservation" : [ {
+        "childSequences" : [ 1, 2, 3 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 4, 5, 6 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "parentSequence" : 3
+      }, {
+        "childSequences" : [ 7, 8, 9 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 10, 11, 12 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "parentSequence" : 9
+      }, {
+        "childSequences" : [ 13, 14, 15 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 16, 17, 18 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "parentSequence" : 15
+      }, {
+        "childSequences" : [ 19, 20, 21 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 22, 23, 24 ],
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+        "parentSequence" : 21
+      }, {
+        "childSequences" : [ 25, 26 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 27, 28 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 29, 30 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 2
+      }, {
+        "childSequences" : [ 31, 32 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 2
+      }, {
+        "childSequences" : [ 33, 34 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 3
+      }, {
+        "childSequences" : [ 35, 36 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+        "parentSequence" : 3
+      }, {
+        "childSequences" : [ 37, 38 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 5
+      }, {
+        "childSequences" : [ 39, 40 ],
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 5
+      }, {
+        "childSequences" : [ 41, 42 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 43, 44 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:check",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 45, 46 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 8
+      }, {
+        "childSequences" : [ 47, 48 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 8
+      }, {
+        "childSequences" : [ 49, 50 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 9
+      }, {
+        "childSequences" : [ 51, 52 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+        "parentSequence" : 9
+      }, {
+        "childSequences" : [ 53, 54 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 11
+      }, {
+        "childSequences" : [ 55, 56 ],
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 11
+      }, {
+        "childSequences" : [ 57, 58 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 59, 60 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:check",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 61, 62 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 14
+      }, {
+        "childSequences" : [ 63, 64 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 14
+      }, {
+        "childSequences" : [ 65, 66 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 15
+      }, {
+        "childSequences" : [ 67, 68 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+        "parentSequence" : 15
+      }, {
+        "childSequences" : [ 69, 70 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 17
+      }, {
+        "childSequences" : [ 71, 72 ],
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 17
+      }, {
+        "childSequences" : [ 73, 74 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 75, 76 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:check",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 77, 78 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 20
+      }, {
+        "childSequences" : [ 79, 80 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 20
+      }, {
+        "childSequences" : [ 81, 82 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+        "parentSequence" : 21
+      }, {
+        "childSequences" : [ 83, 84 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+        "parentSequence" : 21
+      }, {
+        "childSequences" : [ 85, 86 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+        "parentSequence" : 23
+      }, {
+        "childSequences" : [ 87, 88 ],
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+        "parentSequence" : 23
+      } ],
+      "maximumResidual" : 0.0,
+      "realization" : [ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6283335571615513, 0.37166644283844874, 0.2162643138637814, 0.0, 0.15540212897466735, 0.3996580382680291, 0.0, 0.600341961731971, 0.0, 0.600341961731971, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.95447409733124, 0.04552590266876, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.6283335571615513, 0.0, 0.6283335571615513, 0.0, 0.37166644283844874, 0.0, 0.37166644283844874, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.600341961731971, 0.0, 0.600341961731971, 0.0, 0.600341961731971, 0.0, 0.600341961731971, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0 ],
+      "sequences" : [ {
+        "action" : "",
+        "index" : 0,
+        "key" : ""
+      }, {
+        "action" : "fold",
+        "index" : 1,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "index" : 2,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      }, {
+        "action" : "raise:22.0",
+        "index" : 3,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      }, {
+        "action" : "fold",
+        "index" : 4,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "call",
+        "index" : 5,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "raise:100.0",
+        "index" : 6,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "fold",
+        "index" : 7,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "index" : 8,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      }, {
+        "action" : "raise:22.0",
+        "index" : 9,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      }, {
+        "action" : "fold",
+        "index" : 10,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "call",
+        "index" : 11,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "raise:100.0",
+        "index" : 12,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "fold",
+        "index" : 13,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "index" : 14,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      }, {
+        "action" : "raise:22.0",
+        "index" : 15,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      }, {
+        "action" : "fold",
+        "index" : 16,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "call",
+        "index" : 17,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "raise:100.0",
+        "index" : 18,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "fold",
+        "index" : 19,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "index" : 20,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      }, {
+        "action" : "raise:22.0",
+        "index" : 21,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      }, {
+        "action" : "fold",
+        "index" : 22,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "call",
+        "index" : 23,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "raise:100.0",
+        "index" : 24,
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      }, {
+        "action" : "fold",
+        "index" : 25,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 26,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 27,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 28,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 29,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 30,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 31,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 32,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 33,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 34,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 35,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 36,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 37,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 38,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 39,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 40,
+        "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 41,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 42,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 43,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 44,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 45,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 46,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 47,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 48,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 49,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 50,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 51,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 52,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 53,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 54,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 55,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 56,
+        "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 57,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 58,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 59,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 60,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 61,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 62,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 63,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 64,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 65,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 66,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 67,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 68,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 69,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 70,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 71,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 72,
+        "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 73,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 74,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 75,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 76,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 77,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 78,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 79,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 80,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 81,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 82,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 83,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 84,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check"
+      }, {
+        "action" : "fold",
+        "index" : 85,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "call",
+        "index" : 86,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet"
+      }, {
+        "action" : "check",
+        "index" : 87,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      }, {
+        "action" : "bet",
+        "index" : 88,
+        "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check"
+      } ]
+    },
+    "firstLp" : {
+      "absoluteDualityGap" : 1.7763568394002505E-15,
+      "algorithm" : "OWNED_ASCENDING_L1_COMPENSATED_PHASE_TWO_DIRECTION_ORIGINAL_CERTIFICATE/v4",
+      "constraints" : 79,
+      "dualValue" : 8.701106252380919,
+      "maximumDualViolation" : 3.552713678800501E-15,
+      "maximumPrimalViolation" : 8.881784197001252E-16,
+      "primalValue" : 8.701106252380917,
+      "problemHash" : "2105885364eab63dfb048d5c2f772e791fd0151bcd752f718e6c0880179dbed6",
+      "variables" : 81,
+      "work" : {
+        "arithmeticWork" : 23260893,
+        "basisFactorizations" : 30,
+        "blandFallback" : false,
+        "cleanupPivots" : 0,
+        "phaseOnePivots" : 3,
+        "phaseTwoPivots" : 24
+      }
+    },
+    "firstProjection" : {
+      "independentSequences" : [ 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87 ],
+      "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ] ],
+      "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 ],
+      "originalFlowHash" : "d8cf869cd637ba41419528403cf654624c45eefc8641894ab7f8de0f363a6874",
+      "projectionHash" : "59a7eead0d42c9084e19cd19599d6377255931778e3ae7c2ae583b33d95f1081",
+      "rhs" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 ],
+      "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1 ] ]
+    },
+    "informationSets" : [ {
+      "actions" : [ "fold", "call", "raise:22.0" ],
+      "actor" : 3,
+      "depth" : 2,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:100.0" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:22.0" ],
+      "actor" : 3,
+      "depth" : 2,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:100.0" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:22.0" ],
+      "actor" : 3,
+      "depth" : 2,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:100.0" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:22.0" ],
+      "actor" : 3,
+      "depth" : 2,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:100.0" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 4,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 5,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 6,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:bet",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 3,
+      "depth" : 7,
+      "key" : "3:supplied-flop-one-bet:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check",
+      "ownHistory" : [ {
+        "action" : "raise:22.0",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0"
+      }, {
+        "action" : "call",
+        "key" : "3:supplied-connected-single-flop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:9.0" ],
+      "actor" : 5,
+      "depth" : 1,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:50.0" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:9.0" ],
+      "actor" : 5,
+      "depth" : 1,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:50.0" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call", "raise:9.0" ],
+      "actor" : 5,
+      "depth" : 1,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:",
+      "ownHistory" : [ ]
+    }, {
+      "actions" : [ "fold", "call", "raise:50.0" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 4,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 7,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 8,
+      "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 4,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 7,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 8,
+      "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 3,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 4,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 5,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 7,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "call",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      } ]
+    }, {
+      "actions" : [ "check", "bet" ],
+      "actor" : 5,
+      "depth" : 6,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      } ]
+    }, {
+      "actions" : [ "fold", "call" ],
+      "actor" : 5,
+      "depth" : 8,
+      "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+      "ownHistory" : [ {
+        "action" : "raise:9.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "raise:50.0",
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "check",
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      } ]
+    } ],
+    "lowerValue" : -0.04150523879142831,
+    "originalReductionHash" : "4e9fe01e007845e3f476583886fcfdaa729f64cb316d98c7f07e4cf1c873e78e",
+    "projectedPayoff" : {
+      "constant" : -8.742611491172346,
+      "firstCost" : [ 17.872553680325062, 16.96079832204421, 13.122553680325062, 9.318158302533302, -4.708662024245907, -3.5364761174382893, -9.458662024245907, -1.9421977645661868, -6.4448221152579706, -5.112634650401921, -11.19482211525797, -2.8091549925431507, -0.9764580496488386, -0.1489068331995959, -5.726458049648839, -0.08219124995440759, 0.0, 0.0, 1.62013607737292E-4, 0.0, 0.0, 0.0, 8.74775648624333E-4, 0.0, 0.0, 0.0, -6.133790673264357E-4, 0.0, 0.0, 0.0, -0.003327014387869651, 0.0, 0.0, 0.0, -2.278499400209926E-4, 0.0, 0.0, 0.0, -0.001237863306119885, 0.0, 0.0, 0.0, -7.989391213075422E-5, 0.0, 0.0, 0.0, -4.3610158741737683E-4, 0.0 ],
+      "matrix" : [ [ -6.43699213826681, -6.43699213826681, -7.478658804933477, -5.218900259381345, -10.895325471600142, -6.51664142001313, -6.51664142001313, -7.558308086679797, -5.280848241333438, -10.974974753346462, -4.918920122045122, -4.918920122045122, -5.960586788711789, -4.037772020502284, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -4.6945351221667017E-4, 0.0, 0.0 ], [ -6.088834091239519, -6.088834091239519, -7.478658804933477, -5.218900259381345, -10.895325471600142, -6.161124405655656, -6.161124405655656, -7.558308086679797, -5.280848241333438, -10.974974753346462, -4.710839825149036, -4.710839825149036, -5.960586788711789, -4.037772020502284, -9.377253455378455, 0.0, 0.0, 0.0, 2.077007422402159E-4, 0.0, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 2.2726420752736543E-4, 0.0, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.951660668765932E-4, 0.0, -4.6945351221667017E-4, 0.0, 0.0 ], [ -4.853658804933477, -4.853658804933477, -4.853658804933477, -4.853658804933477, -10.895325471600142, -4.933308086679797, -4.933308086679797, -4.933308086679797, -4.933308086679797, -10.974974753346462, -3.3355867887117894, -3.3355867887117894, -3.3355867887117894, -3.3355867887117894, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -3.345198373981269, -3.345198373981269, -3.345198373981269, -3.345198373981269, -10.895325471600142, -3.3848708273050376, -3.3848708273050376, -3.3848708273050376, -3.3848708273050376, -10.974974753346462, -2.588089101246996, -2.588089101246996, -2.588089101246996, -2.588089101246996, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0011265678000875368, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0012325806322516849, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010586434106170948 ], [ 0.5329897363203291, 0.5329897363203291, -0.5086769303463374, 0.20382919926505524, -3.9253435970130037, 0.4174865338516659, 0.4174865338516659, -0.6241801328150007, 0.11396137091038454, -4.040846799481667, 3.758185754073912, 3.758185754073912, 2.7165190874072453, 2.7131810295872794, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5329094276462688E-4, 0.0, 0.0 ], [ 0.2379080149228183, 0.2379080149228183, -0.5086769303463374, 0.20382919926505524, -3.9253435970130037, 0.1330622151757025, 0.1330622151757025, -0.6241801328150007, 0.11396137091038454, -4.040846799481667, 3.165505887339769, 3.165505887339769, 2.7165190874072453, 2.7131810295872794, -0.7001475792594212, 0.0, 0.0, 0.0, -4.076698155645524E-5, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -4.076698155645524E-5, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -6.372769530664265E-5, 0.0, 1.5329094276462688E-4, 0.0, 0.0 ], [ 2.1163230696536623, 2.1163230696536623, 2.1163230696536623, 2.1163230696536623, -3.9253435970130037, 2.0008198671849993, 2.0008198671849993, 2.0008198671849993, 2.0008198671849993, -4.040846799481667, 5.341519087407245, 5.341519087407245, 5.341519087407245, 5.341519087407245, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.1304302784565949, 0.1304302784565949, 0.1304302784565949, 0.1304302784565949, -3.9253435970130037, 0.07282269617796008, 0.07282269617796008, 0.07282269617796008, 0.07282269617796008, -4.040846799481667, 1.738944789931632, 1.738944789931632, 1.738944789931632, 1.738944789931632, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.442808952677374E-4 ], [ 1.3390871894161371, 1.3390871894161371, 0.2974205227494705, 0.8311930762999845, -3.119246143917196, 1.07367422457883, 1.07367422457883, 0.032007557912163365, 0.6247263964369231, -3.3846591087545033, 4.032060701263004, 4.032060701263004, 2.990394034596337, 2.926343605434888, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.608190173979631E-6, 0.0, 0.0 ], [ 0.9697004981955643, 0.9697004981955643, 0.2974205227494705, 0.8311930762999845, -3.119246143917196, 0.7287932922801347, 0.7287932922801347, 0.032007557912163365, 0.6247263964369231, -3.3846591087545033, 3.4141408599262215, 3.4141408599262215, 2.990394034596337, 2.926343605434888, -0.4262726320703294, 0.0, 0.0, 0.0, 1.054318488529015E-4, 0.0, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3799857549857551E-4, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, -3.162955465587042E-6, 0.0, 7.608190173979631E-6, 0.0, 0.0 ], [ 2.92242052274947, 2.92242052274947, 2.92242052274947, 2.92242052274947, -3.119246143917196, 2.6570075579121633, 2.6570075579121633, 2.6570075579121633, 2.6570075579121633, -3.3846591087545033, 5.615394034596337, 5.615394034596337, 5.615394034596337, 5.615394034596337, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.5328690279348177, 0.5328690279348177, 0.5328690279348177, 0.5328690279348177, -3.119246143917196, 0.4005815025551874, 0.4005815025551874, 0.4005815025551874, 0.4005815025551874, -3.3846591087545033, 1.875704462053146, 1.875704462053146, 1.875704462053146, 1.875704462053146, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.723809588941168E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.608548072363873E-5 ], [ 1.1698665866017834, 1.1698665866017834, 0.1281999199351168, 0.6995245276906458, -3.2884667467315496, 0.5994921572635393, 0.5994921572635393, -0.4421745094031273, 0.2557867330893651, -3.858841176069794, -0.792900694216484, -0.792900694216484, -1.8345673608831508, -0.8275574885361073, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.595574319258529E-4, 0.0, 0.0 ], [ 0.8160914235338573, 0.8160914235338573, 0.1281999199351168, 0.6995245276906458, -3.2884667467315496, 0.29836368504131705, 0.29836368504131705, -0.4421745094031273, 0.2557867330893651, -3.858841176069794, -0.9655482753755783, -0.9655482753755783, -1.8345673608831508, -0.8275574885361073, -5.251234027549817, 0.0, 0.0, 0.0, 1.0074598890388364E-4, 0.0, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3799857549857551E-4, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.494789323736692E-4, 0.0, -3.595574319258529E-4, 0.0, 0.0 ], [ 2.753199919935117, 2.753199919935117, 2.753199919935117, 2.753199919935117, -3.2884667467315496, 2.1828254905968727, 2.1828254905968727, 2.1828254905968727, 2.1828254905968727, -3.858841176069794, 0.7904326391168492, 0.7904326391168492, 0.7904326391168492, 0.7904326391168492, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.4484570602991652, 0.4484570602991652, 0.4484570602991652, 0.4484570602991652, -3.2884667467315496, 0.16408171835803473, 0.16408171835803473, 0.16408171835803473, 0.16408171835803473, -3.858841176069794, -0.5303475287027923, -0.5303475287027923, -0.5303475287027923, -0.5303475287027923, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.469886637649795E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.110685331080067E-4 ], [ 0.0, 1.8151375059269798E-5, 0.0, 0.0, 0.0, 0.0, 2.5025025025025026E-5, 0.0, 0.0, 0.0, 0.0, 1.3747299931510457E-5, 0.0, 0.0, 0.0, -1.8151375059269798E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.5025025025025026E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.3747299931510457E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.278182788051209E-5, -7.297593646277856E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.6218652863389708E-5, -7.98495864285338E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0579790316632424E-5, -6.857186133501922E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -5.166160593792174E-5, -5.166160593792174E-5, 0.0, 0.0, 0.0, -7.122507122507123E-5, -7.122507122507123E-5, 0.0, 0.0, 0.0, -3.9126930574299006E-5, -3.9126930574299006E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -5.166160593792174E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -7.122507122507123E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.9126930574299006E-5, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.484058704453441E-5, -2.077007422402159E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.462231968810917E-5, -2.2726420752736543E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.857324936272305E-5, -1.951660668765932E-4, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.2426710617500087E-4, 0.0, 0.0, 0.0, 0.0, 1.7132517132517128E-4, 0.0, 0.0, 0.0, 0.0, 9.411613030034088E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -1.2426710617500087E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.7132517132517128E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -9.411613030034088E-5, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5596789856658276E-4, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.7949693114166797E-4, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.408924106292528E-4, -4.6945351221667017E-4, 0.0, 0.0 ], [ -2.78895735310209E-4, -2.78895735310209E-4, -2.78895735310209E-4, -2.78895735310209E-4, 0.0, -3.84908567474357E-4, -3.84908567474357E-4, -3.84908567474357E-4, -3.84908567474357E-4, 0.0, -2.1097134583976688E-4, -2.1097134583976688E-4, -2.1097134583976688E-4, -2.1097134583976688E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.78895735310209E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.84908567474357E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1097134583976688E-4, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.50489659700186E-4, -0.0011265678000875368, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.033638902059955E-4, -0.0012325806322516849, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.166121587174218E-4, -0.0010586434106170948 ], [ 0.0, -6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, -6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, -7.721537326800483E-5, 0.0, 0.0, 0.0, 6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.721537326800483E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.086790738106528E-5, 1.4323534060376172E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.086790738106528E-5, 1.4323534060376172E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.4901546283125216E-5, 2.239081186449606E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.9680611785874942E-4, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 2.1976683160893683E-4, 2.1976683160893683E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.1976683160893683E-4, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.939327485380117E-5, 4.076698155645524E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.939327485380117E-5, 4.076698155645524E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -7.087363172889487E-5, 6.372769530664265E-5, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, -4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, -5.286283246809561E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.286283246809561E-4, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4286490437806227E-4, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4286490437806227E-4, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.704798168613957E-4, 1.5329094276462688E-4, 0.0, 0.0 ], [ 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0, 0.0011919529600450652, 0.0011919529600450652, 0.0011919529600450652, 0.0011919529600450652, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010675307139122927, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010675307139122927, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0011919529600450652, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.210447289394658E-4, 2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.210447289394658E-4, 2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.831007120480806E-4, 3.442808952677374E-4 ], [ 0.0, -1.778093883357041E-5, 0.0, 0.0, 0.0, 0.0, -6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, -5.5935870080606913E-5, 0.0, 0.0, 0.0, 1.778093883357041E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.5935870080606913E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.815670934091986E-6, -3.7043622569938356E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0536852642115802E-5, -4.848598598598599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4261794689426262E-5, 1.1113086770981439E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 5.060728744939269E-5, 5.060728744939269E-5, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 1.5920209176788122E-4, 1.5920209176788122E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 5.060728744939269E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5920209176788122E-4, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3706140350877198E-5, -1.054318488529015E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.99895036737142E-5, -1.3799857549857551E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -4.059126180836707E-5, 3.162955465587042E-6, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -1.2173104278367437E-4, 0.0, 0.0, 0.0, 0.0, -4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, -3.829455720903089E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.2173104278367437E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.829455720903089E-4, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2968824087245126E-5, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.21369142421774E-5, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -9.76384405660721E-5, 7.608190173979631E-6, 0.0, 0.0 ], [ 2.752911058832111E-4, 2.752911058832111E-4, 2.752911058832111E-4, 2.752911058832111E-4, 0.0, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 0.0, 8.637575455009666E-4, 8.637575455009666E-4, 8.637575455009666E-4, 8.637575455009666E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.752911058832111E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.88146547357074E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.637575455009666E-4, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.408724513987671E-5, -5.723809588941168E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6210542526331993E-4, -7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1941222599117347E-4, 1.608548072363873E-5 ], [ 0.0, -1.9427322058901007E-5, 0.0, 0.0, 0.0, 0.0, -6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, -2.304936515462836E-6, 0.0, 0.0, 0.0, 1.9427322058901007E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.304936515462836E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.992479321426689E-6, -3.539723934460776E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0536852642115802E-5, -4.848598598598599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.2553672093145774E-5, -5.2519624888045934E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 5.529314739841055E-5, 5.529314739841055E-5, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 6.560203928624982E-6, 6.560203928624982E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 5.529314739841055E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.560203928624982E-6, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.1363210376368272E-5, -1.0074598890388364E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.99895036737142E-5, -1.3799857549857551E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5729682111261046E-5, -1.494789323736692E-4, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -1.3300243563401455E-4, 0.0, 0.0, 0.0, 0.0, -4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, -1.5779949990476366E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3300243563401455E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5779949990476366E-5, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.7333127662075058E-5, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.21369142421774E-5, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.594437048384411E-5, -3.595574319258529E-4, 0.0, 0.0 ], [ 3.006834010123484E-4, 3.006834010123484E-4, 3.006834010123484E-4, 3.006834010123484E-4, 0.0, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 0.0, 3.660353166932116E-5, 3.660353166932116E-5, 3.660353166932116E-5, 3.660353166932116E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.006834010123484E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.88146547357074E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.660353166932116E-5, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.142275879117983E-5, -5.469886637649795E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6210542526331993E-4, -7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9313341681762735E-4, -8.110685331080067E-4 ] ],
+      "originalPayoffHash" : "36835212963682e557a7f5f40e17d56ce0cd11cfd77cc57972cba484fe05ab93",
+      "reducedPayoffHash" : "b2db5c3fef8e9f214aea6d9e211519e8e7b495e8d3c73e76f9ba340c9e62aaf3",
+      "secondCost" : [ 4.89504862592856, 4.3331867846464895, 7.561715292595228, 3.4843534561256595, 21.228381959261892, 5.925988504319094, 5.330688969586994, 8.592655170985761, 4.286373740896766, 22.25932183765243, -0.5784256390753091, -0.9628264255525755, 2.0882410275913585, -0.7741951259837758, 15.754907694258023, 0.0, 1.3109326431694852E-4, 0.0, 0.0, 0.0, 8.9748465570834E-4, 0.0, 0.0, 0.0, 1.6249802434012962E-4, 0.0, 0.0, 0.0, 0.0011124864743285797, 0.0, 0.0, 0.0, 9.758936568147095E-5, 0.0, 0.0, 0.0, 6.681118112039166E-4, 0.0, 0.0 ]
+    },
+    "reductionWork" : {
+      "chargedUnits" : 490150,
+      "limit" : 8000000
+    },
+    "secondActor" : 5,
+    "secondFlow" : {
+      "actor" : 5,
+      "conservation" : [ {
+        "childSequences" : [ 1, 2, 3 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 4, 5, 6 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0",
+        "parentSequence" : 3
+      }, {
+        "childSequences" : [ 7, 8 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "parentSequence" : 6
+      }, {
+        "childSequences" : [ 9, 10, 11 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 12, 13, 14 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0",
+        "parentSequence" : 11
+      }, {
+        "childSequences" : [ 15, 16 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "parentSequence" : 14
+      }, {
+        "childSequences" : [ 17, 18, 19 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:",
+        "parentSequence" : 0
+      }, {
+        "childSequences" : [ 20, 21, 22 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0",
+        "parentSequence" : 19
+      }, {
+        "childSequences" : [ 23, 24 ],
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+        "parentSequence" : 22
+      }, {
+        "childSequences" : [ 25, 26 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:",
+        "parentSequence" : 2
+      }, {
+        "childSequences" : [ 27, 28 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 25
+      }, {
+        "childSequences" : [ 29, 30 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 3
+      }, {
+        "childSequences" : [ 31, 32 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 29
+      }, {
+        "childSequences" : [ 33, 34 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+        "parentSequence" : 5
+      }, {
+        "childSequences" : [ 35, 36 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 33
+      }, {
+        "childSequences" : [ 37, 38 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 6
+      }, {
+        "childSequences" : [ 39, 40 ],
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 37
+      }, {
+        "childSequences" : [ 41, 42 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:",
+        "parentSequence" : 10
+      }, {
+        "childSequences" : [ 43, 44 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 41
+      }, {
+        "childSequences" : [ 45, 46 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 11
+      }, {
+        "childSequences" : [ 47, 48 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 45
+      }, {
+        "childSequences" : [ 49, 50 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+        "parentSequence" : 13
+      }, {
+        "childSequences" : [ 51, 52 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 49
+      }, {
+        "childSequences" : [ 53, 54 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 14
+      }, {
+        "childSequences" : [ 55, 56 ],
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 53
+      }, {
+        "childSequences" : [ 57, 58 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:",
+        "parentSequence" : 18
+      }, {
+        "childSequences" : [ 59, 60 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 57
+      }, {
+        "childSequences" : [ 61, 62 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 19
+      }, {
+        "childSequences" : [ 63, 64 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 61
+      }, {
+        "childSequences" : [ 65, 66 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:",
+        "parentSequence" : 21
+      }, {
+        "childSequences" : [ 67, 68 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet",
+        "parentSequence" : 65
+      }, {
+        "childSequences" : [ 69, 70 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:",
+        "parentSequence" : 22
+      }, {
+        "childSequences" : [ 71, 72 ],
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet",
+        "parentSequence" : 69
+      } ],
+      "maximumResidual" : 2.220446049250313E-16,
+      "realization" : [ 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0000000000000002, 0.0, 0.0, 7.508913473083726E-17, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.3306690738754696E-16, 0.9999999999999999, 2.220446049250313E-16, 1.1102230246251565E-16, 0.0, 0.0, 0.0, 0.0, 0.0, 7.508913473083726E-17, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+      "sequences" : [ {
+        "action" : "",
+        "index" : 0,
+        "key" : ""
+      }, {
+        "action" : "fold",
+        "index" : 1,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "call",
+        "index" : 2,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "raise:9.0",
+        "index" : 3,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:"
+      }, {
+        "action" : "fold",
+        "index" : 4,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "call",
+        "index" : 5,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "raise:50.0",
+        "index" : 6,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "fold",
+        "index" : 7,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "call",
+        "index" : 8,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "fold",
+        "index" : 9,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "call",
+        "index" : 10,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "raise:9.0",
+        "index" : 11,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:"
+      }, {
+        "action" : "fold",
+        "index" : 12,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "call",
+        "index" : 13,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "raise:50.0",
+        "index" : 14,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "fold",
+        "index" : 15,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "call",
+        "index" : 16,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "fold",
+        "index" : 17,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "call",
+        "index" : 18,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "raise:9.0",
+        "index" : 19,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:"
+      }, {
+        "action" : "fold",
+        "index" : 20,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "call",
+        "index" : 21,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "raise:50.0",
+        "index" : 22,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "action" : "fold",
+        "index" : 23,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "call",
+        "index" : 24,
+        "key" : "5:supplied-connected-single-flop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      }, {
+        "action" : "check",
+        "index" : 25,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 26,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 27,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 28,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 29,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 30,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 31,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 32,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 33,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 34,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 35,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 36,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 37,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 38,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 39,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 40,
+        "key" : "5:supplied-flop-one-bet:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 41,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 42,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 43,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 44,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 45,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 46,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 47,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 48,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 49,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 50,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 51,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 52,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 53,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 54,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 55,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 56,
+        "key" : "5:supplied-flop-one-bet:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 57,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 58,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 59,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 60,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 61,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 62,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 63,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 64,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 65,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 66,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 67,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 68,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "check",
+        "index" : 69,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "bet",
+        "index" : 70,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:"
+      }, {
+        "action" : "fold",
+        "index" : 71,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      }, {
+        "action" : "call",
+        "index" : 72,
+        "key" : "5:supplied-flop-one-bet:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:8d Kc Kd:check|bet"
+      } ]
+    },
+    "secondLp" : {
+      "absoluteDualityGap" : 3.552713678800501E-15,
+      "algorithm" : "OWNED_ASCENDING_L1_COMPENSATED_PHASE_TWO_DIRECTION_ORIGINAL_CERTIFICATE/v4",
+      "constraints" : 81,
+      "dualValue" : -8.701106252380926,
+      "maximumDualViolation" : 1.7763568394002505E-15,
+      "maximumPrimalViolation" : 1.3322676295501878E-15,
+      "primalValue" : -8.701106252380923,
+      "problemHash" : "77b5660d76748dc362f4087bf154a073ccf0b8bd38da051c1f916bd8fa1faa52",
+      "variables" : 79,
+      "work" : {
+        "arithmeticWork" : 26916562,
+        "basisFactorizations" : 35,
+        "blandFallback" : false,
+        "cleanupPivots" : 0,
+        "phaseOnePivots" : 11,
+        "phaseTwoPivots" : 21
+      }
+    },
+    "secondProjection" : {
+      "independentSequences" : [ 1, 2, 4, 5, 7, 9, 10, 12, 13, 15, 17, 18, 20, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71 ],
+      "inequalities" : [ [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 1 ] ],
+      "offset" : [ 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ],
+      "originalFlowHash" : "7e9fd4e8d2d0ea9889e1871e8312b3d124e4f7ab312d8defc1631a6218cdb48b",
+      "projectionHash" : "e4430bbafc522d8335cce4ca4b953b13d3c8d40307d398bea095ab0f3e0d7701",
+      "rhs" : [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0 ],
+      "transform" : [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1 ] ]
+    },
+    "snapshotHash" : "bb0b275981847797dbe761d933b6dbdcca949b86f0a9f7c78661c54e0a7bf49f",
+    "treeNodes" : 1321,
+    "upperValue" : -0.04150523879142298
+  },
+  "certifiedReachLower" : -1.0E-8,
+  "cost" : [ -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.08333333333333333, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.08333333333333333, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.08333333333333333, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+  "matrix" : [ [ -6.43699213826681, -6.43699213826681, -7.478658804933477, -5.218900259381345, -10.895325471600142, -6.51664142001313, -6.51664142001313, -7.558308086679797, -5.280848241333438, -10.974974753346462, -4.918920122045122, -4.918920122045122, -5.960586788711789, -4.037772020502284, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -4.6945351221667017E-4, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -6.088834091239519, -6.088834091239519, -7.478658804933477, -5.218900259381345, -10.895325471600142, -6.161124405655656, -6.161124405655656, -7.558308086679797, -5.280848241333438, -10.974974753346462, -4.710839825149036, -4.710839825149036, -5.960586788711789, -4.037772020502284, -9.377253455378455, 0.0, 0.0, 0.0, 2.077007422402159E-4, 0.0, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 2.2726420752736543E-4, 0.0, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.951660668765932E-4, 0.0, -4.6945351221667017E-4, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -4.853658804933477, -4.853658804933477, -4.853658804933477, -4.853658804933477, -10.895325471600142, -4.933308086679797, -4.933308086679797, -4.933308086679797, -4.933308086679797, -10.974974753346462, -3.3355867887117894, -3.3355867887117894, -3.3355867887117894, -3.3355867887117894, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -3.345198373981269, -3.345198373981269, -3.345198373981269, -3.345198373981269, -10.895325471600142, -3.3848708273050376, -3.3848708273050376, -3.3848708273050376, -3.3848708273050376, -10.974974753346462, -2.588089101246996, -2.588089101246996, -2.588089101246996, -2.588089101246996, -9.377253455378455, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0011265678000875368, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0012325806322516849, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010586434106170948, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.5329897363203291, 0.5329897363203291, -0.5086769303463374, 0.20382919926505524, -3.9253435970130037, 0.4174865338516659, 0.4174865338516659, -0.6241801328150007, 0.11396137091038454, -4.040846799481667, 3.758185754073912, 3.758185754073912, 2.7165190874072453, 2.7131810295872794, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5329094276462688E-4, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.2379080149228183, 0.2379080149228183, -0.5086769303463374, 0.20382919926505524, -3.9253435970130037, 0.1330622151757025, 0.1330622151757025, -0.6241801328150007, 0.11396137091038454, -4.040846799481667, 3.165505887339769, 3.165505887339769, 2.7165190874072453, 2.7131810295872794, -0.7001475792594212, 0.0, 0.0, 0.0, -4.076698155645524E-5, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -4.076698155645524E-5, 0.0, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -6.372769530664265E-5, 0.0, 1.5329094276462688E-4, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 2.1163230696536623, 2.1163230696536623, 2.1163230696536623, 2.1163230696536623, -3.9253435970130037, 2.0008198671849993, 2.0008198671849993, 2.0008198671849993, 2.0008198671849993, -4.040846799481667, 5.341519087407245, 5.341519087407245, 5.341519087407245, 5.341519087407245, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.1304302784565949, 0.1304302784565949, 0.1304302784565949, 0.1304302784565949, -3.9253435970130037, 0.07282269617796008, 0.07282269617796008, 0.07282269617796008, 0.07282269617796008, -4.040846799481667, 1.738944789931632, 1.738944789931632, 1.738944789931632, 1.738944789931632, -0.7001475792594212, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.442808952677374E-4, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.3390871894161371, 1.3390871894161371, 0.2974205227494705, 0.8311930762999845, -3.119246143917196, 1.07367422457883, 1.07367422457883, 0.032007557912163365, 0.6247263964369231, -3.3846591087545033, 4.032060701263004, 4.032060701263004, 2.990394034596337, 2.926343605434888, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.608190173979631E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.9697004981955643, 0.9697004981955643, 0.2974205227494705, 0.8311930762999845, -3.119246143917196, 0.7287932922801347, 0.7287932922801347, 0.032007557912163365, 0.6247263964369231, -3.3846591087545033, 3.4141408599262215, 3.4141408599262215, 2.990394034596337, 2.926343605434888, -0.4262726320703294, 0.0, 0.0, 0.0, 1.054318488529015E-4, 0.0, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3799857549857551E-4, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, -3.162955465587042E-6, 0.0, 7.608190173979631E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 2.92242052274947, 2.92242052274947, 2.92242052274947, 2.92242052274947, -3.119246143917196, 2.6570075579121633, 2.6570075579121633, 2.6570075579121633, 2.6570075579121633, -3.3846591087545033, 5.615394034596337, 5.615394034596337, 5.615394034596337, 5.615394034596337, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.5328690279348177, 0.5328690279348177, 0.5328690279348177, 0.5328690279348177, -3.119246143917196, 0.4005815025551874, 0.4005815025551874, 0.4005815025551874, 0.4005815025551874, -3.3846591087545033, 1.875704462053146, 1.875704462053146, 1.875704462053146, 1.875704462053146, -0.4262726320703294, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.723809588941168E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.608548072363873E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.1698665866017834, 1.1698665866017834, 0.1281999199351168, 0.6995245276906458, -3.2884667467315496, 0.5994921572635393, 0.5994921572635393, -0.4421745094031273, 0.2557867330893651, -3.858841176069794, -0.792900694216484, -0.792900694216484, -1.8345673608831508, -0.8275574885361073, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.595574319258529E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0 ], [ 0.8160914235338573, 0.8160914235338573, 0.1281999199351168, 0.6995245276906458, -3.2884667467315496, 0.29836368504131705, 0.29836368504131705, -0.4421745094031273, 0.2557867330893651, -3.858841176069794, -0.9655482753755783, -0.9655482753755783, -1.8345673608831508, -0.8275574885361073, -5.251234027549817, 0.0, 0.0, 0.0, 1.0074598890388364E-4, 0.0, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3799857549857551E-4, 0.0, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.494789323736692E-4, 0.0, -3.595574319258529E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, -1.0, -1.0, 0.0, 0.0 ], [ 2.753199919935117, 2.753199919935117, 2.753199919935117, 2.753199919935117, -3.2884667467315496, 2.1828254905968727, 2.1828254905968727, 2.1828254905968727, 2.1828254905968727, -3.858841176069794, 0.7904326391168492, 0.7904326391168492, 0.7904326391168492, 0.7904326391168492, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.4484570602991652, 0.4484570602991652, 0.4484570602991652, 0.4484570602991652, -3.2884667467315496, 0.16408171835803473, 0.16408171835803473, 0.16408171835803473, 0.16408171835803473, -3.858841176069794, -0.5303475287027923, -0.5303475287027923, -0.5303475287027923, -0.5303475287027923, -5.251234027549817, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.469886637649795E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.110685331080067E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0 ], [ 0.0, 1.8151375059269798E-5, 0.0, 0.0, 0.0, 0.0, 2.5025025025025026E-5, 0.0, 0.0, 0.0, 0.0, 1.3747299931510457E-5, 0.0, 0.0, 0.0, -1.8151375059269798E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.5025025025025026E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.3747299931510457E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.278182788051209E-5, -7.297593646277856E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.6218652863389708E-5, -7.98495864285338E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0579790316632424E-5, -6.857186133501922E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -5.166160593792174E-5, -5.166160593792174E-5, 0.0, 0.0, 0.0, -7.122507122507123E-5, -7.122507122507123E-5, 0.0, 0.0, 0.0, -3.9126930574299006E-5, -3.9126930574299006E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -5.166160593792174E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -7.122507122507123E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.9126930574299006E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.484058704453441E-5, -2.077007422402159E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.462231968810917E-5, -2.2726420752736543E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.857324936272305E-5, -1.951660668765932E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.2426710617500087E-4, 0.0, 0.0, 0.0, 0.0, 1.7132517132517128E-4, 0.0, 0.0, 0.0, 0.0, 9.411613030034088E-5, 0.0, 0.0, 0.0, 0.0, 0.0, -1.2426710617500087E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.7132517132517128E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -9.411613030034088E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5596789856658276E-4, -4.996044880913302E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.7949693114166797E-4, -5.466625532415006E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.408924106292528E-4, -4.6945351221667017E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ -2.78895735310209E-4, -2.78895735310209E-4, -2.78895735310209E-4, -2.78895735310209E-4, 0.0, -3.84908567474357E-4, -3.84908567474357E-4, -3.84908567474357E-4, -3.84908567474357E-4, 0.0, -2.1097134583976688E-4, -2.1097134583976688E-4, -2.1097134583976688E-4, -2.1097134583976688E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.78895735310209E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.84908567474357E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1097134583976688E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.50489659700186E-4, -0.0011265678000875368, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.033638902059955E-4, -0.0012325806322516849, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.166121587174218E-4, -0.0010586434106170948, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, -6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, -6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, -7.721537326800483E-5, 0.0, 0.0, 0.0, 6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.914809546388495E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.721537326800483E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.086790738106528E-5, 1.4323534060376172E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.086790738106528E-5, 1.4323534060376172E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.4901546283125216E-5, 2.239081186449606E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.9680611785874942E-4, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 2.1976683160893683E-4, 2.1976683160893683E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9680611785874942E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.1976683160893683E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.939327485380117E-5, 4.076698155645524E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -5.939327485380117E-5, 4.076698155645524E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -7.087363172889487E-5, 6.372769530664265E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, -4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, -5.286283246809561E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.733984997142892E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.286283246809561E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4286490437806227E-4, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4286490437806227E-4, 9.80611177979599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.704798168613957E-4, 1.5329094276462688E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0010675307139122927, 0.0, 0.0011919529600450652, 0.0011919529600450652, 0.0011919529600450652, 0.0011919529600450652, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010675307139122927, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0010675307139122927, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0011919529600450652, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.210447289394658E-4, 2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.210447289394658E-4, 2.1985864913496493E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -3.831007120480806E-4, 3.442808952677374E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, -1.778093883357041E-5, 0.0, 0.0, 0.0, 0.0, -6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, -5.5935870080606913E-5, 0.0, 0.0, 0.0, 1.778093883357041E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.5935870080606913E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.815670934091986E-6, -3.7043622569938356E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0536852642115802E-5, -4.848598598598599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.4261794689426262E-5, 1.1113086770981439E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 5.060728744939269E-5, 5.060728744939269E-5, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 1.5920209176788122E-4, 1.5920209176788122E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 5.060728744939269E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5920209176788122E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3706140350877198E-5, -1.054318488529015E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.99895036737142E-5, -1.3799857549857551E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -4.059126180836707E-5, 3.162955465587042E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -1.2173104278367437E-4, 0.0, 0.0, 0.0, 0.0, -4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, -3.829455720903089E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.2173104278367437E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.829455720903089E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2968824087245126E-5, -2.536063391326549E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.21369142421774E-5, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -9.76384405660721E-5, 7.608190173979631E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 2.752911058832111E-4, 2.752911058832111E-4, 2.752911058832111E-4, 2.752911058832111E-4, 0.0, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 0.0, 8.637575455009666E-4, 8.637575455009666E-4, 8.637575455009666E-4, 8.637575455009666E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.752911058832111E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.88146547357074E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.637575455009666E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.408724513987671E-5, -5.723809588941168E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6210542526331993E-4, -7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.1941222599117347E-4, 1.608548072363873E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, -1.9427322058901007E-5, 0.0, 0.0, 0.0, 0.0, -6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, -2.304936515462836E-6, 0.0, 0.0, 0.0, 1.9427322058901007E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.338575417522783E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.304936515462836E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.992479321426689E-6, -3.539723934460776E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0536852642115802E-5, -4.848598598598599E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.2553672093145774E-5, -5.2519624888045934E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 5.529314739841055E-5, 5.529314739841055E-5, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 6.560203928624982E-6, 6.560203928624982E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 5.529314739841055E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8040560803718686E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.560203928624982E-6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.1363210376368272E-5, -1.0074598890388364E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.99895036737142E-5, -1.3799857549857551E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5729682111261046E-5, -1.494789323736692E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -1.3300243563401455E-4, 0.0, 0.0, 0.0, 0.0, -4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, -1.5779949990476366E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 1.3300243563401455E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.339486247380986E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.5779949990476366E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.7333127662075058E-5, -2.4233494628231474E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.21369142421774E-5, -3.3194251944251943E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.594437048384411E-5, -3.595574319258529E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0 ], [ 3.006834010123484E-4, 3.006834010123484E-4, 3.006834010123484E-4, 3.006834010123484E-4, 0.0, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 9.88146547357074E-5, 0.0, 3.660353166932116E-5, 3.660353166932116E-5, 3.660353166932116E-5, 3.660353166932116E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.006834010123484E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 9.88146547357074E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.660353166932116E-5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.142275879117983E-5, -5.469886637649795E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6210542526331993E-4, -7.488574100416205E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.9313341681762735E-4, -8.110685331080067E-4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0 ], [ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ], [ 4.89504862592856, 4.3331867846464895, 7.561715292595228, 3.4843534561256595, 21.228381959261892, 5.925988504319094, 5.330688969586994, 8.592655170985761, 4.286373740896766, 22.25932183765243, -0.5784256390753091, -0.9628264255525755, 2.0882410275913585, -0.7741951259837758, 15.754907694258023, 0.0, 1.3109326431694852E-4, 0.0, 0.0, 0.0, 8.9748465570834E-4, 0.0, 0.0, 0.0, 1.6249802434012962E-4, 0.0, 0.0, 0.0, 0.0011124864743285797, 0.0, 0.0, 0.0, 9.758936568147095E-5, 0.0, 0.0, 0.0, 6.681118112039166E-4, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0 ] ],
+  "minimumReach" : 1.0E-4,
+  "question" : {
+    "action" : "check",
+    "hero" : 3,
+    "informationSet" : "3:supplied-flop-one-bet:2c 3c:|BB:call:8d Kc Kd:check"
+  },
+  "rhs" : [ -17.872553680325062, -16.96079832204421, -13.122553680325062, -9.318158302533302, 4.708662024245907, 3.5364761174382893, 9.458662024245907, 1.9421977645661868, 6.4448221152579706, 5.112634650401921, 11.19482211525797, 2.8091549925431507, 0.9764580496488386, 0.1489068331995959, 5.726458049648839, 0.08219124995440759, -0.0, -0.0, -1.62013607737292E-4, -0.0, -0.0, -0.0, -8.74775648624333E-4, -0.0, -0.0, -0.0, 6.133790673264357E-4, -0.0, -0.0, -0.0, 0.003327014387869651, -0.0, -0.0, -0.0, 2.278499400209926E-4, -0.0, -0.0, -0.0, 0.001237863306119885, -0.0, -0.0, -0.0, 7.989391213075422E-5, -0.0, -0.0, -0.0, 4.3610158741737683E-4, -0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 8.701106262380923 ],
+  "scope" : "ISOLATED_DIAGNOSTIC_NO_SOLVED_HANDLE",
+  "solved" : {
+    "certificate" : {
+      "absoluteDualityGap" : 0.0,
+      "algorithm" : "OWNED_ASCENDING_L1_RESOLVABLE_COST_COMPENSATED_BASIS_DUAL_DIRECTION_ORIGINAL_CERTIFICATE/v6",
+      "constraints" : 82,
+      "dualValue" : 0.0,
+      "maximumDualViolation" : 0.0,
+      "maximumPrimalViolation" : 0.0,
+      "primalValue" : 0.0,
+      "problemHash" : "67f391b9cb569f2954d5e92ffdfed53abd35010110c035369955c08cc3c812dc",
+      "variables" : 79,
+      "work" : {
+        "arithmeticWork" : 23969677,
+        "basisFactorizations" : 20,
+        "blandFallback" : false,
+        "cleanupPivots" : 0,
+        "phaseOnePivots" : 17,
+        "phaseTwoPivots" : 0
+      }
+    },
+    "dual" : [ -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+    "point" : [ 0.0, 1.0, 0.0, 0.0, 1.9671650222354553E-33, 0.0, 0.9999999983830306, 1.3103270275748367E-9, 0.0, 3.0664245615488384E-10, 0.0, 0.9999999994445857, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.692369996770513E-5, 0.0, 1.3690043452520737E-13, 6.902966867805582E-10, 0.0, 0.0, 2.3520590620840966E-13, 8.897522569058687E-10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+  }
+}

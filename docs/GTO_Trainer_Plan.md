@@ -312,10 +312,12 @@ The [cached CFR traversal](cached-cfr-traversal.md) now reduces fresh-reference 
 
 The [weak-range coverage study](weak-range-flop-coverage.md) attempts eight declared contexts in one physical game: four BTN hands after a check and facing a bet. All four facing-bet cases have complete separated interval evidence, including the unchanged weak-fold control. All four after-check cases fail strict behavioral-ratio reconstruction and remain explicit numerical rejections. No new fresh-reference qualification or website questions follow from the survey.
 
+The separately selected [v9 negative-reach protocol](certified-negative-reach.md) now preserves the original 79-variable/82-constraint LP and converts those four after-check cases into independently checked zero-reach witnesses. Original-flow reconstruction, complete perfect recall, full-parent security and every unnormalized world mass pass unchanged thresholds. All four facing-bet results retain their original arithmetic and positive-reach posterior checks. The old v8 study remains unchanged; the new evidence diagnoses insufficient reach and adds no lessons.
+
 The immediate goals are:
 
-1. Capture the common after-check numerical reconstruction failure and verify its original LP/realization evidence. Correct it only through a separately versioned, independently checked method; preserve the existing reach, global-security and posterior gates.
-2. Complete fresh-reference qualification for useful range-specific interval candidates. Add a typed trainer source only for decisions that meet every existing face, quality, reach, regret and educational gate.
+1. Complete fresh-reference qualification for the three additional facing-bet interval candidates under the weak supplied ranges. Add a typed trainer source only for decisions that meet every existing face, quality, reach, regret and educational gate.
+2. Declare a separate bounded range/board model for useful check-versus-bet practice. Require whole-face positive reach before computing conditional lessons; do not remove zero-reach opponent strategies from the current face.
 3. Integrate qualified content with explicit range/model identities. Then resume broader preflop continuation coverage; require separate validation for richer streets, realistic rake and multiway play.
 
 Keep the current eleven-question trainer stable during that work. AWS deployment remains paused. A general six-active-player 100bb cash solution, realistic opening/defence charts and coherent full-hand play are still broader goals, not descriptions of the current bounded research model.

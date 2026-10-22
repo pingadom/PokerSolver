@@ -53,6 +53,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_expanded_flop_interval_collection.py'
           python3 -m unittest discover -s scripts -p 'test_check_qualified_flop_collection.py'
           python3 -m unittest discover -s scripts -p 'test_check_weak_range_flop_coverage.py'
+          python3 -m unittest discover -s scripts -p 'test_check_certified_reach_coverage.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7

@@ -10,6 +10,10 @@ import java.util.*;
 public final class SixMaxRefinedFlopCoverageStudy {
     public static final String REQUEST_SCHEMA = "pokerlab-refined-flop-coverage-request/v1";
     public static final String REPORT_SCHEMA = "pokerlab-refined-flop-coverage-report/v1";
+    public static final String CERTIFIED_REACH_REQUEST_SCHEMA =
+            "pokerlab-refined-flop-coverage-request/v2";
+    public static final String CERTIFIED_REACH_REPORT_SCHEMA =
+            "pokerlab-refined-flop-coverage-report/v2";
     public static final String STATUS = "INTERVAL_DISCOVERY_REQUIRES_FRESH_REFERENCE_QUALIFICATION";
     public static final int MAX_HANDS = 4;
     public static final int MAX_BYTES = SixMaxRefinedConditionalStudy.MAX_BYTES;
@@ -22,18 +26,23 @@ public final class SixMaxRefinedFlopCoverageStudy {
             String publicPreflopHistory,
             double maximumLossBb) {
         public Request {
-            if (!REQUEST_SCHEMA.equals(schemaVersion)
+            if (!(REQUEST_SCHEMA.equals(schemaVersion)
+                            || CERTIFIED_REACH_REQUEST_SCHEMA.equals(schemaVersion))
                     || parent == null
                     || heroHands == null
                     || heroHands.isEmpty()
                     || heroHands.size() > MAX_HANDS
                     || heroHands.stream().anyMatch(Objects::isNull)
                     || new HashSet<>(heroHands).size() != heroHands.size()
-                    || !FiniteTwoPlayerConditionalActionIntervals
-                            .PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
-                            .equals(intervalAlgorithm))
+                    || !(REQUEST_SCHEMA.equals(schemaVersion)
+                            ? FiniteTwoPlayerConditionalActionIntervals
+                                    .PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                    .equals(intervalAlgorithm)
+                            : FiniteTwoPlayerConditionalActionIntervals
+                                    .PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                    .equals(intervalAlgorithm)))
                 throw new IllegalArgumentException(
-                        "Bounded distinct BTN hands and explicit v8 mode required");
+                        "Bounded distinct BTN hands and schema-bound v8/v9 mode required");
             heroHands = List.copyOf(heroHands);
             SixMaxSuppliedIntervalFeedback.classify(0, 0, maximumLossBb);
             for (String hand : heroHands)
@@ -105,6 +114,34 @@ public final class SixMaxRefinedFlopCoverageStudy {
                             && !"CONDITIONAL".equals(rejection.layer()))
                     || (outcome == Outcome.LP_REJECTED && !"LP".equals(rejection.layer())))
                 throw new IllegalArgumentException("Discovery outcome and evidence differ");
+            if (rejection != null && rejection.reachFailure() != null) {
+                var audit = rejection.reachFailure();
+                String expectedProtocol =
+                        FiniteTwoPlayerConditionalActionIntervals
+                                        .PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                        .equals(request.intervalAlgorithm())
+                                ? FiniteTwoPlayerConditionalActionIntervals
+                                        .CERTIFIED_REACH_FAILURE_ALGORITHM
+                                : FiniteTwoPlayerConditionalActionIntervals.REACH_FAILURE_ALGORITHM;
+                String key =
+                        request.hero()
+                                + ":supplied-flop-one-bet:"
+                                + request.heroCards()
+                                + ":"
+                                + request.publicPreflopHistory()
+                                + ":"
+                                + String.join(" ", request.parent().connected().flop())
+                                + ":"
+                                + String.join("|", request.flopActions());
+                if (!expectedProtocol.equals(audit.algorithm())
+                        || audit.question().hero() != request.hero()
+                        || !key.equals(audit.question().informationSet())
+                        || audit.securitySlack() != SixMaxSuppliedFlopActionBounds.SECURITY_SLACK
+                        || audit.requiredMinimumReach()
+                                != SixMaxSuppliedFlopActionBounds.CONDITIONAL_REACH_FLOOR)
+                    throw new IllegalArgumentException(
+                            "Rejected reach protocol or context differs");
+            }
         }
     }
 
@@ -140,7 +177,8 @@ public final class SixMaxRefinedFlopCoverageStudy {
             List<Case> cases) {
         public Report {
             cases = List.copyOf(cases);
-            if (!REPORT_SCHEMA.equals(schemaVersion)
+            if (request == null
+                    || !reportSchema(request).equals(schemaVersion)
                     || !STATUS.equals(publicationStatus)
                     || trainerAdmission
                     || request == null
@@ -185,6 +223,12 @@ public final class SixMaxRefinedFlopCoverageStudy {
     }
 
     private SixMaxRefinedFlopCoverageStudy() {}
+
+    private static String reportSchema(Request request) {
+        return CERTIFIED_REACH_REQUEST_SCHEMA.equals(request.schemaVersion())
+                ? CERTIFIED_REACH_REPORT_SCHEMA
+                : REPORT_SCHEMA;
+    }
 
     static List<SixMaxRefinedConditionalStudy.Request> plan(Request request) {
         var planned = new ArrayList<SixMaxRefinedConditionalStudy.Request>();
@@ -301,7 +345,7 @@ public final class SixMaxRefinedFlopCoverageStudy {
         }
         return new Result(
                 new Report(
-                        REPORT_SCHEMA,
+                        reportSchema(request),
                         STATUS,
                         false,
                         request,

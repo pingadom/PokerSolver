@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "pokerlab-independent-certified-reach-coverage/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "negativeReachWitnessesChecked": 4,
+  "positiveEndpointCertificatesChecked": 32,
+  "capturedOriginalLpDimensions": [
+    79,
+    82
+  ],
+  "capturedExactCertificate": {
+    "primalViolation": 2.256439601538234e-16,
+    "dualViolation": 0.0,
+    "dualityGap": 0.0
+  },
+  "oldRatioViolations": [
+    {
+      "key": "5:supplied-connected-single-flop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "ratio": 1.0000001190407424,
+      "absoluteExcess": 3.650294126530209e-17
+    }
+  ],
+  "rejectedCases": [
+    {
+      "hand": "2c 3c",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041505228791422974,
+      "maximumOriginalRealizationDifference": 3.650294126530209e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 2.256439601538234e-16,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "Ah Kh",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041505228791422974,
+      "maximumOriginalRealizationDifference": 3.650294126530209e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 2.256439601538234e-16,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "As Qs",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041505228791422974,
+      "maximumOriginalRealizationDifference": 3.650294126530209e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 2.256439601538234e-16,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "Qh Th",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041505228791422974,
+      "maximumOriginalRealizationDifference": 3.650294126530209e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 2.256439601538234e-16,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    }
+  ],
+  "parentCheck": {
+    "originalLpCertificatesIndependentlyChecked": 2,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fullBoardHandEvaluations": 31584384,
+    "fixedRunoutsRegenerated": 15984,
+    "literalTreeStates": 1321,
+    "policyInformationSets": 73,
+    "nashConvBb": 1.2212453270876722e-15,
+    "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+  },
+  "noNewTrainerQuestions": true,
+  "requestSha256": "7e1f4c389426615841e26e189d05d9c4dc9d7d015111e8a8f8ce3ce7d9bcee95",
+  "reportStoredSha256": "14a04263e499e5b862a6c2277d53070c678aeb233c0c6309bba9ef3137dc0fc6",
+  "reportExpandedSha256": "835301b4693a121f380a6ca20f6f380e06b7f0a988416f8b0d88732efec27848",
+  "checkerSha256": "7736c80c40c7822455f3318f4b54ef5627b5f664d77eb98b81e07b2c04275582",
+  "helperSha256": "0218b6d4aae6aaf4dc300bfb456475d86fb52f3d4dfe2bedefa960e8fbaa7b34",
+  "budgetSha256": "97d32836c9405073e7c479232a5fdc2a8d0c03c858859b60785c8863bdc5bd1c"
+}
