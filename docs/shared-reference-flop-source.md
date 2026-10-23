@@ -1,6 +1,6 @@
 # Shared-reference flop source
 
-This backend source qualifies three additional BTN facing-bet decisions in one physical game. It builds the game once and trains **two fresh CFR+ reference policies**, then checks both policies and the primary candidate at **every question**. The original eleven-question website remains unchanged; this source is available through the owned Java API and offline CLI, with no HTTP route or deployment added.
+This backend source qualifies three additional BTN facing-bet decisions in one physical game. It builds the game once and trains **two fresh CFR+ reference policies**, then checks both policies and the primary candidate at **every question**. The original eleven-question website remains unchanged. The source is independently usable through its owned Java API and offline CLI, and is consumed by the separate default-disabled fourteen-question backend collection.
 
 ## Model and results
 
@@ -64,4 +64,4 @@ Adversarial tests cover missing/duplicated/reordered hands, altered game/key/act
 
 “I separated expensive strategy qualification from interactive training. A batch owns one physical game and two independently initialized reference runs, checks every selected decision against both, and creates an opaque capability only when the complete batch passes. A pinned startup replay then builds an immutable cache. The trainer cannot trust client EVs or deserialized success flags; it uses that cache to grade decisions and replay saved sessions. Sharing the pair cuts the reference iteration budget across these three questions by two thirds without removing any per-question validation.”
 
-The next step is a default-disabled HTTP adapter and a separately versioned collection joining these three contexts to the existing eleven. That would make fourteen questions, with seven robust calls, four bets, two folds and one check. It is not the current website count. Check/bet variety in this weak-range model remains blocked by certified zero reach after BB checks; changing that requires a separately declared game or objective. Broader ranges, boards, later betting, rake and six active players remain separate solver work.
+The [separate v5 backend collection](fourteen-question-flop-collection.md) now joins these three contexts to the existing eleven and exposes a default-disabled cached HTTP API. Its fourteen questions contain seven robust calls, four bets, two folds and one check. Frontend integration is next; fourteen is not the current website count. Check/bet variety in this weak-range model remains blocked by certified zero reach after BB checks; changing that requires a separately declared game or objective. Broader ranges, boards, later betting, rake and six active players remain separate solver work.

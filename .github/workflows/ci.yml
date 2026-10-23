@@ -55,6 +55,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_weak_range_flop_coverage.py'
           python3 -m unittest discover -s scripts -p 'test_check_certified_reach_coverage.py'
           python3 -m unittest discover -s scripts -p 'test_check_shared_call_flop_feedback.py'
+          python3 -m unittest discover -s scripts -p 'test_check_call_flop_collection.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -517,5 +518,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: qualified-collection-compose-log, path: qualified-collection-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  call-flop-collection-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-call-flop-collection.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_call_flop_collection.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Call collection source is absent without opt-in
+        run: python3 scripts/smoke-call-flop-collection.py --disabled
+      - name: Six-source physical qualification, fourteen cached questions and canonical review
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-call-flop-collection.yml up -d --no-deps api
+          python3 scripts/smoke-call-flop-collection.py
+      - name: Call collection service logs
+        if: always()
+        run: docker compose logs --no-color > call-collection-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: call-collection-compose-log, path: call-collection-compose.log }
       - if: always()
         run: docker compose down -v
