@@ -114,6 +114,8 @@ jobs:
         run: |
           cmp ../docs/data/supplied-eleven-question-flop-collection-review.json src/test-data/qualified-flop-collection-review.json
           cmp ../docs/data/supplied-weak-hand-qualified-flop-drill.json src/test-data/weak-hand-flop-drill.json
+      - name: Check fourteen-question UI fixture bytes
+        run: cmp ../docs/data/supplied-fourteen-question-flop-collection-review.json src/test-data/call-flop-collection-review.json
       - name: Keep collection UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence
