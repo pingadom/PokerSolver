@@ -1,0 +1,24 @@
+# Local opt-in: all six physical source qualifications replay before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_CALL_FLOP_COLLECTION_ENABLED: "true"
+      TRAINER_CALL_FLOP_COLLECTION_MANIFEST_PATH: /opt/pokerlab/call-flop-collection/supplied-fourteen-question-flop-collection-manifest.json
+      TRAINER_CALL_FLOP_COLLECTION_HASH: 62bda418612e3b7c336652c960e16c1433eba3730b94b7b2cfb3e3e30cdbb619
+    volumes:
+      - ./docs/data/supplied-ten-question-flop-collection-manifest.json:/opt/pokerlab/call-flop-collection/supplied-ten-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-request.json:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-btn-curriculum-request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-four-button-hand-btn-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-request.json:/opt/pokerlab/call-flop-collection/supplied-paired-four-hand-curriculum-request.json:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-paired-four-hand-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-eleven-question-flop-collection-manifest.json:/opt/pokerlab/call-flop-collection/supplied-eleven-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-request.json:/opt/pokerlab/call-flop-collection/supplied-weak-hand-qualified-flop-request.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-weak-hand-qualified-flop-report.json.gz:ro
+      - ./docs/data/supplied-fourteen-question-flop-collection-manifest.json:/opt/pokerlab/call-flop-collection/supplied-fourteen-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-shared-call-flop-request.json:/opt/pokerlab/call-flop-collection/supplied-shared-call-flop-request.json:ro
+      - ./docs/data/supplied-shared-call-flop-report.json.gz:/opt/pokerlab/call-flop-collection/supplied-shared-call-flop-report.json.gz:ro
