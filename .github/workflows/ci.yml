@@ -19,7 +19,7 @@ jobs:
       matrix:
         group: [solver-0, solver-1, solver-2, solver-3, solver-4, solver-5, solver-6, solver-7, services-0, services-1]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-java@v6
         with: { distribution: temurin, java-version: "21", cache: maven }
       - name: Build dependencies and check all formatting
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v8
         with:
           pattern: junit-results-*
@@ -93,7 +93,7 @@ jobs:
     defaults:
       run: { working-directory: frontend }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with: { node-version: "24" }
       - name: Keep interval UI fixture identical to physically replayed evidence
@@ -127,7 +127,7 @@ jobs:
     defaults:
       run: { working-directory: infrastructure/terraform }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: hashicorp/setup-terraform@v4
         with: { terraform_version: "1.13.5" }
       - run: terraform fmt -check -recursive
@@ -137,7 +137,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer.yml -f docker-compose.trainer-side-pot.yml config --quiet
@@ -342,7 +342,7 @@ jobs:
     # Independent three-source qualification; preserve the existing Compose budget.
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-mixed-flop-interval-collection.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_mixed_flop_collection.py'
@@ -374,7 +374,7 @@ jobs:
     # Independent four-source qualification; preserve the existing Compose budget.
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose config --quiet
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-expanded-flop-interval-collection.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_interval_expanded_flop_collection.py'
@@ -405,7 +405,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-refined-flop-interval.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_refined_flop_interval.py'
       - run: docker compose up --build -d
@@ -435,7 +435,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-paired-flop-interval.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_paired_flop_interval.py'
       - run: docker compose up --build -d
@@ -465,7 +465,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-weak-hand-flop-interval.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_weak_hand_flop_interval.py'
       - run: docker compose up --build -d
@@ -495,7 +495,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-qualified-flop-collection.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_qualified_flop_collection.py'
       - run: docker compose up --build -d
@@ -525,7 +525,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-call-flop-collection.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_call_flop_collection.py'
       - run: docker compose up --build -d
