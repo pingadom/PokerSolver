@@ -176,7 +176,7 @@ export default function CallFlopCollectionPage() {
     if (metadata) { try { window.localStorage.removeItem(callSessionKey(metadata.collectionHash)); } catch { /* The session can still reset in memory. */ } }
     setSessionNotice(""); clear(); window.history.replaceState(null, "", "#interval-call-flop"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
-  return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page expanded-flop-collection-page btn-flop-interval-page${question?.decision.legacy?.decision.legacy?.decision.kind === "BB_FACING_BET" ? " later-flop-interval-page" : ""}`}>
+  return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page expanded-flop-collection-page btn-flop-interval-page call-flop-collection-page${question?.decision.legacy?.decision.legacy?.decision.kind === "BB_FACING_BET" ? " later-flop-interval-page" : ""}`}>
     <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP PRACTICE · FOURTEEN DECISIONS</p>
@@ -204,7 +204,6 @@ export default function CallFlopCollectionPage() {
                 disabled={busy} onClick={() => navigate(i)}>{i + 1} · {callQuestionLabel(q)}{attempts.some(a => a.questionIndex === i) ? " ✓" : ""}</button>)}
             </nav>
             </details>
-            {index === questions.length - 1 && <p className="collection-end">Last question · {covered} of {questions.length} practised. Review your session or revisit a decision.</p>}
             {attempts.length >= 100 && <p role="status">Attempt limit reached. Navigation, review and export remain available.</p>}
           </>}>
           {review && <section className="interval-review" aria-label="Independent flop practice review">
