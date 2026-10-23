@@ -7,9 +7,9 @@ export const pairedFlopActionLabel = (action: PairedFlopAction, question: Pick<P
 export const pairedFlopClassificationLabel = (move: Pick<PairedFlopIntervalMove, "classification">) => move.classification === "WITHIN_LIMIT" ? "Within limit"
   : move.classification === "OUTSIDE_LIMIT" ? "Outside limit" : "Strategy-dependent";
 
-export default function PairedFlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children, prompt }: {
+export default function PairedFlopIntervalDecisionTable({ question, feedback, knownMoves, attemptCount, busy, submit, controls, children, prompt, researchDescription }: {
   question: Omit<PairedFlopIntervalQuestion, "questionIndex">; feedback: Pick<PairedFlopIntervalFeedback, "selected" | "alternatives"> | null; knownMoves?: PairedFlopIntervalMove[];
-  attemptCount: number; busy: boolean; submit: (action: PairedFlopAction) => void; controls: ReactNode; children?: ReactNode; prompt?: string;
+  attemptCount: number; busy: boolean; submit: (action: PairedFlopAction) => void; controls: ReactNode; children?: ReactNode; prompt?: string; researchDescription?: string;
 }) {
   const c = question.context;
   return <>
@@ -63,7 +63,7 @@ export default function PairedFlopIntervalDecisionTable({ question, feedback, kn
       <ol>{c.preflopHistory.map((move, i) => <li key={i}>{move.seat}: {move.kind.replaceAll("_", " ").toLowerCase()}{move.amountBb > 0 ? ` ${move.amountBb} bb` : ""}</li>)}</ol>
       <p>Flop: BB bet {c.betSizeBb} bb. BTN faces a call of {c.toCallBb} bb.</p>
       <p>Report <code>{question.reportHash}</code></p>
-      <p>These four supplied BTN hands form a small research drill with two active players. Source-history reach is unavailable; public trainer admission remains off.</p>
+      <p>{researchDescription ?? "These four supplied BTN hands form a small research drill with two active players. Source-history reach is unavailable; public trainer admission remains off."}</p>
       <p>Security slack {question.securitySlackBb} bb · Minimum question reach {question.minimumReach}, conditioned on the physical flop with hero’s past cancelled.</p>
     </details>
   </>;

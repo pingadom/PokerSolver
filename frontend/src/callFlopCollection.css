@@ -1,0 +1,6 @@
+.call-question-picker { margin-block: 7px; }
+.call-question-picker > summary { cursor: pointer; color: #ccd4e4; font-size: .85rem; }
+.call-session-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.call-session-tools label { display: inline-flex; align-items: center; gap: 8px; }
+.call-session-tools input { max-width: 220px; font-size: .8rem; }
+.call-session-tools p { font-size: .8rem; color: #adb5c5; margin: 0; }
