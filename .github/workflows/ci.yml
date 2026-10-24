@@ -56,6 +56,11 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_certified_reach_coverage.py'
           python3 -m unittest discover -s scripts -p 'test_check_shared_call_flop_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_call_flop_collection.py'
+      - name: Independently verify unpaired-board discovery and qualified source
+        if: matrix.group == 'solver-2'
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_check_unpaired_flop_discovery.py'
+          python3 -m unittest discover -s scripts -p 'test_check_unpaired_shared_flop.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7

@@ -1,0 +1,1076 @@
+{
+  "attempts" : [ {
+    "action" : "fold",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 2.0000014089305296E-8
+      }, {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -5.388392099424343,
+        "lowerLossBb" : 2.387541256943708,
+        "upperEvBb" : -5.387541266943708,
+        "upperLossBb" : 2.388392109424357
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 2.0000014089305296E-8
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 0,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "2c 3c",
+        "informationSet" : "3:supplied-flop-one-bet:2c 3c:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 0,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "call",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 2.0000014089305296E-8
+      }, {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -5.388392099424343,
+        "lowerLossBb" : 2.387541256943708,
+        "upperEvBb" : -5.387541266943708,
+        "upperLossBb" : 2.388392109424357
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -5.388392099424343,
+        "lowerLossBb" : 2.387541256943708,
+        "upperEvBb" : -5.387541266943708,
+        "upperLossBb" : 2.388392109424357
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 1,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "2c 3c",
+        "informationSet" : "3:supplied-flop-one-bet:2c 3c:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 0,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "fold",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 4.025339550391367,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 4.029031648230129
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.025339560391381,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.029031638230129,
+        "upperLossBb" : 0.0036920778387479203
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 4.025339550391367,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 4.029031648230129
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 2,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "Ah Kh",
+        "informationSet" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 1,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "call",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 4.025339550391367,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 4.029031648230129
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.025339560391381,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.029031638230129,
+        "upperLossBb" : 0.0036920778387479203
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.025339560391381,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.029031638230129,
+        "upperLossBb" : 0.0036920778387479203
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 3,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "Ah Kh",
+        "informationSet" : "3:supplied-flop-one-bet:Ah Kh:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 1,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "fold",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.166519407301097,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.167314747305381
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.166519417301111,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.167314737305381,
+        "upperLossBb" : 7.953200042702946E-4
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.166519407301097,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.167314747305381
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 4,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "As Qs",
+        "informationSet" : "3:supplied-flop-one-bet:As Qs:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 2,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "call",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.166519407301097,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.167314747305381
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.166519417301111,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.167314737305381,
+        "upperLossBb" : 7.953200042702946E-4
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.166519417301111,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.167314737305381,
+        "upperLossBb" : 7.953200042702946E-4
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 5,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "As Qs",
+        "informationSet" : "3:supplied-flop-one-bet:As Qs:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 2,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "fold",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.231346907100404,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.232467700712091
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.231346917100418,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.232467690712091,
+        "upperLossBb" : 0.0011207736116727318
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.231346907100404,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.232467700712091
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 6,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "Qh Th",
+        "informationSet" : "3:supplied-flop-one-bet:Qh Th:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 3,
+      "totalQuestions" : 4
+    }
+  }, {
+    "action" : "call",
+    "feedback" : {
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 7.231346907100404,
+        "upperEvBb" : -2.999999989999986,
+        "upperLossBb" : 7.232467700712091
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.231346917100418,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.232467690712091,
+        "upperLossBb" : 0.0011207736116727318
+      } ],
+      "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "maximumLossBb" : 0.01,
+      "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+      "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+      "selected" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 4.231346917100418,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 4.232467690712091,
+        "upperLossBb" : 0.0011207736116727318
+      },
+      "trainerAdmission" : false
+    },
+    "index" : 7,
+    "question" : {
+      "decision" : {
+        "beliefs" : "EXPLICIT_SUPPLIED_CONDITIONAL_JOINT_PRIOR/v1",
+        "chanceModel" : "ORIGINAL_JOINT_DEAL_ONCE_PHYSICAL_FLOP_PLUS_EXACT_RESIDUAL/v1",
+        "context" : {
+          "actingSeat" : "BTN",
+          "betSizeBb" : 3.25,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "bet",
+            "amountBb" : 3.25,
+            "seat" : "BB"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BTN",
+            "status" : "ACTING"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 6.25,
+            "remainingStackBb" : 93.75,
+            "seat" : "BB",
+            "status" : "ACTIVE"
+          } ],
+          "potBb" : 9.75,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 3.25
+        },
+        "evScope" : "ABSOLUTE_TERMINAL_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+        "hero" : "BTN",
+        "heroCards" : "Qh Th",
+        "informationSet" : "3:supplied-flop-one-bet:Qh Th:|BB:call:6d Qc Td:bet",
+        "maximumLossBb" : 0.01,
+        "minimumReach" : 1.0E-4,
+        "model" : "SUPPLIED_JOINT_PREFLOP_ONE_SELECTED_FLOP_ONE_BET_EXACT_CHECKDOWN/v1",
+        "publicationStatus" : "SHARED_REFERENCE_PHYSICAL_FLOP_DRILL_RESEARCH_ONLY",
+        "reachUnits" : "COUNTERFACTUAL_QUESTION_GIVEN_PHYSICAL_FLOP_HERO_PAST_CANCELLED/v1",
+        "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+        "securitySlackBb" : 1.0E-8,
+        "selection" : "ORDERED_ALL_QUALIFIED_SHARED_REFERENCE_QUESTIONS/v1",
+        "sourceHistoryReachStatus" : "UNAVAILABLE_NO_SOURCE_POLICY",
+        "trainerAdmission" : false
+      },
+      "index" : 3,
+      "totalQuestions" : 4
+    }
+  } ],
+  "counts" : {
+    "distinctQuestions" : 4,
+    "outsideLimit" : 4,
+    "strategyDependent" : 0,
+    "totalQuestions" : 4,
+    "withinLimit" : 4
+  },
+  "reportHash" : "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+  "schemaVersion" : "pokerlab-shared-flop-review/v1"
+}
