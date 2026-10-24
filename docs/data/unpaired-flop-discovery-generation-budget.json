@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "pokerlab-unpaired-flop-discovery-generation-budget/v1",
+  "scope": "NEW_BOARD_COMPLETE_ORIGINAL_FACE_DISCOVERY_NOT_TRAINER_QUALIFICATION",
+  "base": "ddfc3733d1de17e031e318d5cca296992a6c2fce",
+  "trainerAdmission": false,
+  "parentRequestSha256": "79f079acc7b47c5abf30fb5f328bc773eae6732310b731d6a5c76b7f7be2bfb5",
+  "coverageRequestSha256": "d9279575af66c10b8723110b9444092dbca30b180a7b9d4afc662e54a225a961",
+  "controlRequestSha256": "7e1f4c389426615841e26e189d05d9c4dc9d7d015111e8a8f8ce3ce7d9bcee95",
+  "unchangedQualificationGateSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "physicalGameBuilds": 2,
+  "standaloneParentStudies": 1,
+  "plannedCaseAttempts": 8,
+  "maximumActionComputations": 16,
+  "maximumParentSolves": 25,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "allOriginalNumericAndCompilerCapsPreserved": true,
+  "onRejection": "Retain every outcome. No substituted board, prior, hand, algorithm, threshold or automatic retry."
+}

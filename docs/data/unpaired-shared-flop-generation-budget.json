@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "pokerlab-unpaired-shared-flop-generation-budget/v1",
+  "scope": "AFTER_POSITIVE_DISCOVERY_ONE_OWNED_QUALIFICATION_AND_REVIEW",
+  "trainerAdmission": false,
+  "base": "ddfc3733d1de17e031e318d5cca296992a6c2fce",
+  "requestSha256": "5d17ed90d70640574057fa7adf8cc30ff80ee82d7f6777b30e23a1b8db8cf74f",
+  "discoveryReceiptSha256": "de490061bd9fdf4f0062f869f15230fa0244bbe1906e5f3cce102ea859245eee",
+  "discoveryReportStoredSha256": "c03fac5c79c563a755325841e9266755c36e68e2c7e1d2753cadf5e31111a4da",
+  "unchangedGateSourceSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "physicalGameBuilds": 1,
+  "conditionalStudies": 4,
+  "maximumActionComputations": 8,
+  "maximumParentSolves": 12,
+  "freshReferenceRuns": 2,
+  "referenceIterations": [
+    80000,
+    160000
+  ],
+  "totalReferenceIterations": 240000,
+  "maximumReferenceVisitedNodes": 635040000,
+  "selectedPolicyAssessments": 12,
+  "maximumEndpointCertificates": 32,
+  "maximumCompilerUnits": 160000000,
+  "maximumLpPivots": 320000,
+  "maximumLpArithmeticWork": 128000000000,
+  "maximumReportExpandedBytes": 8388608,
+  "maximumReviewExpandedBytes": 524288,
+  "reviewChoices": [
+    {
+      "questionIndex": 0,
+      "action": "fold"
+    },
+    {
+      "questionIndex": 0,
+      "action": "call"
+    },
+    {
+      "questionIndex": 1,
+      "action": "fold"
+    },
+    {
+      "questionIndex": 1,
+      "action": "call"
+    },
+    {
+      "questionIndex": 2,
+      "action": "fold"
+    },
+    {
+      "questionIndex": 2,
+      "action": "call"
+    },
+    {
+      "questionIndex": 3,
+      "action": "fold"
+    },
+    {
+      "questionIndex": 3,
+      "action": "call"
+    }
+  ],
+  "automaticRetries": 0,
+  "allOriginalNumericAndCompilerCapsPreserved": true,
+  "onRejection": "Retain whole failed source. Do not select a subset, change policy budgets, gates, priors or board. No review on failed whole-batch qualification.",
+  "reviewGeneration": "Create from the exact same owned qualified result: zero additional replay/reference runs."
+}
