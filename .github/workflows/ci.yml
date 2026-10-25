@@ -130,6 +130,8 @@ jobs:
         run: cmp ../docs/data/supplied-four-question-interval-collection-review.json src/test-data/interval-collection-review.json
       - name: Keep seven-question UI fixture identical to physically replayed evidence
         run: cmp ../docs/data/supplied-seven-question-interval-collection-review.json src/test-data/interval-collection-seven-review.json
+      - name: Check eighteen-question UI fixture bytes
+        run: cmp ../docs/data/supplied-eighteen-question-flop-collection-review.json src/test-data/unpaired-flop-collection-review.json
       - run: npm install --global pnpm@11.25.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint && pnpm typecheck && pnpm test && pnpm build
