@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [eighteen-question backend trainer](docs/unpaired-flop-collection.md) combines the existing fourteen decisions with all four qualified hands on 6♦ T♦ Q♣. Its separate default-off v6 API physically replays seven sources once, then serves cached questions, EV/loss grades and exact reviews. Older trainer routes and source pins remain unchanged.
+
 The [unpaired physical-flop source](docs/unpaired-flop-source.md) adds four qualified backend fold/call decisions on 6♦ T♦ Q♣, with independent physical/LP checks, two fresh reference policies and an exact eight-attempt review. Four after-check cases remain explicitly rejected with certified zero-reach witnesses. A new CLI generates the report and review from one owned solve; website collections remain separately pinned.
 
 The [certified negative-reach mode](docs/certified-negative-reach.md) now explains four previously numerical after-check failures with original-LP witnesses of zero reach. It preserves the four positive interval results and the existing trainer, with separately versioned replay and independent physical/security checks.

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-flop-interval-collection-manifest/v6",
+  "collectionHash": "b1302c7d2ab8eb9e506567ca4d73c6a754e11b38470612d16bc090ffe7fe95d2",
+  "legacyManifestFile": "supplied-fourteen-question-flop-collection-manifest.json",
+  "legacyCollectionHash": "62bda418612e3b7c336652c960e16c1433eba3730b94b7b2cfb3e3e30cdbb619",
+  "legacyManifestSha256": "3d3c8d91dc62cefb853561a0688b0341f4596f324fd9ee2e8e1a92f67014f127",
+  "batchRequestFile": "supplied-unpaired-shared-flop-request.json",
+  "batchRequestSha256": "5d17ed90d70640574057fa7adf8cc30ff80ee82d7f6777b30e23a1b8db8cf74f",
+  "batchReportFile": "supplied-unpaired-shared-flop-report.json.gz",
+  "batchReportStoredSha256": "39207f874e76252e592fde3645e7b10d8447876184c7216e8298295ba944d0a9",
+  "batchReportHash": "c5845cabc3a93208520549d5893ea311ad3c5409f792b96729b0d325fab077c9",
+  "sharedInputHash": "ad38e633f247e0746498cf719c48b13e15e50981ad5aea4125630280f547c5c4",
+  "startupBudget": {
+    "sourceReplays": 7,
+    "freshReferenceRuns": 14,
+    "freshIterations": 1212000
+  }
+}

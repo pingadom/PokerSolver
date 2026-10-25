@@ -50,6 +50,9 @@ pokerlab:
     qualified-flop-collection-enabled: ${TRAINER_QUALIFIED_FLOP_COLLECTION_ENABLED:false}
     qualified-flop-collection-manifest-path: ${TRAINER_QUALIFIED_FLOP_COLLECTION_MANIFEST_PATH:}
     qualified-flop-collection-hash: ${TRAINER_QUALIFIED_FLOP_COLLECTION_HASH:}
+    unpaired-flop-collection-enabled: ${TRAINER_UNPAIRED_FLOP_COLLECTION_ENABLED:false}
+    unpaired-flop-collection-manifest-path: ${TRAINER_UNPAIRED_FLOP_COLLECTION_MANIFEST_PATH:}
+    unpaired-flop-collection-hash: ${TRAINER_UNPAIRED_FLOP_COLLECTION_HASH:}
     call-flop-collection-enabled: ${TRAINER_CALL_FLOP_COLLECTION_ENABLED:false}
     call-flop-collection-manifest-path: ${TRAINER_CALL_FLOP_COLLECTION_MANIFEST_PATH:}
     call-flop-collection-hash: ${TRAINER_CALL_FLOP_COLLECTION_HASH:}
