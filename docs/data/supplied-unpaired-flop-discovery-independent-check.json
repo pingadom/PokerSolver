@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "pokerlab-independent-unpaired-flop-discovery/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "board": [
+    "6d",
+    "Qc",
+    "Td"
+  ],
+  "parentCheck": {
+    "originalLpCertificatesIndependentlyChecked": 2,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fullBoardHandEvaluations": 31584384,
+    "fixedRunoutsRegenerated": 15984,
+    "literalTreeStates": 1321,
+    "policyInformationSets": 73,
+    "nashConvBb": 3.885780586188048e-16,
+    "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+  },
+  "solvedCases": 4,
+  "originalActionEndpointCertificatesChecked": 32,
+  "certifiedRejectedCases": [
+    {
+      "hand": "2c 3c",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041432170535796904,
+      "maximumOriginalRealizationDifference": 1.874742752597071e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 7.586491280797059e-17,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "Ah Kh",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041432170535796904,
+      "maximumOriginalRealizationDifference": 1.874742752597071e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 7.586491280797059e-17,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "As Qs",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041432170535796904,
+      "maximumOriginalRealizationDifference": 1.874742752597071e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 7.586491280797059e-17,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    },
+    {
+      "hand": "Qh Th",
+      "questionReach": 0.0,
+      "certifiedReachLowerBound": -1e-08,
+      "fullParentHeroBestResponse": -0.041432170535796904,
+      "maximumOriginalRealizationDifference": 1.874742752597071e-17,
+      "exactOriginalCertificate": {
+        "primalViolation": 7.586491280797059e-17,
+        "dualViolation": 0.0,
+        "dualityGap": 0.0
+      }
+    }
+  ],
+  "discoveredMoves": [
+    {
+      "hand": "2c 3c",
+      "withinLimit": "fold"
+    },
+    {
+      "hand": "Ah Kh",
+      "withinLimit": "call"
+    },
+    {
+      "hand": "As Qs",
+      "withinLimit": "call"
+    },
+    {
+      "hand": "Qh Th",
+      "withinLimit": "call"
+    }
+  ],
+  "checkerSourceSha256": "13470094dfd1ec885014466525b0db6c7d0bcf7575039b5aae863102b55ddb2f",
+  "generationBudgetSha256": "46f99978f8ca897ccf9f21c001e70884a037e7a04fd620517ecd266c430dcc2b",
+  "requestSha256": "d9279575af66c10b8723110b9444092dbca30b180a7b9d4afc662e54a225a961",
+  "parentStoredSha256": "8e024485cb04eaaecc9a509fa0da51b5f929d6b8178be3dbcf23b8f47b3c6bce",
+  "coverageStoredSha256": "c03fac5c79c563a755325841e9266755c36e68e2c7e1d2753cadf5e31111a4da"
+}
