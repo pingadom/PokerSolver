@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "pokerlab-big-blind-pairwise-feedback-generation-budget/v1",
+  "scope": "ALL_SIX_BB_CONTEXTS_NO_SELECTED_OUTCOME_DROPPING",
+  "trainerAdmission": false,
+  "requestSha256": "e58dac2b469b1c2771ae948c958867c1f80c81b75f64ab9dcc1b284fc95910b1",
+  "pairwiseStudySha256": "5b7b4e6c428fbeb5549460b2ac6257faa359536faf327bd18b8e18cd0156414d",
+  "pairwiseReceiptSha256": "cc8d49b40e2fc18fb5587dff6d773ab782d3f4cf84ed65da70ca3ce80ef29857",
+  "unchangedOriginalGateSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 6,
+  "maximumParentSolves": 18,
+  "maximumActionComputations": 12,
+  "maximumEndpointCertificates": 51,
+  "freshReferenceRuns": 2,
+  "referenceIterations": [
+    80000,
+    160000
+  ],
+  "totalReferenceIterations": 240000,
+  "selectedPolicyAssessments": 18,
+  "maximumReferenceVisitedNodes": 635040000,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "securitySlack": 1e-08,
+  "requiredMinimumReach": 0.0001,
+  "maximumLossBb": 0.01,
+  "fullParentAndReachedFlopGapBb": 0.001,
+  "originalNumericAndCompilerCapsPreserved": true,
+  "onRejection": "Retain all cases and failures. No relaxed actual/counterfactual reach, face inclusion or accuracy gate. No substituted prior, hand, board or extra seed.",
+  "outputs": [
+    "docs/data/supplied-unpaired-bb-pairwise-feedback-report.json.gz"
+  ]
+}

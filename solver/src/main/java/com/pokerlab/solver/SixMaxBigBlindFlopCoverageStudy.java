@@ -161,6 +161,15 @@ public final class SixMaxBigBlindFlopCoverageStudy {
         var game =
                 new SixMaxSuppliedFlopBettingGame(
                         input.input(), input.flop(), input.betPotFraction());
+        return solve(request, game);
+    }
+
+    static Result solve(Request request, SixMaxSuppliedFlopBettingGame game) throws Exception {
+        var input = request.parent().connected();
+        if (!input.input().equals(game.source().input())
+                || !input.flop().equals(game.binding().flop())
+                || input.betPotFraction() != game.binding().betPotFraction())
+            throw new IllegalArgumentException("BB coverage game identity differs");
         var planned = plan(request);
         // Invalid histories are input failures before any LP, never numerical study outcomes.
         for (var item : planned) SixMaxRefinedConditionalStudy.question(game, item);
