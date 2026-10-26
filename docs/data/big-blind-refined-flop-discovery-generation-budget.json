@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "pokerlab-big-blind-refined-discovery-generation-budget/v1",
+  "scope": "EXPLICIT_ALL_PHASE_REFINEMENT_COMPLETE_SIX_CASE_STUDY_NOT_QUALIFICATION",
+  "trainerAdmission": false,
+  "coverageRequestSha256": "2f5bf2bde5bbb538ed38097978a1601f622fc816d60c4d47eb500daf2a300d4f",
+  "originalRejectedReportSha256": "5ef8f8702de815c30a9667c1bf71070c1079a36816641a7f2a183c9a7d9af3ed",
+  "capturedLpSha256": "439f10b2e1008c638af7c70147762348e743a5ce1c4ac026a71a2144aff2b094",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 6,
+  "maximumActionComputations": 12,
+  "maximumParentSolves": 18,
+  "maximumOriginalLpCertificates": 90,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "securitySlack": 1e-08,
+  "requiredMinimumReach": 0.0001,
+  "maximumLossBb": 0.01,
+  "originalWorkAndNumericCapsPreserved": true,
+  "onRejection": "Retain all outcomes under this predeclared new mode; no automatic retries or fallback to old modes",
+  "outputs": [
+    "docs/data/supplied-unpaired-bb-refined-flop-coverage-report.json.gz"
+  ]
+}

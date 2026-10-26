@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "pokerlab-big-blind-flop-discovery-generation-budget/v1",
+  "scope": "COMPLETE_BIG_BLIND_CONTEXT_DISCOVERY_NOT_TRAINER_QUALIFICATION",
+  "base": "884850eacfa4715e36e8b14e5ee583bd6863f3b0",
+  "trainerAdmission": false,
+  "parentRequestSha256": "79f079acc7b47c5abf30fb5f328bc773eae6732310b731d6a5c76b7f7be2bfb5",
+  "coverageRequestSha256": "cc88be3ac556234d4263d9f78e43de016f1364e1b544cccf952ed41e539fcfe8",
+  "unchangedQualificationGateSha256": "1ba91041189b3afd66ee4ee5fc3bc9f989087b65f2a9452b558418fc4ca81aaf",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 6,
+  "maximumActionComputations": 12,
+  "maximumParentSolves": 18,
+  "maximumOriginalLpCertificates": 90,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "perParentReductionLimit": 8000000,
+  "perActionCompilerLimit": 8000000,
+  "perActionCumulativePivotLimit": 10000,
+  "perActionCumulativeArithmeticLimit": 4000000000,
+  "securitySlack": 1e-08,
+  "requiredMinimumReach": 0.0001,
+  "maximumLossBb": 0.01,
+  "outputs": [
+    "docs/data/supplied-unpaired-bb-flop-coverage-report.json.gz"
+  ],
+  "onRejection": "Retain all six ordered outcomes. No substituted prior, board, hand, algorithm, threshold or retry; no trainer capability."
+}
