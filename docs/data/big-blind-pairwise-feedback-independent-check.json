@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "pokerlab-independent-big-blind-pairwise-feedback/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "sourceCheck": {
+    "schemaVersion": "pokerlab-independent-big-blind-pairwise-study/v1",
+    "trainerAdmission": false,
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0,
+    "contextsChecked": 6,
+    "actionsChecked": 12,
+    "candidateIndices": [
+      1,
+      3
+    ],
+    "qualifiedTrainerQuestions": 0,
+    "exactBinary64OutwardDifferenceChecks": true,
+    "sourceCheck": {
+      "schemaVersion": "pokerlab-independent-big-blind-flop-discovery/v1",
+      "trainerAdmission": false,
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0,
+      "contextsChecked": 6,
+      "actionsChecked": 12,
+      "originalFailuresPreserved": 6,
+      "originalEndpointCertificatesChecked": 51,
+      "parentCheck": {
+        "originalLpCertificatesIndependentlyChecked": 2,
+        "physicalWorlds": 24,
+        "fullBoardsRegenerated": 15792192,
+        "fullBoardHandEvaluations": 31584384,
+        "fixedRunoutsRegenerated": 15984,
+        "literalTreeStates": 1321,
+        "policyInformationSets": 73,
+        "nashConvBb": 3.885780586188048e-16,
+        "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+      },
+      "qualifiedTrainerQuestions": 0,
+      "completeOriginalSecurityFace": true,
+      "heroPastCancellationAndOpponentLikelihoodChecked": true,
+      "capturedUpperLpPhysicallyReconstructed": true,
+      "oracleExactCertificateChecked": true,
+      "classifications": [
+        {
+          "heroCards": "7d 7h",
+          "flopActions": [],
+          "moves": [
+            {
+              "action": "check",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -1.042569225120551,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -0.9769933803621819,
+              "upperLossBb": 0.06557584475836908
+            },
+            {
+              "action": "bet",
+              "classification": "WITHIN_LIMIT",
+              "lowerEvBb": -0.9772897997897935,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -0.9771763080580421,
+              "upperLossBb": 0.000296419427611605
+            }
+          ]
+        },
+        {
+          "heroCards": "7d 7h",
+          "flopActions": [
+            "check",
+            "bet"
+          ],
+          "moves": [
+            {
+              "action": "fold",
+              "classification": "OUTSIDE_LIMIT",
+              "lowerEvBb": -3.00000001,
+              "lowerLossBb": 0.3459602066163132,
+              "upperEvBb": -2.99999999,
+              "upperLossBb": 0.7700185557703474
+            },
+            {
+              "action": "call",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -2.654039783383687,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -2.2299814542296525,
+              "upperLossBb": 0.4240583291540343
+            }
+          ]
+        },
+        {
+          "heroCards": "9d 9h",
+          "flopActions": [],
+          "moves": [
+            {
+              "action": "check",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -0.8424941500411826,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -0.7770665049761413,
+              "upperLossBb": 0.06542764506504128
+            },
+            {
+              "action": "bet",
+              "classification": "WITHIN_LIMIT",
+              "lowerEvBb": -0.7772147247147166,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -0.7771012329892039,
+              "upperLossBb": 0.00014821973857537252
+            }
+          ]
+        },
+        {
+          "heroCards": "9d 9h",
+          "flopActions": [
+            "check",
+            "bet"
+          ],
+          "moves": [
+            {
+              "action": "fold",
+              "classification": "OUTSIDE_LIMIT",
+              "lowerEvBb": -3.00000001,
+              "lowerLossBb": 0.6369762593211465,
+              "upperEvBb": -2.99999999,
+              "upperLossBb": 1.0294445693816936
+            },
+            {
+              "action": "call",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -2.3630237306788535,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -1.9705554406183063,
+              "upperLossBb": 0.3924682900605472
+            }
+          ]
+        },
+        {
+          "heroCards": "Ac Jc",
+          "flopActions": [],
+          "moves": [
+            {
+              "action": "check",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -1.692685457466502,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -1.5650189058111517,
+              "upperLossBb": 0.12766655165535035
+            },
+            {
+              "action": "bet",
+              "classification": "WITHIN_LIMIT",
+              "lowerEvBb": -1.565315325315317,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -1.565141008972227,
+              "upperLossBb": 0.0002964195041652573
+            }
+          ]
+        },
+        {
+          "heroCards": "Ac Jc",
+          "flopActions": [
+            "check",
+            "bet"
+          ],
+          "moves": [
+            {
+              "action": "fold",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -3.00000001,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -2.99999999,
+              "upperLossBb": 0.12446526710861683
+            },
+            {
+              "action": "call",
+              "classification": "STRATEGY_DEPENDENT",
+              "lowerEvBb": -3.254851656122603,
+              "lowerLossBb": 0.0,
+              "upperEvBb": -2.875534742891383,
+              "upperLossBb": 0.37931691323121974
+            }
+          ]
+        }
+      ],
+      "checkerSourceSha256": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60",
+      "requestSha256": "2f5bf2bde5bbb538ed38097978a1601f622fc816d60c4d47eb500daf2a300d4f",
+      "reportStoredSha256": "5332c4e76704ebe7d8c2b8075403210d633088ad90fdadb61fb85387071f3d38",
+      "reportExpandedSha256": "04f67d51fbc6b85dda7744014b2de8fe7c27c9339c222342e7422f3554fb988d",
+      "generationBudgetSha256": "2286577002dce42699067b2e5150f58962b4e5b42ca0ba3f88d82062bb767c77",
+      "capturedLpSha256": "439f10b2e1008c638af7c70147762348e743a5ce1c4ac026a71a2144aff2b094"
+    },
+    "checkerSourceSha256": "add8c02232736e5075ab36b0e5e8f2416c151d746c3498c58286aa73f367445b",
+    "reportStoredSha256": "5b7b4e6c428fbeb5549460b2ac6257faa359536faf327bd18b8e18cd0156414d",
+    "reportExpandedSha256": "755e75cb52c3246529983a3ac3cebbf876edaa09253b662bad37712fbe62fb8c",
+    "generationBudgetSha256": "24556b45810f02e5c16d6b350125caf066d66b5de8dee5b9f66d3907e154a9d2"
+  },
+  "contextsChecked": 6,
+  "policyAssessmentsChecked": 18,
+  "referenceVisitedNodes": 635040000,
+  "qualifiedIndices": [],
+  "outcomes": [
+    {
+      "index": 0,
+      "heroCards": "7d 7h",
+      "flopActions": [],
+      "actionSeparated": false,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.3333333333333333,
+        0.3333333331334354,
+        0.33333333328335857
+      ],
+      "counterfactualReach": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "rejectionReasons": [
+        "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+      ]
+    },
+    {
+      "index": 1,
+      "heroCards": "7d 7h",
+      "flopActions": [
+        "check",
+        "bet"
+      ],
+      "actionSeparated": true,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.0,
+        4.5126002957390616e-09,
+        1.1281571270047587e-09
+      ],
+      "counterfactualReach": [
+        0.25705754614549403,
+        0.2531926520843652,
+        0.25319265257274665
+      ],
+      "rejectionReasons": [
+        "160000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "80000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "PRIMARY:SELECTED_DECISION_REGRET"
+      ]
+    },
+    {
+      "index": 2,
+      "heroCards": "9d 9h",
+      "flopActions": [],
+      "actionSeparated": false,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.3333333333333333,
+        0.33333333315542907,
+        0.333333333288857
+      ],
+      "counterfactualReach": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "rejectionReasons": [
+        "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+      ]
+    },
+    {
+      "index": 3,
+      "heroCards": "9d 9h",
+      "flopActions": [
+        "check",
+        "bet"
+      ],
+      "actionSeparated": true,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.0,
+        4.222770460781157e-09,
+        1.055699215269232e-09
+      ],
+      "counterfactualReach": [
+        0.25705754614549403,
+        0.2531926520843652,
+        0.25319265257274665
+      ],
+      "rejectionReasons": [
+        "160000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "80000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "PRIMARY:SELECTED_DECISION_REGRET"
+      ]
+    },
+    {
+      "index": 4,
+      "heroCards": "Ac Jc",
+      "flopActions": [],
+      "actionSeparated": false,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.33333333333333326,
+        0.3333333328911725,
+        0.33333333322279246
+      ],
+      "counterfactualReach": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "rejectionReasons": [
+        "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+      ]
+    },
+    {
+      "index": 5,
+      "heroCards": "Ac Jc",
+      "flopActions": [
+        "check",
+        "bet"
+      ],
+      "actionSeparated": false,
+      "qualifiedForOfflineDrill": false,
+      "actualReach": [
+        0.0,
+        2.4968978598702202e-09,
+        6.242283675501498e-10
+      ],
+      "counterfactualReach": [
+        0.25705754614549403,
+        0.2531926520843652,
+        0.25319265257274665
+      ],
+      "rejectionReasons": [
+        "160000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "160000:SELECTED_DECISION_REGRET",
+        "80000:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "80000:SELECTED_DECISION_REGRET",
+        "NO_ROBUST_MOVE_OUTSIDE_LIMIT",
+        "NO_ROBUST_MOVE_WITHIN_LIMIT",
+        "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+        "PRIMARY:SELECTED_DECISION_REGRET"
+      ]
+    }
+  ],
+  "checkerSourceSha256": "2e7fe598c358e362d2726d435f0bf3de55252df4a656384425be8de8ecaeb1f9",
+  "reportStoredSha256": "3a7c735e165f4d45642a4106aadbbfa716e698d3fc5969f65f28bea297fc6906",
+  "reportExpandedSha256": "30dbcc3d04d61ac7ad8b9a1c56178121b6064b7613773b16f14cf9daae7c5344",
+  "generationBudgetSha256": "74c6f5be48b08742cc0d5e4c4ed2ac0bab79fe49d5c24116664d28c569770b98"
+}

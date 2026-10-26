@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "pokerlab-big-blind-pairwise-study-generation-budget/v1",
+  "scope": "COMPLETE_OWNED_BB_PAIRWISE_DISCOVERY_NOT_QUALIFICATION",
+  "trainerAdmission": false,
+  "sourceRequestSha256": "2f5bf2bde5bbb538ed38097978a1601f622fc816d60c4d47eb500daf2a300d4f",
+  "frozenCoverageReportSha256": "5332c4e76704ebe7d8c2b8075403210d633088ad90fdadb61fb85387071f3d38",
+  "lossAlgorithm": "OTHER_ACTION_INTERVAL_DIFFERENCES_ZERO_DIAGONAL_OUTWARD_ROUNDED/v1",
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 6,
+  "maximumActionComputations": 12,
+  "maximumParentSolves": 18,
+  "maximumOriginalLpCertificates": 90,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "maximumLossBb": 0.01,
+  "originalNumericAndWorkCapsPreserved": true,
+  "outputs": [
+    "docs/data/supplied-unpaired-bb-pairwise-study.json.gz"
+  ]
+}

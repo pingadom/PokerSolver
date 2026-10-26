@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [BB pairwise-regret survey](docs/big-blind-pairwise-regret.md) tightens conditional loss bounds without changing source EVs, then checks every context against two fresh 80k/160k policies. Two call/fold candidates gain action separation but fail actual reach; all six outcomes remain visible and no rejected question can be graded.
+
 The [big-blind flop study](docs/big-blind-flop-discovery.md) covers all three supplied BB hands, first to act and responding to a BTN bet. A separately versioned phase-I simplex mode certifies all six contexts after preserving the original six numerical failures. Independent checks reconstruct the physical game and verify 51 endpoint certificates. Ambiguous results remain research-only.
 
 The [eighteen-decision table](docs/eighteen-question-table.md) connects the v6 collection to a separate practice page with six-seat tables, EV/loss feedback, saved reviews and an optional study inspection that reveals action EVs without counting an attempt. The new mode loads on demand; older practice routes remain available.
