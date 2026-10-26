@@ -29,6 +29,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "OWNED_PHYSICAL_FLOP_ASCENDING_PARENT_REFINED_BASIS_ENDPOINTS/v7";
     public static final String PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_RESOLVABLE_BASIS_CERTIFIED_NEGATIVE_REACH_ENDPOINTS/v9";
+    public static final String PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM =
+            "OWNED_PHYSICAL_FLOP_ALL_PHASE_REFINED_BASIS_CERTIFIED_REACH_ENDPOINTS/v10";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -457,6 +459,41 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         }
     }
 
+    /** New explicit endpoint mode; unchanged parent, face, reach floor and certificate gates. */
+    static Result solvePhysicalFlopPhaseOneRefined(
+            SixMaxSuppliedFlopBettingGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        try {
+            return solve(
+                    game,
+                    question,
+                    securitySlack,
+                    minimumReach,
+                    FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                    BoundedLinearProgram.MAX_PIVOTS,
+                    BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                    true,
+                    physicalFlopMass(game, question),
+                    false,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true);
+        } catch (IllegalStateException failure) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Certified negative reach witness failed: " + failure.getMessage());
+            rejected.initCause(failure);
+            throw rejected;
+        }
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");
@@ -703,6 +740,46 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             boolean resolvableRefinedBasis,
             boolean certifiedNegativeReach)
             throws Exception {
+        return solve(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                exactPowerOfTwoRows,
+                refinedDirections,
+                ascendingRefined,
+                refinedBasis,
+                resolvableRefinedBasis,
+                certifiedNegativeReach,
+                false);
+    }
+
+    private static <S> Result solve(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows,
+            boolean refinedDirections,
+            boolean ascendingRefined,
+            boolean refinedBasis,
+            boolean resolvableRefinedBasis,
+            boolean certifiedNegativeReach,
+            boolean refinedPhaseOne)
+            throws Exception {
+        if (refinedPhaseOne && !certifiedNegativeReach)
+            throw new IllegalArgumentException(
+                    "All-phase refinement requires explicit certified reach");
         if (certifiedNegativeReach && !resolvableRefinedBasis)
             throw new IllegalArgumentException(
                     "Certified negative reach requires explicit v9 mode");
@@ -827,24 +904,27 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             plans.add(new Plan(choice, linear.constant(), linear.cost()));
         }
         var lpBudget =
-                resolvableRefinedBasis
-                        ? LpBudget.resolvableRefinedBasis(pivotLimit, arithmeticLimit)
-                        : refinedBasis
-                                ? LpBudget.ascendingRefinedBasis(pivotLimit, arithmeticLimit)
-                                : ascendingRefined
-                                        ? LpBudget.ascendingRefinedDirections(
+                refinedPhaseOne
+                        ? LpBudget.phaseOneRefinedBasis(pivotLimit, arithmeticLimit)
+                        : resolvableRefinedBasis
+                                ? LpBudget.resolvableRefinedBasis(pivotLimit, arithmeticLimit)
+                                : refinedBasis
+                                        ? LpBudget.ascendingRefinedBasis(
                                                 pivotLimit, arithmeticLimit)
-                                        : refinedDirections
-                                                ? LpBudget.refinedDirections(
+                                        : ascendingRefined
+                                                ? LpBudget.ascendingRefinedDirections(
                                                         pivotLimit, arithmeticLimit)
-                                                : exactPowerOfTwoRows
-                                                        ? LpBudget.exactPowerOfTwoRows(
+                                                : refinedDirections
+                                                        ? LpBudget.refinedDirections(
                                                                 pivotLimit, arithmeticLimit)
-                                                        : new LpBudget(
-                                                                pivotLimit,
-                                                                arithmeticLimit,
-                                                                physicalFlopMass > 0,
-                                                                physicalFlopMass > 0);
+                                                        : exactPowerOfTwoRows
+                                                                ? LpBudget.exactPowerOfTwoRows(
+                                                                        pivotLimit, arithmeticLimit)
+                                                                : new LpBudget(
+                                                                        pivotLimit,
+                                                                        arithmeticLimit,
+                                                                        physicalFlopMass > 0,
+                                                                        physicalFlopMass > 0);
         int n = face.matrix()[0].length;
         double[] reachCost = new double[n];
         for (int j = 0; j < op.variables(); j++) reachCost[j] = -denominator.cost().get(j);
@@ -1047,21 +1127,23 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         var work = budget.audit();
         return new Result(
                 new Audit(
-                        physicalFlopMass > 0
-                                ? resolvableRefinedBasis
-                                        ? certifiedNegativeReach
-                                                ? PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
-                                                : PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
-                                        : refinedBasis
-                                                ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
-                                                : ascendingRefined
-                                                        ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
-                                                        : refinedDirections
-                                                                ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
-                                                                : exactPowerOfTwoRows
-                                                                        ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
-                                                                        : PHYSICAL_FLOP_ALGORITHM
-                                : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
+                        refinedPhaseOne
+                                ? PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM
+                                : physicalFlopMass > 0
+                                        ? resolvableRefinedBasis
+                                                ? certifiedNegativeReach
+                                                        ? PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                                        : PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                                : refinedBasis
+                                                        ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
+                                                        : ascendingRefined
+                                                                ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
+                                                                : refinedDirections
+                                                                        ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
+                                                                        : exactPowerOfTwoRows
+                                                                                ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
+                                                                                : PHYSICAL_FLOP_ALGORITHM
+                                        : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,

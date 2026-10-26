@@ -118,8 +118,11 @@ public final class SixMaxRefinedFlopCoverageStudy {
                 var audit = rejection.reachFailure();
                 String expectedProtocol =
                         FiniteTwoPlayerConditionalActionIntervals
-                                        .PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
-                                        .equals(request.intervalAlgorithm())
+                                                .PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                                .equals(request.intervalAlgorithm())
+                                        || FiniteTwoPlayerConditionalActionIntervals
+                                                .PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM
+                                                .equals(request.intervalAlgorithm())
                                 ? FiniteTwoPlayerConditionalActionIntervals
                                         .CERTIFIED_REACH_FAILURE_ALGORITHM
                                 : FiniteTwoPlayerConditionalActionIntervals.REACH_FAILURE_ALGORITHM;

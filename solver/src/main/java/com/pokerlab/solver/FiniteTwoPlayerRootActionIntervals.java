@@ -516,6 +516,7 @@ public final class FiniteTwoPlayerRootActionIntervals {
 
     static final class LpBudget {
         private enum Representation {
+            PHASE_ONE_REFINED_BASIS,
             ORIGINAL,
             ASCENDING_L1,
             RESOLVABLE_COSTS,
@@ -574,6 +575,10 @@ public final class FiniteTwoPlayerRootActionIntervals {
             return new LpBudget(pivotLimit, workLimit, Representation.RESOLVABLE_REFINED_BASIS);
         }
 
+        static LpBudget phaseOneRefinedBasis(int pivots, long work) {
+            return new LpBudget(pivots, work, Representation.PHASE_ONE_REFINED_BASIS);
+        }
+
         private LpBudget(int pivotLimit, long workLimit, Representation representation) {
             this.pivotLimit = pivotLimit;
             this.workLimit = workLimit;
@@ -584,6 +589,9 @@ public final class FiniteTwoPlayerRootActionIntervals {
                 throws Exception {
             var result =
                     switch (representation) {
+                        case PHASE_ONE_REFINED_BASIS ->
+                                BoundedLinearProgram.solvePhaseOneRefinedBasis(
+                                        matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
                         case ORIGINAL ->
                                 BoundedLinearProgram.solve(
                                         matrix, rhs, cost, pivotLimit - pivots, workLimit - work);
