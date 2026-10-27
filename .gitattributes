@@ -3,5 +3,5 @@
 *.png binary
 *.pdf binary
 # Frozen sizing requests are hashed as complete input bytes, including line endings.
-docs/data/supplied-unpaired-bb-pot-size-screen-request.json -text
-docs/data/supplied-unpaired-bb-quarter-pot-screen-request.json -text
+docs/data/supplied-unpaired-bb-pot-size-screen-request.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/data/supplied-unpaired-bb-quarter-pot-screen-request.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
