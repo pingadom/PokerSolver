@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+  "trainerAdmission": false,
+  "literalTreeStates": 1609,
+  "informationSets": 89,
+  "originalLpCertificatesChecked": 2,
+  "policiesChecked": 3,
+  "physicalWorlds": 24,
+  "fullBoardsRegenerated": 15792192,
+  "fixedRunoutsRegenerated": 15984,
+  "nashConvBb": 3.726186026398182e-15,
+  "referenceNashConvBb": [
+    2.087894412916569e-09,
+    5.219769547148978e-10
+  ],
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+  "requestStoredSha256": "28bd4ce547e1819904d5cc217f18410c0d939a81aa87f89e0050915891b3675e",
+  "reportStoredSha256": "14cccdffafbb70dbfc54e6ff4467881cbf8d612891277cfcdcb38cab0ca373bf",
+  "immutableHelperSha256": {
+    "check-bb-sizing-physics.py": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65",
+    "check-unpaired-flop-discovery.py": "13470094dfd1ec885014466525b0db6c7d0bcf7575039b5aae863102b55ddb2f",
+    "CheckWeakHandPhysicalCounts.java": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba",
+    "check-supplied-flop-action-bounds.py": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e",
+    "check-refined-parent-study.py": "2424767c3beae323f6dbdc7057bed4234ee80fb57e1a68afeafba1388995a0f7"
+  },
+  "physicalCarrierStoredSha256": "8e024485cb04eaaecc9a509fa0da51b5f929d6b8178be3dbcf23b8f47b3c6bce"
+}
