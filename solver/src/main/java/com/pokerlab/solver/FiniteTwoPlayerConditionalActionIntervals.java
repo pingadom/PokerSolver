@@ -494,6 +494,51 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         }
     }
 
+    /** Owned size-menu event; no caller-selected scaling or fixed-size strategy substitution. */
+    static Result solveSizeMenuPhysicalFlop(
+            SixMaxSuppliedFlopSizeMenuGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        Objects.requireNonNull(game);
+        Objects.requireNonNull(question);
+        if (!question.informationSet()
+                .startsWith(question.hero() + ":" + SixMaxSuppliedFlopSizeMenuGame.FLOP_KEY))
+            throw new IllegalArgumentException("Owned size-menu flop question required");
+        double mass = game.handoffs().getFirst().physicalFlopMass();
+        if (!Double.isFinite(mass)
+                || mass <= 0
+                || game.handoffs().stream().anyMatch(h -> h.physicalFlopMass() != mass))
+            throw new IllegalArgumentException("Inconsistent owned size-menu flop support");
+        try {
+            return solve(
+                    game,
+                    question,
+                    securitySlack,
+                    minimumReach,
+                    FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                    BoundedLinearProgram.MAX_PIVOTS,
+                    BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                    true,
+                    mass,
+                    false,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true);
+        } catch (IllegalStateException failure) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Size-menu conditional witness failed: " + failure.getMessage());
+            rejected.initCause(failure);
+            throw rejected;
+        }
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");

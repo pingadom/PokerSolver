@@ -85,7 +85,9 @@ jobs:
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - name: Independently verify joint flop size-menu physics and corruption controls
         if: matrix.group == 'solver-3'
-        run: python3 -m unittest discover -s scripts -p 'test_check_flop_size_menu.py'
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_check_flop_size_menu.py'
+          python3 -m unittest discover -s scripts -p 'test_check_size_menu_conditional.py'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
