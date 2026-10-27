@@ -7,4 +7,4 @@ docs/data/supplied-unpaired-bb-pot-size-screen-request.json -text whitespace=bla
 docs/data/supplied-unpaired-bb-quarter-pot-screen-request.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Preserve the exact checker bytes recorded by the prequalification receipts,
 # including its terminal blank line; retain the other whitespace checks.
-scripts/check-bb-sizing-physics.py whitespace=blank-at-eol,space-before-tab
+scripts/check-bb-sizing-physics.py whitespace=-blank-at-eof,blank-at-eol,space-before-tab
