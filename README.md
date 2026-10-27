@@ -10,9 +10,9 @@ The [big-blind flop study](docs/big-blind-flop-discovery.md) covers all three su
 
 The [eighteen-decision table](docs/eighteen-question-table.md) connects the v6 collection to a separate practice page with six-seat tables, EV/loss feedback, saved reviews and an optional study inspection that reveals action EVs without counting an attempt. The new mode loads on demand; older practice routes remain available.
 
-The [eighteen-question backend trainer](docs/unpaired-flop-collection.md) combines the existing fourteen decisions with all four qualified hands on 6♦ T♦ Q♣. Its separate default-off v6 API physically replays seven sources once, then serves cached questions, EV/loss grades and exact reviews. Older trainer routes and source pins remain unchanged.
+The [eighteen-question backend trainer](docs/unpaired-flop-collection.md) combines the existing fourteen decisions with all four qualified hands on 6â™¦ Tâ™¦ Qâ™£. Its separate default-off v6 API physically replays seven sources once, then serves cached questions, EV/loss grades and exact reviews. Older trainer routes and source pins remain unchanged.
 
-The [unpaired physical-flop source](docs/unpaired-flop-source.md) adds four qualified backend fold/call decisions on 6♦ T♦ Q♣, with independent physical/LP checks, two fresh reference policies and an exact eight-attempt review. Four after-check cases remain explicitly rejected with certified zero-reach witnesses. A new CLI generates the report and review from one owned solve; website collections remain separately pinned.
+The [unpaired physical-flop source](docs/unpaired-flop-source.md) adds four qualified backend fold/call decisions on 6â™¦ Tâ™¦ Qâ™£, with independent physical/LP checks, two fresh reference policies and an exact eight-attempt review. Four after-check cases remain explicitly rejected with certified zero-reach witnesses. A new CLI generates the report and review from one owned solve; website collections remain separately pinned.
 
 The [certified negative-reach mode](docs/certified-negative-reach.md) now explains four previously numerical after-check failures with original-LP witnesses of zero reach. It preserves the four positive interval results and the existing trainer, with separately versioned replay and independent physical/security checks.
 
@@ -28,7 +28,7 @@ The [qualified weak-hand backend trainer](docs/qualified-weak-hand-flop-trainer.
 
 The [explicit resolvable/refined endpoint mode](docs/resolvable-refined-endpoints.md) now solves a new weak-hand fold decision with independently regenerated physical counts and 298 exact-fraction LP controls. It remains a research result pending fresh trainer qualification.
 
-A distributed Texas Hold’em simulation platform: submit exact hands, split millions of Monte Carlo trials into reproducible batches, process them with independent workers, and inspect equity and progress in a React workspace.
+A distributed Texas Holdâ€™em simulation platform: submit exact hands, split millions of Monte Carlo trials into reproducible batches, process them with independent workers, and inspect equity and progress in a React workspace.
 
 Built around an existing Java poker engine, with PostgreSQL as the durable source of truth and explicit protection against duplicate queue delivery.
 
@@ -54,7 +54,7 @@ The [later BB flop trainer](docs/supplied-flop-feedback.md#later-bb-table-ui) no
 
 The [combined flop practice collection](docs/flop-interval-collection.md) now presents both independently qualified contexts in one pinned session. It preserves the initial check/bet and later fold/call protocols, remembers each question's feedback, counts distinct contexts separately from retries, and exports an exact mixed review. Both sources physically replay once at startup; the browser and HTTP requests use cached evidence. These two decisions from the same supplied hand do not establish broader range coverage or a full-hand strategy.
 
-- 2–9 players with exact hole cards, 0–5 known community cards and up to 100 million trials.
+- 2â€“9 players with exact hole cards, 0â€“5 known community cards and up to 100 million trials.
 - Seeded batches, correct multiway tie splitting, per-player wins/ties/losses/equity.
 - Durable submission/outbox, retry, visibility renewal, dead-letter handling and idempotent finalisation.
 - PostgreSQL migrations and real concurrency tests; optional Redis cache with outage fallback.
@@ -85,13 +85,13 @@ The [bounded suit-refinement model](docs/sixmax-suit-refinement.md) now reveals 
 
 [The actual-card conditional preflop study](docs/sixmax-actual-preflop-conditional-study.md) now solves CO versus BB under fixed full-joint source beliefs, preserves folded-card blockers, and checks every material action EV against fresh independent references. The 3/9bb and 3/9/22bb ladders supply a deterministic offline trainer with public six-seat tables and ten-question reviews. The larger five-target ladder fails feedback stability and exports diagnostics only. Mandatory checkdown, synthetic ranges and no rake remain explicit research limits.
 
-A third [offline conditional trainer scenario](docs/sixmax-actual-preflop-conditional-study.md) now covers BB facing a CO limp–re-raise, with folded callers' chips represented in the six-seat table. All four material decisions pass independent feedback screening.
+A third [offline conditional trainer scenario](docs/sixmax-actual-preflop-conditional-study.md) now covers BB facing a CO limpâ€“re-raise, with folded callers' chips represented in the six-seat table. All four material decisions pass independent feedback screening.
 
 [Supplied joint-range preflop research](docs/sixmax-supplied-joint-preflop.md) now supports larger explicitly declared conditional hand sets without traversing the full six-seat source tree. Two 18-world examples and a deeper 27-world 3/9/22bb example cover BTN/BB defense and CO facing a BTN 3-bet, preserve all folded blockers, pass all 17 material feedback checks and supply offline ten-question drills. Supplied beliefs and unavailable source-history reach remain explicit; a separate unstable example exports diagnostics only.
 
-[Root-action EV intervals](docs/sixmax-root-action-ev-intervals.md) now distinguish whole-game accuracy from ambiguity in alternative moves. The owned solver bounds every root move across an explicitly approximate opponent security face, checks original flows and independent hidden-information continuations, and reports conservative decision-loss ranges. A 27-world five-target A♣J♣ example identifies calling as robustly best while the raise EV spans about 0.196–0.729bb. Strict physical/numerical replay and an optional independent full-plan oracle preserve the diagnostic-only boundary; existing trainer gates remain unchanged.
+[Root-action EV intervals](docs/sixmax-root-action-ev-intervals.md) now distinguish whole-game accuracy from ambiguity in alternative moves. The owned solver bounds every root move across an explicitly approximate opponent security face, checks original flows and independent hidden-information continuations, and reports conservative decision-loss ranges. A 27-world five-target Aâ™£Jâ™£ example identifies calling as robustly best while the raise EV spans about 0.196â€“0.729bb. Strict physical/numerical replay and an optional independent full-plan oracle preserve the diagnostic-only boundary; existing trainer gates remain unchanged.
 
-[Later-decision EV intervals](docs/sixmax-conditional-action-ev-intervals.md) now account for opponent actions changing hidden-hand probabilities. The owned solver certifies positive reach over the complete security face before a bounded linear-fractional reduction, independently checks every posterior and reports all legal moves. In the 27-world BB99 re-raise example, calling has a tiny conservative loss bound while raising to 50bb spans about 8.629–9.112bb. Exact physical replay and a separate full-plan oracle agree; this remains diagnostic-only and leaves trainer admission unchanged.
+[Later-decision EV intervals](docs/sixmax-conditional-action-ev-intervals.md) now account for opponent actions changing hidden-hand probabilities. The owned solver certifies positive reach over the complete security face before a bounded linear-fractional reduction, independently checks every posterior and reports all legal moves. In the 27-world BB99 re-raise example, calling has a tiny conservative loss bound while raising to 50bb spans about 8.629â€“9.112bb. Exact physical replay and a separate full-plan oracle agree; this remains diagnostic-only and leaves trainer admission unchanged.
 
 The [explicit behavioral-floor solver](docs/sixmax-behavior-floor-solver.md) adds a separately identified owned LP solve, independent floor-aware CFR+ and replayable diagnostics for richer actual-card preflop menus. Original-game quality and all-action feedback remain separate gates; the five-target menu is still blocked from training.
 
@@ -103,7 +103,7 @@ The literal-board model also has a proved capacity limit: its 600 history/board 
 
 The [four-question interval collection](docs/sixmax-l1-interval-collection.md) adds qualified BB decisions with 77, 99 and suited AJ. An explicitly selected L1 row representation certifies the original LP constraints and preserves old reports and work caps. The ordered collection binds every source, physically replays all four reports at startup, and supports cached navigation, grading and canonical reviews through a separate default-disabled API. Independent full-plan checks cover 83 fresh LPs and 72 joint witnesses. Browser collection navigation is the next frontend step; general trainer admission remains off.
 
-Java 21 · Maven · Spring Boot 4.1 · PostgreSQL 16 · SQS · Redis 7 · React 19 · TypeScript · Vite · Terraform · ECS Fargate
+Java 21 Â· Maven Â· Spring Boot 4.1 Â· PostgreSQL 16 Â· SQS Â· Redis 7 Â· React 19 Â· TypeScript Â· Vite Â· Terraform Â· ECS Fargate
 
 ## Quick start
 
@@ -175,7 +175,7 @@ Use `exact-plus` in place of `exact` to generate a separate CFR+ validation pack
 
 For the wider synthetic research spot, use `exact-plus target/diverse-validation-pack.json 3000 2026-09-23T12:00:00Z diverse` as the generator arguments to reproduce the [committed exact fixture](solver/src/test/resources/diverse-validation-pack.json). Use `mc-plus target/diverse-sampled-pack.json 3000 10000 17 2026-09-23T12:00:00Z diverse` to compare a faster sampled payoff table. The command prints provisional content-screening findings. Exact payoffs pass the numeric screen, but the ranges remain synthetic and the pack is not served to users.
 
-The [range-sensitivity study](docs/preflop-range-sensitivity.md) re-solves the exact fixture after ±25% one-combo weight changes and records which decisions move; it is part of the content review before any trainer API is enabled.
+The [range-sensitivity study](docs/preflop-range-sensitivity.md) re-solves the exact fixture after Â±25% one-combo weight changes and records which decisions move; it is part of the content review before any trainer API is enabled.
 
 The [focused preflop trainer demo](docs/GTO_Demo_Scope_Review.md) now connects the wider exact two-player solution pack to a ten-decision website drill, with saved-pack identity checks, server-side EV grading and a complete session review. Run it locally with `docker compose -f docker-compose.yml -f docker-compose.trainer.yml up --build -d --scale worker=2`, then open `http://localhost:8080/#trainer`. The synthetic ranges and restricted all-in tree remain validation-only. The solver also has an experimental [six-seat all-in call game](docs/multiway-solver-research.md) with exact multiway payoffs, opt-in research API and local `#multiway` drill; general 6-max betting trees remain future work.
 
@@ -197,10 +197,10 @@ Ten million trials, median of three runs, Ryzen 7 5700X3D / Java 21:
 
 | Engine worker threads | Wall time | Trials/second | Speedup |
 | --------------------- | --------: | ------------: | ------: |
-| 1                     |  14.751 s |       677,904 |   1.00× |
-| 2                     |   7.724 s |     1,294,622 |   1.91× |
-| 4                     |   3.857 s |     2,592,441 |   3.82× |
-| 8                     |   2.253 s |     4,437,734 |   6.55× |
+| 1                     |  14.751 s |       677,904 |   1.00Ã— |
+| 2                     |   7.724 s |     1,294,622 |   1.91Ã— |
+| 4                     |   3.857 s |     2,592,441 |   3.82Ã— |
+| 8                     |   2.253 s |     4,437,734 |   6.55Ã— |
 
 These are engine thread measurements, not AWS or end-to-end queue scaling claims. [Method, raw data and reproduction](docs/benchmarks.md).
 
@@ -244,3 +244,5 @@ The [shared-reference three-hand source](docs/shared-reference-flop-source.md) q
 The [fourteen-question backend collection](docs/fourteen-question-flop-collection.md) joins that batch to the original eleven questions under a separate v5 pin. Its default-disabled API serves cached grades and exact review exports after complete six-source startup, preserving every original question and the explicit same-game sharing. A dedicated Docker smoke exercises all fourteen questions and 28 legal grades. The [table UI](docs/fourteen-question-flop-ui.md), available at `#interval-call-flop`, adds action EVs, feedback, device-saved practice and validated review import/export while keeping older routes separate.
 
 The [joint flop size-menu backend](docs/SOLVER_SIZE_MENU.md) now solves quarter-pot and half-pot BB bets inside one connected preflop/flop game, with a separate BTN pot-size response after a check. Its 1,609-state research study includes original LP witnesses, two fresh CFR+ references and independent physical, perfect-recall and certificate checks. Conditional action bounds and trainer qualification remain the next step.
+
+The [size-menu conditional study](docs/size-menu-conditional-bounds.md) adds original-security-face EV and loss bounds for all three BB actions with 99 in the jointly solved game. Thirteen interval certificates and witness posteriors are independently checked; ambiguous actions remain unresolved and the study grants no trainer admission.
