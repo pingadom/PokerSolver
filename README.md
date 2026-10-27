@@ -1,5 +1,7 @@
 # PokerLab Cloud
 
+The [twenty-decision sizing trainer](docs/twenty-question-sizing-trainer.md) adds two pot-size BB responses through a separately pinned, default-off v7 collection and table UI; existing eighteen-question reviews remain compatible with v6.
+
 The [BB sizing screen and pot-size drill](docs/bb-sizing-primary-screen.md) checks quarter-pot and pot-size models before fresh qualification. Pot-size bets yield two qualified backend responses: call with BB99 and fold with AcJc. Cached public questions, grades and a four-attempt review retain the actual 6.5bb call price; quarter-pot failures and every other context remain visible.
 
 The [BB pairwise-regret survey](docs/big-blind-pairwise-regret.md) tightens conditional loss bounds without changing source EVs, then checks every context against two fresh 80k/160k policies. Two call/fold candidates gain action separation but fail actual reach; all six outcomes remain visible and no rejected question can be graded.

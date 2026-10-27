@@ -1,0 +1,30 @@
+# Local opt-in: all eight physical source qualifications replay before API readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      TRAINER_SIZING_FLOP_COLLECTION_ENABLED: "true"
+      TRAINER_SIZING_FLOP_COLLECTION_MANIFEST_PATH: /opt/pokerlab/sizing-flop-collection/supplied-twenty-question-flop-collection-manifest.json
+      TRAINER_SIZING_FLOP_COLLECTION_HASH: eeeadc2a2addf1e6878af533fe51251a42f3f2afa2f1a1fb7f0dd6e6bb01b9a5
+    volumes:
+      - ./docs/data/supplied-ten-question-flop-collection-manifest.json:/opt/pokerlab/sizing-flop-collection/supplied-ten-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-request.json:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-flop-feedback-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-request.json:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-request.json:ro
+      - ./docs/data/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-later-bb-flop-feedback-report.json.gz:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-request.json:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-btn-curriculum-request.json:ro
+      - ./docs/data/supplied-four-button-hand-btn-curriculum-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-four-button-hand-btn-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-request.json:/opt/pokerlab/sizing-flop-collection/supplied-paired-four-hand-curriculum-request.json:ro
+      - ./docs/data/supplied-paired-four-hand-curriculum-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-paired-four-hand-curriculum-report.json.gz:ro
+      - ./docs/data/supplied-eleven-question-flop-collection-manifest.json:/opt/pokerlab/sizing-flop-collection/supplied-eleven-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-request.json:/opt/pokerlab/sizing-flop-collection/supplied-weak-hand-qualified-flop-request.json:ro
+      - ./docs/data/supplied-weak-hand-qualified-flop-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-weak-hand-qualified-flop-report.json.gz:ro
+      - ./docs/data/supplied-fourteen-question-flop-collection-manifest.json:/opt/pokerlab/sizing-flop-collection/supplied-fourteen-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-shared-call-flop-request.json:/opt/pokerlab/sizing-flop-collection/supplied-shared-call-flop-request.json:ro
+      - ./docs/data/supplied-shared-call-flop-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-shared-call-flop-report.json.gz:ro
+      - ./docs/data/supplied-eighteen-question-flop-collection-manifest.json:/opt/pokerlab/sizing-flop-collection/supplied-eighteen-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-unpaired-shared-flop-request.json:/opt/pokerlab/sizing-flop-collection/supplied-unpaired-shared-flop-request.json:ro
+      - ./docs/data/supplied-unpaired-shared-flop-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-unpaired-shared-flop-report.json.gz:ro
+      - ./docs/data/supplied-twenty-question-flop-collection-manifest.json:/opt/pokerlab/sizing-flop-collection/supplied-twenty-question-flop-collection-manifest.json:ro
+      - ./docs/data/supplied-unpaired-bb-pot-size-feedback-request.json:/opt/pokerlab/sizing-flop-collection/supplied-unpaired-bb-pot-size-feedback-request.json:ro
+      - ./docs/data/supplied-unpaired-bb-pot-size-feedback-report.json.gz:/opt/pokerlab/sizing-flop-collection/supplied-unpaired-bb-pot-size-feedback-report.json.gz:ro

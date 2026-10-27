@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-flop-interval-collection-manifest/v7",
+  "collectionHash": "eeeadc2a2addf1e6878af533fe51251a42f3f2afa2f1a1fb7f0dd6e6bb01b9a5",
+  "legacyManifestFile": "supplied-eighteen-question-flop-collection-manifest.json",
+  "legacyCollectionHash": "b1302c7d2ab8eb9e506567ca4d73c6a754e11b38470612d16bc090ffe7fe95d2",
+  "legacyManifestSha256": "b04b2ae52ed8258df31868fbd7a344e6d6750460f243ca81bf9b2f6c2ffc025e",
+  "potRequestFile": "supplied-unpaired-bb-pot-size-feedback-request.json",
+  "potRequestSha256": "8761b196a7129e65a49b35bf7d6ff2099301544439130881ddf1007a376dfe87",
+  "potReportFile": "supplied-unpaired-bb-pot-size-feedback-report.json.gz",
+  "potReportStoredSha256": "76d67b68c37f242e6f7d77f34bb023bd5811a05b7e4835c4ef9b870d19290c5b",
+  "potReportHash": "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+  "sharedInputHash": "ad38e633f247e0746498cf719c48b13e15e50981ad5aea4125630280f547c5c4",
+  "startupBudget": {
+    "sourceReplays": 8,
+    "freshReferenceRuns": 16,
+    "freshIterations": 1452000
+  }
+}

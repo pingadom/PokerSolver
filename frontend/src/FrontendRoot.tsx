@@ -23,7 +23,10 @@ const CallFlopCollectionPage = lazy(() => import("./CallFlopCollectionPage"));
 
 const UnpairedFlopCollectionPage = lazy(() => import("./UnpairedFlopCollectionPage"));
 
+const SizingFlopCollectionPage = lazy(() => import("./SizingFlopCollectionPage"));
+
 function currentRoute() {
+  if (window.location.hash.startsWith("#interval-sizing-flop")) return "interval-sizing-flop";
   if (window.location.hash.startsWith("#interval-unpaired-flop")) return "interval-unpaired-flop";
   if (window.location.hash.startsWith("#interval-call-flop")) return "interval-call-flop";
   if (window.location.hash.startsWith("#interval-qualified-flop")) return "interval-qualified-flop";
@@ -52,6 +55,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "interval-sizing-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><SizingFlopCollectionPage /></Suspense>;
   if (route === "interval-unpaired-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><UnpairedFlopCollectionPage /></Suspense>;
   if (route === "interval-call-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><CallFlopCollectionPage /></Suspense>;
   if (route === "interval-qualified-flop") return <QualifiedFlopCollectionPage />;

@@ -46,6 +46,16 @@ class BackendEvidenceTest(unittest.TestCase):
                 report.parent.mkdir(parents=True, exist_ok=True)
                 report.write_text(f'<testsuite name="{name}" tests="1" failures="0" errors="0" skipped="0"><testcase name="one"/></testsuite>', encoding='utf-8')
 
+    def test_service_replay_assignment_is_disjoint_and_complete(self):
+        sources={name: 'api' for name in ci.SERVICE_REPLAY_SHARDS}
+        sources.update({'com.example.OtherApiTest': 'api','com.example.SolverTest': 'solver'})
+        groups={g: ci.selected(g,sources) for g in ci.GROUPS}
+        flattened=[name for names in groups.values() for name in names]
+        self.assertEqual(sorted(sources),sorted(flattened))
+        self.assertEqual(len(flattened),len(set(flattened)))
+        for name,bucket in ci.SERVICE_REPLAY_SHARDS.items():
+            self.assertIn(name,groups[f'services-{bucket}'])
+
     def verify(self):
         with contextlib.redirect_stdout(io.StringIO()):
             return ci.verify(self.folder)
@@ -67,7 +77,7 @@ class BackendEvidenceTest(unittest.TestCase):
         assigned = [ci.selected(group, sources) for group in ci.GROUPS]
         self.assertEqual(set(sources), set().union(*map(set, assigned)))
         self.assertEqual(len(sources), sum(map(len, assigned)))
-        self.assertEqual({4, 6, 7}, set(ci.SOLVER_REPLAY_SHARDS.values()))
+        self.assertEqual({4, 5, 6, 7}, set(ci.SOLVER_REPLAY_SHARDS.values()))
         for name, bucket in ci.SOLVER_REPLAY_SHARDS.items():
             self.assertIn(name, ci.selected(f'solver-{bucket}', sources))
             self.assertNotIn(name, ci.selected('solver-3', sources))
@@ -120,7 +130,7 @@ class BackendEvidenceTest(unittest.TestCase):
     def test_old_commit_unfinished_or_changed_class_assignment_never_passes(self):
         path = self.folder / 'junit-results-services-0/backend-ci-manifest-services-0.json'
         original = json.loads(path.read_text(encoding='utf-8'))
-        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v3'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v4')]:
+        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v3'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v4'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v5')]:
             changed = {**original, key: value}
             path.write_text(json.dumps(changed), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'Incomplete or foreign manifest'):

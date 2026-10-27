@@ -80,6 +80,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_bb_sizing_primary_screen.py'
           python3 -m unittest discover -s scripts -p 'test_check_bb_pot_size_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_bb_pot_size_review.py'
+          python3 -m unittest discover -s scripts -p 'test_check_sizing_flop_collection.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7
@@ -605,5 +606,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: unpaired-collection-compose-log, path: unpaired-collection-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  sizing-flop-collection-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-sizing-flop-collection.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_sizing_flop_collection.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Sizing collection source is absent without opt-in
+        run: python3 scripts/smoke-sizing-flop-collection.py --disabled
+      - name: Eight-source physical qualification, twenty cached questions and canonical review
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-sizing-flop-collection.yml up -d --no-deps api
+          python3 scripts/smoke-sizing-flop-collection.py
+      - name: Sizing collection service logs
+        if: always()
+        run: docker compose logs --no-color > sizing-collection-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: sizing-collection-compose-log, path: sizing-collection-compose.log }
       - if: always()
         run: docker compose down -v
