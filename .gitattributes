@@ -2,3 +2,6 @@
 *.sh text eol=lf
 *.png binary
 *.pdf binary
+# Frozen sizing requests are hashed as complete input bytes, including line endings.
+docs/data/supplied-unpaired-bb-pot-size-screen-request.json -text
+docs/data/supplied-unpaired-bb-quarter-pot-screen-request.json -text
