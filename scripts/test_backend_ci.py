@@ -61,6 +61,17 @@ class BackendEvidenceTest(unittest.TestCase):
         self.assertEqual(len(self.sources), summary['classes'])
         self.assertEqual(0, summary['failures'] + summary['errors'])
 
+    def test_expensive_replays_move_to_distinct_shards_without_losing_any_class(self):
+        sources = {name: 'solver' for name in ci.SOLVER_REPLAY_SHARDS}
+        sources.update({'example.solver.OtherTest': 'solver', 'example.api.OtherTest': 'api'})
+        assigned = [ci.selected(group, sources) for group in ci.GROUPS]
+        self.assertEqual(set(sources), set().union(*map(set, assigned)))
+        self.assertEqual(len(sources), sum(map(len, assigned)))
+        self.assertEqual({4, 6, 7}, set(ci.SOLVER_REPLAY_SHARDS.values()))
+        for name, bucket in ci.SOLVER_REPLAY_SHARDS.items():
+            self.assertIn(name, ci.selected(f'solver-{bucket}', sources))
+            self.assertNotIn(name, ci.selected('solver-3', sources))
+
     def test_missing_additional_solver_shards_never_pass(self):
         for bucket in range(2, 8):
             with self.subTest(bucket=bucket):
@@ -109,7 +120,7 @@ class BackendEvidenceTest(unittest.TestCase):
     def test_old_commit_unfinished_or_changed_class_assignment_never_passes(self):
         path = self.folder / 'junit-results-services-0/backend-ci-manifest-services-0.json'
         original = json.loads(path.read_text(encoding='utf-8'))
-        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v3')]:
+        for key, value in [('commit', 'old-head'), ('completed', False), ('completed', 1), ('selectedClasses', []), ('inventoryHash', 'old-inventory'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v3'), ('schemaVersion', 'pokerlab-backend-ci-manifest/v4')]:
             changed = {**original, key: value}
             path.write_text(json.dumps(changed), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'Incomplete or foreign manifest'):

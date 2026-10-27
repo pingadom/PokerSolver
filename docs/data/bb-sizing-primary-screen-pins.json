@@ -1,0 +1,10 @@
+{
+  "quarter-pot": {
+    "storedSha256": "b17a2062ee0cdbbddcef802141a3eccc9a52f0356b4760791a4180fc78975b3e",
+    "expandedSha256": "b186b9cefd96dc534376cd49adb0264e1287f79bf6909296258a9d2987d87860"
+  },
+  "pot-size": {
+    "storedSha256": "e6b3d8fa27dd3e38a80bc43e879a1209b524278d46de0b5489782578cc9a4260",
+    "expandedSha256": "7868032c3f77150be96ecdc43499e8072a73327d1ef1441d2f567b4817443169"
+  }
+}

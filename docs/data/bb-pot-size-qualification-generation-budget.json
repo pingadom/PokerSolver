@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "pokerlab-bb-pot-size-qualification-generation-budget/v1",
+  "scope": "ALL_SIX_POT_SIZE_CONTEXTS_AFTER_COMPLETE_PRIMARY_SCREEN",
+  "trainerAdmission": false,
+  "requestSha256": "8761b196a7129e65a49b35bf7d6ff2099301544439130881ddf1007a376dfe87",
+  "screenReceiptSha256": "3e486dc93c7dd13da6bc1a898fbd14b6565f61c29a7f74627896b4eb7cff664c",
+  "screenReportSha256": "e6b3d8fa27dd3e38a80bc43e879a1209b524278d46de0b5489782578cc9a4260",
+  "screenPrimaryEligibleIndices": [
+    3,
+    5
+  ],
+  "physicalGameBuilds": 1,
+  "plannedCaseAttempts": 6,
+  "maximumParentSolves": 18,
+  "maximumActionComputations": 12,
+  "maximumEndpointCertificates": 51,
+  "freshReferenceRuns": 2,
+  "referenceIterations": [
+    80000,
+    160000
+  ],
+  "totalReferenceIterations": 240000,
+  "selectedPolicyAssessments": 18,
+  "maximumReferenceVisitedNodes": 635040000,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "allOriginalGatesAndNumericCapsPreserved": true,
+  "output": "docs/data/supplied-unpaired-bb-pot-size-feedback-report.json.gz",
+  "quarterPotFreshReferenceRuns": 0
+}
