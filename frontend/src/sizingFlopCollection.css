@@ -1,0 +1,11 @@
+@media (min-width: 901px) and (max-height: 980px) {
+  .sizing-flop-collection-page .trainer-topbar { padding-block: 5px; }
+  .sizing-flop-collection-page .hand-play-title h1 { font-size: 26px; }
+  .sizing-flop-collection-page .hand-play-title .eyebrow { margin-bottom: 3px; }
+  .sizing-flop-collection-page .hand-play-disclosure { margin-block: 6px; padding-block: 6px; }
+  .sizing-flop-collection-page .trainer-play { padding: 10px; }
+  .sizing-flop-collection-page .poker-table { height: clamp(235px, 30vh, 270px); }
+  .sizing-flop-collection-page .interval-feedback { padding-block: 6px; margin-top: 6px; }
+  .sizing-flop-collection-page .interval-feedback h2 { margin: 0; font-size: 16px; }
+  .sizing-flop-collection-page .interval-feedback > p { margin: 0; font-size: 12px; line-height: 1.4; }
+}

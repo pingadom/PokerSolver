@@ -15,6 +15,7 @@ import "./flopInterval.css";
 import "./btnFlopInterval.css";
 import "./mixedFlopCollection.css";
 import "./callFlopCollection.css";
+import "./sizingFlopCollection.css";
 
 function download(text: string, pin: string) {
   const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
