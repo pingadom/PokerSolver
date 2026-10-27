@@ -74,6 +74,12 @@ jobs:
         run: |
           python3 -m unittest discover -s scripts -p 'test_check_big_blind_pairwise_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_big_blind_pairwise_feedback.py'
+      - name: Independently verify sizing screens, qualified pot-size source and cached reviews
+        if: matrix.group == 'solver-0'
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_check_bb_sizing_primary_screen.py'
+          python3 -m unittest discover -s scripts -p 'test_check_bb_pot_size_feedback.py'
+          python3 -m unittest discover -s scripts -p 'test_check_bb_pot_size_review.py'
       - name: Verify assigned backend tests
         run: python3 scripts/backend-ci.py run ${{ matrix.group }}
       - uses: actions/upload-artifact@v7

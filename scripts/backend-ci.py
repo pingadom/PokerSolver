@@ -14,7 +14,15 @@ MODULES = ('engine', 'solver', 'shared', 'api', 'worker')
 SOLVER_SHARDS = 8
 SERVICES_SHARDS = 2
 GROUPS = tuple(f'solver-{bucket}' for bucket in range(SOLVER_SHARDS)) + tuple(f'services-{bucket}' for bucket in range(SERVICES_SHARDS))
-SCHEMA = 'pokerlab-backend-ci-manifest/v4'
+SCHEMA = 'pokerlab-backend-ci-manifest/v5'
+# These three complete replay suites previously collided in solver-3. Keep the
+# same eight bounded jobs and inventory, but place each on a different lighter shard.
+# This changes assignment only: no class, method or evidence check is excluded.
+SOLVER_REPLAY_SHARDS = {
+    'com.pokerlab.solver.UnpairedFlopCollectionIntegrationTest': 4,
+    'com.pokerlab.solver.CallFlopCollectionIntegrationTest': 6,
+    'com.pokerlab.solver.SixMaxExpandedFlopIntervalCollectionTest': 7,
+}
 
 
 def inventory():
@@ -47,8 +55,11 @@ def selected(group, sources):
     service = group.startswith('services-')
     bucket = int(group.rsplit('-', 1)[1])
     modulus = SERVICES_SHARDS if service else SOLVER_SHARDS
+    def assigned(name):
+        hashed = int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % modulus
+        return hashed if service else SOLVER_REPLAY_SHARDS.get(name, hashed)
     return [name for name, module in sources.items() if (module != 'solver') == service
-            and int(hashlib.sha256(name.encode('utf-8')).hexdigest(), 16) % modulus == bucket]
+            and assigned(name) == bucket]
 
 
 def manifest(group):

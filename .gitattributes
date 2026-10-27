@@ -2,3 +2,9 @@
 *.sh text eol=lf
 *.png binary
 *.pdf binary
+# Frozen sizing requests are hashed as complete input bytes, including line endings.
+docs/data/supplied-unpaired-bb-pot-size-screen-request.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/data/supplied-unpaired-bb-quarter-pot-screen-request.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve the exact checker bytes recorded by the prequalification receipts,
+# including its terminal blank line; retain the other whitespace checks.
+scripts/check-bb-sizing-physics.py whitespace=-blank-at-eof,blank-at-eol,space-before-tab

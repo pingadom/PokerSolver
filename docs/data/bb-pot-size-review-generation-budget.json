@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-bb-pot-size-review-generation-budget/v1",
+  "scope": "FRESH_SOURCE_REPLAY_ONCE_THEN_CACHED_CANONICAL_REVIEW",
+  "trainerAdmission": false,
+  "requestSha256": "8761b196a7129e65a49b35bf7d6ff2099301544439130881ddf1007a376dfe87",
+  "sourceReportSha256": "76d67b68c37f242e6f7d77f34bb023bd5811a05b7e4835c4ef9b870d19290c5b",
+  "sourceReceiptSha256": "55309d7f7aa0a52755911e77248098efbd626a77e30630cc1ccd1056658a5940",
+  "physicalGameBuilds": 1,
+  "maximumParentSolves": 18,
+  "maximumActionComputations": 12,
+  "freshReferenceRuns": 2,
+  "totalReferenceIterations": 240000,
+  "selectedPolicyAssessments": 18,
+  "cachedReviewGrades": 4,
+  "automaticRetries": 0,
+  "maximumReviewBytes": 1048576,
+  "output": "docs/data/supplied-unpaired-bb-pot-size-review.json"
+}

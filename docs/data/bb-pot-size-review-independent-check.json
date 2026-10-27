@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "pokerlab-independent-bb-pot-size-review/v1",
+  "trainerAdmission": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "sourceCheck": {
+    "screenCheck": {
+      "schemaVersion": "pokerlab-independent-bb-sizing-primary-screen/v1",
+      "trainerAdmission": false,
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0,
+      "models": [
+        {
+          "name": "quarter-pot",
+          "betPotFraction": 0.25,
+          "originalEndpointCertificatesChecked": 51,
+          "parentCheck": {
+            "originalLpCertificatesIndependentlyChecked": 2,
+            "physicalWorlds": 24,
+            "fullBoardsRegenerated": 15792192,
+            "fullBoardHandEvaluations": 31584384,
+            "fixedRunoutsRegenerated": 15984,
+            "literalTreeStates": 1321,
+            "policyInformationSets": 73,
+            "nashConvBb": 5.315192730392937e-15,
+            "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+          },
+          "candidateIndices": [
+            1,
+            3,
+            5
+          ],
+          "primaryEligibleIndices": [],
+          "contexts": [
+            {
+              "index": 0,
+              "heroCards": "7d 7h",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.3333333333333333,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 1,
+              "heroCards": "7d 7h",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": true,
+              "primaryEligible": false,
+              "actualReach": 0.0,
+              "counterfactualReach": 0.26411509229098806,
+              "rejectionReasons": [
+                "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+                "PRIMARY:SELECTED_DECISION_REGRET"
+              ]
+            },
+            {
+              "index": 2,
+              "heroCards": "9d 9h",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.3333333333333333,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 3,
+              "heroCards": "9d 9h",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": true,
+              "primaryEligible": false,
+              "actualReach": 0.0,
+              "counterfactualReach": 0.26411509229098806,
+              "rejectionReasons": [
+                "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+                "PRIMARY:SELECTED_DECISION_REGRET"
+              ]
+            },
+            {
+              "index": 4,
+              "heroCards": "Ac Jc",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.33333333333333315,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 5,
+              "heroCards": "Ac Jc",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": true,
+              "primaryEligible": false,
+              "actualReach": 1.1505115536933094e-33,
+              "counterfactualReach": 0.26411509229098806,
+              "rejectionReasons": [
+                "PRIMARY:INSUFFICIENT_ACTUAL_QUESTION_REACH",
+                "PRIMARY:SELECTED_DECISION_REGRET"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "pot-size",
+          "betPotFraction": 1.0,
+          "originalEndpointCertificatesChecked": 51,
+          "parentCheck": {
+            "originalLpCertificatesIndependentlyChecked": 2,
+            "physicalWorlds": 24,
+            "fullBoardsRegenerated": 15792192,
+            "fullBoardHandEvaluations": 31584384,
+            "fixedRunoutsRegenerated": 15984,
+            "literalTreeStates": 1321,
+            "policyInformationSets": 73,
+            "nashConvBb": 2.8796409701214998e-15,
+            "cardReferenceSha256": "36ea082554f63d1338a8faf43ef9dda12c012e26e24ab314d48da122bf59f9ba"
+          },
+          "candidateIndices": [
+            3,
+            5
+          ],
+          "primaryEligibleIndices": [
+            3,
+            5
+          ],
+          "contexts": [
+            {
+              "index": 0,
+              "heroCards": "7d 7h",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.3333333333333333,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 1,
+              "heroCards": "7d 7h",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.2669457735247209,
+              "counterfactualReach": 0.2669457735247209,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 2,
+              "heroCards": "9d 9h",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.33333333333333315,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 3,
+              "heroCards": "9d 9h",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": true,
+              "primaryEligible": true,
+              "actualReach": 0.2669457735247207,
+              "counterfactualReach": 0.2669457735247209,
+              "rejectionReasons": []
+            },
+            {
+              "index": 4,
+              "heroCards": "Ac Jc",
+              "flopActions": [],
+              "actionSeparated": false,
+              "primaryEligible": false,
+              "actualReach": 0.3333333333333333,
+              "counterfactualReach": 0.3333333333333333,
+              "rejectionReasons": [
+                "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+              ]
+            },
+            {
+              "index": 5,
+              "heroCards": "Ac Jc",
+              "flopActions": [
+                "check",
+                "bet"
+              ],
+              "actionSeparated": true,
+              "primaryEligible": true,
+              "actualReach": 0.2669457735247208,
+              "counterfactualReach": 0.2669457735247209,
+              "rejectionReasons": []
+            }
+          ]
+        }
+      ],
+      "contextsChecked": 12,
+      "primaryAssessmentsChecked": 12,
+      "originalEndpointCertificatesChecked": 102,
+      "qualifiedTrainerQuestions": 0,
+      "checkerSourceSha256": "655950abbf5c760bb5b00c3dc5178db07d7cabb87b3465c6768872e8e9230357",
+      "physicsHelperSha256": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65",
+      "generationBudgetSha256": "987e387fdef469a24ea7927207146edc587b6bd4d5eb3b45e027b0c3dc712589"
+    },
+    "qualifiedIndices": [
+      3,
+      5
+    ],
+    "policyAssessmentsChecked": 18,
+    "referenceVisitedNodes": 635040000,
+    "outcomes": [
+      {
+        "index": 0,
+        "heroCards": "7d 7h",
+        "flopActions": [],
+        "qualified": false,
+        "actualReach": [
+          0.3333333333333333,
+          0.33333333313342595,
+          0.3333333332833561
+        ],
+        "rejectionReasons": [
+          "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+        ]
+      },
+      {
+        "index": 1,
+        "heroCards": "7d 7h",
+        "flopActions": [
+          "check",
+          "bet"
+        ],
+        "qualified": false,
+        "actualReach": [
+          0.2669457735247209,
+          0.2669453064337443,
+          0.2669455346016139
+        ],
+        "rejectionReasons": [
+          "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+        ]
+      },
+      {
+        "index": 2,
+        "heroCards": "9d 9h",
+        "flopActions": [],
+        "qualified": false,
+        "actualReach": [
+          0.33333333333333315,
+          0.3333333331554189,
+          0.33333333328885445
+        ],
+        "rejectionReasons": [
+          "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+        ]
+      },
+      {
+        "index": 3,
+        "heroCards": "9d 9h",
+        "flopActions": [
+          "check",
+          "bet"
+        ],
+        "qualified": true,
+        "actualReach": [
+          0.2669457735247207,
+          0.26694530616435036,
+          0.26694553453426495
+        ],
+        "rejectionReasons": []
+      },
+      {
+        "index": 4,
+        "heroCards": "Ac Jc",
+        "flopActions": [],
+        "qualified": false,
+        "actualReach": [
+          0.3333333333333333,
+          0.3333333328911291,
+          0.3333333332227816
+        ],
+        "rejectionReasons": [
+          "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+        ]
+      },
+      {
+        "index": 5,
+        "heroCards": "Ac Jc",
+        "flopActions": [
+          "check",
+          "bet"
+        ],
+        "qualified": true,
+        "actualReach": [
+          0.2669457735247208,
+          0.2669453062349346,
+          0.26694553455191117
+        ],
+        "rejectionReasons": []
+      }
+    ],
+    "reportStoredSha256": "76d67b68c37f242e6f7d77f34bb023bd5811a05b7e4835c4ef9b870d19290c5b",
+    "reportExpandedSha256": "75ced35a8ff17ee04a8c51ee12c856f0e81cdf0aa186e0ee28e38534e205cedb",
+    "generationBudgetSha256": "726741304afe7ee168b7240c280a1e6f50ccfbc046fb3b4128613f5e4d708f34"
+  },
+  "reviewCheck": {
+    "attempts": 4,
+    "questionsAttempted": 2,
+    "classifications": {
+      "WITHIN_LIMIT": 2,
+      "OUTSIDE_LIMIT": 2,
+      "STRATEGY_DEPENDENT": 0
+    }
+  },
+  "reviewStoredSha256": "2b649c68e1809cd734564bd88b5e3cbd2b0ba35c58561d5e46c2d4d98c6d013a",
+  "checkerSourceSha256": "ede9be2b4fb55f622354b57abe491cc8034525de423c1aa92cb0f4431a0f58e7",
+  "generationBudgetSha256": "1f5c453730909f7026a7989e9e6a6da4af1aba7a7c381af962403c539dfecf1f"
+}

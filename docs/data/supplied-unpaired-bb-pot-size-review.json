@@ -1,0 +1,483 @@
+{
+  "attempts" : [ {
+    "feedback" : {
+      "action" : "fold",
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.37401272093524257,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.37544876287559076
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -2.6259872690647574,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.6245512471244092,
+        "upperLossBb" : 0.0
+      } ],
+      "question" : {
+        "heroCards" : "9d 9h",
+        "index" : 0,
+        "reportHash" : "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+        "sourceIndex" : 3,
+        "table" : {
+          "actingSeat" : "BB",
+          "betSizeBb" : 6.5,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "check",
+            "amountBb" : 0.0,
+            "seat" : "BB"
+          }, {
+            "action" : "bet",
+            "amountBb" : 6.5,
+            "seat" : "BTN"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 9.5,
+            "remainingStackBb" : 90.5,
+            "seat" : "BTN",
+            "status" : "ACTIVE"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BB",
+            "status" : "ACTING"
+          } ],
+          "potBb" : 13.0,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 6.5
+        },
+        "totalQuestions" : 2
+      },
+      "selected" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.37401272093524257,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.37544876287559076
+      }
+    },
+    "index" : 0
+  }, {
+    "feedback" : {
+      "action" : "call",
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.37401272093524257,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.37544876287559076
+      }, {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -2.6259872690647574,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.6245512471244092,
+        "upperLossBb" : 0.0
+      } ],
+      "question" : {
+        "heroCards" : "9d 9h",
+        "index" : 0,
+        "reportHash" : "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+        "sourceIndex" : 3,
+        "table" : {
+          "actingSeat" : "BB",
+          "betSizeBb" : 6.5,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "check",
+            "amountBb" : 0.0,
+            "seat" : "BB"
+          }, {
+            "action" : "bet",
+            "amountBb" : 6.5,
+            "seat" : "BTN"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 9.5,
+            "remainingStackBb" : 90.5,
+            "seat" : "BTN",
+            "status" : "ACTIVE"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BB",
+            "status" : "ACTING"
+          } ],
+          "potBb" : 13.0,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 6.5
+        },
+        "totalQuestions" : 2
+      },
+      "selected" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -2.6259872690647574,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.6245512471244092,
+        "upperLossBb" : 0.0
+      }
+    },
+    "index" : 1
+  }, {
+    "feedback" : {
+      "action" : "fold",
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.0
+      }, {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -4.203426439605017,
+        "lowerLossBb" : 1.201684132874307,
+        "upperEvBb" : -4.201684142874307,
+        "upperLossBb" : 1.2034264496050169
+      } ],
+      "question" : {
+        "heroCards" : "Ac Jc",
+        "index" : 1,
+        "reportHash" : "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+        "sourceIndex" : 5,
+        "table" : {
+          "actingSeat" : "BB",
+          "betSizeBb" : 6.5,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "check",
+            "amountBb" : 0.0,
+            "seat" : "BB"
+          }, {
+            "action" : "bet",
+            "amountBb" : 6.5,
+            "seat" : "BTN"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 9.5,
+            "remainingStackBb" : 90.5,
+            "seat" : "BTN",
+            "status" : "ACTIVE"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BB",
+            "status" : "ACTING"
+          } ],
+          "potBb" : 13.0,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 6.5
+        },
+        "totalQuestions" : 2
+      },
+      "selected" : {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.0
+      }
+    },
+    "index" : 2
+  }, {
+    "feedback" : {
+      "action" : "call",
+      "alternatives" : [ {
+        "action" : "fold",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : -3.00000001,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : -2.99999999,
+        "upperLossBb" : 0.0
+      }, {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -4.203426439605017,
+        "lowerLossBb" : 1.201684132874307,
+        "upperEvBb" : -4.201684142874307,
+        "upperLossBb" : 1.2034264496050169
+      } ],
+      "question" : {
+        "heroCards" : "Ac Jc",
+        "index" : 1,
+        "reportHash" : "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+        "sourceIndex" : 5,
+        "table" : {
+          "actingSeat" : "BB",
+          "betSizeBb" : 6.5,
+          "board" : [ "6d", "Qc", "Td" ],
+          "flopHistory" : [ {
+            "action" : "check",
+            "amountBb" : 0.0,
+            "seat" : "BB"
+          }, {
+            "action" : "bet",
+            "amountBb" : 6.5,
+            "seat" : "BTN"
+          } ],
+          "legalActions" : [ "fold", "call" ],
+          "players" : [ {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "UTG",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "HJ",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 0.0,
+            "remainingStackBb" : 100.0,
+            "seat" : "CO",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 9.5,
+            "remainingStackBb" : 90.5,
+            "seat" : "BTN",
+            "status" : "ACTIVE"
+          }, {
+            "committedBb" : 0.5,
+            "remainingStackBb" : 99.5,
+            "seat" : "SB",
+            "status" : "FOLDED"
+          }, {
+            "committedBb" : 3.0,
+            "remainingStackBb" : 97.0,
+            "seat" : "BB",
+            "status" : "ACTING"
+          } ],
+          "potBb" : 13.0,
+          "preflopHistory" : [ {
+            "amountBb" : 0.5,
+            "kind" : "POST_SMALL_BLIND",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 1.0,
+            "kind" : "POST_BIG_BLIND",
+            "seat" : "BB"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "UTG"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "HJ"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "CO"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "RAISE_TO",
+            "seat" : "BTN"
+          }, {
+            "amountBb" : 0.0,
+            "kind" : "FOLD",
+            "seat" : "SB"
+          }, {
+            "amountBb" : 3.0,
+            "kind" : "CALL",
+            "seat" : "BB"
+          } ],
+          "publicPreflopHistory" : "|BB:call",
+          "toCallBb" : 6.5
+        },
+        "totalQuestions" : 2
+      },
+      "selected" : {
+        "action" : "call",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -4.203426439605017,
+        "lowerLossBb" : 1.201684132874307,
+        "upperEvBb" : -4.201684142874307,
+        "upperLossBb" : 1.2034264496050169
+      }
+    },
+    "index" : 3
+  } ],
+  "publicationStatus" : "QUALIFIED_BOUNDED_BIG_BLIND_PAIRWISE_DRILL_RESEARCH_ONLY",
+  "qualifiedSourceIndices" : [ 3, 5 ],
+  "reportHash" : "04e99982ef9775a83cbffa28f64aedc7e146dd95dc38f09ad73604df24828996",
+  "schemaVersion" : "pokerlab-big-blind-pairwise-review/v1",
+  "summary" : {
+    "attempts" : 4,
+    "outsideLimit" : 2,
+    "questionsAttempted" : 2,
+    "strategyDependent" : 0,
+    "withinLimit" : 2
+  },
+  "trainerAdmission" : false
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "pokerlab-bb-sizing-screen-generation-budget/v1",
+  "scope": "TWO_EXPLICIT_BETTING_MODELS_ALL_TWELVE_CONTEXTS_PRIMARY_ONLY",
+  "base": "effbcf9def2471f3c88caaee355e5b9a8c17b8e2",
+  "trainerAdmission": false,
+  "models": [
+    {
+      "name": "quarter-pot",
+      "betPotFraction": 0.25,
+      "requestSha256": "43ab6739b9204c20099fcf8b9595e310c0221c3d71a2b363264c88eba0c10402",
+      "output": "docs/data/supplied-unpaired-bb-quarter-pot-primary-screen.json.gz"
+    },
+    {
+      "name": "pot-size",
+      "betPotFraction": 1.0,
+      "requestSha256": "4c95eeb671a7a247bf136c1fdf0368782b6d7afaa65a140fdc9745a9c6b54584",
+      "output": "docs/data/supplied-unpaired-bb-pot-size-primary-screen.json.gz"
+    }
+  ],
+  "physicalGameBuilds": 2,
+  "plannedCaseAttempts": 12,
+  "maximumParentSolves": 36,
+  "maximumActionComputations": 24,
+  "maximumPrimaryAssessments": 12,
+  "maximumOriginalLpCertificates": 180,
+  "freshReferenceRuns": 0,
+  "automaticRetries": 0,
+  "maximumExpandedBytesPerReport": 8388608,
+  "originalNumericAndCompilerCapsPreserved": true,
+  "securitySlack": 1e-08,
+  "requiredMinimumReach": 0.0001,
+  "maximumLossBb": 0.01,
+  "fullParentAndReachedFlopGapBb": 0.001,
+  "onRejection": "Retain all cases across both models; no replacement fraction, hand, prior, board, algorithm, seed or gate. Primary eligibility never confers grading authority."
+}
