@@ -1,0 +1,27 @@
+.btn-sizing-page .btn-sizing-hands { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .5rem; }
+.btn-sizing-page .btn-sizing-hands [aria-current="step"] { border-color: #6daeff; background: #173b63; }
+.btn-sizing-page .btn-sizing-hands button { flex: 1 1 100px; padding: .45rem .65rem; }
+.btn-sizing-page .btn-sizing-controls { gap: .5rem; margin-top: .5rem; }
+.btn-sizing-page .btn-sizing-controls button { flex: 1 1 125px; }
+.btn-sizing-page .btn-sizing-study-note { margin: .4rem 0; color: var(--muted); font-size: .78rem; }
+.btn-sizing-page .btn-sizing-session { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: .6rem; font-size: .78rem; }
+.btn-sizing-page .btn-sizing-session input { display: block; max-width: 100%; font-size: .75rem; margin-top: .25rem; }
+.btn-sizing-page .interval-feedback { margin-top: .5rem; padding: .6rem .8rem; }
+.btn-sizing-page .interval-feedback h2 { margin: 0; }
+.btn-sizing-page .interval-feedback p { margin: .3rem 0 0; }
+.btn-sizing-page .interval-context { margin-top: .6rem; }
+.btn-sizing-page .poker-action-value strong { font-size: .8rem; }
+@media (max-width: 600px) {
+  .btn-sizing-page .btn-sizing-hands { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 901px) and (max-height: 980px) {
+  .btn-sizing-page .trainer-topbar { padding-block: 5px; }
+  .btn-sizing-page .hand-play-title h1 { font-size: 26px; }
+  .btn-sizing-page .hand-play-title .eyebrow { margin-bottom: 3px; }
+  .btn-sizing-page .hand-play-disclosure { margin-block: 6px; padding-block: 6px; }
+  .btn-sizing-page .trainer-play { padding: 10px; }
+  .btn-sizing-page .poker-table { height: clamp(250px, 30vh, 270px); }
+  .btn-sizing-page .poker-board > span { width: 27px; height: 30px; font-size: 17px; }
+  .btn-sizing-page .poker-table-center > strong { font-size: 20px; line-height: 1.1; }
+  .btn-sizing-page .interval-feedback p { font-size: .8rem; line-height: 1.4; }
+}

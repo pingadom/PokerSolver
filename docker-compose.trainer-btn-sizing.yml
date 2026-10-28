@@ -1,0 +1,12 @@
+# Explicit local opt-in. One full replay; requests use the owned cache after readiness.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1200m"
+      TRAINER_SIZE_MENU_BTN_ENABLED: "true"
+      TRAINER_SIZE_MENU_BTN_MANIFEST_PATH: /opt/pokerlab/btn-sizing/supplied-size-menu-btn-quarter-drill-manifest.json
+      TRAINER_SIZE_MENU_BTN_STUDY_HASH: c55d598cedc094e836d2d4f4f5ca97897721218f9bc557a9830cc75b45fac5bc
+    volumes:
+      - ./docs/data/supplied-size-menu-btn-quarter-drill-manifest.json:/opt/pokerlab/btn-sizing/supplied-size-menu-btn-quarter-drill-manifest.json:ro
+      - ./docs/data/supplied-size-menu-btn-quarter-request.json:/opt/pokerlab/btn-sizing/supplied-size-menu-btn-quarter-request.json:ro
+      - ./docs/data/supplied-size-menu-btn-quarter-report.json.gz:/opt/pokerlab/btn-sizing/supplied-size-menu-btn-quarter-report.json.gz:ro

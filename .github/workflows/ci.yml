@@ -645,3 +645,33 @@ jobs:
         with: { name: sizing-collection-compose-log, path: sizing-collection-compose.log }
       - if: always()
         run: docker compose down -v
+
+  btn-sizing-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-btn-sizing.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_size_menu_btn.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: BTN sizing source is absent without opt-in
+        run: python3 scripts/smoke-size-menu-btn.py --disabled
+      - name: Owned startup, four BTN tables, eight cached grades and canonical reviews
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-btn-sizing.yml up -d --no-deps api
+          python3 scripts/smoke-size-menu-btn.py
+      - name: BTN sizing service logs
+        if: always()
+        run: docker compose logs --no-color > btn-sizing-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: btn-sizing-compose-log, path: btn-sizing-compose.log }
+      - if: always()
+        run: docker compose down -v
