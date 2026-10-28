@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "pokerlab-size-menu-btn-quarter-independent-check/v1",
+  "trainerAdmission": false,
+  "parentCheck": {
+    "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+    "trainerAdmission": false,
+    "literalTreeStates": 1609,
+    "informationSets": 89,
+    "originalLpCertificatesChecked": 2,
+    "policiesChecked": 3,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fixedRunoutsRegenerated": 15984,
+    "nashConvBb": 3.726186026398182e-15,
+    "referenceNashConvBb": [
+      2.087894412916569e-09,
+      5.219769547148978e-10
+    ],
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "handsChecked": 4,
+  "actionAttemptsChecked": 8,
+  "conditionalCertificatesChecked": 32,
+  "policyAssessmentsChecked": 12,
+  "retainedEndpointRejections": 0,
+  "qualifiedIndices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "outcomes": [
+    {
+      "index": 0,
+      "hand": "2c 3c",
+      "qualified": true,
+      "reasons": [],
+      "moves": [
+        {
+          "action": "fold",
+          "classification": "WITHIN_LIMIT",
+          "lowerEvBb": -3.00000001,
+          "lowerLossBb": 0.0,
+          "upperEvBb": -2.999999989999986,
+          "upperLossBb": 2.0000014089305296e-08
+        },
+        {
+          "action": "call",
+          "classification": "OUTSIDE_LIMIT",
+          "lowerEvBb": -3.9784959319937547,
+          "lowerLossBb": 0.9783587526117561,
+          "upperEvBb": -3.978358762611756,
+          "upperLossBb": 0.9784959419937689
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "hand": "Ah Kh",
+      "qualified": true,
+      "reasons": [],
+      "moves": [
+        {
+          "action": "fold",
+          "classification": "OUTSIDE_LIMIT",
+          "lowerEvBb": -3.00000001,
+          "lowerLossBb": 3.832798443307839,
+          "upperEvBb": -2.999999989999986,
+          "upperLossBb": 3.833393636130621
+        },
+        {
+          "action": "call",
+          "classification": "WITHIN_LIMIT",
+          "lowerEvBb": 0.8327984533078528,
+          "lowerLossBb": 0.0,
+          "upperEvBb": 0.8333936261306213,
+          "upperLossBb": 0.0005951728227684416
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "hand": "As Qs",
+      "qualified": true,
+      "reasons": [],
+      "moves": [
+        {
+          "action": "fold",
+          "classification": "OUTSIDE_LIMIT",
+          "lowerEvBb": -3.00000001,
+          "lowerLossBb": 6.187628565331581,
+          "upperEvBb": -2.999999989999986,
+          "upperLossBb": 6.187750831759272
+        },
+        {
+          "action": "call",
+          "classification": "WITHIN_LIMIT",
+          "lowerEvBb": 3.187628575331595,
+          "lowerLossBb": 0.0,
+          "upperEvBb": 3.1877508217592725,
+          "upperLossBb": 0.00012224642767755256
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "hand": "Qh Th",
+      "qualified": true,
+      "reasons": [],
+      "moves": [
+        {
+          "action": "fold",
+          "classification": "OUTSIDE_LIMIT",
+          "lowerEvBb": -3.00000001,
+          "lowerLossBb": 6.236397103731678,
+          "upperEvBb": -2.999999989999986,
+          "upperLossBb": 6.236563576573884
+        },
+        {
+          "action": "call",
+          "classification": "WITHIN_LIMIT",
+          "lowerEvBb": 3.236397113731692,
+          "lowerLossBb": 0.0,
+          "upperEvBb": 3.236563566573884,
+          "upperLossBb": 0.0001664528421922995
+        }
+      ]
+    }
+  ],
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "qualificationAdditionalLpSolves": 0,
+  "qualificationAdditionalCfrRuns": 0,
+  "checkerSourceSha256": "65d190523dbf9a0d1502c3f1d83f5c2bc35a56d2b02dfc11fea1e7d4e36005ad",
+  "requestStoredSha256": "adddab22057676b1bc22660dc5e84536b0a5c1ad112b3ed4d7da411bb3261db2",
+  "reportStoredSha256": "1a1a105d38a3e6a739aff3cb55bc95a4d481e5ae7ba892189659484bd31a6a14",
+  "immutableHelperSha256": {
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-refined-conditional-study.py": "a2405fcaaba4477e42d60fee081e7c48bcbd19fc2e6164555445ca30f16b8baf",
+    "check-btn-flop-feedback.py": "401ff3863f391d0b72cd65a7e557d7a4c680732c360a61d87eb307fa8791d85b",
+    "check-big-blind-flop-discovery.py": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60"
+  }
+}
