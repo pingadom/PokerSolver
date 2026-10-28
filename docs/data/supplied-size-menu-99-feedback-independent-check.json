@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "pokerlab-size-menu-feedback-independent-check/v1",
+  "trainerAdmission": false,
+  "sourceCheck": {
+    "schemaVersion": "pokerlab-size-menu-conditional-independent-check/v1",
+    "trainerAdmission": false,
+    "parentCheck": {
+      "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+      "trainerAdmission": false,
+      "literalTreeStates": 1609,
+      "informationSets": 89,
+      "originalLpCertificatesChecked": 2,
+      "policiesChecked": 3,
+      "physicalWorlds": 24,
+      "fullBoardsRegenerated": 15792192,
+      "fixedRunoutsRegenerated": 15984,
+      "nashConvBb": 3.726186026398182e-15,
+      "referenceNashConvBb": [
+        2.087894412916569e-09,
+        5.219769547148978e-10
+      ],
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0
+    },
+    "conditionalCertificatesChecked": 13,
+    "conditionalActionsChecked": 3,
+    "physicalQuestionWorlds": 8,
+    "heroPastCancelled": true,
+    "reachFloor": 0.0001,
+    "securitySlack": 1e-08,
+    "continuationPlans": [
+      2,
+      1,
+      1
+    ],
+    "moves": [
+      {
+        "action": "check",
+        "lowerEvBb": -1.602813349655455,
+        "upperEvBb": -0.31698962608604914,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 1.2858237235694059,
+        "classification": "STRATEGY_DEPENDENT"
+      },
+      {
+        "action": "bet:0.25",
+        "lowerEvBb": -0.31728604603603744,
+        "upperEvBb": -0.3171603701943377,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 0.00029641994998830246,
+        "classification": "WITHIN_LIMIT"
+      },
+      {
+        "action": "bet:0.5",
+        "lowerEvBb": -0.7772147247147166,
+        "upperEvBb": -0.31698962608684494,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 0.4602250986286675,
+        "classification": "STRATEGY_DEPENDENT"
+      }
+    ],
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "policyAssessmentsChecked": 3,
+  "forcedActionValuesChecked": 9,
+  "qualifiedForOfflineDrill": false,
+  "rejectionReasons": [
+    "NO_ROBUST_MOVE_OUTSIDE_LIMIT"
+  ],
+  "policyFailures": [
+    [],
+    [],
+    []
+  ],
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "qualificationAdditionalLpSolves": 0,
+  "qualificationAdditionalCfrRuns": 0,
+  "checkerSourceSha256": "ecbe19a4a2e8934ba0d379c26680027256244b0ff57131ce9ba9958b81862db4",
+  "requestStoredSha256": "42880e905bc1b4acb79a29d719937300f9b2b72cc3706fe0914160fbfc09d173",
+  "reportStoredSha256": "8bc807167f59e6f4e5cd0ef2c550692f27ef8a5e139005389e14e2db329b4e69",
+  "immutableHelperSha256": {
+    "check-size-menu-conditional.py": "199558198dcc95c2d318399b0d2238bff73bc2ded1ffa967ca1f75754f63d2e2",
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-bb-sizing-physics.py": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65"
+  }
+}
