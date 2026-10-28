@@ -248,3 +248,5 @@ The [joint flop size-menu backend](docs/SOLVER_SIZE_MENU.md) now solves quarter-
 The [size-menu conditional study](docs/size-menu-conditional-bounds.md) adds original-security-face EV and loss bounds for all three BB actions with 99 in the jointly solved game. Thirteen interval certificates and witness posteriors are independently checked; ambiguous actions remain unresolved and the study grants no trainer admission.
 
 The [size-menu policy qualification](docs/size-menu-policy-qualification.md) checks all three owned policies against reach, convergence, the complete security face and every conditional action bound. The 99 study passes those policy checks but remains rejected for drill use because no alternative is provably outside the loss limit; no trainer admission is issued.
+
+The [joint-sizing BTN study](docs/size-menu-btn-quarter-study.md) now qualifies all four supplied BTN responses to a quarter-pot bet, with 32 interval certificates and 12 fresh-policy assessments checked independently. An owned offline cache supplies four questions, eight certified grades and bounded pinned reviews; the public API and table UI remain a subsequent integration step.
