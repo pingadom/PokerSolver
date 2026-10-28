@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "pokerlab-size-menu-btn-drill-manifest/v1",
+  "studyHash": "c55d598cedc094e836d2d4f4f5ca97897721218f9bc557a9830cc75b45fac5bc",
+  "requestFile": "supplied-size-menu-btn-quarter-request.json",
+  "requestSha256": "adddab22057676b1bc22660dc5e84536b0a5c1ad112b3ed4d7da411bb3261db2",
+  "reportFile": "supplied-size-menu-btn-quarter-report.json.gz",
+  "reportStoredSha256": "1a1a105d38a3e6a739aff3cb55bc95a4d481e5ae7ba892189659484bd31a6a14",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 9,
+    "maximumParentLpSolves": 18,
+    "maximumIntervalLpSolves": 32,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  }
+}
