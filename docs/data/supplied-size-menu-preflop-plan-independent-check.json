@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "pokerlab-size-menu-preflop-plan-independent-check/v1",
+  "trainerAdmission": false,
+  "symbolicTreeStatesChecked": 1609,
+  "preflopQuestionsChecked": 17,
+  "preflopActionsChecked": 48,
+  "withinPlanLimitActions": 41,
+  "overPlanLimitActions": 7,
+  "completeMenuQuestionIndices": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    10,
+    12,
+    13,
+    15,
+    16
+  ],
+  "maximumCartesianPlans": 1296,
+  "fullJointWorldsChecked": 24,
+  "enumeratedBoards": 0,
+  "handEvaluations": 0,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "c23ba5c104e62e71900759380e7d180198afee4ce96eb94db6fb8fc3f05b7075",
+  "requestStoredSha256": "28bd4ce547e1819904d5cc217f18410c0d939a81aa87f89e0050915891b3675e",
+  "reportStoredSha256": "8017c35d5e1208aad5b8979863451d76362396ba3004b8580a6615d31413c0a6"
+}
