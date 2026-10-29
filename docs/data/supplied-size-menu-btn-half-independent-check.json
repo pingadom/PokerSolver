@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "pokerlab-size-menu-btn-half-independent-check/v1",
+  "trainerAdmission": false,
+  "parentCheck": {
+    "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+    "trainerAdmission": false,
+    "literalTreeStates": 1609,
+    "informationSets": 89,
+    "originalLpCertificatesChecked": 2,
+    "policiesChecked": 3,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fixedRunoutsRegenerated": 15984,
+    "nashConvBb": 3.726186026398182e-15,
+    "referenceNashConvBb": [
+      2.087894412916569e-09,
+      5.219769547148978e-10
+    ],
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "handsChecked": 4,
+  "actionAttemptsChecked": 8,
+  "negativeReachCertificatesChecked": 8,
+  "rejectedWorldMassesChecked": 48,
+  "conditionalUtilityCertificatesChecked": 0,
+  "policyAssessmentsChecked": 0,
+  "retainedEndpointRejections": 8,
+  "qualifiedIndices": [],
+  "outcomes": [
+    {
+      "index": 0,
+      "hand": "2c 3c",
+      "qualified": false,
+      "reasons": [
+        "ENDPOINT:call:CONDITIONAL:INSUFFICIENT_REACH",
+        "ENDPOINT:fold:CONDITIONAL:INSUFFICIENT_REACH"
+      ],
+      "negativeWitnesses": [
+        {
+          "action": "fold",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        },
+        {
+          "action": "call",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "hand": "Ah Kh",
+      "qualified": false,
+      "reasons": [
+        "ENDPOINT:call:CONDITIONAL:INSUFFICIENT_REACH",
+        "ENDPOINT:fold:CONDITIONAL:INSUFFICIENT_REACH"
+      ],
+      "negativeWitnesses": [
+        {
+          "action": "fold",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        },
+        {
+          "action": "call",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "hand": "As Qs",
+      "qualified": false,
+      "reasons": [
+        "ENDPOINT:call:CONDITIONAL:INSUFFICIENT_REACH",
+        "ENDPOINT:fold:CONDITIONAL:INSUFFICIENT_REACH"
+      ],
+      "negativeWitnesses": [
+        {
+          "action": "fold",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        },
+        {
+          "action": "call",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "hand": "Qh Th",
+      "qualified": false,
+      "reasons": [
+        "ENDPOINT:call:CONDITIONAL:INSUFFICIENT_REACH",
+        "ENDPOINT:fold:CONDITIONAL:INSUFFICIENT_REACH"
+      ],
+      "negativeWitnesses": [
+        {
+          "action": "fold",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        },
+        {
+          "action": "call",
+          "questionReach": 0.0,
+          "certifiedReachLowerBound": -9.999999988630641e-09,
+          "fullParentHeroBestResponse": -0.0414870568365722,
+          "maximumOriginalRealizationDifference": 4.7668987649525926e-18,
+          "exactOriginalCertificate": {
+            "primalValue": 0.0,
+            "dualValue": -1.1369359413771027e-17,
+            "maximumPrimalViolation": 2.883904188096295e-16,
+            "maximumDualViolation": 6.265749156414588e-17,
+            "absoluteDualityGap": 1.1369359413771027e-17
+          }
+        }
+      ]
+    }
+  ],
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "c6346b5007240fb0457842ca23fb499bd846d740be6fe621ba961de09adddd0b",
+  "requestStoredSha256": "7521140167120942fd77b19c1aa741f63733b211a4e7c938aa8439a0a7d78508",
+  "reportStoredSha256": "1b488b16ed3cfc958e9085d73ddc9ebc6a3285da987f1e3036cf01bff59da97a",
+  "immutableHelperSha256": {
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-certified-reach-coverage.py": "7736c80c40c7822455f3318f4b54ef5627b5f664d77eb98b81e07b2c04275582",
+    "check-btn-flop-feedback.py": "401ff3863f391d0b72cd65a7e557d7a4c680732c360a61d87eb307fa8791d85b",
+    "check-refined-conditional-study.py": "a2405fcaaba4477e42d60fee081e7c48bcbd19fc2e6164555445ca30f16b8baf",
+    "check-big-blind-flop-discovery.py": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60",
+    "check-resolvable-refined-lp.py": "84795dabca56dd86a4870b23efd8d5731d4b4b17d3399fbfa818f7ee9d18f080"
+  }
+}
