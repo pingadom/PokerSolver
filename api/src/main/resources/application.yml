@@ -51,6 +51,9 @@ pokerlab:
     qualified-flop-collection-manifest-path: ${TRAINER_QUALIFIED_FLOP_COLLECTION_MANIFEST_PATH:}
     qualified-flop-collection-hash: ${TRAINER_QUALIFIED_FLOP_COLLECTION_HASH:}
     sizing-flop-collection-enabled: ${TRAINER_SIZING_FLOP_COLLECTION_ENABLED:false}
+    size-menu-btn-enabled: ${TRAINER_SIZE_MENU_BTN_ENABLED:false}
+    size-menu-btn-manifest-path: ${TRAINER_SIZE_MENU_BTN_MANIFEST_PATH:}
+    size-menu-btn-study-hash: ${TRAINER_SIZE_MENU_BTN_STUDY_HASH:}
     sizing-flop-collection-manifest-path: ${TRAINER_SIZING_FLOP_COLLECTION_MANIFEST_PATH:}
     sizing-flop-collection-hash: ${TRAINER_SIZING_FLOP_COLLECTION_HASH:}
     unpaired-flop-collection-enabled: ${TRAINER_UNPAIRED_FLOP_COLLECTION_ENABLED:false}

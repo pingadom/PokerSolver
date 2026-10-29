@@ -24,8 +24,10 @@ const CallFlopCollectionPage = lazy(() => import("./CallFlopCollectionPage"));
 const UnpairedFlopCollectionPage = lazy(() => import("./UnpairedFlopCollectionPage"));
 
 const SizingFlopCollectionPage = lazy(() => import("./SizingFlopCollectionPage"));
+const SizeMenuBtnPage = lazy(() => import("./SizeMenuBtnPage"));
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#btn-sizing-flop")) return "btn-sizing-flop";
   if (window.location.hash.startsWith("#interval-sizing-flop")) return "interval-sizing-flop";
   if (window.location.hash.startsWith("#interval-unpaired-flop")) return "interval-unpaired-flop";
   if (window.location.hash.startsWith("#interval-call-flop")) return "interval-call-flop";
@@ -55,6 +57,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "btn-sizing-flop") return <Suspense fallback={<p role="status">Loading BTN practice…</p>}><SizeMenuBtnPage /></Suspense>;
   if (route === "interval-sizing-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><SizingFlopCollectionPage /></Suspense>;
   if (route === "interval-unpaired-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><UnpairedFlopCollectionPage /></Suspense>;
   if (route === "interval-call-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><CallFlopCollectionPage /></Suspense>;

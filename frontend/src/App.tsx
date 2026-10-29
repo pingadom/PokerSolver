@@ -536,6 +536,7 @@ export default function App() {
               <p><a className="solver-demo-link" href="#interval-flop">Pocket sevens: verified flop decision ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-flop-response">Pocket sevens: facing a flop bet ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-sizing-flop?question=18">Flop practice: twenty decisions across bet sizes ↗</a></p>
+              <p><a className="solver-demo-link" href="#btn-sizing-flop">BTN practice: facing a quarter-pot bet ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-unpaired-flop">Flop practice: eighteen decisions with saved reviews ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-call-flop">Flop practice: fourteen decisions with saved reviews ↗</a></p>
               <p><a className="solver-demo-link" href="#interval-qualified-flop">Practise eleven decisions, including a weak-hand fold ↗</a></p>
