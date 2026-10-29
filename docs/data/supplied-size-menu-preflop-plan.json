@@ -1,0 +1,2357 @@
+{
+  "chanceMassScope" : "ORIGINAL_JOINT_CHANCE_ONLY_NOT_QUESTION_REACH/v1",
+  "continuationPlanLimit" : 64,
+  "estimatedPhysicalBudget" : {
+    "additionalEnumeratedRunouts" : 63936,
+    "additionalHandEvaluations" : 127872,
+    "compatibleDeals" : 24,
+    "completeTreeStates" : 1609,
+    "informationSets" : {
+      "BTN" : 56,
+      "BB" : 33
+    },
+    "nonAllInBoundaries" : 4,
+    "sequences" : {
+      "BTN" : 121,
+      "BB" : 85
+    },
+    "sourceBudget" : {
+      "completeTreeStates" : 361,
+      "enumeratedBoards" : 15792192,
+      "handEvaluations" : 31584384,
+      "informationSets" : {
+        "BTN" : 8,
+        "BB" : 9
+      },
+      "jointDeals" : 24,
+      "publicStates" : 15,
+      "sequences" : {
+        "BTN" : 25,
+        "BB" : 25
+      }
+    }
+  },
+  "publicationStatus" : "PREFLOP_CONTINUATION_PLAN_PREFLIGHT_ONLY",
+  "questions" : [ {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:22.0",
+      "cartesianPlans" : 192,
+      "enumerationPrechargeUnits" : 308928,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 6.0
+      }, {
+        "action" : "raise:22.0",
+        "amountBb" : 19.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 12.5,
+      "publicHistory" : "|BB:raise:9.0",
+      "toCallBb" : 6.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "2c 3c",
+    "index" : 0,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0",
+    "originalWorldIndices" : [ 0, 1, 2, 12, 13, 14 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:100.0",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 28.0
+      }, {
+        "action" : "raise:100.0",
+        "amountBb" : 78.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 72.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "toCallBb" : 28.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "2c 3c",
+    "index" : 1,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:2c 3c:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+    "originalWorldIndices" : [ 0, 1, 2, 12, 13, 14 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:22.0",
+      "cartesianPlans" : 192,
+      "enumerationPrechargeUnits" : 308928,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 6.0
+      }, {
+        "action" : "raise:22.0",
+        "amountBb" : 19.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 12.5,
+      "publicHistory" : "|BB:raise:9.0",
+      "toCallBb" : 6.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "Ah Kh",
+    "index" : 2,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0",
+    "originalWorldIndices" : [ 3, 4, 5, 15, 16, 17 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:100.0",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 28.0
+      }, {
+        "action" : "raise:100.0",
+        "amountBb" : 78.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 72.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "toCallBb" : 28.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "Ah Kh",
+    "index" : 3,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Ah Kh:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+    "originalWorldIndices" : [ 3, 4, 5, 15, 16, 17 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:22.0",
+      "cartesianPlans" : 192,
+      "enumerationPrechargeUnits" : 308928,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 6.0
+      }, {
+        "action" : "raise:22.0",
+        "amountBb" : 19.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 12.5,
+      "publicHistory" : "|BB:raise:9.0",
+      "toCallBb" : 6.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "As Qs",
+    "index" : 4,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:As Qs:|BB:raise:9.0",
+    "originalWorldIndices" : [ 6, 7, 8, 18, 19, 20 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:100.0",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 28.0
+      }, {
+        "action" : "raise:100.0",
+        "amountBb" : 78.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 72.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "toCallBb" : 28.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "As Qs",
+    "index" : 5,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:As Qs:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+    "originalWorldIndices" : [ 6, 7, 8, 18, 19, 20 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:22.0",
+      "cartesianPlans" : 192,
+      "enumerationPrechargeUnits" : 308928,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      }, {
+        "actions" : [ "fold", "call", "raise:100.0" ],
+        "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 6.0
+      }, {
+        "action" : "raise:22.0",
+        "amountBb" : 19.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 12.5,
+      "publicHistory" : "|BB:raise:9.0",
+      "toCallBb" : 6.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "Qh Th",
+    "index" : 6,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0",
+    "originalWorldIndices" : [ 9, 10, 11, 21, 22, 23 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 8,
+      "enumerationPrechargeUnits" : 12872,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.25"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:bet:0.5"
+      }, {
+        "actions" : [ "check", "bet:1.0" ],
+        "informationSet" : "3:supplied-size-menu-flop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:100.0",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BTN",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 28.0
+      }, {
+        "action" : "raise:100.0",
+        "amountBb" : 78.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTING"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTIVE"
+      } ],
+      "potBb" : 72.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+      "toCallBb" : 28.0
+    },
+    "hero" : "BTN",
+    "heroCards" : "Qh Th",
+    "index" : 7,
+    "informationSet" : "3:supplied-size-menu-preflop:supplied-conditional-preflop:Qh Th:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0",
+    "originalWorldIndices" : [ 9, 10, 11, 21, 22, 23 ],
+    "priorChanceMass" : 0.25
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:9.0",
+      "cartesianPlans" : 1296,
+      "enumerationPrechargeUnits" : 2085264,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 2.0
+      }, {
+        "action" : "raise:9.0",
+        "amountBb" : 8.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 1.0,
+        "remainingStackBb" : 99.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 4.5,
+      "publicHistory" : "",
+      "toCallBb" : 2.0
+    },
+    "hero" : "BB",
+    "heroCards" : "7d 7h",
+    "index" : 8,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:",
+    "originalWorldIndices" : [ 0, 3, 6, 9, 12, 15, 18, 21 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:50.0",
+      "cartesianPlans" : 12,
+      "enumerationPrechargeUnits" : 19308,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 13.0
+      }, {
+        "action" : "raise:50.0",
+        "amountBb" : 41.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 31.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0",
+      "toCallBb" : 13.0
+    },
+    "hero" : "BB",
+    "heroCards" : "7d 7h",
+    "index" : 9,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0",
+    "originalWorldIndices" : [ 0, 3, 6, 9, 12, 15, 18, 21 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 50.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 100.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 100.0,
+        "remainingStackBb" : 0.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 150.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "toCallBb" : 50.0
+    },
+    "hero" : "BB",
+    "heroCards" : "7d 7h",
+    "index" : 10,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:7d 7h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+    "originalWorldIndices" : [ 0, 3, 6, 9, 12, 15, 18, 21 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:9.0",
+      "cartesianPlans" : 1296,
+      "enumerationPrechargeUnits" : 2085264,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 2.0
+      }, {
+        "action" : "raise:9.0",
+        "amountBb" : 8.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 1.0,
+        "remainingStackBb" : 99.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 4.5,
+      "publicHistory" : "",
+      "toCallBb" : 2.0
+    },
+    "hero" : "BB",
+    "heroCards" : "9d 9h",
+    "index" : 11,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:",
+    "originalWorldIndices" : [ 1, 4, 7, 10, 13, 16, 19, 22 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:50.0",
+      "cartesianPlans" : 12,
+      "enumerationPrechargeUnits" : 19308,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 13.0
+      }, {
+        "action" : "raise:50.0",
+        "amountBb" : 41.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 31.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0",
+      "toCallBb" : 13.0
+    },
+    "hero" : "BB",
+    "heroCards" : "9d 9h",
+    "index" : 12,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0",
+    "originalWorldIndices" : [ 1, 4, 7, 10, 13, 16, 19, 22 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 50.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 100.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 100.0,
+        "remainingStackBb" : 0.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 150.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "toCallBb" : 50.0
+    },
+    "hero" : "BB",
+    "heroCards" : "9d 9h",
+    "index" : 13,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:9d 9h:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+    "originalWorldIndices" : [ 1, 4, 7, 10, 13, 16, 19, 22 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:9.0",
+      "cartesianPlans" : 1296,
+      "enumerationPrechargeUnits" : 2085264,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call", "raise:50.0" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "CONTINUATION_PLAN_LIMIT",
+      "withinPlanLimit" : false
+    } ],
+    "allMovesWithinPlanLimit" : false,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 2.0
+      }, {
+        "action" : "raise:9.0",
+        "amountBb" : 8.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 3.0,
+        "remainingStackBb" : 97.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 1.0,
+        "remainingStackBb" : 99.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 4.5,
+      "publicHistory" : "",
+      "toCallBb" : 2.0
+    },
+    "hero" : "BB",
+    "heroCards" : "Ac Jc",
+    "index" : 14,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:",
+    "originalWorldIndices" : [ 2, 5, 8, 11, 14, 17, 20, 23 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 6,
+      "enumerationPrechargeUnits" : 9654,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:call:6d Qc Td:check|bet:1.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "raise:50.0",
+      "cartesianPlans" : 12,
+      "enumerationPrechargeUnits" : 19308,
+      "futureHeroDecisions" : [ {
+        "actions" : [ "check", "bet:0.25", "bet:0.5" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-flop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:call:6d Qc Td:check|bet:1.0"
+      }, {
+        "actions" : [ "fold", "call" ],
+        "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0"
+      } ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 13.0
+      }, {
+        "action" : "raise:50.0",
+        "amountBb" : 41.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 22.0,
+        "remainingStackBb" : 78.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 9.0,
+        "remainingStackBb" : 91.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 31.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0",
+      "toCallBb" : 13.0
+    },
+    "hero" : "BB",
+    "heroCards" : "Ac Jc",
+    "index" : 15,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0",
+    "originalWorldIndices" : [ 2, 5, 8, 11, 14, 17, 20, 23 ],
+    "priorChanceMass" : 0.3333333333333333
+  }, {
+    "actions" : [ {
+      "action" : "fold",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    }, {
+      "action" : "call",
+      "cartesianPlans" : 1,
+      "enumerationPrechargeUnits" : 1609,
+      "futureHeroDecisions" : [ ],
+      "status" : "WITHIN_PLAN_LIMIT_ONLY",
+      "withinPlanLimit" : true
+    } ],
+    "allMovesWithinPlanLimit" : true,
+    "context" : {
+      "actingSeat" : "BB",
+      "actions" : [ {
+        "action" : "fold",
+        "amountBb" : 0.0
+      }, {
+        "action" : "call",
+        "amountBb" : 50.0
+      } ],
+      "history" : [ {
+        "amountBb" : 0.5,
+        "kind" : "POST_SMALL_BLIND",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 1.0,
+        "kind" : "POST_BIG_BLIND",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "UTG"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "HJ"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "CO"
+      }, {
+        "amountBb" : 3.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 0.0,
+        "kind" : "FOLD",
+        "seat" : "SB"
+      }, {
+        "amountBb" : 9.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 22.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      }, {
+        "amountBb" : 50.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BB"
+      }, {
+        "amountBb" : 100.0,
+        "kind" : "RAISE_TO",
+        "seat" : "BTN"
+      } ],
+      "players" : [ {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "UTG",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "HJ",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 0.0,
+        "remainingStackBb" : 100.0,
+        "seat" : "CO",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 100.0,
+        "remainingStackBb" : 0.0,
+        "seat" : "BTN",
+        "status" : "ACTIVE"
+      }, {
+        "committedBb" : 0.5,
+        "remainingStackBb" : 99.5,
+        "seat" : "SB",
+        "status" : "FOLDED"
+      }, {
+        "committedBb" : 50.0,
+        "remainingStackBb" : 50.0,
+        "seat" : "BB",
+        "status" : "ACTING"
+      } ],
+      "potBb" : 150.5,
+      "publicHistory" : "|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+      "toCallBb" : 50.0
+    },
+    "hero" : "BB",
+    "heroCards" : "Ac Jc",
+    "index" : 16,
+    "informationSet" : "5:supplied-size-menu-preflop:supplied-conditional-preflop:Ac Jc:|BB:raise:9.0|BTN:raise:22.0|BB:raise:50.0|BTN:raise:100.0",
+    "originalWorldIndices" : [ 2, 5, 8, 11, 14, 17, 20, 23 ],
+    "priorChanceMass" : 0.3333333333333333
+  } ],
+  "request" : {
+    "flop" : [ "6d", "Qc", "Td" ],
+    "input" : {
+      "schemaVersion" : "pokerlab-supplied-joint-preflop-input/v1",
+      "specification" : {
+        "history" : [ {
+          "action" : "fold",
+          "seat" : "UTG"
+        }, {
+          "action" : "fold",
+          "seat" : "HJ"
+        }, {
+          "action" : "fold",
+          "seat" : "CO"
+        }, {
+          "action" : "raise:3.0",
+          "seat" : "BTN"
+        }, {
+          "action" : "fold",
+          "seat" : "SB"
+        } ],
+        "rules" : {
+          "raiseSchedule" : "NEXT_TARGET",
+          "raiseToBb" : [ 3.0, 9.0, 22.0, 50.0, 100.0 ],
+          "smallBlindBb" : 0.5,
+          "stackBb" : 100.0
+        }
+      },
+      "worlds" : [ {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "2c 3c", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "2c 3c", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "2c 3c", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "As Qs", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "As Qs", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "As Qs", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "2d 3d", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "2c 3c", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "2c 3c", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "2c 3c", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Ah Kh", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "As Qs", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "As Qs", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "As Qs", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "7d 7h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "9d 9h" ],
+        "weight" : 1.0
+      }, {
+        "dealtCombos" : [ "4c 4d", "6h 8c", "2h 3h", "Qh Th", "5c 6c", "Ac Jc" ],
+        "weight" : 1.0
+      } ]
+    },
+    "menu" : {
+      "afterCheck" : [ 1.0 ],
+      "firstToAct" : [ 0.25, 0.5 ]
+    },
+    "schemaVersion" : "pokerlab-supplied-flop-size-menu-request/v1"
+  },
+  "schemaVersion" : "pokerlab-size-menu-preflop-plan/v1",
+  "sourceRequestHash" : "489f96fc5c633014f7117754f768909f2c05a6bd95016dad3c6a53eda2773830",
+  "trainerAdmission" : false,
+  "work" : {
+    "cfrIterations" : 0,
+    "enumeratedBoards" : 0,
+    "handEvaluations" : 0,
+    "lpSolves" : 0,
+    "overPlanLimitActions" : 7,
+    "preflopActions" : 48,
+    "preflopInformationSets" : 17,
+    "symbolicTreeStates" : 1609,
+    "withinPlanLimitActions" : 41
+  }
+}
