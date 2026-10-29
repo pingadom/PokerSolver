@@ -2,6 +2,7 @@ package com.pokerlab.solver;
 
 import com.pokerlab.solver.PreflopAllInSpot.Seat;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
@@ -443,10 +444,7 @@ public final class SixMaxSizeMenuPreflopPlan {
 
     public static void write(Path path, Result result) throws Exception {
         path = path.toAbsolutePath().normalize();
-        byte[] bytes =
-                SixMaxTexturePayoffTable.mapper()
-                        .writerWithDefaultPrettyPrinter()
-                        .writeValueAsBytes(result.report());
+        byte[] bytes = SixMaxTextureStudy.json(result.report()).getBytes(StandardCharsets.UTF_8);
         if (bytes.length > SixMaxSuppliedFlopSizeMenuStudy.MAX_BYTES)
             throw new IllegalArgumentException("Plan byte cap exceeded");
         if (path.toString().endsWith(".gz")) {

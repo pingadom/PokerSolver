@@ -279,6 +279,12 @@ class SizeMenuPreflopPlanTest {
     @Test
     void commandsPreserveSourcesReplayWholeContextsAndSupportCompressedOutput(@TempDir Path temp)
             throws Exception {
+        Path plain = temp.resolve("canonical.json");
+        SixMaxSizeMenuPreflopPlan.write(plain, owned);
+        String canonical = Files.readString(plain);
+        assertEquals(SixMaxTextureStudy.json(owned.report()), canonical);
+        assertFalse(canonical.contains("\r"));
+        assertTrue(canonical.endsWith("\n"));
         Path output = temp.resolve("plan.json.gz");
         SixMaxSizeMenuPreflopPlan.write(output, owned);
         assertEquals(owned.report(), SixMaxSizeMenuPreflopPlan.replay(INPUT, output).report());

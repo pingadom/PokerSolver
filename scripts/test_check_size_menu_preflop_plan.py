@@ -18,6 +18,7 @@ class PreflopPlanTests(unittest.TestCase):
         r=check.check();self.assertEqual(r,check.read(check.DATA/'supplied-size-menu-preflop-plan-independent-check.json'))
         self.assertEqual((17,48,41,7,1296),(r['preflopQuestionsChecked'],r['preflopActionsChecked'],r['withinPlanLimitActions'],r['overPlanLimitActions'],r['maximumCartesianPlans']))
         self.assertEqual(10,len(r['completeMenuQuestionIndices']));self.assertEqual(0,r['freshLpSolves']);self.assertEqual(0,r['enumeratedBoards'])
+        stored=check.REPORT.read_bytes();self.assertNotIn(b'\r',stored);self.assertTrue(stored.endswith(b'\n'))
     def test_every_hand_move_and_world_stays_in_the_inventory(self):
         self.reject(lambda r:r['questions'].pop())
         self.reject(lambda r:r['questions'][0]['actions'].pop())

@@ -90,6 +90,10 @@ outputs. Six Python test methods corrupt inventories, future decisions, prices,
 plan products, work, scope and admission. No numerical source generation or
 physical replay is hidden in these tests.
 
+Canonical LF JSON and a trailing newline keep stored report pins portable between
+Windows development and Linux CI. Both the writer test and independent published
+file test enforce this, rather than relying on the platform pretty printer.
+
 ## Next solver work
 
 Use this inventory to design a separately declared preflop interval study. Keep
