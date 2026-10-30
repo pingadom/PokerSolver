@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "pokerlab-reduced-preflop-independent-check/v1",
+  "trainerAdmission": false,
+  "parentCheck": {
+    "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+    "trainerAdmission": false,
+    "literalTreeStates": 1609,
+    "informationSets": 89,
+    "originalLpCertificatesChecked": 2,
+    "policiesChecked": 3,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fixedRunoutsRegenerated": 15984,
+    "nashConvBb": 3.726186026398182e-15,
+    "referenceNashConvBb": [
+      2.087894412916569e-09,
+      5.219769547148978e-10
+    ],
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "originalEndpointCertificatesChecked": 11,
+  "completedActions": [
+    "fold",
+    "call"
+  ],
+  "retainedRejections": [
+    {
+      "action": "raise:9.0",
+      "kind": "LP",
+      "reason": "WORK_LIMIT"
+    }
+  ],
+  "completeMenu": false,
+  "fullCartesianPlansChecked": 1303,
+  "reducedPlansChecked": 57,
+  "coverage": [
+    {
+      "action": "fold",
+      "cartesianPlansChecked": 1,
+      "reducedPlansChecked": 1,
+      "maximumErasureCoefficientDifference": 0.0
+    },
+    {
+      "action": "call",
+      "cartesianPlansChecked": 6,
+      "reducedPlansChecked": 4,
+      "maximumErasureCoefficientDifference": 0.0
+    },
+    {
+      "action": "raise:9.0",
+      "cartesianPlansChecked": 1296,
+      "reducedPlansChecked": 52,
+      "maximumErasureCoefficientDifference": 0.0
+    }
+  ],
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "4202b10cbeddab54d20708b87d5769403bbbf4dda3a604df3518299a851d0960",
+  "requestStoredSha256": "32e1b02245debe67e44eec52048839e2caa82462f3c537e350cca778c3793441",
+  "reportStoredSha256": "1f5233c5f7b5ea4c831701e54ee927edbc158ec0630773fa6ee19c6bdb57d754",
+  "immutableHelperSha256": {
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-bb-sizing-physics.py": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65",
+    "check-big-blind-flop-discovery.py": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60",
+    "check-supplied-flop-action-bounds.py": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e"
+  }
+}

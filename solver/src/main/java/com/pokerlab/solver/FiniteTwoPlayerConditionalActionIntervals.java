@@ -31,6 +31,8 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             "OWNED_PHYSICAL_FLOP_RESOLVABLE_BASIS_CERTIFIED_NEGATIVE_REACH_ENDPOINTS/v9";
     public static final String PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM =
             "OWNED_PHYSICAL_FLOP_ALL_PHASE_REFINED_BASIS_CERTIFIED_REACH_ENDPOINTS/v10";
+    public static final String PREFLOP_ROOT_REDUCED_ALGORITHM =
+            "OWNED_SIZE_MENU_PREFLOP_ROOT_REDUCED_HERO_PLANS_CERTIFIED_ENDPOINTS/v1";
     public static final String SCOPE =
             "ACTION_CONDITIONED_POSTERIOR_OPTIMAL_HERO_CONTINUATION_TERMINAL_UTILITY/v1";
     public static final double DEFAULT_MINIMUM_REACH = .01;
@@ -539,6 +541,59 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         }
     }
 
+    /** Original-prior measurement (mass one), not conditioning on the selected physical flop. */
+    static Result solveSizeMenuPreflopRootReduced(
+            SixMaxSuppliedFlopSizeMenuGame game,
+            Question question,
+            double securitySlack,
+            double minimumReach)
+            throws Exception {
+        Objects.requireNonNull(game);
+        Objects.requireNonNull(question);
+        boolean found =
+                game.chanceOutcomes(game.initialState()).stream()
+                        .anyMatch(
+                                root ->
+                                        game.currentPlayer(root.state()) == question.hero()
+                                                && (question.hero()
+                                                                + ":"
+                                                                + game.informationSet(root.state()))
+                                                        .equals(question.informationSet()));
+        if (!found
+                || !question.informationSet()
+                        .startsWith(
+                                question.hero() + ":" + SixMaxSuppliedFlopSizeMenuGame.PREFLOP_KEY))
+            throw new IllegalArgumentException("Owned initial preflop question required");
+        try {
+            return solveWithPlanRepresentation(
+                    game,
+                    question,
+                    securitySlack,
+                    minimumReach,
+                    FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                    BoundedLinearProgram.MAX_PIVOTS,
+                    BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                    true,
+                    1,
+                    false,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true);
+        } catch (IllegalStateException failure) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Reduced preflop endpoint verification failed: "
+                                    + failure.getMessage());
+            rejected.initCause(failure);
+            throw rejected;
+        }
+    }
+
     private static double physicalFlopMass(SixMaxSuppliedFlopBettingGame game, Question question) {
         if (!question.informationSet().startsWith(question.hero() + ":supplied-flop-one-bet:"))
             throw new IllegalArgumentException("Physical flop question required");
@@ -822,6 +877,48 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
             boolean certifiedNegativeReach,
             boolean refinedPhaseOne)
             throws Exception {
+        return solveWithPlanRepresentation(
+                game,
+                question,
+                securitySlack,
+                minimumReach,
+                compilerLimit,
+                pivotLimit,
+                arithmeticLimit,
+                conditioned,
+                physicalFlopMass,
+                exactPowerOfTwoRows,
+                refinedDirections,
+                ascendingRefined,
+                refinedBasis,
+                resolvableRefinedBasis,
+                certifiedNegativeReach,
+                refinedPhaseOne,
+                false);
+    }
+
+    private static <S> Result solveWithPlanRepresentation(
+            MultiPlayerCfrGame<S> game,
+            Question question,
+            double securitySlack,
+            double minimumReach,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            boolean conditioned,
+            double physicalFlopMass,
+            boolean exactPowerOfTwoRows,
+            boolean refinedDirections,
+            boolean ascendingRefined,
+            boolean refinedBasis,
+            boolean resolvableRefinedBasis,
+            boolean certifiedNegativeReach,
+            boolean refinedPhaseOne,
+            boolean reducedHeroPlans)
+            throws Exception {
+        if (reducedHeroPlans && (!refinedPhaseOne || physicalFlopMass != 1))
+            throw new IllegalArgumentException(
+                    "Reduced root mode requires original-prior measurement");
         if (refinedPhaseOne && !certifiedNegativeReach)
             throw new IllegalArgumentException(
                     "All-phase refinement requires explicit certified reach");
@@ -895,18 +992,32 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
                                 root.opponentPast()));
             }
         }
-        var continuations = new TreeMap<String, List<String>>();
-        for (var root : roots)
-            collectContinuations(forced(root, question), question.hero(), continuations, budget);
-        long count = 1;
-        for (var actions : continuations.values()) {
-            count *= actions.size();
-            if (count > MAX_CONTINUATION_PLANS)
-                throw new IllegalArgumentException("Conditional continuation plan budget exceeded");
+        List<Map<String, String>> choices;
+        if (reducedHeroPlans) {
+            choices =
+                    ReducedHeroContinuations.compile(
+                                    roots.stream().map(root -> forced(root, question)).toList(),
+                                    question.hero(),
+                                    checked.treeNodes(),
+                                    budget)
+                            .choices();
+        } else {
+            var continuations = new TreeMap<String, List<String>>();
+            for (var root : roots)
+                collectContinuations(
+                        forced(root, question), question.hero(), continuations, budget);
+            long count = 1;
+            for (var actions : continuations.values()) {
+                count *= actions.size();
+                if (count > MAX_CONTINUATION_PLANS)
+                    throw new IllegalArgumentException(
+                            "Conditional continuation plan budget exceeded");
+            }
+            budget.charge(count * checked.treeNodes());
+            var full = new ArrayList<Map<String, String>>();
+            enumerate(new ArrayList<>(continuations.entrySet()), 0, new TreeMap<>(), full);
+            choices = full;
         }
-        budget.charge(count * checked.treeNodes());
-        var choices = new ArrayList<Map<String, String>>();
-        enumerate(new ArrayList<>(continuations.entrySet()), 0, new TreeMap<>(), choices);
         var baseline =
                 ascendingRefined
                         ? FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
@@ -1172,23 +1283,25 @@ public final class FiniteTwoPlayerConditionalActionIntervals {
         var work = budget.audit();
         return new Result(
                 new Audit(
-                        refinedPhaseOne
-                                ? PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM
-                                : physicalFlopMass > 0
-                                        ? resolvableRefinedBasis
-                                                ? certifiedNegativeReach
-                                                        ? PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
-                                                        : PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
-                                                : refinedBasis
-                                                        ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
-                                                        : ascendingRefined
-                                                                ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
-                                                                : refinedDirections
-                                                                        ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
-                                                                        : exactPowerOfTwoRows
-                                                                                ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
-                                                                                : PHYSICAL_FLOP_ALGORITHM
-                                        : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
+                        reducedHeroPlans
+                                ? PREFLOP_ROOT_REDUCED_ALGORITHM
+                                : refinedPhaseOne
+                                        ? PHYSICAL_FLOP_PHASE_ONE_REFINED_ALGORITHM
+                                        : physicalFlopMass > 0
+                                                ? resolvableRefinedBasis
+                                                        ? certifiedNegativeReach
+                                                                ? PHYSICAL_FLOP_CERTIFIED_REACH_ALGORITHM
+                                                                : PHYSICAL_FLOP_RESOLVABLE_REFINED_BASIS_ALGORITHM
+                                                        : refinedBasis
+                                                                ? PHYSICAL_FLOP_REFINED_BASIS_ALGORITHM
+                                                                : ascendingRefined
+                                                                        ? PHYSICAL_FLOP_ASCENDING_REFINED_ALGORITHM
+                                                                        : refinedDirections
+                                                                                ? PHYSICAL_FLOP_REFINED_DIRECTION_ALGORITHM
+                                                                                : exactPowerOfTwoRows
+                                                                                        ? PHYSICAL_FLOP_EXACT_POWER_TWO_ALGORITHM
+                                                                                        : PHYSICAL_FLOP_ALGORITHM
+                                                : conditioned ? CONDITIONED_ALGORITHM : ALGORITHM,
                         SCOPE,
                         false,
                         question,

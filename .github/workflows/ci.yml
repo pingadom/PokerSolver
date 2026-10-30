@@ -92,6 +92,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_size_menu_btn.py'
           python3 -m unittest discover -s scripts -p 'test_check_size_menu_half_btn.py'
           python3 -m unittest discover -s scripts -p 'test_check_size_menu_preflop_plan.py'
+          python3 -m unittest discover -s scripts -p 'test_check_reduced_preflop.py'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
