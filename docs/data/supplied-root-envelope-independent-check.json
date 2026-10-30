@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+  "trainerAdmission": false,
+  "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+  "parentCheck": {
+    "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+    "trainerAdmission": false,
+    "literalTreeStates": 1609,
+    "informationSets": 89,
+    "originalLpCertificatesChecked": 2,
+    "policiesChecked": 3,
+    "physicalWorlds": 24,
+    "fullBoardsRegenerated": 15792192,
+    "fixedRunoutsRegenerated": 15984,
+    "nashConvBb": 3.726186026398182e-15,
+    "referenceNashConvBb": [
+      2.087894412916569e-09,
+      5.219769547148978e-10
+    ],
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "originalEnvelopeCertificatesChecked": 5,
+  "originalRootWorlds": 8,
+  "completePureHeroRows": 33,
+  "checkedActions": [
+    "fold",
+    "call",
+    "raise:9.0"
+  ],
+  "completeOuterBounds": true,
+  "attainedEndpointClaims": false,
+  "gradingAuthority": false,
+  "work": {
+    "compilerLimit": 8000000,
+    "compilerUnits": 1120512,
+    "lpArithmeticWork": 471304900,
+    "lpPivots": 153,
+    "lpSolves": 5
+  },
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "dd871cc2d9394a52263a2f8945d5713e2f9e0a8a21fde0be0ead0bc60c28a0b1",
+  "requestStoredSha256": "f7b04caff2daa26c752418905cb056bb1a2509c645a9c79e5fa9db217b57a78e",
+  "reportStoredSha256": "2f323fbd0af14a81e1d52773a8f1327876ef2192d882ee75c240012040bb6a4a",
+  "immutableHelperSha256": {
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-bb-sizing-physics.py": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65",
+    "check-big-blind-flop-discovery.py": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60",
+    "check-supplied-flop-action-bounds.py": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e"
+  }
+}
