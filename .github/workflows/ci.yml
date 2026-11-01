@@ -94,6 +94,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_size_menu_preflop_plan.py'
           python3 -m unittest discover -s scripts -p 'test_check_reduced_preflop.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_security_envelope.py'
+            python3 -m unittest discover -s scripts -p 'test_check_root_envelope_feedback.py'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
