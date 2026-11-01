@@ -1,0 +1,67 @@
+{
+  "attempts" : [ {
+    "attempt" : {
+      "action" : "fold",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -9.99999993922529E-9,
+        "lowerLossBb" : 1.7857791802528848,
+        "upperEvBb" : 1.0000000050247593E-8,
+        "upperLossBb" : 1.78577929297108
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658"
+    },
+    "ordinal" : 0
+  }, {
+    "attempt" : {
+      "action" : "call",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.7857791902528848,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.7857792829710801,
+        "upperLossBb" : 9.27181953436218E-8
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658"
+    },
+    "ordinal" : 1
+  }, {
+    "attempt" : {
+      "action" : "raise:9.0",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "raise:9.0",
+        "classification" : "STRATEGY_DEPENDENT",
+        "lowerEvBb" : -5.359434212217635,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.7857792829710801,
+        "upperLossBb" : 7.145213495188715
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658"
+    },
+    "ordinal" : 2
+  } ],
+  "counts" : {
+    "distinctQuestions" : 1,
+    "outsideLimit" : 1,
+    "strategyDependent" : 1,
+    "withinLimit" : 1
+  },
+  "studyHash" : "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658"
+}

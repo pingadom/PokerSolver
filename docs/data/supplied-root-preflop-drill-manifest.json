@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "pokerlab-root-preflop-drill-manifest/v1",
+  "studyHash": "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658",
+  "requestFile": "supplied-root-envelope-feedback-request.json",
+  "requestSha256": "2503e36c63d7026b1d53c5b49c91cd3572de0fe4e23c4f3cc048b0a6cc82c8a6",
+  "reportFile": "supplied-root-envelope-feedback-report.json.gz",
+  "reportStoredSha256": "e3bf6895b71c24dd5202d09e402ee413d9d40d35cce660d9d5edfce5e2d1823d",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 2,
+    "maximumParentLpSolves": 4,
+    "maximumEnvelopeLpSolves": 5,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  }
+}

@@ -95,6 +95,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_reduced_preflop.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_security_envelope.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_envelope_feedback.py'
+            python3 -m unittest discover -s scripts -p 'test_check_root_preflop_drill.py'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -678,5 +679,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: btn-sizing-compose-log, path: btn-sizing-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  root-preflop-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-root-preflop.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_root_preflop.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Root preflop source is absent without opt-in
+        run: python3 scripts/smoke-root-preflop.py --disabled
+      - name: Owned root startup, three cached grades and canonical reviews
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-root-preflop.yml up -d --no-deps api
+          python3 scripts/smoke-root-preflop.py
+      - name: Root preflop service logs
+        if: always()
+        run: docker compose logs --no-color > root-preflop-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: root-preflop-compose-log, path: root-preflop-compose.log }
       - if: always()
         run: docker compose down -v

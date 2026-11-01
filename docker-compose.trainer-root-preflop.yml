@@ -1,0 +1,12 @@
+# Explicit local opt-in. One complete source replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1200m"
+      TRAINER_ROOT_PREFLOP_ENABLED: "true"
+      TRAINER_ROOT_PREFLOP_MANIFEST_PATH: /opt/pokerlab/root-preflop/supplied-root-preflop-drill-manifest.json
+      TRAINER_ROOT_PREFLOP_STUDY_HASH: cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658
+    volumes:
+      - ./docs/data/supplied-root-preflop-drill-manifest.json:/opt/pokerlab/root-preflop/supplied-root-preflop-drill-manifest.json:ro
+      - ./docs/data/supplied-root-envelope-feedback-request.json:/opt/pokerlab/root-preflop/supplied-root-envelope-feedback-request.json:ro
+      - ./docs/data/supplied-root-envelope-feedback-report.json.gz:/opt/pokerlab/root-preflop/supplied-root-envelope-feedback-report.json.gz:ro
