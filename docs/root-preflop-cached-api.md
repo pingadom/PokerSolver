@@ -116,5 +116,5 @@ python scripts/check-root-preflop-drill.py
 python -m unittest discover -s scripts -p test_check_root_preflop_drill.py
 ```
 
-The next step is a separate table UI consuming these cached endpoints. This
-release adds the backend protocol and explicit opt-in only.
+The separate [table UI](root-preflop-table-ui.md) consumes these cached endpoints
+at `#root-preflop`. The backend remains explicitly opt-in.
