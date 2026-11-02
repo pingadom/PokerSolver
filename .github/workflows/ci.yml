@@ -96,6 +96,7 @@ jobs:
             python3 -m unittest discover -s scripts -p 'test_check_root_security_envelope.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_envelope_feedback.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_preflop_drill.py'
+          python3 -m unittest discover -s scripts -p 'test_check_root_minimax.py'
       - uses: actions/upload-artifact@v7
         if: always()
         with:
