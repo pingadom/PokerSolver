@@ -1,0 +1,62 @@
+import copy
+import importlib.util
+from pathlib import Path
+import tempfile
+import unittest
+from unittest.mock import patch
+
+spec=importlib.util.spec_from_file_location('root_cache_test',Path(__file__).with_name('check-root-preflop-drill.py'))
+check=importlib.util.module_from_spec(spec);spec.loader.exec_module(check)
+
+
+class RootCacheCheckTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.manifest=check.read(check.MANIFEST);cls.fixture=check.read(check.FIXTURE);cls.export=check.REVIEW.read_bytes().decode();cls.receipt=check.check()
+    def reject(self,change):
+        value=copy.deepcopy(self.fixture);change(value)
+        with self.assertRaises(ValueError):check.check_values(self.manifest,value,self.export)
+    def test_original_source_and_public_three_grade_receipt(self):
+        self.assertEqual(self.receipt,check.read(check.DATA/'supplied-root-preflop-drill-independent-check.json'))
+        self.assertEqual(3,self.receipt['cachedGradesChecked']);self.assertTrue(self.receipt['emptyPreflopBoard'])
+        self.assertEqual(0,self.receipt['freshLpSolves']);self.assertEqual(0,self.receipt['freshCfrRuns'])
+    def test_future_board_hidden_cards_and_context_cannot_leak(self):
+        self.reject(lambda f:f['questions'][0]['board'].append('6d'))
+        self.reject(lambda f:f['questions'][0].__setitem__('opponentCards','As Ac'))
+        self.reject(lambda f:f['questions'][0]['context'].__setitem__('toCallBb',9))
+    def test_ev_scope_shift_losses_and_raise_ambiguity_are_independent(self):
+        self.reject(lambda f:f['metadata'].__setitem__('evScope','TERMINAL_PROFIT'))
+        self.reject(lambda f:f['grades'][1]['move'].__setitem__('lowerEvBb',99))
+        self.reject(lambda f:f['grades'][2]['move'].__setitem__('classification','WITHIN_LIMIT'))
+        self.reject(lambda f:f['questions'][0]['moves'][0].__setitem__('lowerLossBb',0))
+    def test_no_public_admission_missing_action_or_alternative_source(self):
+        self.reject(lambda f:f['metadata'].__setitem__('trainerAdmission',True))
+        self.reject(lambda f:f['grades'].pop())
+        self.reject(lambda f:f['questions'][0].__setitem__('sourceCaseIndex',1))
+        self.reject(lambda f:f['metadata'].__setitem__('studyHash','0'*64))
+    def test_manifest_file_identity_and_work_reservation_are_checked(self):
+        for field,value in [('reportStoredSha256','0'*64),('studyHash','0'*64),('requestFile','../escape.json')]:
+            m=copy.deepcopy(self.manifest);m[field]=value
+            with self.assertRaises(ValueError):check.check_values(m,self.fixture,self.export)
+        m=copy.deepcopy(self.manifest);m['startupBudget']['maximumEnvelopeLpSolves']=99
+        with self.assertRaises(ValueError):check.check_values(m,self.fixture,self.export)
+    def test_reviews_retain_order_repeats_and_unresolved_counts(self):
+        choices=[a['attempt'] for a in self.fixture['review']['attempts']]
+        self.assertEqual(self.fixture['review'],check.review(choices,self.fixture['grades']))
+        repeated=check.review([dict(sourceCaseIndex=0,action='raise:9.0')]*128,self.fixture['grades'])
+        self.assertEqual(128,repeated['counts']['strategyDependent'])
+        self.assertEqual(list(range(128)),[a['ordinal'] for a in repeated['attempts']])
+        self.reject(lambda f:f['review']['counts'].__setitem__('strategyDependent',0))
+    def test_invalid_choices_and_review_overflow_cannot_get_grades(self):
+        for c in [dict(sourceCaseIndex=1,action='call'),dict(sourceCaseIndex='0',action='call'),dict(sourceCaseIndex=False,action='call'),dict(sourceCaseIndex=0,action='check'),dict(sourceCaseIndex=0,action='fold',ev=99)]:
+            with self.assertRaises(ValueError):check.review([c],self.fixture['grades'])
+        with self.assertRaises(ValueError):check.review([dict(sourceCaseIndex=0,action='fold')]*129,self.fixture['grades'])
+    def test_canonical_export_checks_real_bytes_without_newline_normalization(self):
+        for text in [self.export.replace('\n','\r\n'),self.export.rstrip(),self.export+'\n']:
+            with self.assertRaises(ValueError):check.check_values(self.manifest,self.fixture,text)
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder)/'review.json';p.write_bytes(self.export.replace('\n','\r\n').encode())
+            with patch.object(check,'REVIEW',p),self.assertRaises(ValueError):check.check()
+
+
+if __name__=='__main__':unittest.main()

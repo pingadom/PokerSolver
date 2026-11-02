@@ -54,6 +54,9 @@ pokerlab:
     size-menu-btn-enabled: ${TRAINER_SIZE_MENU_BTN_ENABLED:false}
     size-menu-btn-manifest-path: ${TRAINER_SIZE_MENU_BTN_MANIFEST_PATH:}
     size-menu-btn-study-hash: ${TRAINER_SIZE_MENU_BTN_STUDY_HASH:}
+    root-preflop-enabled: ${TRAINER_ROOT_PREFLOP_ENABLED:false}
+    root-preflop-manifest-path: ${TRAINER_ROOT_PREFLOP_MANIFEST_PATH:}
+    root-preflop-study-hash: ${TRAINER_ROOT_PREFLOP_STUDY_HASH:}
     sizing-flop-collection-manifest-path: ${TRAINER_SIZING_FLOP_COLLECTION_MANIFEST_PATH:}
     sizing-flop-collection-hash: ${TRAINER_SIZING_FLOP_COLLECTION_HASH:}
     unpaired-flop-collection-enabled: ${TRAINER_UNPAIRED_FLOP_COLLECTION_ENABLED:false}
