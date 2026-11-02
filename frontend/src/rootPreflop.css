@@ -1,0 +1,23 @@
+.root-preflop-page .root-controls { justify-content: center; }
+.root-preflop-page .poker-action-value strong { font-size: .85rem; }
+.root-preflop-page .root-session-notice { font-size: .8rem; color: #c0d3e4; margin: .7rem 0 0; }
+.root-preflop-page .interval-review > p { color: #d6e4ef; font-size: .8rem; }
+.root-preflop-page .interval-feedback { display: block; }
+.root-preflop-page .interval-feedback h2 { margin-bottom: .25rem; }
+.root-preflop-page .interval-feedback p + p { margin-top: .2rem; }
+.root-preflop-page .interval-context dd { margin: .3rem 0 .8rem; overflow-wrap: anywhere; }
+.root-preflop-page .poker-table { height: 290px; }
+.root-preflop-page .poker-player.folded .poker-card-backs { display: none; }
+@media (min-width: 901px) and (max-height: 820px) {
+  .root-preflop-page .poker-table { height: 235px; }
+  .root-preflop-page .poker-table-center { top: 40%; }
+  .root-preflop-page .poker-hero-controls { margin-top: 8px; }
+  .root-preflop-page .poker-action { padding: 7px 6px; }
+  .root-preflop-page .poker-action-value strong { font-size: .8rem; }
+  .root-preflop-page .root-controls { margin-top: .65rem; }
+}
+@media (max-width: 600px) {
+  .root-preflop-page .poker-table { height: 310px; }
+  .root-preflop-page .poker-action-value strong { font-size: .72rem; }
+  .root-preflop-page .poker-action-label { font-size: .75rem; }
+}
