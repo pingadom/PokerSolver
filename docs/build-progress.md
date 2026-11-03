@@ -43,3 +43,10 @@ The [first complete CI run](https://github.com/pingadom/PokerSolver/actions/runs
 No AWS infrastructure was applied, and no deployment workflow was executed. Terraform validation establishes syntactic/provider-schema correctness; it does not prove an actual AWS deployment. Docker is still absent on the Windows host, with container verification supplied by CI. Authentication, ranges, cancellation endpoints, autoscaling, push updates and S3 exports remain deliberately out of core scope.
 
 Release policy: tag `v1.0.0` only after the final revision passes CI and the working tree is clean. Do not merge or deploy implicitly.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

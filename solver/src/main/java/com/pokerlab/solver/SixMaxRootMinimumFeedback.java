@@ -263,9 +263,17 @@ public final class SixMaxRootMinimumFeedback {
     public static Result solve(Request request, Path envelopePath, Path minimumPath)
             throws Exception {
         var saved = readMinimum(minimumPath);
+        var original = SixMaxRootMinimumStudy.readSource(envelopePath);
+        return solve(request, original, saved);
+    }
+
+    static Result solve(
+            Request request,
+            SixMaxRootEnvelopeFeedback.Report original,
+            SixMaxRootMinimumStudy.Report saved)
+            throws Exception {
         if (!request.minimumRequest().equals(saved.request()))
             throw new IllegalArgumentException("Pinned minimum request differs");
-        var original = SixMaxRootMinimumStudy.readSource(envelopePath);
         var owned = SixMaxRootMinimumStudy.solve(request.minimumRequest(), original);
         if (!saved.equals(owned.report()))
             throw new IllegalArgumentException("Complete original minimum replay differs");

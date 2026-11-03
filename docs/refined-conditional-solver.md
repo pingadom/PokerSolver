@@ -68,3 +68,10 @@ qualification gates remain necessary. Other screened questions retain their reco
 work-limit or numerical rejections. In particular, BTN after checking still has a zero-reach witness;
 this mode does not manufacture its conditional posterior. Wider ranges, richer betting streets,
 multiplayer equilibrium and AWS deployment remain separate work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

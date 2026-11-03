@@ -126,3 +126,10 @@ This is two-active-player research at six seats, with the existing tiny supplied
 ranges and physical-flop/checkdown abstraction. It is not a general six-player
 cash equilibrium, and the work-limit failure is not a third-party library bug.
 AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

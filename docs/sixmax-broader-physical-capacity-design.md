@@ -58,3 +58,10 @@ Persist only exact generated or exactly replayed payoff tables. A raw JSON recor
 5. **Trainer admission and API integration.** Require the existing parent/local/materiality/stability and 25% retained-coverage gates, measured over all heads-up reach. Build an opaque admitted pack and verify hidden-card boundaries, deterministic question replay and grade EVs before connecting it to the table UI.
 
 The next deliverable is a separately identified broader-support experiment with declared budgets and measured resource costs. Storage compatibility does not meet the 25% retained-content gate. Broader ranges, rake, multiple flop bet sizes, turn/river decisions and true multiway equilibrium remain separate model milestones.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

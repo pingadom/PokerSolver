@@ -84,3 +84,10 @@ The first prototype retained uncompressed canonical bytes and used 64-bit arrays
 ## Remaining model work
 
 The compact format leaves the old 600-revelation, 2,000-observation and one-million-state caps in place. They cannot support the unchanged 25% retained heads-up coverage target: even 600 ideal literal revelations cover at most 6.073%. Broader per-history support needs its own model namespace and measured state, policy, payoff, heap and full-replay budgets before fresh training and exhaustive action-EV screening. Storage compatibility alone grants no retained-content credit. The current four sampled action-EV failures, unexamined eligible cases, realistic ranges, rake and genuine multiway equilibrium remain open. AWS deployment stays paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

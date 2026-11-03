@@ -104,3 +104,10 @@ Tests separately check public-only classification, history-dependent fallbacks, 
 “I reduced solver memory by defining the public observation model per betting history. I preserve every legal hidden world, split exact board outcomes out of an aggregate, and subtract their payoffs so the original marginal totals recover exactly. I bind model and policy identities, retrain from zero regrets, then evaluate both full-game deviations and rare local decisions. I report reached board coverage separately from decision accuracy and trainer admission.”
 
 The [conditional refinement and decision-stability follow-up](sixmax-history-physical-refinement.md) now implements frozen-preflop local optimization, complete parent re-audits, exact fresh-budget replay and retained coverage measurement in this separately bound model. The broad candidate fails on fourteen selected cases and exports no policy; a separately declared accurate-case derivative retains 28 of 32 screened cases as research evidence, covering only 0.132% of all heads-up reach. Next address the weak/unstable decisions and a broader measured screen. A broader menu must address the heuristic's concentration and demonstrate acceptable runtime and local quality. Realistic ranges, rake, multiway postflop and richer turn/river betting remain separate milestones. Public AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

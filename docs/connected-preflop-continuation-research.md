@@ -20,3 +20,10 @@ This is still **validation-only**. Four seats have exogenous folds, and the cand
 The [connected chance audit](connected-chance-abstraction-audit.md) now makes that comparison. The starting menu has more than 1bb of range-weighted forced-check-down bias; a seeded menu search reduces in-sample bias but fails on unseen combos. This rules out promoting either menu to training content despite its abstract-game best-response gap.
 
 A separate [physical-deck connected game](physical-deck-connected-research.md) now samples every legal flop, turn and river directly while retaining the same preflop decisions and postflop bet sizes. Its check-down audit matches the exact board distribution within measured sampling error. The resulting CFR profile remains sparse across the much larger public tree and has no full-game convergence certificate, so it is research infrastructure rather than a trainer pack.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

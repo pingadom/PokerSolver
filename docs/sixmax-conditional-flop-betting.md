@@ -42,3 +42,10 @@ mvn -q -pl solver -am spotless:check verify
 Tests cover all terminal betting paths against an unbeatable flopped-royal-flush control, six-seat chip conservation, constant-sum centering, exact checkdown equivalence, physical folded-card removal, correlated live-hand support, private information-set grouping, deterministic CFR+, exact best-response bounds, conditional opponent-action EVs for both players, forced own actions, rare-history underflow, invalid policies and inputs, stack-sized bets, real saved-policy replay and byte-reproducible CLI output with source preservation.
 
 The [conditional turn/river continuation](sixmax-conditional-turn-river-betting.md) now extends this correlated chance model through public flop actions, a shown turn, two connected betting rounds and all 36 physical rivers per compatible deal. It carries called contributions and caps bets at remaining stacks, including all-in runouts. These are still separate conditional solves: the next integration step is to re-solve the flop with the later-street values in a single tree, then connect those values back into a re-solved six-seat preflop policy with broad flop coverage and a measured chance/abstraction method. More realistic ranges, broader action menus and separate multiway/rake validation remain publication gates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

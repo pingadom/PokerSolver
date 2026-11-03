@@ -17,3 +17,10 @@ AWS additionally supplies SQS queue depth/age metrics. Terraform creates alarms 
 If progress stalls, inspect outbox pending count, queue age, worker logs and batch attempts in that order. Never manually increment progress. Retry a transient outage by restoring its dependency; redrive of a failed simulation does not revive a terminal record. Submit a new request with the recorded scenario and seed after fixing the underlying problem. Inspect malformed DLQ bodies privately and do not paste credentials or raw untrusted payloads into public logs.
 
 API and worker shutdown are graceful. Interrupted workers leave unacknowledged queue messages for another worker after their lease expires. Redis remains optional; PostgreSQL readiness is essential.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -91,3 +91,10 @@ The current literal-board capacity itself rules out the unchanged 25% retained t
 The menu selector now rejects requests above that capacity before frozen-policy checks or expensive board enumeration. It also rejects serialized selection evidence whose claimed reach exceeds its menu's own optimistic bound. This is a one-sided impossibility bound, not a promise that requests below it are feasible. Meeting the current target needs a declared broader observation/storage/runtime design and performance evidence; raising a compute cap or lowering the content gate silently would conceal the problem.
 
 In parallel, address the fourteen weak selected cases within a declared local-solver design/budget, then investigate the four accurate-but-EV-unstable cases without weakening the decision gates. A broader stability sweep must report work cost and actual retained reach rather than crediting unexamined boards. Expanding history/seat-pair coverage, realistic private ranges, rake, multiway postflop and richer later-street betting require their own model and validation changes. These results do not qualify a new trainer pack. Public AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

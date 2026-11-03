@@ -57,3 +57,10 @@ Tests verify a large conditional improvement from a controlled checkdown policy,
 This experiment still uses the synthetic two-deal source and sparse physical-flop coverage. Improving its conditional decisions does not increase the probability of reaching those decisions, establish realistic cash ranges, or certify full six-max poker. The next gate is refinement on strategically significant histories reached by learned policies, followed by broader private-hand support and measured parent/conditional quality across those games.
 
 The refinement API now also accepts an explicit `SixMaxContinuationStudyBudget`. Existing calls keep the eight-pair default; the [physical-flop width experiment](sixmax-flop-width-study.md) opts into sixteen pairs without increasing the two-million-state cap. An exact tree-count preflight checks cost before validation and solving. The parent and conditional audit requirements remain unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

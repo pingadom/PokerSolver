@@ -78,3 +78,10 @@ Every trainer command first completes replay. Questions display all six public s
 Tests compare exact counts against the separate all-subsets enumerator, verify folded-card effects, preserve sparse correlated support, reject work/card/history/input failures before enumeration, and independently calculate every leaf payout and candidate/reference action EV. Independent literal 8-by-9 complete-plan matrices check every pure deviation of both saved equilibria without calling the game, strategy evaluator or best-response implementation. Saved accepted/rejected studies replay, tampered rehashed physical evidence fails, and existing source-derived studies retain exact replay.
 
 The separate [root-action interval diagnostic](sixmax-root-action-ev-intervals.md) now investigates this stability boundary on a richer five-target version of the 27-world fixture. It bounds each move across an explicit numerical opponent security face and identifies robust action quality without claiming a unique EV or changing admission. Next design and validate ambiguity-aware feedback qualification, then expand useful supplied scenario/seat-pair support and content registration with provenance visible in the product. Full-range cash realism, rake, broader physical postflop coverage and multiplayer convergence remain separate goals. No upstream library defect was identified in this work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

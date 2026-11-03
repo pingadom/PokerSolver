@@ -74,3 +74,10 @@ utilities, check reference work and replay every saved grade. They run no optimi
 Next integrate this typed source into a separately versioned mixed collection and the table UI.
 This backend qualification does not extend the old six-question collection or establish ordinary
 six-max cash coverage. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -33,3 +33,10 @@ The independent Python checker composes the complete original v6 proofs with ind
 CI retains all existing tests and smoke jobs, adds the new opt-in smoke, and requires a complete disjoint backend inventory. Manifest v6 assigns the added full-source solver/API replay suites to lighter existing shards; no class is removed and the original 35-minute backend-job bound remains unchanged. The new smoke has its own 30-minute bound, including at most 25 minutes for startup.
 
 This extends the bounded research trainer; it does not establish general six-active-player cash GTO or unrestricted postflop play.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

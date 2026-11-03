@@ -46,3 +46,10 @@ every LP witness uses the new representation. A second regression traverses the 
 facing an initial BB bet and requires an insufficient-full-face-reach rejection; numerical
 success does not make that question suitable for teaching. These are solver diagnostics,
 not a versioned later-decision report or a new playable trainer question.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

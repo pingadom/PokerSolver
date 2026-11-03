@@ -17,3 +17,10 @@ Codex read the supplied cloud specification and inspected the existing implement
 | Performance report      | Added a repeatable thread-scaling harness and chart script                                        | Twelve measured ten-million-trial runs; exact batch-output equality across worker counts; CSV-backed plot                                | Rejected extrapolating engine speedup into cloud/distributed cost or latency claims                                             |
 
 All implementation and these automated checks were performed with AI assistance. Test outputs and CI artifacts are separate evidence from generated explanations; no independent human review, independent agent review, deployment, or user acceptance is claimed. The PR remains available for human review. Benchmarks contain measured observations, not generated estimates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

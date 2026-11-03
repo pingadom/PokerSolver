@@ -15,3 +15,10 @@ The new page loads on demand and calls only `/api/v1/trainer/research/flop-inter
 For an independently configured development API, `POKERLAB_UNPAIRED_FLOP_API_TARGET` sets the Vite proxy target for v6. The old proxy settings stay separate. Browser verification can use a separate port and tab without reloading an existing practice session.
 
 These remain supplied-prior research games with two active players at a six-seat table, no rake and one flop bet followed by exact checkdown. An EV range is final chip profit under the declared game; a loss interval is a conservative bound, not a strategy frequency or sampling error. Four after-check cases with certified zero reach remain excluded from practice.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

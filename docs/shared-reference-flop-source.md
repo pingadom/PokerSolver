@@ -65,3 +65,10 @@ Adversarial tests cover missing/duplicated/reordered hands, altered game/key/act
 “I separated expensive strategy qualification from interactive training. A batch owns one physical game and two independently initialized reference runs, checks every selected decision against both, and creates an opaque capability only when the complete batch passes. A pinned startup replay then builds an immutable cache. The trainer cannot trust client EVs or deserialized success flags; it uses that cache to grade decisions and replay saved sessions. Sharing the pair cuts the reference iteration budget across these three questions by two thirds without removing any per-question validation.”
 
 The [separate v5 backend collection](fourteen-question-flop-collection.md) now joins these three contexts to the existing eleven and exposes a default-disabled cached HTTP API. Its fourteen questions contain seven robust calls, four bets, two folds and one check. Frontend integration is next; fourteen is not the current website count. Check/bet variety in this weak-range model remains blocked by certified zero reach after BB checks; changing that requires a separately declared game or objective. Broader ranges, boards, later betting, rake and six active players remain separate solver work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

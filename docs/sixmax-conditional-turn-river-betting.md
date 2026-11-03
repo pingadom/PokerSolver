@@ -62,3 +62,10 @@ mvn -q -pl solver -am spotless:check verify
 Tests cover physical turn conditioning and 36-card river chance, folded blockers, turn-averaged equivalence with the independent 666-board flop baseline, perfect recall, all terminal paths against an unbeatable royal flush, six-seat conservation, uncalled bet refunds, branch-specific stack caps, all-in runouts, exhaustive CFR and independent best responses, both players' conditional EVs, forced own actions, rare reach underflow, strict input/policy rejection, source replay and reproducible CLI output.
 
 The [connected postflop tree and chance study](sixmax-connected-postflop.md) now re-solve flop, turn and river decisions together, with exact physical chance and a separately labelled restricted-turn comparison. The next integration is feeding those values into a re-solved six-seat preflop game with broader flop coverage and measured computation cost. Wider private support, position-specific ranges, raises, multiway continuation and a declared cash rake model remain separate gates before publishing realistic GTO lessons.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

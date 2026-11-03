@@ -63,3 +63,10 @@ python scripts/check-supplied-root-intervals.py \
 ```
 
 Next design and validate an admission policy for ambiguity-aware feedback, with separate treatment of EV intervals and robust action quality. Later posterior handling is now implemented separately as described above. Existing admission rules remain unchanged until feedback qualification is complete; broader useful scenarios and eventual full cash-poker scope remain on the roadmap. AWS deployment is still paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

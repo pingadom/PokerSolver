@@ -85,3 +85,10 @@ The intermediate preflop-only update is not acceptable on its own: its changed p
 Each saved policy has **127,318 complete rows**. The exhaustive preflop stage visits 97,926,000 nodes and 50,112,000 terminals. Its frozen continuation table includes a six-seat utility vector for every one of the twelve original private deals. Reports [711](data/sixmax-three-open-alternating-seed-711.json) and [712](data/sixmax-three-open-alternating-seed-712.json) bind the fresh training budgets, source, menu, whole-round decision, retained policy hash and both source/retained coverage. The large policy checkpoints remain ignored local files.
 
 An [independent-policy comparison](sixmax-connected-policy-stability.md) now reloads those checkpoints and recomputes quality, content and stage-normalized action-frequency disagreement. Two passing seeds are useful finite-game evidence, not a broad stability certificate or trainer admission. General 6-max cash play still needs wider physical hand support, history-dependent raise menus, multiway postflop betting, broader physical-board coverage and independent tests across more seeds and budgets. High public-history reach cannot substitute for those model gates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -238,3 +238,10 @@ Reproduce from `solver/` after compiling:
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 50000 200000 10000 20000 42 3x3 both sampled sampled-eval 20000'
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalResponseStability' '-Dexec.args=10000 50000 200000 10000 20000 42 5x5 both sampled sampled-eval 20000'
 ```
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -19,3 +19,10 @@ java --class-path 'solver/target/classes;engine/target/classes' com.pokerlab.sol
 The current trainer pack gets **no reduction**: its hand pairs already have different rank/suit structures. The synthetic probe gets a **12× reduction in board enumerations**, because the 36 physical pairings collapse to three patterns of suit overlap. These are counts of board evaluations, not wall-clock speedups; the evaluator, cache lookup, solver iterations and pack validation have their own costs. The probe is a scaling check, not new trainer content.
 
 This result argues against expanding the demo by simply adding many exact combos. Larger realistic ranges need documented range provenance and uncertainty bounds first. Their payoff cost should be measured with this report, then benchmarked on the target machine. Even with suit reuse, exact enumeration over broad two-player ranges may be too expensive; a future payoff method would need measured uncertainty and a solver-quality gate that includes it. The current validation-only pack and its saved EVs are unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

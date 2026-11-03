@@ -43,3 +43,10 @@ The benchmark refuses existing output/budget paths and verifies its three input 
 For an interview: “I reduced overhead in repeated CFR traversals using a privately owned immutable graph. I preserved floating-point operation order and checked whole policies and work counts exactly, then replayed the original qualification pipeline. I measured traversal separately from startup so I could state the benefit without overstating what the benchmark proves.”
 
 The legacy single-question follow-up used a separate fixed diagnostic: three alternating-order pairs at 1,000 iterations, six fresh solves, with exact whole-policy/work equality and no inactive pruning. All three measured hot-loop ratios were 2.926–2.987 on the local JVM; cache construction took about 0.058 seconds. These include cold/JIT effects and are not a whole-producer or universal speed estimate. A separate isolated full-producer comparison then trained fresh 80k/160k references and reproduced the entire original report, hash `c95a6ce29095416967306a49496a7636d30cd9f9a4b648fca832a9db5d8545e7`, exactly. The production patch matches that validated candidate. No source reports, iteration budgets, pruning modes, algorithms or thresholds were changed. The existing full physical replay test remains the integration gate; this is an optimization of our traversal adapter, not an upstream library fix.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -138,3 +138,10 @@ pnpm build
 The engine includes an exhaustive distribution check of every five-card hand, named category/tiebreaker examples, seeded reproducibility, multiway ties and partial-batch planning. Integration contracts cover duplicates, concurrent finalisation, out-of-order results, retry and terminal failure. See [benchmarks](benchmarks.md).
 
 On Windows, stop a service before rebuilding its running JAR, or copy the JAR to an ignored runtime directory first; Windows can lock a running JAR and prevent Maven repackage. If a default port is occupied, stop only the relevant local service or adjust Compose mappings. If progress stalls, inspect queue connectivity, outbox rows and worker logs rather than resubmitting blindly.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

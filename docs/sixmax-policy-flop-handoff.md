@@ -43,3 +43,10 @@ The CLI strictly reloads the saved pack, caps the input at 16 MiB, binds the res
 Tests cover analytic action-conditioned posteriors, folded blockers, correlations between surviving hands, total probability over every physical unordered flop, deterministic sampling, an unbeatable flopped royal flush, exact runout counts, pot conservation, invalid histories, missing/zero strategy reach, invalid boards, unsupported rake and rare-history numerical stability. Integration tests replay the committed saved policy and verify CLI provenance and source preservation.
 
 A [conditional heads-up flop betting game](sixmax-conditional-flop-betting.md) now consumes this correlated posterior directly. It permits one flop bet before mandatory turn/river checkdown, keeps opponent/folded cards out of information sets, preserves all six chip utilities, and measures solved values against this exact checkdown baseline with a conditional best-response gap. Turn/river betting, broad flop coverage, re-solving the source preflop policy and broader input ranges remain prerequisites for a connected cash-game strategy.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

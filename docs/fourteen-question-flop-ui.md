@@ -29,3 +29,10 @@ Vite normally forwards all API requests to port 18080. To use an independently s
 These are independent flop decisions with two active players at a six-seat table, two source-specific supplied range sets, no rake and one flop bet followed by exact checkdown. The three shared hands are not three new range sets. Source-history reach remains unavailable and public trainer admission is off. This is not a general six-active-player GTO solution. Broader reachable check/bet contexts, additional boards/ranges, later betting and rake require separate solver work.
 
 Validation covers all fourteen questions and twenty-eight moves, board/menu changes, all three same-pin hand transitions, stale grade rejection, persistence, imports, canonical downloads, unavailable servers and the attempt cap. Existing routes and tests remain in place.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

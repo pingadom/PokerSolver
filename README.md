@@ -262,3 +262,10 @@ The separate [root security envelope](docs/root-security-envelope.md) supplies c
 The [root-envelope qualification](docs/root-envelope-qualification.md) now checks the primary policy and both fresh references against those conservative bounds. The declared BB99 root qualifies for an offline drill: call is within the loss limit, fold is outside it, and raise stays unresolved. An opaque capability binds the owned report; public trainer admission remains false. A pinned cache and preflop API are the next step.
 
 The [cached preflop backend](docs/root-preflop-cached-api.md) now loads that qualified source once and serves one six-seat BB99 question, all three cached grades and canonical session reviews through a separate default-off API. It shows current-decision EVs with an empty preflop board and preserves the raise's unresolved classification. Requests perform no solving or source-file reads; existing trainer routes remain unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

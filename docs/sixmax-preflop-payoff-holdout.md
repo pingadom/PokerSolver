@@ -42,3 +42,10 @@ mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxPreflopH
 | 713 holdout | 0.023412 | −0.001617 | 0.003958 | 0.001396 | 1.635200 |
 
 The terminal-payoff SE is roughly one quarter of the 2,000-board run, consistent with using sixteen times as many boards. The observed NashConv drift is smaller in these two holdouts, while the training NashConv itself is slightly higher. This compares two separately solved policies at the same 500-iteration budget; it does not demonstrate monotonic convergence with additional boards. The limited seed count and the estimated nature of the payoff SE still prevent a statistical certification or a real cash-game GTO claim.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

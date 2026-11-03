@@ -16,3 +16,10 @@ Manual checks against the committed pack:
 The pack's best-response gap is about 0.000149bb and exact payoffs have zero board-sampling error. Those measures support consistency *inside the stated game*. They do not establish that the ranges, bet sizes or game branch represent ordinary cash poker. [The range-sensitivity probe](preflop-range-sensitivity.md) shows `Ah Kh` moving from 24% to 98% shove frequency and `Ks Qs` changing preferred action under one-at-a-time weight perturbations. The interface therefore presents EVs as model results, describes close decisions cautiously, and never calls a low-frequency action inherently wrong.
 
 Before promoting this content beyond a validation demo, a poker reviewer must inspect the action history, range provenance, legal alternatives and realistic rake/cap assumptions. A broader preflop solution also needs postflop continuation values for calls and small raises. The eight included combos cannot support a full 13×13 strategy chart.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

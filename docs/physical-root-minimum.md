@@ -110,3 +110,10 @@ The older exact interval's raise `LP:WORK_LIMIT` remains intact. A later milesto
 may evaluate whether this checked lower bound can improve a separately qualified
 trainer envelope; that requires its own declared scope, complete-menu loss bounds,
 policy checks and admission tests. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

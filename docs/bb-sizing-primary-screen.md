@@ -60,3 +60,10 @@ Java tests replay both models and the fresh qualified source, check correct call
 CI assignment also changes under manifest v5. Three complete collection replay suites previously collided in `solver-3`; each now runs on a different lighter shard. The same eight solver/two service jobs, 35-minute limit, full automatic class inventory and aggregate evidence checks remain. No test is excluded, and old assignment manifests are rejected. Tests verify disjoint complete coverage and the explicit expensive-suite allocation.
 
 All 332 older evidence files are preserved. AWS deployment remains paused. The next product step is integrating these qualified backend questions into a separately pinned collection/API and an actor-aware table UI.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

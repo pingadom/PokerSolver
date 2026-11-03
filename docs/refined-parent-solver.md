@@ -41,3 +41,10 @@ The independent checker enumerates all 666 turn/river runouts for each of the 24
 This fixes the parent numerical blocker for one paired-board model. It does not certify conditional action EVs, positive question reach across the complete security face, fresh-reference inclusion, educational action classes or a new trainer lesson. Candidate iteration `1` is a strategy-container sentinel, not a CFR training run. No conditional posterior is manufactured at zero reach.
 
 Next, use explicitly versioned feedback studies to assess individual paired-board decisions with all original face/reach/reference/regret gates. Separate rainbow and two-tone probes still have zero-reach rejection witnesses for their first BTN question; this parent correction does not remove that blocker. Wider credible ranges, rake, richer streets and genuinely multiplayer equilibrium remain separate milestones. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

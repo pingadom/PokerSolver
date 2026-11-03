@@ -56,3 +56,10 @@ terraform destroy
 ```
 
 The demo explicitly skips the RDS final snapshot and has deletion protection off: destroying it removes the database. Export anything you intend to retain first. ECR repositories and S3 buckets deliberately do not force deletion of contents; remove unwanted demo images/artifacts through the AWS console or CLI after review, then rerun destroy if AWS reports nonempty resources. The provider lockfile is committed; backend credentials, state and plans are ignored. Configure an encrypted remote state backend with locking for shared environments.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

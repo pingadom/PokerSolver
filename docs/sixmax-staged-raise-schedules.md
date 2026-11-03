@@ -56,3 +56,10 @@ mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxPreflopR
 ```
 
 Use the saved pack's `generatedAt` value when reproducing its exact content hash; a changed timestamp changes that hash. The command above illustrates the workflow. New output paths preserve recorded evidence. All artifacts remain `VALIDATION_ONLY`; full ranges, wider physical boards, multiway postflop betting, postflop raises, realistic rake and trainer admission remain separate gates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

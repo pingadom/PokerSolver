@@ -49,3 +49,10 @@ python -m unittest discover -s scripts -p 'test_check_supplied_connected_flop.py
 Stored and expanded JSON are bounded to 8MiB, duplicate keys/nonfinite values are rejected, and writes are exclusive. Physical replay rejects altered counts even if a caller recomputes the surrounding hashes. Corruption controls also cover chance renormalization, policy changes, wrong residual multiplicity, changed priors/pots, admission and manufactured tiny-reach posteriors.
 
 The next gate is robust action feedback for a supported connected decision: complete-face action EV/loss bounds, adequate reach, fresh independent reference policies and physical replay before any trainer admission. Full turn/river betting, wider flop coverage, realistic ranges/rake and genuinely multiplayer strategy remain separate milestones. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

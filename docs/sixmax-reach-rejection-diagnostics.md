@@ -54,3 +54,10 @@ python -m unittest discover -s scripts -p 'test_check_supplied_zero_reach.py'
 The [recorded check](data/supplied-four-button-hand-zero-reach-independent-check.json) binds the request, compressed/expanded report and checker source bytes. CI runs the positive control and corruption controls for the original point, dual value, behavioral mass, admission identity, duplicate keys and non-finite numbers. Failed controls write no receipt; existing receipts cannot be overwritten. Java tests cover both hero orientations, padding-only failure, budget exhaustion, physical replay, tampered rehashed counts and separation from trainer requests.
 
 Broader work must explicitly address unreachable histories and strategic postflop continuation. Intersecting the security face with a positive-reach constraint would quantify over a different opponent set and needs a separate model and validation. Changing synthetic priors merely to produce more questions would not establish ordinary six-max cash coverage. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

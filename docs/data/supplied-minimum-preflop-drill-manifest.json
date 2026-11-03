@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "pokerlab-minimum-preflop-drill-manifest/v1",
+  "studyHash": "baa6420476438abfca0c508d19ca313d8f9dc78f643293df9b2866418f15bf6d",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 2,
+    "maximumParentLpSolves": 4,
+    "maximumMinimumLpSolves": 1,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  },
+  "requestFile": "supplied-root-minimum-feedback-request.json",
+  "requestSha256": "9dc93d4fab85ec8bd50b012b19debad9ec2cd8c601e077b65425256963533897",
+  "reportFile": "supplied-root-minimum-feedback-report.json.gz",
+  "reportStoredSha256": "94ed219424afe003d38893696f37d0bf5aa64aaf73620b66f470319d5593902e",
+  "envelopeFile": "supplied-root-envelope-feedback-report.json.gz",
+  "envelopeStoredSha256": "e3bf6895b71c24dd5202d09e402ee413d9d40d35cce660d9d5edfce5e2d1823d",
+  "minimumFile": "supplied-root-minimum-report.json.gz",
+  "minimumStoredSha256": "ea48889cd6677102c917d1990e6b14dc576a12dad75bc7a86d3fb21cc1906403"
+}

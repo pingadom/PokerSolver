@@ -61,3 +61,10 @@ Each preflop stage freezes sixteen exact six-seat utility vectors, including the
 Full checkpoints stay in ignored `.local/` and are approximately 61.00 / 60.98 MiB. Their saved hashes match the retained audits: `f40dc45ebcec3eb8461f8a10b5bfcbe513ab760b9662855b5c63177910a77a00` and `53c64c19fd3f4ef20b9b7f5842ff5dec1f707b005e8ac572f7c125738658f0b0`. The different row count and file size reflect the changed physical support and board, not a compression or algorithm-performance claim.
 
 Tests reconstruct source selection and board-conditioned beliefs independently, check exact source/menu/budget binding, recompute acceptance decisions, verify policy hash chains and all-six-seat payoff accounting, and reconcile physical branch reach with the retained audit. They do not repeat long CFR training in CI. No new trainer pack is admitted by this evidence.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

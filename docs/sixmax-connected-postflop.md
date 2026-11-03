@@ -54,3 +54,10 @@ The CLI caps source files at 16 MiB and exports two examples. The audit accepts 
 Tests cover full folded-card-aware chance, agreement with the independent 666-pair checkdown baseline, all terminal histories across three streets, uncalled refunds, equal splits, six-seat conservation, stack caps and every all-in street, private information grouping, recall, chance-key separation, duplicate quantiles, deterministic CFR+ and exact best responses, conditional EVs for both players, forced own moves, repeated rare opponent actions, strict input rejection, agreement with the preceding turn/river implementation, solution-hash determinism and byte-reproducible source-bound exports.
 
 A [sparse connected preflop follow-up](sixmax-connected-preflop.md) now updates all six preflop policies and selected heads-up postflop policies in one tree. It preserves each chosen physical flop's actual probability and uses residual checkdown for the remainder; the source policy no longer freezes preflop reach. This establishes a bounded integration path, but its tiny coverage cannot replace broad postflop solving. More private hands with defensible position-specific provenance, wider raise/bet menus, multiway postflop continuation and cash rake remain gates for realistic trainer content.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

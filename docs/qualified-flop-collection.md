@@ -79,3 +79,10 @@ python3 scripts/check-qualified-flop-collection.py \
 The standard-library checker composes the original v3 physical proofs and the weak-hand physical/LP/reference-policy checker. It independently reconstructs the new drill from the checked report, then checks all eleven questions, both moves in every question, the typed wrapper, review order and counts. It runs **zero fresh LP solves and zero fresh CFR training runs**. Its receipt includes nested evidence and exact source/manifest/review hashes.
 
 The eleven within-limit choices consist of **two folds, one check, four calls and four bets**. This inventory is not balanced game coverage or a measured accuracy score. Both boards, supplied beliefs and the two-active-player scope remain explicit. Broader ranges, more bet sizes, turn/river continuation and genuinely multiplayer equilibrium solving remain separate work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

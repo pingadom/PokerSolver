@@ -96,3 +96,10 @@ The [continuation-feedback follow-up](sixmax-continuation-preflop-feedback.md) n
 Tests independently reconstruct nested menus and their physical betting reach, compare preflight with exhaustive state counts, exercise exact-limit admission and one-state-short rejection, and inspect a planned four-deal wider tree without training. A repeated saved-pack CLI run checks byte-identical output, source preservation, history identity, explicit completion counts, independent quality flags and rejected width requests. The original one-flop study retains its schema and selection behavior.
 
 This remains sparse synthetic research. The source's four physical deals and restricted preflop actions do not represent realistic position ranges; only selected physical flops permit heads-up betting. Multiway non-all-in pots still check down, and the postflop game allows check/bet and call/fold with one configured bet per street. Wider private ranges, postflop raises, multiway betting, full-board coverage and cash rake remain separate solver gates before general GTO trainer publication.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

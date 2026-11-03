@@ -88,3 +88,10 @@ Tests check independently reconstructed source-history ranks, public-history ide
 The next solver gate is expanding physical-flop coverage with measured cost and conditional quality, then feeding improved continuations back into preflop training. Broader private ranges, multiway postflop betting, postflop raises and a credible cash rake model still precede full six-max trainer publication. Increasing history reach and reducing selected conditional gaps does not resolve those remaining restrictions.
 
 A follow-up [physical-flop width study](sixmax-flop-width-study.md) now adds nested menus, exact complete-tree cost preflight, explicit sixteen-pair budgets and a plan-only CLI. It keeps the one-flop selection and existing export schema available. Its coverage and strategic results are reported separately from this study.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

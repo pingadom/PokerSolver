@@ -83,3 +83,10 @@ Final postflop refinement preserves these new preflop rows and hence this reach.
 Tests compare projected profile values with full connected evaluation under different preflop policies, retain weighted off-policy private support and blocked boards, distinguish different public histories with the same active players, and verify immutable postflop rows after feedback. Posterior-changing and revived-history tests independently re-evaluate candidate conditional quality. CLI tests cover byte-identical reproduction, optional final refinement, matched control identity, planning without training, invalid budgets and source preservation.
 
 The [alternating-round follow-up](sixmax-alternating-continuation-rounds.md) now implements repeated whole rounds with explicit quality stop/rejection rules and source-bound policy checkpoints in the same declared game: a preflop update cannot inherit the old posterior's conditional certificate, and a final candidate must pass both independent checks before replacing the retained policy. Broader private-card and physical-board coverage still follows. This stage alone does not justify publishing general GTO charts.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

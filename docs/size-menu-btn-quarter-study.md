@@ -95,3 +95,10 @@ qualified-case capabilities can populate it; parsed reports cannot. Review order
 repeated attempts and counts are retained, with a 128-attempt cap. This adds no
 LP, CFR or physical evaluation work and uses the already reserved validation
 replay. No public API, loader or UI is enabled by this addition.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -127,3 +127,10 @@ gates. Passing this research calculation alone does not satisfy them. Keep broad
 or ambiguous decisions rejected. Any wider hand/range/model study needs a separate
 declared budget; the old exact raise's retained work failure cannot be relabelled
 as a successful endpoint solve.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

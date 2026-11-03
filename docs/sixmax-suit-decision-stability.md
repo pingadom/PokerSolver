@@ -89,3 +89,10 @@ CI reuses the already replayed balanced derivative to avoid repeating its costly
 The backend can now explain which particular action and hand failed a quality check, rather than presenting a low aggregate error as adequate feedback. The next substantial blocker is a declared observation/runtime design that covers useful material physical hands under affordable memory and solve cost. Keep the coverage and stability gates intact before constructing an admitted physical-flop lesson pack. Broader ranges, realistic rake, multiway betting and later-street continuation remain separate validated expansions. AWS deployment remains paused.
 
 For an interview, derive a private-world posterior after a public bet, show fold/call EV accounting, explain information-set-consistent pure plans, and use the measured 0.1316bb EV drift as an example of why independent budget checks matter. Explain the distinction between a useful research screen and an admitted trainer: 23 stable cases demonstrate reproducible local progress, while their limited reach still prevents a broad release claim.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

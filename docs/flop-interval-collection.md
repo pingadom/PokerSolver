@@ -73,3 +73,10 @@ The UI validates the pair's shared cards/board/preflop handoff and consistent be
 Local validation passes 15 new Java tests with real pinned startup and rehashed-tamper rejection; five Python checker tests plus 19 readiness tests; and all 367 frontend tests, lint, type checking and production build. Live browser checks against the actual Java loader play all four moves across both contexts and compare the downloaded review to the entire saved artifact. At 1366×768, players, action ranges, navigation and feedback fit together. Phone layouts are checked for horizontal overflow; longer feedback/reviews can scroll vertically.
 
 Next improve solver/content coverage through separately declared reference-budget and model studies. Broader ranges, rake, rich turn/river betting and truly multiplayer equilibrium remain separate work. These two related contexts do not add new range coverage or establish a full-hand strategy. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -77,3 +77,10 @@ Links bind `report` and `question` (0–3). The browser rejects stale pins, inco
 Downloads post only the pinned question/action choices to `/review/export`. The cached trainer reconstructs the review and serializes it with the same bounded Java writer as the CLI. The browser validates the returned inventory, every captured grade and the counts, then downloads the original UTF-8 text. For the saved eight-choice sequence, tests and the live smoke require byte-for-byte equality with the owned review artifact. This avoids JavaScript reformatting Java numeric endpoints.
 
 Frontend regression tests cover all four hands, privacy before a choice, retained feedback, direct links, strict protocol validation, cancelled/duplicate requests, forged exports and 0/100/101 bounds. CI compares the raw frontend fixture with the saved solver review before testing. The current two-BB collection protocol and its saved identity remain unchanged. Next is a separately versioned collection combining those two contexts with these four BTN questions.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

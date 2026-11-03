@@ -13,3 +13,10 @@ Run `mvn -pl solver -am test` for the transition, blocker, action-order, account
 ## Follow-up: conditioning directly on the six-seat policy
 
 The separate [policy-derived handoff](sixmax-policy-flop-handoff.md) now derives the joint posterior from every observed action in a saved six-seat policy, including folded players. It retains all six physical hands, uses 9,880 legal flops per deal rather than this class's two-hand 17,296-flop model, and supplies exact conditional checkdown baselines. Its reach audit binds the original full-round pack and prioritizes actual reached heads-up histories. This newer bridge prepares the correlated chance input for postflop solving; it does not convert the old product-of-two-ranges `FlopTurnRiverSpot` into a connected six-seat solution.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

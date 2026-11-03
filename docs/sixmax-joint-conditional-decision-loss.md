@@ -77,3 +77,10 @@ The next backend step is now implemented as [selected-question interval feedback
 Design a separately identified ambiguity-aware feedback qualification using robust **decision loss**, with explicit checks that fresh reference policies lie inside its declared security face. Preserve material-decision, posterior, source-provenance and reference-quality requirements. Keep the old scalar-EV stability rule and its rejected five-target studies intact; any new feedback format needs its own identity and replay evidence before serving questions.
 
 This work adds solver diagnostics, not trainer content. Mandatory postflop checkdown, synthetic supplied ranges and no rake remain model limits. Broader realistic ranges, strategic postflop coverage and multiway equilibrium are separate milestones. AWS deployment remains paused. No upstream library defect was found in this batch.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

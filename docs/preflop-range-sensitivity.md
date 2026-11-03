@@ -19,3 +19,10 @@ The baseline best-response gap is 0.000149bb against its exact payoff table. The
 The `Ks Qs` reversal is the clearest publication warning: a low best-response gap and exact showdown payoffs do not make a strategy robust to uncertain input ranges. The `Ah Kh` EV edge is comparable to the re-solve gaps, so the precise mix should not be taught as a stable percentage.
 
 This is a local one-at-a-time test. It does not cover simultaneous range changes, alternate bet sizes, rake, multiway action, population estimates or model error. Before publishing a preflop pack, document plausible range sources and their uncertainty, repeat sensitivity checks around those ranges, and have a poker reviewer assess the action tree and interpretation.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

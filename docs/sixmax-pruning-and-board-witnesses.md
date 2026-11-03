@@ -66,3 +66,10 @@ Freeze compiled solver/engine classes before launching long local studies if dev
 Use these explicit witnesses to design a separately versioned public signal that retains strategically relevant ranks and suit information. Declare its chance weights, blockers, information sets and state budget before retraining. Compare independent quality measurements and retained material hand diversity; do not merely split texture names or promote a finite-budget score. Broader credible ranges, multiway continuations, rake and later betting still require their own evidence.
 
 For an interview: the concrete contribution is an exact optional traversal optimization with backwards-compatible provenance, plus a reproducible diagnostic that separates conditional equity error from information lost through private-hand posteriors. This is PokerLab code, not an upstream library bug fix.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

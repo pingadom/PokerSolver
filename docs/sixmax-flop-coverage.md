@@ -89,3 +89,10 @@ The audit allows 1–3 distinct seeds, 1–3 distinct mixture values in [0,0.95]
 Tests independently check rare-event EV accounting, both prefix and suffix corrections, controlled six-player optimal actions, seeded reproducibility and counter reset, exhaustive compatibility, traversal reduction, baseline expectation and disabling, non-finite baseline rejection, explicit completion/probability/state-budget validation, wider physical probabilities and blockers, connected-game support caps, source-bound export and exact full/conditional best responses.
 
 The next gate is adequate postflop sample support and quality at a wider physical-flop coverage. A scalable lazy public-card game, more effective sampling or state-action baselines, and an independent held-out strategic audit must be measured before realistic content can be promoted. Credible position-specific private ranges, wider action menus, multiway postflop play and specified cash rake remain separate requirements.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

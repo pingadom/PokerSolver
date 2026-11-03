@@ -640,3 +640,10 @@ Do not implement these until the full core acceptance criteria pass:
 - contribution upstream to a real open-source dependency or tooling project used by PokerLab
 
 Stretch work must follow the same Git discipline: small changes, tests, documentation, and regular commits.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

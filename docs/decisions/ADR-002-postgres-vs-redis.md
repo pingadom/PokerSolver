@@ -7,3 +7,10 @@ Redis serves a justified ephemeral key/value workload. `pokerlab:v1:status:<uuid
 Redis connection and command timeouts are 200 ms. Misses, flushes, corrupt entries and outages fall back to PostgreSQL. Cache errors/hits/misses are metered. Optional Redis does not make the database-backed readiness check unhealthy. Use `CACHE_ENABLED=false` for a lower-cost deployment without Redis; Terraform offers an opt-in private ElastiCache instance.
 
 Indexes serve recent-history ordering, composite batch identity, and pending outbox scanning. Result identity is unique per simulation. Separate relational counters make progress queries cheap without parsing each batch payload.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

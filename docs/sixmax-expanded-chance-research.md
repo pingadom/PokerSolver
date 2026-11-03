@@ -27,3 +27,10 @@ The empirical run accepted 256 draws without collision and happened to include a
 For a game with more than 64 legal deals, empirical sampling can give a bounded provisional support, but omitted-deal effects remain unmeasured. More board trials, independent seeds and range profiles, expanded raise menus, and a real postflop continuation model are needed before these policies become trainer-ready. The 3bb/open-shove tree reaches the public/private work cap before 64 deals, so this experiment does not claim that the full raise tree scales to this support yet.
 
 The follow-up [independent-board holdout](sixmax-preflop-payoff-holdout.md) keeps this exact chance support fixed, freezes the learned policy, and tests its value and six-seat best responses on new showdown-board streams. It also introduces a mixed-pair range fixture that exposes more policy sensitivity than the same-rank suit variants above.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
