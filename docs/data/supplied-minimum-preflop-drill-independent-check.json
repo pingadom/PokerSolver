@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "pokerlab-minimum-preflop-drill-independent-check/v1",
+  "trainerAdmission": false,
+  "sourceCheck": {
+    "schemaVersion": "pokerlab-root-minimum-feedback-independent-check/v1",
+    "trainerAdmission": false,
+    "sourceMinimumCheck": {
+      "schemaVersion": "pokerlab-root-minimum-independent-check/v1",
+      "trainerAdmission": false,
+      "completeMinimum": true,
+      "referenceSupportedMinimum": true,
+      "originalSourceChecked": {
+        "schemaVersion": "pokerlab-root-feedback-independent-check/v1",
+        "trainerAdmission": false,
+        "completeOuterBounds": true,
+        "sourceCheck": {
+          "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+          "trainerAdmission": false,
+          "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+          "parentCheck": {
+            "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+            "trainerAdmission": false,
+            "literalTreeStates": 1609,
+            "informationSets": 89,
+            "originalLpCertificatesChecked": 2,
+            "policiesChecked": 3,
+            "physicalWorlds": 24,
+            "fullBoardsRegenerated": 15792192,
+            "fixedRunoutsRegenerated": 15984,
+            "nashConvBb": 3.726186026398182e-15,
+            "referenceNashConvBb": [
+              2.087894412916569e-09,
+              5.219769547148978e-10
+            ],
+            "freshLpSolves": 0,
+            "freshCfrRuns": 0
+          },
+          "originalEnvelopeCertificatesChecked": 5,
+          "originalRootWorlds": 8,
+          "completePureHeroRows": 33,
+          "checkedActions": [
+            "fold",
+            "call",
+            "raise:9.0"
+          ],
+          "completeOuterBounds": true,
+          "attainedEndpointClaims": false,
+          "gradingAuthority": false,
+          "work": {
+            "compilerLimit": 8000000,
+            "compilerUnits": 1120512,
+            "lpArithmeticWork": 471304900,
+            "lpPivots": 153,
+            "lpSolves": 5
+          },
+          "freshLpSolves": 0,
+          "freshCfrRuns": 0
+        },
+        "publicRootQualityScope": "ORIGINAL_WHOLE_PUBLIC_ROOT_GAME_NOT_PRIVATE_HAND_CONDITIONED/v1",
+        "policiesChecked": 3,
+        "forcedContinuationValuesChecked": 9,
+        "decisionLossesChecked": 9,
+        "moveClassifications": [
+          {
+            "action": "fold",
+            "classification": "OUTSIDE_LIMIT"
+          },
+          {
+            "action": "call",
+            "classification": "WITHIN_LIMIT"
+          },
+          {
+            "action": "raise:9.0",
+            "classification": "STRATEGY_DEPENDENT"
+          }
+        ],
+        "qualifiedForOfflineDrill": true,
+        "rejectionReasons": [],
+        "attainedEndpointClaims": false,
+        "freshLpSolves": 0,
+        "freshCfrRuns": 0
+      },
+      "policiesChecked": 3,
+      "endpointCertificatesChecked": 1,
+      "completePlanCoverage": {
+        "action": "raise:9.0",
+        "cartesianPlansChecked": 1296,
+        "reducedPlansChecked": 52,
+        "maximumErasureCoefficientDifference": 0.0
+      },
+      "minimumBracket": {
+        "lowerBound": 0.21114181882276112,
+        "upperBound": 0.2111418388227532,
+        "witnessUtility": 0.2111418288227532
+      },
+      "fullActionUpperEndpointClaim": false,
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0
+    },
+    "movesChecked": 3,
+    "policyMovesChecked": 9,
+    "utilityAndLossBoundsChecked": 36,
+    "qualifiedForOfflineDrill": true,
+    "rejectionReasons": [],
+    "moves": [
+      {
+        "action": "fold",
+        "lowerEvBb": -1.00000001,
+        "upperEvBb": -0.99999999,
+        "lowerLossBb": 1.7857791802528848,
+        "upperLossBb": 1.78577929297108,
+        "classification": "OUTSIDE_LIMIT"
+      },
+      {
+        "action": "call",
+        "lowerEvBb": 0.7857791902528848,
+        "upperEvBb": 0.7857792829710801,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 9.27181953436218e-08,
+        "classification": "WITHIN_LIMIT"
+      },
+      {
+        "action": "raise:9.0",
+        "lowerEvBb": 0.21114181882276112,
+        "upperEvBb": 0.7857792829710801,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 0.574637464148319,
+        "classification": "STRATEGY_DEPENDENT"
+      }
+    ],
+    "minimumUpperUsedAsActionCeiling": false,
+    "currentDecisionEvShiftApplied": false,
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "canonicalJavaSourcePinVerifiedByOwnedReplay": "baa6420476438abfca0c508d19ca313d8f9dc78f643293df9b2866418f15bf6d",
+  "publicQuestionsChecked": 1,
+  "cachedGradesChecked": 3,
+  "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+  "emptyPreflopBoard": true,
+  "hiddenDealsAndFutureBoardAbsent": true,
+  "canonicalReviewAttemptsChecked": 3,
+  "sourceCommitmentShiftBb": 1.0,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "1bee14bac8eac68b076932bcf5151fcf8453775ba540b02da4a036f71efe2a12",
+  "sourceStoredSha256": {
+    "supplied-minimum-preflop-drill-manifest.json": "0d40dcdb114cfd7f6cc1161b1696064fbb5329055f26e28e3a4d29b2eb972e8d",
+    "supplied-minimum-preflop-drill-fixture.json": "61479634fa1faeec823ec874899d0db989a76ec832751cc374a8ca4cdb0e4257",
+    "supplied-minimum-preflop-drill-review.json": "4a0b0882fa7dae605bccca228b25852636322fd7c92995efd7a7db125b24d4d9"
+  },
+  "immutableHelperSha256": {
+    "check-root-minimum-feedback.py": "683e1f614d333d4a881ed4223baae2f1d149115a5414f73b56dc553bbb071c69",
+    "check-root-security-envelope.py": "dd871cc2d9394a52263a2f8945d5713e2f9e0a8a21fde0be0ead0bc60c28a0b1",
+    "check-flop-size-menu.py": "054c6c2db950244559d6274f1ba4bb15e0c0aee53ec7c1b04cb132606de3569a",
+    "check-bb-sizing-physics.py": "c8344e028a326691e841d960b7ae7b0604e14372cbc5ae2246b58ef4b6804d65",
+    "check-big-blind-flop-discovery.py": "fadffe2ae7deb39a57978a15109245641ed23c8bd6a348ce2730c0f2be8bac60",
+    "check-supplied-flop-action-bounds.py": "c545845504dd0fc345095477aff80d0ac5b45aec71bf71a4e5bda670bdda714e"
+  }
+}

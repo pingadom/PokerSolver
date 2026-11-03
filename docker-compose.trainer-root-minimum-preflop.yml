@@ -1,0 +1,14 @@
+# Explicit local opt-in. One complete source replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1200m"
+      TRAINER_ROOT_MINIMUM_PREFLOP_ENABLED: "true"
+      TRAINER_ROOT_MINIMUM_PREFLOP_MANIFEST_PATH: /opt/pokerlab/root-minimum-preflop/supplied-minimum-preflop-drill-manifest.json
+      TRAINER_ROOT_MINIMUM_PREFLOP_STUDY_HASH: baa6420476438abfca0c508d19ca313d8f9dc78f643293df9b2866418f15bf6d
+    volumes:
+      - ./docs/data/supplied-minimum-preflop-drill-manifest.json:/opt/pokerlab/root-minimum-preflop/supplied-minimum-preflop-drill-manifest.json:ro
+      - ./docs/data/supplied-root-minimum-feedback-request.json:/opt/pokerlab/root-minimum-preflop/supplied-root-minimum-feedback-request.json:ro
+      - ./docs/data/supplied-root-minimum-feedback-report.json.gz:/opt/pokerlab/root-minimum-preflop/supplied-root-minimum-feedback-report.json.gz:ro
+      - ./docs/data/supplied-root-envelope-feedback-report.json.gz:/opt/pokerlab/root-minimum-preflop/supplied-root-envelope-feedback-report.json.gz:ro
+      - ./docs/data/supplied-root-minimum-report.json.gz:/opt/pokerlab/root-minimum-preflop/supplied-root-minimum-report.json.gz:ro
