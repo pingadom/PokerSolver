@@ -50,3 +50,10 @@ All rows have positive numerical encounter mass in at least one of these average
 The largest postflop frequency difference is about 5.8% total variation on a particular BB `AJ` river response. This remains visible even though the two complete policies have very small mean disagreement. The report records the exact own-hand/public-history information-set key for investigation. Those private diagnostics remain offline.
 
 The paired result is evidence of close action frequencies at these fixed budgets and this one source/menu, alongside independently passing quality and content checks. It does not select a winner, establish general multiplayer convergence or admit a trainer pack. The [revised betting-model study](sixmax-preflop-payoff-reuse.md) supplies independent training commands. More seeds, budgets, physical boards and betting support remain separate validation work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

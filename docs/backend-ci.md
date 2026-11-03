@@ -31,3 +31,10 @@ This change follows two timed-out serial runs of the owned sequence-form milesto
 The BTN-after-check qualification declares 240,000 fresh reference iterations and adds a complete physical replay. The previous busiest solver group took 25m32s before this work; placing another approximately eight-minute replay there would leave too little margin below the existing 35-minute limit. The versioned v3 manifest therefore uses four automatic hash partitions plus services. Every class remains mandatory, including newly discovered classes, and all five groups must be present exactly once. The old v2 manifest is rejected at this new commit; audit historical evidence with the verifier from its actual tested commit.
 
 Using the preceding actual PR166 JUnit class durations, the new automatic partitions contain approximately 8.77, 16.18, 10.03 and 14.51 minutes of historical test work. The BTN replay hashes to group 3; adding a conservative 550-second local estimate projects about 23.67 minutes there, before clean build overhead. This is a scheduling estimate, not a replacement for the next actual CI run or its JUnit evidence.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

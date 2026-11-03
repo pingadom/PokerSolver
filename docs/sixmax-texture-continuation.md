@@ -89,3 +89,10 @@ mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxTextureS
 Tests cover every texture and all card permutations, independent flop-first enumeration for all pairs, physical blockers, hidden-hand information sets, all terminal settlements, checkdown recovery, exact tree accounting, unchanged multiway/uncontested paths, action-conditioned posteriors, zero-reach support, strict table/checkpoint validation and deterministic guarded solve/replay exports. Saved real-data tests replay measured evidence rather than repeating long training or full-deck enumeration in CI.
 
 The [fixed-utility pruning and named-board follow-up](sixmax-pruning-and-board-witnesses.md) adds an opt-in traversal shortcut, independently compares same-game checkpoints and measures exact checkdown-equity differences on explicitly named physical flops. It separates conditional payoff variation from blocker-driven posterior information. The next model step is to add strategically meaningful board information, then validate the final policy's retained hand diversity and conditional quality. Multiway continuations, realistic ranges, rake and richer betting remain separate research work. No new trainer API, UI lesson or AWS deployment is enabled by these experiments.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

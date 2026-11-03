@@ -51,3 +51,10 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 The fine mode keeps hash `25e28ef764e7972baa54710b37d78d3f839a60863b0849f76642abe9beb4ebbf`; the coarse mode has hash `6e2a88be7a3dbe371895148be5858317d0d57eccfea7222322171b2a4af2d46d`. The next quality gate is a broader range and a strategic response audit under realistic continuation policies, with enough held-out samples to evaluate later-street choices. Neither mode is ready for a 6-max chart or a mixed-street trainer pack.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

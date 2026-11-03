@@ -67,3 +67,10 @@ python scripts/check-supplied-conditional-intervals.py \
 Eleven analytic JVM tests cover changing posteriors, either hero orientation, hidden-information continuation, repeated opponent actions, unreachable questions, conservative floor certification, zero-probability worlds, fixed hero history, root equivalence, immutable input snapshots and aggregate work caps. Nine physical/report tests cover actual commitment, independent endpoint controls, every posterior, all-move caps, exact gzip replay, immutable handles, strict loading and corrupted evidence.
 
 The [joint conditional decision-loss extension](sixmax-joint-conditional-decision-loss.md) now optimizes action differences against the same opponent strategy, with separate replayable diagnostics. The conservative intervals above retain their identity and values. Next design ambiguity-aware feedback qualification that distinguishes robust action quality from unique alternative EV, while preserving the current admission rules. Broader useful scenarios, full cash ranges, rake, physical postflop coverage and six-player equilibrium remain separate work. This solver still has exactly two active decision makers at a six-seat table and mandatory postflop checkdown. AWS deployment remains paused. No upstream library defect was found in this batch.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

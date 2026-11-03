@@ -62,3 +62,10 @@ Java regressions cover the actual captured ratio, tiny and zero mass, nonfinite/
 ## Next useful milestone
 
 Fresh-reference qualification is still required for the three additional facing-bet candidates before publishing lessons. After-check variety needs a separately declared game whose complete security face supports those questions, or a separately defined training objective; discarding zero-reach opponent strategies would change the stated problem. Broader supplied ranges, boards, rake, later betting and six-active-player solving remain separate model work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

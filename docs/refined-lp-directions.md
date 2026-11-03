@@ -64,3 +64,10 @@ python -m unittest discover -s scripts -p 'test_check_btn_flop_curriculum.py'
 ```
 
 Regression coverage includes all 292 independent LP oracle problems, the two physical old-failure/new-success cases, exact rational rank/direction proofs, original-certificate checks, finite/invalid/infeasible/unbounded cases, exact work exhaustion, a complete owned four-context replay and semantic corruptions across every hand. CI retains all source-discovered tests, four solver partitions, five required manifests and the existing per-job bounds. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

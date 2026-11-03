@@ -31,3 +31,10 @@ java -Xmx3g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 The next solver step is a scalable chance model with broader, independently checked hand ranges and a measured strategic abstraction error. A richer flop/turn sample must be validated on combos and boards not used to choose it. The exact physical-deck baseline and a small in-game gap are separate requirements; neither substitutes for the other.
 
 The [physical-deck connected research game](physical-deck-connected-research.md) now removes the handpicked public-card menu and uses seeded draws from every legal flop, turn and river. Its check-down estimate agrees with the exact baseline within measured sampling error, while its learned policy remains too sparse to receive a full-game gap or enter a trainer. The next bottleneck is therefore information-set coverage and strategic validation, rather than the mechanics of legal public-card sampling.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -42,3 +42,10 @@
 - Login, cross-device progress, public AWS deployment and paid infrastructure changes. Deployment remains paused by the user's earlier instruction.
 
 After the demo is working, review user feedback and the cost of expanding the solved range. The next solver step should then be chosen from measured bottlenecks and content quality, rather than adding several betting streets or table formats at once.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

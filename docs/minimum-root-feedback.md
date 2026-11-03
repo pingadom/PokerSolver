@@ -99,3 +99,10 @@ The current website/cache/API still uses the existing root-preflop source. Wirin
 this separate qualification into a typed source loader and cached trainer is the
 next boundary, with separate source pins, ownership/admission tests and a declared
 startup-replay budget. This result is not a broader six-active-player solution.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -67,3 +67,10 @@ mvn -q -pl solver exec:java '-Dexec.mainClass=com.pokerlab.solver.SixMaxMaterial
 The CLI strictly reloads one source of at most 16 MiB, rejects normalized-path and hard-link output aliases, finishes validation before writing, and atomically replaces its report. It never modifies or trains the source. The schema is `six-max-material-continuation-feasibility/v1`, with publication status `VALIDATION_ONLY`.
 
 Analytic tests count exactly 7,140 material flops in a four-world fixture, check inclusive thresholds, demonstrate dominant-hand removal through board conditioning, prove the history-slot/floor accounting, credit the entire tail, and distinguish zero reach from underflow. Invalid policies, empirical chance, applied rake, excessive private support, immutable reports, repeatability and file guards are tested. Saved-artifact tests recompute all seven all-flop bounds and source hashes without retraining. Additional BB-control tests bind the declared input spots, changed weights, exact payoffs, fresh policy budgets and both sensitivity reports. The next solver work should improve useful source hand coverage and continuation assumptions before broader re-raise connected studies; full ranges, multiway postflop betting, realistic rake and production admission remain separate research gates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

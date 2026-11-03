@@ -111,3 +111,10 @@ java -jar api/target/api-1.0.0.jar --research-preview --server.port=18080
 ```
 
 Start `pnpm dev` in `frontend` in another terminal, then open `http://127.0.0.1:5173/#sixmax-preflop`. The explicit preview launcher imports only this research controller, its validated saved-pack loader and API error handling. It excludes datasource/Flyway startup and simulation/queue services, with loopback binding by default. Other drills and equity simulations require the complete API; omitting the flag preserves normal startup. A real HTTP regression test runs the preview with an unreachable datasource URL to verify this separation.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

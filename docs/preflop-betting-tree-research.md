@@ -79,3 +79,10 @@ The bridge is checked against the independently implemented forced-shove multiwa
 This is **not a new solved six-max strategy**. The rule tree does not yet assign credible starting ranges by position or a postflop continuation value to call/check branches. Its terminal bridge assumes equal stacks; the separate forced-shove model handles unequal-stack side pots. A [research handoff](preflop-flop-transition-research.md) now carries a heads-up pot and explicitly action-conditioned ranges to a flop spot, but no validated preflop policy supplies those range likelihoods yet. The current postflop validation packs use synthetic ranges assigned at their starting street, so they cannot be plugged into these branches as credible continuation values without policy provenance, broader flop solving and error measurement.
 
 Run `mvn -pl solver -am test` for the betting-order, pot-accounting, terminal-boundary and saved-pack regression tests. The full solver suite exercises all committed validation packs after the stricter history check.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

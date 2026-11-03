@@ -37,3 +37,10 @@ The sampling audit now retains all of its at most 64 physical-deal streams. `Sha
 | 32,000 | 1.634748 | 2,048,000 |
 
 The 2bb target is met at 32,000 boards per deal. Replaying every stage from scratch would evaluate 4,064,000 boards; retaining streams requires 2,048,000, about **49.6% less board-evaluation work** on this ladder. The 4,000-board ladder drops from 480,000 to 256,000 evaluations, about 46.7%. These are counted work reductions, not measured wall-clock speedups. The original seed-711 values at 500–4,000 boards are unchanged. Independently held-out policy verification, realistic ranges and postflop continuation remain separate requirements; the [higher-budget holdout](sixmax-preflop-payoff-holdout.md#higher-board-budget-holdout) measures the next check on the frozen policy.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

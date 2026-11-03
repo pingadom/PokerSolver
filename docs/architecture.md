@@ -145,3 +145,10 @@ There is no user authentication or per-user quota. Local published ports bind to
 Decisions: [SQS](decisions/ADR-001-queue.md), [PostgreSQL vs Redis](decisions/ADR-002-postgres-vs-redis.md), [idempotent workers](decisions/ADR-003-idempotent-workers.md).
 
 The [material-continuation preflight](sixmax-material-continuation-feasibility.md) walks complete exact-source policies and enumerates all 52-choose-3 boards for up to twenty public histories. It conditions joint six-hand reach with folded blockers, credits all unexamined mass, and bounds one to four material histories while ignoring cost and pair diversity. Numeric underflow prevents an infeasibility verdict. This fixed-policy content diagnostic leaves saved searches and strategy-quality/publication gates unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

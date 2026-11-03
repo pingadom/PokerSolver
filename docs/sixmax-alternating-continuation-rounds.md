@@ -105,3 +105,10 @@ The measured fixtures above use four physical private deals, two selected heads-
 ## Private-support follow-up
 
 The [eight-deal study](sixmax-eight-deal-private-coverage.md) expands private support and introduces source/retained-policy range diagnostics. Newly generated alternating reports use schema v2 with these additional fields; historical v1 reports remain unchanged and readable. The measured v1 studies above still use their original four-deal games.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

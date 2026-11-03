@@ -323,3 +323,10 @@ The immediate goals are:
 3. Integrate qualified content with explicit range/model identities. Then resume broader preflop continuation coverage; require separate validation for richer streets, realistic rake and multiway play.
 
 Keep the current eleven-question trainer stable during that work. AWS deployment remains paused. A general six-active-player 100bb cash solution, realistic opening/defence charts and coherent full-hand play are still broader goals, not descriptions of the current bounded research model.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

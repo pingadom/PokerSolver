@@ -37,3 +37,10 @@ Independent batches scale well through four threads on this machine. Eight threa
 The implementation preserves the existing direct hand-score evaluator, bypasses verbose hand objects in normal batches and excludes known cards before sampling. Board lists and winner lists still allocate inside the trial loop. We retained that readable implementation because measured throughput met the demo objective. Replacing these objects or changing the random generator would require another correctness and reproducibility review, followed by measurements under the same conditions.
 
 Distributed throughput will additionally include publication, long polling, visibility renewal, database round trips, per-simulation row-lock contention and final aggregation. Cloud vCPU limits, network latency and JVM warmup can dominate small batches. Do not extrapolate this table into AWS cost or ECS speedup claims.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

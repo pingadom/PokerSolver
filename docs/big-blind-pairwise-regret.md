@@ -70,3 +70,10 @@ The independent study check reconstructs the original physical source and verifi
 Java tests cover all vertices of 21,952 three-action interval boxes (526,848 selected-action checks), exact binary64 subtraction, invalid inputs, complete physical and fresh replay, source identity, omitted outcomes, forged qualification fields, CLI preflight and refusal to grade every rejected context. Python corruption controls change contexts, EVs, bounds, candidates, actual/counterfactual reach, policy regrets, inclusion, budgets and failure lists. CI includes the new checks and the complete original test inventory.
 
 All 323 older data files, existing trainer protocols and the paused AWS deployment remain unchanged. The new evidence is backend research; it does not expose unqualified content on the website.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

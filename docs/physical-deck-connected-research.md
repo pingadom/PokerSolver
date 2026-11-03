@@ -18,3 +18,10 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 The [board-bucket experiment](connected-board-bucket-research.md) now shares coarse public observations and audits its strategy on independently sampled runouts. It reduces the visited information-set count and catches a major pocket-aces preflop error in the unbucketed profile, but still has preflop deviations and unmeasured full-game abstraction error. A trainer artifact needs both a complete policy for its declared game and evidence about abstraction and sampling error; neither profile is serialized or served.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

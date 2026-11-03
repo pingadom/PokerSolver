@@ -88,3 +88,10 @@ published rejection evidence without optimization or training. Its fixed-study
 contract rejects invented positive outcomes, discarded failures or copied
 quarter-pot grades. Local Java tests reserve one full replay; corruption tests
 and context/provenance checks add no numerical solves.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

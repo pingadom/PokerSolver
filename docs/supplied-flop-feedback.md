@@ -170,3 +170,10 @@ The frontend fixture must be byte-identical to the physically replayed offline d
 The [two-context flop collection](flop-interval-collection.md) now combines both independently qualified decisions with retained source protocols, cached grading, exact mixed reviews and table navigation. These intervals do not establish a coherent full-hand policy. Partially blocked support, wider ranges, rake, turn/river betting and truly multiplayer equilibrium remain separate work. AWS deployment remains paused.
 
 The [BTN-after-check qualification](btn-flop-qualification.md) adds a separate owned check/bet report for BTN's made J-high flush. It declares fresh 80k/160k references and retains both BB past actions in BTN's counterfactual reach. This is offline qualified feedback; its trainer/API and collection integration follow separately.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

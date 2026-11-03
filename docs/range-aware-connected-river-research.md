@@ -285,3 +285,10 @@ Reproduce from `solver/` after compiling, one profile at a time:
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalConnectedRiverResponseSweep' '-Dexec.args=3x3 300,1000,3000 42,43 50000 10'
 mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalConnectedRiverResponseSweep' '-Dexec.args=5x5 300,1000,3000 42,43 50000 10'
 ```
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

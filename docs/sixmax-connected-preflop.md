@@ -71,3 +71,10 @@ The parent wrapper caches validated node classification, legal actions and settl
 Repeating the complete 200-iteration study after this change produced **byte-identical JSON**, including both policy hashes, every EV, all best responses and coverage values. Observed local elapsed time fell from 448.7 to 260.2 seconds, about 42%. Regression suites ran alongside both studies, so these are local timings rather than an isolated hardware benchmark or a portable speed guarantee. The cache trades additional per-game memory for reduced repeated work; broader models still need an explicit memory and traversal budget.
 
 The next integration gate is broader measured flop coverage and a computational model that can support it. More private deals with justified position-specific provenance, wider action menus, multiway postflop decisions and specified cash rake remain necessary before a realistic six-max trainer pack. This experiment establishes the joint solving path; its sparse coverage does not complete those gates.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

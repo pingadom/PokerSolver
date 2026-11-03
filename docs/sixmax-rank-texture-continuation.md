@@ -82,3 +82,10 @@ mvn -q -pl solver -am test '-Dtest=SixMaxRankTexture*Test,SixMaxTexturePayoffTab
 Freeze compiled solver/engine classes before a long study if Maven rebuilds continue concurrently. A running process must not load a mixture of class versions. `repack` exports the same checked checkpoint as raw JSON or gzip; it does not resume optimizer state or continue training.
 
 For an interview: this contribution refines the game's public information, shares an exact integer payoff kernel, preserves complete six-player policies and proves what the richer model still omits through independent physical-board measurements. No upstream library issue was found in this work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -22,3 +22,10 @@ com.pokerlab.solver.SixMaxSuppliedIntervalCollectionMain
 Deep links use `#interval-collection?collection=<hash>&question=<zero-based-index>`. Invalid indices, duplicate/unknown query parameters and stale pins reject before practice. The displayed current question always comes from the validated inventory.
 
 The fixture is a byte-identical copy of the physically replayed offline review, enforced by CI. Tests cover distinct calling/raising decisions, all verdicts, navigation, reset, caps, explicit retries, stale or forged responses, cancellation and exported JSON. These remain supplied-belief research scenarios with two active players, no rake and mandatory postflop checkdown. General trainer admission and AWS deployment remain off.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

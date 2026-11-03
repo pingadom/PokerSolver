@@ -50,3 +50,10 @@ python -m unittest discover -s scripts -p 'test_check_supplied_flop_action_bound
 Stored and expanded reports retain the 8MiB cap and exclusive output creation. Corruption controls cover changed physical event/floor units, priors, matrices, numerators, duals, original flows, behavioral responses, posteriors, loss envelopes, reference quality and admission.
 
 The [initial-flop feedback follow-up](supplied-flop-feedback.md) now qualifies the supported 77 question with separate reach, face, reference and loss checks, and adds an owned offline drill with exact grading/review replay plus a default-disabled operator-pinned API. Unknown/later questions and ambiguous hands remain rejected. Next integrate the table UI. Partial blocked support, broader flop coverage, turn/river betting, rake and genuinely multiplayer strategy remain separate work. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

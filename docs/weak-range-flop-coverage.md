@@ -42,3 +42,10 @@ The request, report, prior generation reservation and independent receipt are se
 The independent Python checker reconstructs the 24 physical worlds, all 15,792,192 source boards, the literal 1,321-state game, original parent LP witnesses and best responses. It checks all 32 endpoint certificates for the four successes, original full-path reach/posteriors, action values, losses, classifications and successful-case work charges. Its receipt explicitly says the rejected cases are **not independently certified**; full Java replay reproduces those production failures. The corruption controls cover order, omitted cases, admission, reservations, failure relabelling, strong-hand certificates, posteriors, source identity and move classifications.
 
 The next numerical milestone is to capture and explain the common behavioral-ratio reconstruction failure while preserving original-security and posterior checks. Any correction needs its own explicit algorithm/version, original-problem certificates and regressions; clipping a bad conditional ratio or lowering the reach requirement is not a substitute. After that, run fresh-reference qualification for useful candidates before adding another trainer source. Broader ranges, street betting, rake and six-active-player equilibrium remain separate model work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

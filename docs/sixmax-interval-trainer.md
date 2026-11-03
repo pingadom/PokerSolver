@@ -105,3 +105,10 @@ Frontend tests use the actual checked-in physically replayed drill, cover all th
 A broader collection needs independently qualified questions and an identity binding its ordered reports and selection settings. Random street/full-hand practice needs that additional coverage first.
 
 Supplied synthetic priors, exactly two active players, mandatory postflop checkdown, unavailable source-policy history reach and no rake remain limitations. Strategic postflop, broader preflop coverage and multiway equilibrium remain separate work. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

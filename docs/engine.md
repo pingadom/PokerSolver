@@ -7,3 +7,10 @@ The framework-free `engine` module preserves the original hand evaluator and CLI
 Wins mean outright wins; ties count participation in a split pot; losses equal trials minus wins minus ties. Equity shares count fractional pots, divided by trials for equity. Shares use IEEE 754 double precision; aggregation accepts a relative conservation tolerance of 1e-10. Results must be weighted by trials, never averaged across unequal batches.
 
 The evaluator uses an allocation-light score path when verbose diagnostics are disabled. Board sampling currently allocates a short list and index array per trial. Measure before replacing this with a more complex implementation.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

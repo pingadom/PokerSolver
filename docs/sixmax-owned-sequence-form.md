@@ -104,3 +104,10 @@ mvn -q -pl solver -am test '-Dtest=BoundedLinearProgramTest,FiniteTwoPlayerSeque
 `solver/src/test/resources/bounded-lp-oracle-controls.json.gz` stores 292 literal original LPs: both programs for twenty physical trees and six synthetic hidden-type games, plus 240 seeded generic bounded problems with negative right-hand sides, active equalities, duplicate rows and random costs. Independent [SciPy HiGHS](https://docs.scipy.org/doc/scipy/reference/optimize.linprog-highs.html) values are offline mathematical controls, not external poker strategy data. CI needs no Python/SciPy: Java checks every original primal/dual certificate and oracle value, then two seeded row permutations and one positive power-of-two row scaling per problem (876 more variants). `python scripts/verify-sequence-form-lp-controls.py` independently recomputes all saved oracle values with optional local NumPy/SciPy.
 
 Game tests cover known Kuhn value −1/18, hidden-action separation, full own-prefix recall, unreachable own rows, correlated chance, deterministic identities and all six hidden-type sizes. Original normal form controls small cases; independent best responses check every accepted strategy. Numerical controls include degenerate cycling with Bland fallback, malformed inputs, work exhaustion, infeasible/unbounded examples and near-zero improving directions. Physical tests reuse fully replayed payoff/study fixtures, independently enumerate all twenty repaired pure responses, compute every screened primary action EV from pot/share accounting, and reject changed snapshot/reduction/flow/work/policy/lineage/admission fields and file aliases.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

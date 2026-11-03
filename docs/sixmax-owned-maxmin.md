@@ -75,3 +75,10 @@ Tests cover matching pennies, rock-paper-scissors, dominance, negative constants
 `docs/data/finite-maxmin-independent-controls.json.gz` contains 120 literal matrix controls and two original-payoff LP certificates generated independently with SciPy HiGHS. CI recomputes their original-matrix bounds and compares the owned Java solver; it does not require SciPy. `scripts/generate-maxmin-controls.py` reproduces the research oracle with locally installed NumPy/SciPy and a new output path. These are mathematical test matrices, not external poker strategy data. No production dependency or library defect was introduced or identified.
 
 The [compact physical-storage control](sixmax-compact-physical-storage.md) and [owned sequence-form backend](sixmax-owned-sequence-form.md) are now implemented. The next model milestone is a [separately identified broader-support experiment](sixmax-broader-physical-capacity-design.md) with measured budgets and actual retained coverage. The current 600-revelation cap makes 25% retained coverage impossible even with perfect local policies; improving convergence does not remove that constraint.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

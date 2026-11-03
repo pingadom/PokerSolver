@@ -34,3 +34,10 @@ The API is off by default. For local research, set `TRAINER_RIVER_RESEARCH_ENABL
 The local website route `#river` shows the public board, current acting seat, exact hero cards and legal actions. Feedback then reveals both action EVs, frequencies and one-action EV loss. It warns when actions are nearly tied and keeps the synthetic-range boundary visible. The drill samples one decision at a time; it does not imply the earlier streets were played according to this pack.
 
 The next research work is to define a plausible river reach state from earlier streets, add alternate bet sizes and rake, then introduce turn and flop chance nodes with measured abstraction/payoff error. Until those links exist, this pack proves a later-street solver and grading contract only. It is not a general GTO river strategy, a mixed-street curriculum or a preflop continuation model.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -25,3 +25,10 @@ A second local route, `#turn-river-hand`, now plays a **connected partial hand**
 `POST /api/v1/trainer/research/turn-river/hands/replay` accepts `{"seed":"42","packHash":"<hash from metadata>","heroPlayer":0,"actions":["k","c"]}`. An empty action list starts the hand. The server replays the supplied hero transcript from the same seed, returning either the next hero decision or a completed hand. It rejects stale packs, illegal or excess actions, and transcripts longer than four hero decisions. Initial deal, river card and opponent policy draws use separate deterministic event streams, so replaying a transcript reproduces the same state; requests do not solve or persist anything. The client can replay alternative actions in this research mode, so this is not a tamper-resistant scoring system or stored learner progress.
 
 Before turning this into a reviewed lesson, the ranges must be tied to explicit earlier-street actions, alternative bet sizes and rake must be modeled, and the approximate strategy must be checked against game-abstraction error. A coherent full-hand trainer also needs earlier-street transitions that preserve these public histories and posterior ranges.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

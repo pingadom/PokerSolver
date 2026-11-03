@@ -48,3 +48,10 @@ python -m unittest discover -s scripts -p 'test_check_supplied_reach_bounds.py'
 Analytic tests compare literal signal plans in both hero orientations, constant reach, security-limited reach, tolerance boundaries and shared work exhaustion. Physical tests cover both endpoints, positive-question diagnostics, legacy separation, exclusive plain/gzip replay, source-byte binding and rehashed-count tampering. Eleven independent-checker tests cover both points, dual values, behavioral masses, classification, admission, alternate pot rules, changed counts, malformed numbers/keys and byte caps. Failures create no receipt.
 
 The next model gate is bounded strategic continuation for this supplied joint prior, drawing on the existing connected postflop studies while retaining counterfactual private support, public-history recall and measured chance coverage. Frozen continuation values alone do not certify the complete strategic game. Realistic ranges, rake and genuinely multiplayer strategy remain separate work; AWS deployment is paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

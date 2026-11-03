@@ -118,3 +118,10 @@ python -m unittest discover -s scripts -p test_check_root_preflop_drill.py
 
 The separate [table UI](root-preflop-table-ui.md) consumes these cached endpoints
 at `#root-preflop`. The backend remains explicitly opt-in.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

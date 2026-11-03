@@ -47,3 +47,10 @@ The offline `SixMaxUnpairedFlopCollectionMain` supports `create <manifest> <pin>
 Java tests exercise complete physical startup, all question mappings, byte-identical export, same-card/different-board rejection, stale pins, alias/path/snapshot protection and real Spring controller validation. The independent Python checker verifies all seven source proofs and exact review composition without LP or CFR optimization; corruption controls alter source kinds, private cards, indices, EVs, grades and coverage.
 
 The v5 and earlier protocols, all 311 older data files and the current browser session remain unchanged. This release adds backend capability; website controls for v6 are a separate step. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

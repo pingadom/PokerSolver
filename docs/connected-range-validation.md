@@ -92,3 +92,10 @@ mvn -q exec:java '-Dexec.mainClass=com.pokerlab.solver.BenchmarkPhysicalDeckSubg
 ```
 
 Vary the chance seed and menu size to inspect sensitivity. The restricted-game gap cannot be cited as the full-deck policy's Nash gap or used to reject or publish a trainer chart by itself. A stronger next method needs full-deck chance sampling **inside** the best-response computation, or a much broader independently held-out chance approximation with quantified sampling error and fallback sensitivity.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

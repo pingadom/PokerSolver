@@ -36,3 +36,10 @@ The generator does not write a file if the measured gap misses the supplied targ
 The API remains disabled by default. With `TRAINER_FLOP_RESEARCH_ENABLED=true` and `TRAINER_FLOP_RESEARCH_PACK_PATH` pointing to the compressed pack, `GET /api/v1/trainer/research/flop` returns metadata. `POST /api/v1/trainer/research/flop/hands/replay` takes `{"seed":"42","packHash":"<metadata hash>","heroPlayer":0,"actions":[]}` to start; append hero action codes and resend to advance. It rejects stale pack hashes, illegal or excess actions, and client-supplied EV fields. The [local trainer Compose overlay](../docker-compose.trainer.yml) mounts the pack and enables the route. The website route `#flop-hand` plays this validation-only hand with the same seed and saved pack, hides undealt cards, and keeps the opponent private until showdown.
 
 A future preflop-to-flop transition still needs preceding-street ranges and actions, realistic bet sizes and rake; this synthetic flop fixture cannot supply those by itself. The opt-in research API is not a reviewed 6-max lesson or a general preflop continuation value.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -23,3 +23,10 @@ java -Xmx2g -cp 'solver\target\classes;engine\target\classes' com.pokerlab.solve
 ```
 
 The [disjoint-range follow-up](connected-range-validation.md) now tests three new combos per seat and a sample-split audit of BB's first action on flop, turn and river. Aces remain sensible, while a medium pair and some postflop observations remain unstable. River observations are especially sparse: fewer than 10% of sampled river decisions fall in buckets with even ten held-out observations. The next quality gate is a much broader, independently justified range and a stronger strategic response estimate. This bucket policy is neither serialized nor admitted to the trainer. Rake, endogenous actions from the other four seats, more bet sizes, and realistic hand ranges also remain outside this connected fixture.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

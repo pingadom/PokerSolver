@@ -78,3 +78,10 @@ The source limit is 16 MiB; the existing checkpoint reader enforces 128 MiB, str
 Future alternating-study artifacts use **v5**, adding `sourceContentCoverage` and `retainedContentCoverage`. A plan-only report has source coverage and null retained coverage; a completed report screens the actually retained policy, including after a rejected round. Historical v1–v4 artifacts deserialize with null new fields and remain unchanged. Checkpoint schema v1 and the quality-gate rules remain unchanged.
 
 Tests cover weighted blocker effects, multiple boards without repeated history mass, inclusive threshold boundaries, almost-pure retained hands, zero reach versus numeric underflow, deterministic search, feasibility bounds, both budget and diversity failures, source mismatch, file aliases, malformed options, size limits and unchanged checkpoint bytes. Saved evidence is cross-checked against the original completed solve reports; CI does not rerun the high-budget solves.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

@@ -46,3 +46,10 @@ The [local range-sensitivity probe](../preflop-range-sensitivity.md) varies one 
 - Benchmark runtime and memory before scaling beyond 47 exact matchups; study sampled-payoff sensitivity on substantially larger ranges where exhaustive enumeration is impractical.
 - Define a human review and publication decision for a realistic content set before exposing a read-only trainer API. The provisional numeric screen and structural checks alone cannot publish a pack.
 - Solve non-all-in preflop decisions only after their postflop continuation model and rake treatment are validated.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

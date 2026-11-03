@@ -9,3 +9,10 @@ The worker acknowledges only after durable processing. A dead-letter consumer re
 The PostgreSQL development transport persists messages, leases one with `FOR UPDATE SKIP LOCKED`, rotates receipts, retries expired leases, and selects messages with five attempts for dead-letter handling. Handled dead letters remain in its table for inspection. This permits actual API and worker processes to run separately with restart-safe jobs while preserving the production transport abstraction.
 
 Sources: [SQS at-least-once delivery](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html).
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

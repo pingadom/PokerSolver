@@ -50,3 +50,10 @@ In these four runs, measured deviation fell at every sampled budget, including w
 The next solver gate is to increase the number and diversity of physical joint deals without precomputing every board/payoff for every terminal, then measure robustness across ranges and raise menus before generated decisions are approved for the trainer. A connected postflop action model is also required: mandatory checkdown is a rule of this research game, not a solution for flop, turn, or river decisions.
 
 The [expanded private-card experiment](sixmax-expanded-chance-research.md) now exercises 64 legal deals with both exact range-product chance and an explicitly labelled empirical chance sample. The public/private work cap and sampled-payoff error still limit what can be inferred from its lower deviation numbers.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

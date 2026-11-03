@@ -77,3 +77,10 @@ Acceptance means the bounded research refinement passed its declared checks. It 
 The [physical-hand decision screen](sixmax-suit-decision-stability.md) now completes bounded own-card EV and independent-budget stability checks on 32 material physical cases: 23 pass for every material question, with a separately bound replayable report. Broader observation coverage remains the next blocker and needs an explicit runtime/memory design rather than silently increasing caps. These three candidates are independent derivatives of the same fresh predecessor; recursive refinement chains are not supported by this schema.
 
 For an interview: explain why a low weighted error can conceal poor rare decisions, derive the full-joint posterior, describe fresh local optimization under frozen ranges, and show why the parent strategy must be re-audited after simultaneous replacements. The balanced experiment demonstrates an explicit tradeoff between worst-case local quality and likely play, with reproducible evidence and preserved model limitations.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

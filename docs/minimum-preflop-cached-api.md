@@ -106,10 +106,9 @@ python -m unittest discover -s scripts -p test_check_minimum_preflop_drill.py
 python -m unittest discover -s scripts -p test_smoke_minimum_preflop.py
 ```
 
-PR creation awaits the project owner's review of the prepared code revision,
-under the repository's user-review policy. No user review confirmation is recorded
-until that explicit clearance arrives. Review confirmation will then identify the
-reviewed code commit across all project-authored human-readable documentation.
+The project owner cleared code revision `b7db059` for PR creation on 2026-11-03.
+The approval is recorded across the project's human-readable documentation;
+material later code changes require renewed review.
 
 
 ## Validation-only budget amendment
@@ -126,3 +125,10 @@ This changes no numerical inputs, policies, work caps or saved source; complete
 source equality remains mandatory. There is no new numerical generation or search.
 The local validation total becomes one solver replay and two API replays; the
 initial HTTP capture and three CI replay reservations remain unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

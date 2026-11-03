@@ -44,3 +44,10 @@ A failed batch retains its diagnostic report, creates no review and returns an e
 Java integration tests independently regenerate the source/review pair, load the pinned saved source, replay the parent and all eight discovery cases, and verify empty/repeated reviews and malformed-input rejection. Their physical builds, parent solves and fresh-reference work are separately reserved before execution.
 
 The twelve new artifacts have distinct filenames under `docs/data`; all 299 older data files retain their original bytes and Git blobs. API/UI collection integration is a later, separately versioned step. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on
+2026-11-03 (Europe/London), with “cleared b7db059”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
