@@ -1,9 +1,17 @@
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import FrontendRoot from "./FrontendRoot";
-import { rootApiBase, rootSessionKey, type RootGrade } from "./rootPreflopApi";
-import { rootFixtureReview, rootGrades, rootMetadata as metadata, rootQuestion } from "./test-data/rootPreflop";
+import { legacyRootClient } from "./rootPreflopApi";
+import { minimumPreflopClient } from "./minimumPreflopApi";
+import type { RootGrade } from "./rootPreflopProtocol";
+import { rootFixtureReview as legacyReview, rootGrades as legacyGrades, rootMetadata as legacyMetadata, rootQuestion as legacyQuestion } from "./test-data/rootPreflop";
+import { minimumFixtureReview, minimumGrades, minimumMetadata, minimumQuestion } from "./test-data/minimumPreflop";
 
+describe.each([
+  { name: "original envelope", client: legacyRootClient, metadata: legacyMetadata, rootQuestion: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
+  { name: "minimum informed", client: minimumPreflopClient, metadata: minimumMetadata, rootQuestion: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
+])("$name table", ({ client, metadata, rootQuestion, rootGrades, rootFixtureReview }) => {
+const { rootApiBase, rootSessionKey } = client;
 const response = (body: unknown, status = 200) => Promise.resolve({ ok: status < 400, status,
   text: async () => typeof body === "string" ? body : JSON.stringify(body) } as Response);
 function mockApi(options: { status?: number; grade?: (g: RootGrade) => Promise<Response>; badQuestion?: boolean; badReview?: boolean; badExport?: boolean } = {}) {
@@ -21,7 +29,7 @@ function mockApi(options: { status?: number; grade?: (g: RootGrade) => Promise<R
 }
 const button = (name: string) => screen.getByRole("button", { name });
 const posts = (fetch: ReturnType<typeof mockApi>, suffix: string) => fetch.mock.calls.filter(([u]) => String(u).endsWith(suffix));
-function open(query = "") { window.history.replaceState(null, "", "#root-preflop" + query); return render(<FrontendRoot />); }
+function open(query = "") { window.history.replaceState(null, "", client.route + query); return render(<FrontendRoot />); }
 async function choose(action = "Call 2 bb") { fireEvent.click(await screen.findByRole("button", { name: action })); }
 afterEach(() => { window.history.replaceState(null, "", "/"); localStorage.clear(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
@@ -37,7 +45,7 @@ it("loads the pinned public question before rendering six seats, a blue BB and r
   expect(button("Raise to 9 bb")).toHaveTextContent("8 bb more committed");
   expect(fetch.mock.calls).toHaveLength(2);
   expect(fetch.mock.calls.every(([url]) => String(url).startsWith(rootApiBase))).toBe(true);
-  expect(window.location.hash).toBe(`#root-preflop?study=${metadata.studyHash}`);
+  expect(window.location.hash).toBe(`${client.route}?study=${metadata.studyHash}`);
 });
 it.each([["Fold", "Outside limit", "fold"], ["Call 2 bb", "Within limit", "call"], ["Raise to 9 bb", "Unresolved", "raise:9.0"]])("grades %s with feedback under the controls", async (label, verdict, action) => {
   const fetch = mockApi(); open(); await choose(label);
@@ -100,7 +108,7 @@ it("uses unmodified validated export bytes and a source-pinned filename", async 
   open(); await choose(); await screen.findByRole("heading", { name: "Within limit" });
   fireEvent.click(button("Review 1 attempt")); await screen.findByLabelText("Preflop session review");
   fireEvent.click(button("Download session review")); await waitFor(() => expect(create).toHaveBeenCalledTimes(1));
-  expect((click.mock.instances[0] as HTMLAnchorElement).download).toBe(`pokerlab-root-preflop-review-${metadata.studyHash.slice(0, 12)}.json`);
+  expect((click.mock.instances[0] as HTMLAnchorElement).download).toBe(`${client.exportPrefix}-${metadata.studyHash.slice(0, 12)}.json`);
   expect(revoke).toHaveBeenCalledWith("blob:root");
 });
 it.each(["?study=wrong", "?study=x&study=y", "?question=0", "?extra=x", "-old"])("rejects stale or invalid deep link %s", async query => {
@@ -139,7 +147,7 @@ it("aborts an old grade on hash navigation and ignores its late reply", async ()
   let resolve!: (r: Response) => void;
   const fetch = mockApi({ grade: () => new Promise(r => { resolve = r; }) }); open(); await choose();
   const signal = posts(fetch, "/grade")[0][1]?.signal;
-  act(() => { window.history.replaceState(null, "", "#root-preflop?study=wrong"); window.dispatchEvent(new HashChangeEvent("hashchange")); });
+  act(() => { window.history.replaceState(null, "", `${client.route}?study=wrong`); window.dispatchEvent(new HashChangeEvent("hashchange")); });
   await screen.findByRole("alert"); expect(signal?.aborted).toBe(true);
   await act(async () => resolve(await response(rootGrades[1])));
   expect(localStorage.getItem(rootSessionKey)).toBeNull(); expect(screen.queryByRole("heading", { name: "Within limit" })).not.toBeInTheDocument();
@@ -149,4 +157,6 @@ it("supports 1–3 shortcuts and ignores repeats, modifiers and interactive targ
   for (const modifiers of [{ ctrlKey: true }, { shiftKey: true }, { repeat: true }, { altKey: true }, { metaKey: true }]) fireEvent.keyDown(window, { key: "1", ...modifiers });
   fireEvent.keyDown(button("Fold"), { key: "2" }); expect(posts(fetch, "/grade")).toHaveLength(0);
   fireEvent.keyDown(window, { key: "3" }); await screen.findByRole("heading", { name: "Unresolved" });
+});
+
 });
