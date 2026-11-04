@@ -81,7 +81,7 @@ Tests cover weighted blocker effects, multiple boards without repeated history m
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
+`dddc4c2a5cdd4adcb0854b8d78a69f350fcf6bc4` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared dddc4c2”. This confirmation applies to
 that code revision. See the project’s Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

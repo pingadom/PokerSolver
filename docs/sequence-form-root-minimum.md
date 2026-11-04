@@ -83,9 +83,10 @@ not symbolic bounds on an exact Nash set.
 
 ## Review status
 
-Implementation and local evidence are awaiting project-owner review. No PR or
-new review confirmation may be created until the exact revision is explicitly
-cleared. Existing confirmations refer only to their named historical revisions.
+The project owner cleared code revision `dddc4c2` for PR creation on 2026-11-04
+with “cleared dddc4c2”. This factual approval is recorded across project
+documentation and the central review history. Later material code changes require
+renewed review. PR creation and full CI follow this clearance.
 
 ## Analytic results and reproduction
 
@@ -139,3 +140,10 @@ automatically includes the new test class. Full PR CI follows user clearance.
 This completes an analytic solver-capacity milestone. A physical root study,
 fresh-reference comparison and any trainer adoption still require separate
 declarations and evidence. No current trainer EV or classification changed.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`dddc4c2a5cdd4adcb0854b8d78a69f350fcf6bc4` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared dddc4c2”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

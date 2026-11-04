@@ -40,9 +40,31 @@ interview guide. Earlier review history is retained here. Documentation-only
 recording follows clearance; runtime code remains unchanged from the reviewed
 revision. Full PR CI and container checks follow PR creation. AWS remains paused.
 
+## 2026-11-04 sequence root minimum
+
+The project owner reviewed code changes in commit
+`dddc4c2a5cdd4adcb0854b8d78a69f350fcf6bc4` on branch
+`codex/sequence-form-root-minimum` and explicitly cleared PR creation with:
+
+> cleared dddc4c2
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later code changes. Local validation passed 94 Java tests
+across eight suites, including 19 new kernel tests, and 12 Python checker methods.
+Eight frozen analytic controls replayed exactly; independent exact-binary64
+checking verified 16 parent and eight endpoint certificates. Backend/API packaging
+and formatting checks passed. No new physical poker source or trainer data was
+generated; the 32-type results are analytic continuation-capacity evidence.
+
+The latest confirmation is recorded in 140 Markdown documents and the existing
+final confirmation pages of the reference PDF and interview guide. Earlier review
+history remains here. The original Word/PDF content is preserved. Changes after
+clearance only record this factual approval; the reviewed solver code is unchanged.
+Full PR CI follows PR creation. Trainer admission and AWS deployment remain off.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
+`dddc4c2a5cdd4adcb0854b8d78a69f350fcf6bc4` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared dddc4c2”. This confirmation applies to
 that code revision. See the project’s Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
