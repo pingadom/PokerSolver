@@ -90,9 +90,37 @@ approval. A fresh full CI run and evidence audit must pass before merging PR #21
 AWS deployment remains paused. Physical qualification of the sequence-flow root
 minimum kernel remains a separately declared future study.
 
+## 2026-11-04 physical sequence root minimum
+
+The project owner reviewed code revision
+`2b9d114ea3999c6224e04daeba6261afb6ca44e8` on branch
+`codex/physical-sequence-root-minimum` and explicitly cleared PR creation with:
+
+> cleared 2b9d114
+
+This confirmation applies to that code revision, not later code or the entire
+historical codebase. Local validation passed 31 Java tests, including 12 new
+physical-study tests sharing one complete physical replay, and 12 independent
+Python controls. Backend/API packaging and formatting checks passed.
+
+One declared physical generation reproduced the original BB99 raise minimum with
+the sequence-flow kernel. The minimum brackets overlap, with witness difference
+-1.6375789613221059e-15 bb. The new endpoint used 73 pivots and 572,344,163 charged
+LP arithmetic units, compared with 263 and 2,045,249,458 in the pinned legacy
+control. Compiler work was higher; these are counters for one fixed scenario,
+not a general runtime benchmark. Original numerical kernels, trainer values,
+all previous data and previews remain unchanged.
+
+The approval is recorded across 141 Markdown documents and the existing final
+confirmation pages of the reference PDF and local interview guide, for 143
+human-readable project documents. Earlier approval history and the original
+Word/PDF content remain preserved. Post-clearance edits only record this factual
+approval. Fresh complete PR CI and an exact-head evidence audit must pass before
+merging. Trainer adoption is separate; AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` and cleared PR update on
-2026-11-04 (Europe/London), with “cleared 8b007ed”. This confirmation applies to
+`2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared 2b9d114”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

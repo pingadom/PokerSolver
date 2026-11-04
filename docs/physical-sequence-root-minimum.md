@@ -54,8 +54,10 @@ No native API startup or AWS deployment is included.
 
 ## Review status
 
-This change is awaiting project-owner review. No PR or new review confirmation
-may be created before the completed code revision is explicitly cleared.
+The project owner cleared code revision `2b9d114` for PR creation on 2026-11-04
+with “cleared 2b9d114”. This factual approval applies only to that revision.
+Fresh complete PR CI and an evidence audit must pass before merging; later
+material code changes require renewed review.
 
 
 ## Result and comparison
@@ -120,3 +122,10 @@ Existing trainer source pins and move EVs remain unchanged. This experiment does
 not replace the current cache or improve the public trainer automatically. A
 later adoption needs its own declared complete-menu, loss and admission checks;
 broader private ranges and six-active-player equilibrium remain separate work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared 2b9d114”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
