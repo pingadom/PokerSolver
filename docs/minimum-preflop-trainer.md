@@ -99,7 +99,14 @@ already-qualified cached API; freezing the frontend performs no solver replay.
 
 ## Review status
 
-This change is awaiting explicit project-owner clearance. No PR has been created
-for it. Existing review confirmations apply only to their named historical code
-revision. After code and local verification are complete, provide the exact new
-revision, diff, files, behaviours and validation limits for review before a PR.
+The project owner cleared code revision `7c8a70e` for PR creation on 2026-11-04
+with “cleared 7c8a70e”. The factual confirmation is recorded across the project's
+human-readable documentation and central review history. Later material code
+changes require renewed review. PR creation and full CI follow this clearance.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
+that code revision. See the project’s Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
