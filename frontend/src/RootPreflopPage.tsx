@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import PokerTable, { type TableMove } from "./PokerTable";
 import { intervalRange } from "./intervalTrainerFormatting";
-import { parseRootGrade, parseRootMetadata, parseRootQuestion, parseRootReview, readRootReview, rootChoices, rootMaximumAttempts,
-  rootRequest, rootReviewDocument, rootSessionKey, rootSessionReview, RootProtocolError, RootRequestError,
-  type RootAction, type RootAttempt, type RootGrade, type RootMetadata, type RootMove, type RootQuestion, type RootReview } from "./rootPreflopApi";
+import { legacyRootClient } from "./rootPreflopApi";
+import { rootMaximumAttempts, RootProtocolError, RootRequestError,
+  type RootClient, type RootAction, type RootAttempt, type RootGrade, type RootMetadata, type RootMove, type RootQuestion, type RootReview } from "./rootPreflopProtocol";
 import "./intervalTrainer.css";
 import "./rootPreflop.css";
 
@@ -12,7 +12,7 @@ export const rootVerdict = (move: RootMove) => move.classification === "WITHIN_L
   : move.classification === "OUTSIDE_LIMIT" ? "Outside limit" : "Unresolved";
 const tone = (action: RootAction): TableMove => action === "raise:9.0" ? "raise" : action;
 
-export default function RootPreflopPage() {
+export default function RootPreflopPage({ client = legacyRootClient }: { client?: RootClient }) {
   const [generation, setGeneration] = useState(0);
   const [metadata, setMetadata] = useState<RootMetadata | null>(null);
   const [question, setQuestion] = useState<RootQuestion | null>(null);
@@ -35,26 +35,26 @@ export default function RootPreflopPage() {
   useEffect(() => {
     const controller = new AbortController(); operation.current = controller; pending.current = true;
     void (async () => {
-      const m = parseRootMetadata(await rootRequest("", controller.signal));
+      const m = client.parseRootMetadata(await client.rootRequest("", controller.signal));
       if (controller.signal.aborted) return;
       const [route, query] = window.location.hash.split("?");
       const params = new URLSearchParams(query ?? "");
-      if (route !== "#root-preflop" || [...params.keys()].some(k => k !== "study" || params.getAll(k).length !== 1) ||
+      if (route !== client.route || [...params.keys()].some(k => k !== "study" || params.getAll(k).length !== 1) ||
         params.has("study") && params.get("study") !== m.studyHash) throw new RootProtocolError();
-      const q = parseRootQuestion(await rootRequest(`/questions/0?studyHash=${m.studyHash}`, controller.signal), m);
+      const q = client.parseRootQuestion(await client.rootRequest(`/questions/0?studyHash=${m.studyHash}`, controller.signal), m);
       if (controller.signal.aborted) return;
       setMetadata(m); setQuestion(q);
-      window.history.replaceState(null, "", `#root-preflop?study=${m.studyHash}`);
+      window.history.replaceState(null, "", `${client.route}?study=${m.studyHash}`);
       try {
-        const text = localStorage.getItem(rootSessionKey);
+        const text = localStorage.getItem(client.rootSessionKey);
         if (text !== null) {
-          const restored = readRootReview(text, m, q);
+          const restored = client.readRootReview(text, m, q);
           saved.current = restored.attempts; setAttempts(restored.attempts);
           setFeedback(restored.attempts.at(-1)?.grade ?? null);
           if (restored.attempts.length) setNotice(`Restored ${restored.attempts.length} saved attempts for this study.`);
         }
       } catch {
-        try { localStorage.removeItem(rootSessionKey); } catch { /* Practice remains available without storage. */ }
+        try { localStorage.removeItem(client.rootSessionKey); } catch { /* Practice remains available without storage. */ }
         setNotice("Saved practice could not be restored. Starting a fresh session.");
       }
     })().catch((cause: unknown) => {
@@ -64,7 +64,7 @@ export default function RootPreflopPage() {
       }
     }).finally(() => { if (!controller.signal.aborted) { pending.current = false; setBusy(false); } });
     return () => controller.abort();
-  }, [generation]);
+  }, [generation, client]);
 
   function fail(cause: unknown, controller: AbortController) {
     if (controller.signal.aborted) return;
@@ -76,12 +76,12 @@ export default function RootPreflopPage() {
     pending.current = true; setBusy(true); setError(""); setReview(null);
     const controller = new AbortController(); operation.current = controller;
     try {
-      const grade = parseRootGrade(await rootRequest("/grade", controller.signal, { studyHash: metadata.studyHash,
+      const grade = client.parseRootGrade(await client.rootRequest("/grade", controller.signal, { studyHash: metadata.studyHash,
         sourceCaseIndex: 0, action }), question, action);
       if (controller.signal.aborted) return;
       const next = [...saved.current, { ordinal: saved.current.length, attempt: { sourceCaseIndex: 0, action }, grade }];
       saved.current = next; setAttempts(next); setFeedback(grade);
-      try { localStorage.setItem(rootSessionKey, JSON.stringify(rootSessionReview(metadata, question, next))); }
+      try { localStorage.setItem(client.rootSessionKey, JSON.stringify(client.rootSessionReview(metadata, question, next))); }
       catch { setNotice("Your choice is recorded for this visit. Browser storage is unavailable, so reloading will not save it."); }
     } catch (cause) { fail(cause, controller); }
     finally { if (!controller.signal.aborted) { pending.current = false; setBusy(false); } }
@@ -93,15 +93,15 @@ export default function RootPreflopPage() {
     const captured = saved.current.slice();
     try {
       if (exporting) {
-        const text = await rootReviewDocument(controller.signal, metadata, question, captured);
+        const text = await client.rootReviewDocument(controller.signal, metadata, question, captured);
         if (controller.signal.aborted) return;
         const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
         const anchor = document.createElement("a"); anchor.href = url;
-        anchor.download = `pokerlab-root-preflop-review-${metadata.studyHash.slice(0, 12)}.json`;
+        anchor.download = `${client.exportPrefix}-${metadata.studyHash.slice(0, 12)}.json`;
         try { anchor.click(); } finally { URL.revokeObjectURL(url); }
       } else {
-        const result = parseRootReview(await rootRequest("/review", controller.signal, { studyHash: metadata.studyHash,
-          choices: rootChoices(captured) }), metadata, question, rootChoices(captured));
+        const result = client.parseRootReview(await client.rootRequest("/review", controller.signal, { studyHash: metadata.studyHash,
+          choices: client.rootChoices(captured) }), metadata, question, client.rootChoices(captured));
         if (!controller.signal.aborted) setReview(result);
       }
     } catch (cause) { fail(cause, controller); }
@@ -119,13 +119,13 @@ export default function RootPreflopPage() {
   function startOver() {
     if (pending.current) return;
     saved.current = []; setAttempts([]); setFeedback(null); setReview(null); setError(""); setNotice("");
-    try { localStorage.removeItem(rootSessionKey); } catch { setNotice("Browser storage could not be cleared. Practice is reset for this visit."); }
+    try { localStorage.removeItem(client.rootSessionKey); } catch { setNotice("Browser storage could not be cleared. Practice is reset for this visit."); }
   }
-  function reload() { clear(); window.history.replaceState(null, "", "#root-preflop"); setGeneration(g => g + 1); }
+  function reload() { clear(); window.history.replaceState(null, "", client.route); setGeneration(g => g + 1); }
   return <div className="trainer-page preflop-page interval-page root-preflop-page">
     <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
-      <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON</p>
+      <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON · {client.route === "#root-minimum-preflop" ? "UPDATED RAISE BOUNDS" : "ORIGINAL RAISE BOUNDS"}</p>
         <h1>Defend pocket nines</h1><p className="trainer-intro">The button raised to 3 bb. Compare the EV ranges, then choose your response.</p></div></div>
       <p className="trainer-disclosure hand-play-disclosure" role="note">Research exercise · Six seats, two active players · Supplied ranges, selected-flop continuation model · Raise remains unresolved.</p>
       {error && <div className="trainer-error" role="alert"><p>{error}</p><button className="trainer-button" disabled={busy}

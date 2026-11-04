@@ -166,6 +166,8 @@ jobs:
         run: cmp ../docs/data/supplied-eighteen-question-flop-collection-review.json src/test-data/unpaired-flop-collection-review.json
       - name: Keep root preflop UI pin identical to owned HTTP capture
         run: cmp ../docs/data/supplied-root-preflop-drill-fixture.json src/test-data/root-preflop-drill.json
+      - name: Keep minimum preflop UI pin identical to owned HTTP capture
+        run: cmp ../docs/data/supplied-minimum-preflop-drill-fixture.json src/test-data/minimum-preflop-drill.json
       - run: npm install --global pnpm@11.25.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint && pnpm typecheck && pnpm test && pnpm build

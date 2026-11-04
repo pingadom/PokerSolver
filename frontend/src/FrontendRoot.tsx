@@ -26,8 +26,10 @@ const UnpairedFlopCollectionPage = lazy(() => import("./UnpairedFlopCollectionPa
 const SizingFlopCollectionPage = lazy(() => import("./SizingFlopCollectionPage"));
 const SizeMenuBtnPage = lazy(() => import("./SizeMenuBtnPage"));
 const RootPreflopPage = lazy(() => import("./RootPreflopPage"));
+const MinimumPreflopPage = lazy(() => import("./MinimumPreflopPage"));
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#root-minimum-preflop")) return "root-minimum-preflop";
   if (window.location.hash.startsWith("#root-preflop")) return "root-preflop";
   if (window.location.hash.startsWith("#btn-sizing-flop")) return "btn-sizing-flop";
   if (window.location.hash.startsWith("#interval-sizing-flop")) return "interval-sizing-flop";
@@ -59,7 +61,8 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
-  if (route === "root-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><RootPreflopPage /></Suspense>;
+  if (route === "root-minimum-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><MinimumPreflopPage /></Suspense>;
+  if (route === "root-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><RootPreflopPage key={route} /></Suspense>;
   if (route === "btn-sizing-flop") return <Suspense fallback={<p role="status">Loading BTN practice…</p>}><SizeMenuBtnPage /></Suspense>;
   if (route === "interval-sizing-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><SizingFlopCollectionPage /></Suspense>;
   if (route === "interval-unpaired-flop") return <Suspense fallback={<p role="status">Loading flop practice…</p>}><UnpairedFlopCollectionPage /></Suspense>;

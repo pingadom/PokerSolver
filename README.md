@@ -263,6 +263,8 @@ The [root-envelope qualification](docs/root-envelope-qualification.md) now check
 
 The [cached preflop backend](docs/root-preflop-cached-api.md) now loads that qualified source once and serves one six-seat BB99 question, all three cached grades and canonical session reviews through a separate default-off API. It shows current-decision EVs with an empty preflop board and preserves the raise's unresolved classification. Requests perform no solving or source-file reads; existing trainer routes remain unchanged.
 
+The [minimum-informed preflop exercise](docs/minimum-preflop-trainer.md) connects the tighter raise bounds to the same poker table at `#root-minimum-preflop`. It shows server EVs on the action buttons, feedback below, saved attempts and downloadable session reviews. The original `#root-preflop` study keeps its separate source pin and saved session; raising remains unresolved in both studies.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `b7db0595f4c714c4d71491246a33bf4011751eea` and cleared PR creation on

@@ -1,9 +1,18 @@
-import { afterEach, expect, it, vi } from "vitest";
-import saved from "./test-data/root-preflop-drill.json";
-import { rootFixtureReview, rootGrades, rootMetadata as metadata, rootQuestion as question } from "./test-data/rootPreflop";
-import { parseRootGrade, parseRootMetadata, parseRootQuestion, parseRootReview, readRootReview, rootApiBase, rootChoices, rootEqual,
-  rootRequest, rootReviewDocument, rootSessionReview, RootProtocolError, RootRequestError, type RootAction, type RootQuestion } from "./rootPreflopApi";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import legacySaved from "./test-data/root-preflop-drill.json";
+import minimumSaved from "./test-data/minimum-preflop-drill.json";
+import { rootFixtureReview as legacyReview, rootGrades as legacyGrades, rootMetadata as legacyMetadata, rootQuestion as legacyQuestion } from "./test-data/rootPreflop";
+import { minimumFixtureReview, minimumGrades, minimumMetadata, minimumQuestion } from "./test-data/minimumPreflop";
+import { legacyRootClient } from "./rootPreflopApi";
+import { minimumPreflopClient } from "./minimumPreflopApi";
+import { rootEqual, RootProtocolError, RootRequestError, type RootAction, type RootQuestion } from "./rootPreflopProtocol";
 
+describe.each([
+  { name: "original envelope", client: legacyRootClient, saved: legacySaved, metadata: legacyMetadata, question: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
+  { name: "minimum informed", client: minimumPreflopClient, saved: minimumSaved, metadata: minimumMetadata, question: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
+])("$name protocol", ({ client, saved, metadata, question, rootGrades, rootFixtureReview }) => {
+const { parseRootGrade, parseRootMetadata, parseRootQuestion, parseRootReview, readRootReview, rootApiBase,
+  rootChoices, rootRequest, rootReviewDocument, rootSessionReview } = client;
 const copy = <T,>(value: T): T => structuredClone(value);
 const response = (value: unknown, status = 200) => Promise.resolve({ ok: status < 400, status,
   text: async () => typeof value === "string" ? value : JSON.stringify(value) } as Response);
@@ -91,4 +100,6 @@ it("downloads validated server bytes unchanged and refuses non-LF or mismatched 
     fetch.mockImplementation(() => response(altered));
     await expect(rootReviewDocument(signal, metadata, question, review.attempts)).rejects.toThrow(RootProtocolError);
   }
+});
+
 });
