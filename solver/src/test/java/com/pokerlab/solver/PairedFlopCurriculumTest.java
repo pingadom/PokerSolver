@@ -391,11 +391,19 @@ class PairedFlopCurriculumTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SixMaxPairedFlopTrainerLoader.load(input, input, PairedFlopOwnedFixture.PIN));
+        // Keep both hard-link paths on the temporary filesystem, even when /tmp is separate.
+        var copiedInput = Files.copy(input, dir.resolve("input.json"));
         var alias = dir.resolve("alias.json");
-        Files.createLink(alias, input.toAbsolutePath());
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> SixMaxPairedFlopTrainerLoader.load(input, alias, PairedFlopOwnedFixture.PIN));
+        Files.createLink(alias, copiedInput);
+        assertTrue(Files.isSameFile(copiedInput, alias));
+        assertEquals(
+                "Inputs and outputs must be distinct files",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        SixMaxPairedFlopTrainerLoader.load(
+                                                copiedInput, alias, PairedFlopOwnedFixture.PIN))
+                        .getMessage());
         assertEquals(
                 List.of(new SixMaxPairedFlopTrainer.Choice(2, "call")),
                 SixMaxPairedFlopTrainerMain.choices(new String[] {"2:call"}));
