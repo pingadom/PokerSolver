@@ -267,13 +267,19 @@ class SixMaxMixedFlopIntervalCollectionTest {
                                 SixMaxMixedFlopIntervalCollectionLoader.distinctOutput(
                                         data("manifest"),
                                         data("manifest").getParent().resolve(name)));
+        // Copy before linking so the alias test also works with a separate temporary mount.
+        var copiedManifest = Files.copy(data("manifest"), dir.resolve("copied-manifest.json"));
         var alias = dir.resolve("report-alias.json");
-        Files.createLink(alias, data("manifest").toAbsolutePath());
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        SixMaxMixedFlopIntervalCollectionLoader.distinctOutput(
-                                data("manifest"), alias));
+        Files.createLink(alias, copiedManifest);
+        assertTrue(Files.isSameFile(copiedManifest, alias));
+        assertEquals(
+                "Inputs and outputs must be distinct files",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () ->
+                                        SixMaxMixedFlopIntervalCollectionLoader.distinctOutput(
+                                                copiedManifest, alias))
+                        .getMessage());
         assertThrows(
                 IllegalArgumentException.class,
                 () ->

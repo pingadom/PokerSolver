@@ -265,9 +265,11 @@ The [cached preflop backend](docs/root-preflop-cached-api.md) now loads that qua
 
 The [minimum-informed preflop exercise](docs/minimum-preflop-trainer.md) connects the tighter raise bounds to the same poker table at `#root-minimum-preflop`. It shows server EVs on the action buttons, feedback below, saved attempts and downloadable session reviews. The original `#root-preflop` study keeps its separate source pin and saved session; raising remains unresolved in both studies.
 
+The separate [sequence-form root-minimum kernel](docs/sequence-form-root-minimum.md) avoids enumerating complete continuation plans. Analytic controls with 32 private types cover 2^32 possible continuation maps using one endpoint LP and 67 hero sequences, within the existing limits. Original-flow witnesses and independent exact-certificate checks support this solver-capacity result; no new physical poker source or trainer bound is claimed.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
-that code revision. See the project’s Code Review History for the approval record.
+`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` and cleared PR update on
+2026-11-04 (Europe/London), with “cleared 8b007ed”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

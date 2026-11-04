@@ -98,7 +98,7 @@ replay. No public API, loader or UI is enabled by this addition.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
-that code revision. See the project’s Code Review History for the approval record.
+`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` and cleared PR update on
+2026-11-04 (Europe/London), with “cleared 8b007ed”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

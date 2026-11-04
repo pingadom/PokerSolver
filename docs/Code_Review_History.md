@@ -40,9 +40,59 @@ interview guide. Earlier review history is retained here. Documentation-only
 recording follows clearance; runtime code remains unchanged from the reviewed
 revision. Full PR CI and container checks follow PR creation. AWS remains paused.
 
+## 2026-11-04 sequence root minimum
+
+The project owner reviewed code changes in commit
+`dddc4c2a5cdd4adcb0854b8d78a69f350fcf6bc4` on branch
+`codex/sequence-form-root-minimum` and explicitly cleared PR creation with:
+
+> cleared dddc4c2
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later code changes. Local validation passed 94 Java tests
+across eight suites, including 19 new kernel tests, and 12 Python checker methods.
+Eight frozen analytic controls replayed exactly; independent exact-binary64
+checking verified 16 parent and eight endpoint certificates. Backend/API packaging
+and formatting checks passed. No new physical poker source or trainer data was
+generated; the 32-type results are analytic continuation-capacity evidence.
+
+The latest confirmation is recorded in 140 Markdown documents and the existing
+final confirmation pages of the reference PDF and interview guide. Earlier review
+history remains here. The original Word/PDF content is preserved. Changes after
+clearance only record this factual approval; the reviewed solver code is unchanged.
+Full PR CI follows PR creation. Trainer admission and AWS deployment remain off.
+
+## 2026-11-04 portable hard link test fixtures
+
+The project owner reviewed code revision
+`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` on branch
+`codex/sequence-form-root-minimum` and explicitly cleared the PR update with:
+
+> cleared 8b007ed
+
+This approval applies to that revision, including the four test changes following
+the earlier `dddc4c2` solver clearance. It does not imply review of later code or
+the entire historical codebase. Original CI run 41881285986 found one existing
+test error: a hard link from a temporary directory to a checkout fixture crossed
+filesystems. The failure and all original evidence remain preserved.
+
+The fix keeps fixture copies and their actual hard-link aliases on the same
+temporary filesystem. All four affected classes passed locally: 35 Java tests,
+zero failures, errors or skips. Assertions additionally require file identity and
+the precise alias-rejection message. Formatting and diff checks passed. Runtime
+solver, checker, numerical evidence, source fixtures, frontend and CI code remain
+unchanged from the earlier cleared solver revision.
+
+This factual approval is recorded in all 140 project Markdown documents and the
+existing final confirmation pages of the reference PDF and interview guide. The
+original Word and PDF content is preserved. Post-clearance edits only record this
+approval. A fresh full CI run and evidence audit must pass before merging PR #218.
+AWS deployment remains paused. Physical qualification of the sequence-flow root
+minimum kernel remains a separately declared future study.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`7c8a70e5509e8cb42f3997e923e58b3c5a3bf759` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 7c8a70e”. This confirmation applies to
-that code revision. See the project’s Code Review History for the approval record.
+`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` and cleared PR update on
+2026-11-04 (Europe/London), with “cleared 8b007ed”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

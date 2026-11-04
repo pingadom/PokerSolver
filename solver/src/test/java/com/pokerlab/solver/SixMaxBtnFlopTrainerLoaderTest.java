@@ -27,11 +27,17 @@ class SixMaxBtnFlopTrainerLoaderTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SixMaxBtnFlopTrainerLoader.load(REQUEST, REQUEST, PIN));
+        // A hard link cannot cross from a checkout mount to a separate /tmp mount.
+        var copiedRequest = Files.copy(REQUEST, dir.resolve("copied-request.json"));
         var alias = dir.resolve("request.json");
-        Files.createLink(alias, REQUEST.toAbsolutePath());
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> SixMaxBtnFlopTrainerLoader.load(REQUEST, alias, PIN));
+        Files.createLink(alias, copiedRequest);
+        assertTrue(Files.isSameFile(copiedRequest, alias));
+        assertEquals(
+                "Inputs and outputs must be distinct files",
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> SixMaxBtnFlopTrainerLoader.load(copiedRequest, alias, PIN))
+                        .getMessage());
         var oversized = dir.resolve("oversized.json");
         Files.writeString(oversized, " ".repeat(SixMaxBtnFlopCurriculum.MAX_BYTES + 1));
         assertThrows(
