@@ -267,9 +267,13 @@ The [minimum-informed preflop exercise](docs/minimum-preflop-trainer.md) connect
 
 The separate [sequence-form root-minimum kernel](docs/sequence-form-root-minimum.md) avoids enumerating complete continuation plans. Analytic controls with 32 private types cover 2^32 possible continuation maps using one endpoint LP and 67 hero sequences, within the existing limits. Original-flow witnesses and independent exact-certificate checks support this solver-capacity result; no new physical poker source or trainer bound is claimed.
 
+The [physical sequence-flow root minimum](docs/physical-sequence-root-minimum.md)
+reproduces the original BB99 raise minimum without continuation-plan enumeration,
+with a separate physical replay, pinned legacy comparison and independent LP checks.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`8b007ed10c8586cb7fa2de9b856bb8a1c3248bd5` and cleared PR update on
-2026-11-04 (Europe/London), with “cleared 8b007ed”. This confirmation applies to
+`2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
+2026-11-04 (Europe/London), with “cleared 2b9d114”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
