@@ -97,6 +97,7 @@ jobs:
             python3 -m unittest discover -s scripts -p 'test_check_root_envelope_feedback.py'
             python3 -m unittest discover -s scripts -p 'test_check_root_preflop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimax.py'
+          python3 -m unittest discover -s scripts -p 'test_check_root_sequence_minimax.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimum.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimum_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_minimum_preflop_drill.py'
