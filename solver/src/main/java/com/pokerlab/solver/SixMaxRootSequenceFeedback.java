@@ -14,6 +14,8 @@ public final class SixMaxRootSequenceFeedback {
             "COMPLETE_MENU_TERMINAL_PROFIT_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1";
     public static final String MINIMUM_SHA =
             "1173300b55be57fd93c68ff02c04cd7318511601b41f1c3839f5e57b2d166b0f";
+    static final String MINIMUM_CANONICAL_HASH =
+            "231336105c0f6f477a7a81d43fd0b57b29adbe83c2cf0531a7ce5412702b1fce";
     public static final int MAX_BYTES = SixMaxRootSequenceMinimumStudy.MAX_BYTES;
     private static final double EPS = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
 
@@ -306,14 +308,28 @@ public final class SixMaxRootSequenceFeedback {
         SixMaxTexturePayoffTableMain.distinct(List.of(envelopePath, legacyPath, minimumPath));
         var saved = readMinimum(minimumPath);
         var original = SixMaxRootMinimumStudy.readSource(envelopePath);
+        var legacy = SixMaxRootMinimumFeedback.readMinimum(legacyPath);
+        return solve(request, original, legacy, saved);
+    }
+
+    static Result solve(
+            Request request,
+            SixMaxRootEnvelopeFeedback.Report original,
+            SixMaxRootMinimumStudy.Report legacy,
+            SixMaxRootSequenceMinimumStudy.Report saved)
+            throws Exception {
+        Objects.requireNonNull(request);
+        if (!MINIMUM_CANONICAL_HASH.equals(SixMaxHeadsUpPreflopGame.hash(saved))
+                || !saved.legacyMinimum().equals(legacy))
+            throw new IllegalArgumentException(
+                    "Captured sequence minimum canonical pin or legacy lineage differs");
         if (!request.minimumRequest().equals(saved.request())
                 || !saved.parent().equals(original.envelope().parent())
                 || !saved.request().sourceRequest().equals(original.request()))
             throw new IllegalArgumentException(
                     "Pinned sequence minimum and original source differ");
         var owned =
-                SixMaxRootSequenceMinimumStudy.solve(
-                        request.minimumRequest(), envelopePath, legacyPath);
+                SixMaxRootSequenceMinimumStudy.solve(request.minimumRequest(), original, legacy);
         if (!saved.equals(owned.report()))
             throw new IllegalArgumentException("Complete original sequence minimum replay differs");
         return qualify(request, owned, original);

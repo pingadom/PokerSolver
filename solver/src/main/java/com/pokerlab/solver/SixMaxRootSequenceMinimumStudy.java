@@ -15,6 +15,8 @@ public final class SixMaxRootSequenceMinimumStudy {
             "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658";
     public static final String SOURCE_STORED_SHA =
             "e3bf6895b71c24dd5202d09e402ee413d9d40d35cce660d9d5edfce5e2d1823d";
+    static final String LEGACY_CANONICAL_HASH =
+            "6040e8e54a11fbe6737a454ae014eca7f054bbb91ac9f4000eecdad41ae13238";
     public static final int MAX_BYTES = 8 * 1024 * 1024;
     private static final double EPS = BoundedLinearProgram.CERTIFICATE_TOLERANCE;
 
@@ -182,6 +184,17 @@ public final class SixMaxRootSequenceMinimumStudy {
         SixMaxTexturePayoffTableMain.distinct(List.of(sourceReport, legacyReport));
         var source = SixMaxRootMinimumStudy.readSource(sourceReport);
         var legacy = SixMaxRootMinimumFeedback.readMinimum(legacyReport);
+        return solve(request, source, legacy);
+    }
+
+    static Result solve(
+            Request request,
+            SixMaxRootEnvelopeFeedback.Report source,
+            SixMaxRootMinimumStudy.Report legacy)
+            throws Exception {
+        Objects.requireNonNull(request);
+        if (!LEGACY_CANONICAL_HASH.equals(SixMaxHeadsUpPreflopGame.hash(legacy)))
+            throw new IllegalArgumentException("Captured legacy minimum canonical pin differs");
         if (!legacy.completeMinimum()
                 || !legacy.referenceSupportedMinimum()
                 || !legacy.parent().equals(source.envelope().parent())
