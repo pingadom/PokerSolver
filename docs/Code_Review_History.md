@@ -142,9 +142,35 @@ code and numerical evidence remain unchanged from the reviewed revision. Full
 PR CI and evidence auditing follow PR creation. This qualification is offline;
 public trainer admission remains false and AWS deployment remains paused.
 
+## 2026-11-05 cached sequence-flow preflop API
+
+The project owner reviewed code changes in commit
+`1bb65a99098bfc1088a017b9cb4c8e824c339e25` on branch
+`codex/sequence-preflop-cached-api` and explicitly cleared PR creation with:
+
+> cleared 1bb65a9
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later code changes. Local verification passed 62 targeted
+Java tests (28 new and 34 existing controls), 10 independent Python tests, five
+smoke-control tests, all-module packaging and formatting. A real localhost API
+capture exercised the production controller/configuration, grades, session reviews,
+canonical exports, strict requests and OpenAPI; its temporary process was stopped.
+The declared five local owned replays reproduced the pinned source reports. No
+new numerical source report was generated and all 398 prior data files remained.
+
+The latest confirmation is recorded in 143 project-authored Markdown documents,
+the reference PDF and the existing local interview guide. Earlier history is
+retained here. The following approval-record changes are documentation only;
+reviewed runtime code, numerical source and public fixtures remain unchanged.
+Fresh full 27-job PR CI, including the new required production-container smoke,
+and exact-merge evidence auditing follow PR creation. Docker was unavailable
+locally; native HTTP is not container evidence. Public admission remains false,
+the API remains default-off and AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared bbb54f0”. This confirmation applies to
+`1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared 1bb65a9”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

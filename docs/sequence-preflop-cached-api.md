@@ -58,8 +58,10 @@ six-active-player GTO solution. No frontend route is included in this change.
 
 ## Review status
 
-Awaiting explicit user clearance of the completed code revision. No new review
-confirmation has been recorded and no PR may be opened before clearance.
+The project owner cleared code revision `1bb65a9` for PR creation on 2026-11-05
+(Europe/London), with “cleared 1bb65a9”. This applies only to that revision.
+Fresh full PR CI, including the required container smoke, and its evidence audit
+must pass before merging. Material code changes require renewed review.
 
 
 ## Backend contract
@@ -163,3 +165,10 @@ frozen previews and the protected interview document remain unchanged. This
 change supplies the backend for later UI adoption; it adds no frontend route or
 general six-active-player equilibrium claim. The supplied future-flop model and
 small private support remain the original explicit research limitations.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared 1bb65a9”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

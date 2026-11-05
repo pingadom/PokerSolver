@@ -54,7 +54,7 @@ The fine mode keeps hash `25e28ef764e7972baa54710b37d78d3f839a60863b0849f76642ab
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared bbb54f0”. This confirmation applies to
+`1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared 1bb65a9”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
