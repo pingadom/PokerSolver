@@ -154,5 +154,14 @@ additional playable scenarios remain separate backend work.
 
 ## Review status
 
-Awaiting explicit owner clearance of the completed revision. No new review
-confirmation is recorded and no PR may be opened before clearance.
+The project owner cleared code revision `fc6b6a7` for PR creation on 2026-11-05
+(Europe/London), with “cleared fc6b6a7”. This applies only to that revision.
+Fresh full PR CI and its evidence audit must pass before merging. Material code
+changes require renewed review.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared fc6b6a7”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

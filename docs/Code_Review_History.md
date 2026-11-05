@@ -168,9 +168,36 @@ and exact-merge evidence auditing follow PR creation. Docker was unavailable
 locally; native HTTP is not container evidence. Public admission remains false,
 the API remains default-off and AWS deployment remains paused.
 
+## 2026-11-05 sequence-flow preflop trainer
+
+The project owner reviewed code changes in commit
+`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` on branch
+`codex/sequence-preflop-trainer` and explicitly cleared PR creation with:
+
+> cleared fc6b6a7
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later code changes. Local verification passed 1,090
+frontend tests across 40 files, lint, typecheck and the production build. A single
+declared native startup powered the existing real-HTTP smoke, dedicated Vite
+proxy check and production-browser validation. All three grades, session review,
+reload, reset, stale-source recovery and real download passed. Download bytes
+matched the server export. No Java replay suite or numerical generation ran.
+
+The latest confirmation is recorded in 144 project-authored Markdown documents,
+the reference PDF and the existing local interview guide, for 146 readable
+documents. Earlier history and original Word/PDF content remain preserved.
+Post-clearance changes only record this factual approval; reviewed code, public
+fixtures and all 402 numerical files remain unchanged. Fresh full 27-job PR CI
+and exact-merge evidence auditing follow PR creation. Docker was unavailable
+locally; native HTTP/browser checks do not replace container evidence. This is
+one repeated BB99 root, six seats and two active players. Raise remains unresolved,
+public trainer admission false and AWS deployment paused. The 390px layout has no
+horizontal overflow, but full feedback requires vertical scrolling.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared 1bb65a9”. This confirmation applies to
+`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared fc6b6a7”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
