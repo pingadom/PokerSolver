@@ -271,6 +271,11 @@ The [physical sequence-flow root minimum](docs/physical-sequence-root-minimum.md
 reproduces the original BB99 raise minimum without continuation-plan enumeration,
 with a separate physical replay, pinned legacy comparison and independent LP checks.
 
+The [sequence-flow feedback qualification](docs/sequence-minimum-feedback.md) derives
+complete-menu utility and loss bounds from the physical sequence result, checks
+all three reference policies and retains every difference from the legacy menu.
+It qualifies offline; existing public trainer sources and grades remain unchanged.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
