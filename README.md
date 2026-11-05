@@ -276,6 +276,11 @@ complete-menu utility and loss bounds from the physical sequence result, checks
 all three reference policies and retains every difference from the legacy menu.
 It qualifies offline; existing public trainer sources and grades remain unchanged.
 
+The [cached sequence-flow preflop API](docs/sequence-preflop-cached-api.md) loads
+the separately pinned qualification once, then serves a public question, three
+cached grades and canonical session reviews. It is default-off and preserves
+raise ambiguity; existing trainers keep their current sources.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on

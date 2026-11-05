@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "pokerlab-sequence-preflop-drill-manifest/v1",
+  "studyHash": "586e0c0777ca9fa8f48e957f126a8f24c8b9382ba9da1442f684fdcb5f40ff21",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 2,
+    "maximumParentLpSolves": 4,
+    "maximumMinimumLpSolves": 1,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  },
+  "requestFile": "supplied-root-sequence-feedback-request.json",
+  "requestSha256": "77861632b5f1260071b89d7c465e812fff74547beef35fa776fb4562b7f13c18",
+  "reportFile": "supplied-root-sequence-feedback-report.json.gz",
+  "reportStoredSha256": "013686942f9d630dbcaad65673afed0263b73d864b6f27e27c161998887ec52b",
+  "envelopeFile": "supplied-root-envelope-feedback-report.json.gz",
+  "envelopeStoredSha256": "e3bf6895b71c24dd5202d09e402ee413d9d40d35cce660d9d5edfce5e2d1823d",
+  "minimumFile": "supplied-root-sequence-minimum-report.json.gz",
+  "minimumStoredSha256": "1173300b55be57fd93c68ff02c04cd7318511601b41f1c3839f5e57b2d166b0f",
+  "legacyMinimumFile": "supplied-root-minimum-report.json.gz",
+  "legacyMinimumStoredSha256": "ea48889cd6677102c917d1990e6b14dc576a12dad75bc7a86d3fb21cc1906403"
+}

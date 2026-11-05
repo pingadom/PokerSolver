@@ -1,0 +1,67 @@
+{
+  "attempts" : [ {
+    "attempt" : {
+      "action" : "fold",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -9.99999993922529E-9,
+        "lowerLossBb" : 1.7857791802528848,
+        "upperEvBb" : 1.0000000050247593E-8,
+        "upperLossBb" : 1.78577929297108
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "586e0c0777ca9fa8f48e957f126a8f24c8b9382ba9da1442f684fdcb5f40ff21"
+    },
+    "ordinal" : 0
+  }, {
+    "attempt" : {
+      "action" : "call",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.7857791902528848,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.7857792829710801,
+        "upperLossBb" : 9.27181953436218E-8
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "586e0c0777ca9fa8f48e957f126a8f24c8b9382ba9da1442f684fdcb5f40ff21"
+    },
+    "ordinal" : 1
+  }, {
+    "attempt" : {
+      "action" : "raise:9.0",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "raise:9.0",
+        "classification" : "STRATEGY_DEPENDENT",
+        "lowerEvBb" : 1.211141818822754,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.7857792829710801,
+        "upperLossBb" : 0.5746374641483261
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "586e0c0777ca9fa8f48e957f126a8f24c8b9382ba9da1442f684fdcb5f40ff21"
+    },
+    "ordinal" : 2
+  } ],
+  "counts" : {
+    "distinctQuestions" : 1,
+    "outsideLimit" : 1,
+    "strategyDependent" : 1,
+    "withinLimit" : 1
+  },
+  "studyHash" : "586e0c0777ca9fa8f48e957f126a8f24c8b9382ba9da1442f684fdcb5f40ff21"
+}

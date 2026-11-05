@@ -100,6 +100,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_root_sequence_minimax.py'
           python3 -m unittest discover -s scripts -p 'test_check_physical_root_sequence_minimum.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_sequence_feedback.py'
+          python3 -m unittest discover -s scripts -p 'test_check_sequence_preflop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimum.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimum_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_minimum_preflop_drill.py'
@@ -750,5 +751,35 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with: { name: root-minimum-preflop-compose-log, path: root-minimum-preflop-compose.log }
+      - if: always()
+        run: docker compose down -v
+
+  root-sequence-preflop-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-root-sequence-preflop.yml config --quiet
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_sequence_preflop.py'
+      - run: docker compose up --build -d
+      - name: Wait for default API readiness
+        run: |
+          for attempt in $(seq 1 90); do
+            if curl --fail --silent http://localhost:18080/actuator/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Sequence preflop source is absent without opt-in
+        run: python3 scripts/smoke-sequence-preflop.py --disabled
+      - name: Owned sequence startup, three cached grades and canonical reviews
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-root-sequence-preflop.yml up -d --no-deps api
+          python3 scripts/smoke-sequence-preflop.py
+      - name: Sequence preflop service logs
+        if: always()
+        run: docker compose logs --no-color > root-sequence-preflop-compose.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: root-sequence-preflop-compose-log, path: root-sequence-preflop-compose.log }
       - if: always()
         run: docker compose down -v
