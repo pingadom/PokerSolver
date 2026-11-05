@@ -129,7 +129,7 @@ AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 2b9d114”. This confirmation applies to
+`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared bbb54f0”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

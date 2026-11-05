@@ -48,8 +48,10 @@ active players at a six-seat table, not a six-active-player equilibrium.
 
 ## Review status
 
-Awaiting explicit user clearance of the completed code revision. No new review
-confirmation has been recorded and no PR may be opened before clearance.
+The project owner cleared code revision `bbb54f0` for PR creation on 2026-11-05
+(Europe/London), with “cleared bbb54f0”. This applies only to that revision.
+Fresh full PR CI and its evidence audit must pass before merging; material code
+changes require renewed review.
 
 
 ## Result
@@ -135,3 +137,10 @@ can adopt the sequence-flow result. A later release must still declare and test
 the typed drill, source-loader admission and cached-serving boundary. The existing
 website/API continues using its current source and grades. Broader private ranges,
 randomized scenarios and six-active-player equilibrium remain further work.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared bbb54f0”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
