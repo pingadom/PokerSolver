@@ -281,6 +281,12 @@ the separately pinned qualification once, then serves a public question, three
 cached grades and canonical session reviews. It is default-off and preserves
 raise ambiguity; existing trainers keep their current sources.
 
+The [sequence-flow preflop exercise](docs/sequence-preflop-trainer.md) connects
+that cache to the poker table at `#root-sequence-preflop`, with server EV bounds
+on move buttons, immediate feedback and source-bound saved-session reviews.
+It remains a single BB99 research scenario with two active players; raise
+remains unresolved and public trainer admission remains false.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
