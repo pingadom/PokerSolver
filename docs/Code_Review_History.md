@@ -118,9 +118,33 @@ Word/PDF content remain preserved. Post-clearance edits only record this factual
 approval. Fresh complete PR CI and an exact-head evidence audit must pass before
 merging. Trainer adoption is separate; AWS deployment remains paused.
 
+## 2026-11-05 sequence-flow complete-menu feedback
+
+The project owner reviewed code changes in commit
+`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` on branch
+`codex/sequence-minimum-feedback` and explicitly cleared PR creation with:
+
+> cleared bbb54f0
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later code changes. Local validation passed 20 targeted
+Java tests (19 new shared-replay tests and the existing parsing guard), 13
+independent Python tests, all-module backend packaging and formatting checks.
+One declared generation and one complete local physical replay reproduced the
+pinned sequence minimum. Independent checking verified the original physical
+certificates, legacy control and all 36 complete-menu utility/loss checks without
+fresh LP or CFR solving. All three policies passed; raise remains strategy dependent.
+
+The latest confirmation is recorded in 142 project-authored Markdown documents,
+the reference PDF and the existing local interview guide. Earlier review history
+is retained here. Documentation-only recording follows actual clearance; runtime
+code and numerical evidence remain unchanged from the reviewed revision. Full
+PR CI and evidence auditing follow PR creation. This qualification is offline;
+public trainer admission remains false and AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`2b9d114ea3999c6224e04daeba6261afb6ca44e8` and cleared PR creation on
-2026-11-04 (Europe/London), with “cleared 2b9d114”. This confirmation applies to
+`bbb54f01a939f28baec37bcd0b1fdd98b8024c48` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared bbb54f0”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
