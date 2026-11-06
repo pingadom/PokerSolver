@@ -1,0 +1,16 @@
+# Explicit local opt-in. One complete source replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1200m"
+      TRAINER_ROOT_BATCH_PREFLOP_ENABLED: "true"
+      TRAINER_ROOT_BATCH_PREFLOP_MANIFEST_PATH: /opt/pokerlab/root-batch-preflop/supplied-batch-preflop-drill-manifest.json
+      TRAINER_ROOT_BATCH_PREFLOP_STUDY_HASH: a7533a49a06fe2b7376109bce133c1b3c937dbef8915ed47af86290d36b777c8
+    volumes:
+      - ./docs/data/supplied-batch-preflop-drill-manifest.json:/opt/pokerlab/root-batch-preflop/supplied-batch-preflop-drill-manifest.json:ro
+      - ./docs/data/supplied-root-sequence-batch-feedback-request.json:/opt/pokerlab/root-batch-preflop/supplied-root-sequence-batch-feedback-request.json:ro
+      - ./docs/data/supplied-root-sequence-batch-feedback-report.json.gz:/opt/pokerlab/root-batch-preflop/supplied-root-sequence-batch-feedback-report.json.gz:ro
+      - ./docs/data/supplied-root-envelope-feedback-report.json.gz:/opt/pokerlab/root-batch-preflop/supplied-root-envelope-feedback-report.json.gz:ro
+      - ./docs/data/supplied-root-sequence-minimum-report.json.gz:/opt/pokerlab/root-batch-preflop/supplied-root-sequence-minimum-report.json.gz:ro
+      - ./docs/data/supplied-root-sequence-batch-report.json.gz:/opt/pokerlab/root-batch-preflop/supplied-root-sequence-batch-report.json.gz:ro
+      - ./docs/data/supplied-root-sequence-feedback-report.json.gz:/opt/pokerlab/root-batch-preflop/supplied-root-sequence-feedback-report.json.gz:ro

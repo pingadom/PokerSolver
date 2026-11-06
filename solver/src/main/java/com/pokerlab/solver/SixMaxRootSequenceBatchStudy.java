@@ -176,6 +176,21 @@ public final class SixMaxRootSequenceBatchStudy {
         var capturedPrevious = capture(previousPath, PRIOR_STORED_SHA);
         var source = decode(capturedSource, SixMaxRootEnvelopeFeedback.Report.class);
         var previous = decode(capturedPrevious, SixMaxRootSequenceMinimumStudy.Report.class);
+        var result = solve(request, source, previous);
+        verify(capturedSource);
+        verify(capturedPrevious);
+        return result;
+    }
+
+    // Captured evidence is not authority; original canonical lineage is checked before solving.
+    static Result solve(
+            Request request,
+            SixMaxRootEnvelopeFeedback.Report source,
+            SixMaxRootSequenceMinimumStudy.Report previous)
+            throws Exception {
+        Objects.requireNonNull(request);
+        Objects.requireNonNull(source);
+        Objects.requireNonNull(previous);
         if (!canonical(source).equals(SOURCE_HASH)
                 || !canonical(previous).equals(PRIOR_HASH)
                 || !source.qualifiedForOfflineDrill()
@@ -233,8 +248,6 @@ public final class SixMaxRootSequenceBatchStudy {
         for (var original : originals) policies.add(assess(original, batch));
         var comparisons = compare(batch, source.envelope().envelope(), previous);
         var reasons = reasons(failure, comparisons, policies);
-        verify(capturedSource);
-        verify(capturedPrevious);
         return new Result(
                 new Report(
                         REPORT_SCHEMA,

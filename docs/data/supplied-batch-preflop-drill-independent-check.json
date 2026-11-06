@@ -1,0 +1,560 @@
+{
+  "schemaVersion": "pokerlab-batch-preflop-drill-independent-check/v1",
+  "trainerAdmission": false,
+  "sourceCheck": {
+    "schemaVersion": "pokerlab-root-sequence-batch-feedback-independent-check/v1",
+    "trainerAdmission": false,
+    "sourceBatchCheck": {
+      "schemaVersion": "pokerlab-physical-root-sequence-batch-independent-check/v1",
+      "trainerAdmission": false,
+      "completeMinima": true,
+      "referenceSupportedMinima": true,
+      "endpointCertificatesChecked": 3,
+      "distinctBatchParentCertificatesChecked": 2,
+      "endpointProofs": [
+        {
+          "parentCertificatesChecked": 2,
+          "endpointCertificatesChecked": 1,
+          "originalHeroSequences": 85,
+          "originalOpponentSequences": 121,
+          "variables": 132,
+          "constraints": 159
+        },
+        {
+          "parentCertificatesChecked": 2,
+          "endpointCertificatesChecked": 1,
+          "originalHeroSequences": 85,
+          "originalOpponentSequences": 121,
+          "variables": 132,
+          "constraints": 159
+        },
+        {
+          "parentCertificatesChecked": 2,
+          "endpointCertificatesChecked": 1,
+          "originalHeroSequences": 85,
+          "originalOpponentSequences": 121,
+          "variables": 132,
+          "constraints": 159
+        }
+      ],
+      "originalPriorChecked": {
+        "schemaVersion": "pokerlab-root-sequence-minimum-independent-check/v1",
+        "trainerAdmission": false,
+        "completeMinimum": true,
+        "referenceSupportedMinimum": true,
+        "legacyMinimumBracketsOverlap": true,
+        "legacyMinimumWitnessDifferenceBb": -1.6375789613221059e-15,
+        "sequenceMinimumProof": {
+          "parentCertificatesChecked": 2,
+          "endpointCertificatesChecked": 1,
+          "originalHeroSequences": 85,
+          "originalOpponentSequences": 121,
+          "variables": 132,
+          "constraints": 159
+        },
+        "legacyControlChecked": {
+          "schemaVersion": "pokerlab-root-minimum-independent-check/v1",
+          "trainerAdmission": false,
+          "completeMinimum": true,
+          "referenceSupportedMinimum": true,
+          "originalSourceChecked": {
+            "schemaVersion": "pokerlab-root-feedback-independent-check/v1",
+            "trainerAdmission": false,
+            "completeOuterBounds": true,
+            "sourceCheck": {
+              "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+              "trainerAdmission": false,
+              "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+              "parentCheck": {
+                "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+                "trainerAdmission": false,
+                "literalTreeStates": 1609,
+                "informationSets": 89,
+                "originalLpCertificatesChecked": 2,
+                "policiesChecked": 3,
+                "physicalWorlds": 24,
+                "fullBoardsRegenerated": 15792192,
+                "fixedRunoutsRegenerated": 15984,
+                "nashConvBb": 3.726186026398182e-15,
+                "referenceNashConvBb": [
+                  2.087894412916569e-09,
+                  5.219769547148978e-10
+                ],
+                "freshLpSolves": 0,
+                "freshCfrRuns": 0
+              },
+              "originalEnvelopeCertificatesChecked": 5,
+              "originalRootWorlds": 8,
+              "completePureHeroRows": 33,
+              "checkedActions": [
+                "fold",
+                "call",
+                "raise:9.0"
+              ],
+              "completeOuterBounds": true,
+              "attainedEndpointClaims": false,
+              "gradingAuthority": false,
+              "work": {
+                "compilerLimit": 8000000,
+                "compilerUnits": 1120512,
+                "lpArithmeticWork": 471304900,
+                "lpPivots": 153,
+                "lpSolves": 5
+              },
+              "freshLpSolves": 0,
+              "freshCfrRuns": 0
+            },
+            "publicRootQualityScope": "ORIGINAL_WHOLE_PUBLIC_ROOT_GAME_NOT_PRIVATE_HAND_CONDITIONED/v1",
+            "policiesChecked": 3,
+            "forcedContinuationValuesChecked": 9,
+            "decisionLossesChecked": 9,
+            "moveClassifications": [
+              {
+                "action": "fold",
+                "classification": "OUTSIDE_LIMIT"
+              },
+              {
+                "action": "call",
+                "classification": "WITHIN_LIMIT"
+              },
+              {
+                "action": "raise:9.0",
+                "classification": "STRATEGY_DEPENDENT"
+              }
+            ],
+            "qualifiedForOfflineDrill": true,
+            "rejectionReasons": [],
+            "attainedEndpointClaims": false,
+            "freshLpSolves": 0,
+            "freshCfrRuns": 0
+          },
+          "policiesChecked": 3,
+          "endpointCertificatesChecked": 1,
+          "completePlanCoverage": {
+            "action": "raise:9.0",
+            "cartesianPlansChecked": 1296,
+            "reducedPlansChecked": 52,
+            "maximumErasureCoefficientDifference": 0.0
+          },
+          "minimumBracket": {
+            "lowerBound": 0.21114181882276112,
+            "upperBound": 0.2111418388227532,
+            "witnessUtility": 0.2111418288227532
+          },
+          "fullActionUpperEndpointClaim": false,
+          "freshLpSolves": 0,
+          "freshCfrRuns": 0
+        },
+        "originalSourceChecked": {
+          "schemaVersion": "pokerlab-root-feedback-independent-check/v1",
+          "trainerAdmission": false,
+          "completeOuterBounds": true,
+          "sourceCheck": {
+            "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+            "trainerAdmission": false,
+            "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+            "parentCheck": {
+              "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+              "trainerAdmission": false,
+              "literalTreeStates": 1609,
+              "informationSets": 89,
+              "originalLpCertificatesChecked": 2,
+              "policiesChecked": 3,
+              "physicalWorlds": 24,
+              "fullBoardsRegenerated": 15792192,
+              "fixedRunoutsRegenerated": 15984,
+              "nashConvBb": 3.726186026398182e-15,
+              "referenceNashConvBb": [
+                2.087894412916569e-09,
+                5.219769547148978e-10
+              ],
+              "freshLpSolves": 0,
+              "freshCfrRuns": 0
+            },
+            "originalEnvelopeCertificatesChecked": 5,
+            "originalRootWorlds": 8,
+            "completePureHeroRows": 33,
+            "checkedActions": [
+              "fold",
+              "call",
+              "raise:9.0"
+            ],
+            "completeOuterBounds": true,
+            "attainedEndpointClaims": false,
+            "gradingAuthority": false,
+            "work": {
+              "compilerLimit": 8000000,
+              "compilerUnits": 1120512,
+              "lpArithmeticWork": 471304900,
+              "lpPivots": 153,
+              "lpSolves": 5
+            },
+            "freshLpSolves": 0,
+            "freshCfrRuns": 0
+          },
+          "publicRootQualityScope": "ORIGINAL_WHOLE_PUBLIC_ROOT_GAME_NOT_PRIVATE_HAND_CONDITIONED/v1",
+          "policiesChecked": 3,
+          "forcedContinuationValuesChecked": 9,
+          "decisionLossesChecked": 9,
+          "moveClassifications": [
+            {
+              "action": "fold",
+              "classification": "OUTSIDE_LIMIT"
+            },
+            {
+              "action": "call",
+              "classification": "WITHIN_LIMIT"
+            },
+            {
+              "action": "raise:9.0",
+              "classification": "STRATEGY_DEPENDENT"
+            }
+          ],
+          "qualifiedForOfflineDrill": true,
+          "rejectionReasons": [],
+          "attainedEndpointClaims": false,
+          "freshLpSolves": 0,
+          "freshCfrRuns": 0
+        },
+        "policiesChecked": 3,
+        "fullActionUpperEndpointClaim": false,
+        "freshLpSolves": 0,
+        "freshCfrRuns": 0
+      },
+      "policiesChecked": 3,
+      "actionLowerChecks": 9,
+      "fullActionUpperEndpointClaim": false,
+      "coherentMinimumPolicyClaim": false,
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0
+    },
+    "previousFeedbackCheck": {
+      "schemaVersion": "pokerlab-root-sequence-feedback-independent-check/v1",
+      "trainerAdmission": false,
+      "sourceMinimumCheck": {
+        "schemaVersion": "pokerlab-root-sequence-minimum-independent-check/v1",
+        "trainerAdmission": false,
+        "completeMinimum": true,
+        "referenceSupportedMinimum": true,
+        "legacyMinimumBracketsOverlap": true,
+        "legacyMinimumWitnessDifferenceBb": -1.6375789613221059e-15,
+        "sequenceMinimumProof": {
+          "parentCertificatesChecked": 2,
+          "endpointCertificatesChecked": 1,
+          "originalHeroSequences": 85,
+          "originalOpponentSequences": 121,
+          "variables": 132,
+          "constraints": 159
+        },
+        "legacyControlChecked": {
+          "schemaVersion": "pokerlab-root-minimum-independent-check/v1",
+          "trainerAdmission": false,
+          "completeMinimum": true,
+          "referenceSupportedMinimum": true,
+          "originalSourceChecked": {
+            "schemaVersion": "pokerlab-root-feedback-independent-check/v1",
+            "trainerAdmission": false,
+            "completeOuterBounds": true,
+            "sourceCheck": {
+              "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+              "trainerAdmission": false,
+              "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+              "parentCheck": {
+                "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+                "trainerAdmission": false,
+                "literalTreeStates": 1609,
+                "informationSets": 89,
+                "originalLpCertificatesChecked": 2,
+                "policiesChecked": 3,
+                "physicalWorlds": 24,
+                "fullBoardsRegenerated": 15792192,
+                "fixedRunoutsRegenerated": 15984,
+                "nashConvBb": 3.726186026398182e-15,
+                "referenceNashConvBb": [
+                  2.087894412916569e-09,
+                  5.219769547148978e-10
+                ],
+                "freshLpSolves": 0,
+                "freshCfrRuns": 0
+              },
+              "originalEnvelopeCertificatesChecked": 5,
+              "originalRootWorlds": 8,
+              "completePureHeroRows": 33,
+              "checkedActions": [
+                "fold",
+                "call",
+                "raise:9.0"
+              ],
+              "completeOuterBounds": true,
+              "attainedEndpointClaims": false,
+              "gradingAuthority": false,
+              "work": {
+                "compilerLimit": 8000000,
+                "compilerUnits": 1120512,
+                "lpArithmeticWork": 471304900,
+                "lpPivots": 153,
+                "lpSolves": 5
+              },
+              "freshLpSolves": 0,
+              "freshCfrRuns": 0
+            },
+            "publicRootQualityScope": "ORIGINAL_WHOLE_PUBLIC_ROOT_GAME_NOT_PRIVATE_HAND_CONDITIONED/v1",
+            "policiesChecked": 3,
+            "forcedContinuationValuesChecked": 9,
+            "decisionLossesChecked": 9,
+            "moveClassifications": [
+              {
+                "action": "fold",
+                "classification": "OUTSIDE_LIMIT"
+              },
+              {
+                "action": "call",
+                "classification": "WITHIN_LIMIT"
+              },
+              {
+                "action": "raise:9.0",
+                "classification": "STRATEGY_DEPENDENT"
+              }
+            ],
+            "qualifiedForOfflineDrill": true,
+            "rejectionReasons": [],
+            "attainedEndpointClaims": false,
+            "freshLpSolves": 0,
+            "freshCfrRuns": 0
+          },
+          "policiesChecked": 3,
+          "endpointCertificatesChecked": 1,
+          "completePlanCoverage": {
+            "action": "raise:9.0",
+            "cartesianPlansChecked": 1296,
+            "reducedPlansChecked": 52,
+            "maximumErasureCoefficientDifference": 0.0
+          },
+          "minimumBracket": {
+            "lowerBound": 0.21114181882276112,
+            "upperBound": 0.2111418388227532,
+            "witnessUtility": 0.2111418288227532
+          },
+          "fullActionUpperEndpointClaim": false,
+          "freshLpSolves": 0,
+          "freshCfrRuns": 0
+        },
+        "originalSourceChecked": {
+          "schemaVersion": "pokerlab-root-feedback-independent-check/v1",
+          "trainerAdmission": false,
+          "completeOuterBounds": true,
+          "sourceCheck": {
+            "schemaVersion": "pokerlab-root-envelope-independent-check/v1",
+            "trainerAdmission": false,
+            "scope": "CONSERVATIVE_OPTIMAL_CONTINUATION_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS/v1",
+            "parentCheck": {
+              "schemaVersion": "pokerlab-size-menu-independent-check/v1",
+              "trainerAdmission": false,
+              "literalTreeStates": 1609,
+              "informationSets": 89,
+              "originalLpCertificatesChecked": 2,
+              "policiesChecked": 3,
+              "physicalWorlds": 24,
+              "fullBoardsRegenerated": 15792192,
+              "fixedRunoutsRegenerated": 15984,
+              "nashConvBb": 3.726186026398182e-15,
+              "referenceNashConvBb": [
+                2.087894412916569e-09,
+                5.219769547148978e-10
+              ],
+              "freshLpSolves": 0,
+              "freshCfrRuns": 0
+            },
+            "originalEnvelopeCertificatesChecked": 5,
+            "originalRootWorlds": 8,
+            "completePureHeroRows": 33,
+            "checkedActions": [
+              "fold",
+              "call",
+              "raise:9.0"
+            ],
+            "completeOuterBounds": true,
+            "attainedEndpointClaims": false,
+            "gradingAuthority": false,
+            "work": {
+              "compilerLimit": 8000000,
+              "compilerUnits": 1120512,
+              "lpArithmeticWork": 471304900,
+              "lpPivots": 153,
+              "lpSolves": 5
+            },
+            "freshLpSolves": 0,
+            "freshCfrRuns": 0
+          },
+          "publicRootQualityScope": "ORIGINAL_WHOLE_PUBLIC_ROOT_GAME_NOT_PRIVATE_HAND_CONDITIONED/v1",
+          "policiesChecked": 3,
+          "forcedContinuationValuesChecked": 9,
+          "decisionLossesChecked": 9,
+          "moveClassifications": [
+            {
+              "action": "fold",
+              "classification": "OUTSIDE_LIMIT"
+            },
+            {
+              "action": "call",
+              "classification": "WITHIN_LIMIT"
+            },
+            {
+              "action": "raise:9.0",
+              "classification": "STRATEGY_DEPENDENT"
+            }
+          ],
+          "qualifiedForOfflineDrill": true,
+          "rejectionReasons": [],
+          "attainedEndpointClaims": false,
+          "freshLpSolves": 0,
+          "freshCfrRuns": 0
+        },
+        "policiesChecked": 3,
+        "fullActionUpperEndpointClaim": false,
+        "freshLpSolves": 0,
+        "freshCfrRuns": 0
+      },
+      "movesChecked": 3,
+      "policyMovesChecked": 9,
+      "utilityAndLossBoundsChecked": 36,
+      "legacyMenuComparison": [
+        {
+          "action": "fold",
+          "legacyMove": {
+            "action": "fold",
+            "lowerEvBb": -1.00000001,
+            "upperEvBb": -0.99999999,
+            "lowerLossBb": 1.7857791802528848,
+            "upperLossBb": 1.78577929297108,
+            "classification": "OUTSIDE_LIMIT"
+          },
+          "lowerEvDifferenceBb": 0.0,
+          "upperEvDifferenceBb": 0.0,
+          "lowerLossDifferenceBb": 0.0,
+          "upperLossDifferenceBb": 0.0,
+          "classificationUnchanged": true
+        },
+        {
+          "action": "call",
+          "legacyMove": {
+            "action": "call",
+            "lowerEvBb": 0.7857791902528848,
+            "upperEvBb": 0.7857792829710801,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 9.27181953436218e-08,
+            "classification": "WITHIN_LIMIT"
+          },
+          "lowerEvDifferenceBb": 0.0,
+          "upperEvDifferenceBb": 0.0,
+          "lowerLossDifferenceBb": 0.0,
+          "upperLossDifferenceBb": 0.0,
+          "classificationUnchanged": true
+        },
+        {
+          "action": "raise:9.0",
+          "legacyMove": {
+            "action": "raise:9.0",
+            "lowerEvBb": 0.21114181882276112,
+            "upperEvBb": 0.7857792829710801,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 0.574637464148319,
+            "classification": "STRATEGY_DEPENDENT"
+          },
+          "lowerEvDifferenceBb": -7.105427357601002e-15,
+          "upperEvDifferenceBb": 0.0,
+          "lowerLossDifferenceBb": 0.0,
+          "upperLossDifferenceBb": 7.105427357601002e-15,
+          "classificationUnchanged": true
+        }
+      ],
+      "qualifiedForOfflineDrill": true,
+      "rejectionReasons": [],
+      "minimumUpperUsedAsActionCeiling": false,
+      "currentDecisionEvShiftApplied": false,
+      "freshLpSolves": 0,
+      "freshCfrRuns": 0
+    },
+    "movesChecked": 3,
+    "minimumLowerChecks": 9,
+    "policyMovesChecked": 9,
+    "utilityLossInequalitiesChecked": 36,
+    "qualifiedForOfflineDrill": true,
+    "rejectionReasons": [],
+    "previousMenuComparison": [
+      {
+        "action": "fold",
+        "previousMove": {
+          "action": "fold",
+          "classification": "OUTSIDE_LIMIT",
+          "lowerEvBb": -1.00000001,
+          "lowerLossBb": 1.7857791802528848,
+          "upperEvBb": -0.99999999,
+          "upperLossBb": 1.78577929297108
+        },
+        "lowerEvDifferenceBb": 0.0,
+        "upperEvDifferenceBb": 0.0,
+        "lowerLossDifferenceBb": 0.0,
+        "upperLossDifferenceBb": 0.0,
+        "classificationUnchanged": true
+      },
+      {
+        "action": "call",
+        "previousMove": {
+          "action": "call",
+          "classification": "WITHIN_LIMIT",
+          "lowerEvBb": 0.7857791902528848,
+          "lowerLossBb": 0.0,
+          "upperEvBb": 0.7857792829710801,
+          "upperLossBb": 9.27181953436218e-08
+        },
+        "lowerEvDifferenceBb": 0.0,
+        "upperEvDifferenceBb": 0.0,
+        "lowerLossDifferenceBb": 0.0,
+        "upperLossDifferenceBb": 0.0,
+        "classificationUnchanged": true
+      },
+      {
+        "action": "raise:9.0",
+        "previousMove": {
+          "action": "raise:9.0",
+          "classification": "STRATEGY_DEPENDENT",
+          "lowerEvBb": 0.211141818822754,
+          "lowerLossBb": 0.0,
+          "upperEvBb": 0.7857792829710801,
+          "upperLossBb": 0.5746374641483261
+        },
+        "lowerEvDifferenceBb": 0.0,
+        "upperEvDifferenceBb": 0.0,
+        "lowerLossDifferenceBb": 0.0,
+        "upperLossDifferenceBb": 0.0,
+        "classificationUnchanged": true
+      }
+    ],
+    "minimumUpperUsedAsFullActionCeiling": false,
+    "currentDecisionEvShiftApplied": false,
+    "freshLpSolves": 0,
+    "freshCfrRuns": 0
+  },
+  "canonicalJavaSourcePinVerifiedByOwnedReplay": "a7533a49a06fe2b7376109bce133c1b3c937dbef8915ed47af86290d36b777c8",
+  "publicQuestionsChecked": 1,
+  "cachedGradesChecked": 3,
+  "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+  "emptyPreflopBoard": true,
+  "hiddenDealsAndFutureBoardAbsent": true,
+  "canonicalReviewAttemptsChecked": 3,
+  "sourceCommitmentShiftBb": 1.0,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "checkerSourceSha256": "dedb1ebcd955b57bb8068a520daae1f6140d210d8f54c5efb515cc7d371fa9a0",
+  "sourceStoredSha256": {
+    "supplied-batch-preflop-drill-manifest.json": "d449ae2d45c225a25d8a27a6aeb8211c4be4b5a4936ddf234f1c806f70de5bf8",
+    "supplied-batch-preflop-drill-fixture.json": "a7397b0e78c666983d830c89bd4f2679dec81a155929c8a52cce13e95a5eb68e",
+    "supplied-batch-preflop-drill-review.json": "dd40505eb33a9d5b884f8ad671f1000ce6fe820ec89e1c0b33921cd1cfc9aa0c"
+  },
+  "immutableHelperSha256": {
+    "check-root-sequence-batch-feedback.py": "8d88b48b438f8c6a59bf1f3ef4ef15c241ecf58840227bc0624caf133d5dba2c",
+    "check-physical-root-sequence-batch.py": "f4ac141bd1d8debbd046818416713d11f7cabfc45ee41a2c353198110f0fbb04",
+    "check-root-sequence-feedback.py": "473ce94f287446c8cc9faff0f0c7687ca6152e9c13cb060ee8068f4c29a18f3c"
+  }
+}
