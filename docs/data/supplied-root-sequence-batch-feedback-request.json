@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "pokerlab-root-sequence-batch-feedback-request/v1",
+  "batchRequest": {
+    "schemaVersion": "pokerlab-physical-root-sequence-batch-request/v1",
+    "sourceRequest": {
+      "schemaVersion": "pokerlab-root-envelope-feedback-request/v1",
+      "envelope": {
+        "schemaVersion": "pokerlab-root-envelope-request/v1",
+        "parent": {
+          "schemaVersion": "pokerlab-supplied-flop-size-menu-request/v1",
+          "input": {
+            "schemaVersion": "pokerlab-supplied-joint-preflop-input/v1",
+            "specification": {
+              "rules": {
+                "stackBb": 100.0,
+                "smallBlindBb": 0.5,
+                "raiseToBb": [
+                  3.0,
+                  9.0,
+                  22.0,
+                  50.0,
+                  100.0
+                ],
+                "raiseSchedule": "NEXT_TARGET"
+              },
+              "history": [
+                {
+                  "seat": "UTG",
+                  "action": "fold"
+                },
+                {
+                  "seat": "HJ",
+                  "action": "fold"
+                },
+                {
+                  "seat": "CO",
+                  "action": "fold"
+                },
+                {
+                  "seat": "BTN",
+                  "action": "raise:3.0"
+                },
+                {
+                  "seat": "SB",
+                  "action": "fold"
+                }
+              ]
+            },
+            "worlds": [
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Ah Kh",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "2c 3c",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "Qh Th",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "7d 7h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "9d 9h"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "2d 3d",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              },
+              {
+                "dealtCombos": [
+                  "4c 4d",
+                  "6h 8c",
+                  "2h 3h",
+                  "As Qs",
+                  "5c 6c",
+                  "Ac Jc"
+                ],
+                "weight": 1.0
+              }
+            ]
+          },
+          "flop": [
+            "6d",
+            "Td",
+            "Qc"
+          ],
+          "menu": {
+            "firstToAct": [
+              0.25,
+              0.5
+            ],
+            "afterCheck": [
+              1.0
+            ]
+          }
+        },
+        "hero": 5,
+        "heroCards": "9d 9h"
+      },
+      "maximumLossBb": 0.01
+    },
+    "sourceReportHash": "cc20afe1dee2584956fba058a4cbac5e421886b6bc98e91ff2c602666173a658",
+    "previousMinimumStoredSha256": "1173300b55be57fd93c68ff02c04cd7318511601b41f1c3839f5e57b2d166b0f",
+    "actions": [
+      "fold",
+      "call",
+      "raise:9.0"
+    ]
+  },
+  "batchStoredSha256": "be3e7400a75fd86bb617cf4e70f758e2a885d80ba052e6441f28d81c61a0dc8b",
+  "previousFeedbackStoredSha256": "013686942f9d630dbcaad65673afed0263b73d864b6f27e27c161998887ec52b",
+  "maximumLossBb": 0.01
+}
