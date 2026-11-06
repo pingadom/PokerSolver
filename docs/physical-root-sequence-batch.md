@@ -139,10 +139,9 @@ Broader supplied ranges, different boards, multi-street coverage and equilibrium
 with more than two active actors remain separate work. Six occupied seats are
 table context here, not six active players in an unrestricted solved game.
 
-Awaiting explicit owner clearance of the new code revision. No PR or review
-confirmation for this milestone has been created. The previous baseline approval
-remains recorded in the central Code Review History and applies only to its stated
-revision.
+The project owner cleared code revision `b035e6d666c819c6d54f677a977d299ae89d5ae9`
+on 2026-11-06 (Europe/London), with “cleared b035e6d”. This approval applies only to
+that revision. The central Code Review History retains this and prior approvals.
 
 
 ## Local validation
@@ -168,8 +167,15 @@ Its parsed contents and the frozen report remained identical; only the receipt's
 request byte-identity field was refreshed to match the committed file. No numerical
 work was repeated for that metadata correction.
 
-Full remote CI for this revision is pending owner clearance and PR creation.
+Full remote CI for this cleared revision follows PR creation.
 The existing 27 CI jobs, every prior test class and all timeouts are retained;
 the new class is discovered automatically and the independent checker is appended
 to the existing verification step. All 403 earlier numerical files, the protected
 interview document and previous preview assets remain unchanged.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b035e6d666c819c6d54f677a977d299ae89d5ae9` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared b035e6d”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

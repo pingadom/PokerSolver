@@ -222,9 +222,44 @@ independent receipt and all 403 numerical data files remain unchanged. Fresh ful
 two-active-player analytic capacity milestone, not new physical trainer content,
 full-action intervals or general six-player equilibrium. AWS remains paused.
 
+## 2026-11-06 physical complete-menu root sequence batch
+
+The project owner reviewed code changes in commit
+`b035e6d666c819c6d54f677a977d299ae89d5ae9` on branch
+`codex/physical-root-sequence-batch` and explicitly cleared PR creation with:
+
+> cleared b035e6d
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later changes. Local verification passed 46 Java tests
+(13 new complete physical-study cases, 14 existing analytic batch cases and 19
+existing analytic kernel cases), 12 independent Python cases, all-module packaging
+and formatting. One declared physical generation and one shared local physical
+replay checked fold, call and raise under the original limits. All nine primary
+and fresh-reference lower-bound assessments passed. The independent checker
+verified the original physical tree, global security, flow domains and three
+endpoint certificates without an optimizer or CFR run. The old raise audit matches
+except for its advertised remaining compiler limit.
+
+The original test-authoring failure is retained: one corruption case wrote the
+existing zero back to itself. Its corrected input passed with all 12 cases on a
+verification-only rerun; no numerical report or Java physical replay was repeated.
+The new request's line endings were normalised and the receipt byte identity
+refreshed without changing the parsed request or frozen numerical report.
+
+The latest confirmation is recorded in 146 project-authored Markdown documents,
+the reference PDF and existing local interview guide, for 148 readable documents.
+Earlier history and original Word/PDF content remain preserved. Post-clearance
+changes only record this factual approval; reviewed code, frozen report and all
+406 numerical data files remain unchanged. Fresh full 27-job PR CI and exact-merge
+evidence auditing follow PR creation. This is the original BB99 supplied-range,
+selected-flop model with two active players at six seats. Minimum upper brackets
+are not full action ceilings, and row witnesses need not be one joint policy.
+There is no new trainer admission or lesson. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`8aa7ebeaf89795100679d27ba0b8c40fbae53868` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared 8aa7ebe”. This confirmation applies to
+`b035e6d666c819c6d54f677a977d299ae89d5ae9` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared b035e6d”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
