@@ -167,13 +167,13 @@ test suites passed on their first invocation.
 
 Existing CI jobs, timeouts and every prior test class remain enabled. The new
 class is discovered automatically and its independent checker is appended to the
-existing verification step. Full remote CI follows owner clearance and PR creation.
+existing verification step. Full remote CI for this cleared revision follows PR creation.
 
 ## Review and remaining scope
 
-Awaiting explicit owner clearance of this new code revision. No PR or review
-confirmation for this milestone has been created. Earlier approvals in the central
-Code Review History cover only their stated revisions.
+The project owner cleared code revision `f689eecd3bac03d51079bdec55f0d9ca1067c1f0`
+on 2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies
+only to that revision. The central Code Review History retains all earlier approvals.
 
 The next backend step is a separately pinned cache over this owned qualification,
 with cached questions/grades and exact source-bound session reviews. Any later
@@ -181,3 +181,10 @@ trainer adoption must retain the preserved ambiguity and source identity. Broade
 ranges, more boards, full streets and equilibrium with more than two active actors
 remain separate work. This is the original BB99 research scenario, not unrestricted
 six-player GTO. AWS deployment remains paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
