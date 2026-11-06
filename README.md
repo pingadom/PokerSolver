@@ -292,9 +292,15 @@ chance-only root minima with one owned parent solve and cumulative endpoint work
 limits. Its separate analytic evidence and strict batch validation support broader
 preflop research; existing trainer sources and answers stay unchanged.
 
+The [physical complete-menu root batch](docs/physical-root-sequence-batch.md)
+checks fold, call and raise for the original BB99 source with one shared parent
+and three minimum LPs. Independent physical/certificate checks support all nine
+primary/reference lower-bound assessments within the original cumulative limits.
+This research report adds no trainer lesson or broader active-player coverage.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`8aa7ebeaf89795100679d27ba0b8c40fbae53868` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared 8aa7ebe”. This confirmation applies to
+`b035e6d666c819c6d54f677a977d299ae89d5ae9` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared b035e6d”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
