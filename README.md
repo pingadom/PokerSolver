@@ -298,9 +298,15 @@ and three minimum LPs. Independent physical/certificate checks support all nine
 primary/reference lower-bound assessments within the original cumulative limits.
 This research report adds no trainer lesson or broader active-player coverage.
 
+The [complete-menu batch feedback qualification](docs/batch-root-feedback-qualification.md)
+owns the full physical replay before issuing a source-bound offline capability.
+It checks every action's minimum and all primary/reference utility and loss bounds,
+preserving the previous menu exactly. Call qualifies, fold is outside the loss
+limit and raise remains unresolved; existing trainers retain their current sources.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`b035e6d666c819c6d54f677a977d299ae89d5ae9` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared b035e6d”. This confirmation applies to
+`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

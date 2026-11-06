@@ -257,9 +257,44 @@ selected-flop model with two active players at six seats. Minimum upper brackets
 are not full action ceilings, and row witnesses need not be one joint policy.
 There is no new trainer admission or lesson. AWS deployment remains paused.
 
+## 2026-11-06 complete-menu batch feedback qualification
+
+The project owner reviewed code changes in commit
+`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` on branch
+`codex/batch-root-feedback` and explicitly cleared PR creation with:
+
+> cleared f689eec
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later changes. Local verification passed 19 Java tests
+(18 new qualification cases with one shared complete physical replay and the
+existing parsing-only guard), 14 independent Python cases, formatting and all
+five backend modules packaged. One declared generation and one local replay
+reproduced the owned complete physical batch before qualification. All nine
+source minimum checks and 36 utility/loss inequalities passed. The previous menu
+and classifications reproduce exactly; call's small lower-bound input difference
+is explicitly retained without weakening the original conservative floor.
+
+The qualification binds the full feedback report and owned source batch. Parsed
+reports grant no authority. The independent checker verifies original physical
+certificates and the prior qualification, then derives the new menu and comparisons
+without optimization or CFR. A read-only metadata helper's package/classloader
+setup was corrected before numerical work; the successful generation and test
+suites required no numerical retry or changed limit.
+
+The latest confirmation is recorded in 147 project-authored Markdown documents,
+the reference PDF and existing local interview guide, for 149 readable documents.
+Earlier history and original Word/PDF content remain preserved. Post-clearance
+changes only record this factual approval; reviewed code, frozen report and all
+409 numerical files remain unchanged. Fresh full 27-job PR CI and exact-merge
+evidence auditing follow PR creation. This is the original BB99 supplied-range,
+selected-flop model with two active players at six seats. Raise remains unresolved,
+public admission stays false and no existing trainer source is migrated. AWS
+deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`b035e6d666c819c6d54f677a977d299ae89d5ae9` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared b035e6d”. This confirmation applies to
+`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
