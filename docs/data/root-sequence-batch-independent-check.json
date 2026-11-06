@@ -1,0 +1,19 @@
+{
+  "status": "PASS_ANALYTIC_ROOT_SEQUENCE_BATCH_NOT_TRAINER_ADMISSION",
+  "batches": 2,
+  "distinctParentCertificates": 4,
+  "endpointCertificates": 10,
+  "largeControlCompletePlanCount": 4294967296,
+  "productionContinuationPlansEnumerated": 0,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "physicalPokerGames": 0,
+  "trainerAdmission": false,
+  "fixtureSha256": "d91cefea461e1c235784639fc20bf741e956124f6a5fa49d7f83d37aae07c802",
+  "checkerSourceSha256": "ecbdeebf354275f2a9a5653730369335a54d49ea513a89a6a0822a674e29d30b",
+  "immutableHelpersSha256": {
+    "check-root-sequence-minimax.py": "5a242aa3b791e04807e5c3f0426633db2c03c5001554f24461f2198db97ce765",
+    "check-root-minimax.py": "a41d0959f74c5e00a0a43843c13b31107d396fdd8da43b0f87e4685a84ad6cc5",
+    "check-resolvable-refined-lp.py": "84795dabca56dd86a4870b23efd8d5731d4b4b17d3399fbfa818f7ee9d18f080"
+  }
+}

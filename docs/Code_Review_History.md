@@ -195,9 +195,36 @@ one repeated BB99 root, six seats and two active players. Raise remains unresolv
 public trainer admission false and AWS deployment paused. The 390px layout has no
 horizontal overflow, but full feedback requires vertical scrolling.
 
+## 2026-11-06 shared-parent root sequence batch
+
+The project owner reviewed code changes in commit
+`8aa7ebeaf89795100679d27ba0b8c40fbae53868` on branch
+`codex/root-sequence-batch` and explicitly cleared PR creation with:
+
+> cleared 8aa7ebe
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later changes. Local verification passed 45 Java tests
+(14 new batch, 19 old analytic and 12 complete physical-study tests), 24 Python
+methods, all-module packaging and formatting. One declared analytic capture
+produced two batches, four parent certificates and ten endpoint certificates.
+The eight-question control used 10 LPs instead of 24 standalone LPs; these are
+fixed-control solve counts, not a runtime benchmark. All ten endpoint audits
+matched standalone calls with identical remaining limits. The old physical report
+reproduced completely. Independent checking performed no fresh LP or CFR solving.
+
+The latest confirmation is recorded in 145 project-authored Markdown documents,
+the reference PDF and existing local interview guide, for 147 readable documents.
+Earlier history and original Word/PDF content remain preserved. Post-clearance
+changes only record this factual approval; reviewed code, the new frozen fixture,
+independent receipt and all 403 numerical data files remain unchanged. Fresh full
+27-job PR CI and exact-merge evidence auditing follow PR creation. This is a
+two-active-player analytic capacity milestone, not new physical trainer content,
+full-action intervals or general six-player equilibrium. AWS remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared fc6b6a7”. This confirmation applies to
+`8aa7ebeaf89795100679d27ba0b8c40fbae53868` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared 8aa7ebe”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

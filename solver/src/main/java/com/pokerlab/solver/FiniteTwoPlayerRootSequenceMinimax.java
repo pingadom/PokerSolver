@@ -133,7 +133,7 @@ public final class FiniteTwoPlayerRootSequenceMinimax {
             throws Exception {
         try {
             return calculate(
-                    game, q, slack, minimumReach, compilerLimit, pivotLimit, arithmeticLimit);
+                    game, q, slack, minimumReach, compilerLimit, pivotLimit, arithmeticLimit, null);
         } catch (IllegalStateException cause) {
             var rejected =
                     new Rejected(
@@ -151,7 +151,8 @@ public final class FiniteTwoPlayerRootSequenceMinimax {
             double minimumReach,
             long compilerLimit,
             int pivotLimit,
-            long arithmeticLimit)
+            long arithmeticLimit,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent)
             throws Exception {
         Objects.requireNonNull(q);
         if (!Double.isFinite(slack)
@@ -167,29 +168,16 @@ public final class FiniteTwoPlayerRootSequenceMinimax {
             throw new IllegalArgumentException("Invalid original root sequence minimax limits");
         var budget = new SequenceFormAffineProjection.Budget(compilerLimit);
         var checked = checked(game);
-        if (q.hero() != checked.firstActor() && q.hero() != checked.secondActor())
-            throw new IllegalArgumentException("Active root actor required");
-        var roots = new ArrayList<Root>();
-        var inside = new HashSet<String>();
-        var outside = new HashSet<String>();
-        collect(
-                checked.snapshot().initialState(),
-                q,
-                1,
-                false,
-                false,
-                roots,
-                inside,
-                outside,
-                budget);
-        if (roots.isEmpty() || inside.stream().anyMatch(outside::contains))
-            throw new Rejected(
-                    Failure.NON_ROOT_QUESTION, "A disjoint chance-only root question is required");
-        double mass = roots.stream().mapToDouble(Root::chance).sum();
-        if (!Double.isFinite(mass) || mass < minimumReach || mass > 1 + EPS)
-            throw new Rejected(
-                    Failure.INSUFFICIENT_REACH,
-                    "Original chance reach is below the required floor");
+        if (ownedParent != null
+                && (!FiniteTwoPlayerAffineSequenceForm.ASCENDING_REFINED_DIRECTIONS_ALGORITHM
+                                .equals(ownedParent.audit().algorithm())
+                        || !SixMaxHistoryPhysicalConditionalRefinement.hash(checked.snapshot())
+                                .equals(ownedParent.audit().snapshotHash())))
+            throw new IllegalArgumentException(
+                    "Owned ascending-refined parent must match captured game");
+        var selected = rootSelection(checked, q, minimumReach, budget);
+        var roots = selected.roots();
+        double mass = selected.mass();
         var forest = new ArrayList<Root>();
         for (var root : roots) {
             int action = root.node().actions().indexOf(q.action());
@@ -197,8 +185,10 @@ public final class FiniteTwoPlayerRootSequenceMinimax {
             forest.add(new Root(root.node().children().get(action), root.chance() / mass));
         }
         var baseline =
-                FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
-                        checked.snapshot());
+                ownedParent == null
+                        ? FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
+                                checked.snapshot())
+                        : ownedParent;
         boolean first = q.hero() == checked.firstActor();
         var hero = first ? checked.firstFlow() : checked.secondFlow();
         var opponent = first ? checked.secondFlow() : checked.firstFlow();
@@ -380,6 +370,82 @@ public final class FiniteTwoPlayerRootSequenceMinimax {
                                 lp.pivots,
                                 lp.work,
                                 0)));
+    }
+
+    private record RootSelection(List<Root> roots, double mass) {
+        RootSelection {
+            roots = List.copyOf(roots);
+        }
+    }
+
+    private static RootSelection rootSelection(
+            FiniteTwoPlayerSequenceForm.Checked checked,
+            Question q,
+            double minimumReach,
+            SequenceFormAffineProjection.Budget budget) {
+        if (q.hero() != checked.firstActor() && q.hero() != checked.secondActor())
+            throw new IllegalArgumentException("Active root actor required");
+        var roots = new ArrayList<Root>();
+        var inside = new HashSet<String>();
+        var outside = new HashSet<String>();
+        collect(
+                checked.snapshot().initialState(),
+                q,
+                1,
+                false,
+                false,
+                roots,
+                inside,
+                outside,
+                budget);
+        if (roots.isEmpty() || inside.stream().anyMatch(outside::contains))
+            throw new Rejected(
+                    Failure.NON_ROOT_QUESTION, "A disjoint chance-only root question is required");
+        double mass = roots.stream().mapToDouble(Root::chance).sum();
+        if (!Double.isFinite(mass) || mass < minimumReach || mass > 1 + EPS)
+            throw new Rejected(
+                    Failure.INSUFFICIENT_REACH,
+                    "Original chance reach is below the required floor");
+        return new RootSelection(roots, mass);
+    }
+
+    static void preflight(
+            FiniteTwoPlayerSequenceForm.Checked checked,
+            Question q,
+            SequenceFormAffineProjection.Budget budget) {
+        var selected = rootSelection(checked, q, MINIMUM_REACH, budget);
+        for (var root : selected.roots())
+            if (!root.node().actions().contains(q.action()))
+                throw new IllegalArgumentException("Illegal forced root action");
+    }
+
+    static Result solveCapturedParent(
+            Snapshot snapshot,
+            Question q,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit)
+            throws Exception {
+        Objects.requireNonNull(ownedParent, "ownedParent");
+        try {
+            return calculate(
+                    snapshot,
+                    q,
+                    DEFAULT_SECURITY_SLACK,
+                    MINIMUM_REACH,
+                    compilerLimit,
+                    pivotLimit,
+                    arithmeticLimit,
+                    ownedParent);
+        } catch (IllegalStateException cause) {
+            var rejected =
+                    new Rejected(
+                            Failure.NUMERICAL_FAILURE,
+                            "Root sequence minimax verification failed: " + cause.getMessage());
+            rejected.initCause(cause);
+            throw rejected;
+        }
     }
 
     private static List<Double> doubles(double[] row) {
