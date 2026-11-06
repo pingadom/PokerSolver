@@ -50,7 +50,7 @@ The v5 and earlier protocols, all 311 older data files and the current browser s
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies to
+`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

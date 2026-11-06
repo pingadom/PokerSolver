@@ -415,6 +415,25 @@ public final class SixMaxRootSequenceBatchFeedback {
         return new Result(request, owned, previous);
     }
 
+    // No paths are accessed in this entry point; the loader owns capture/integrity checking.
+    static Result solve(
+            Request request,
+            SixMaxRootEnvelopeFeedback.Report envelope,
+            SixMaxRootSequenceMinimumStudy.Report minimum,
+            SixMaxRootSequenceBatchStudy.Report saved,
+            SixMaxRootSequenceFeedback.Report previous)
+            throws Exception {
+        lineage(request, saved, previous);
+        if (!saved.previousMinimum().equals(minimum)
+                || !saved.parent().equals(envelope.envelope().parent())
+                || !saved.originalEnvelope().equals(envelope.envelope().envelope()))
+            throw new IllegalArgumentException("Captured batch source lineage differs");
+        var owned = SixMaxRootSequenceBatchStudy.solve(request.batchRequest(), envelope, minimum);
+        if (!saved.equals(owned.report()))
+            throw new IllegalArgumentException("Complete captured physical batch replay differs");
+        return new Result(request, owned, previous);
+    }
+
     private static String canonical(Object value) {
         try {
             return SixMaxHeadsUpPreflopGame.hash(value);
