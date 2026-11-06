@@ -10,7 +10,10 @@ import { minimumFixtureReview, minimumGrades, minimumMetadata, minimumQuestion }
 import { sequencePreflopClient } from "./sequencePreflopApi";
 import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuestion } from "./test-data/sequencePreflop";
 
+import { batchPreflopClient } from "./batchPreflopApi";
+import { batchFixtureReview, batchGrades, batchMetadata, batchQuestion } from "./test-data/batchPreflop";
 describe.each([
+  { name: "complete menu", client: batchPreflopClient, metadata: batchMetadata, rootQuestion: batchQuestion, rootGrades: batchGrades, rootFixtureReview: batchFixtureReview },
   { name: "original envelope", client: legacyRootClient, metadata: legacyMetadata, rootQuestion: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, metadata: minimumMetadata, rootQuestion: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
   { name: "sequence flow", client: sequencePreflopClient, metadata: sequenceMetadata, rootQuestion: sequenceQuestion, rootGrades: sequenceGrades, rootFixtureReview: sequenceFixtureReview },
