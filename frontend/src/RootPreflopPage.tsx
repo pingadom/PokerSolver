@@ -125,7 +125,7 @@ export default function RootPreflopPage({ client = legacyRootClient }: { client?
   return <div className="trainer-page preflop-page interval-page root-preflop-page">
     <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
-      <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON · {client.route === "#root-minimum-preflop" ? "UPDATED RAISE BOUNDS" : "ORIGINAL RAISE BOUNDS"}</p>
+      <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON · {client.studyLabel}</p>
         <h1>Defend pocket nines</h1><p className="trainer-intro">The button raised to 3 bb. Compare the EV ranges, then choose your response.</p></div></div>
       <p className="trainer-disclosure hand-play-disclosure" role="note">Research exercise · Six seats, two active players · Supplied ranges, selected-flop continuation model · Raise remains unresolved.</p>
       {error && <div className="trainer-error" role="alert"><p>{error}</p><button className="trainer-button" disabled={busy}

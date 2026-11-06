@@ -68,7 +68,7 @@ The [separate v5 backend collection](fourteen-question-flop-collection.md) now j
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1bb65a99098bfc1088a017b9cb4c8e824c339e25` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared 1bb65a9”. This confirmation applies to
+`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
+2026-11-05 (Europe/London), with “cleared fc6b6a7”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

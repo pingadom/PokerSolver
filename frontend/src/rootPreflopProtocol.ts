@@ -59,7 +59,7 @@ function choice(value: unknown): RootChoice {
  * Network failures never fall back to this bank, and grades must come from the server. */
 export function createRootClient(config: {
   frozen: { metadata: RootMetadata; questions: RootQuestion[] };
-  apiBase: string; route: string; exportPrefix: string;
+  apiBase: string; route: string; exportPrefix: string; studyLabel?: string;
 }) {
   const { frozen, apiBase: rootApiBase, route, exportPrefix } = config;
   const rootStudyHash = frozen.metadata.studyHash;
@@ -136,7 +136,7 @@ export function createRootClient(config: {
     ensure(text.endsWith("\n") && !text.includes("\r"));
     readRootReview(text, metadata, question, rootChoices(attempts)); return text;
   }
-  return { route, exportPrefix, rootStudyHash, rootApiBase,
+  return { route, exportPrefix, studyLabel: config.studyLabel ?? "ORIGINAL RAISE BOUNDS", rootStudyHash, rootApiBase,
     parseRootMetadata, parseRootQuestion, parseRootGrade, rootReviewCounts, parseRootReview, rootSessionReview, rootChoices, rootSessionKey, readRootReview, rootRequest, rootReviewDocument };
 }
 export type RootClient = ReturnType<typeof createRootClient>;

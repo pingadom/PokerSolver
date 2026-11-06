@@ -7,9 +7,13 @@ import type { RootGrade } from "./rootPreflopProtocol";
 import { rootFixtureReview as legacyReview, rootGrades as legacyGrades, rootMetadata as legacyMetadata, rootQuestion as legacyQuestion } from "./test-data/rootPreflop";
 import { minimumFixtureReview, minimumGrades, minimumMetadata, minimumQuestion } from "./test-data/minimumPreflop";
 
+import { sequencePreflopClient } from "./sequencePreflopApi";
+import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuestion } from "./test-data/sequencePreflop";
+
 describe.each([
   { name: "original envelope", client: legacyRootClient, metadata: legacyMetadata, rootQuestion: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, metadata: minimumMetadata, rootQuestion: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
+  { name: "sequence flow", client: sequencePreflopClient, metadata: sequenceMetadata, rootQuestion: sequenceQuestion, rootGrades: sequenceGrades, rootFixtureReview: sequenceFixtureReview },
 ])("$name table", ({ client, metadata, rootQuestion, rootGrades, rootFixtureReview }) => {
 const { rootApiBase, rootSessionKey } = client;
 const response = (body: unknown, status = 200) => Promise.resolve({ ok: status < 400, status,

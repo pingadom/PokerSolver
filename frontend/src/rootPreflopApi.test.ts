@@ -7,9 +7,14 @@ import { legacyRootClient } from "./rootPreflopApi";
 import { minimumPreflopClient } from "./minimumPreflopApi";
 import { rootEqual, RootProtocolError, RootRequestError, type RootAction, type RootQuestion } from "./rootPreflopProtocol";
 
+import { sequencePreflopClient } from "./sequencePreflopApi";
+import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuestion } from "./test-data/sequencePreflop";
+import sequenceSaved from "./test-data/sequence-preflop-drill.json";
+
 describe.each([
   { name: "original envelope", client: legacyRootClient, saved: legacySaved, metadata: legacyMetadata, question: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, saved: minimumSaved, metadata: minimumMetadata, question: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
+  { name: "sequence flow", client: sequencePreflopClient, saved: sequenceSaved, metadata: sequenceMetadata, question: sequenceQuestion, rootGrades: sequenceGrades, rootFixtureReview: sequenceFixtureReview },
 ])("$name protocol", ({ client, saved, metadata, question, rootGrades, rootFixtureReview }) => {
 const { parseRootGrade, parseRootMetadata, parseRootQuestion, parseRootReview, readRootReview, rootApiBase,
   rootChoices, rootRequest, rootReviewDocument, rootSessionReview } = client;
