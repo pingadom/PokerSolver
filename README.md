@@ -287,6 +287,11 @@ on move buttons, immediate feedback and source-bound saved-session reviews.
 It remains a single BB99 research scenario with two active players; raise
 remains unresolved and public trainer admission remains false.
 
+The [shared-parent root batch](docs/root-sequence-batch.md) screens up to eight
+chance-only root minima with one owned parent solve and cumulative endpoint work
+limits. Its separate analytic evidence and strict batch validation support broader
+preflop research; existing trainer sources and answers stay unchanged.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
