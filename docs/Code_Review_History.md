@@ -292,9 +292,38 @@ selected-flop model with two active players at six seats. Raise remains unresolv
 public admission stays false and no existing trainer source is migrated. AWS
 deployment remains paused.
 
+## 2026-11-06 cached complete-menu batch preflop API
+
+The project owner reviewed code changes in commit
+`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` on branch
+`codex/batch-preflop-cache` and explicitly cleared PR creation with:
+
+> cleared f548b61
+
+This approval covers that code revision. It does not assert review of the entire
+historical codebase or later changes. Local verification passed 59 Java tests
+(28 new cache/API cases and all 31 original physical-batch/feedback regressions),
+10 independent Python cases, five smoke-control cases, all-module packaging and
+formatting. A single native HTTP startup captured the public fixture and passed
+all grades, ordered/repeated/max reviews, exact exports, strict requests and
+OpenAPI. The declared five local owned replays retained the original limits and
+fresh references. No numerical source report was generated. Captured DTOs grant
+no authority; ownership requires genuine replay and complete frozen-report equality.
+
+The latest confirmation is recorded in 148 project-authored Markdown documents,
+the reference PDF and existing local interview guide, for 150 readable documents.
+Earlier history and original Word/PDF content remain preserved. Post-clearance
+changes only record this factual approval; reviewed code and all 413 numerical
+files remain unchanged. Fresh full 28-job CI and exact-merge evidence auditing,
+including the new required production-container smoke, follow PR creation.
+Docker CLI was unavailable locally; native HTTP is not container evidence.
+The API remains default-off and the original BB99 two-active-player scenario
+preserves unresolved raise feedback. Existing trainer sources, frontend and
+saved sessions are unchanged. Public admission remains false and AWS stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f689eecd3bac03d51079bdec55f0d9ca1067c1f0` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared f689eec”. This confirmation applies to
+`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -166,16 +166,23 @@ the canonical review SHA-256 is
 Every prior CI job, class, case and timeout is retained. New test classes use the
 existing automatic inventory. The independent checker joins the existing step;
 a separate required root-batch-preflop-smoke job checks default absence and one
-enabled production replay. Full new 28-job CI follows review and PR creation.
+enabled production replay. Full new 28-job CI for this cleared revision follows PR creation.
 
 ## Review and remaining scope
 
-Awaiting explicit owner clearance of the new code revision. No PR or approval
-confirmation has been created for this milestone. The earlier f689eec clearance
-applies only to that revision, as recorded in Code Review History.
+The project owner cleared code revision `f548b615a7d2924bc8f918b87fcdaaca77d51e7e`
+on 2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies
+only to that revision. Code Review History retains this and all earlier approvals.
 
 This remains a single supplied-range/selected-flop research root with two active
 players, not an unrestricted six-player equilibrium or wider board/range coverage.
 The next frontend step is a separately reviewed table integration over this pin,
 preserving unresolved raise feedback and source-bound saved sessions. AWS remains
 paused. No new cache is enabled in an existing deployment by this change.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
