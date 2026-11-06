@@ -21,7 +21,7 @@ The [board-bucket experiment](connected-board-bucket-research.md) now shares coa
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`fc6b6a7301f7da64aecbf2c60c579d18562f8d1c` and cleared PR creation on
-2026-11-05 (Europe/London), with “cleared fc6b6a7”. This confirmation applies to
+`8aa7ebeaf89795100679d27ba0b8c40fbae53868` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared 8aa7ebe”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

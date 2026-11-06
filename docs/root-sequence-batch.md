@@ -192,5 +192,14 @@ decisions are the next adoption boundary.
 
 ## Review status
 
-Awaiting explicit owner clearance of the completed revision. No new approval is
-recorded; no PR may be created before a fresh review packet and explicit clearance.
+The project owner cleared code revision `8aa7ebe` for PR creation on 2026-11-06
+(Europe/London), with “cleared 8aa7ebe”. This applies only to that revision.
+Fresh full PR CI and its evidence audit must pass before merging. Material code
+changes require renewed review.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`8aa7ebeaf89795100679d27ba0b8c40fbae53868` and cleared PR creation on
+2026-11-06 (Europe/London), with “cleared 8aa7ebe”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
