@@ -325,11 +325,11 @@ The pocket-sevens study now also has a separate opt-in cached backend with three
 legal grades and ordered review exports. It keeps the original research bounds,
 adds the posted 1 BB once for current-decision EV, and preserves raise ambiguity.
 See [the sevens cached API guide](docs/sevens-preflop-cached-api.md). This cache/API
-implementation is awaiting owner review; its frontend integration is still pending.
+implementation was cleared at `bc35089`; its frontend integration is still pending.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
+`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

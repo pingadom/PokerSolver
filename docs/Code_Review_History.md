@@ -384,9 +384,45 @@ model with two active players. Its positive feedback assessment does not issue
 a trainer qualification/cache capability. Existing API/UI and nines sources
 remain unchanged. Trainer admission is false and AWS deployment stays paused.
 
+## 2026-11-07 pocket sevens cached trainer backend
+
+The project owner reviewed code changes at `bc35089a63f16b4f6afb0aa4ef34323c7b282abd` on
+branch `codex/sevens-preflop-cache` and explicitly cleared PR creation with:
+
+> cleared bc35089
+
+This approval covers that revision only. It does not claim review of the entire
+historical codebase or subsequent code. Local validation passed 27 Java tests:
+8 cache, 10 loader guards, 6 enabled API and 3 disabled API; 12 independent Python
+projection/corruption tests and 5 smoke-script tests; real HTTP/OpenAPI checks;
+formatting and packaging of all five modules. Exactly three owned local startup
+replays were used, with no numerical source generation or numerical retries.
+The observed Python checker integer-type false positives were corrected and
+regression-tested without altering solver code or replaying numerical work.
+
+The bounded loader pins and captures the request, original parent and sevens
+report, performs one owned replay, compares the complete report and rechecks
+all sources before publishing immutable cached grades. Current-decision EV
+adds the posted 1 BB exactly once, while loss bounds and raise ambiguity remain.
+The separate default-off API accepts only pinned legal choices and supports
+ordered reviews and canonical LF exports. Public output omits opponent cards
+and future board state. Trainer admission remains false.
+
+The factual latest-review record is added to 151 authored Markdown documents,
+the reference PDF and local untracked interview Word guide: 153 documents.
+After clearance, only approval records change; all reviewed runtime code and
+420 data artifacts remain untouched. Full 29-job CI and production-container
+validation follow PR creation, including the added sevens container smoke job.
+The original 28 jobs/timeouts and all 369 prior class assignments are retained;
+373 classes and 24 independent checker modules are covered by the proposed CI.
+
+This remains one supplied-model BB77 decision with two active players at six
+seats and selected-flop continuation. The frontend integration is still pending,
+raise remains strategy-dependent and AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
+`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

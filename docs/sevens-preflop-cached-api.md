@@ -7,9 +7,9 @@ size-menu continuation game. It is research evidence within that supplied model;
 it does not solve unrestricted six-player cash poker. The raise result remains
 strategy-dependent and must not be labelled an error or a certified good action.
 
-The implementation in this document is awaiting owner review. The approved sevens
-numerical study is code revision `c778a3b`; approval of that study does not approve
-this subsequent cache or API implementation.
+The project owner cleared code revision `bc35089a63f16b4f6afb0aa4ef34323c7b282abd`
+on 2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies
+only to that revision. Code Review History preserves this and earlier approvals.
 
 ## Ownership and startup
 
@@ -129,3 +129,10 @@ regression CI remain pending a reviewed PR. No new library issue was identified
 in these checks. Existing solver implementations and dependency versions are
 unchanged. No claim of full six-player equilibrium or production deployment is
 made by these results.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

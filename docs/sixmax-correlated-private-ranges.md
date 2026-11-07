@@ -179,7 +179,7 @@ For a baseline comparison, use the same harness in an isolated checkout of `b835
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
+`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
