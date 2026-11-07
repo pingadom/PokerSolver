@@ -321,9 +321,43 @@ The API remains default-off and the original BB99 two-active-player scenario
 preserves unresolved raise feedback. Existing trainer sources, frontend and
 saved sessions are unchanged. Public admission remains false and AWS stays paused.
 
+## 2026-11-07 complete-menu preflop table trainer
+
+The project owner reviewed code changes in commit
+`b193ec567dd484ce829f6a456dba7aa347078bd7` on branch
+`codex/batch-preflop-trainer` and explicitly cleared PR creation with:
+
+> cleared b193ec5
+
+This approval applies to that code revision. It does not assert review of the
+entire historical codebase or later changes. Local validation passed 1,175
+frontend tests across 40 files (85 added checks), lint, type checking and the
+production build. A source SHA-256 manifest verifies that the isolated candidate
+used for checks equals the proposed frontend. One declared native startup was
+reused for real HTTP/OpenAPI smoke, dedicated Vite proxy and production browser
+QA. No additional Java replay suites or numerical generators ran.
+
+Desktop and mobile checks covered all three grades, ordered reviews, reload and
+restore, stale-link recovery, reset and the solver entry link. The real browser
+download matched the server's ordered raise/call/fold UTF-8 LF bytes exactly.
+Mobile has no horizontal overflow but feedback needs vertical scrolling;
+desktop feedback fits after the choice button scrolls into view.
+
+The factual latest-review record appears in 149 authored Markdown documents,
+the tracked reference PDF and the local untracked interview Word guide: 151
+readable documents. Original document content and historical approvals are
+preserved. Post-clearance changes only record this approval; reviewed runtime
+code, all 413 numerical artifacts and earlier frozen previews remain unchanged.
+Full 28-job CI and exact tested-merge evidence auditing follow PR creation.
+
+The page is one BB99 supplied-range/selected-flop exercise at a six-seat table
+with two active players. Its public bounds match the previous sequence study;
+the new source qualifies the complete action menu. Raise remains unresolved,
+trainer admission stays false, and AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
+`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

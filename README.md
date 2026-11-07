@@ -309,11 +309,15 @@ captures its pinned inputs, reproduces the owned qualification once at startup,
 then serves one public question, three cached grades and canonical session reviews.
 It is default-off and preserves raise ambiguity, all earlier trainer sources and
 the original two-active-player scope. A dedicated production-container check is
-required before merge; no frontend migration is included.
+required before merge. The [complete-menu table trainer](docs/batch-preflop-table-trainer.md)
+connects that source at `#root-batch-preflop`, with EV bounds on each action,
+inline feedback, saved attempts and canonical review downloads. Earlier source
+routes and saved sessions stay independent. Enable the batch API separately;
+the browser never substitutes frozen data for an unavailable server.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
+`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

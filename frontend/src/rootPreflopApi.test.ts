@@ -11,7 +11,12 @@ import { sequencePreflopClient } from "./sequencePreflopApi";
 import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuestion } from "./test-data/sequencePreflop";
 import sequenceSaved from "./test-data/sequence-preflop-drill.json";
 
+import { batchPreflopClient } from "./batchPreflopApi";
+import { batchFixtureReview, batchGrades, batchMetadata, batchQuestion } from "./test-data/batchPreflop";
+import batchSaved from "./test-data/batch-preflop-drill.json";
+
 describe.each([
+  { name: "complete menu", client: batchPreflopClient, saved: batchSaved, metadata: batchMetadata, question: batchQuestion, rootGrades: batchGrades, rootFixtureReview: batchFixtureReview },
   { name: "original envelope", client: legacyRootClient, saved: legacySaved, metadata: legacyMetadata, question: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, saved: minimumSaved, metadata: minimumMetadata, question: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
   { name: "sequence flow", client: sequencePreflopClient, saved: sequenceSaved, metadata: sequenceMetadata, question: sequenceQuestion, rootGrades: sequenceGrades, rootFixtureReview: sequenceFixtureReview },
