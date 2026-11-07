@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-sevens-preflop-drill-manifest/v1",
+  "studyHash": "5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6",
+  "requestFile": "supplied-sevens-root-study-request.json",
+  "requestSha256": "9c5c26307922844b09b61cf34510b0e31afeb2c38a9e78a98e70f334828c0049",
+  "reportFile": "supplied-sevens-root-study-report.json.gz",
+  "reportStoredSha256": "f6320a28164f3e6f8e4ae78b019d2933bccda5dc9f9cf212f0c7ae6aff59b3c3",
+  "parentFile": "supplied-flop-size-menu-report.json.gz",
+  "parentStoredSha256": "14cccdffafbb70dbfc54e6ff4467881cbf8d612891277cfcdcb38cab0ca373bf",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 2,
+    "maximumParentLpSolves": 4,
+    "maximumEnvelopeLpSolves": 5,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  }
+}

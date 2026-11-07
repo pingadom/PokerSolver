@@ -1,0 +1,67 @@
+{
+  "attempts" : [ {
+    "attempt" : {
+      "action" : "fold",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "fold",
+        "classification" : "OUTSIDE_LIMIT",
+        "lowerEvBb" : -9.99999993922529E-9,
+        "lowerLossBb" : 1.6855081444144142,
+        "upperEvBb" : 1.0000000050247593E-8,
+        "upperLossBb" : 1.6855082571326097
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6"
+    },
+    "ordinal" : 0
+  }, {
+    "attempt" : {
+      "action" : "call",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "call",
+        "classification" : "WITHIN_LIMIT",
+        "lowerEvBb" : 1.6855081544144144,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.6855082471326097,
+        "upperLossBb" : 9.27181953436218E-8
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6"
+    },
+    "ordinal" : 1
+  }, {
+    "attempt" : {
+      "action" : "raise:9.0",
+      "sourceCaseIndex" : 0
+    },
+    "grade" : {
+      "evScope" : "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move" : {
+        "action" : "raise:9.0",
+        "classification" : "STRATEGY_DEPENDENT",
+        "lowerEvBb" : -5.359434212217635,
+        "lowerLossBb" : 0.0,
+        "upperEvBb" : 1.6855082471326097,
+        "upperLossBb" : 7.044942459350245
+      },
+      "sourceCaseIndex" : 0,
+      "studyHash" : "5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6"
+    },
+    "ordinal" : 2
+  } ],
+  "counts" : {
+    "distinctQuestions" : 1,
+    "outsideLimit" : 1,
+    "strategyDependent" : 1,
+    "withinLimit" : 1
+  },
+  "studyHash" : "5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6"
+}

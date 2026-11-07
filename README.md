@@ -321,6 +321,12 @@ and independent certificate/policy checks support its complete conservative menu
 call within the loss limit, fold outside and raise unresolved. This is a backend
 research result; the current trainer and nines sources remain unchanged.
 
+The pocket-sevens study now also has a separate opt-in cached backend with three
+legal grades and ordered review exports. It keeps the original research bounds,
+adds the posted 1 BB once for current-decision EV, and preserves raise ambiguity.
+See [the sevens cached API guide](docs/sevens-preflop-cached-api.md). This cache/API
+implementation is awaiting owner review; its frontend integration is still pending.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
