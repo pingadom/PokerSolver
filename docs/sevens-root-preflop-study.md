@@ -122,6 +122,9 @@ owned replay, with no numerical retries. Parsing-only corrections and their
 earlier logs are preserved in local evidence: strict typed failure reasons and
 typed parent equality fixed the harness without changing numerical computation.
 The exact original producer source was archived and matches its pre-run hash.
+The request uses canonical Git LF bytes. A final byte audit corrected the
+receipt after Windows line-ending normalisation; parsed request values and the
+numerical report were unchanged, with no additional solver run.
 
 All 413 prior numerical artifacts, old source contracts, frozen previews and the
 protected interview guide remain unchanged. The two new test classes join the
