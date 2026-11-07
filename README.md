@@ -315,9 +315,15 @@ inline feedback, saved attempts and canonical review downloads. Earlier source
 routes and saved sessions stay independent. Enable the batch API separately;
 the browser never substitutes frozen data for an unavailable server.
 
+The [pocket sevens preflop backend study](docs/sevens-root-preflop-study.md)
+adds a different BB root in the existing supplied model. An owned physical replay
+and independent certificate/policy checks support its complete conservative menu:
+call within the loss limit, fold outside and raise unresolved. This is a backend
+research result; the current trainer and nines sources remain unchanged.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
+`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
