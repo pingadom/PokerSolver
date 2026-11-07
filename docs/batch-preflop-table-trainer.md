@@ -82,6 +82,13 @@ remain unchanged. Full PR CI and
 production-container checks follow only after explicit owner clearance. AWS
 deployment remains paused.
 
-Awaiting explicit owner clearance of the new frontend revision. No approval is
-claimed for this code yet; the existing f548b61 clearance covers its backend
-predecessor only.
+The project owner cleared code revision `b193ec567dd484ce829f6a456dba7aa347078bd7`
+on 2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies
+only to that revision. Code Review History retains this and all earlier approvals.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

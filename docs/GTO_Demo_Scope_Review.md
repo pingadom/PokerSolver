@@ -45,7 +45,7 @@ After the demo is working, review user feedback and the cost of expanding the so
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f548b615a7d2924bc8f918b87fcdaaca77d51e7e` and cleared PR creation on
-2026-11-06 (Europe/London), with “cleared f548b61”. This confirmation applies to
+`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
