@@ -355,9 +355,38 @@ with two active players. Its public bounds match the previous sequence study;
 the new source qualifies the complete action menu. Raise remains unresolved,
 trainer admission stays false, and AWS deployment remains paused.
 
+## 2026-11-07 pocket sevens preflop backend study
+
+The project owner reviewed code changes at `c778a3bd7d96be3a2d6e196a0270e7130432008b` on
+branch `codex/physical-sevens-root-study` and explicitly cleared PR creation with:
+
+> cleared c778a3b
+
+This approval covers that code revision, not the entire historical codebase or
+later changes. Local validation passed 19 Java cases (18 zero-solve parser and
+guard cases plus one complete owned physical replay), 16 independent Python
+cases, all-module packaging and formatting. The independent checker verified
+five original envelope certificates and all nine forced-action values/losses.
+The single declared BB77 generation and single local replay preserved the
+original parent, two fresh 80k/160k references, numerical limits and ambiguous
+raise. Typed parsing and Git LF receipt corrections required no solver retries.
+
+The factual latest-review record is added to 150 authored Markdown documents,
+the reference PDF and local untracked interview Word guide: 152 documents.
+Original document content and previous approvals remain preserved. After
+clearance, only approval records change; reviewed runtime code and all 416
+numerical artifacts remain untouched. Full 28-job CI and exact tested-merge
+evidence auditing follow PR creation. All previous classes/groups/jobs/timeouts
+remain, with two automatic new test classes and one added independent module.
+
+The new result remains backend-only research in the supplied-range/selected-flop
+model with two active players. Its positive feedback assessment does not issue
+a trainer qualification/cache capability. Existing API/UI and nines sources
+remain unchanged. Trainer admission is false and AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`b193ec567dd484ce829f6a456dba7aa347078bd7` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared b193ec5”. This confirmation applies to
+`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

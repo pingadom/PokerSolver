@@ -132,5 +132,13 @@ automatic CI inventory; all previous classes/groups/jobs/timeouts are retained.
 The independent check is additive in the existing backend checker step. Full PR
 CI follows only after new owner clearance. AWS deployment remains paused.
 
-Awaiting explicit owner clearance of this new code revision. The b193ec5 review
-applies only to its earlier revision; no PR or new confirmation is claimed here.
+The project owner cleared code revision `c778a3bd7d96be3a2d6e196a0270e7130432008b`
+on 2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies
+only to that revision. Code Review History preserves this and earlier approvals.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`c778a3bd7d96be3a2d6e196a0270e7130432008b` and cleared PR creation on
+2026-11-07 (Europe/London), with “cleared c778a3b”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->
