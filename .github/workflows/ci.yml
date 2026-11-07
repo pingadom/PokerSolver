@@ -103,6 +103,7 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_physical_root_sequence_batch.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_sequence_batch_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_batch_preflop_drill.py'
+          python3 -m unittest discover -s scripts -p 'test_check_sevens_root_study.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_sequence_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_sequence_preflop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_minimum.py'
