@@ -1,0 +1,756 @@
+{
+  "metadata": {
+    "schemaVersion": "pokerlab-root-hand-bank-drill/v1",
+    "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+    "publicationStatus": "MULTI_HAND_PREFLOP_ROOT_BANK_RESEARCH_ONLY",
+    "trainerAdmission": false,
+    "model": "SUPPLIED_JOINT_PREFLOP_SELECTED_FLOP_SIZE_MENU/v1",
+    "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+    "tableSeats": 6,
+    "activePlayers": 2,
+    "availableQuestions": 3,
+    "cachedLegalGrades": 9,
+    "maximumAttempts": 128,
+    "startupBudget": {
+      "physicalGames": 1,
+      "maximumParentSolveCalls": 4,
+      "maximumParentLpSolves": 8,
+      "maximumEnvelopeLpSolves": 15,
+      "freshReferenceRuns": 2,
+      "freshIterations": 240000
+    }
+  },
+  "questions": [
+    {
+      "sourceCaseIndex": 0,
+      "heroCards": "7d 7h",
+      "board": [],
+      "context": {
+        "actingSeat": "BB",
+        "publicHistory": "",
+        "history": [
+          {
+            "seat": "SB",
+            "kind": "POST_SMALL_BLIND",
+            "amountBb": 0.5
+          },
+          {
+            "seat": "BB",
+            "kind": "POST_BIG_BLIND",
+            "amountBb": 1.0
+          },
+          {
+            "seat": "UTG",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "HJ",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "CO",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "BTN",
+            "kind": "RAISE_TO",
+            "amountBb": 3.0
+          },
+          {
+            "seat": "SB",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          }
+        ],
+        "potBb": 4.5,
+        "toCallBb": 2.0,
+        "players": [
+          {
+            "seat": "UTG",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "HJ",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "CO",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "BTN",
+            "status": "ACTIVE",
+            "committedBb": 3.0,
+            "remainingStackBb": 97.0
+          },
+          {
+            "seat": "SB",
+            "status": "FOLDED",
+            "committedBb": 0.5,
+            "remainingStackBb": 99.5
+          },
+          {
+            "seat": "BB",
+            "status": "ACTING",
+            "committedBb": 1.0,
+            "remainingStackBb": 99.0
+          }
+        ],
+        "actions": [
+          {
+            "action": "fold",
+            "amountBb": 0.0
+          },
+          {
+            "action": "call",
+            "amountBb": 2.0
+          },
+          {
+            "action": "raise:9.0",
+            "amountBb": 8.0
+          }
+        ]
+      },
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "moves": [
+        {
+          "action": "fold",
+          "lowerEvBb": -9.99999993922529e-09,
+          "upperEvBb": 1.0000000050247593e-08,
+          "lowerLossBb": 1.6855081444144142,
+          "upperLossBb": 1.6855082571326097,
+          "classification": "OUTSIDE_LIMIT"
+        },
+        {
+          "action": "call",
+          "lowerEvBb": 1.6855081544144144,
+          "upperEvBb": 1.6855082471326097,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 9.27181953436218e-08,
+          "classification": "WITHIN_LIMIT"
+        },
+        {
+          "action": "raise:9.0",
+          "lowerEvBb": -5.359434212217635,
+          "upperEvBb": 1.6855082471326097,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 7.044942459350245,
+          "classification": "STRATEGY_DEPENDENT"
+        }
+      ]
+    },
+    {
+      "sourceCaseIndex": 1,
+      "heroCards": "9d 9h",
+      "board": [],
+      "context": {
+        "actingSeat": "BB",
+        "publicHistory": "",
+        "history": [
+          {
+            "seat": "SB",
+            "kind": "POST_SMALL_BLIND",
+            "amountBb": 0.5
+          },
+          {
+            "seat": "BB",
+            "kind": "POST_BIG_BLIND",
+            "amountBb": 1.0
+          },
+          {
+            "seat": "UTG",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "HJ",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "CO",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "BTN",
+            "kind": "RAISE_TO",
+            "amountBb": 3.0
+          },
+          {
+            "seat": "SB",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          }
+        ],
+        "potBb": 4.5,
+        "toCallBb": 2.0,
+        "players": [
+          {
+            "seat": "UTG",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "HJ",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "CO",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "BTN",
+            "status": "ACTIVE",
+            "committedBb": 3.0,
+            "remainingStackBb": 97.0
+          },
+          {
+            "seat": "SB",
+            "status": "FOLDED",
+            "committedBb": 0.5,
+            "remainingStackBb": 99.5
+          },
+          {
+            "seat": "BB",
+            "status": "ACTING",
+            "committedBb": 1.0,
+            "remainingStackBb": 99.0
+          }
+        ],
+        "actions": [
+          {
+            "action": "fold",
+            "amountBb": 0.0
+          },
+          {
+            "action": "call",
+            "amountBb": 2.0
+          },
+          {
+            "action": "raise:9.0",
+            "amountBb": 8.0
+          }
+        ]
+      },
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "moves": [
+        {
+          "action": "fold",
+          "lowerEvBb": -9.99999993922529e-09,
+          "upperEvBb": 1.0000000050247593e-08,
+          "lowerLossBb": 1.7857791802528848,
+          "upperLossBb": 1.78577929297108,
+          "classification": "OUTSIDE_LIMIT"
+        },
+        {
+          "action": "call",
+          "lowerEvBb": 1.7857791902528848,
+          "upperEvBb": 1.7857792829710801,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 9.27181953436218e-08,
+          "classification": "WITHIN_LIMIT"
+        },
+        {
+          "action": "raise:9.0",
+          "lowerEvBb": -5.359434212217635,
+          "upperEvBb": 1.7857792829710801,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 7.145213495188715,
+          "classification": "STRATEGY_DEPENDENT"
+        }
+      ]
+    },
+    {
+      "sourceCaseIndex": 2,
+      "heroCards": "Ac Jc",
+      "board": [],
+      "context": {
+        "actingSeat": "BB",
+        "publicHistory": "",
+        "history": [
+          {
+            "seat": "SB",
+            "kind": "POST_SMALL_BLIND",
+            "amountBb": 0.5
+          },
+          {
+            "seat": "BB",
+            "kind": "POST_BIG_BLIND",
+            "amountBb": 1.0
+          },
+          {
+            "seat": "UTG",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "HJ",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "CO",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          },
+          {
+            "seat": "BTN",
+            "kind": "RAISE_TO",
+            "amountBb": 3.0
+          },
+          {
+            "seat": "SB",
+            "kind": "FOLD",
+            "amountBb": 0.0
+          }
+        ],
+        "potBb": 4.5,
+        "toCallBb": 2.0,
+        "players": [
+          {
+            "seat": "UTG",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "HJ",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "CO",
+            "status": "FOLDED",
+            "committedBb": 0.0,
+            "remainingStackBb": 100.0
+          },
+          {
+            "seat": "BTN",
+            "status": "ACTIVE",
+            "committedBb": 3.0,
+            "remainingStackBb": 97.0
+          },
+          {
+            "seat": "SB",
+            "status": "FOLDED",
+            "committedBb": 0.5,
+            "remainingStackBb": 99.5
+          },
+          {
+            "seat": "BB",
+            "status": "ACTING",
+            "committedBb": 1.0,
+            "remainingStackBb": 99.0
+          }
+        ],
+        "actions": [
+          {
+            "action": "fold",
+            "amountBb": 0.0
+          },
+          {
+            "action": "call",
+            "amountBb": 2.0
+          },
+          {
+            "action": "raise:9.0",
+            "amountBb": 8.0
+          }
+        ]
+      },
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "moves": [
+        {
+          "action": "fold",
+          "lowerEvBb": -9.99999993922529e-09,
+          "upperEvBb": 1.0000000050247593e-08,
+          "lowerLossBb": 1.1531738158424212,
+          "upperLossBb": 1.153173931864052,
+          "classification": "OUTSIDE_LIMIT"
+        },
+        {
+          "action": "call",
+          "lowerEvBb": 1.1531738258424213,
+          "upperEvBb": 1.153173921864052,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 9.602163070221437e-08,
+          "classification": "WITHIN_LIMIT"
+        },
+        {
+          "action": "raise:9.0",
+          "lowerEvBb": -5.359434212217635,
+          "upperEvBb": 1.153173921864052,
+          "lowerLossBb": 0.0,
+          "upperLossBb": 6.512608134081686,
+          "classification": "STRATEGY_DEPENDENT"
+        }
+      ]
+    }
+  ],
+  "grades": [
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 0,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "fold",
+        "lowerEvBb": -9.99999993922529e-09,
+        "upperEvBb": 1.0000000050247593e-08,
+        "lowerLossBb": 1.6855081444144142,
+        "upperLossBb": 1.6855082571326097,
+        "classification": "OUTSIDE_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 0,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "call",
+        "lowerEvBb": 1.6855081544144144,
+        "upperEvBb": 1.6855082471326097,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 9.27181953436218e-08,
+        "classification": "WITHIN_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 0,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "raise:9.0",
+        "lowerEvBb": -5.359434212217635,
+        "upperEvBb": 1.6855082471326097,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 7.044942459350245,
+        "classification": "STRATEGY_DEPENDENT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 1,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "fold",
+        "lowerEvBb": -9.99999993922529e-09,
+        "upperEvBb": 1.0000000050247593e-08,
+        "lowerLossBb": 1.7857791802528848,
+        "upperLossBb": 1.78577929297108,
+        "classification": "OUTSIDE_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 1,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "call",
+        "lowerEvBb": 1.7857791902528848,
+        "upperEvBb": 1.7857792829710801,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 9.27181953436218e-08,
+        "classification": "WITHIN_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 1,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "raise:9.0",
+        "lowerEvBb": -5.359434212217635,
+        "upperEvBb": 1.7857792829710801,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 7.145213495188715,
+        "classification": "STRATEGY_DEPENDENT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 2,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "fold",
+        "lowerEvBb": -9.99999993922529e-09,
+        "upperEvBb": 1.0000000050247593e-08,
+        "lowerLossBb": 1.1531738158424212,
+        "upperLossBb": 1.153173931864052,
+        "classification": "OUTSIDE_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 2,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "call",
+        "lowerEvBb": 1.1531738258424213,
+        "upperEvBb": 1.153173921864052,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 9.602163070221437e-08,
+        "classification": "WITHIN_LIMIT"
+      }
+    },
+    {
+      "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+      "sourceCaseIndex": 2,
+      "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+      "move": {
+        "action": "raise:9.0",
+        "lowerEvBb": -5.359434212217635,
+        "upperEvBb": 1.153173921864052,
+        "lowerLossBb": 0.0,
+        "upperLossBb": 6.512608134081686,
+        "classification": "STRATEGY_DEPENDENT"
+      }
+    }
+  ],
+  "review": {
+    "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+    "attempts": [
+      {
+        "ordinal": 0,
+        "attempt": {
+          "sourceCaseIndex": 0,
+          "action": "fold"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 0,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "fold",
+            "lowerEvBb": -9.99999993922529e-09,
+            "upperEvBb": 1.0000000050247593e-08,
+            "lowerLossBb": 1.6855081444144142,
+            "upperLossBb": 1.6855082571326097,
+            "classification": "OUTSIDE_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 1,
+        "attempt": {
+          "sourceCaseIndex": 0,
+          "action": "call"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 0,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "call",
+            "lowerEvBb": 1.6855081544144144,
+            "upperEvBb": 1.6855082471326097,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 9.27181953436218e-08,
+            "classification": "WITHIN_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "attempt": {
+          "sourceCaseIndex": 0,
+          "action": "raise:9.0"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 0,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "raise:9.0",
+            "lowerEvBb": -5.359434212217635,
+            "upperEvBb": 1.6855082471326097,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 7.044942459350245,
+            "classification": "STRATEGY_DEPENDENT"
+          }
+        }
+      },
+      {
+        "ordinal": 3,
+        "attempt": {
+          "sourceCaseIndex": 1,
+          "action": "fold"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 1,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "fold",
+            "lowerEvBb": -9.99999993922529e-09,
+            "upperEvBb": 1.0000000050247593e-08,
+            "lowerLossBb": 1.7857791802528848,
+            "upperLossBb": 1.78577929297108,
+            "classification": "OUTSIDE_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 4,
+        "attempt": {
+          "sourceCaseIndex": 1,
+          "action": "call"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 1,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "call",
+            "lowerEvBb": 1.7857791902528848,
+            "upperEvBb": 1.7857792829710801,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 9.27181953436218e-08,
+            "classification": "WITHIN_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 5,
+        "attempt": {
+          "sourceCaseIndex": 1,
+          "action": "raise:9.0"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 1,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "raise:9.0",
+            "lowerEvBb": -5.359434212217635,
+            "upperEvBb": 1.7857792829710801,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 7.145213495188715,
+            "classification": "STRATEGY_DEPENDENT"
+          }
+        }
+      },
+      {
+        "ordinal": 6,
+        "attempt": {
+          "sourceCaseIndex": 2,
+          "action": "fold"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 2,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "fold",
+            "lowerEvBb": -9.99999993922529e-09,
+            "upperEvBb": 1.0000000050247593e-08,
+            "lowerLossBb": 1.1531738158424212,
+            "upperLossBb": 1.153173931864052,
+            "classification": "OUTSIDE_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 7,
+        "attempt": {
+          "sourceCaseIndex": 2,
+          "action": "call"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 2,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "call",
+            "lowerEvBb": 1.1531738258424213,
+            "upperEvBb": 1.153173921864052,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 9.602163070221437e-08,
+            "classification": "WITHIN_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 8,
+        "attempt": {
+          "sourceCaseIndex": 2,
+          "action": "raise:9.0"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 2,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "raise:9.0",
+            "lowerEvBb": -5.359434212217635,
+            "upperEvBb": 1.153173921864052,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 6.512608134081686,
+            "classification": "STRATEGY_DEPENDENT"
+          }
+        }
+      },
+      {
+        "ordinal": 9,
+        "attempt": {
+          "sourceCaseIndex": 2,
+          "action": "call"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 2,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "call",
+            "lowerEvBb": 1.1531738258424213,
+            "upperEvBb": 1.153173921864052,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 9.602163070221437e-08,
+            "classification": "WITHIN_LIMIT"
+          }
+        }
+      },
+      {
+        "ordinal": 10,
+        "attempt": {
+          "sourceCaseIndex": 0,
+          "action": "raise:9.0"
+        },
+        "grade": {
+          "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+          "sourceCaseIndex": 0,
+          "evScope": "CURRENT_DECISION_PROFIT_OPTIMAL_FUTURE_CONTINUATION_BB/v1",
+          "move": {
+            "action": "raise:9.0",
+            "lowerEvBb": -5.359434212217635,
+            "upperEvBb": 1.6855082471326097,
+            "lowerLossBb": 0.0,
+            "upperLossBb": 7.044942459350245,
+            "classification": "STRATEGY_DEPENDENT"
+          }
+        }
+      }
+    ],
+    "counts": {
+      "distinctQuestions": 3,
+      "withinLimit": 4,
+      "outsideLimit": 3,
+      "strategyDependent": 4
+    }
+  }
+}

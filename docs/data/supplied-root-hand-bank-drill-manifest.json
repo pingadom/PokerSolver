@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "pokerlab-root-hand-bank-drill-manifest/v1",
+  "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+  "requestFile": "supplied-root-hand-bank-request.json",
+  "requestSha256": "8eb03eb2dfd0d09e02be0a7b31f2b152db6a59c3b7c5a94a718ed50986b2d919",
+  "reportFile": "supplied-root-hand-bank-report.json.gz",
+  "reportStoredSha256": "eb31446fa68413b12cfea51d2ac6e52356de91437c8068faf997a2a40491cadd",
+  "parentFile": "supplied-flop-size-menu-report.json.gz",
+  "parentStoredSha256": "14cccdffafbb70dbfc54e6ff4467881cbf8d612891277cfcdcb38cab0ca373bf",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 4,
+    "maximumParentLpSolves": 8,
+    "maximumEnvelopeLpSolves": 15,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  }
+}
