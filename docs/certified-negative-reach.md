@@ -65,7 +65,7 @@ Fresh-reference qualification is still required for the three additional facing-
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
+`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

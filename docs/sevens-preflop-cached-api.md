@@ -113,7 +113,7 @@ one shared cache test setup and one cached Spring test context. No new numerical
 source report is generated. Full production-container CI is required before the
 next PR can be merged. The [sevens table trainer](sevens-preflop-table-trainer.md)
 connects this backend at `#root-sevens-preflop`; that new frontend revision is
-awaiting owner review. AWS deployment remains paused.
+cleared at `028914b`. AWS deployment remains paused.
 
 ## Validation for owner review
 
@@ -133,7 +133,7 @@ made by these results.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
+`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

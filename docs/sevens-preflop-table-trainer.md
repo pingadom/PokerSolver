@@ -81,7 +81,14 @@ one-game/four-parent-LP/five-envelope-LP/240000-reference-iteration limits. No n
 numerical source report, backend change, Java replay suite or dependency upgrade
 is introduced. All 420 prior data files and earlier previews are preserved.
 
-This frontend revision is awaiting explicit owner review. The prior `bc35089`
-clearance applies only to its cached backend. Full PR CI follows fresh clearance;
-no new frontend PR or owner confirmation is claimed here. AWS deployment stays
-paused.
+The project owner cleared code revision `028914bdd8d970241bdd315db79ffbb094659622`
+on 2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies
+only to that revision. Full PR CI follows PR creation. Code Review History
+preserves this and earlier approvals. AWS deployment stays paused.
+
+<!-- pokerlab-user-code-review:start -->
+Code review confirmed: the project owner reviewed code changes at
+`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
+that code revision. See the project's Code Review History for the approval record.
+<!-- pokerlab-user-code-review:end -->

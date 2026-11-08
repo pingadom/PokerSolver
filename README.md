@@ -328,11 +328,11 @@ See [the sevens cached API guide](docs/sevens-preflop-cached-api.md). This cache
 implementation was cleared at `bc35089`. The [sevens table trainer](docs/sevens-preflop-table-trainer.md)
 connects it at `#root-sevens-preflop`, with source-specific cards and heading,
 action EVs, inline feedback and independent saved reviews. The new frontend
-revision is awaiting owner review.
+revision was cleared at `028914b`.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
+`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
