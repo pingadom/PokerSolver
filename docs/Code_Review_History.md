@@ -420,9 +420,43 @@ This remains one supplied-model BB77 decision with two active players at six
 seats and selected-flop continuation. The frontend integration is still pending,
 raise remains strategy-dependent and AWS deployment stays paused.
 
+## 2026-11-08 pocket sevens table trainer
+
+The project owner reviewed code changes at `028914bdd8d970241bdd315db79ffbb094659622` on
+branch `codex/sevens-preflop-trainer` and explicitly cleared PR creation with:
+
+> cleared 028914b
+
+This approval covers that code revision only, not later changes or the entire
+historical codebase. Local validation passed 1,268 frontend cases across 40 files,
+including 93 added cases; lint, type checking and a production build. All 1,175
+earlier cases were retained, including repeated parameterized names. One test
+title was updated to describe five sources. The UI uses its own sevens route,
+source pin, browser session and review export. A shared hand label preserves the
+prior nines headings. Singular restored/review wording was corrected, along with
+the regression test's request count after adding a review assertion.
+
+Real HTTP/OpenAPI smoke, Vite proxy checks, frozen same-origin production assets,
+desktop/mobile browser QA, save/restore, reset and stale-link recovery passed.
+The actual ordered raise/call/fold review download equals all 1,986 server bytes,
+with UTF-8 LF endings. Two bounded local preview startups were declared: the first
+completed before a pause, then one additional startup verified final wording after
+its processes ended. No numerical source generation or Java replay suites were
+introduced. Backend source, numerical limits and dependency versions are unchanged.
+
+The latest-review record is added to 152 authored Markdown documents, the reference
+PDF and local untracked interview Word guide: 154 documents. Only factual approval
+records change after clearance. All reviewed code and 420 data artifacts remain
+untouched. Full 29-job CI and production-container checks follow PR creation; its
+only workflow addition checks byte identity of the sevens frontend capture.
+
+The source remains one supplied-model BB77 decision, two active players at six
+seats and a selected-flop continuation model. Raise remains unresolved and trainer
+admission false. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`bc35089a63f16b4f6afb0aa4ef34323c7b282abd` and cleared PR creation on
-2026-11-07 (Europe/London), with “cleared bc35089”. This confirmation applies to
+`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -51,7 +51,7 @@ export default function RootPreflopPage({ client = legacyRootClient }: { client?
           const restored = client.readRootReview(text, m, q);
           saved.current = restored.attempts; setAttempts(restored.attempts);
           setFeedback(restored.attempts.at(-1)?.grade ?? null);
-          if (restored.attempts.length) setNotice(`Restored ${restored.attempts.length} saved attempts for this study.`);
+          if (restored.attempts.length) setNotice(`Restored ${restored.attempts.length} saved attempt${restored.attempts.length === 1 ? "" : "s"} for this study.`);
         }
       } catch {
         try { localStorage.removeItem(client.rootSessionKey); } catch { /* Practice remains available without storage. */ }
@@ -126,7 +126,7 @@ export default function RootPreflopPage({ client = legacyRootClient }: { client?
     <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON · {client.studyLabel}</p>
-        <h1>Defend pocket nines</h1><p className="trainer-intro">The button raised to 3 bb. Compare the EV ranges, then choose your response.</p></div></div>
+        <h1>Defend {client.heroHandName}</h1><p className="trainer-intro">The button raised to 3 bb. Compare the EV ranges, then choose your response.</p></div></div>
       <p className="trainer-disclosure hand-play-disclosure" role="note">Research exercise · Six seats, two active players · Supplied ranges, selected-flop continuation model · Raise remains unresolved.</p>
       {error && <div className="trainer-error" role="alert"><p>{error}</p><button className="trainer-button" disabled={busy}
         onClick={fatal || !question ? reload : () => setError("")}>{fatal ? "Load current study" : question ? "Dismiss error" : "Retry loading"}</button></div>}
@@ -166,7 +166,7 @@ export default function RootPreflopPage({ client = legacyRootClient }: { client?
           </div>}
           {attempts.length >= rootMaximumAttempts && <p role="status">Attempt limit reached. Review, download or start over.</p>}
           {notice && <p className="root-session-notice" role="status">{notice}</p>}
-          {review && <section className="interval-review" aria-label="Preflop session review"><h2>{review.attempts.length} attempts · One preflop decision</h2>
+          {review && <section className="interval-review" aria-label="Preflop session review"><h2>{review.attempts.length} attempt{review.attempts.length === 1 ? "" : "s"} · One preflop decision</h2>
             <p>Within limit: {review.counts.withinLimit} · Outside limit: {review.counts.outsideLimit} · Unresolved: {review.counts.strategyDependent}</p>
             <ol>{review.attempts.map(a => <li key={a.ordinal}>{rootActionLabel(a.attempt.action)} · {rootVerdict(a.grade.move)} · Loss {intervalRange(a.grade.move.lowerLossBb, a.grade.move.upperLossBb)}</li>)}</ol>
             <button className="trainer-button" disabled={busy} onClick={() => void sessionReview(true)}>Download session review</button>
