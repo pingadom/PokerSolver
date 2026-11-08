@@ -454,9 +454,45 @@ The source remains one supplied-model BB77 decision, two active players at six
 seats and a selected-flop continuation model. Raise remains unresolved and trainer
 admission false. AWS deployment remains paused.
 
+## 2026-11-08 three-hand preflop root bank
+
+The project owner reviewed code changes at `f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` on branch
+`codex/root-hand-bank` and explicitly cleared PR creation with:
+
+> cleared f7ea2f9
+
+This confirmation applies only to that revision, not later changes or the entire
+historical codebase. The bank preserves all three declared original-model BB
+hands: sevens, nines and suited ace-jack. One owned physical game and parent
+study share the primary and fresh 80,000/160,000-iteration references. All three
+saved outcomes have complete conservative bounds and pass feedback checks;
+call is within the loss limit, fold outside and raise remains unresolved.
+
+Local validation passed 19 Java tests (18 parser/control tests and one complete
+owned physical replay), 15 independent Python tests and Spotless. The checker
+validated 15 envelope certificates, 27 forced values and 27 losses without LP or
+CFR work. Sevens and nines exactly match their standalone evidence. One saved
+bank generation and one owned local replay were performed. New text pins were
+normalised to Git-compatible LF bytes and independently rechecked; the numerical
+report was unchanged. All 420 older data artifacts, kernel/helper sources,
+373 earlier test classes and their shard assignments were retained.
+
+The bank reserves all three envelope attempts with unchanged per-hand numerical
+limits. Completed-work totals explicitly exclude unavailable spent-work audits
+from rejected attempts. Synthetic partial-failure controls retain every hand
+slot; no failure was forced or retried to obtain the saved results. The source
+remains two active players at six seats with supplied ranges and a selected-flop
+continuation model. It grants neither trainer admission nor grading authority.
+
+This factual approval is recorded in 153 authored Markdown documents, the
+reference PDF and the local untracked interview Word guide: 155 documents.
+Post-clearance edits record this approval only; reviewed runtime code and all
+423 data artifacts are untouched. Full CI follows PR creation, retaining all
+29 jobs and adding one independent checker command. AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
+`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -133,7 +133,7 @@ made by these results.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
+`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -94,13 +94,14 @@ step. Previous test classes, checker steps and numerical evidence remain intact.
 
 ## Review status
 
-This new bank change is awaiting explicit user clearance. The latest actual
-approval below covers the earlier code revision only. A PR for this change must
-wait for review of its exact commit and local validation packet.
+The project owner cleared code revision `f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f`
+on 2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation covers
+that revision only. Full PR CI follows PR creation; Code Review History preserves
+this and earlier approvals.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 028914b”. This confirmation applies to
+`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
