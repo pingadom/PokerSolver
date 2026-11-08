@@ -490,9 +490,44 @@ Post-clearance edits record this approval only; reviewed runtime code and all
 423 data artifacts are untouched. Full CI follows PR creation, retaining all
 29 jobs and adding one independent checker command. AWS deployment stays paused.
 
+## 2026-11-08 three-hand cached trainer backend
+
+The project owner reviewed code changes at `afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` on branch
+`codex/root-hand-bank-cache` and explicitly cleared PR creation with:
+
+> cleared afb22aa
+
+This approval covers that revision only, not later changes or the entire historical
+codebase. The opt-in backend owns one complete three-hand bank replay per startup,
+then serves three questions, nine immutable grades and mixed-hand reviews from
+cache. Source loading checks all captured pins and file identities; partial banks
+cannot silently reduce the curriculum. Current-decision EV adds the posted BB once,
+while losses and unresolved raises remain unchanged. Requests accept choices only.
+
+Local checks passed 30 Java tests, 15 independent projection/corruption tests, five
+smoke controls, Spotless and parsed CI/Compose/operator YAML. Native HTTP/OpenAPI
+checks covered all nine grades, typed index limits, ordered/repeated/maximum reviews
+and stable canonical downloads. The 11-attempt export has 6,657 UTF-8 LF bytes.
+Tests verified continued grading after source files disappear. All 423 prior data
+files, kernels, helpers, dependencies and 375 earlier test classes/assignments remain.
+
+Four declared local owned cache replays were used: one solver suite, one API context
+and two native starts. The first native exposed copied request-schema names; a
+budget amendment covered an isolated final runtime verifying corrected names.
+No numerical rejection was retried or saved source report replaced. Kernel limits
+are unchanged. Native HTTP used explicit properties; the new production-container
+CI job verifies environment wiring. Docker is unavailable locally.
+
+This approval record is added to 154 authored Markdown documents, the reference PDF
+and local untracked interview Word guide: 156 documents. Reviewed runtime code and
+all 427 data files are unchanged after clearance. Full CI follows PR creation,
+preserving the previous 29 jobs and adding a separate 30th container check. Scope
+remains the supplied two-active-player game at six seats; trainer admission is false,
+and frontend integration follows separately. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
+`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

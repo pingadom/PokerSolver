@@ -135,13 +135,14 @@ source pin, hero cards, inline EVs and canonical reviews.
 
 ## Review status
 
-This cache/API revision awaits explicit user review. No PR or review confirmation
-for it has been created. The latest actual approval below applies only to the
-earlier bank source revision.
+The project owner cleared code revision `afb22aa3ed11992c2d6fed91cfdb6a24aae130f8`
+on 2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies
+only to that revision. Full PR CI follows PR creation; Code Review History retains
+this and earlier approvals.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
+`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

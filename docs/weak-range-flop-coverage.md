@@ -45,7 +45,7 @@ The next numerical milestone is to capture and explain the common behavioral-rat
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
+`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
