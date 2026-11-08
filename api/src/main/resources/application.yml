@@ -54,6 +54,9 @@ pokerlab:
     size-menu-btn-enabled: ${TRAINER_SIZE_MENU_BTN_ENABLED:false}
     size-menu-btn-manifest-path: ${TRAINER_SIZE_MENU_BTN_MANIFEST_PATH:}
     size-menu-btn-study-hash: ${TRAINER_SIZE_MENU_BTN_STUDY_HASH:}
+    root-sevens-preflop-enabled: ${TRAINER_ROOT_SEVENS_PREFLOP_ENABLED:false}
+    root-sevens-preflop-manifest-path: ${TRAINER_ROOT_SEVENS_PREFLOP_MANIFEST_PATH:}
+    root-sevens-preflop-study-hash: ${TRAINER_ROOT_SEVENS_PREFLOP_STUDY_HASH:}
     root-batch-preflop-enabled: ${TRAINER_ROOT_BATCH_PREFLOP_ENABLED:false}
     root-batch-preflop-manifest-path: ${TRAINER_ROOT_BATCH_PREFLOP_MANIFEST_PATH:}
     root-batch-preflop-study-hash: ${TRAINER_ROOT_BATCH_PREFLOP_STUDY_HASH:}

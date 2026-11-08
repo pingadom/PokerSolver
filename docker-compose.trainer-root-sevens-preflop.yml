@@ -1,0 +1,13 @@
+# Explicit local opt-in. One complete sevens replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1200m"
+      TRAINER_ROOT_SEVENS_PREFLOP_ENABLED: "true"
+      TRAINER_ROOT_SEVENS_PREFLOP_MANIFEST_PATH: /opt/pokerlab/root-sevens-preflop/supplied-sevens-preflop-drill-manifest.json
+      TRAINER_ROOT_SEVENS_PREFLOP_STUDY_HASH: 5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6
+    volumes:
+      - ./docs/data/supplied-sevens-preflop-drill-manifest.json:/opt/pokerlab/root-sevens-preflop/supplied-sevens-preflop-drill-manifest.json:ro
+      - ./docs/data/supplied-sevens-root-study-request.json:/opt/pokerlab/root-sevens-preflop/supplied-sevens-root-study-request.json:ro
+      - ./docs/data/supplied-sevens-root-study-report.json.gz:/opt/pokerlab/root-sevens-preflop/supplied-sevens-root-study-report.json.gz:ro
+      - ./docs/data/supplied-flop-size-menu-report.json.gz:/opt/pokerlab/root-sevens-preflop/supplied-flop-size-menu-report.json.gz:ro
