@@ -330,6 +330,12 @@ connects it at `#root-sevens-preflop`, with source-specific cards and heading,
 action EVs, inline feedback and independent saved reviews. The new frontend
 revision was cleared at `028914b`.
 
+The [three-hand preflop root bank](docs/root-hand-bank-study.md) computes sevens,
+nines and suited ace-jack from one shared physical parent and reference-policy
+run. Each hand retains its complete menu or typed failure. All three saved
+outcomes pass the conservative feedback checks; raises remain unresolved. The
+bank is backend research awaiting user review, with no new trainer API or page.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `028914bdd8d970241bdd315db79ffbb094659622` and cleared PR creation on
