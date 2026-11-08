@@ -336,9 +336,14 @@ run. Each hand retains its complete menu or typed failure. All three saved
 outcomes pass the conservative feedback checks; raises remain unresolved. The
 bank is backend research cleared at `f7ea2f9`, with no new trainer API or page.
 
+The [three-hand cached trainer API](docs/root-hand-bank-cached-api.md) adds a
+separate opt-in backend for all three bank hands, nine cached grades and mixed-hand
+reviews with canonical downloads. Startup owns one full source replay; requests
+then use immutable cached values. This cache/API change was cleared at `afb22aa`.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`f7ea2f9ae6c8ee9e8ba2faf1ec9f780aa195733f` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared f7ea2f9”. This confirmation applies to
+`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

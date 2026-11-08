@@ -1,0 +1,13 @@
+# Explicit local opt-in. One complete three-hand bank replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1600m"
+      TRAINER_ROOT_HAND_BANK_ENABLED: "true"
+      TRAINER_ROOT_HAND_BANK_MANIFEST_PATH: /opt/pokerlab/root-hand-bank/supplied-root-hand-bank-drill-manifest.json
+      TRAINER_ROOT_HAND_BANK_STUDY_HASH: e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d
+    volumes:
+      - ./docs/data/supplied-root-hand-bank-drill-manifest.json:/opt/pokerlab/root-hand-bank/supplied-root-hand-bank-drill-manifest.json:ro
+      - ./docs/data/supplied-root-hand-bank-request.json:/opt/pokerlab/root-hand-bank/supplied-root-hand-bank-request.json:ro
+      - ./docs/data/supplied-root-hand-bank-report.json.gz:/opt/pokerlab/root-hand-bank/supplied-root-hand-bank-report.json.gz:ro
+      - ./docs/data/supplied-flop-size-menu-report.json.gz:/opt/pokerlab/root-hand-bank/supplied-flop-size-menu-report.json.gz:ro
