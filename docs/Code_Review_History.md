@@ -525,9 +525,40 @@ preserving the previous 29 jobs and adding a separate 30th container check. Scop
 remains the supplied two-active-player game at six seats; trainer admission is false,
 and frontend integration follows separately. AWS deployment remains paused.
 
+## 2026-11-08 mixed three-hand preflop table
+
+The project owner reviewed code changes at `838fd5ac57e6524998181efedf99a6a1d6d7f20d` on branch
+`codex/root-hand-bank-table` and explicitly cleared PR creation with:
+
+> cleared 838fd5a
+
+This approval covers that revision only, not later changes or the entire historical
+codebase. The separate table page adds manual and balanced mixed practice for
+77, 99 and AJs, hand-specific inline EVs and feedback, saved sessions and canonical
+mixed reviews. All three questions and all nine grades retain their own indices.
+The strict client rejects mismatched sources, cross-hand grades and invalid reviews;
+it never substitutes the fixture for a failed request. Earlier routes remain intact.
+
+Local checks passed 1,384 frontend cases across 42 files, retaining all 1,268 prior
+cases and adding 116. Lint, TypeScript, build, desktop/mobile browser checks, native
+API and both Vite/production proxy checks passed. An actual mixed review download
+matched all 1,983 native export bytes. A final CSS-only toolbar contrast correction
+was followed by lint, TypeScript, build and responsive browser checks. No additional
+native startup, Java replay suite or numerical source generation was used.
+
+This confirmation is recorded in 155 authored Markdown documents, the reference
+PDF and local untracked interview Word guide: 157 documents. Reviewed code and all
+427 numerical evidence files remain unchanged after clearance. The PR adds only
+one frontend fixture-byte comparison to the existing 30 CI jobs; full CI follows
+PR creation. The earlier backend PR #232 passed all 30 jobs and merged separately.
+Scope remains a supplied-range, fixed-prefix game with two active players at six
+seats and selected-flop continuation. Raises remain unresolved and trainer admission
+is false. It does not establish six-player GTO or full-hand frequencies. AWS
+deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
+`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

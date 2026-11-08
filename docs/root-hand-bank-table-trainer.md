@@ -67,12 +67,14 @@ endpoints does not reproduce them. Posted blinds are accounted for by the server
 
 ## Review status
 
-The table frontend described here is awaiting explicit owner review. The latest
-confirmation below refers only to the earlier cache/API code, not this new UI.
+The project owner cleared code revision `838fd5ac57e6524998181efedf99a6a1d6d7f20d`
+on 2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies
+only to that revision. Full PR CI follows PR creation; the central history retains
+this and earlier approvals.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
+`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -5,7 +5,7 @@ private-hand questions and nine cached grades. Sevens, nines and suited ace-jack
 retain separate question indices and values. Mixed-hand reviews preserve every
 submitted choice, repeat and ordinal, and count distinct questions correctly.
 The cache/API milestone itself added no frontend page. The subsequent
-[table integration](root-hand-bank-table-trainer.md) is awaiting owner review.
+[table integration](root-hand-bank-table-trainer.md) was cleared by the project owner at `838fd5a`.
 
 The source remains the original supplied joint game with two active players at
 six seats and a selected-flop continuation. This does not establish unrestricted
@@ -134,18 +134,18 @@ for this source, plus an independent projection-checker command. Earlier classes
 test assignments, checker steps, fixture bytes and dependency versions are retained.
 The subsequent table integration mixes these three public question indices while
 retaining their source pin, hero cards, inline EVs and canonical reviews. Its new
-frontend code requires a separate review.
+frontend code was separately cleared at `838fd5a`.
 
 ## Review status
 
 The project owner cleared code revision `afb22aa3ed11992c2d6fed91cfdb6a24aae130f8`
 on 2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies
 only to that revision. PR #232 passed all 30 checks and merged; Code Review History
-retains this and earlier approvals. The subsequent table UI requires its own clearance.
+retains this and earlier approvals. The subsequent table UI was separately cleared at `838fd5a`.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
+`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
