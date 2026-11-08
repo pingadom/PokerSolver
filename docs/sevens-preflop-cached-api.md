@@ -111,8 +111,9 @@ boolean or floating protocol integers, invented admission and lost raise ambigui
 Local validation reserves exactly three owned replays: one native HTTP startup,
 one shared cache test setup and one cached Spring test context. No new numerical
 source report is generated. Full production-container CI is required before the
-next PR can be merged. The frontend integration is the following milestone;
-this backend change adds no website route. AWS deployment remains paused.
+next PR can be merged. The [sevens table trainer](sevens-preflop-table-trainer.md)
+connects this backend at `#root-sevens-preflop`; that new frontend revision is
+awaiting owner review. AWS deployment remains paused.
 
 ## Validation for owner review
 

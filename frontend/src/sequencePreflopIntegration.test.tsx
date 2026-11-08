@@ -12,7 +12,12 @@ import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuesti
 import { batchPreflopClient } from "./batchPreflopApi";
 import { batchFixtureReview, batchGrades, batchMetadata, batchQuestion } from "./test-data/batchPreflop";
 
+import { sevensPreflopClient } from "./sevensPreflopApi";
+import { sevensFixtureReview, sevensGrades, sevensMetadata, sevensQuestion } from "./test-data/sevensPreflop";
+
 const studies = [
+  { name: "sevens", client: sevensPreflopClient, metadata: sevensMetadata, question: sevensQuestion, grades: sevensGrades, review: sevensFixtureReview,
+    action: "raise:9.0" as RootAction, verdict: "Unresolved" },
   { name: "batch", client: batchPreflopClient, metadata: batchMetadata, question: batchQuestion, grades: batchGrades, review: batchFixtureReview,
     action: "raise:9.0" as RootAction, verdict: "Unresolved" },
   { name: "original", client: legacyRootClient, metadata: rootMetadata, question: rootQuestion, grades: rootGrades, review: rootFixtureReview,
@@ -48,7 +53,7 @@ it("binds the new route, source pin and public bank to the owned sequence HTTP c
   expect(sequenceQuestion.context).toEqual(minimumQuestion.context);
   expect(sequenceQuestion.board).toEqual([]);
   expect(sequenceMetadata.trainerAdmission).toBe(false);
-  expect(new Set(studies.map(s => s.client.rootSessionKey)).size).toBe(4);
+  expect(new Set(studies.map(s => s.client.rootSessionKey)).size).toBe(5);
 });
 it("retains the full-action ceiling, commitment shift and unresolved raise", () => {
   expect(sequenceGrades[2].move.lowerEvBb).toBe(1.211141818822754);
@@ -64,8 +69,9 @@ it.each(pairs)("rejects $from.name source pins and grades in $to.name while chec
   expect(() => to.client.parseRootGrade(from.grades[2], to.question, "raise:9.0")).toThrow(RootProtocolError);
   expect(() => to.client.parseRootReview(from.review([]), to.metadata, to.question)).toThrow(RootProtocolError);
 });
-it("keeps all four research studies reachable from the solver section", () => {
+it("keeps all five research studies reachable from the solver section", () => {
   window.history.replaceState(null, "", "#solver"); render(<FrontendRoot />);
+  expect(screen.getByRole("link", { name: /Pocket sevens: defend against the button/ })).toHaveAttribute("href", sevensPreflopClient.route);
   expect(screen.getByRole("link", { name: /complete-menu preflop practice/ })).toHaveAttribute("href", batchPreflopClient.route);
   expect(screen.getByRole("link", { name: /sequence solver research practice/ })).toHaveAttribute("href", sequencePreflopClient.route);
   expect(screen.getByRole("link", { name: /tighter raise bounds/ })).toHaveAttribute("href", minimumPreflopClient.route);
@@ -92,7 +98,7 @@ it.each(studies.filter(s => s.name === "original" || s.name === "minimum"))("dis
   expect(localStorage.getItem(sequencePreflopClient.rootSessionKey)).toBeNull();
   expect(localStorage.getItem(foreign.client.rootSessionKey)).toBe(saved);
 });
-it.each(pairs.filter(p => p.from.name === "sequence" || p.to.name === "sequence" || p.from.name === "batch" || p.to.name === "batch"))(
+it.each(pairs.filter(p => p.from.name === "sequence" || p.to.name === "sequence" || p.from.name === "batch" || p.to.name === "batch" || p.from.name === "sevens" || p.to.name === "sevens"))(
   "aborts a pending $from.name grade and ignores its late reply after opening $to.name", async ({ from, to }) => {
     let resolve!: (value: Response) => void, signal!: AbortSignal;
     api({ client: from.client, wait: s => { signal = s; return new Promise(r => { resolve = r; }); } });
@@ -128,5 +134,32 @@ it.each(studies.filter(s => s.name !== "batch"))("discards a $name session under
   await screen.findByRole("button", { name: "Fold" });
   expect(screen.getByText(/could not be restored/)).toBeInTheDocument();
   expect(localStorage.getItem(batchPreflopClient.rootSessionKey)).toBeNull();
+  expect(localStorage.getItem(foreign.client.rootSessionKey)).toBe(saved);
+});
+
+it("pins a genuinely different private hand and source-specific title to the sevens HTTP capture", () => {
+  expect(sevensPreflopClient.rootStudyHash).toBe("5f52b053c7610adbfb4abd2cfb210674b4a325d8b870cd350edc22d192708da6");
+  expect(sevensPreflopClient.route).toBe("#root-sevens-preflop");
+  expect(sevensPreflopClient.heroHandName).toBe("pocket sevens");
+  expect(batchPreflopClient.heroHandName).toBe("pocket nines");
+  expect(sevensPreflopClient.rootSessionKey).toBe(`pokerlab:root-sevens-preflop:v1:${sevensMetadata.studyHash}`);
+  expect(sevensMetadata.startupBudget.maximumEnvelopeLpSolves).toBe(5);
+  expect(sevensMetadata.trainerAdmission).toBe(false);
+  expect(sevensQuestion.context).toEqual(batchQuestion.context);
+  expect(sevensQuestion.heroCards).toBe("7d 7h");
+  expect(sevensQuestion.board).toEqual([]);
+  expect(sevensQuestion).not.toEqual(batchQuestion);
+  expect(sevensGrades[1].move.lowerEvBb).toBe(1.6855081544144144);
+  expect(sevensGrades[2].move.classification).toBe("STRATEGY_DEPENDENT");
+});
+it.each(studies.filter(s => s.name !== "sevens"))("discards a $name session under the sevens key while preserving its original", async foreign => {
+  const saved = JSON.stringify(foreign.review([{ sourceCaseIndex: 0, action: foreign.action }]));
+  localStorage.setItem(foreign.client.rootSessionKey, saved);
+  localStorage.setItem(sevensPreflopClient.rootSessionKey, saved);
+  api(); window.history.replaceState(null, "", sevensPreflopClient.route); render(<FrontendRoot />);
+  await screen.findByRole("button", { name: "Fold" });
+  expect(screen.getByRole("heading", { name: "Defend pocket sevens" })).toBeInTheDocument();
+  expect(screen.getByText(/could not be restored/)).toBeInTheDocument();
+  expect(localStorage.getItem(sevensPreflopClient.rootSessionKey)).toBeNull();
   expect(localStorage.getItem(foreign.client.rootSessionKey)).toBe(saved);
 });

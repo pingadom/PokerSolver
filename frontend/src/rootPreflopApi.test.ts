@@ -15,7 +15,12 @@ import { batchPreflopClient } from "./batchPreflopApi";
 import { batchFixtureReview, batchGrades, batchMetadata, batchQuestion } from "./test-data/batchPreflop";
 import batchSaved from "./test-data/batch-preflop-drill.json";
 
+import { sevensPreflopClient } from "./sevensPreflopApi";
+import { sevensFixtureReview, sevensGrades, sevensMetadata, sevensQuestion } from "./test-data/sevensPreflop";
+import sevensSaved from "./test-data/sevens-preflop-drill.json";
+
 describe.each([
+  { name: "pocket sevens", client: sevensPreflopClient, saved: sevensSaved, metadata: sevensMetadata, question: sevensQuestion, rootGrades: sevensGrades, rootFixtureReview: sevensFixtureReview },
   { name: "complete menu", client: batchPreflopClient, saved: batchSaved, metadata: batchMetadata, question: batchQuestion, rootGrades: batchGrades, rootFixtureReview: batchFixtureReview },
   { name: "original envelope", client: legacyRootClient, saved: legacySaved, metadata: legacyMetadata, question: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, saved: minimumSaved, metadata: minimumMetadata, question: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },

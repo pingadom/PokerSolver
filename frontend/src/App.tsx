@@ -531,6 +531,7 @@ export default function App() {
               </p>
               <a className="solver-demo-link" href="#trainer">Open trainer demo ↗</a>
               <p><a className="solver-demo-link" href="#sixmax-preflop">Six-seat opens and raises research drill ↗</a></p>
+              <p><a className="solver-demo-link" href="#root-sevens-preflop">Pocket sevens: defend against the button ↗</a></p>
               <p><a className="solver-demo-link" href="#root-batch-preflop">Pocket nines: complete-menu preflop practice ↗</a></p>
               <p><a className="solver-demo-link" href="#root-sequence-preflop">Pocket nines: sequence solver research practice ↗</a></p>
               <p><a className="solver-demo-link" href="#root-minimum-preflop">Pocket nines: tighter raise bounds research drill ↗</a></p>

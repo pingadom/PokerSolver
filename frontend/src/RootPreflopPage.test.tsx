@@ -12,7 +12,11 @@ import { sequenceFixtureReview, sequenceGrades, sequenceMetadata, sequenceQuesti
 
 import { batchPreflopClient } from "./batchPreflopApi";
 import { batchFixtureReview, batchGrades, batchMetadata, batchQuestion } from "./test-data/batchPreflop";
+import { sevensPreflopClient } from "./sevensPreflopApi";
+import { sevensFixtureReview, sevensGrades, sevensMetadata, sevensQuestion } from "./test-data/sevensPreflop";
+
 describe.each([
+  { name: "pocket sevens", client: sevensPreflopClient, metadata: sevensMetadata, rootQuestion: sevensQuestion, rootGrades: sevensGrades, rootFixtureReview: sevensFixtureReview },
   { name: "complete menu", client: batchPreflopClient, metadata: batchMetadata, rootQuestion: batchQuestion, rootGrades: batchGrades, rootFixtureReview: batchFixtureReview },
   { name: "original envelope", client: legacyRootClient, metadata: legacyMetadata, rootQuestion: legacyQuestion, rootGrades: legacyGrades, rootFixtureReview: legacyReview },
   { name: "minimum informed", client: minimumPreflopClient, metadata: minimumMetadata, rootQuestion: minimumQuestion, rootGrades: minimumGrades, rootFixtureReview: minimumFixtureReview },
@@ -46,7 +50,8 @@ it("loads the pinned public question before rendering six seats, a blue BB and r
   expect(screen.getByLabelText("BTN player")).toHaveClass("villain", "move-raise");
   expect(screen.getByLabelText("BTN player")).toHaveTextContent("Raised to 3 bb");
   expect(screen.getAllByLabelText(/^(UTG|HJ|CO|BTN|SB|BB) player$/)).toHaveLength(6);
-  expect(screen.getByLabelText("Your cards")).toHaveTextContent("9♦9♥");
+  expect(screen.getByRole("heading", { name: `Defend ${client.heroHandName}` })).toBeInTheDocument();
+  expect(screen.getByLabelText("Your cards")).toHaveTextContent(rootQuestion.heroCards.startsWith("7") ? "7♦7♥" : "9♦9♥");
   expect(screen.queryByLabelText("Flop board")).not.toBeInTheDocument();
   for (const name of ["Fold", "Call 2 bb", "Raise to 9 bb"]) expect(button(name)).toHaveTextContent("EV");
   expect(button("Raise to 9 bb")).toHaveTextContent("8 bb more committed");
@@ -87,9 +92,11 @@ it("blocks duplicate clicks and keyboard submissions while a grade is pending", 
 it("restores source-validated attempts and resets without reloading or solving", async () => {
   const saved = rootFixtureReview([{ sourceCaseIndex: 0, action: "raise:9.0" }]); localStorage.setItem(rootSessionKey, JSON.stringify(saved));
   const fetch = mockApi(); open(); await screen.findByRole("heading", { name: "Unresolved" });
-  expect(screen.getByText(/Restored 1 saved attempts/)).toBeInTheDocument();
+  expect(screen.getByText(/Restored 1 saved attempt for this study/)).toBeInTheDocument();
+  fireEvent.click(button("Review 1 attempt"));
+  expect(await screen.findByRole("heading", { name: "1 attempt · One preflop decision" })).toBeInTheDocument();
   fireEvent.click(button("Start over")); expect(button("Call 2 bb")).toBeEnabled();
-  expect(localStorage.getItem(rootSessionKey)).toBeNull(); expect(fetch.mock.calls).toHaveLength(2);
+  expect(localStorage.getItem(rootSessionKey)).toBeNull(); expect(fetch.mock.calls).toHaveLength(3);
 });
 it("discards corrupt saved data and keeps practice available without storage", async () => {
   localStorage.setItem(rootSessionKey, "broken"); mockApi();

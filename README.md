@@ -325,7 +325,10 @@ The pocket-sevens study now also has a separate opt-in cached backend with three
 legal grades and ordered review exports. It keeps the original research bounds,
 adds the posted 1 BB once for current-decision EV, and preserves raise ambiguity.
 See [the sevens cached API guide](docs/sevens-preflop-cached-api.md). This cache/API
-implementation was cleared at `bc35089`; its frontend integration is still pending.
+implementation was cleared at `bc35089`. The [sevens table trainer](docs/sevens-preflop-table-trainer.md)
+connects it at `#root-sevens-preflop`, with source-specific cards and heading,
+action EVs, inline feedback and independent saved reviews. The new frontend
+revision is awaiting owner review.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at

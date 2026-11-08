@@ -29,9 +29,11 @@ const RootPreflopPage = lazy(() => import("./RootPreflopPage"));
 const MinimumPreflopPage = lazy(() => import("./MinimumPreflopPage"));
 const SequencePreflopPage = lazy(() => import("./SequencePreflopPage"));
 
+const SevensPreflopPage = lazy(() => import("./SevensPreflopPage"));
 const BatchPreflopPage = lazy(() => import("./BatchPreflopPage"));
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#root-sevens-preflop")) return "root-sevens-preflop";
   if (window.location.hash.startsWith("#root-batch-preflop")) return "root-batch-preflop";
   if (window.location.hash.startsWith("#root-sequence-preflop")) return "root-sequence-preflop";
   if (window.location.hash.startsWith("#root-minimum-preflop")) return "root-minimum-preflop";
@@ -66,6 +68,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "root-sevens-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><SevensPreflopPage /></Suspense>;
   if (route === "root-batch-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><BatchPreflopPage /></Suspense>;
   if (route === "root-sequence-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><SequencePreflopPage /></Suspense>;
   if (route === "root-minimum-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><MinimumPreflopPage /></Suspense>;
