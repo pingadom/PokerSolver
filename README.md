@@ -351,6 +351,11 @@ tightens two worst-case raise values with one owned sequence-form batch and
 independent physical/certificate checks. This backend revision was cleared at
 `a874053`; feedback qualification remains separate and trainer grades are unchanged.
 
+The [two-hand feedback qualification](docs/bank-raise-feedback-qualification.md)
+checks complete 77/AJs menus against the owned raise minima and all six original
+policies, narrowing raise loss bounds while preserving unresolved classifications.
+This qualification revision awaits owner review; cache/API adoption follows.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on

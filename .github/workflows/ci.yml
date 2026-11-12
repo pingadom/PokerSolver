@@ -108,6 +108,8 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_check_root_hand_bank_drill.py'
           python3 scripts/check-bank-raise-sequence.py
           python3 -m unittest discover -s scripts -p 'test_check_bank_raise_sequence.py'
+          python3 scripts/check-bank-raise-feedback.py
+          python3 -m unittest discover -s scripts -p 'test_check_bank_raise_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_sevens_preflop_drill.py'
           python3 -m unittest discover -s scripts -p 'test_check_root_sequence_feedback.py'
           python3 -m unittest discover -s scripts -p 'test_check_sequence_preflop_drill.py'

@@ -20,6 +20,7 @@ SCHEMA = 'pokerlab-backend-ci-manifest/v6'
 # The new v7 startup uses a lighter solver shard; its API startup uses services-1.
 # This changes assignment only: no class, method or evidence check is excluded.
 SOLVER_REPLAY_SHARDS = {
+    'com.pokerlab.solver.BankRaiseFeedbackReplayTest': 0,
     'com.pokerlab.solver.UnpairedFlopCollectionIntegrationTest': 4,
     'com.pokerlab.solver.CallFlopCollectionIntegrationTest': 6,
     'com.pokerlab.solver.SixMaxExpandedFlopIntervalCollectionTest': 7,

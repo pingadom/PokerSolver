@@ -334,6 +334,15 @@ feedback with the existing reference, reach and educational gates before adding
 a separately pinned trainer source. Broader ranges, rake, richer street betting
 and multiway equilibrium remain separate goals. AWS deployment stays paused.
 
+## Qualified two hand minimum feedback
+
+The raise-minimum solver is merged through PR #235. The proposed
+[complete-menu qualification](bank-raise-feedback-qualification.md) verifies both
+hands and all 72 primary/reference utility/loss inequalities under the unchanged
+gates. It remains offline and awaits owner review. Next add a separately pinned
+owned cache/API and then integrate the public menus into practice. Existing
+trainer grades and broader range, rake and multiway goals remain separate.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
