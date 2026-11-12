@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "pokerlab-bank-raise-sequence-request/v1",
+  "bankStoredSha256": "eb31446fa68413b12cfea51d2ac6e52356de91437c8068faf997a2a40491cadd",
+  "bankStudyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+  "heroCards": [
+    "7d 7h",
+    "Ac Jc"
+  ],
+  "action": "raise:9.0"
+}

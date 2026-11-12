@@ -556,9 +556,42 @@ seats and selected-flop continuation. Raises remain unresolved and trainer admis
 is false. It does not establish six-player GTO or full-hand frequencies. AWS
 deployment remains paused.
 
+## 2026-11-12 sevens and suited ace jack raise minima
+
+The project owner reviewed code changes at `a874053cbda0b74cb80ec45ef01ad50ee3034f84` on branch
+`codex/bank-raise-sequence-minima` and explicitly cleared PR creation with:
+
+> cleared a874053
+
+This approval covers that revision only, not later changes or the entire historical
+codebase. The owned study rebuilds the original physical parent and fresh references
+then computes two raise-to-9 sequence minima in one shared-parent batch. It retains
+the original supplied ranges, folded-card blockers, global security face and limits.
+The terminal-profit minimum brackets tighten the earlier conservative lower bound
+to about -0.4222958 BB for sevens and -3.4421594 BB for suited ace-jack. Minimum
+upper brackets are not full action upper bounds. Six original policy checks use
+the appropriate lower bounds; trainer grades and admission remain unchanged.
+
+Local checks passed 17 Java tests including complete owned replay, 14 independent
+tests, full compilation and Spotless. Independent checks reconstruct physical
+payoffs, both parent and endpoint certificates, flows and grouped best responses.
+One declared generation and one owned replay suite ran, each retaining the original
+80k/160k fresh references. An accessor error was corrected before numerical work;
+isolated-checker dependency setup was completed without rerunning the solver.
+No numerical rejection was retried, source evidence overwritten or kernel cap raised.
+
+The factual confirmation is recorded in 156 authored Markdown documents, the
+reference PDF and local untracked interview Word guide: 158 documents. Reviewed
+code and all 430 numerical evidence files remain unchanged after clearance. Full
+PR CI follows PR creation with all 30 jobs and 379 prior class assignments retained;
+the new Java class adds 17 tests on solver-7 and the independent step adds 14 tests.
+Scope remains a research-only two-active-player supplied game at six seats with
+selected-flop continuation. Feedback qualification is the next boundary. AWS
+deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
+`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
+2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
