@@ -329,14 +329,14 @@ Keep the current eleven-question trainer stable during that work. AWS deployment
 The three-hand cache and table are merged through PR #233. The proposed
 [sevens/AJs sequence-minimum study](bank-raise-sequence-minima.md) now tightens
 the two additional worst-case raise values under the same original global face.
-It remains research-only and awaits owner review. Next qualify the resulting
+It remains research-only and was cleared at `a874053`. Next qualify the resulting
 feedback with the existing reference, reach and educational gates before adding
 a separately pinned trainer source. Broader ranges, rake, richer street betting
 and multiway equilibrium remain separate goals. AWS deployment stays paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
+`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
+2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

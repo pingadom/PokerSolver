@@ -89,7 +89,7 @@ changed physical payoffs, face/certificate forgery, altered support, misleading
 minimum interpretation and partial-failure controls. Full compilation and Spotless
 passed. The existing 30 CI jobs, class assignments and checker steps are retained;
 the new checker/test commands are additive and the new Java class is discovered
-automatically. Full PR CI awaits owner clearance and PR creation.
+automatically. Owner clearance was given for `a874053`; full PR CI follows PR creation.
 
 ## Scope and next step
 
@@ -106,12 +106,14 @@ its own identity, startup replay and review. AWS deployment remains paused.
 
 ## Review status
 
-This new solver revision is awaiting explicit owner clearance. The latest review
-record below refers only to the earlier table frontend, not this later solver code.
+The project owner cleared code revision `a874053cbda0b74cb80ec45ef01ad50ee3034f84`
+on 2026-11-12 (Europe/London), with “cleared a874053”. This applies only to that
+revision. Full PR CI follows PR creation; Code Review History retains this and
+earlier approvals.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
+`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
+2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

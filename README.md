@@ -348,12 +348,12 @@ cleared by the project owner at `838fd5a`; full PR CI follows PR creation.
 
 The [sevens and suited ace-jack raise study](docs/bank-raise-sequence-minima.md)
 tightens two worst-case raise values with one owned sequence-form batch and
-independent physical/certificate checks. This new backend revision awaits owner
-review and feedback qualification; current trainer grades remain unchanged.
+independent physical/certificate checks. This backend revision was cleared at
+`a874053`; feedback qualification remains separate and trainer grades are unchanged.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
+`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
+2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
