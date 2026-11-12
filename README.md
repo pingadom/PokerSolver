@@ -341,9 +341,14 @@ separate opt-in backend for all three bank hands, nine cached grades and mixed-h
 reviews with canonical downloads. Startup owns one full source replay; requests
 then use immutable cached values. This cache/API change was cleared at `afb22aa`.
 
+The [three-hand table trainer](docs/root-hand-bank-table-trainer.md) connects
+77, 99 and AJs to mixed or manual practice, with hand-specific inline EVs,
+feedback, saved sessions and canonical mixed reviews. This frontend revision is
+cleared by the project owner at `838fd5a`; full PR CI follows PR creation.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
+`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

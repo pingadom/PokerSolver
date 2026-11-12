@@ -1,0 +1,6 @@
+.bank-hand-toolbar { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; margin: .5rem 0; }
+.bank-hand-toolbar [role="group"] { display: flex; gap: .35rem; }
+.bank-hand-toolbar .trainer-button { padding: .4rem .65rem; min-height: 34px; }
+.bank-hand-toolbar [aria-pressed="true"] { border-color: #58a6ff; background: #162d47; color: #edf6ff; }
+.bank-hand-toolbar > span { font-size: .78rem; color: #435b66; }
+.bank-table-page .hand-play-title { margin-bottom: .35rem; }

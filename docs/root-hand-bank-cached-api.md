@@ -4,7 +4,8 @@ The owned preflop root bank now has an opt-in research trainer backend with thre
 private-hand questions and nine cached grades. Sevens, nines and suited ace-jack
 retain separate question indices and values. Mixed-hand reviews preserve every
 submitted choice, repeat and ordinal, and count distinct questions correctly.
-No frontend page is added in this change.
+The cache/API milestone itself added no frontend page. The subsequent
+[table integration](root-hand-bank-table-trainer.md) was cleared by the project owner at `838fd5a`.
 
 The source remains the original supplied joint game with two active players at
 six seats and a selected-flop continuation. This does not establish unrestricted
@@ -124,25 +125,27 @@ were used: the first revealed copied OpenAPI schema names; a separately declared
 second start verified corrected final controller names and range constraints.
 No numerical rejection was retried, saved source report replaced, or kernel budget
 increased. Native HTTP used explicit Spring properties; Compose CI verifies the
-environment-variable wiring. Docker is unavailable locally, so that container
-check remains pending the next PR.
+environment-variable wiring. PR #232 passed all 30 CI jobs, including the new
+root-hand-bank container smoke, before merging. Docker was unavailable locally;
+the container check ran in CI.
 
 The CI change retains the existing 29 jobs and adds a separate 30th container job
 for this source, plus an independent projection-checker command. Earlier classes,
 test assignments, checker steps, fixture bytes and dependency versions are retained.
-The next UI step can mix these three public question indices while retaining their
-source pin, hero cards, inline EVs and canonical reviews.
+The subsequent table integration mixes these three public question indices while
+retaining their source pin, hero cards, inline EVs and canonical reviews. Its new
+frontend code was separately cleared at `838fd5a`.
 
 ## Review status
 
 The project owner cleared code revision `afb22aa3ed11992c2d6fed91cfdb6a24aae130f8`
 on 2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies
-only to that revision. Full PR CI follows PR creation; Code Review History retains
-this and earlier approvals.
+only to that revision. PR #232 passed all 30 checks and merged; Code Review History
+retains this and earlier approvals. The subsequent table UI was separately cleared at `838fd5a`.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`afb22aa3ed11992c2d6fed91cfdb6a24aae130f8` and cleared PR creation on
-2026-11-08 (Europe/London), with “cleared afb22aa”. This confirmation applies to
+`838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
+2026-11-08 (Europe/London), with “cleared 838fd5a”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
