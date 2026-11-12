@@ -324,6 +324,16 @@ The immediate goals are:
 
 Keep the current eleven-question trainer stable during that work. AWS deployment remains paused. A general six-active-player 100bb cash solution, realistic opening/defence charts and coherent full-hand play are still broader goals, not descriptions of the current bounded research model.
 
+## Three-hand preflop continuation
+
+The three-hand cache and table are merged through PR #233. The proposed
+[sevens/AJs sequence-minimum study](bank-raise-sequence-minima.md) now tightens
+the two additional worst-case raise values under the same original global face.
+It remains research-only and awaits owner review. Next qualify the resulting
+feedback with the existing reference, reach and educational gates before adding
+a separately pinned trainer source. Broader ranges, rake, richer street betting
+and multiway equilibrium remain separate goals. AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on

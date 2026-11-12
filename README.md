@@ -346,6 +346,11 @@ The [three-hand table trainer](docs/root-hand-bank-table-trainer.md) connects
 feedback, saved sessions and canonical mixed reviews. This frontend revision is
 cleared by the project owner at `838fd5a`; full PR CI follows PR creation.
 
+The [sevens and suited ace-jack raise study](docs/bank-raise-sequence-minima.md)
+tightens two worst-case raise values with one owned sequence-form batch and
+independent physical/certificate checks. This new backend revision awaits owner
+review and feedback qualification; current trainer grades remain unchanged.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `838fd5ac57e6524998181efedf99a6a1d6d7f20d` and cleared PR creation on
