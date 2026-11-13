@@ -339,13 +339,13 @@ and multiway equilibrium remain separate goals. AWS deployment stays paused.
 The raise-minimum solver is merged through PR #235. The proposed
 [complete-menu qualification](bank-raise-feedback-qualification.md) verifies both
 hands and all 72 primary/reference utility/loss inequalities under the unchanged
-gates. It remains offline and awaits owner review. Next add a separately pinned
+gates. It remains offline; the owner cleared revision `62a8a68`. Next add a separately pinned
 owned cache/API and then integrate the public menus into practice. Existing
 trainer grades and broader range, rake and multiway goals remain separate.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
-2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
+`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
+2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
