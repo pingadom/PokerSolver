@@ -77,7 +77,13 @@ class BackendEvidenceTest(unittest.TestCase):
         assigned = [ci.selected(group, sources) for group in ci.GROUPS]
         self.assertEqual(set(sources), set().union(*map(set, assigned)))
         self.assertEqual(len(sources), sum(map(len, assigned)))
-        self.assertEqual({4, 5, 6, 7}, set(ci.SOLVER_REPLAY_SHARDS.values()))
+        self.assertEqual({
+            'com.pokerlab.solver.BankRaiseFeedbackReplayTest': 0,
+            'com.pokerlab.solver.UnpairedFlopCollectionIntegrationTest': 4,
+            'com.pokerlab.solver.CallFlopCollectionIntegrationTest': 6,
+            'com.pokerlab.solver.SixMaxExpandedFlopIntervalCollectionTest': 7,
+            'com.pokerlab.solver.SizingFlopCollectionIntegrationTest': 5,
+        }, ci.SOLVER_REPLAY_SHARDS)
         for name, bucket in ci.SOLVER_REPLAY_SHARDS.items():
             self.assertIn(name, ci.selected(f'solver-{bucket}', sources))
             self.assertNotIn(name, ci.selected('solver-3', sources))

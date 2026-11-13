@@ -589,9 +589,36 @@ Scope remains a research-only two-active-player supplied game at six seats with
 selected-flop continuation. Feedback qualification is the next boundary. AWS
 deployment remains paused.
 
+## 2026-11-13 complete two hand raise feedback qualification
+
+The project owner reviewed code changes at `62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785`
+on branch `codex/bank-raise-feedback` and explicitly cleared PR creation with:
+
+> cleared 62a8a68
+
+This approval applies only to those changes, not later code or the entire historical
+codebase. The qualification owns the original two-hand raise-minimum replay, checks
+both complete fold/call/raise menus, retains all full-action upper bounds and original
+quality/reach gates, and checks 72 utility/loss inequalities across six policies.
+Raise loss upper bounds improve to about 1.1078041 BB for sevens and 3.5953334 BB
+for AcJc. Both raises remain strategy dependent; trainer admission stays false.
+
+Local checks passed 18 Java tests including complete owned replay, 16 independent
+tests and 14 backend CI controls, plus compilation and Spotless. One generation and
+one owned replay suite used the unchanged physical model, fresh 80k/160k references
+and original limits. No numerical retry or published-source overwrite was used.
+CI preserves all 380 earlier class assignments; the new replay uses solver-0.
+
+The actual approval is recorded in 157 authored Markdown documents, the reference
+PDF and local untracked interview Word guide: 159 documents. All 433 numerical
+evidence files and reviewed code remain unchanged after clearance. Full PR CI
+follows PR creation. Scope remains an offline supplied-range game with two active
+players at six seats and selected-flop continuation. Cache/API adoption is the next
+boundary. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
-2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
+`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
+2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

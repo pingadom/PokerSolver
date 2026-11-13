@@ -70,7 +70,7 @@ Analytic tests count exactly 7,140 material flops in a four-world fixture, check
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`a874053cbda0b74cb80ec45ef01ad50ee3034f84` and cleared PR creation on
-2026-11-12 (Europe/London), with “cleared a874053”. This confirmation applies to
+`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
+2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
