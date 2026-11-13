@@ -26,7 +26,10 @@ SOLVER_REPLAY_SHARDS = {
     'com.pokerlab.solver.SixMaxExpandedFlopIntervalCollectionTest': 7,
     'com.pokerlab.solver.SizingFlopCollectionIntegrationTest': 5,
 }
-SERVICE_REPLAY_SHARDS = {'com.pokerlab.api.SizingFlopCollectionControllerTest': 1}
+SERVICE_REPLAY_SHARDS = {
+    'com.pokerlab.api.SizingFlopCollectionControllerTest': 1,
+    'com.pokerlab.api.RootHandBankRaiseDrillControllerTest': 1,
+}
 
 
 def inventory():

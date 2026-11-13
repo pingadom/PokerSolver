@@ -39,6 +39,9 @@ pokerlab:
   cache:
     enabled: ${CACHE_ENABLED:true}
   trainer:
+    bank-raise-feedback-enabled: ${TRAINER_BANK_RAISE_FEEDBACK_ENABLED:false}
+    bank-raise-feedback-manifest-path: ${TRAINER_BANK_RAISE_FEEDBACK_MANIFEST_PATH:}
+    bank-raise-feedback-study-hash: ${TRAINER_BANK_RAISE_FEEDBACK_STUDY_HASH:}
     paired-flop-interval-research-enabled: ${TRAINER_PAIRED_FLOP_INTERVAL_RESEARCH_ENABLED:false}
     paired-flop-interval-request-path: ${TRAINER_PAIRED_FLOP_INTERVAL_REQUEST_PATH:}
     paired-flop-interval-report-path: ${TRAINER_PAIRED_FLOP_INTERVAL_REPORT_PATH:}

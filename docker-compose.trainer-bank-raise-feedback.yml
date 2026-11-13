@@ -1,0 +1,14 @@
+# Explicit local opt-in. One owned two-hand feedback replay, then cached choices only.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1600m"
+      TRAINER_BANK_RAISE_FEEDBACK_ENABLED: "true"
+      TRAINER_BANK_RAISE_FEEDBACK_MANIFEST_PATH: /opt/pokerlab/bank-raise/supplied-bank-raise-drill-manifest.json
+      TRAINER_BANK_RAISE_FEEDBACK_STUDY_HASH: 60f8eb975a963ebdf3964cf4edb72354b8e0841e01bc5eb3a3a333e5bc9b0343
+    volumes:
+      - ./docs/data/supplied-bank-raise-drill-manifest.json:/opt/pokerlab/bank-raise/supplied-bank-raise-drill-manifest.json:ro
+      - ./docs/data/supplied-bank-raise-feedback-request.json:/opt/pokerlab/bank-raise/supplied-bank-raise-feedback-request.json:ro
+      - ./docs/data/supplied-bank-raise-feedback-report.json.gz:/opt/pokerlab/bank-raise/supplied-bank-raise-feedback-report.json.gz:ro
+      - ./docs/data/supplied-bank-raise-sequence-report.json.gz:/opt/pokerlab/bank-raise/supplied-bank-raise-sequence-report.json.gz:ro
+      - ./docs/data/supplied-root-hand-bank-report.json.gz:/opt/pokerlab/bank-raise/supplied-root-hand-bank-report.json.gz:ro

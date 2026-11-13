@@ -343,6 +343,14 @@ gates. It remains offline; the owner cleared revision `62a8a68`. Next add a sepa
 owned cache/API and then integrate the public menus into practice. Existing
 trainer grades and broader range, rake and multiway goals remain separate.
 
+## Owned two hand raise feedback cache and API
+
+The proposed [cache/API boundary](bank-raise-feedback-cache-api.md) replays the
+qualified 77/AJs menus once at startup, then serves two public questions and six
+immutable grades with mixed reviews and exports. It uses a separate source pin
+and opt-in flag, retains original IDs 0 and 2 and awaits owner review. Next connect
+the pinned menus to the existing table; broader range and multiway work follows.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
