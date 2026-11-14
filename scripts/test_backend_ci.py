@@ -16,6 +16,13 @@ spec.loader.exec_module(ci)
 
 
 class BackendEvidenceTest(unittest.TestCase):
+    def test_new_owned_raise_http_replay_uses_the_lighter_service_group(self):
+        name = 'com.pokerlab.api.RootHandBankRaiseDrillControllerTest'
+        sources = {name: 'api', 'com.pokerlab.api.SizingFlopCollectionControllerTest': 'api'}
+        self.assertEqual(1, ci.SERVICE_REPLAY_SHARDS[name])
+        self.assertEqual(sorted(sources), ci.selected('services-1', sources))
+        self.assertEqual([], ci.selected('services-0', sources))
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
