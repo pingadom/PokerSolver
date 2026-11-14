@@ -49,7 +49,7 @@ These remain bounded two-active-player research games at six-seat tables with su
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared 77accde”. This confirmation applies to
+`df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared df4101e”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
