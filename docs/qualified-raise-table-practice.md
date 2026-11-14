@@ -6,8 +6,8 @@ move's current-decision EV on its button, grades choices through the native API,
 and keeps next-hand controls and feedback on the main table. The hero stays blue,
 opponents red, with move colours and captions on the player panels.
 
-The backend cache/API was separately reviewed as `cc53f13`. This later UI revision
-awaits explicit owner clearance. Both raises remain unresolved and general trainer
+The backend cache/API was separately reviewed as `cc53f13`. This UI revision
+was cleared as `77accde` on 2026-11-14 (Europe/London). Both raises remain unresolved and general trainer
 admission stays off. This is practice for a supplied two-active-player model at six
 seats with a fixed preflop prefix and selected-flop continuation.
 
@@ -104,7 +104,7 @@ was already reviewed.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
+`77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared 77accde”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
