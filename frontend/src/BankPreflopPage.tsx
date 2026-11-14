@@ -45,18 +45,18 @@ export default function BankPreflopPage({ client = bankPreflopClient }: { client
       const params = new URLSearchParams(query ?? "");
       if (route !== client.route || [...params.keys()].some(k => !["study", "question", "mode"].includes(k) || params.getAll(k).length !== 1) ||
         params.has("study") && params.get("study") !== m.studyHash ||
-        params.has("question") && !/^[0-2]$/.test(params.get("question")!) ||
+        params.has("question") && (!/^[0-2]$/.test(params.get("question")!) || !client.sourceCaseIndices.includes(Number(params.get("question")))) ||
         params.has("mode") && !["mixed", "manual"].includes(params.get("mode")!)) throw new RootProtocolError();
-      const index = Number(params.get("question") ?? 0);
+      const index = Number(params.get("question") ?? client.sourceCaseIndices[0]);
       const requestedMode = params.get("mode") === "manual" ? "manual" : "mixed";
-      const loaded = await Promise.all([0, 1, 2].map(async i => {
+      const loaded = await Promise.all(client.sourceCaseIndices.map(async i => {
         const value = client.parseRootQuestion(await client.rootRequest(`/questions/${i}?studyHash=${m.studyHash}`, controller.signal), m);
         if (value.sourceCaseIndex !== i) throw new RootProtocolError();
         return value;
       }));
       if (controller.signal.aborted) return;
-      const q = loaded[index];
-      setMetadata(m); setQuestions(loaded); setQuestion(q); setMode(requestedMode); queue.current = initialBankQueue(index);
+      const q = loaded.find(q => q.sourceCaseIndex === index)!;
+      setMetadata(m); setQuestions(loaded); setQuestion(q); setMode(requestedMode); queue.current = initialBankQueue(index, Math.random, client.sourceCaseIndices);
       window.history.replaceState(null, "", `${client.route}?study=${m.studyHash}&question=${index}&mode=${requestedMode}`);
       try {
         const text = localStorage.getItem(client.rootSessionKey);
@@ -130,20 +130,21 @@ export default function BankPreflopPage({ client = bankPreflopClient }: { client
     window.addEventListener("keydown", key); return () => window.removeEventListener("keydown", key);
   });
   function selectHand(index: number, nextMode = mode) {
-    if (pending.current || !metadata || !questions[index]) return;
-    setQuestion(questions[index]); setMode(nextMode); setFeedback(null); setReview(null); setError(""); setNotice("");
-    if (nextMode === "manual") queue.current = initialBankQueue(index);
+    const selected = questions.find(q => q.sourceCaseIndex === index);
+    if (pending.current || !metadata || !selected) return;
+    setQuestion(selected); setMode(nextMode); setFeedback(null); setReview(null); setError(""); setNotice("");
+    if (nextMode === "manual") queue.current = initialBankQueue(index, Math.random, client.sourceCaseIndices);
     window.history.replaceState(null, "", `${client.route}?study=${metadata.studyHash}&question=${index}&mode=${nextMode}`);
   }
   function changeMode(nextMode: "mixed" | "manual") {
     if (pending.current || !question || !metadata) return;
-    setMode(nextMode); queue.current = initialBankQueue(question.sourceCaseIndex);
+    setMode(nextMode); queue.current = initialBankQueue(question.sourceCaseIndex, Math.random, client.sourceCaseIndices);
     window.history.replaceState(null, "", `${client.route}?study=${metadata.studyHash}&question=${question.sourceCaseIndex}&mode=${nextMode}`);
   }
   function nextHand() {
     if (!question || pending.current) return;
-    if (mode === "mixed") { const next = nextBankHand(question.sourceCaseIndex, queue.current); queue.current = next.remaining; selectHand(next.index); }
-    else selectHand((question.sourceCaseIndex + 1) % 3);
+    if (mode === "mixed") { const next = nextBankHand(question.sourceCaseIndex, queue.current, Math.random, client.sourceCaseIndices); queue.current = next.remaining; selectHand(next.index); }
+    else selectHand(client.sourceCaseIndices[(client.sourceCaseIndices.indexOf(question.sourceCaseIndex) + 1) % client.sourceCaseIndices.length]);
   }
   function startOver() {
     if (pending.current) return;
@@ -160,14 +161,14 @@ export default function BankPreflopPage({ client = bankPreflopClient }: { client
       {question && !fatal && <div className="bank-hand-toolbar" aria-label="Hand practice settings">
         <div role="group" aria-label="Practice format"><button className="trainer-button" aria-pressed={mode === "mixed"} disabled={busy} onClick={() => changeMode("mixed")}>Mixed practice</button>
           <button className="trainer-button" aria-pressed={mode === "manual"} disabled={busy} onClick={() => changeMode("manual")}>Choose a hand</button></div>
-        <div role="group" aria-label="Hero hand">{bankHandLabels.map((label, i) => <button key={label} className="trainer-button" aria-label={`Practise ${bankHandNames[i]}`}
-          aria-pressed={question.sourceCaseIndex === i} disabled={busy} onClick={() => selectHand(i, "manual")}>{label}</button>)}</div>
+        <div role="group" aria-label="Hero hand">{client.sourceCaseIndices.map(i => <button key={i} className="trainer-button" aria-label={`Practise ${bankHandNames[i]}`}
+          aria-pressed={question.sourceCaseIndex === i} disabled={busy} onClick={() => selectHand(i, "manual")}>{bankHandLabels[i]}</button>)}</div>
         <span>{mode === "mixed" ? "One of each hand per round" : "Selected hand practice"}</span>
       </div>}
       {error && <div className="trainer-error" role="alert"><p>{error}</p><button className="trainer-button" disabled={busy}
         onClick={fatal || !question ? reload : () => setError("")}>{fatal ? "Load current study" : question ? "Dismiss error" : "Retry loading"}</button></div>}
       {!question && !error && <p role="status">Loading preflop practice…</p>}
-      {question && !fatal && <section className="trainer-card trainer-play preflop-play" aria-label="Three-hand preflop research decision">
+      {question && !fatal && <section className="trainer-card trainer-play preflop-play" aria-label={client.decisionLabel}>
         <PokerTable heroSeat="BB" heroCombo={question.heroCards} potBb={question.context.potBb} toCallBb={question.context.toCallBb}
           selectedMove={feedback ? { kind: tone(feedback.move.action), label: rootActionLabel(feedback.move.action) } : undefined}
           players={question.context.players.map(player => {
@@ -211,7 +212,7 @@ export default function BankPreflopPage({ client = bankPreflopClient }: { client
           </section>}
         </PokerTable>
         <details className="interval-context"><summary>EV scope, public history and exact bounds</summary>
-          <p>EV is profit from this decision, with optimal future hero continuation against each supported opponent strategy. The 1 bb already posted is accounted for once by the server. Loss bounds compare moves jointly; subtracting separate EV endpoints does not reproduce them. Displayed endpoints are rounded outwards.</p>
+          <p>EV is profit from this decision, with optimal future hero continuation against each supported opponent strategy. The 1 bb already posted is accounted for once by the server. {client.lossScopeNote} Displayed endpoints are rounded outwards.</p>
           <p>This fixed-prefix, supplied-range model uses one selected flop plus residual continuations. It does not establish whole-hand frequencies, a unique best action or six-player GTO. No future board or opponent cards are shown.</p>
           <ol>{question.context.history.map((h, i) => <li key={i}>{h.seat}: {h.kind === "FOLD" ? "Fold" : h.kind === "RAISE_TO" ? `Raise to ${h.amountBb} bb` : `Post ${h.amountBb} bb`}</li>)}</ol>
           <dl>{question.moves.map(m => <div key={m.action}><dt>{rootActionLabel(m.action)}</dt><dd>EV [{m.lowerEvBb}, {m.upperEvBb}] bb; loss [{m.lowerLossBb}, {m.upperLossBb}] bb</dd></div>)}</dl>

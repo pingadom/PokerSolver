@@ -351,6 +351,13 @@ immutable grades with mixed reviews and exports. It uses a separate source pin
 and opt-in flag, retains original IDs 0 and 2 and was cleared as `cc53f13`. Next connect
 the pinned menus to the existing table; broader range and multiway work follows.
 
+## Qualified raise table integration
+
+The proposed [qualified raise table](qualified-raise-table-practice.md) uses the
+separate 77/AJs source with original IDs 0 and 2, inline EV bounds, server grading
+and mixed reviews. The original three-hand source remains separate. This UI
+revision awaits owner clearance; range and later-street expansion remain ahead.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on

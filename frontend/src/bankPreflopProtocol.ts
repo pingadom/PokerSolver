@@ -8,6 +8,7 @@ export type RootMetadata = {
   schemaVersion: string; studyHash: string; publicationStatus: string; trainerAdmission: boolean;
   model: string; evScope: string; tableSeats: number; activePlayers: number; availableQuestions: number;
   cachedLegalGrades: number; maximumAttempts: number; startupBudget: Record<string, number>;
+  sourceCaseIndices?: number[];
 };
 export type RootQuestion = { sourceCaseIndex: number; heroCards: string; board: string[]; evScope: string;
   context: { actingSeat: MultiwaySeat; publicHistory: string;
@@ -60,9 +61,17 @@ function choice(value: unknown): RootChoice {
 export function createBankClient(config: {
   frozen: { metadata: RootMetadata; questions: RootQuestion[] };
   apiBase: string; route: string; exportPrefix: string; studyLabel?: string; heroHandName?: string;
+  decisionLabel?: string; lossScopeNote?: string;
 }) {
   const { frozen, apiBase: rootApiBase, route, exportPrefix } = config;
   const rootStudyHash = frozen.metadata.studyHash;
+  const sourceCaseIndices = Object.freeze(frozen.questions.map(q => q.sourceCaseIndex));
+  ensure(sourceCaseIndices.length === frozen.metadata.availableQuestions && new Set(sourceCaseIndices).size === sourceCaseIndices.length);
+  ensure(sourceCaseIndices.every(i => Number.isInteger(i) && i >= 0 && i < 3));
+  if (frozen.metadata.sourceCaseIndices) ensure(rootEqual(frozen.metadata.sourceCaseIndices, sourceCaseIndices));
+  function questionFor(index: number): RootQuestion {
+    const q = frozen.questions.find(q => q.sourceCaseIndex === index); ensure(q); return q;
+  }
   function parseRootMetadata(value: unknown): RootMetadata {
     ensure(rootEqual(value, frozen.metadata)); return value as RootMetadata;
   }
@@ -70,7 +79,7 @@ export function createBankClient(config: {
     parseRootMetadata(metadata);
     const q = object(value, "sourceCaseIndex heroCards board context evScope moves");
     ensure(typeof q.sourceCaseIndex === "number" && Number.isInteger(q.sourceCaseIndex) && q.sourceCaseIndex >= 0 && q.sourceCaseIndex < 3);
-    ensure(rootEqual(value, frozen.questions[q.sourceCaseIndex])); return value as RootQuestion;
+    ensure(rootEqual(value, questionFor(q.sourceCaseIndex))); return value as RootQuestion;
   }
   function parseRootGrade(value: unknown, question: RootQuestion, action: RootAction): RootGrade {
     parseRootQuestion(question, frozen.metadata);
@@ -93,7 +102,7 @@ export function createBankClient(config: {
     ensure(r.studyHash === metadata.studyHash && Array.isArray(r.attempts) && r.attempts.length <= rootMaximumAttempts);
     for (let i = 0; i < r.attempts.length; i++) {
       const a = object(r.attempts[i], "ordinal attempt grade"), c = choice(a.attempt);
-      ensure(a.ordinal === i); parseRootGrade(a.grade, frozen.questions[c.sourceCaseIndex], c.action);
+      ensure(a.ordinal === i); parseRootGrade(a.grade, questionFor(c.sourceCaseIndex), c.action);
     }
     const attempts = r.attempts as RootAttempt[];
     ensure(rootEqual(r.counts, rootReviewCounts(attempts)) && (!expected || rootEqual(rootChoices(attempts), expected)));
@@ -138,7 +147,9 @@ export function createBankClient(config: {
     ensure(text.endsWith("\n") && !text.includes("\r"));
     readRootReview(text, metadata, question, rootChoices(attempts)); return text;
   }
-  return { route, exportPrefix, heroHandName: config.heroHandName ?? "pocket nines", studyLabel: config.studyLabel ?? "ORIGINAL RAISE BOUNDS", rootStudyHash, rootApiBase,
+  return { route, exportPrefix, sourceCaseIndices, heroHandName: config.heroHandName ?? "pocket nines", studyLabel: config.studyLabel ?? "ORIGINAL RAISE BOUNDS", rootStudyHash, rootApiBase,
+    decisionLabel: config.decisionLabel ?? "Three-hand preflop research decision",
+    lossScopeNote: config.lossScopeNote ?? "Loss bounds compare moves jointly; subtracting separate EV endpoints does not reproduce them.",
     parseRootMetadata, parseRootQuestion, parseRootGrade, rootReviewCounts, parseRootReview, rootSessionReview, rootChoices, rootSessionKey, readRootReview, rootRequest, rootReviewDocument };
 }
 export type BankClient = ReturnType<typeof createBankClient>;

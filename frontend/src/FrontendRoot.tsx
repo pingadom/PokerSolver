@@ -30,10 +30,12 @@ const MinimumPreflopPage = lazy(() => import("./MinimumPreflopPage"));
 const SequencePreflopPage = lazy(() => import("./SequencePreflopPage"));
 
 const BankPreflopPage = lazy(() => import("./BankPreflopPage"));
+const BankRaisePreflopPage = lazy(() => import("./BankRaisePreflopPage"));
 const SevensPreflopPage = lazy(() => import("./SevensPreflopPage"));
 const BatchPreflopPage = lazy(() => import("./BatchPreflopPage"));
 
 function currentRoute() {
+  if (window.location.hash.startsWith("#bank-raise-feedback")) return "bank-raise-feedback";
   if (window.location.hash.startsWith("#root-hand-bank")) return "root-hand-bank";
   if (window.location.hash.startsWith("#root-sevens-preflop")) return "root-sevens-preflop";
   if (window.location.hash.startsWith("#root-batch-preflop")) return "root-batch-preflop";
@@ -70,6 +72,7 @@ export default function FrontendRoot() {
     window.addEventListener("hashchange", changed);
     return () => window.removeEventListener("hashchange", changed);
   }, []);
+  if (route === "bank-raise-feedback") return <Suspense fallback={<p role="status">Loading hand practice…</p>}><BankRaisePreflopPage /></Suspense>;
   if (route === "root-hand-bank") return <Suspense fallback={<p role="status">Loading hand practice…</p>}><BankPreflopPage /></Suspense>;
   if (route === "root-sevens-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><SevensPreflopPage /></Suspense>;
   if (route === "root-batch-preflop") return <Suspense fallback={<p role="status">Loading preflop practice…</p>}><BatchPreflopPage /></Suspense>;
