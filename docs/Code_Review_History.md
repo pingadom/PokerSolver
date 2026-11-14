@@ -649,9 +649,46 @@ research-only supplied game with two active players at six seats and selected-fl
 continuation, with trainer admission false. Table UI integration is the next
 revision and needs its own review. AWS deployment remains paused.
 
+## 2026-11-14 qualified raise table practice
+
+The project owner reviewed code changes at `77accdef878a5fb2cfb4c672f716e30f67da7ec6`
+on branch `codex/qualified-raise-table` and explicitly cleared PR creation with:
+
+> cleared 77accde
+
+This approval covers the changes in that revision. The table uses the separately
+pinned qualified 77/AJs cache, preserves original source IDs 0 and 2, displays
+current-decision EV bounds on move buttons and keeps next-hand controls and
+feedback together. Mixed and manual practice, sessions, ordered reviews and
+UTF-8 exports retain source identities. The older three-hand source stays separate.
+
+Local validation passed lint, TypeScript, the production build and 1,465 tests
+across 44 files. All 1,384 earlier cases remain; 81 cases were added. Native HTTP
+and OpenAPI checks passed for two questions and six grades. Production and Vite
+proxies used the real native server; a four-attempt browser download matched all
+2,573 native export bytes. Desktop checks kept all six players, choices and
+feedback visible; mobile checks found no horizontal overflow.
+
+One declared qualified-source startup and one separately declared legacy
+compatibility startup used their original bounded numerical work. The latter
+restored an initially offline local legacy preview. Neither mathematical source
+was regenerated or retried in the UI validation. All 436 evidence files remain
+unchanged. The prior backend PR's requested frontend-only CI retry actually
+executed all 30 jobs again; the audit records those actual executions and their
+success on the unchanged approved backend head. The later UI includes an explicit
+readiness wait in that existing keyboard test without removing its assertions.
+
+This actual clearance is recorded across 159 authored Markdown documents, the
+reference PDF and local untracked interview Word guide: 161 documents. Only
+documentation records change after clearance. Full PR CI follows. This supplied
+model has two active players at six seats with selected-flop continuation; both
+raises remain unresolved and general trainer admission remains false. Broader
+ranges, richer streets and multiplayer equilibrium remain separate work. AWS
+deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
+`77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared 77accde”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

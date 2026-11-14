@@ -180,6 +180,7 @@ it("prevents duplicates/navigation while grading and discards late results after
 });
 it("aborts unmounted work and ignores modified, repeating or focused keyboard shortcuts", async () => {
   const fetch = mockApi(); const view = open(); await screen.findByRole("button", { name: "Call" });
+  await waitFor(() => expect(call()).toBeEnabled());
   fireEvent.keyDown(window, { key: "2", ctrlKey: true }); fireEvent.keyDown(window, { key: "2", repeat: true });
   fireEvent.keyDown(call(), { key: "2" });
   expect(fetch.mock.calls.filter(([url]) => String(url).endsWith("/grade"))).toHaveLength(0);

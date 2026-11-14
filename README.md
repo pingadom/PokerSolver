@@ -360,9 +360,13 @@ The [owned two-hand raise feedback cache/API](docs/bank-raise-feedback-cache-api
 adds separately pinned questions, cached grades, reviews and exports for source IDs
 0 and 2. The owner cleared backend revision `cc53f13`; public table adoption follows.
 
+The [qualified raise table](docs/qualified-raise-table-practice.md) connects the
+77/AJs cache to inline EV choices, hand navigation, saved sessions and review
+downloads. This later UI revision awaits owner clearance.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
+`77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared 77accde”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

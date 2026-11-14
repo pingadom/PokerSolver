@@ -4,6 +4,7 @@ import { loadEnv } from "vite";
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   server: { proxy: {
+    "/api/v1/trainer/research/bank-raise-feedback-drill": loadEnv(mode, ".", "POKERLAB_").POKERLAB_BANK_RAISE_FEEDBACK_API_TARGET ?? "http://localhost:18080",
     "/api/v1/trainer/research/root-hand-bank-drill": loadEnv(mode, ".", "POKERLAB_").POKERLAB_ROOT_HAND_BANK_API_TARGET ?? "http://localhost:18080",
     "/api/v1/trainer/research/root-sevens-preflop-drill": loadEnv(mode, ".", "POKERLAB_").POKERLAB_ROOT_SEVENS_PREFLOP_API_TARGET ?? "http://localhost:18080",
     "/api/v1/trainer/research/root-batch-preflop-drill": loadEnv(mode, ".", "POKERLAB_").POKERLAB_ROOT_BATCH_PREFLOP_API_TARGET ?? "http://localhost:18080",
