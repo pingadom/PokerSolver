@@ -348,12 +348,12 @@ trainer grades and broader range, rake and multiway goals remain separate.
 The proposed [cache/API boundary](bank-raise-feedback-cache-api.md) replays the
 qualified 77/AJs menus once at startup, then serves two public questions and six
 immutable grades with mixed reviews and exports. It uses a separate source pin
-and opt-in flag, retains original IDs 0 and 2 and awaits owner review. Next connect
+and opt-in flag, retains original IDs 0 and 2 and was cleared as `cc53f13`. Next connect
 the pinned menus to the existing table; broader range and multiway work follows.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
-2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
+`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -3,7 +3,7 @@
 This backend serves the original BB77 and AcJc feedback as immutable questions,
 six cached grades and ordered reviews. It builds on qualification revision
 `62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785`, separately cleared by the owner.
-The new cache/API revision awaits explicit owner review. It remains research-only;
+The owner cleared cache/API revision `cc53f13` on 2026-11-14. It remains research-only;
 trainer admission is false and both raises remain strategy dependent.
 
 ## Startup and ownership
@@ -109,12 +109,12 @@ table UI while retaining the previous source. AWS deployment remains paused.
 
 ## Review status
 
-The new cache/API revision awaits owner clearance. The confirmation below covers
-only the earlier qualification code and does not claim review of this later code.
+The owner cleared this cache/API revision with “cleared cc53f13” on 2026-11-14.
+The confirmation below identifies exactly the reviewed code changes.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
-2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
+`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

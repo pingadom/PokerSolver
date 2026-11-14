@@ -616,9 +616,42 @@ follows PR creation. Scope remains an offline supplied-range game with two activ
 players at six seats and selected-flop continuation. Cache/API adoption is the next
 boundary. AWS deployment remains paused.
 
+## 2026-11-14 owned raise feedback cache and API
+
+The project owner reviewed code changes at `cc53f13ce75c053c298fe32c5a0d3fb67663cd2d`
+on branch `codex/bank-raise-feedback-cache` and explicitly cleared PR creation with:
+
+> cleared cc53f13
+
+This approval applies to those changes only, not later revisions or the entire
+historical codebase. The cache replays the owned qualified 77/AJs source at startup,
+pins all five input files and checks them again after replay, then serves two
+public questions and six immutable cached grades. Original IDs 0 and 2 remain
+separate. Current-decision EVs shift by the posted 1 BB exactly once; losses and
+strategy-dependent raise classifications stay unchanged. Requests supply choices
+only, and ordered reviews and UTF-8 exports derive grades and counts on the server.
+
+Local checks passed 23 Java tests, 13 independent corruption tests, six smoke
+controls and 15 CI accounting controls, plus compilation and Spotless. One owned
+fixture capture, one loader suite and one real MVC startup used three declared
+local physical replays with the original limits and fresh 80k/160k references.
+No numerical rejection was retried or mathematical source report regenerated.
+Git text normalization preserved the raw capture, parsed values and Python syntax;
+the final independent receipt was rederived without another numerical replay.
+Native Docker startup and OpenAPI verification are pending PR CI after clearance.
+The new API replay uses the lighter services-1 group; all 382 earlier assignments,
+all 30 CI jobs and their timeouts remain intact.
+
+This actual clearance is recorded in 158 authored Markdown documents, the
+reference PDF and local untracked interview Word guide: 160 documents. All 436
+evidence files and reviewed code stay unchanged after clearance. Scope remains a
+research-only supplied game with two active players at six seats and selected-flop
+continuation, with trainer admission false. Table UI integration is the next
+revision and needs its own review. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
-2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
+`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

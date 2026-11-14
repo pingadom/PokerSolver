@@ -358,11 +358,11 @@ The owner cleared qualification revision `62a8a68`; cache/API adoption follows.
 
 The [owned two-hand raise feedback cache/API](docs/bank-raise-feedback-cache-api.md)
 adds separately pinned questions, cached grades, reviews and exports for source IDs
-0 and 2. This later backend revision awaits owner clearance; public table adoption follows.
+0 and 2. The owner cleared backend revision `cc53f13`; public table adoption follows.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`62a8a68d32d3e1e0e729dcee0dab7c1ff55cb785` and cleared PR creation on
-2026-11-13 (Europe/London), with “cleared 62a8a68”. This confirmation applies to
+`cc53f13ce75c053c298fe32c5a0d3fb67663cd2d` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared cc53f13”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
