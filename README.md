@@ -364,6 +364,15 @@ The [qualified raise table](docs/qualified-raise-table-practice.md) connects the
 77/AJs cache to inline EV choices, hand navigation, saved sessions and review
 downloads. This later UI revision awaits owner clearance.
 
+## Shared parent envelope batch
+
+The proposed [shared-parent root envelope backend](docs/root-security-envelope-batch.md)
+reuses one owned parent across up to eight complete root menus, with cumulative
+work caps and independently checked original certificates. Analytic controls
+preserve standalone bounds while avoiding repeated parent LPs. Physical bank
+integration follows separately; existing sources and grades retain their pins.
+This later backend revision awaits owner review. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on

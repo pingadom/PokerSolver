@@ -353,10 +353,19 @@ the pinned menus to the existing table; broader range and multiway work follows.
 
 ## Qualified raise table integration
 
-The proposed [qualified raise table](qualified-raise-table-practice.md) uses the
+The owner-cleared [qualified raise table](qualified-raise-table-practice.md) uses the
 separate 77/AJs source with original IDs 0 and 2, inline EV bounds, server grading
 and mixed reviews. The original three-hand source remains separate. This UI
 revision was cleared as `77accde`; range and later-street expansion remain ahead.
+
+## Shared parent envelope batch
+
+The proposed [shared-parent root envelope backend](root-security-envelope-batch.md)
+reuses one owned parent across up to eight complete root menus, with cumulative
+work caps and independently checked original certificates. Analytic controls
+preserve standalone bounds while avoiding repeated parent LPs. Physical bank
+integration follows separately; existing sources and grades retain their pins.
+This later backend revision awaits owner review. AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at

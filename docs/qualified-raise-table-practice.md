@@ -98,9 +98,9 @@ expansion and postflop progression remain separate work.
 
 ## Review status
 
-This UI revision awaits explicit owner clearance. The latest confirmation below
-covers only the earlier backend cache/API code and does not claim this later code
-was already reviewed.
+The owner cleared UI code revision `77accde` on 2026-11-14 (Europe/London).
+The confirmation below applies to that exact UI revision. Any later material
+code changes require their own review before PR creation.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
