@@ -138,12 +138,12 @@ qualified tighter 77/AJs source is not replaced or downgraded. Existing caches
 and website lessons keep their pins and grades. Trainer admission remains false.
 Next integrate a separately pinned owned source where appropriate, retaining
 qualification and public projection boundaries. AWS deployment remains paused.
-This later code revision awaits explicit owner review; the approval below covers
-only the earlier shared-parent batch revision.
+The owner cleared this revision on 2026-11-15 after reviewing its packet.
+The approval below identifies the exact reviewed code revision.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared df4101e”. This confirmation applies to
+`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

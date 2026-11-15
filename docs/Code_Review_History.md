@@ -722,9 +722,49 @@ two-active-player constant-sum research solver, including at six-seat layouts;
 physical hand-bank integration and qualification follow separately. No new public
 trainer content or general multiplayer GTO claim is introduced. AWS stays paused.
 
+## 2026-11-15 physical hand bank parent reuse
+
+The project owner reviewed code changes at `c4cbfaddb8c57f1d13f940f53d578a4698911032`
+on branch `codex/physical-root-bank-parent-reuse` and explicitly cleared PR
+creation in response to the review packet with:
+
+> I reviewed c4cbfad — clear it
+
+This approval covers that revision only. It followed clarification that the
+repeated clearance of `df4101e` referred to an already merged revision; that
+older clearance was not treated as approval for this later code. The physical
+producer now passes its actual private affine result to a separately tagged batch
+mode. The complete original three-hand bank uses two parent LPs instead of eight,
+with all fifteen endpoints and fresh 80k/160k references retained. Every original
+menu, witness and full policy assessment must reproduce. The default batch path
+and the separately qualified tighter 77/AJs source keep their earlier behaviour.
+
+Local validation passed 44 Java tests and 18 independent corruption controls,
+compilation, Spotless and packaging. One declared physical generation and one
+owned replay passed with unchanged source and numerical capture. Both runs kept
+one physical model, two parent LPs, fifteen endpoints and two fresh references.
+No rejected numerical solve was retried and no tolerance or cap was increased.
+The independent checker binds the new parent and endpoint certificates to the
+unchanged original physics and derives hashes from raw lexical JSON spans,
+preserving original numeric notation and IEEE signed zero.
+
+The first compile caught a checked-exception wrapper omission before physical
+work. Request/checker CRLF transport endings were normalized after preserving raw
+copies; only transport hashes in the independent receipt were rederived. The first
+numerical gzip stayed unchanged. All 436 earlier data files and 28 earlier test
+resources remain unchanged. Three separate data files record the new request,
+report and independent receipt. Full PR CI follows this actual clearance.
+
+The confirmation is recorded in 161 authored Markdown documents, the reference
+PDF and local untracked interview Word guide: 163 documents. Only documentation
+records change after clearance. This remains a supplied-range, fixed-prefix,
+two-active-player research model at six seats. Existing website grades and source
+pins are unchanged; no public trainer admission or multiplayer GTO claim follows.
+AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared df4101e”. This confirmation applies to
+`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
