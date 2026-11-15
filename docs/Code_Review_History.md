@@ -762,9 +762,44 @@ two-active-player research model at six seats. Existing website grades and sourc
 pins are unchanged; no public trainer admission or multiplayer GTO claim follows.
 AWS deployment remains paused.
 
+## 2026-11-15 owned physical root-bank trainer cache
+
+The project owner reviewed code changes at `0c134ab61c74462795a41552a9c17ac75aa882e7`
+on branch `codex/physical-root-bank-cache` and explicitly cleared PR creation in response
+to the exact revision's review packet with:
+
+> I reviewed 0c134ab — clear it
+
+This approval covers that revision only. The new offline loader captures and
+pins the original public source and its separate optimized physical proof,
+replays the private captured view once, and constructs the same three public
+questions, nine cached grades and mixed reviews. Two parent LPs replace the
+historical eight; fifteen endpoints and fresh 80k/160k references remain.
+Old HTTP metadata stays historical and unchanged. The new proof identity cannot
+replace the public source ID when selecting questions or grading choices.
+
+Local validation passed 23 Java tests and 50 independent checks (17 new, 18 retained
+physical and 15 retained public controls), Spotless, compilation and packaging.
+One declared owned cache startup passed in 90.407 seconds including Maven; this
+is a functional observation, not a speed benchmark. All solver source bytes were
+frozen before that run. No numerical rejection was retried and no new public
+numerical fixture was generated. All 439 earlier data files and 28 resources
+remain unchanged; two new data files carry the manifest and independent receipt.
+The checker helper-call mismatch and raw export-byte handling were corrected
+without rerunning the solver, with earlier logs and receipt retained locally.
+
+The confirmation is recorded in 162 authored Markdown documents, the reference
+PDF and the local untracked interview Word guide: 164 documents. Only these
+review records change after clearance. All 389 earlier CI assignments and thirty
+jobs remain. Full PR CI follows this actual clearance. This remains a research
+model with two active players at six seats, trainer admission false, and no
+unrestricted multiplayer equilibrium claim. API integration follows separately;
+the website and separately qualified tighter 77/AJs source are unchanged.
+AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

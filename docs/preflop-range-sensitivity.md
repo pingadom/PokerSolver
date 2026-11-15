@@ -22,7 +22,7 @@ This is a local one-at-a-time test. It does not cover simultaneous range changes
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

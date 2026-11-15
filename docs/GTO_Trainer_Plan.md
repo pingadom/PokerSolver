@@ -383,14 +383,14 @@ three-hand public contract while replaying the owned physical parent proof once
 at startup: two parent LPs, fifteen endpoints and the same fresh references.
 All nine grades, EV/loss semantics, hidden-information boundaries and mixed review
 results match the current fixture. The new manifest separates public identity
-from physical startup provenance. This backend revision awaits owner clearance.
+from physical startup provenance. The owner cleared this backend revision as `0c134ab`.
 Next add opt-in HTTP configuration and accurate provenance metadata, then use the
 same verified path when expanding ranges. Broader GTO and AWS deployment remain
 separate; deployment is paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

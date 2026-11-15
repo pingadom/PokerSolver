@@ -6,9 +6,9 @@ one physical game, one parent call/two parent LPs, fifteen endpoint LPs, and fre
 80k/160k references. Earlier startup used eight parent LPs. This is
 a reduction in parent LP count; no comparative runtime speedup is claimed.
 
-The new code is awaiting explicit owner review. No PR may be opened until its
-exact revision is cleared. The latest historical approval at the end of this
-file applies only to that previously reviewed code revision.
+The owner reviewed and cleared code revision `0c134ab` on 2026-11-15.
+Full PR CI follows this actual clearance. The approval at the end of this file
+identifies the exact reviewed code revision.
 
 ## Two identities, one unchanged public contract
 
@@ -104,7 +104,7 @@ AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
