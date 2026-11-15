@@ -58,6 +58,7 @@ pokerlab:
     size-menu-btn-manifest-path: ${TRAINER_SIZE_MENU_BTN_MANIFEST_PATH:}
     size-menu-btn-study-hash: ${TRAINER_SIZE_MENU_BTN_STUDY_HASH:}
     root-hand-bank-enabled: ${TRAINER_ROOT_HAND_BANK_ENABLED:false}
+    root-hand-bank-startup-source: ${TRAINER_ROOT_HAND_BANK_STARTUP_SOURCE:ORIGINAL}
     root-hand-bank-manifest-path: ${TRAINER_ROOT_HAND_BANK_MANIFEST_PATH:}
     root-hand-bank-study-hash: ${TRAINER_ROOT_HAND_BANK_STUDY_HASH:}
     root-sevens-preflop-enabled: ${TRAINER_ROOT_SEVENS_PREFLOP_ENABLED:false}

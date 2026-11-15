@@ -880,7 +880,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker-compose.yml -f docker-compose.trainer-root-hand-bank.yml config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.trainer-physical-root-bank.yml config --quiet
       - run: python3 -m unittest discover -s scripts -p 'test_smoke_root_hand_bank.py'
+      - run: python3 -m unittest discover -s scripts -p 'test_smoke_physical_root_bank_startup.py'
       - run: docker compose up --build -d
       - name: Wait for default API readiness
         run: |
@@ -890,11 +892,18 @@ jobs:
           done
           exit 1
       - name: Root hand bank source is absent without opt-in
-        run: python3 scripts/smoke-root-hand-bank.py --disabled
+        run: |
+          python3 scripts/smoke-root-hand-bank.py --disabled
+          python3 scripts/smoke-physical-root-bank-startup.py --disabled
       - name: Owned root bank startup, nine cached grades and canonical reviews
         run: |
           docker compose -f docker-compose.yml -f docker-compose.trainer-root-hand-bank.yml up -d --no-deps api
           python3 scripts/smoke-root-hand-bank.py
+          python3 scripts/smoke-physical-root-bank-startup.py --source ORIGINAL
+      - name: Owned physical parent startup provenance and unchanged nine-grade contract
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.trainer-physical-root-bank.yml up -d --no-deps api
+          python3 scripts/smoke-physical-root-bank-startup.py
       - name: Raise feedback opt-in configuration and smoke controls
         run: |
           docker compose -f docker-compose.yml -f docker-compose.trainer-bank-raise-feedback.yml config --quiet
