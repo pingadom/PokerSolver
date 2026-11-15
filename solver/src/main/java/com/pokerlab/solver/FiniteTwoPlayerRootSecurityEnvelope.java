@@ -143,6 +143,18 @@ public final class FiniteTwoPlayerRootSecurityEnvelope {
             int pivotLimit,
             long arithmeticLimit)
             throws Exception {
+        return calculate(game, q, supplied, compilerLimit, pivotLimit, arithmeticLimit, null);
+    }
+
+    private static <S> Result calculate(
+            MultiPlayerCfrGame<S> game,
+            Question q,
+            Map<String, String> supplied,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent)
+            throws Exception {
         Objects.requireNonNull(q);
         if (pivotLimit < 0
                 || pivotLimit > BoundedLinearProgram.MAX_PIVOTS
@@ -152,30 +164,21 @@ public final class FiniteTwoPlayerRootSecurityEnvelope {
                     "Only reduced original LP work limits are permitted");
         var budget = new SequenceFormAffineProjection.Budget(compilerLimit);
         var checked = checked(game);
-        if (q.hero() != checked.firstActor() && q.hero() != checked.secondActor())
-            throw new IllegalArgumentException("Active root actor required");
-        var roots = new ArrayList<Root>();
-        var inside = new HashSet<String>();
-        var outside = new HashSet<String>();
-        scope(
-                checked.snapshot().initialState(),
-                q,
-                1,
-                false,
-                false,
-                roots,
-                inside,
-                outside,
-                budget);
-        double mass = roots.stream().mapToDouble(Root::mass).sum();
-        if (!Double.isFinite(mass) || mass < MINIMUM_REACH || mass > 1 + EPS || roots.isEmpty())
-            throw new IllegalArgumentException("Positive original-prior root reach required");
-        if (inside.stream().anyMatch(outside::contains))
+        if (ownedParent != null
+                && (!FiniteTwoPlayerAffineSequenceForm.ASCENDING_REFINED_DIRECTIONS_ALGORITHM
+                                .equals(ownedParent.audit().algorithm())
+                        || !SixMaxHistoryPhysicalConditionalRefinement.hash(checked.snapshot())
+                                .equals(ownedParent.audit().snapshotHash())))
             throw new IllegalArgumentException(
-                    "Root deviation shares hero information with another observation");
+                    "Owned ascending-refined parent must match captured game");
+        var selected = rootSelection(checked, q, budget);
+        var roots = selected.roots();
+        double mass = selected.mass();
         var baseline =
-                FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
-                        checked.snapshot());
+                ownedParent == null
+                        ? FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
+                                checked.snapshot())
+                        : ownedParent;
         boolean first = q.hero() == checked.firstActor();
         var hero = first ? checked.firstFlow() : checked.secondFlow();
         var opponent = first ? checked.secondFlow() : checked.firstFlow();
@@ -359,6 +362,61 @@ public final class FiniteTwoPlayerRootSecurityEnvelope {
                         actions,
                         new Work(
                                 work.chargedUnits(), work.limit(), lp.solves, lp.pivots, lp.work)));
+    }
+
+    private record RootSelection(List<Root> roots, double mass) {
+        RootSelection {
+            roots = List.copyOf(roots);
+        }
+    }
+
+    private static RootSelection rootSelection(
+            Checked checked, Question q, SequenceFormAffineProjection.Budget budget) {
+        Objects.requireNonNull(q, "question");
+        if (q.hero() != checked.firstActor() && q.hero() != checked.secondActor())
+            throw new IllegalArgumentException("Active root actor required");
+        var roots = new ArrayList<Root>();
+        var inside = new HashSet<String>();
+        var outside = new HashSet<String>();
+        scope(
+                checked.snapshot().initialState(),
+                q,
+                1,
+                false,
+                false,
+                roots,
+                inside,
+                outside,
+                budget);
+        double mass = roots.stream().mapToDouble(Root::mass).sum();
+        if (!Double.isFinite(mass) || mass < MINIMUM_REACH || mass > 1 + EPS || roots.isEmpty())
+            throw new IllegalArgumentException("Positive original-prior root reach required");
+        if (inside.stream().anyMatch(outside::contains))
+            throw new IllegalArgumentException(
+                    "Root deviation shares hero information with another observation");
+        return new RootSelection(roots, mass);
+    }
+
+    static void preflight(Checked checked, Question q, SequenceFormAffineProjection.Budget budget) {
+        rootSelection(checked, q, budget);
+    }
+
+    static Result solveCapturedParent(
+            Snapshot snapshot,
+            Question q,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit)
+            throws Exception {
+        Objects.requireNonNull(ownedParent, "ownedParent");
+        try {
+            return calculate(
+                    snapshot, q, null, compilerLimit, pivotLimit, arithmeticLimit, ownedParent);
+        } catch (IllegalStateException failure) {
+            throw new Rejected(
+                    "Root envelope verification failed: " + failure.getMessage(), failure);
+        }
     }
 
     private static void scope(

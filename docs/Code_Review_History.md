@@ -686,9 +686,45 @@ raises remain unresolved and general trainer admission remains false. Broader
 ranges, richer streets and multiplayer equilibrium remain separate work. AWS
 deployment stays paused.
 
+## 2026-11-14 shared parent root envelope batch
+
+The project owner reviewed code changes at `df4101ea7b0e3b11467bd1d28c2f59c2768e3725`
+on branch `codex/shared-parent-root-envelopes` and explicitly cleared PR creation:
+
+> cleared df4101e
+
+This approval covers that revision. The batch captures the caller's game once,
+checks every root before parent solving and reuses one private owned ascending-
+refined parent across up to eight distinct full-menu root questions. The two
+active labels may vary by question. Compiler units, endpoint pivots and arithmetic
+remain cumulative under the original caps; failure returns no partial result.
+The original standalone envelope arithmetic and witnesses stay unchanged.
+
+Local checks passed 16 new Java tests and all nine unchanged envelope tests,
+18 independent corruption tests, compilation, Spotless and packaging. All 38
+original LP certificates across eight frozen analytic menus were independently
+checked. Those controls use six parent LPs instead of sixteen standalone parent
+LPs; this is a solve-count result rather than a measured runtime speedup. The
+maximum-eight-question and live-caller single-capture controls also passed.
+
+The first analytic capture was retained. Initial comparison assertions wrongly
+expected a batch remainder to equal the standalone compiler cap; only that limit
+was excluded from exact output comparisons. The independent checker was corrected
+to use the envelope's own flow normalization and Java binary64 JSON notation.
+Neither correction changed the capture or a numerical kernel. No physical poker
+replay, fresh reference training or mathematical source regeneration was run for
+this slice. All 436 data files and all 27 earlier test resources remain unchanged.
+
+The actual clearance is recorded in 160 authored Markdown documents, the reference
+PDF and local untracked interview Word guide: 162 documents. Only documentation
+records change after clearance. Full PR CI follows. This remains a conservative
+two-active-player constant-sum research solver, including at six-seat layouts;
+physical hand-bank integration and qualification follow separately. No new public
+trainer content or general multiplayer GTO claim is introduced. AWS stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`77accdef878a5fb2cfb4c672f716e30f67da7ec6` and cleared PR creation on
-2026-11-14 (Europe/London), with “cleared 77accde”. This confirmation applies to
+`df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on
+2026-11-14 (Europe/London), with “cleared df4101e”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
