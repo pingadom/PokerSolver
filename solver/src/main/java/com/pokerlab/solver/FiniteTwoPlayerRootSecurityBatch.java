@@ -9,6 +9,8 @@ public final class FiniteTwoPlayerRootSecurityBatch {
     public static final String ALGORITHM = "ROOT_SECURITY_ENVELOPE_SHARED_OWNED_PARENT_BATCH/v1";
     public static final String SCOPE =
             "CONSERVATIVE_FULL_MENU_OUTER_BOUNDS_NOT_ATTAINED_ENDPOINTS_OR_TRAINER_ADMISSION/v1";
+    public static final String REUSED_PARENT_ALGORITHM =
+            "ROOT_SECURITY_ENVELOPE_REUSED_OWNED_PHYSICAL_PARENT_BATCH/v1";
     public static final int MAX_QUESTIONS = 8;
 
     public record Work(
@@ -74,6 +76,32 @@ public final class FiniteTwoPlayerRootSecurityBatch {
             int pivotLimit,
             long arithmeticLimit)
             throws Exception {
+        return calculate(game, questions, compilerLimit, pivotLimit, arithmeticLimit, null);
+    }
+
+    static <S> Result reuseOwnedParent(
+            MultiPlayerCfrGame<S> game,
+            List<Question> questions,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent)
+            throws Exception {
+        Objects.requireNonNull(ownedParent, "ownedParent");
+        return calculate(
+                game,
+                questions,
+                FiniteTwoPlayerAffineSequenceForm.MAX_REDUCTION_WORK,
+                BoundedLinearProgram.MAX_PIVOTS,
+                BoundedLinearProgram.MAX_ARITHMETIC_WORK,
+                ownedParent);
+    }
+
+    private static <S> Result calculate(
+            MultiPlayerCfrGame<S> game,
+            List<Question> questions,
+            long compilerLimit,
+            int pivotLimit,
+            long arithmeticLimit,
+            FiniteTwoPlayerAffineSequenceForm.Result ownedParent)
+            throws Exception {
         Objects.requireNonNull(questions, "questions");
         if (questions.isEmpty() || questions.size() > MAX_QUESTIONS)
             throw new IllegalArgumentException("One to eight distinct root questions required");
@@ -89,11 +117,20 @@ public final class FiniteTwoPlayerRootSecurityBatch {
             throw new IllegalArgumentException("Original endpoint limits required");
         var budget = new SequenceFormAffineProjection.Budget(compilerLimit);
         var checked = FiniteTwoPlayerSequenceForm.checked(game);
+        if (ownedParent != null
+                && (!FiniteTwoPlayerAffineSequenceForm.ASCENDING_REFINED_DIRECTIONS_ALGORITHM
+                                .equals(ownedParent.audit().algorithm())
+                        || !SixMaxHistoryPhysicalConditionalRefinement.hash(checked.snapshot())
+                                .equals(ownedParent.audit().snapshotHash())))
+            throw new IllegalArgumentException(
+                    "Owned ascending-refined parent must match captured game");
         for (var q : captured) FiniteTwoPlayerRootSecurityEnvelope.preflight(checked, q, budget);
         long preflight = budget.audit().chargedUnits();
         var parent =
-                FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
-                        checked.snapshot());
+                ownedParent == null
+                        ? FiniteTwoPlayerAffineSequenceForm.solveAscendingRefinedDirections(
+                                checked.snapshot())
+                        : ownedParent;
         var envelopes = new ArrayList<FiniteTwoPlayerRootSecurityEnvelope.Audit>();
         int pivots = 0, solves = 0;
         long arithmetic = 0;
@@ -116,12 +153,14 @@ public final class FiniteTwoPlayerRootSecurityBatch {
         var p = parent.audit();
         var work =
                 new Work(
-                        1,
-                        2,
-                        p.reductionWork().chargedUnits(),
-                        Math.addExact(
-                                p.firstLp().work().arithmeticWork(),
-                                p.secondLp().work().arithmeticWork()),
+                        ownedParent == null ? 1 : 0,
+                        ownedParent == null ? 2 : 0,
+                        ownedParent == null ? p.reductionWork().chargedUnits() : 0,
+                        ownedParent == null
+                                ? Math.addExact(
+                                        p.firstLp().work().arithmeticWork(),
+                                        p.secondLp().work().arithmeticWork())
+                                : 0,
                         preflight,
                         budget.audit().chargedUnits(),
                         compilerLimit,
@@ -133,7 +172,7 @@ public final class FiniteTwoPlayerRootSecurityBatch {
                         0);
         return new Result(
                 new Audit(
-                        ALGORITHM,
+                        ownedParent == null ? ALGORITHM : REUSED_PARENT_ALGORITHM,
                         SCOPE,
                         false,
                         p.snapshotHash(),

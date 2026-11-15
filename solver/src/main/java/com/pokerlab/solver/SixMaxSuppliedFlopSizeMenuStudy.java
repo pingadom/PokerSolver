@@ -105,9 +105,15 @@ public final class SixMaxSuppliedFlopSizeMenuStudy {
 
     public static final class Result {
         private final Report report;
+        private final FiniteTwoPlayerAffineSequenceForm.Result ownedParent;
 
-        private Result(Report report) {
+        private Result(Report report, FiniteTwoPlayerAffineSequenceForm.Result ownedParent) {
             this.report = report;
+            this.ownedParent = Objects.requireNonNull(ownedParent);
+        }
+
+        FiniteTwoPlayerAffineSequenceForm.Result ownedParent() {
+            return ownedParent;
         }
 
         public Report report() {
@@ -177,7 +183,8 @@ public final class SixMaxSuppliedFlopSizeMenuStudy {
                         solved.audit(),
                         solved.firstLpWitness(),
                         solved.secondLpWitness(),
-                        references));
+                        references),
+                solved);
     }
 
     public static Request readRequest(Path path) throws Exception {
