@@ -141,9 +141,17 @@ qualification and public projection boundaries. AWS deployment remains paused.
 The owner cleared this revision on 2026-11-15 after reviewing its packet.
 The approval below identifies the exact reviewed code revision.
 
+## Cache handoff follow-up
+
+The proposed [offline cache loader](physical-root-bank-drill-cache.md) now accepts
+only the reproduced owned physical result and retains the existing public study
+ID and all nine original grades. Its separate manifest identifies optimized startup
+provenance. The owner cleared the new cache code as `0c134ab`; the approval below
+identifies that exact later revision.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

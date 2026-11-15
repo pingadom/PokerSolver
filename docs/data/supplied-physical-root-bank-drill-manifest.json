@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "pokerlab-physical-root-bank-drill-manifest/v1",
+  "studyHash": "e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d",
+  "physicalStudyHash": "feb331638b447a30be52d8fd9bfe6c267120afe29ba0b51c94b416f7d068771e",
+  "requestFile": "supplied-physical-root-bank-reuse-request.json",
+  "requestSha256": "36119e55e1b9eef745b1b7fcad2a2401b5ade450bf84bbdabdd9298155ea2975",
+  "reportFile": "supplied-physical-root-bank-reuse-report.json.gz",
+  "reportStoredSha256": "bb65da5c69e8689bdd758a6f80ece2b9c2fbbaedb903782d1be046ebef24ee5d",
+  "bankFile": "supplied-root-hand-bank-report.json.gz",
+  "bankStoredSha256": "eb31446fa68413b12cfea51d2ac6e52356de91437c8068faf997a2a40491cadd",
+  "startupBudget": {
+    "physicalGames": 1,
+    "maximumParentSolveCalls": 1,
+    "maximumParentLpSolves": 2,
+    "maximumEnvelopeLpSolves": 15,
+    "freshReferenceRuns": 2,
+    "freshIterations": 240000
+  }
+}

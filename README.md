@@ -382,9 +382,18 @@ LPs and the original fresh references remain. The ordinary batch and current
 trainer sources keep their identities. The owner cleared this revision as `c4cbfad`;
 no public lesson or multiplayer GTO claim follows. AWS deployment stays paused.
 
+## Owned physical root-bank cache
+
+The proposed [offline cache loader](docs/physical-root-bank-drill-cache.md) carries
+the two-parent physical proof into the existing three-hand research protocol.
+It replays once at startup, then serves the same nine immutable grades and mixed
+reviews without numerical work. Public lesson identity and optimized startup proof
+are pinned separately. API integration follows after review; current website
+sources and tighter qualified 77/AJs menus remain unchanged.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed c4cbfad — clear it”. This confirmation applies to
+`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
+2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
