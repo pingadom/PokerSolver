@@ -1,0 +1,37 @@
+{
+  "status": "PASS_PHYSICAL_PARENT_REUSE_RESEARCH_ONLY",
+  "physicalGames": 1,
+  "actualParentLpSolves": 2,
+  "historicalParentLpSolves": 8,
+  "additionalBatchParentLpSolves": 0,
+  "endpointLpSolves": 15,
+  "parentCertificatesChecked": 2,
+  "endpointCertificatesChecked": 15,
+  "originalMenus": 3,
+  "legalMoves": 9,
+  "policyChecks": 9,
+  "forcedContinuationValuesChecked": 27,
+  "decisionLossesChecked": 27,
+  "cumulativeCompilerUnits": 3366363,
+  "endpointPivots": 468,
+  "endpointArithmeticWork": 1440054300,
+  "freshReferenceRuns": 2,
+  "freshReferenceIterations": [
+    80000,
+    160000
+  ],
+  "originalEnvelopeHashes": [
+    "77dafe7eea51eba08714b6cddee8012a92e391d3d5197b17563d808bd6a249eb",
+    "ca7578f308eb6b1fe944ec4db9c883984b835229a009538e8652b7bd8901f54b",
+    "6ec195ff65c465719ed94e14214c94f62d1a1623f64a677acf2adfcd5053a2dd"
+  ],
+  "trainerAdmission": false,
+  "gradingAuthority": false,
+  "freshLpSolves": 0,
+  "freshCfrRuns": 0,
+  "sourceStoredSha256": "eb31446fa68413b12cfea51d2ac6e52356de91437c8068faf997a2a40491cadd",
+  "requestStoredSha256": "36119e55e1b9eef745b1b7fcad2a2401b5ade450bf84bbdabdd9298155ea2975",
+  "reportStoredSha256": "bb65da5c69e8689bdd758a6f80ece2b9c2fbbaedb903782d1be046ebef24ee5d",
+  "checkerSourceSha256": "6cc0de717cad3927442f2be467281e73b48776ae0522ae5814382eb908553171",
+  "immutableHelperSha256": "e2ffd071b195d26a44c0339958ac51eac57a8c89c2d54c89e7b0d7f2faff9893"
+}

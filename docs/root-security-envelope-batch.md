@@ -103,6 +103,15 @@ trainer sources keep their identities and do not automatically use this batch.
 AWS deployment remains paused. The owner cleared this code as `df4101e` on 2026-11-14 (Europe/London).
 The approval below applies to that exact revision.
 
+## Physical parent handoff
+
+The proposed [physical hand-bank integration](physical-root-bank-parent-reuse.md)
+reproduces the original three menus and full reference checks with two parent LPs
+instead of eight, by reusing the physical producer's owned result. Fifteen endpoint
+LPs and the original fresh references remain. The ordinary batch and current
+trainer sources keep their identities. This later revision awaits owner review;
+no public lesson or multiplayer GTO claim follows. AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on

@@ -373,6 +373,15 @@ preserve standalone bounds while avoiding repeated parent LPs. Physical bank
 integration follows separately; existing sources and grades retain their pins.
 The owner cleared this backend revision as `df4101e`. AWS deployment remains paused.
 
+## Physical parent handoff
+
+The proposed [physical hand-bank integration](docs/physical-root-bank-parent-reuse.md)
+reproduces the original three menus and full reference checks with two parent LPs
+instead of eight, by reusing the physical producer's owned result. Fifteen endpoint
+LPs and the original fresh references remain. The ordinary batch and current
+trainer sources keep their identities. This later revision awaits owner review;
+no public lesson or multiplayer GTO claim follows. AWS deployment stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `df4101ea7b0e3b11467bd1d28c2f59c2768e3725` and cleared PR creation on
