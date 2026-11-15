@@ -376,6 +376,18 @@ LPs and the original fresh references remain. The ordinary batch and current
 trainer sources keep their identities. The owner cleared this revision as `c4cbfad`;
 no public lesson or multiplayer GTO claim follows. AWS deployment stays paused.
 
+## Owned physical root-bank cache boundary
+
+The proposed [cache loader](physical-root-bank-drill-cache.md) preserves the
+three-hand public contract while replaying the owned physical parent proof once
+at startup: two parent LPs, fifteen endpoints and the same fresh references.
+All nine grades, EV/loss semantics, hidden-information boundaries and mixed review
+results match the current fixture. The new manifest separates public identity
+from physical startup provenance. This backend revision awaits owner clearance.
+Next add opt-in HTTP configuration and accurate provenance metadata, then use the
+same verified path when expanding ranges. Broader GTO and AWS deployment remain
+separate; deployment is paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `c4cbfaddb8c57f1d13f940f53d578a4698911032` and cleared PR creation on

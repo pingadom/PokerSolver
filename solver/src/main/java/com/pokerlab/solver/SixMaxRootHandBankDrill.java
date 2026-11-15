@@ -129,7 +129,22 @@ public final class SixMaxRootHandBankDrill {
 
     public static Result create(SixMaxRootHandBankStudy.Result owned) throws Exception {
         Objects.requireNonNull(owned);
-        var report = owned.report();
+        return fromReport(owned.report());
+    }
+
+    public static Result createFromPhysical(SixMaxPhysicalRootBankStudy.Result owned)
+            throws Exception {
+        Objects.requireNonNull(owned);
+        var physical = owned.report();
+        if (!SixMaxPhysicalRootBankDrillLoader.PHYSICAL_STUDY_HASH.equals(
+                        SixMaxHeadsUpPreflopGame.hash(physical))
+                || !physical.originalMenusReproduced()
+                || physical.trainerAdmission())
+            throw new IllegalArgumentException("Complete owned physical bank proof required");
+        return fromReport(physical.historicalSource());
+    }
+
+    private static Result fromReport(SixMaxRootHandBankStudy.Report report) throws Exception {
         String hash = SixMaxHeadsUpPreflopGame.hash(report);
         if (!SixMaxRootHandBankDrillLoader.STUDY_HASH.equals(hash)
                 || !report.completeOuterBounds()
