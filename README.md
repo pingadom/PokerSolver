@@ -391,9 +391,17 @@ reviews without numerical work. Public lesson identity and optimized startup pro
 are pinned separately. API integration follows after review; current website
 sources and tighter qualified 77/AJs menus remain unchanged.
 
+## Physical root-bank startup selection
+
+The proposed [HTTP integration](docs/physical-root-bank-startup-api.md) adds explicit
+operator selection of the physical cache and a separate cached startup provenance
+endpoint. Existing website metadata, questions, nine grades and canonical reviews
+stay unchanged. The original startup remains the default, with the research feature
+off unless enabled. The owner cleared this revision as `e4e0cb8`.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

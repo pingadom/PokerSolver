@@ -61,7 +61,7 @@ Change seeds to `43` for replication, or `5x5` to `3x3` for the original fixture
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -388,9 +388,20 @@ Next add opt-in HTTP configuration and accurate provenance metadata, then use th
 same verified path when expanding ranges. Broader GTO and AWS deployment remain
 separate; deployment is paused.
 
+## Optimized owned startup through HTTP
+
+The proposed [source selection and provenance API](physical-root-bank-startup-api.md)
+connects the reproduced physical cache to the existing three-hand trainer handlers.
+Operator selection is strict and explicit, original startup remains the default,
+and provenance reports two parent LPs without changing the frozen website protocol.
+Default and physical HTTP suites plus a separate native startup verify all original
+questions, grades and exports. The owner cleared this revision as `e4e0cb8`. Next
+continue bounded range and continuation coverage with the existing qualification
+gates; broad multiplayer equilibrium and AWS deployment remain separate.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

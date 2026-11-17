@@ -102,9 +102,17 @@ add a separately reviewed opt-in backend configuration that reports the optimize
 startup provenance accurately while preserving public lesson and grade identity.
 AWS deployment remains paused.
 
+## HTTP source integration follow-up
+
+The proposed [operator selection and provenance endpoint](physical-root-bank-startup-api.md)
+now uses this owned cache through the existing trainer handlers while preserving
+all frozen public metadata and grade identities. The separate endpoint accurately
+reports runtime work; the original startup stays the default. The owner cleared this HTTP code as `e4e0cb8`; the approval below
+identifies the exact later revision.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

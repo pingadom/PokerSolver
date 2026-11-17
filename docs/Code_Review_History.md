@@ -797,9 +797,48 @@ unrestricted multiplayer equilibrium claim. API integration follows separately;
 the website and separately qualified tighter 77/AJs source are unchanged.
 AWS deployment remains paused.
 
+## 2026-11-17 physical startup source selection and HTTP provenance
+
+The project owner reviewed code changes at `e4e0cb847794ff9df7d1ce6d35af636d383acfc4`
+on branch `codex/physical-root-bank-http` and explicitly cleared PR creation with:
+
+> cleared e4e0cb8
+
+This approval covers that revision only. The private startup source capability
+selects a complete owned original or physical-parent loader without fallback.
+Original startup remains the default and research remains disabled by default.
+The separate cached provenance endpoint reports the selected proof and actual
+startup reservation while preserving the entire frozen public metadata, question,
+grade and canonical review/export contract. Physical startup uses two parent LPs;
+original startup retains eight. Both keep fifteen endpoints and fresh 80k/160k
+references. The original public controller and all solver code are unchanged.
+
+Local validation passed 25 Java cases (15 new, ten retained), eleven new smoke
+controls and five retained controls, Spotless, compilation and packaging. The
+declared original/physical MVC startups and separate physical native startup all
+passed: three games, 8+2+2 parent LPs, 45 endpoints and six fresh references/720k
+iterations. No numerical failure was retried and no new numerical fixture was
+generated. A second full native HTTP contract pass succeeded with all four source
+files unavailable; exactly one native startup completed and its owned temporary
+process was stopped. All source bytes were frozen before numerical work.
+
+All 441 earlier data files, 28 solver resources, 392 earlier CI class assignments,
+thirty jobs and their original limits are preserved. Strict YAML checks passed;
+Docker Compose was unavailable locally, so complete container verification remains
+for PR CI after this clearance. The native test used the real research controllers
+and error handling while excluding database auto-configuration. An existing Mockito
+agent warning is a test setup cleanup item, not a discovered upstream defect.
+
+This factual confirmation is recorded in 163 authored Markdown documents, the
+reference PDF and the local untracked interview Word guide: 165 documents. Only
+review documentation changes after clearance. This is still a supplied-range,
+fixed-prefix two-active-player research model at six seats, with trainer admission
+false. No new educational decision, unrestricted multiplayer GTO or deployment is
+claimed. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -1,0 +1,14 @@
+# Explicit local opt-in to the owned physical parent; public lesson/grade identity stays unchanged.
+services:
+  api:
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx1600m"
+      TRAINER_ROOT_HAND_BANK_ENABLED: "true"
+      TRAINER_ROOT_HAND_BANK_STARTUP_SOURCE: PHYSICAL_PARENT_REUSE
+      TRAINER_ROOT_HAND_BANK_MANIFEST_PATH: /opt/pokerlab/physical-root-bank/supplied-physical-root-bank-drill-manifest.json
+      TRAINER_ROOT_HAND_BANK_STUDY_HASH: e333144323609afd2d5fd47daf7b2636b56647d3f080c579d1491c10afc8e84d
+    volumes:
+      - ./docs/data/supplied-physical-root-bank-drill-manifest.json:/opt/pokerlab/physical-root-bank/supplied-physical-root-bank-drill-manifest.json:ro
+      - ./docs/data/supplied-physical-root-bank-reuse-request.json:/opt/pokerlab/physical-root-bank/supplied-physical-root-bank-reuse-request.json:ro
+      - ./docs/data/supplied-physical-root-bank-reuse-report.json.gz:/opt/pokerlab/physical-root-bank/supplied-physical-root-bank-reuse-report.json.gz:ro
+      - ./docs/data/supplied-root-hand-bank-report.json.gz:/opt/pokerlab/physical-root-bank/supplied-root-hand-bank-report.json.gz:ro

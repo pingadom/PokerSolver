@@ -31,6 +31,7 @@ class RootHandBankDrillControllerTest {
                     "supplied-root-hand-bank-report.json.gz",
                     "supplied-flop-size-menu-report.json.gz");
     static Path sources;
+    @Autowired RootHandBankStartupSource startup;
     @Autowired MockMvc mvc;
     @Autowired SixMaxRootHandBankDrill.Result drill;
     final ObjectMapper mapper = new ObjectMapper();
@@ -88,6 +89,18 @@ class RootHandBankDrillControllerTest {
     void invalid(String route, String json) throws Exception {
         mvc.perform(post(BASE + route).contentType("application/json").content(json))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void originalDefaultRetainsItsOwnedSourceAndHistoricalReservation() {
+        assertSame(drill, startup.drill());
+        var p = startup.provenance();
+        assertEquals(RootHandBankStartupSource.Mode.ORIGINAL, p.startupSource());
+        assertEquals(PIN, p.sourceProofHash());
+        assertEquals(4, p.startupBudget().maximumParentSolveCalls());
+        assertEquals(8, p.startupBudget().maximumParentLpSolves());
+        assertEquals(15, p.startupBudget().maximumEnvelopeLpSolves());
+        assertEquals(240000, p.startupBudget().freshIterations());
     }
 
     @Test
