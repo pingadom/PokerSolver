@@ -399,6 +399,14 @@ endpoint. Existing website metadata, questions, nine grades and canonical review
 stay unchanged. The original startup remains the default, with the research feature
 off unless enabled. The owner cleared this revision as `e4e0cb8`.
 
+## Weighted range inputs
+
+The proposed [range compiler](docs/weighted-range-notation.md) accepts weighted
+pair/suited/offsuit notation and exact combos, expands all 169 classes into the
+1,326 physical hands, and handles known-card blockers without renormalizing input
+weights. Its CLI writes explicit new range-input JSON. Existing exact-game caps,
+solver strategies and website lessons remain unchanged; this revision awaits review.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on

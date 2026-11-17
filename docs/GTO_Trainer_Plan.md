@@ -399,6 +399,16 @@ questions, grades and exports. The owner cleared this revision as `e4e0cb8`. Nex
 continue bounded range and continuation coverage with the existing qualification
 gates; broad multiplayer equilibrium and AWS deployment remain separate.
 
+## Broader physical range input
+
+The proposed [weighted range notation layer](weighted-range-notation.md) supplies
+all 169 hand classes, per-combo frequencies, exact-combo selection and blocker
+accounting to the existing solver input types. It preserves the exact world's
+64-deal cap and the seeded sampler's empirical meaning. Twenty-two local controls
+cover every physical two-card combination and CLI safety. This input capability
+awaits owner clearance; it does not publish a solved range chart. Next define and
+qualify a bounded broader-range source under explicit error and work budgets.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on

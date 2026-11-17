@@ -44,6 +44,22 @@ No AWS infrastructure was applied, and no deployment workflow was executed. Terr
 
 Release policy: tag `v1.0.0` only after the final revision passes CI and the working tree is clean. Do not merge or deploy implicitly.
 
+## 17 November 2026 solver scope assessment
+
+The project owner's current direction remains a complete explainable solver demo
+and small trainer, progressing toward the broader six-max cash GTO product.
+A rough planning assessment is about 90% for the focused demo and 40% for the
+broader product. These are judgment estimates by scope, not test-count percentages
+or a claim that remaining mathematical work is linear. Realistic broad ranges,
+rake, general six-active-player solving and coherent full-hand strategy remain
+substantial work.
+
+The next proposed range-input backend covers 169 classes and 1,326 exact physical
+hands with per-combo weights, blocker handling and a standalone CLI. All 22 local
+tests and packaging passed. It integrates with existing input types and preserves
+all solver caps; no new trained chart or lesson is claimed. Owner review and new
+PR CI are still required for this later revision. AWS deployment remains paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
