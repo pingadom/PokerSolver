@@ -3,8 +3,8 @@
 The proposed backend integration lets an operator select the reproduced physical
 parent cache while preserving the existing website's complete public protocol.
 The original startup remains the default and the global research flag remains off.
-This later code awaits explicit owner review; the historical approval below applies
-only to the earlier cache revision.
+The owner cleared this code revision as `e4e0cb8` on 2026-11-17.
+The approval below identifies the exact reviewed revision; full PR CI follows.
 
 ## Operator selection and owned authority
 
@@ -122,7 +122,7 @@ operator status as that coverage grows.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`0c134ab61c74462795a41552a9c17ac75aa882e7` and cleared PR creation on
-2026-11-15 (Europe/London), with “I reviewed 0c134ab — clear it”. This confirmation applies to
+`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
+2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
