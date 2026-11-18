@@ -416,6 +416,15 @@ counts, with the original 64-world cap and a bounded prefix search. Complete pla
 can enter the existing mandatory-checkdown research-spot validation; no sampled
 fallback, new trainer lesson or GTO claim follows. The owner cleared this revision as `1dfc54a`.
 
+## Six seat payoff budgets
+
+The proposed [payoff work layer](docs/six-seat-payoff-work.md) plans complete
+six-seat exact or explicitly sampled board work before execution, enforces board
+and hand-evaluation budgets, and produces an owned private table for the existing
+research game. All 58 selected local tests passed, including an exact physical
+cross-check. This later revision awaits owner review; no new trainer lesson is
+admitted by these payoff tables.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on

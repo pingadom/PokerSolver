@@ -119,6 +119,14 @@ owner clearance; full PR CI follows that clearance. Broader range sampling/error
 physical payoff budgets, strategy solving, independent quality checks and trainer
 admission remain separate work. AWS deployment remains paused.
 
+## Proposed physical payoff follow up
+
+The [payoff work planner](six-seat-payoff-work.md) consumes this owned complete
+input, calculates exact or explicitly sampled physical board costs, and can execute
+a complete private payoff table within its separate budgets. It preserves the
+input prior and unsupported-hand reporting. This later revision awaits its own
+review and does not qualify strategies or publish trainer questions.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
