@@ -408,9 +408,20 @@ accounting to the existing solver input types. It preserves the exact world's
 cover every physical two-card combination and CLI safety. The owner cleared this input capability as `dcb58cd`; it does not publish a solved range chart. Next define and
 qualify a bounded broader-range source under explicit error and work budgets.
 
+## Six-seat range input preflight — proposed
+
+The [six-seat planner](six-seat-range-preflight.md) now connects weighted notation
+to complete bounded joint support and the existing research spot. It preserves
+all six private hands, exposes unsupported combos and refuses incomplete products.
+Nineteen new controls include a weighted twelve-world comparison with the existing
+game's chance model. The owner cleared this revision as `1dfc54a`. Next use reviewed inputs
+to plan bounded physical payoff work and select an explicit exact or empirical
+source model, then solve and qualify before publishing trainer decisions. The
+existing 64-world cap and AWS pause remain.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
-2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
+`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
