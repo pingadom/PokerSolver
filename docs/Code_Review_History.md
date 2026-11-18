@@ -836,9 +836,42 @@ fixed-prefix two-active-player research model at six seats, with trainer admissi
 false. No new educational decision, unrestricted multiplayer GTO or deployment is
 claimed. AWS deployment remains paused.
 
+## 2026-11-18 weighted physical range notation and exports
+
+The project owner reviewed code changes at `dcb58cde859f7be56fefde2b1baff0edbdf25fae`
+on branch `codex/weighted-range-notation` and explicitly cleared PR creation with:
+
+> cleared dcb58cd
+
+This approval covers that revision only. The range input layer covers all 169
+pair/suited/offsuit classes and 1,326 physical hands, preserving per-combo weights,
+known-card blockers, immutable outputs and semantic identity. Overlaps and malformed
+inputs reject; decimal bounds are checked before binary64 conversion. The CLI
+exports only explicit range assumptions and refuses existing files/hard-link aliases.
+It grants neither trainer admission nor grading authority.
+
+All 22 Java cases passed: fourteen notation/physical controls, three existing-game/
+sampler integration controls and five CLI controls. Literal deck enumeration checks
+the full partition; blocker counts cover all 53 known-card inventory sizes. The
+unchanged exact game's 64-world cap rejects broad products before payoff work.
+Two seeded 32-draw sampler controls remain empirical, not exact joint priors.
+No LP, CFR or physical board enumeration ran; the equal-share oracle is analytic
+control data only. No strategy fixture or published grade was generated.
+
+Spotless, compilation and packaging passed. All earlier solver/engine code, 441
+data files, 28 resources, 395 CI class assignments and dependencies are preserved.
+Three new test classes auto-discover without workflow or timeout changes. Full PR
+CI follows this clearance. These are broader input capabilities, not solved 169-hand
+charts or a general six-player equilibrium. Existing lessons and AWS deployment
+remain unchanged; deployment remains paused.
+
+The scoped confirmation is recorded in 164 authored Markdown documents, the
+reference PDF and the local untracked interview guide: 166 documents. Only review
+records change after clearance. Later code requires separate review.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
-2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
+`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
+2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
