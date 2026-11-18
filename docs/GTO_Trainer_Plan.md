@@ -419,9 +419,21 @@ to plan bounded physical payoff work and select an explicit exact or empirical
 source model, then solve and qualify before publishing trainer decisions. The
 existing 64-world cap and AWS pause remain.
 
+## Six seat physical payoff work — proposed
+
+The [payoff work planner and executor](six-seat-payoff-work.md) now connects owned
+range preflight to complete bounded physical payoff tables. It keeps exact and
+sampled board models explicit, shares board scores across all active subsets,
+reconciles actual sampled work, and exposes an owned oracle to the existing game.
+Seventeen new local controls pass, including complete exact single-world comparison
+with an independent dead-card heads-up enumerator. The owner cleared this revision as `87673cb`.
+Next bind reviewed ranges/payoff configuration into fresh source solves and audit
+quality, uncertainty and educational coverage before admitting new lessons. Existing
+solver/state caps and the AWS pause remain.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
+`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

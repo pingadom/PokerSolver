@@ -908,9 +908,49 @@ The scoped confirmation is recorded in 165 authored Markdown documents, the
 reference PDF and local untracked interview guide: 167 documents. Only factual
 review records change after clearance. Later code requires separate review.
 
+## 2026-11-18 owned six seat physical payoff work
+
+The project owner reviewed code changes at `87673cb036635e75d85b7e6c59409b6fb1aea3d4`
+on branch `codex/six-seat-payoff-work` and explicitly cleared PR creation with:
+
+> I reviewed 87673cb — clear it
+
+This approval covers that revision only. An owned complete six-seat private input
+now produces an explicit exact or shared-board payoff work plan. Both board and
+hand-evaluation costs must fit lowerable budgets before execution. All six dealt
+hands remain blockers, and board scores are shared across every active subset.
+There is no automatic sampling, support truncation or strategy solving.
+
+Explicit execution returns complete immutable private payoff rows and an owned
+lookup oracle for the existing research game. Sampled board counts reconcile with
+the actual oracle counter. The CLI separates planning from evaluation, preserves
+signed seed identity as a string, and refuses existing files and aliases before
+expensive work. Output contains all concealed hands and is private research data,
+with trainer admission and grading authority false.
+
+All seventeen new Java cases and forty-one retained input cases passed. A complete
+six-player exact control evaluates 658008 boards and agrees with an independent
+two-active/six-dealt enumerator over another 658008 boards. The final suite also
+uses 114 sampled boards, including a twelve-world table with 684 subset estimates
+and exactly 96 observed draws. The existing game consumes that table without more
+physical work. Python checks exact planned counts and a separate four-board CLI
+capture's work, complete subsets, conservation and folded-player zeros. These
+controls establish payoff/work behavior, not broad-range strategy quality.
+
+Spotless, compilation and packaging passed. Existing Java sources, 441 data files,
+28 solver resources, 400 earlier CI assignments and dependencies remain unchanged.
+No new CFR or LP solving runs. Full PR CI follows this clearance. Sample standard
+errors are diagnostic, can be zero at small budgets and are not confidence or
+convergence certificates. Fresh source solving, payoff error assessment and
+independent educational qualification remain separate. AWS deployment is paused.
+
+The scoped confirmation is recorded in 166 authored Markdown documents, the
+reference PDF and local untracked interview guide: 168 documents. Only factual
+review records change after clearance. Later code requires separate review.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
+`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

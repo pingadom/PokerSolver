@@ -77,9 +77,27 @@ PR CI follows that clearance. AWS deployment remains paused.
   the next boundary; the rough planning estimates stay 90% for the focused demo
   and 40% for the broad product. The owner cleared this revision as `1dfc54a`.
 
+## Six seat payoff work — 18 November 2026, owner cleared
+
+- Added owned exact/shared-board payoff planning and explicit execution for complete
+  six-seat private support. Board/hand costs must fit both lowerable limits; there
+  is no fallback sampling or support truncation. Private CLI plan/evaluate modes
+  preserve signed seed identity and reject existing outputs before evaluation.
+- All 17 new cases and 41 retained input cases passed. A complete one-world exact
+  result agrees with an independent two-active/six-dealt board enumerator. A
+  twelve-world sampled table reconciles 96 actual board draws and feeds the
+  existing game without more physical evaluations. These are payoff controls,
+  not solved policies or trainer admission.
+- Spotless, compilation and packaging passed. Existing Java, 441 data files,
+  28 resources, 400 prior CI assignments and dependencies remain unchanged.
+  Full PR CI follows owner clearance. Fresh range-driven source solving, payoff
+  error checks and independent strategy qualification remain next. Planning
+  estimates remain about 90% for the focused demo and 40% for the broad product;
+  these are scope judgments rather than test-count measures. AWS stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
+`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
