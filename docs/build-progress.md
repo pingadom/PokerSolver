@@ -95,6 +95,24 @@ PR CI follows that clearance. AWS deployment remains paused.
   estimates remain about 90% for the focused demo and 40% for the broad product;
   these are scope judgments rather than test-count measures. AWS stays paused.
 
+## Fresh six seat range sources — 18 November 2026, awaiting review
+
+- Added complete range-to-payoff-to-CFR source orchestration and an independent
+  finite-model deviation audit, preserving validation-only publication. Owned
+  payoff reuse recomputes the target policy; no strategy rows transfer.
+- Source plans reject excessive exhaustive node work before physical execution.
+  Actual visits match 6*iterations*(1+private-worlds*public-states). Captured private
+  requests have bounded reads, exact seed strings and strict schema/token guards.
+- All 17 new cases and 58 retained cases passed, including exact/sampled source
+  execution, a correlated twelve-world source and comparison with the old builder.
+  A Jackson String coercion integration error was reproduced and fixed in the new
+  decoder with explicit guards and regression coverage; no upstream bug is claimed.
+- Spotless, compilation and packaging passed. Earlier Java, 441 data files,
+  28 resources, 402 CI assignments and dependencies remain unchanged. Full new PR
+  CI follows owner clearance. Realistic range sources and independent error,
+  strategy/content qualification remain next. Scope estimates remain roughly
+  90% focused demo / 40% broad product; these are planning judgments. AWS stays paused.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on

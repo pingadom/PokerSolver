@@ -123,6 +123,14 @@ certificates. Reviewed source assumptions, payoff accuracy, strategy solving and
 independent qualification still precede any trainer admission. No website lesson
 or public HTTP response changes. AWS deployment stays paused.
 
+## Proposed fresh source follow up
+
+The [range-driven source workflow](six-seat-range-source.md) consumes these owned
+payoff plans/results, applies a separate exhaustive CFR traversal budget and creates
+a fresh validation-only source with a full finite-model deviation audit. Source
+packs require at least two sampled trials per world. This later revision awaits
+its own review and does not grant trainer admission or change this payoff layer.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on

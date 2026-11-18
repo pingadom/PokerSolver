@@ -425,6 +425,15 @@ research game. All 58 selected local tests passed, including an exact physical
 cross-check. The owner cleared this revision as `87673cb`; no new trainer lesson is
 admitted by these payoff tables.
 
+## Fresh range driven source solves
+
+The proposed [six-seat source workflow](docs/six-seat-range-source.md) connects
+weighted ranges and owned physical payoffs to fresh exhaustive CFR and complete
+finite-model deviation audits. It plans a separate traversal budget and captures
+strict private JSON requests, with all 75 selected local checks passing. This
+later revision awaits review. Output remains validation-only and private; no new
+trainer question is admitted.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on

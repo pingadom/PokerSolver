@@ -431,6 +431,17 @@ Next bind reviewed ranges/payoff configuration into fresh source solves and audi
 quality, uncertainty and educational coverage before admitting new lessons. Existing
 solver/state caps and the AWS pause remain.
 
+## Range driven source solving — proposed
+
+The [fresh source workflow](six-seat-range-source.md) now joins owned range/payoff
+planning to a fresh bounded six-player preflop solve and complete finite-model
+best-response audit. Physical budgets and exact CFR node visits remain separate.
+Both exact and sampled source controls pass, with sampled quality explicitly
+interpreted in its estimated-payoff game. Seventeen new controls and 58 retained
+controls pass; this revision awaits owner review. Next run declared-budget sources
+with reviewed realistic assumptions and independent payoff/strategy/content gates
+before adding trainer questions. Existing caps and the AWS pause remain.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
