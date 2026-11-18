@@ -3,8 +3,8 @@
 This proposed solver input layer expands poker range notation into exact weighted
 physical hands. It covers all 169 pair/suited/offsuit classes and all 1,326 possible
 two-card combinations, preserving per-combo weights and explicit known-card
-blockers. This later code awaits owner review; the historical approval below
-applies only to the earlier HTTP startup revision.
+blockers. The owner cleared this revision as `dcb58cd` on 2026-11-18.
+The approval below identifies the exact reviewed revision; full PR CI follows.
 
 ## Accepted grammar
 
@@ -115,7 +115,7 @@ and coherent full-hand strategy remain broader work. AWS deployment stays paused
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
-2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
+`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
+2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

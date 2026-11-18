@@ -405,11 +405,11 @@ The proposed [range compiler](docs/weighted-range-notation.md) accepts weighted
 pair/suited/offsuit notation and exact combos, expands all 169 classes into the
 1,326 physical hands, and handles known-card blockers without renormalizing input
 weights. Its CLI writes explicit new range-input JSON. Existing exact-game caps,
-solver strategies and website lessons remain unchanged; this revision awaits review.
+solver strategies and website lessons remain unchanged; the owner cleared this revision as `dcb58cd`.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
-2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
+`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
+2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

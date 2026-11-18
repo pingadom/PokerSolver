@@ -405,13 +405,12 @@ The proposed [weighted range notation layer](weighted-range-notation.md) supplie
 all 169 hand classes, per-combo frequencies, exact-combo selection and blocker
 accounting to the existing solver input types. It preserves the exact world's
 64-deal cap and the seeded sampler's empirical meaning. Twenty-two local controls
-cover every physical two-card combination and CLI safety. This input capability
-awaits owner clearance; it does not publish a solved range chart. Next define and
+cover every physical two-card combination and CLI safety. The owner cleared this input capability as `dcb58cd`; it does not publish a solved range chart. Next define and
 qualify a bounded broader-range source under explicit error and work budgets.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`e4e0cb847794ff9df7d1ce6d35af636d383acfc4` and cleared PR creation on
-2026-11-17 (Europe/London), with “cleared e4e0cb8”. This confirmation applies to
+`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
+2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
