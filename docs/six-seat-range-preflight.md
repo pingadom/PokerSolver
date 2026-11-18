@@ -3,8 +3,8 @@
 This proposed backend step connects weighted poker notation to the existing six-seat
 mandatory-checkdown research model. It completely enumerates card-legal joint
 private hands within explicit limits before any physical payoff construction or
-strategy solving. The current proposal awaits owner review; the historical
-confirmation below applies only to its named earlier revision.
+strategy solving. The owner reviewed this revision and cleared PR creation on 2026-11-18.
+The confirmation below identifies the exact approved revision; full PR CI follows.
 
 ## Complete physical prior
 
@@ -115,13 +115,13 @@ Spotless, compilation and packaging with tests skipped passed. No existing solve
 or engine Java sources, dependencies, data fixtures, resources or CI job limits
 change. No CFR, LP solving or physical board enumeration runs in these tests.
 The new test classes join the existing automatically discovered CI shards after
-owner clearance; full PR CI is pending. Broader range sampling/error accounting,
+owner clearance; full PR CI follows that clearance. Broader range sampling/error accounting,
 physical payoff budgets, strategy solving, independent quality checks and trainer
 admission remain separate work. AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
-2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
+`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

@@ -60,7 +60,7 @@ tests and packaging passed. It integrates with existing input types and preserve
 all solver caps; no new trained chart or lesson is claimed. The owner cleared this revision as `dcb58cd`; full
 PR CI follows that clearance. AWS deployment remains paused.
 
-## Six-seat weighted range preflight — 18 November 2026, awaiting review
+## Six-seat weighted range preflight — 18 November 2026, owner cleared
 
 - Added a bounded complete card-legality planner for six explicit weighted ranges,
   with immutable full joint priors, unsupported-hand visibility, log-weight
@@ -75,11 +75,11 @@ PR CI follows that clearance. AWS deployment remains paused.
 - Existing source files, numerical evidence, resources and dependencies remain
   unchanged. Broader preflop support/physical payoff budgets/qualification remain
   the next boundary; the rough planning estimates stay 90% for the focused demo
-  and 40% for the broad product. This change is not owner-cleared yet.
+  and 40% for the broad product. The owner cleared this revision as `1dfc54a`.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
-2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
+`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

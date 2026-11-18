@@ -869,9 +869,48 @@ The scoped confirmation is recorded in 164 authored Markdown documents, the
 reference PDF and the local untracked interview guide: 166 documents. Only review
 records change after clearance. Later code requires separate review.
 
+## 2026-11-18 complete bounded six seat range preflight
+
+The project owner reviewed code changes at `1dfc54ab65f422fc658aa53311f1b18cea8e5c21`
+on branch `codex/six-seat-range-preflight` and explicitly cleared PR creation with:
+
+> I reviewed 1dfc54a — clear it
+
+This approval covers that revision only. Six explicit weighted seat ranges now
+produce a complete card-legal joint private prior under the original 64-world cap
+and a new one-million-prefix-check cap. Lower limits are allowed. Incomplete or
+impossible products reject without truncation or fallback sampling. Log-weight
+normalization preserves tiny common scales; unrepresentable positive probabilities
+reject rather than lose worlds. Unsupported declared hands remain visible and
+cannot be silently pruned into the existing research spot.
+
+The private CLI exports full ranges, complete concealed worlds, support, identities
+and work. Trainer admission and grading authority remain false. Existing files
+and hard-link aliases are preserved. This output belongs in offline research,
+not public trainer questions. Existing research-spot public-state/product guards
+still apply; no new HTTP endpoint or website lesson is included.
+
+All nineteen new Java cases and twenty-two retained range cases passed. A literal
+Cartesian oracle checks weighted twelve-world probabilities. The existing game's
+chance outcomes match the planned prior with an analytic equal-share control;
+this is not physical showdown evidence. A separate local Python Cartesian/Decimal
+check of the actual CLI capture matches every joint probability and all six seat
+marginals. No new LP, CFR or physical board enumeration ran.
+
+Spotless, compilation and packaging passed. All earlier Java sources, 441 data
+files, 28 solver resources, 398 earlier CI class assignments and dependencies are
+preserved. Two new suites auto-discover without workflow or timeout changes.
+Full PR CI follows this clearance. Broader physical payoff budgets, source solving
+and independent strategy qualification remain separate work. AWS deployment stays
+paused.
+
+The scoped confirmation is recorded in 165 authored Markdown documents, the
+reference PDF and local untracked interview guide: 167 documents. Only factual
+review records change after clearance. Later code requires separate review.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
-2026-11-18 (Europe/London), with “cleared dcb58cd”. This confirmation applies to
+`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
