@@ -407,6 +407,15 @@ pair/suited/offsuit notation and exact combos, expands all 169 classes into the
 weights. Its CLI writes explicit new range-input JSON. Existing exact-game caps,
 solver strategies and website lessons remain unchanged; the owner cleared this revision as `dcb58cd`.
 
+## Six-seat range planning
+
+The proposed [six-seat preflight](docs/six-seat-range-preflight.md) checks the full
+card-legal product of six weighted ranges before expensive payoffs or solving.
+It exposes blocker-induced correlations, unsupported declared hands and exact work
+counts, with the original 64-world cap and a bounded prefix search. Complete plans
+can enter the existing mandatory-checkdown research-spot validation; no sampled
+fallback, new trainer lesson or GTO claim follows. This proposal awaits owner review.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on

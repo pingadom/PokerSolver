@@ -113,6 +113,14 @@ source model, appropriate sampling/error accounting where used, complete solving
 and qualification before teaching decisions. Multiway equilibrium, realistic rake
 and coherent full-hand strategy remain broader work. AWS deployment stays paused.
 
+## Proposed six-seat follow-up
+
+The [six-seat preflight](six-seat-range-preflight.md) consumes six compiled ranges
+and constructs their complete card-legal joint prior within explicit work/world
+limits. It exposes blocker-induced correlations and unsupported hands rather than
+multiplying marginals or silently pruning ranges. This follow-up awaits its own
+owner review and does not change this compiler's grammar or physical partition.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `dcb58cde859f7be56fefde2b1baff0edbdf25fae` and cleared PR creation on
