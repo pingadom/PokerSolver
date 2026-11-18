@@ -3,8 +3,8 @@
 This proposed backend step connects a complete six-seat range preflight to explicit
 physical payoff work. It plans the cost before creating an oracle, requires an
 exact or sampled board model, and can execute that complete plan into an owned
-private payoff table. This later revision awaits owner review. The historical
-confirmation below applies only to its named earlier code revision.
+private payoff table. The owner reviewed this revision and cleared PR creation on 2026-11-18.
+The confirmation below identifies that exact revision; full PR CI follows.
 
 ## Work that is counted
 
@@ -125,7 +125,7 @@ or public HTTP response changes. AWS deployment stays paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
+`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

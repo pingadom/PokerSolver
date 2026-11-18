@@ -77,7 +77,7 @@ PR CI follows that clearance. AWS deployment remains paused.
   the next boundary; the rough planning estimates stay 90% for the focused demo
   and 40% for the broad product. The owner cleared this revision as `1dfc54a`.
 
-## Six seat payoff work — 18 November 2026, awaiting review
+## Six seat payoff work — 18 November 2026, owner cleared
 
 - Added owned exact/shared-board payoff planning and explicit execution for complete
   six-seat private support. Board/hand costs must fit both lowerable limits; there
@@ -97,7 +97,7 @@ PR CI follows that clearance. AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`1dfc54ab65f422fc658aa53311f1b18cea8e5c21` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 1dfc54a — clear it”. This confirmation applies to
+`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
+2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
