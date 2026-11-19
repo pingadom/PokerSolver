@@ -60,7 +60,7 @@ validation-only and contains concealed hands.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
+`a90efd0603a32348fa1b95deaa6b9d521066037e` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared a90efd0”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
