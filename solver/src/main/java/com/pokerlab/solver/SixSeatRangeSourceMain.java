@@ -66,6 +66,8 @@ public final class SixSeatRangeSourceMain {
         report.put("spotHash", plan.spot().contentHash());
         report.put("plannedCfrWork", plan.work());
         report.put("plannedPayoffWork", plan.payoffPlan().work());
+        boolean suitReuse = request.payoff().method() == SixSeatPayoffWork.Method.EXACT_SUIT_REUSE;
+        if (suitReuse) report.put("plannedEvaluatedDeals", plan.payoffPlan().evaluatedDeals());
         if (compare) {
             var exactPlan = SixSeatPayoffComparison.planExactReference(plan, exactBudget);
             report.put("plannedExactReferenceWork", exactPlan.work());
@@ -82,6 +84,8 @@ public final class SixSeatRangeSourceMain {
             report.put("sourcePackJson", result.packJson());
             report.put("cfrStatistics", result.statistics());
             report.put("quality", result.quality());
+            if (suitReuse)
+                report.put("boardsFromEvaluatedDeals", result.payoffs().boardsFromEvaluatedDeals());
             report.put("observedSharedBoards", result.payoffs().observedSharedBoards());
             report.put(
                     "payoffBoardsFromPerDealEstimates",

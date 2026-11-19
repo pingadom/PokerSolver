@@ -56,7 +56,9 @@ public final class SixSeatPayoffComparison {
         Objects.requireNonNull(exactPayoffs, "exactPayoffs");
         var sampledPayoffs = sampledSource.payoffs();
         requireMethod(sampledPayoffs.plan(), SixSeatPayoffWork.Method.SHARED_BOARD_MONTE_CARLO);
-        requireMethod(exactPayoffs.plan(), SixSeatPayoffWork.Method.EXACT_ENUMERATION);
+        if (!exactPayoffs.plan().configuration().method().isExact())
+            throw new IllegalArgumentException(
+                    "Payoff comparison requires exact reference payoffs");
         if (!sampledPayoffs
                 .plan()
                 .input()
@@ -116,7 +118,7 @@ public final class SixSeatPayoffComparison {
                 exactPayoffs.plan().contentHash(),
                 terminals,
                 sampledPayoffs.boardsFromPerDealEstimates(),
-                exactPayoffs.boardsFromPerDealEstimates(),
+                exactPayoffs.boardsFromEvaluatedDeals(),
                 sampled.maximumTerminalPayoffStandardErrorBb(),
                 before.nashConvBb(),
                 after.nashConvBb(),
