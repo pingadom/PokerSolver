@@ -968,9 +968,19 @@ Spotless, compilation and packaging passed. Full PR CI follows clearance.
 The review record covers this commit. It appears in 167 authored Markdown
 documents, the reference PDF and the local interview guide.
 
+## 2026-11-19 Compare sampled preflop policies against exact board payoffs
+
+The project owner reviewed code changes at `c19e89959751af0abb94dc65fcbbe937ae9e44f8` on branch
+`codex/six-seat-payoff-comparison` and cleared PR creation with “cleared c19e899”.
+
+The revision audits a frozen sampled policy against exact board payoffs. It checks the same weighted ranges and game, then measures per-seat terminal shifts and best-response values. All 37 selected Java cases passed. Two twelve-world experiments checked the change in finite-game deviation gains.
+
+The confirmation covers this revision and appears in 168 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
+`c19e89959751af0abb94dc65fcbbe937ae9e44f8` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared c19e899”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
