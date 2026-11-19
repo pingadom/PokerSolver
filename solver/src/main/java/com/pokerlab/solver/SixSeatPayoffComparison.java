@@ -41,16 +41,24 @@ public final class SixSeatPayoffComparison {
     /** Plan reference work before creating the sampled source or enumerating any boards. */
     public static SixSeatPayoffWork.Plan planExactReference(
             SixSeatRangeSource.Plan sampledSource, SixSeatPayoffWork.Budget exactBudget) {
-        requireMethod(
-                sampledSource.payoffPlan(), SixSeatPayoffWork.Method.SHARED_BOARD_MONTE_CARLO);
-        return SixSeatPayoffWork.plan(
-                sampledSource.payoffPlan().input(),
-                SixSeatPayoffWork.Configuration.exact(),
-                exactBudget);
+        return planExactReference(
+                sampledSource, SixSeatPayoffWork.Configuration.exact(), exactBudget);
     }
 
-    /** Reuse both owned inputs. This comparison executes no board trials or CFR iterations. */
-    public static Report assess(
+    static SixSeatPayoffWork.Plan planExactReference(
+            SixSeatRangeSource.Plan sampledSource,
+            SixSeatPayoffWork.Configuration reference,
+            SixSeatPayoffWork.Budget exactBudget) {
+        requireMethod(
+                sampledSource.payoffPlan(), SixSeatPayoffWork.Method.SHARED_BOARD_MONTE_CARLO);
+        if (!reference.method().isExact())
+            throw new IllegalArgumentException("Payoff comparison requires an exact reference");
+        return SixSeatPayoffWork.plan(sampledSource.payoffPlan().input(), reference, exactBudget);
+    }
+
+    record MatchedGames(SixMaxPreflopCheckdownGame sampled, SixMaxPreflopCheckdownGame exact) {}
+
+    static MatchedGames matchedGames(
             SixSeatRangeSource.Result sampledSource, SixSeatPayoffWork.Result exactPayoffs) {
         Objects.requireNonNull(sampledSource, "sampledSource");
         Objects.requireNonNull(exactPayoffs, "exactPayoffs");
@@ -72,6 +80,17 @@ public final class SixSeatPayoffComparison {
         var outcomes = sampled.chanceOutcomes(sampled.initialState());
         if (!outcomes.equals(exact.chanceOutcomes(exact.initialState())))
             throw new IllegalStateException("Payoff comparison requires the same chance outcomes");
+        return new MatchedGames(sampled, exact);
+    }
+
+    /** Reuse both owned inputs. This comparison executes no board trials or CFR iterations. */
+    public static Report assess(
+            SixSeatRangeSource.Result sampledSource, SixSeatPayoffWork.Result exactPayoffs) {
+        var games = matchedGames(sampledSource, exactPayoffs);
+        var sampled = games.sampled();
+        var exact = games.exact();
+        var sampledPayoffs = sampledSource.payoffs();
+        var outcomes = sampled.chanceOutcomes(sampled.initialState());
         var seats = Seat.values();
         double[] minimum = new double[seats.length];
         double[] maximum = new double[seats.length];
