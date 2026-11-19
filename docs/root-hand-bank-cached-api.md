@@ -145,7 +145,7 @@ retains this and earlier approvals. The subsequent table UI was separately clear
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
+`c19e89959751af0abb94dc65fcbbe937ae9e44f8` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared c19e899”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
