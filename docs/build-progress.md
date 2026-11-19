@@ -95,7 +95,7 @@ PR CI follows that clearance. AWS deployment remains paused.
   estimates remain about 90% for the focused demo and 40% for the broad product;
   these are scope judgments rather than test-count measures. AWS stays paused.
 
-## Fresh six seat range sources — 18 November 2026, awaiting review
+## Fresh six seat range sources — cleared 19 November 2026
 
 - Added complete range-to-payoff-to-CFR source orchestration and an independent
   finite-model deviation audit, preserving validation-only publication. Owned
@@ -115,7 +115,7 @@ PR CI follows that clearance. AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
+`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

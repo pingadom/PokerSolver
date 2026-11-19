@@ -948,9 +948,29 @@ The scoped confirmation is recorded in 166 authored Markdown documents, the
 reference PDF and local untracked interview guide: 168 documents. Only factual
 review records change after clearance. Later code requires separate review.
 
+## 2026-11-19 fresh six seat sources from weighted ranges
+
+The project owner reviewed code changes at `2919507e9ab099ae802529f6835e94fd41cb6fd7` on branch `codex/six-seat-range-source`
+and explicitly cleared PR creation with the message “cleared 2919507”.
+
+The revision connects complete six seat ranges and owned exact or sampled
+payoffs to a fresh exhaustive CFR solve. A separate traversal budget applies
+before physical evaluation. The existing pack validator checks complete
+information sets, payoffs and quality. The captured CLI enforces literal JSON
+types and preserves the full signed seed. Output is private research evidence
+with validation-only publication.
+
+All 75 selected Java cases passed, including 17 new cases. Exact and sampled
+source controls, retained input/payoff tests, an independent CLI capture check,
+and a matched three-budget finite-game comparison support this revision.
+Spotless, compilation and packaging passed. Full PR CI follows clearance.
+
+The review record covers this commit. It appears in 167 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
+`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

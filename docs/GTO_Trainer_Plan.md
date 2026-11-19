@@ -438,13 +438,13 @@ planning to a fresh bounded six-player preflop solve and complete finite-model
 best-response audit. Physical budgets and exact CFR node visits remain separate.
 Both exact and sampled source controls pass, with sampled quality explicitly
 interpreted in its estimated-payoff game. Seventeen new controls and 58 retained
-controls pass; this revision awaits owner review. Next run declared-budget sources
+controls pass; the owner cleared this revision as `2919507`. Next run declared-budget sources
 with reviewed realistic assumptions and independent payoff/strategy/content gates
 before adding trainer questions. Existing caps and the AWS pause remain.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`87673cb036635e75d85b7e6c59409b6fb1aea3d4` and cleared PR creation on
-2026-11-18 (Europe/London), with “I reviewed 87673cb — clear it”. This confirmation applies to
+`2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared 2919507”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
