@@ -978,9 +978,19 @@ The revision audits a frozen sampled policy against exact board payoffs. It chec
 The confirmation covers this revision and appears in 168 authored Markdown
 documents, the reference PDF and the local interview guide.
 
+## 2026-11-19 Reuse exact six seat showdown work across suits
+
+The project owner reviewed code changes at `a90efd0603a32348fa1b95deaa6b9d521066037e` on branch
+`codex/six-seat-exact-suit-reuse` and cleared PR creation with “cleared a90efd0”.
+
+The revision evaluates one exact payoff stream per global suit class while keeping all original weighted worlds and subset rows. All 41 selected Java cases passed. The 36-world direct comparison matched 2,052 subset rows within 2.98e-14 per seat. Two full source solves passed the existing validation-only pack audit.
+
+The confirmation covers this revision and appears in 169 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`c19e89959751af0abb94dc65fcbbe937ae9e44f8` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared c19e899”. This confirmation applies to
+`a90efd0603a32348fa1b95deaa6b9d521066037e` and cleared PR creation on
+2026-11-19 (Europe/London), with “cleared a90efd0”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

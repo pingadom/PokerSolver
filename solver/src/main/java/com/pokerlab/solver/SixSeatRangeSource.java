@@ -243,7 +243,7 @@ public final class SixSeatRangeSource {
                                                     r.hands(), r.activeMask(), r.estimate()))
                             .toList();
             String method =
-                    request.payoff().method() == SixSeatPayoffWork.Method.EXACT_ENUMERATION
+                    request.payoff().method().isExact()
                             ? MultiwaySolutionPack.EXACT_ENUMERATION
                             : SixMaxPreflopSolutionPack.SHARED_BOARD_MONTE_CARLO;
             var pack =

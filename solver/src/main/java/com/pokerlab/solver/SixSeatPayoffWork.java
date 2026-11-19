@@ -12,21 +12,28 @@ public final class SixSeatPayoffWork {
 
     public enum Method {
         EXACT_ENUMERATION,
-        SHARED_BOARD_MONTE_CARLO
+        SHARED_BOARD_MONTE_CARLO,
+        EXACT_SUIT_REUSE;
+
+        public boolean isExact() {
+            return this == EXACT_ENUMERATION || this == EXACT_SUIT_REUSE;
+        }
     }
 
     public record Configuration(Method method, int trialsPerDeal, long seed) {
         public Configuration {
             Objects.requireNonNull(method, "method");
-            if (method == Method.EXACT_ENUMERATION
-                    ? trialsPerDeal != 0 || seed != 0
-                    : trialsPerDeal < 1)
+            if (method.isExact() ? trialsPerDeal != 0 || seed != 0 : trialsPerDeal < 1)
                 throw new IllegalArgumentException(
                         "Exact needs zero trials/seed; sampled needs positive trials");
         }
 
         public static Configuration exact() {
             return new Configuration(Method.EXACT_ENUMERATION, 0, 0);
+        }
+
+        public static Configuration exactSuitReuse() {
+            return new Configuration(Method.EXACT_SUIT_REUSE, 0, 0);
         }
 
         public static Configuration shared(int trials, long seed) {
@@ -97,17 +104,20 @@ public final class SixSeatPayoffWork {
         private final List<Row> rows;
         private final long boardsFromPerDealEstimates;
         private final Long observedSharedBoards;
+        private final long boardsFromEvaluatedDeals;
         private final Map<Key, MultiwayShowdownEstimate> table;
 
         private Result(
                 Plan plan,
                 List<Row> rows,
                 long boardsFromPerDealEstimates,
-                Long observedSharedBoards) {
+                Long observedSharedBoards,
+                long boardsFromEvaluatedDeals) {
             this.plan = plan;
             this.rows = List.copyOf(rows);
             this.boardsFromPerDealEstimates = boardsFromPerDealEstimates;
             this.observedSharedBoards = observedSharedBoards;
+            this.boardsFromEvaluatedDeals = boardsFromEvaluatedDeals;
             var values = new LinkedHashMap<Key, MultiwayShowdownEstimate>();
             for (var row : rows)
                 if (values.put(new Key(row.hands(), row.activeMask()), row.estimate()) != null)
@@ -131,6 +141,11 @@ public final class SixSeatPayoffWork {
             return observedSharedBoards;
         }
 
+        /** Sums trial counts only once for each physical oracle pass. */
+        public long boardsFromEvaluatedDeals() {
+            return boardsFromEvaluatedDeals;
+        }
+
         /** Shares depend on physical hands and mask, not their prior frequencies. */
         public MultiwayShowdownOracle oracle() {
             return (hands, mask) -> {
@@ -151,6 +166,8 @@ public final class SixSeatPayoffWork {
         private final Budget budget;
         private final Work work;
         private final String contentHash;
+        private final List<Integer> representatives;
+        private final int evaluatedDeals;
 
         private Plan(
                 SixSeatRangePreflight.Result input, Configuration configuration, Budget budget) {
@@ -158,11 +175,16 @@ public final class SixSeatPayoffWork {
             this.configuration = configuration;
             this.budget = budget;
             int deals = input.deals().size();
+            representatives =
+                    configuration.method() == Method.EXACT_SUIT_REUSE
+                            ? SixSeatSuitClasses.representatives(input)
+                            : java.util.stream.IntStream.range(0, deals).boxed().toList();
+            evaluatedDeals = (int) representatives.stream().distinct().count();
             long perDeal =
-                    configuration.method() == Method.EXACT_ENUMERATION
+                    configuration.method().isExact()
                             ? EXACT_BOARDS_PER_DEAL
                             : configuration.trialsPerDeal();
-            long boards = Math.multiplyExact(deals, perDeal);
+            long boards = Math.multiplyExact(evaluatedDeals, perDeal);
             work =
                     new Work(
                             deals,
@@ -201,6 +223,11 @@ public final class SixSeatPayoffWork {
             return work;
         }
 
+        /** Physical deal streams to evaluate, with all original worlds retained in work(). */
+        public int evaluatedDeals() {
+            return evaluatedDeals;
+        }
+
         public String contentHash() {
             return contentHash;
         }
@@ -219,30 +246,39 @@ public final class SixSeatPayoffWork {
             MultiwayShowdownOracle oracle =
                     shared != null ? shared : new ExactMultiwayShowdownOracle();
             var rows = new ArrayList<Row>();
-            long perDealBoards = 0;
-            for (var deal : input.deals()) {
-                boolean first = true;
+            var evaluated = new MultiwayShowdownEstimate[work.jointDeals()][64];
+            long logicalBoards = 0;
+            long evaluatedBoards = 0;
+            for (int world = 0; world < work.jointDeals(); world++) {
+                var deal = input.deals().get(world);
+                var keys = deal.hands().stream().map(WeightedCombo::key).toList();
+                int representative = representatives.get(world);
                 for (int mask = 1; mask < 64; mask++) {
                     if (Integer.bitCount(mask) < 2) continue;
-                    var value = oracle.estimate(deal.hands(), mask);
-                    validate(value, mask, work.boardsPerDeal());
-                    if (first) {
-                        perDealBoards = Math.addExact(perDealBoards, value.trials());
-                        first = false;
+                    MultiwayShowdownEstimate value;
+                    if (representative == world) {
+                        value = oracle.estimate(deal.hands(), mask);
+                        validate(value, mask, work.boardsPerDeal());
+                        evaluated[world][mask] = value;
+                        if (mask == 3) evaluatedBoards += value.trials();
+                    } else {
+                        value = evaluated[representative][mask];
                     }
-                    rows.add(
-                            new Row(
-                                    deal.hands().stream().map(WeightedCombo::key).toList(),
-                                    mask,
-                                    value));
+                    if (mask == 3) logicalBoards += value.trials();
+                    rows.add(new Row(keys, mask, value));
                 }
             }
             if (rows.size() != work.activeSubsetEntries()
-                    || perDealBoards != work.boardEvaluations()
-                    || (shared != null && shared.boardsEvaluated() != work.boardEvaluations()))
+                    || logicalBoards != Math.multiplyExact(work.jointDeals(), work.boardsPerDeal())
+                    || evaluatedBoards != work.boardEvaluations()
+                    || (shared != null && shared.boardsEvaluated() != evaluatedBoards))
                 throw new IllegalStateException("Actual owned payoff execution differs from plan");
             return new Result(
-                    this, rows, perDealBoards, shared == null ? null : shared.boardsEvaluated());
+                    this,
+                    rows,
+                    logicalBoards,
+                    shared == null ? null : shared.boardsEvaluated(),
+                    evaluatedBoards);
         }
     }
 

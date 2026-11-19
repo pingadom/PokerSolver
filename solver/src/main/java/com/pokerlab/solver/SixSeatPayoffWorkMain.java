@@ -16,7 +16,7 @@ public final class SixSeatPayoffWorkMain {
                 || args[1] == null
                 || args[1].isBlank())
             throw new IllegalArgumentException(
-                    "Usage: plan|evaluate NEW-output.json exact|shared:TRIALS:SEED MAX-BOARDS MAX-HAND-EVALUATIONS UTG HJ CO BTN SB BB");
+                    "Usage: plan|evaluate NEW-output.json exact|exact-suit-reuse|shared:TRIALS:SEED MAX-BOARDS MAX-HAND-EVALUATIONS UTG HJ CO BTN SB BB");
         Path output = Path.of(args[1]);
         if (Files.exists(output, LinkOption.NOFOLLOW_LINKS))
             throw new FileAlreadyExistsException(output.toString());
@@ -24,13 +24,15 @@ public final class SixSeatPayoffWorkMain {
         SixSeatPayoffWork.Configuration config;
         if (parts.length == 1 && parts[0].equals("exact"))
             config = SixSeatPayoffWork.Configuration.exact();
+        else if (parts.length == 1 && parts[0].equals("exact-suit-reuse"))
+            config = SixSeatPayoffWork.Configuration.exactSuitReuse();
         else if (parts.length == 3 && parts[0].equals("shared"))
             config =
                     SixSeatPayoffWork.Configuration.shared(
                             Integer.parseInt(parts[1]), Long.parseLong(parts[2]));
         else
             throw new IllegalArgumentException(
-                    "Explicit exact or shared:TRIALS:SEED method required");
+                    "Explicit exact, exact-suit-reuse or shared:TRIALS:SEED method required");
         var budget = new SixSeatPayoffWork.Budget(Long.parseLong(args[3]), Long.parseLong(args[4]));
         var input =
                 SixSeatRangePreflight.plan(
@@ -50,11 +52,15 @@ public final class SixSeatPayoffWorkMain {
         report.put("seatSupport", input.seatSupport());
         report.put("budget", budget);
         report.put("plannedWork", plan.work());
+        boolean suitReuse = config.method() == SixSeatPayoffWork.Method.EXACT_SUIT_REUSE;
+        if (suitReuse) report.put("plannedEvaluatedDeals", plan.evaluatedDeals());
         report.put("executed", args[0].equals("evaluate"));
         if (args[0].equals("evaluate")) {
             var result = plan.execute();
             report.put("boardsFromPerDealEstimates", result.boardsFromPerDealEstimates());
             report.put("observedSharedBoards", result.observedSharedBoards());
+            if (suitReuse)
+                report.put("boardsFromEvaluatedDeals", result.boardsFromEvaluatedDeals());
             report.put("payoffs", result.rows());
         }
         byte[] bytes =
