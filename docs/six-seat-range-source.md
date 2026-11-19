@@ -149,6 +149,11 @@ remain unchanged. Two new suites auto-discover; full PR CI follows owner clearan
 Broader realistic support, independent error/quality and content qualification,
 postflop integration and public trainer admission remain separate. AWS stays paused.
 
+## Exact payoff comparison
+
+Use the [payoff comparison](six-seat-payoff-comparison.md) to reassess a fixed
+sampled policy under exact boards with the same finite game and private prior.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
 `2919507e9ab099ae802529f6835e94fd41cb6fd7` and cleared PR creation on
