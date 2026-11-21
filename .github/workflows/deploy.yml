@@ -20,7 +20,7 @@ jobs:
       API_SERVICE: ${{ vars.ECS_API_SERVICE }}
       WORKER_SERVICE: ${{ vars.ECS_WORKER_SERVICE }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
