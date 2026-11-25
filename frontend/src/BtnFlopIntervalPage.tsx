@@ -139,7 +139,7 @@ export default function BtnFlopIntervalPage() {
   function reset() { clear(); window.history.replaceState(null, "", "#interval-btn-flop"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
   return <div className="trainer-page preflop-page interval-page collection-page flop-interval-page btn-flop-interval-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP PRACTICE · FOUR BTN HANDS</p>
         <h1>Play the button</h1><p className="trainer-intro">BB checked. Your turn to check or bet. Choose a move to see its EV and loss range.</p></div></div>

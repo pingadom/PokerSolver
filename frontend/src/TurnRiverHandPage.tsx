@@ -157,7 +157,7 @@ export default function TurnRiverHandPage() {
   return (
     <main className="trainer-page">
       <header className="trainer-topbar">
-        <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
+        <a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a>
         <a className="trainer-back" href="#turn-river">← Single-decision drill</a>
       </header>
       <div className="trainer-container hand-play-container">

@@ -151,7 +151,7 @@ export default function SizeMenuBtnPage() {
   }
   const covered = new Set(attempts.map(a => a.attempt.sourceCaseIndex)).size;
   return <div className="trainer-page preflop-page interval-page flop-interval-page btn-sizing-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">BTN · FOUR FLOP DECISIONS</p><h1>Facing the bet</h1>
         <p className="trainer-intro">BB bets a quarter of the pot. Choose whether to fold or call.</p></div></div>

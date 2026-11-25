@@ -163,7 +163,7 @@ export default function SixMaxPreflopPage() {
   });
 
   return <main className="trainer-page preflop-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <div className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">SIX-SEAT PREFLOP / SOLVER RESEARCH</p><h1>Play the preflop decision</h1><p className="trainer-intro">Ten decisions drawn from our saved six-seat policy. Opens, calls and re-raises are in play.</p></div><span className="trainer-status">VALIDATION ONLY</span></div>
       <div className="trainer-disclosure hand-play-disclosure" role="note">Synthetic ranges and a limited raise menu. If betting ends before an all-in, every later street is checked down. This is a solver test, not a general cash-game strategy.</div>

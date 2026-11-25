@@ -126,7 +126,7 @@ export default function FlopCollectionPage() {
   function reset() { clear(); window.history.replaceState(null, "", "#interval-flop-collection"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
   return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page${question?.decision.kind === "BB_FACING_BET" ? " later-flop-interval-page" : ""}`}>
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">TWO QUALIFIED FLOP CONTEXTS</p>
         <h1>Flop practice</h1><p className="trainer-intro">Play distinct decisions, then compare the supported EV and loss ranges.</p></div></div>
