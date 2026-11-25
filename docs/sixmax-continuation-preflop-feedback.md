@@ -86,7 +86,7 @@ The [alternating-round follow-up](sixmax-alternating-continuation-rounds.md) now
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`a90efd0603a32348fa1b95deaa6b9d521066037e` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared a90efd0”. This confirmation applies to
+`9174350326fd2d0b9034d6efcf09da1f743b00b0` and cleared PR creation on
+2026-11-25 (Europe/London), with “All 3” (selecting clearance of `9174350`). This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
