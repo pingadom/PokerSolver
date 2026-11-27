@@ -17,16 +17,30 @@ public final class SixSeatRangeSourceMain {
     public static void main(String[] args) throws Exception {
         if (args == null || args.length < 3)
             throw new IllegalArgumentException(
-                    "Usage: plan|solve INPUT.json NEW-output.json, or compare INPUT.json NEW-output.json MAX-EXACT-BOARDS MAX-EXACT-HANDS");
+                    "Usage: plan|solve INPUT.json NEW-output.json, or compare|compare-trainer with exact work limits");
+        int expectedArguments =
+                switch (args[0]) {
+                    case "plan", "solve" -> 3;
+                    case "compare" -> 5;
+                    case "compare-trainer" -> 10;
+                    default -> throw new IllegalArgumentException("Invalid source command");
+                };
+        if (args.length != expectedArguments)
+            throw new IllegalArgumentException("Invalid source argument count");
         boolean compare = "compare".equals(args[0]);
-        if (compare
-                ? args.length != 5
-                : args.length != 3 || (!"plan".equals(args[0]) && !"solve".equals(args[0])))
-            throw new IllegalArgumentException("Invalid source command or argument count");
+        boolean trainerAudit = "compare-trainer".equals(args[0]);
         var exactBudget =
-                compare
+                compare || trainerAudit
                         ? new SixSeatPayoffWork.Budget(
                                 Long.parseLong(args[3]), Long.parseLong(args[4]))
+                        : null;
+        var reference =
+                trainerAudit ? exactReference(args[5]) : SixSeatPayoffWork.Configuration.exact();
+        var options =
+                trainerAudit
+                        ? new SixSeatTrainerActionAudit.Options(
+                                Integer.parseInt(args[6]), Long.parseLong(args[7]),
+                                Double.parseDouble(args[8]), Double.parseDouble(args[9]))
                         : null;
         Path input = Path.of(args[1]), output = Path.of(args[2]);
         if (Files.exists(output, LinkOption.NOFOLLOW_LINKS))
@@ -52,9 +66,11 @@ public final class SixSeatRangeSourceMain {
         var report = new LinkedHashMap<String, Object>();
         report.put(
                 "schemaVersion",
-                compare
-                        ? "pokerlab-six-seat-payoff-comparison/v1"
-                        : "pokerlab-six-seat-range-source/v1");
+                switch (args[0]) {
+                    case "compare" -> "pokerlab-six-seat-payoff-comparison/v1";
+                    case "compare-trainer" -> "pokerlab-six-seat-trainer-action-audit/v1";
+                    default -> "pokerlab-six-seat-range-source/v1";
+                });
         report.put("trainerAdmission", false);
         report.put("gradingAuthority", false);
         report.put(
@@ -76,7 +92,18 @@ public final class SixSeatRangeSourceMain {
                     "comparison",
                     SixSeatPayoffComparison.assess(plan.execute(), exactPlan.execute()));
         }
-        if (!compare) report.put("solved", args[0].equals("solve"));
+        if (trainerAudit) {
+            var exactPlan =
+                    SixSeatPayoffComparison.planExactReference(plan, reference, exactBudget);
+            report.put("plannedExactReferenceWork", exactPlan.work());
+            report.put("plannedExactEvaluatedDeals", exactPlan.evaluatedDeals());
+            report.put("exactReferenceBudget", exactBudget);
+            report.put("exactReferenceMethod", reference.method());
+            report.put(
+                    "trainerActionAudit",
+                    SixSeatTrainerActionAudit.assess(plan.execute(), exactPlan.execute(), options));
+        }
+        if (!compare && !trainerAudit) report.put("solved", args[0].equals("solve"));
         if (args[0].equals("solve")) {
             var result = plan.execute();
             report.put("sourcePackHash", result.packHash());
@@ -93,5 +120,14 @@ public final class SixSeatRangeSourceMain {
         }
         byte[] encoded = mapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(report);
         Files.write(output, encoded, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+    }
+
+    private static SixSeatPayoffWork.Configuration exactReference(String value) {
+        return switch (value) {
+            case "exact" -> SixSeatPayoffWork.Configuration.exact();
+            case "exact-suit-reuse" -> SixSeatPayoffWork.Configuration.exactSuitReuse();
+            default ->
+                    throw new IllegalArgumentException("Reference needs exact or exact-suit-reuse");
+        };
     }
 }
