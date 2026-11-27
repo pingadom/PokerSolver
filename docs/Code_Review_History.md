@@ -1002,9 +1002,19 @@ No live trainer admission or grading authority is granted; AWS deployment remain
 The confirmation covers this revision and appears in 170 authored Markdown
 documents, the reference PDF and the local interview guide.
 
+## 2026-11-27 Rebrand UI, README, and display name to Strata Solver (Phase 1)
+
+The project owner reviewed code changes at `47b79c954c1c3fefb13aae6ca08fb38a9a374414` on branch
+`rebrand/strata-solver` and cleared PR creation with “cleared 9fa8968, 47b79c9, 4533b09”.
+
+The revision updates user-visible branding across frontend/index.html, frontend/src/App.tsx, 22 trainer pages, README.md, and the root Maven display name to Strata Solver while preserving internal Java packages, localStorage keys, and JSON wire/pack schemas. Local validation passed eslint, tsc --noEmit, all 1,465 frontend tests across 44 files, and the Vite production build. AWS deployment remains paused.
+
+The confirmation covers this revision and appears in 170 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`9174350326fd2d0b9034d6efcf09da1f743b00b0` and cleared PR creation on
-2026-11-25 (Europe/London), with “All 3” (selecting clearance of `9174350`). This confirmation applies to
+`47b79c954c1c3fefb13aae6ca08fb38a9a374414` and cleared PR creation on
+2026-11-27 (Europe/London), with “cleared 9fa8968, 47b79c9, 4533b09”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->

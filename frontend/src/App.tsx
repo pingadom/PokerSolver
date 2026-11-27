@@ -132,10 +132,10 @@ export default function App() {
   return (
     <div className="workspace">
       <aside className="sidebar">
-        <a className="brand" href="/" aria-label="PokerLab home">
+        <a className="brand" href="/" aria-label="Strata Solver home">
           <span className="brand-mark">♠</span>
           <span>
-            PokerLab<span className="cloud">CLOUD</span>
+            Strata<span className="cloud">SOLVER</span>
           </span>
         </a>
         <div className="nav-label">WORKSPACE</div>
@@ -163,7 +163,7 @@ export default function App() {
           <span>
             Workspace <span className="slash">/</span> Equity simulator
           </span>
-          <span className="edition">POKERLAB / 01</span>
+          <span className="edition">STRATA / 01</span>
         </header>
         <div className="page-content">
           <div className="page-heading">
@@ -679,7 +679,7 @@ export default function App() {
           </section>
           <footer>
             Monte Carlo estimates for exact Texas Hold’em hands.
-            <span>POKERLAB CLOUD</span>
+            <span>STRATA SOLVER</span>
           </footer>
         </div>
       </main>

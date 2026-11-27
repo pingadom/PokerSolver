@@ -142,7 +142,7 @@ export default function MixedFlopCollectionPage() {
   function reset() { clear(); window.history.replaceState(null, "", "#interval-mixed-flop"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
   return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page mixed-flop-collection-page btn-flop-interval-page${question?.decision.kind === "BB_FACING_BET" ? " later-flop-interval-page" : ""}`}>
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP PRACTICE · SIX DECISIONS</p>
         <h1>Play both sides</h1><p className="trainer-intro">Practise BB’s first move, BB facing a bet, and four BTN hands after a check.</p></div></div>

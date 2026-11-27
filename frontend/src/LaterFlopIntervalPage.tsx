@@ -128,7 +128,7 @@ export default function LaterFlopIntervalPage() {
   };
 
   return <div className="trainer-page preflop-page interval-page flop-interval-page later-flop-interval-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#interval-flop">Initial flop drill</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#interval-flop">Initial flop drill</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP RESPONSE · TWO ACTIVE PLAYERS</p>
         <h1>Facing a flop bet</h1><p className="trainer-intro">BB checked. BTN bet. Choose fold or call, then compare the supported EV and loss ranges.</p></div></div>

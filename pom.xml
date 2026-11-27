@@ -5,7 +5,7 @@
   <artifactId>pokerlab-cloud</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>PokerLab Cloud</name>
+  <name>Strata Solver</name>
   <modules>
     <module>engine</module>
     <module>solver</module>

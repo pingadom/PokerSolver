@@ -158,7 +158,7 @@ export default function TurnRiverPage() {
   return (
     <main className="trainer-page">
       <header className="trainer-topbar">
-        <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
+        <a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a>
         <a className="trainer-back" href="#trainer">← Preflop trainer</a>
       </header>
       <div className="trainer-container">
@@ -166,7 +166,7 @@ export default function TurnRiverPage() {
           <div>
             <p className="eyebrow">SOLVER RESEARCH / TURN + RIVER</p>
             <h1>Turn and river decisions</h1>
-            <p className="trainer-intro">Practise one decision from a two-street game solved by PokerLab. A river card is dealt between betting rounds.</p>
+            <p className="trainer-intro">Practise one decision from a two-street game solved by Strata Solver. A river card is dealt between betting rounds.</p>
           </div>
           <span className="trainer-status">VALIDATION ONLY</span>
         </div>

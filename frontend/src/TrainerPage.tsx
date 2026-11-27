@@ -183,7 +183,7 @@ export default function TrainerPage() {
   return (
     <main className="trainer-page">
       <header className="trainer-topbar">
-        <a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a>
+        <a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a>
         <a className="trainer-back" href="#solver">← Equity Lab</a>
       </header>
       <div className="trainer-container hand-play-container">

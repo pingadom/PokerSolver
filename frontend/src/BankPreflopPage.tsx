@@ -153,7 +153,7 @@ export default function BankPreflopPage({ client = bankPreflopClient }: { client
   }
   function reload() { clear(); window.history.replaceState(null, "", client.route); setGeneration(g => g + 1); }
   return <div className="trainer-page preflop-page interval-page root-preflop-page bank-table-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">PREFLOP · BB VS BUTTON · {client.studyLabel}</p>
         <h1>{question ? `Defend ${bankHandNames[question.sourceCaseIndex]}` : "Preflop hand practice"}</h1><p className="trainer-intro">The button raised to 3 bb. Compare the EV ranges, then choose your response.</p></div></div>

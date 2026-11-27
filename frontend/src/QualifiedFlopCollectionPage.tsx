@@ -142,7 +142,7 @@ export default function QualifiedFlopCollectionPage() {
   function reset() { clear(); window.history.replaceState(null, "", "#interval-qualified-flop"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
   return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page expanded-flop-collection-page btn-flop-interval-page${question?.decision.legacy?.decision.kind === "BB_FACING_BET" ? " later-flop-interval-page" : ""}`}>
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP PRACTICE · ELEVEN DECISIONS</p>
         <h1>Know when to let go</h1><p className="trainer-intro">Practise checking, betting and calling, then decide when a weak hand should fold.</p></div></div>

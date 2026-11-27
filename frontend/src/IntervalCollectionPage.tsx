@@ -125,7 +125,7 @@ export default function IntervalCollectionPage() {
   function reset() { clear(); window.history.replaceState(null, "", "#interval-collection"); setGeneration((g) => g + 1); }
   const covered = new Set(attempts.map((a) => a.questionIndex)).size;
   return <div className="trainer-page preflop-page interval-page collection-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">QUALIFIED DECISIONS · TWO ACTIVE PLAYERS</p>
         <h1>Preflop practice</h1><p className="trainer-intro">Play distinct decisions, then compare the supported EV and loss ranges.</p></div></div>

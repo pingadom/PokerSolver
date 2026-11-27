@@ -195,7 +195,7 @@ export default function SizingFlopCollectionPage() {
   const context = question ? sizingDecision(question).context : null;
   const hero = context && ("actingSeat" in context ? context.actingSeat : context.hero);
   return <div className={`trainer-page preflop-page interval-page collection-page flop-interval-page expanded-flop-collection-page btn-flop-interval-page call-flop-collection-page unpaired-flop-collection-page sizing-flop-collection-page${hero === "BB" ? " later-flop-interval-page" : ""}`}>
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">FLOP PRACTICE · TWENTY DECISIONS</p>
         <h1>Play the flop</h1><p className="trainer-intro">Check, bet, call or fold. Compare the EV of each move and revisit your decisions.</p></div></div>

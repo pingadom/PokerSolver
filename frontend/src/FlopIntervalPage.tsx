@@ -128,7 +128,7 @@ export default function FlopIntervalPage() {
   };
 
   return <div className="trainer-page preflop-page interval-page flop-interval-page">
-    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> PokerLab</a><a className="trainer-back" href="#solver">← Solver project</a></header>
+    <header className="trainer-topbar"><a className="trainer-brand" href="#solver"><span>♠</span> Strata Solver</a><a className="trainer-back" href="#solver">← Solver project</a></header>
     <main className="trainer-container hand-play-container">
       <div className="trainer-title-row hand-play-title"><div><p className="eyebrow">ONE QUALIFIED QUESTION · TWO ACTIVE PLAYERS</p>
         <h1>Play the flop interval</h1><p className="trainer-intro">Choose a move, then compare its EV and loss across the supported strategies.</p></div></div>
