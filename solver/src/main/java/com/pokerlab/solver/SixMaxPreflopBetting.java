@@ -48,21 +48,54 @@ public final class SixMaxPreflopBetting {
         NEXT_TARGET
     }
 
+    public enum OpenLimpRule {
+        ALLOWED,
+        SMALL_BLIND_ONLY,
+        DISALLOWED
+    }
+
     @JsonSerialize(using = SixMaxPreflopRulesJson.Serializer.class)
     @JsonDeserialize(using = SixMaxPreflopRulesJson.Deserializer.class)
     public record Rules(
             double stackBb,
             double smallBlindBb,
             List<Double> raiseToBb,
-            RaiseSchedule raiseSchedule) {
+            RaiseSchedule raiseSchedule,
+            OpenLimpRule openLimpRule,
+            int maxRaisedPotPlayers) {
         public Rules {
             raiseToBb = List.copyOf(Objects.requireNonNull(raiseToBb, "raiseToBb"));
             Objects.requireNonNull(raiseSchedule, "raiseSchedule");
+            Objects.requireNonNull(openLimpRule, "openLimpRule");
+            if (maxRaisedPotPlayers < 2 || maxRaisedPotPlayers > ORDER.length)
+                throw new IllegalArgumentException(
+                        "maxRaisedPotPlayers must be between 2 and " + ORDER.length);
         }
 
         /** Historical callers retain the global target menu and its serialized identity. */
         public Rules(double stackBb, double smallBlindBb, List<Double> raiseToBb) {
-            this(stackBb, smallBlindBb, raiseToBb, RaiseSchedule.GLOBAL_TARGETS);
+            this(
+                    stackBb,
+                    smallBlindBb,
+                    raiseToBb,
+                    RaiseSchedule.GLOBAL_TARGETS,
+                    OpenLimpRule.ALLOWED,
+                    ORDER.length);
+        }
+
+        /** Historical scheduled callers retain unrestricted limps and multiway calls. */
+        public Rules(
+                double stackBb,
+                double smallBlindBb,
+                List<Double> raiseToBb,
+                RaiseSchedule raiseSchedule) {
+            this(
+                    stackBb,
+                    smallBlindBb,
+                    raiseToBb,
+                    raiseSchedule,
+                    OpenLimpRule.ALLOWED,
+                    ORDER.length);
         }
 
         public static Rules reference100Bb() {
@@ -232,7 +265,8 @@ public final class SixMaxPreflopBetting {
         List<Move> legal = new ArrayList<>();
         if (committed < state.currentBet) {
             legal.add(new Move(seat, Kind.FOLD, 0));
-            legal.add(new Move(seat, Kind.CALL, fromUnits(state.currentBet)));
+            if (isCallAllowed(state, seat))
+                legal.add(new Move(seat, Kind.CALL, fromUnits(state.currentBet)));
         } else {
             legal.add(new Move(seat, Kind.CHECK, fromUnits(committed)));
         }
@@ -373,6 +407,21 @@ public final class SixMaxPreflopBetting {
         if (!targets.contains(stackBb)) targets.add(stackBb);
         targets.sort(Comparator.naturalOrder());
         return new SixMaxPreflopBetting(new Rules(stackBb, smallBlindBb, targets));
+    }
+
+    private boolean isCallAllowed(State state, Seat seat) {
+        if (state.currentBet == UNITS_PER_BB) {
+            return switch (rules.openLimpRule()) {
+                case ALLOWED -> true;
+                case SMALL_BLIND_ONLY -> seat == Seat.SB;
+                case DISALLOWED -> false;
+            };
+        }
+        if (rules.maxRaisedPotPlayers() == ORDER.length) return true;
+        int matched = 0;
+        for (int index = 0; index < ORDER.length; index++)
+            if (!state.folded[index] && state.committed[index] >= state.currentBet) matched++;
+        return matched < rules.maxRaisedPotPlayers();
     }
 
     private void requireOwnState(State state) {

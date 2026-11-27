@@ -44,21 +44,139 @@ public final class SixMaxPreflopCheckdownGame
     private record PublicNode(
             SixMaxPreflopBetting.State betting,
             List<String> actions,
-            Map<String, String> children) {}
+            Map<String, String> children,
+            TerminalTemplate terminal) {}
 
     private record Deal(
             List<WeightedCombo> hands,
             double logWeight,
-            Map<Integer, MultiwayShowdownEstimate> estimates) {}
+            MultiwayShowdownEstimate[] estimatesByMask) {}
 
-    private record TerminalPayoff(double[] utilitiesBb, double rakeBb, double errorBoundBb) {}
+    /**
+     * Public-node settlement template shared across all private deals. Precomputing the tier
+     * structure once per terminal node eliminates the O(deals * terminals) payoff map while
+     * preserving exact AllInSidePots arithmetic.
+     */
+    private static final class TerminalTemplate {
+        private final double[] baseUtilitiesBb;
+        private final int[] tierMasks;
+        private final double[] tierPotsBb;
+        private final double rakeBb;
+
+        private TerminalTemplate(
+                double[] baseUtilitiesBb, int[] tierMasks, double[] tierPotsBb, double rakeBb) {
+            this.baseUtilitiesBb = baseUtilitiesBb;
+            this.tierMasks = tierMasks;
+            this.tierPotsBb = tierPotsBb;
+            this.rakeBb = rakeBb;
+        }
+
+        private static TerminalTemplate of(
+                SixMaxPreflopBetting.State state, CashRakeRule rakeRule) {
+            int seats = Seat.values().length;
+            double[] committed = new double[seats];
+            int activeMask = 0;
+            for (Seat seat : Seat.values()) {
+                int index = seat.ordinal();
+                committed[index] = state.committedBb(seat);
+                if (!state.isFolded(seat)) activeMask |= 1 << index;
+            }
+            boolean flopDealt =
+                    state.status() == Status.ALL_IN_SHOWDOWN
+                            || state.status() == Status.POSTFLOP_CONTINUATION_REQUIRED;
+            if (state.status() == Status.UNCONTESTED
+                    ? Integer.bitCount(activeMask) != 1
+                    : !flopDealt || Integer.bitCount(activeMask) < 2)
+                throw new IllegalStateException("Terminal status disagrees with live seats");
+
+            double[] levels =
+                    java.util.Arrays.stream(committed)
+                            .distinct()
+                            .filter(value -> value > 0)
+                            .sorted()
+                            .toArray();
+            double[] baseUtilities = new double[seats];
+            for (int seat = 0; seat < seats; seat++)
+                baseUtilities[seat] = committed[seat] == 0 ? 0 : -committed[seat];
+
+            int[] rawMasks = new int[levels.length];
+            double[] rawPots = new double[levels.length];
+            int tierCount = 0;
+            double rake = 0;
+            double lower = 0;
+            for (double upper : levels) {
+                int contributors = 0;
+                int eligible = 0;
+                for (int seat = 0; seat < seats; seat++) {
+                    if (committed[seat] < upper) continue;
+                    contributors++;
+                    if ((activeMask & (1 << seat)) != 0) eligible |= 1 << seat;
+                }
+                if (eligible == 0)
+                    throw new IllegalArgumentException("A side pot has no eligible player");
+                double grossPot = (upper - lower) * contributors;
+                double tierRake =
+                        rakeRule.forTier(
+                                grossPot, contributors, flopDealt, rakeRule.capBb() - rake);
+                rake += tierRake;
+                double pot = grossPot - tierRake;
+                if (Integer.bitCount(eligible) == 1) {
+                    baseUtilities[Integer.numberOfTrailingZeros(eligible)] += pot;
+                } else {
+                    rawMasks[tierCount] = eligible;
+                    rawPots[tierCount] = pot;
+                    tierCount++;
+                }
+                lower = upper;
+            }
+            return new TerminalTemplate(
+                    baseUtilities,
+                    java.util.Arrays.copyOf(rawMasks, tierCount),
+                    java.util.Arrays.copyOf(rawPots, tierCount),
+                    rake);
+        }
+
+        private double[] utilitiesBb(Deal deal) {
+            double[] utilities = baseUtilitiesBb.clone();
+            for (int t = 0; t < tierMasks.length; t++) {
+                double[] shares = deal.estimatesByMask()[tierMasks[t]].shares();
+                double pot = tierPotsBb[t];
+                for (int seat = 0; seat < utilities.length; seat++)
+                    utilities[seat] += pot * shares[seat];
+            }
+            return utilities;
+        }
+
+        private double errorBoundBb(Deal deal) {
+            if (tierMasks.length == 0) return 0;
+            if (tierMasks.length == 1) {
+                double[] errors = deal.estimatesByMask()[tierMasks[0]].standardErrors();
+                double pot = tierPotsBb[0];
+                double max = 0;
+                for (double error : errors) max = Math.max(max, pot * error);
+                return max;
+            }
+            double[] bounds = new double[baseUtilitiesBb.length];
+            for (int t = 0; t < tierMasks.length; t++) {
+                double[] errors = deal.estimatesByMask()[tierMasks[t]].standardErrors();
+                double pot = tierPotsBb[t];
+                for (int seat = 0; seat < bounds.length; seat++) bounds[seat] += pot * errors[seat];
+            }
+            double max = 0;
+            for (double bound : bounds) max = Math.max(max, bound);
+            return max;
+        }
+
+        private double rakeBb() {
+            return rakeBb;
+        }
+    }
 
     private final SixMaxPreflopBetting betting;
     private final CashRakeRule rakeRule;
     private final Map<String, PublicNode> publicNodes;
     private final List<Deal> deals;
     private final List<ChanceOutcome<State>> chanceOutcomes;
-    private final List<Map<String, TerminalPayoff>> terminalPayoffs;
     private final TreeSummary treeSummary;
     private final double maximumTerminalPayoffStandardErrorBb;
     private final ChanceModel chanceModel;
@@ -88,7 +206,7 @@ public final class SixMaxPreflopCheckdownGame
         return new SixMaxPreflopCheckdownGame(
                 rules,
                 sample.deals().stream()
-                        .map(deal -> new Deal(deal.hands(), Math.log(deal.occurrences()), Map.of()))
+                        .map(deal -> new Deal(deal.hands(), Math.log(deal.occurrences()), null))
                         .toList(),
                 rakeRule,
                 showdown,
@@ -130,23 +248,20 @@ public final class SixMaxPreflopCheckdownGame
                         .sum();
         List<Deal> finished = new ArrayList<>();
         List<ChanceOutcome<State>> outcomes = new ArrayList<>();
-        List<Map<String, TerminalPayoff>> payoffs = new ArrayList<>();
+        List<TerminalTemplate> terminals = new ArrayList<>();
+        for (var node : nodes.values()) if (node.terminal() != null) terminals.add(node.terminal());
         double largestError = 0;
         for (Deal deal : prepared) {
-            Map<Integer, MultiwayShowdownEstimate> estimates = new LinkedHashMap<>();
+            MultiwayShowdownEstimate[] estimates = new MultiwayShowdownEstimate[1 << playerCount()];
             for (int mask = 1; mask < 1 << playerCount(); mask++) {
                 if (Integer.bitCount(mask) < 2) continue;
                 var estimate = showdown.estimate(deal.hands(), mask);
                 validateEstimate(estimate, mask);
-                estimates.put(mask, estimate);
+                estimates[mask] = estimate;
             }
-            Deal resolved = new Deal(deal.hands(), deal.logWeight(), Map.copyOf(estimates));
-            Map<String, TerminalPayoff> byHistory = new LinkedHashMap<>();
-            for (var node : nodes.entrySet()) {
-                if (node.getValue().betting().status() == Status.DECISION) continue;
-                TerminalPayoff payoff = payoff(resolved, node.getValue().betting());
-                byHistory.put(node.getKey(), payoff);
-                largestError = Math.max(largestError, payoff.errorBoundBb());
+            Deal resolved = new Deal(deal.hands(), deal.logWeight(), estimates);
+            for (TerminalTemplate terminal : terminals) {
+                largestError = Math.max(largestError, terminal.errorBoundBb(resolved));
             }
             int index = finished.size();
             finished.add(resolved);
@@ -154,11 +269,9 @@ public final class SixMaxPreflopCheckdownGame
                     new ChanceOutcome<>(
                             new State(index, ""),
                             Math.exp(deal.logWeight() - maxLogWeight) / totalMass));
-            payoffs.add(Map.copyOf(byHistory));
         }
         deals = List.copyOf(finished);
         chanceOutcomes = List.copyOf(outcomes);
-        terminalPayoffs = List.copyOf(payoffs);
         maximumTerminalPayoffStandardErrorBb = largestError;
     }
 
@@ -210,22 +323,18 @@ public final class SixMaxPreflopCheckdownGame
     @Override
     public double[] terminalUtilities(State state) {
         if (!isTerminal(state)) throw new IllegalArgumentException("Expected a terminal state");
-        return terminalPayoffs
-                .get(state.dealIndex())
-                .get(state.publicHistory())
-                .utilitiesBb()
-                .clone();
+        return node(state).terminal().utilitiesBb(deals.get(state.dealIndex()));
     }
 
     public double terminalRakeBb(State state) {
         if (!isTerminal(state)) throw new IllegalArgumentException("Expected a terminal state");
-        return terminalPayoffs.get(state.dealIndex()).get(state.publicHistory()).rakeBb();
+        return node(state).terminal().rakeBb();
     }
 
     /** Conservative maximum of the per-seat payoff SEs at this terminal. */
     public double terminalMaximumPayoffStandardErrorBb(State state) {
         if (!isTerminal(state)) throw new IllegalArgumentException("Expected a terminal state");
-        return terminalPayoffs.get(state.dealIndex()).get(state.publicHistory()).errorBoundBb();
+        return node(state).terminal().errorBoundBb(deals.get(state.dealIndex()));
     }
 
     /** A folded player's payoff is fixed; active seats use the conservative terminal maximum. */
@@ -326,7 +435,11 @@ public final class SixMaxPreflopCheckdownGame
         }
         if (children.size() != actions.size())
             throw new IllegalStateException("Betting actions need unique names");
-        nodes.put(history, new PublicNode(state, List.copyOf(actions), Map.copyOf(children)));
+        TerminalTemplate terminal =
+                state.status() == Status.DECISION ? null : TerminalTemplate.of(state, rakeRule);
+        nodes.put(
+                history,
+                new PublicNode(state, List.copyOf(actions), Map.copyOf(children), terminal));
         for (int index = 0; index < moves.size(); index++)
             buildTree(
                     betting.apply(state, moves.get(index)),
@@ -392,7 +505,7 @@ public final class SixMaxPreflopCheckdownGame
             if (deals.size() == MAX_JOINT_DEALS)
                 throw new IllegalArgumentException(
                         "More than " + MAX_JOINT_DEALS + " physical joint deals");
-            deals.add(new Deal(List.copyOf(hands), logWeight, Map.of()));
+            deals.add(new Deal(List.copyOf(hands), logWeight, null));
             return;
         }
         for (WeightedCombo combo : ranges.get(seat)) {
@@ -426,44 +539,5 @@ public final class SixMaxPreflopCheckdownGame
         }
         if (Math.abs(sum - 1) > 1e-9)
             throw new IllegalArgumentException("Showdown shares must sum to one");
-    }
-
-    private TerminalPayoff payoff(Deal deal, SixMaxPreflopBetting.State state) {
-        if (state.status() == Status.UNCONTESTED) {
-            var settled = SixMaxPreflopTerminalPayoff.settleUncontested(state, rakeRule);
-            return new TerminalPayoff(
-                    toArray(settled.utilitiesBb()),
-                    settled.rakeBb(),
-                    settled.maximumPayoffStandardErrorBb());
-        }
-        if (state.status() == Status.ALL_IN_SHOWDOWN) {
-            var settled =
-                    SixMaxPreflopTerminalPayoff.settle(
-                            state,
-                            deal.hands(),
-                            rakeRule,
-                            (hands, mask) -> deal.estimates().get(mask));
-            return new TerminalPayoff(
-                    toArray(settled.utilitiesBb()),
-                    settled.rakeBb(),
-                    settled.maximumPayoffStandardErrorBb());
-        }
-        if (state.status() != Status.POSTFLOP_CONTINUATION_REQUIRED)
-            throw new IllegalArgumentException("Expected a completed preflop round");
-        double[] committed = new double[playerCount()];
-        int activeMask = 0;
-        for (Seat seat : Seat.values()) {
-            committed[seat.ordinal()] = state.committedBb(seat);
-            if (!state.isFolded(seat)) activeMask |= 1 << seat.ordinal();
-        }
-        var settled =
-                AllInSidePots.settle(
-                        committed, activeMask, 0, deal.estimates()::get, rakeRule, true);
-        return new TerminalPayoff(
-                settled.utilitiesBb(), settled.rakeBb(), settled.maximumStandardErrorBb());
-    }
-
-    private static double[] toArray(List<Double> values) {
-        return values.stream().mapToDouble(Double::doubleValue).toArray();
     }
 }

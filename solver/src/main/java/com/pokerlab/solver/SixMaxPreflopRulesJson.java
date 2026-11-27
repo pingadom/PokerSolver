@@ -24,6 +24,10 @@ public final class SixMaxPreflopRulesJson {
                 SixMaxPreflopBetting.Rules rules, JsonGenerator output, SerializerProvider provider)
                 throws IOException {
             output.writeStartObject();
+            if (rules.maxRaisedPotPlayers() != PreflopAllInSpot.Seat.values().length)
+                output.writeNumberField("maxRaisedPotPlayers", rules.maxRaisedPotPlayers());
+            if (rules.openLimpRule() != SixMaxPreflopBetting.OpenLimpRule.ALLOWED)
+                output.writeStringField("openLimpRule", rules.openLimpRule().name());
             if (rules.raiseSchedule() != SixMaxPreflopBetting.RaiseSchedule.GLOBAL_TARGETS)
                 output.writeStringField("raiseSchedule", rules.raiseSchedule().name());
             output.writeArrayFieldStart("raiseToBb");
@@ -46,6 +50,8 @@ public final class SixMaxPreflopRulesJson {
             Double smallBlind = null;
             List<Double> targets = null;
             var schedule = SixMaxPreflopBetting.RaiseSchedule.GLOBAL_TARGETS;
+            var openLimpRule = SixMaxPreflopBetting.OpenLimpRule.ALLOWED;
+            int maxRaisedPotPlayers = PreflopAllInSpot.Seat.values().length;
             while (input.nextToken() != JsonToken.END_OBJECT) {
                 if (input.currentToken() != JsonToken.FIELD_NAME)
                     throw invalid(input, "Expected a rule field");
@@ -70,13 +76,38 @@ public final class SixMaxPreflopRulesJson {
                             throw invalid(input, "Unknown raiseSchedule");
                         }
                     }
+                    case "openLimpRule" -> {
+                        if (input.currentToken() != JsonToken.VALUE_STRING)
+                            throw invalid(input, "openLimpRule must be a supported name");
+                        try {
+                            openLimpRule =
+                                    SixMaxPreflopBetting.OpenLimpRule.valueOf(input.getText());
+                        } catch (IllegalArgumentException exception) {
+                            throw invalid(input, "Unknown openLimpRule");
+                        }
+                    }
+                    case "maxRaisedPotPlayers" -> {
+                        if (input.currentToken() != JsonToken.VALUE_NUMBER_INT)
+                            throw invalid(
+                                    input,
+                                    "maxRaisedPotPlayers must be an integer between 2 and 6");
+                        maxRaisedPotPlayers = input.getIntValue();
+                    }
                     default -> throw invalid(input, "Unknown rule field: " + field);
                 }
             }
             if (stack == null || smallBlind == null || targets == null)
                 throw invalid(input, "stackBb, smallBlindBb and raiseToBb are required");
-            var rules = new SixMaxPreflopBetting.Rules(stack, smallBlind, targets, schedule);
+            SixMaxPreflopBetting.Rules rules;
             try {
+                rules =
+                        new SixMaxPreflopBetting.Rules(
+                                stack,
+                                smallBlind,
+                                targets,
+                                schedule,
+                                openLimpRule,
+                                maxRaisedPotPlayers);
                 new SixMaxPreflopBetting(rules);
             } catch (IllegalArgumentException exception) {
                 throw invalid(input, exception.getMessage());
