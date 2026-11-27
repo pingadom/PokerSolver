@@ -184,7 +184,7 @@ six-player GTO. AWS deployment remains paused.
 
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`9174350326fd2d0b9034d6efcf09da1f743b00b0` and cleared PR creation on
-2026-11-25 (Europe/London), with “All 3” (selecting clearance of `9174350`). This confirmation applies to
+`4533b09ca264e53232eb9bf70d744f2c1e12c4e3` and cleared PR creation on
+2026-11-27 (Europe/London), with “cleared 9fa8968, 47b79c9, 4533b09”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
