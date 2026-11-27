@@ -182,14 +182,34 @@ public final class SixSeatTrainerActionAudit {
                                                         - sampled.actionEvBb().get(action),
                                                 exact.bestEvBb() - exact.actionEvBb().get(action)))
                         .toList();
+        var verdict = verdict(actions, options.acceptableLossBb(), options.maximumLossDriftBb());
+        return new Row(
+                prompt,
+                Long.toString(seed),
+                count,
+                actions,
+                verdict.sampledAcceptableActions(),
+                verdict.exactAcceptableActions(),
+                verdict.maximumLossDriftBb(),
+                verdict.stable());
+    }
+
+    record Verdict(
+            List<String> sampledAcceptableActions,
+            List<String> exactAcceptableActions,
+            double maximumLossDriftBb,
+            boolean stable) {}
+
+    static Verdict verdict(
+            List<Action> actions, double acceptableLossBb, double maximumLossDriftBb) {
         var sampledAcceptable =
                 actions.stream()
-                        .filter(a -> a.sampledLossBb() <= options.acceptableLossBb())
+                        .filter(a -> a.sampledLossBb() <= acceptableLossBb)
                         .map(Action::action)
                         .toList();
         var exactAcceptable =
                 actions.stream()
-                        .filter(a -> a.exactLossBb() <= options.acceptableLossBb())
+                        .filter(a -> a.exactLossBb() <= acceptableLossBb)
                         .map(Action::action)
                         .toList();
         double drift =
@@ -197,14 +217,10 @@ public final class SixSeatTrainerActionAudit {
                         .mapToDouble(a -> Math.abs(a.sampledLossBb() - a.exactLossBb()))
                         .max()
                         .orElseThrow();
-        return new Row(
-                prompt,
-                Long.toString(seed),
-                count,
-                actions,
+        return new Verdict(
                 sampledAcceptable,
                 exactAcceptable,
                 drift,
-                sampledAcceptable.equals(exactAcceptable) && drift <= options.maximumLossDriftBb());
+                sampledAcceptable.equals(exactAcceptable) && drift <= maximumLossDriftBb);
     }
 }

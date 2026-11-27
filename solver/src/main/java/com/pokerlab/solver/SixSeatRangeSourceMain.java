@@ -17,30 +17,41 @@ public final class SixSeatRangeSourceMain {
     public static void main(String[] args) throws Exception {
         if (args == null || args.length < 3)
             throw new IllegalArgumentException(
-                    "Usage: plan|solve INPUT.json NEW-output.json, or compare|compare-trainer with exact work limits");
+                    "Usage: plan|solve INPUT.json NEW-output.json, or compare, compare-trainer or compare-trainer-coverage with exact work limits");
         int expectedArguments =
                 switch (args[0]) {
                     case "plan", "solve" -> 3;
                     case "compare" -> 5;
                     case "compare-trainer" -> 10;
+                    case "compare-trainer-coverage" -> 9;
                     default -> throw new IllegalArgumentException("Invalid source command");
                 };
         if (args.length != expectedArguments)
             throw new IllegalArgumentException("Invalid source argument count");
         boolean compare = "compare".equals(args[0]);
         boolean trainerAudit = "compare-trainer".equals(args[0]);
+        boolean coverageAudit = "compare-trainer-coverage".equals(args[0]);
         var exactBudget =
-                compare || trainerAudit
+                compare || trainerAudit || coverageAudit
                         ? new SixSeatPayoffWork.Budget(
                                 Long.parseLong(args[3]), Long.parseLong(args[4]))
                         : null;
         var reference =
-                trainerAudit ? exactReference(args[5]) : SixSeatPayoffWork.Configuration.exact();
+                trainerAudit || coverageAudit
+                        ? exactReference(args[5])
+                        : SixSeatPayoffWork.Configuration.exact();
         var options =
                 trainerAudit
                         ? new SixSeatTrainerActionAudit.Options(
                                 Integer.parseInt(args[6]), Long.parseLong(args[7]),
                                 Double.parseDouble(args[8]), Double.parseDouble(args[9]))
+                        : null;
+        var coverageOptions =
+                coverageAudit
+                        ? new SixSeatTrainerCoverageAudit.Options(
+                                Double.parseDouble(args[6]),
+                                Double.parseDouble(args[7]),
+                                Double.parseDouble(args[8]))
                         : null;
         Path input = Path.of(args[1]), output = Path.of(args[2]);
         if (Files.exists(output, LinkOption.NOFOLLOW_LINKS))
@@ -69,6 +80,8 @@ public final class SixSeatRangeSourceMain {
                 switch (args[0]) {
                     case "compare" -> "pokerlab-six-seat-payoff-comparison/v1";
                     case "compare-trainer" -> "pokerlab-six-seat-trainer-action-audit/v1";
+                    case "compare-trainer-coverage" ->
+                            "pokerlab-six-seat-trainer-coverage-audit/v1";
                     default -> "pokerlab-six-seat-range-source/v1";
                 });
         report.put("trainerAdmission", false);
@@ -92,18 +105,28 @@ public final class SixSeatRangeSourceMain {
                     "comparison",
                     SixSeatPayoffComparison.assess(plan.execute(), exactPlan.execute()));
         }
-        if (trainerAudit) {
+        if (trainerAudit || coverageAudit) {
             var exactPlan =
                     SixSeatPayoffComparison.planExactReference(plan, reference, exactBudget);
             report.put("plannedExactReferenceWork", exactPlan.work());
             report.put("plannedExactEvaluatedDeals", exactPlan.evaluatedDeals());
             report.put("exactReferenceBudget", exactBudget);
             report.put("exactReferenceMethod", reference.method());
-            report.put(
-                    "trainerActionAudit",
-                    SixSeatTrainerActionAudit.assess(plan.execute(), exactPlan.execute(), options));
+            var sampledResult = plan.execute();
+            var exactResult = exactPlan.execute();
+            if (trainerAudit) {
+                report.put(
+                        "trainerActionAudit",
+                        SixSeatTrainerActionAudit.assess(sampledResult, exactResult, options));
+            } else {
+                report.put(
+                        "trainerCoverageAudit",
+                        SixSeatTrainerCoverageAudit.assess(
+                                sampledResult, exactResult, coverageOptions));
+            }
         }
-        if (!compare && !trainerAudit) report.put("solved", args[0].equals("solve"));
+        if (!compare && !trainerAudit && !coverageAudit)
+            report.put("solved", args[0].equals("solve"));
         if (args[0].equals("solve")) {
             var result = plan.execute();
             report.put("sourcePackHash", result.packHash());
