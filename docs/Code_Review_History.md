@@ -988,9 +988,23 @@ The revision evaluates one exact payoff stream per global suit class while keepi
 The confirmation covers this revision and appears in 169 authored Markdown
 documents, the reference PDF and the local interview guide.
 
+## 2026-11-25 Audit sampled six-seat trainer feedback against exact payoffs
+
+The project owner reviewed code changes at `9174350326fd2d0b9034d6efcf09da1f743b00b0` on branch
+`codex/six-seat-trainer-action-audit` and cleared PR creation with “All 3” (selecting clearance of `9174350`).
+
+The revision adds `SixSeatTrainerActionAudit` and the offline `compare-trainer` CLI command to compare
+conditional trainer action feedback from a frozen sampled policy against direct or suit-reused exact
+showdown payoffs on the same weighted deals. Local verification passed Spotless and all 43 selected
+Java cases across seven suites (`SixSeatTrainerActionAuditTest` plus six existing six-seat suites).
+No live trainer admission or grading authority is granted; AWS deployment remains paused.
+
+The confirmation covers this revision and appears in 170 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`a90efd0603a32348fa1b95deaa6b9d521066037e` and cleared PR creation on
-2026-11-19 (Europe/London), with “cleared a90efd0”. This confirmation applies to
+`9174350326fd2d0b9034d6efcf09da1f743b00b0` and cleared PR creation on
+2026-11-25 (Europe/London), with “All 3” (selecting clearance of `9174350`). This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
