@@ -1002,9 +1002,19 @@ No live trainer admission or grading authority is granted; AWS deployment remain
 The confirmation covers this revision and appears in 170 authored Markdown
 documents, the reference PDF and the local interview guide.
 
+## 2026-11-27 Cover the full reached six-seat preflop prompt tree
+
+The project owner reviewed code changes at `9fa89685cb28dd13d5bdbac26072eaa775bf8acc` on branch
+`codex/six-seat-trainer-coverage-audit` and cleared PR creation with “cleared 9fa8968, 47b79c9, 4533b09”.
+
+The revision adds SixSeatTrainerCoverageAudit and the offline compare-trainer-coverage CLI command to audit all positively reached preflop prompts under a frozen sampled policy against exact showdowns, with configurable reach floor and bounded top-32 failure reporting. Local validation passed 45 selected Java cases across eight suites, Spotless, and independent traversal reconciliation within 1e-12 bb. No live trainer admission or grading authority is granted; AWS deployment remains paused.
+
+The confirmation covers this revision and appears in 171 authored Markdown
+documents, the reference PDF and the local interview guide.
+
 <!-- pokerlab-user-code-review:start -->
 Code review confirmed: the project owner reviewed code changes at
-`9174350326fd2d0b9034d6efcf09da1f743b00b0` and cleared PR creation on
-2026-11-25 (Europe/London), with “All 3” (selecting clearance of `9174350`). This confirmation applies to
+`9fa89685cb28dd13d5bdbac26072eaa775bf8acc` and cleared PR creation on
+2026-11-27 (Europe/London), with “cleared 9fa8968, 47b79c9, 4533b09”. This confirmation applies to
 that code revision. See the project's Code Review History for the approval record.
 <!-- pokerlab-user-code-review:end -->
